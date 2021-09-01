@@ -5,9 +5,9 @@ import App from './App';
 
 // import Screen_Cart from './screens/Screen_Category/index'
 import reportWebVitals from './reportWebVitals';
-import {createStore,compose,applyMiddleware} from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 import myReducer from './reducers/index';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { icons } from './Admin/assets/icons';
 const store = createStore(myReducer, compose(
@@ -15,13 +15,13 @@ const store = createStore(myReducer, compose(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 );
-React.icons = icons
+React.icons = icons;
 ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}
     <Provider store={store}>
 
-    <App/>
+      <App />
     </Provider>,
   </React.StrictMode>,
   document.getElementById('root')
