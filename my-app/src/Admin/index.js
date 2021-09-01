@@ -21,7 +21,7 @@ class index extends Component {
       <Router>
        
               <Switch>
-                <Route to="/admin" component={Login} />
+                <Route to="/admin/login" component={Login} />
                 {/* <Route to="/admin/home" component={Home} /> */}
               </Switch>
             

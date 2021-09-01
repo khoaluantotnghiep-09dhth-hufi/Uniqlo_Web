@@ -55,7 +55,7 @@ class index extends Component {
     var { isCheckLogin } = this.state;
     console.log(isCheckLogin);
     if (!isCheckLogin) {
-      return <Route pathname="/home/dashboard" component={HomePape} />;
+      return <Route pathname="/admin/home" component={HomePape} />;
     }
     return (
       // <Container>
@@ -102,16 +102,15 @@ class index extends Component {
                 <CCard className="p-4">
                   <CCardBody >
                     <CForm onSubmit={this.onSubmit}>
-                      <h1>Login</h1>
-                      <p className="text-muted">Sign In to your account</p>
+                      <h1>Đăng Nhập</h1>
+                      <p className="text-muted">Đăng Nhập Tài Khoản Admin Của Bạn</p>
                       <CInputGroup className="mb-3">
                         <CInputGroupPrepend>
                           <CInputGroupText>
                             <CIcon name="cil-user" />
                           </CInputGroupText>
                         </CInputGroupPrepend>
-                        <CInput type="text" placeholder="Username" autoComplete="username" name="txtPhone"
-                          onChange={this.onChange} />
+                        <CInput type="text" placeholder="Tên đăng nhập" autoComplete="username" name="txtPhone" onChange={this.onChange} />
                       </CInputGroup>
                       <CInputGroup className="mb-4">
                         <CInputGroupPrepend>
@@ -119,15 +118,14 @@ class index extends Component {
                             <CIcon name="cil-lock-locked" />
                           </CInputGroupText>
                         </CInputGroupPrepend>
-                        <CInput type="password" placeholder="Password" autoComplete="current-password" name="txtPassword"
-                          onChange={this.onChange} />
+                        <CInput type="password" placeholder="Mật khẩu" autoComplete="current-password" name="txtPassword" onChange={this.onChange} />
                       </CInputGroup>
                       <CRow>
                         <CCol xs="6">
-                          <CButton color="primary" className="px-4">Login</CButton>
+                          <CButton color="primary" className="px-4" >Đăng Nhập</CButton>
                         </CCol>
                         <CCol xs="6" className="text-right">
-                          <CButton color="link" className="px-0">Forgot password?</CButton>
+                          <CButton color="link" className="px-0">Bạn Quên Mật Khẩu?</CButton>
                         </CCol>
                       </CRow>
                     </CForm>
@@ -136,12 +134,10 @@ class index extends Component {
                 <CCard className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
                   <CCardBody className="text-center">
                     <div>
-                      <h2>Sign up</h2>
+                      <h2>Logo để ở đây</h2>
                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
                         labore et dolore magna aliqua.</p>
-                      <Link to="/register">
-                        <CButton color="primary" className="mt-3" active tabIndex={-1}>Register Now!</CButton>
-                      </Link>
+                      
                     </div>
                   </CCardBody>
                 </CCard>

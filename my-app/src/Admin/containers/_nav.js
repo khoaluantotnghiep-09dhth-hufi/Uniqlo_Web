@@ -7,7 +7,7 @@ const _nav =  [
     _tag: 'CSidebarNavItem',
     name: 'Trang Chủ',
      to: '/admin/home',
-    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
+    icon: <CIcon name="cil-home" customClasses="c-sidebar-nav-icon"/>,
  
   },
   {
@@ -15,22 +15,65 @@ const _nav =  [
     _children: ['Hệ Thống']
   },
   {
-    _tag: 'CSidebarNavItem',
+    _tag: 'CSidebarNavDropdown',
     name: 'Đơn Hàng',
-    to: '/admin/system/order',
-    icon: 'cil-drop',
+
+    route: '/admin/system/order',
+    icon: 'cil-list',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Tất Cả Đơn Hàng',
+        to: '/admin/system/order/all',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Đã Xác Nhận',
+        to: '/admin/system/order/confirmed',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Chưa Xác Nhận',
+        to: '/admin/system/order/unconfimred',
+      },
+      
+    ]
   },
   {
-    _tag: 'CSidebarNavItem',
+    _tag: 'CSidebarNavDropdown',
     name: 'Tin Tức',
-    to: '/admin/system/news',
+    route: '/admin/system/news',
     icon: 'cil-pencil',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Danh Sách Tin Tưc',
+        to: '/admin/system/news/list',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Thêm Tin Tức',
+        to: '/admin/system/news/add',
+      },
+    ]
   },
   {
-    _tag: 'CSidebarNavItem',
+    _tag: 'CSidebarNavDropdown',
     name: 'Khuyến Mãi',
-    to: '/admin/system/discount',
+    route: '/admin/system/discount',
     icon: 'cil-pencil',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Danh Sách Khuyến Mãi',
+        to: '/admin/system/discount/list',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Thêm Khuyến Mãi',
+        to: '/admin/system/discount/add',
+      },
+    ]
   },
   {
     _tag: 'CSidebarNavTitle',
@@ -39,15 +82,15 @@ const _nav =  [
   {
     _tag: 'CSidebarNavItem',
     name: 'Danh Sách Khách Hàng',
-    route: '/admin/customers/list',
-    icon: 'cil-puzzle',
+    to: '/admin/customers/list',
+    icon: 'cil-list',
     
   },
   {
     _tag: 'CSidebarNavItem',
     name: 'Tài Khoản Khách Hàng',
     to: '/admin/customers/account',
-    icon: 'cil-chart-pie'
+    icon: 'cil-user'
   },
   {
     _tag: 'CSidebarNavItem',
