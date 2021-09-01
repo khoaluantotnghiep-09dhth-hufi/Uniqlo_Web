@@ -1,0 +1,29 @@
+.header{
+    margin-top: 16px;
+}
+.sizeIcon{
+    font-size: 22px;
+    transform: translateY(10px);
+}
+.icon{
+    position: relative;
+}
+.badge{
+    position: absolute;
+    left: 25px;
+    top: -11px;
+    border-radius: 60%;
+    font-size: 15px;
+}
+.nav-link{
+    color: #555;
+    text-decoration: none;
+    font-weight:bold;
+}
+
+.dropdown-toggle::after {
+    display:none;
+}
+.input-group{
+    justify-content: flex-end;
+}

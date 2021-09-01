@@ -1,0 +1,19 @@
+.Card__Cart{
+    flex-direction: row;
+}
+.Card__cartImage{
+    
+  
+    max-width: 134px;
+    max-height:134px;
+}
+.Cart__Delete{
+    transform: translateY(10%);
+}
+
+.Cart_Item--border{
+    border-bottom: 1px solid #777;
+}
+.Cart_Item--border:last-child{
+    border-bottom:none;
+}

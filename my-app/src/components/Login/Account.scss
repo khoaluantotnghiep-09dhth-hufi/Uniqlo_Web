@@ -1,0 +1,20 @@
+.Account-padding{
+    padding:100px 0 150px 0;
+}
+.button--width{
+    width:100%;
+    margin: 0;
+}
+.btn-outline-secondary {
+    color: #666 !important;
+    background-color: transparent !important;
+    border: 2px solid #666 !important;
+}
+.btn-outline-secondary:hover, .btn-outline-secondary:focus, .btn-outline-secondary:active, .btn-outline-secondary:active:focus, .btn-outline-secondary.active {
+    color: #666 !important;
+    background-color: transparent !important;
+    border-color: #666!important;
+}
+.btn{
+    box-shadow: none;
+}
