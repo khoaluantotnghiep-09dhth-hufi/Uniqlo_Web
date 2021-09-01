@@ -13,7 +13,7 @@ import {
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
-
+import logo from '../assets/logo_uq_01.jpg';
 // sidebar nav config
 import navigation from './_nav'
 
@@ -27,16 +27,12 @@ const TheSidebar = () => {
       onShowChange={(val) => dispatch({type: 'set', sidebarShow: val })}
     >
       <CSidebarBrand className="d-md-down-none" to="/">
-        <CIcon
-          className="c-sidebar-brand-full"
-          name="logo-negative"
-          height={35}
-        />
-        <CIcon
-          className="c-sidebar-brand-minimized"
-          name="sygnet"
-          height={35}
-        />
+       
+        <img src={logo} className="c-sidebar-brand-full" height={35} />
+        <h3 className="c-sidebar-brand-full text-danger font-weight-bolder" height={35} >Uniqlo Admin</h3>
+        
+        <img src={logo} className="c-sidebar-brand-minimized" height={35} />
+        
       </CSidebarBrand>
       <CSidebarNav>
 

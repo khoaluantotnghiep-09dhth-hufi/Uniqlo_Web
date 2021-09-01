@@ -19,17 +19,19 @@ const _nav =  [
     name: 'Đơn Hàng',
 
     route: '/admin/system/order',
-    icon: 'cil-list',
+    icon: 'cil-basket',
     _children: [
       {
         _tag: 'CSidebarNavItem',
         name: 'Tất Cả Đơn Hàng',
         to: '/admin/system/order/all',
+        icon: 'cil-list',
       },
       {
         _tag: 'CSidebarNavItem',
         name: 'Đã Xác Nhận',
         to: '/admin/system/order/confirmed',
+        icon: 'cil-task',
       },
       {
         _tag: 'CSidebarNavItem',
@@ -49,6 +51,7 @@ const _nav =  [
         _tag: 'CSidebarNavItem',
         name: 'Danh Sách Tin Tưc',
         to: '/admin/system/news/list',
+        icon: 'cil-list',
       },
       {
         _tag: 'CSidebarNavItem',
@@ -67,11 +70,13 @@ const _nav =  [
         _tag: 'CSidebarNavItem',
         name: 'Danh Sách Khuyến Mãi',
         to: '/admin/system/discount/list',
+        icon: 'cil-list',
       },
       {
         _tag: 'CSidebarNavItem',
         name: 'Thêm Khuyến Mãi',
         to: '/admin/system/discount/add',
+        icon: 'cil-playlist-add',
       },
     ]
   },
@@ -83,7 +88,7 @@ const _nav =  [
     _tag: 'CSidebarNavItem',
     name: 'Danh Sách Khách Hàng',
     to: '/admin/customers/list',
-    icon: 'cil-list',
+    icon: 'cil-people',
     
   },
   {
@@ -94,7 +99,7 @@ const _nav =  [
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Widgets',
+    name: 'Để giành mốt xài =))',
     to: '/widgets',
     icon: 'cil-calculator',
     
