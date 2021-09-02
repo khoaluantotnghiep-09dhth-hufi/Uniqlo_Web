@@ -11,7 +11,6 @@ export {
   TheFooter,
   TheHeader,
   TheHeaderDropdown,
-  
   TheLayout,
   TheSidebar
 }

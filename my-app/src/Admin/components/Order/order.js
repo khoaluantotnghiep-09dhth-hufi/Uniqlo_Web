@@ -23,10 +23,11 @@ import usersData from '../User/UserData';
 // }
 const fields = ['name', 'registered', 'role', 'status']
 
-const Tables = () => {
-    return (
-        <>
-           
+class List_Order extends React.Component {
+    render() {
+        return (
+            <>
+
                 <CRow>
                     <CCol xs="12" lg="24">
                         <CCard>
@@ -57,10 +58,11 @@ const Tables = () => {
 
 
                 </CRow>
-      
 
-        </>
-    )
+
+            </>
+        )
+    }
 }
 
-export default Tables
+export default List_Order

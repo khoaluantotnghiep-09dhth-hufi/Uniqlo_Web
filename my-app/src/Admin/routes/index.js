@@ -24,32 +24,5 @@ const routes = [
     { path: '/admin/system/discount/list', exact: true, name: 'Danh Sách Khuyến Mãi', component: ListDiscount },
     { path: '/admin/system/discount/add', exact: true, name: 'Thêm Khuyến Mãi Mới', component: AddDiscount },
 ]
-// var routes = [
-// {
-//     path:'/admin/home/dashboard',
-//     exact:true,
-//     main:()=><Home/>
-// },
-// {
-//     path:'/admin/home/product',
-//     exact:true,
-//     main:()=><Product/>
-// },
-// {
-//     path:'/admin/home/product/add',
-//     exact:true,
-//     main:({history})=><Add_Product history={history}/>
-// },
-// {
-//     path:'/admin/home/product/:id/edit',
-//     exact:true,
-//     main:({match,history})=><Add_Product match={match} history={history}/>
-// },
-// {
-//     path: '',
-//     exact: false,
-//     main:()=><NotFound/>
-// },
-// ];
 
 export default routes
