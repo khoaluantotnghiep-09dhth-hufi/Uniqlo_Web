@@ -16,7 +16,7 @@ const routes = [
     { path: '/admin/home', exact: true, name: 'Trang Chủ', component: Home },
     { path: '/admin/system/order/all', exact: true, name: 'Tất Cả Đơn Hàng', component: Order },
     { path: '/admin/system/order/confirmed', exact: true, name: 'Đơn Hàng Đã Xác Nhận', component: ConfirmedOrder },
-    { path: '/admin/system/order/unconfimred', exact: true, name: 'Đơn Hàng Chưa Xác Nhận', component: UnConfirmedOrder },
+    { path: '/admin/system/order/unconfirmed', exact: true, name: 'Đơn Hàng Chưa Xác Nhận', component: UnConfirmedOrder },
     { path: '/admin/customers/list', exact: true, name: 'Danh Sách Khách Hàng', component: ListCustomers },
     { path: '/admin/customers/account', exact: true, name: 'Tài Khoản Khách Hàng', component: AccountCustomers },
     { path: '/admin/system/news/list', exact: true, name: 'Danh Sách Tin Tức', component: ListNews },

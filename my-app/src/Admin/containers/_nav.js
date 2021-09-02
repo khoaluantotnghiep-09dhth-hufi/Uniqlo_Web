@@ -36,7 +36,7 @@ const _nav =  [
       {
         _tag: 'CSidebarNavItem',
         name: 'Chưa Xác Nhận',
-        to: '/admin/system/order/unconfimred',
+        to: '/admin/system/order/unconfirmed',
       },
       
     ]
