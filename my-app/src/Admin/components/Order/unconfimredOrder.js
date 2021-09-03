@@ -32,7 +32,7 @@ class Order_UnConfirmedOrder extends React.Component {
                     <CCol xs="12" lg="24">
                         <CCard>
                             <CCardHeader>
-                                Danh Sách Đơn Hàng
+                                Danh Sách Đơn Hàng Chưa Xác Nhận
                             </CCardHeader>
                             <CCardBody>
                                 <CDataTable

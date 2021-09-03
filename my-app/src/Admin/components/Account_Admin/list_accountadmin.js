@@ -32,7 +32,7 @@ class List_Customers extends React.Component {
                     <CCol xs="12" lg="24">
                         <CCard>
                             <CCardHeader>
-                                Danh Sách Đơn Hàng
+                                Danh Sách Tài Khoản Admin
                             </CCardHeader>
                             <CCardBody>
                                 <CDataTable
@@ -55,11 +55,7 @@ class List_Customers extends React.Component {
                             </CCardBody>
                         </CCard>
                     </CCol>
-
-
                 </CRow>
-
-
             </>
         )
     }

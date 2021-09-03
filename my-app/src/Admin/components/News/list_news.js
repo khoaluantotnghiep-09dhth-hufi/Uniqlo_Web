@@ -38,7 +38,7 @@ class List_News extends React.Component {
                     <CCol xs="12" lg="24">
                         <CCard>
                             <CCardHeader>
-                                Danh Sách Đơn Hàng
+                                Danh Sách Tin Tức
                             </CCardHeader>
                             <CCardBody>
                                 <CDataTable
