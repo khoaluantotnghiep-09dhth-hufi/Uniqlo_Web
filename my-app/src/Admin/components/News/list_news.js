@@ -6,10 +6,12 @@ import {
     CCardHeader,
     CCol,
     CDataTable,
-    CRow
+    CRow,
+    CButton,
 } from '@coreui/react'
+import CIcon from '@coreui/icons-react';
 
-
+import {Link} from "react-router-dom";
 import usersData from '../User/UserData';
 
 // const getBadge = status => {
@@ -21,13 +23,17 @@ import usersData from '../User/UserData';
 //         default: return 'primary'
 //     }
 // }
-const fields = ['name', 'registered', 'role', 'status']
+const fields = ['Tên', 'registered', 'role', 'status', 'Hành Động']
 
 class List_News extends React.Component {
     render() {
         return (
             <>
-
+                <Link to="/admin/system/news/add">
+                    <CButton type="button" className="btn btn-danger">
+                        Thêm Mới
+                    </CButton>
+                </Link>
                 <CRow>
                     <CCol xs="12" lg="24">
                         <CCard>
@@ -50,6 +56,25 @@ class List_News extends React.Component {
                                                 </td>
                                             )
 
+                                    }}
+                                    scopedSlots={{
+                                        'Hành Động':
+                                            (item) => (
+                                                <td>
+                                                    <Link to="/admin/system/discount/../edit">
+                                                        <CButton type="button" className="btn btn-primary">
+                                                            Sửa
+                                                        </CButton>
+                                                    </Link>
+                                                    <Link to="/admin/system/discount/../delete">
+                                                        <CButton type="button" className="btn btn-warning">
+                                                            Xóa
+                                                        </CButton>
+                                                    </Link>
+
+                                                </td>
+
+                                            )
                                     }}
                                 />
                             </CCardBody>

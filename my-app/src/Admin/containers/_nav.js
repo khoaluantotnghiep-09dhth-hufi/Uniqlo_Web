@@ -44,44 +44,44 @@ const _nav =  [
     ]
   },
   {
-    _tag: 'CSidebarNavDropdown',
+    _tag: 'CSidebarNavItem',
     name: 'Tin Tức',
-    route: '/admin/system/news',
+    to: '/admin/system/news',
     icon: 'cil-pencil',
-    _children: [
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Danh Sách Tin Tưc',
-        to: '/admin/system/news/list',
-        icon: 'cil-list',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Thêm Tin Tức',
-        to: '/admin/system/news/add',
-        icon: 'cil-level-up',
-      },
-    ]
+    // _children: [
+    //   {
+    //     _tag: 'CSidebarNavItem',
+    //     name: 'Danh Sách Tin Tưc',
+    //     to: '/admin/system/news/list',
+    //     icon: 'cil-list',
+    //   },
+    //   {
+    //     _tag: 'CSidebarNavItem',
+    //     name: 'Thêm Tin Tức',
+    //     to: '/admin/system/news/add',
+    //     icon: 'cil-level-up',
+    //   },
+    // ]
   },
   {
-    _tag: 'CSidebarNavDropdown',
+    _tag: 'CSidebarNavItem',
     name: 'Khuyến Mãi',
-    route: '/admin/system/discount',
+    to: '/admin/system/discount',
     icon: 'cil-pencil',
-    _children: [
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Danh Sách Khuyến Mãi',
-        to: '/admin/system/discount/list',
-        icon: 'cil-list',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Thêm Khuyến Mãi',
-        to: '/admin/system/discount/add',
-        icon: 'cil-playlist-add',
-      },
-    ]
+    // _children: [
+    //   {
+    //     _tag: 'CSidebarNavItem',
+    //     name: 'Danh Sách Khuyến Mãi',
+    //     to: '/admin/system/discount/list',
+    //     icon: 'cil-list',
+    //   },
+    //   {
+    //     _tag: 'CSidebarNavItem',
+    //     name: 'Thêm Khuyến Mãi',
+    //     to: '/admin/system/discount/add',
+    //     icon: 'cil-playlist-add',
+    //   },
+    // ]
   },
   {
     _tag: 'CSidebarNavTitle',

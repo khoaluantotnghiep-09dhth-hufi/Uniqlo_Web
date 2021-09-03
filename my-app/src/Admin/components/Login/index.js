@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import Home from "./../../screens/Home/index";
+
 import HomePape from "../../containers/TheLayout";
 import { Route } from "react-router-dom";
 
