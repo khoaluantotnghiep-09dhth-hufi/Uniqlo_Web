@@ -11,7 +11,8 @@ const ListNews = React.lazy(() => import('../components/News/list_news'));
 const AddNews = React.lazy(() => import('../components/News/add_news'));
 const ListDiscount = React.lazy(() => import('../components/Discount/list_discount'));
 const AddDiscount = React.lazy(() => import('../components/Discount/add_discount'));
-
+const AddAccountAdmin = React.lazy(() => import('../components/Account_Admin/add_accountAdmin'));
+const ListAccountAdmin = React.lazy(() => import('../components/Account_Admin/list_accountadmin'));
 const routes = [
     { path: '/admin/home', exact: true, name: 'Trang Chủ', component: Home },
     { path: '/admin/system/order/all', exact: true, name: 'Tất Cả Đơn Hàng', component: Order },
@@ -23,6 +24,8 @@ const routes = [
     { path: '/admin/system/news/add', exact: true, name: 'Thêm Tin Tức Mới', component: AddNews },
     { path: '/admin/system/discount/list', exact: true, name: 'Danh Sách Khuyến Mãi', component: ListDiscount },
     { path: '/admin/system/discount/add', exact: true, name: 'Thêm Khuyến Mãi Mới', component: AddDiscount },
+    { path: '/admin/account/add', exact: true, name: 'Thêm Tài Khoản Admin Mới', component: AddAccountAdmin },
+    { path: '/admin/account/list', exact: true, name: 'Danh Sách Tài Khoản Admin', component: ListAccountAdmin },
 ]
 
 export default routes

@@ -37,6 +37,8 @@ const _nav =  [
         _tag: 'CSidebarNavItem',
         name: 'Chưa Xác Nhận',
         to: '/admin/system/order/unconfirmed',
+        
+        icon: 'cil-warning',
       },
       
     ]
@@ -57,6 +59,7 @@ const _nav =  [
         _tag: 'CSidebarNavItem',
         name: 'Thêm Tin Tức',
         to: '/admin/system/news/add',
+        icon: 'cil-level-up',
       },
     ]
   },
@@ -105,7 +108,28 @@ const _nav =  [
     
   },
   {
-    _tag: 'CSidebarNavDivider'
+    _tag: 'CSidebarNavTitle',
+    _children: ['Tài Khoản Admin']
+  },
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Tài Khoản',
+    route: '/admin/account',
+    icon: 'cil-pencil',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Danh Sách Tài Khoản',
+        to: '/admin/account/list',
+        icon: 'cil-list',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Thêm Tài Khoản Mới',
+        to: '/admin/account/add',
+        icon: 'cil-level-up',
+      },
+    ]
   },
   
   
