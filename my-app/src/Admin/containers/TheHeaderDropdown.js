@@ -8,7 +8,11 @@ import {
   CImg
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+ faSignOutAlt,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 const TheHeaderDropdown = () => {
   return (
     <CDropdown
@@ -26,34 +30,7 @@ const TheHeaderDropdown = () => {
         </div>
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
-        {/* <CDropdownItem
-          header
-          tag="div"
-          color="light"
-          className="text-center"
-        >
-          <strong>Account</strong>
-        </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-bell" className="mfe-2" />
-          Updates
-   
-        </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-envelope-open" className="mfe-2" />
-          Messages
-         
-        </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-task" className="mfe-2" />
-          Tasks
-        
-        </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-comment-square" className="mfe-2" />
-          Comments
       
-        </CDropdownItem> */}
         <CDropdownItem
           header
           tag="div"
@@ -63,7 +40,7 @@ const TheHeaderDropdown = () => {
           <strong>Cá Nhân</strong>
         </CDropdownItem>
         <CDropdownItem>
-          <CIcon name="cil-user" className="mfe-2" />Thông Tin Tài Khoản
+        <FontAwesomeIcon icon={faUser} size="lg" className="mr-2"/>Thông Tin Tài Khoản
         </CDropdownItem>
         <CDropdownItem>
           <CIcon name="cil-settings" className="mfe-2" />
@@ -81,7 +58,7 @@ const TheHeaderDropdown = () => {
         </CDropdownItem>
         <CDropdownItem divider />
         <CDropdownItem>
-          <CIcon name="cil-lock-locked" className="mfe-2" />
+        <FontAwesomeIcon icon={faSignOutAlt} size="lg" className="mr-2"/>
           Đăng Xuất
         </CDropdownItem>
       </CDropdownMenu>
