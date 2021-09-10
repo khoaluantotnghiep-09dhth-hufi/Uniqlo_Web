@@ -87,19 +87,19 @@ const _nav =  [
   {
     _tag: 'CSidebarNavDropdown',
     name:  <h5>Nhập/Xuất Kho</h5>,
-    route: '/',
+    route: '/admin/manage',
     icon: <FontAwesomeIcon icon={faWarehouse} className="mr-2" size="lg"/>,
     _children: [
       {
         _tag: 'CSidebarNavItem',
         name:  <h5>Đặt Hàng</h5>,
-        to: '/',
+        to: '/admin/manage/order-product',
         icon: <FontAwesomeIcon icon={faPaperPlane} className="mr-2"  size="lg"/>,
       },
       {
         _tag: 'CSidebarNavItem',
         name:  <h5>Nhập Hàng</h5>,
-        to: '/',
+        to: '/admin/manage/import-product',
         icon: <FontAwesomeIcon icon={faFileImport} className="mr-2" size="lg"/>,
       },
 
@@ -135,7 +135,7 @@ const _nav =  [
   {
     _tag: 'CSidebarNavItem',
     name:  <h5>Sản Phẩm</h5>,
-    route: '/',
+    to: '/admin/manage/products',
     icon: <FontAwesomeIcon icon={faTshirt} className="mr-2" size="lg"/>,
   },
  
@@ -143,13 +143,13 @@ const _nav =  [
   {
     _tag: 'CSidebarNavItem',
     name:  <h5>Nhân Viên</h5>,
-    route: '/',
+    to: '/admin/manage/staffs',
     icon: <FontAwesomeIcon icon={faIdCard} className="mr-2" size="lg"/>,
   },
   {
     _tag: 'CSidebarNavItem',
     name:  <h5>Khách Hàng</h5>,
-    route: '/',
+    to: '/admin/manage/customers',
     icon: <FontAwesomeIcon icon={faUsers} className="mr-2" size="lg"/>,
   },
   {
@@ -159,7 +159,7 @@ const _nav =  [
   {
     _tag: 'CSidebarNavItem',
     name: <h5>Phân Quyền</h5>,
-    route: '/admin/account',
+    to: '/admin/account',
     icon: <FontAwesomeIcon icon={faUserCog} className="mr-2" size="lg"/>,
     
   },
