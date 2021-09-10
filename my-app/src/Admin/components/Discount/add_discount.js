@@ -11,7 +11,11 @@ import {
     CButton,
     
 } from '@coreui/react'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPlus,
+  
+} from "@fortawesome/free-solid-svg-icons";
 export default class addNews extends React.Component {
     render() {
         return (
@@ -66,7 +70,7 @@ export default class addNews extends React.Component {
              
             </CFormGroup>
             <CFormGroup >
-              <CButton color='danger' className="m-2" >Thêm</CButton>
+              <CButton color='danger' className="m-2" > <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg"/>Thêm</CButton>
              
             </CFormGroup>
           </CForm>

@@ -10,7 +10,11 @@ import {
     CButton,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faCheck,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import usersData from '../User/UserData';
 
@@ -63,12 +67,12 @@ class List_News extends React.Component {
                                                 <td>
                                                     <Link to="/admin/system/discount/../edit">
                                                         <CButton type="button" className="btn btn-primary">
-                                                            Sửa
+                                                            <FontAwesomeIcon icon={faCheck} className="mr-2" size="lg"/>Xác Nhận Đơn
                                                         </CButton>
                                                     </Link>
                                                     <Link to="/admin/system/discount/../delete">
                                                         <CButton type="button" className="btn btn-warning">
-                                                            Xóa
+                                                        <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg"/>Hủy Đơn
                                                         </CButton>
                                                     </Link>
 

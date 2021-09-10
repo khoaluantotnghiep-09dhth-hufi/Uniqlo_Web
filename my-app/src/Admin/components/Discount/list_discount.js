@@ -9,7 +9,12 @@ import {
     CRow,
     CButton,
 } from '@coreui/react'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPlus,
+  faTimes,
+  faTools,
+} from "@fortawesome/free-solid-svg-icons";
 
 import usersData from '../User/UserData';
 import CIcon from '@coreui/icons-react';
@@ -32,7 +37,7 @@ class List_Discount extends React.Component {
                 {/* <Route to="/admin/system/discount/add"><CButton className="btn btn-danger" >Thêm Khuyến Mãi Mới</CButton></Route> */}
                 <Link to="/admin/system/discount/add">
                     <CButton type="button" className="btn btn-danger">
-                        Thêm Mới
+                    <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg"/>Thêm Mới
                     </CButton>
                 </Link>
                 <CRow>
@@ -62,18 +67,18 @@ class List_Discount extends React.Component {
                                         'Hành Động':
                                             (item) => (
                                                 <td>
-                                                    <Link to="/admin/system/discount/../edit">
-                                                        <CButton type="button" className="btn btn-primary">
-                                                            Sửa
-                                                        </CButton>
-                                                    </Link>
-                                                    <Link to="/admin/system/discount/../delete">
-                                                        <CButton type="button" className="btn btn-warning">
-                                                            Xóa
-                                                        </CButton>
-                                                    </Link>
+                                                <Link to="/admin/system/discount/../edit">
+                                                    <CButton type="button" className="btn btn-primary">
+                                                    <FontAwesomeIcon icon={faTools} className="mr-2" size="lg"/>Sửa
+                                                    </CButton>
+                                                </Link>
+                                                <Link to="/admin/system/discount/../delete">
+                                                    <CButton type="button" className="btn btn-warning">
+                                                    <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg"/>Xóa
+                                                    </CButton>
+                                                </Link>
 
-                                                </td>
+                                            </td>
 
                                             )
                                     }}
