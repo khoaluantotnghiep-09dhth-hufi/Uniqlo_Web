@@ -7,6 +7,11 @@ import Detail_Product from "./../screens/Screen_DetailProduct/index";
 import Search from "./../screens/Screen_Search/index";
 import Account from "./../screens/Screen_Account/index";
 import NotFound from "./../screens/Screen_NotFound/index";
+import Contact from "./../screens/Screen_Contact/index"
+import Return_Policy from "./../screens/Screen_ReturnPolicy/index"
+import Guide from "./../screens/Screen_Guide/index"
+import Accessibility from "./../screens/Screen_Accessibility/index"
+import Privacy_Policy from "./../screens/Screen_PrivacyPolicy/index"
 
 var routes = [
   {
@@ -28,6 +33,31 @@ var routes = [
     path: "/cart",
     exact: true,
     main: () => <Cart />,
+  },
+  {
+    path: "/contact",
+    exact: true,
+    main: () => <Contact />,
+  },
+  {
+    path: "/return_policy",
+    exact: true,
+    main: () => <Return_Policy />,
+  },
+  {
+    path: "/guide",
+    exact: true,
+    main: () => <Guide />,
+  },
+  {
+    path: "/accessibility",
+    exact: true,
+    main: () => <Accessibility />,
+  },
+  {
+    path: "/privacy_policy",
+    exact: true,
+    main: () => <Privacy_Policy />,
   },
   {
     path: "/category",

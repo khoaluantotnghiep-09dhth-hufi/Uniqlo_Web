@@ -61,13 +61,13 @@ class index extends Component {
             </NavLink>{" "}
           </Col>
 
-          <Col>
+          <Col xs="6" sm="6" md="6" lg="6">
             <Header_Center />
           </Col>
 
           <Col>
             <Row>
-              <Col md="10">
+              <Col xs="9" sm="9" md="9" lg="9">
                 <NavLink to="/search">
                   <InputGroup>
                     <MDBInput
@@ -79,13 +79,13 @@ class index extends Component {
                   </InputGroup>
                 </NavLink>
               </Col>
-              <Col md="1">
+              <Col xs="1" sm="1" md="1" lg="1">
                 {isCheckAccount}
                 {/* <NavLink to="/login">
                   <MDBIcon icon="user" md="4" className="sizeIcon" />
                 </NavLink>{" "} */}
               </Col>
-              <Col md="1">
+              <Col xs="1" sm="1" md="1" lg="1">
                 {" "}
                 <NavLink to="/cart">
                   {" "}

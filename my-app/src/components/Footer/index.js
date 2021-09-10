@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Image, Nav } from 'react-bootstrap';
-
-
+import Contact from "./../Contact/index"
+import Return_Policy from "./../Return_Policy/index"
+import Guide from "./../Guide/index"
+import Accessibility from "./../Accessibility/index"
+import Privacy_Policy from "./../Privacy_Policy/index"
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
@@ -21,16 +24,14 @@ class index extends Component {
 
             <Col xl={1} className="img-tran"> <Image src="https://www.uniqlo.com/vn/explorer/img/logo_uq_01.gif" rounded /></Col>
 
-            <Col>
+            <Col  xs="10" sm="10" md="10" lg="10">
               <Nav className="justify-content-around ">
-                <Nav.Link className="font-nav" href="#action1" >Liên hệ chúng tôi</Nav.Link>                   
-                <Nav.Link className="font-nav" href="#" >Chính sách đổi trả</Nav.Link>               
-                <Nav.Link className="font-nav" href="#" >Điều khoản sử dụng</Nav.Link>
-                <Nav.Link className="font-nav" href="#" >Khả năng truy cập</Nav.Link>               
-                 <Nav.Link className="font-nav" href="#">Chính sách bảo mật</Nav.Link>
+                <Nav.Link className="font-nav" href="/contact" >Liên hệ chúng tôi</Nav.Link>                   
+                <Nav.Link className="font-nav" href="/return_policy" >Chính sách đổi trả</Nav.Link>               
+                <Nav.Link className="font-nav" href="/guide" >Điều khoản sử dụng</Nav.Link>
+                <Nav.Link className="font-nav" href="/accessibility" >Khả năng truy cập</Nav.Link>               
+                 <Nav.Link className="font-nav" href="/privacy_policy">Chính sách bảo mật</Nav.Link>
               </Nav>
-
-
             </Col>
 
             <Col xl={1} className="img-tran">
