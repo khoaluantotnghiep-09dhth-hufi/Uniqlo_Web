@@ -16,7 +16,7 @@ import {
   faPlus,
   
 } from "@fortawesome/free-solid-svg-icons";
-export default class addNews extends React.Component {
+export default class addCustomer extends React.Component {
     render() {
         return (
             <CContainer fluid>

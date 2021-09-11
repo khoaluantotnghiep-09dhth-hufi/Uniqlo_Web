@@ -17,7 +17,7 @@ import {
 
 } from "@fortawesome/free-solid-svg-icons";
 
-export default class addNews extends React.Component {
+export default class addStaff extends React.Component {
 
     render() {
         return (

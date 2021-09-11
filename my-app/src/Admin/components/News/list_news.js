@@ -30,7 +30,7 @@ import usersData from '../User/UserData';
 // }
 const fields = ['Tên', 'registered', 'role', 'status', 'Hành Động']
 
-class List_News extends React.Component {
+class ListNews extends React.Component {
     render() {
         return (
             <>
@@ -95,4 +95,4 @@ class List_News extends React.Component {
     }
 }
 
-export default List_News
+export default ListNews

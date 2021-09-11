@@ -23,7 +23,7 @@ import usersData from '../User/UserData';
 // }
 const fields = ['name', 'registered', 'role', 'status']
 
-class Order_Confirmed extends React.Component {
+class OrderConfirmed extends React.Component {
     render() {
         return (
             <>
@@ -65,4 +65,4 @@ class Order_Confirmed extends React.Component {
     }
 }
 
-export default Order_Confirmed
+export default OrderConfirmed

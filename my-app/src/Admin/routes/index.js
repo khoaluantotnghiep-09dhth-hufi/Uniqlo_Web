@@ -26,6 +26,18 @@ const AddOrderProduct = React.lazy(() => import('../components/OrderProduct/add_
 
 const ListImportProduct = React.lazy(() => import('../components/ImportProduct/list_import_product'));
 const AddImportProduct = React.lazy(() => import('../components/ImportProduct/add_import_product'));
+
+const ListObject = React.lazy(() => import('../components/Object/list_object'));
+const AddObject = React.lazy(() => import('../components/Object/add_object'));
+
+const ListSectors = React.lazy(() => import('../components/Sector/list_sectors'));
+const AddSector = React.lazy(() => import('../components/Sector/add_sector'));
+
+const ListCategories = React.lazy(() => import('../components/Category/list_categories'));
+const AddCategory = React.lazy(() => import('../components/Category/add_category'));
+
+const ListStatistical = React.lazy(() => import('../components/Statistical/statistical_shop'));
+const ListStatisticalOrderImport = React.lazy(() => import('../components/Statistical/statistical_order_import'));
 // const Page404 = React.lazy(() => import('../screens/page404/Page404'));
 const routes = [
     { path: '/admin', exact: true, name: 'Trang Chủ', component: Home },
@@ -42,7 +54,6 @@ const routes = [
     { path: '/admin/system/discount/add', exact: true, name: 'Thêm Khuyến Mãi Mới', component: AddDiscount },
 
     { path: '/admin/account/add', exact: true, name: 'Thêm Tài Khoản Admin Mới', component: AddAccountAdmin },
-   
 
     { path: '/admin/manage/products', exact: true, name: 'Danh Sách Sản Phẩm', component: ListProducts },
     { path: '/admin/manage/product/add', exact: true, name: 'Thêm Sản Phẩm Mới', component: AddProduct },
@@ -59,7 +70,17 @@ const routes = [
     { path: '/admin/manage/import-product', exact: true, name: 'Danh Sách Nhập Hàng', component: ListImportProduct },
     { path: '/admin/manage/import-product/add', exact: true, name: 'Lập Đơn Nhập Hàng', component: AddImportProduct },
 
+    { path: '/admin/manage/objects', exact: true, name: 'Danh Sách Đối Tượng', component: ListObject },
+    { path: '/admin/manage/object/add', exact: true, name: 'Thêm Đối Tượng Mới', component: AddObject },
 
+    { path: '/admin/manage/sectors', exact: true, name: 'Danh Sách Loại Sản Phẩm', component: ListSectors },
+    { path: '/admin/manage/sector/add', exact: true, name: 'Thêm Loại Sản Phẩm Mới', component: AddSector },
+
+    { path: '/admin/manage/categories', exact: true, name: 'Danh Sách Danh Mục', component: ListCategories },
+    { path: '/admin/manage/category/add', exact: true, name: 'Thêm Danh Mục Mới', component: AddCategory },
+
+    { path: '/admin/manage/statistical', exact: true, name: 'Thống Kê Doanh Số', component: ListStatistical },
+    { path: '/admin/manage/statistical-order-import', exact: true, name: 'Thống Kê Kho', component: ListStatisticalOrderImport },
 ]
-
+///admin/manage/categories
 export default routes

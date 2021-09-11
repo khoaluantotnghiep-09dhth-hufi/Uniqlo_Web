@@ -23,7 +23,7 @@ import usersData from '../User/UserData';
 // }
 const fields = ['name', 'registered', 'role', 'status']
 
-class Order_UnConfirmedOrder extends React.Component {
+class OrderUnConfirmedOrder extends React.Component {
     render() {
         return (
             <>
@@ -65,4 +65,4 @@ class Order_UnConfirmedOrder extends React.Component {
     }
 }
 
-export default Order_UnConfirmedOrder
+export default OrderUnConfirmedOrder

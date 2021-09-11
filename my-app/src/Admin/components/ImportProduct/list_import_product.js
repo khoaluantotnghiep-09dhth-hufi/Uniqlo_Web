@@ -30,7 +30,7 @@ const getBadge = status => {
 }
 const fields = ['Tên', 'registered', 'role', 'status', 'Hành Động']
 
-class List_Discount extends React.Component {
+class ListImportProduct extends React.Component {
     render() {
         return (
             <>
@@ -96,4 +96,4 @@ class List_Discount extends React.Component {
     }
 }
 
-export default List_Discount
+export default ListImportProduct

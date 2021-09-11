@@ -23,6 +23,8 @@ import {
   faMinus,
   faStore,
   faUsers,
+  faChartBar,
+  faChartLine,
 } from "@fortawesome/free-solid-svg-icons";
 const _nav =  [
   {
@@ -85,6 +87,13 @@ const _nav =  [
     _children: ['Quản Lý']
   },
   {
+    _tag: 'CSidebarNavItem',
+    name:  <h5>Thống Kê Doanh Số</h5>,
+    to: '/admin/manage/statistical',
+    icon: <FontAwesomeIcon icon={faChartLine} className="mr-2" size="lg"/>,
+    
+  },
+  {
     _tag: 'CSidebarNavDropdown',
     name:  <h5>Nhập/Xuất Kho</h5>,
     route: '/admin/manage',
@@ -102,32 +111,37 @@ const _nav =  [
         to: '/admin/manage/import-product',
         icon: <FontAwesomeIcon icon={faFileImport} className="mr-2" size="lg"/>,
       },
-
+      {
+        _tag: 'CSidebarNavItem',
+        name:  <h5>Thống Kê</h5>,
+        to: '/admin/manage/statistical-order-import',
+        icon: <FontAwesomeIcon icon={faChartBar} className="mr-2" size="lg"/>,
+      },
     ]
 
   },
   {
     _tag: 'CSidebarNavDropdown',
     name:  <h5>Danh Sách</h5>,
-    route: '/',
+    route: '/admin/manage/cate',
     icon: <FontAwesomeIcon icon={faGripHorizontal} className="mr-2" size="lg"/>,
     _children: [
       {
         _tag: 'CSidebarNavItem',
         name:  <h5>Đối Tượng</h5>,
-        to: '/',
+        to: '/admin/manage/objects',
         icon: <FontAwesomeIcon icon={faBars} className="mr-2" size="lg"/>,
       },
       {
         _tag: 'CSidebarNavItem',
         name:  <h5>Loại Sản Phẩm</h5>,
-        to: '/',
+        to: '/admin/manage/sectors',
         icon: <FontAwesomeIcon icon={faGripLines} className="mr-2" size="lg"/>,
       },
       {
         _tag: 'CSidebarNavItem',
         name:  <h5>Danh Mục</h5>,
-        to: '/',
+        to: '/admin/manage/categories',
         icon: <FontAwesomeIcon icon={faMinus} className="mr-2" size="lg"/>,
       },
     ]
