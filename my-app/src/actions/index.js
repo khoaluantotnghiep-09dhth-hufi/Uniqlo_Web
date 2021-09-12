@@ -206,3 +206,20 @@ export const fetchCategoryResquest = () => {
     });
   };
 };
+//Lấy tất cả danh sách Bills_Customer
+export const fetchBillsCustomer = (bills_customer) => {
+  return {
+    type: types.FETCH_BILLS_CUSTOMER,
+    bills_customer,
+  };
+};
+
+export const fetchBillsCustomerResquest = () => {
+  return (dispatch) => {
+    return callApi("bill-customer", "GET", null).then((response) => {
+     
+      dispatch(fetchBillsCustomer(response.data));
+    
+    });
+  };
+};
