@@ -38,6 +38,12 @@ const AddCategory = React.lazy(() => import('../components/Category/add_category
 
 const ListStatistical = React.lazy(() => import('../components/Statistical/statistical_shop'));
 const ListStatisticalOrderImport = React.lazy(() => import('../components/Statistical/statistical_order_import'));
+
+const ListColor = React.lazy(() => import('../components/Color/list_color'));
+const AddColor = React.lazy(() => import('../components/Color/add_color'));
+
+const ListSize = React.lazy(() => import('../components/Size/list_size'));
+const AddSize = React.lazy(() => import('../components/Size/add_size'));
 // const Page404 = React.lazy(() => import('../screens/page404/Page404'));
 const routes = [
     { path: '/admin', exact: true, name: 'Trang Chủ', component: Home },
@@ -81,6 +87,12 @@ const routes = [
 
     { path: '/admin/manage/statistical', exact: true, name: 'Thống Kê Doanh Số', component: ListStatistical },
     { path: '/admin/manage/statistical-order-import', exact: true, name: 'Thống Kê Kho', component: ListStatisticalOrderImport },
+
+    { path: '/admin/manage/color', exact: true, name: 'Danh Sách Màu', component: ListColor },
+    { path: '/admin/manage/color/add', exact: true, name: 'Thêm Màu Mới', component: AddColor },
+
+    { path: '/admin/manage/size', exact: true, name: 'Danh Sách Kích Cỡ', component: ListSize },
+    { path: '/admin/manage/size/add', exact: true, name: 'Thêm Kích Cỡ Mới', component: AddSize },
 ]
 ///admin/manage/categories
 export default routes

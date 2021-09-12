@@ -25,6 +25,8 @@ import {
   faUsers,
   faChartBar,
   faChartLine,
+  faPalette,
+  faDraftingCompass,
 } from "@fortawesome/free-solid-svg-icons";
 const _nav =  [
   {
@@ -152,8 +154,18 @@ const _nav =  [
     to: '/admin/manage/products',
     icon: <FontAwesomeIcon icon={faTshirt} className="mr-2" size="lg"/>,
   },
- 
-  
+  {
+    _tag: 'CSidebarNavItem',
+    name:  <h5>Màu</h5>,
+    to: '/admin/manage/color',
+    icon: <FontAwesomeIcon icon={faPalette} className="mr-2" size="lg"/>,
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name:  <h5>Kích Cỡ</h5>,
+    to: '/admin/manage/size',
+    icon: <FontAwesomeIcon icon={faDraftingCompass} className="mr-2" size="lg"/>,
+  },
   {
     _tag: 'CSidebarNavItem',
     name:  <h5>Nhân Viên</h5>,
