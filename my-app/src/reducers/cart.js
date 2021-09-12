@@ -1,7 +1,6 @@
 import * as types from "./../constants/ActionTypes";
 import uniqid from "uniqid";
 
-
 var initialState = [];
 var findIndex = (cart, product) => {
   var result = -1;
@@ -33,8 +32,10 @@ var cart = (state = initialState, action) => {
   var id = "";
   var index = -1;
   switch (action.type) {
+    //Lấy tất cả danh sách giỏ hàng
     case types.LIST_ALL:
       return [...state];
+    //Thêm sản phẩm vào giỏ hàng
     case types.ADD_ITEM:
       var newItem = {
         id: uniqid("item-"),
@@ -49,12 +50,14 @@ var cart = (state = initialState, action) => {
       state.push(newItem);
       sessionStorage.setItem("cart", JSON.stringify(state));
       return [...state];
+    //Xóa sản phẩm vào giỏ hàng
     case types.DELETE_ITEM:
       id = action.id;
       index = findIndex(state, id);
       state.splice(index, 1);
       sessionStorage.setItem("cart", JSON.stringify(state));
       return [...state];
+    //Thêm sản phẩm vào giỏ hàng
     case types.ADD_TO_CART:
       index = findProductCart(state, product);
 
@@ -69,6 +72,7 @@ var cart = (state = initialState, action) => {
 
       sessionStorage.setItem("cart", JSON.stringify(state));
       return [...state];
+    //Xóa sản phẩm vào giỏ hàng
     case types.REMOVE_TO_CART:
       index = findProductCart(state, product);
 
@@ -77,6 +81,7 @@ var cart = (state = initialState, action) => {
       }
       sessionStorage.setItem("cart", JSON.stringify(state));
       return [...state];
+    //Cập nhật giỏ hàng
     case types.UPDATE_QUANTITY_CART:
       index = findProductCart(state, product);
 
@@ -85,6 +90,8 @@ var cart = (state = initialState, action) => {
       }
       sessionStorage.setItem("cart", JSON.stringify(state));
       return [...state];
+    //Reset giỏ hàng
+
     case types.RESET_CART:
       resetCart(state);
       return [...state];

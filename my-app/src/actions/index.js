@@ -20,7 +20,7 @@ export const deleteItem = (id) => {
     id,
   };
 };
-
+//Thêm sản phẩm vào giỏ hàng
 export const addToCart = (product, quantity) => {
   return {
     type: types.ADD_TO_CART,
@@ -28,13 +28,14 @@ export const addToCart = (product, quantity) => {
     quantity,
   };
 };
+//Xóa sản phẩm trong giỏ hàng
 export const removeToCart = (product) => {
   return {
     type: types.REMOVE_TO_CART,
     product,
   };
 };
-
+//Cập nhật giỏ hàng
 export const updateQuantity = (product, quantity) => {
   return {
     type: types.UPDATE_QUANTITY_CART,
@@ -54,7 +55,7 @@ export const onRestCart = (product) => {
 
 
 
-//Axios  Get All user
+//Lấy tất cả danh sách Khách hàng
 export const fetchUser = (user) => {
   return {
     type: types.FETCH_USER,
@@ -72,7 +73,7 @@ export const fetchUserRequest = () => {
 
 
 
-// Axios Get Products
+// Lấy tất cả danh sách sản phẩm
 export const fetchProduct = (products) => {
   return {
     type: types.FETCH_PRODUCT,
@@ -88,7 +89,7 @@ export const fetchProductResquest = () => {
   };
 };
 
-//Delete
+//Xóa Sản Phẩm
 export const onDeleteProduct = (id) => {
   return {
     type: types.DELETE_PRODUCT,
@@ -103,7 +104,7 @@ export const onDeleteProductResquest = (id) => {
     });
   };
 };
-//Add_Item
+//Thêm sản phẩm
 export const onAddProduct = (product) => {
   return {
     type: types.ADD_PRODUCT,
@@ -118,7 +119,7 @@ export const onAddProductResquest = (product) => {
     });
   };
 };
-//Update_Product
+//Cập nhật sản phẩm
 export const onUpdateProduct = (product) => {
   return {
     type: types.UPDATE_PRODUCT,
@@ -135,7 +136,7 @@ export const onUpdateProductResquest = (product) => {
   };
 };
 
-//Edit
+//Sửa sản phẩm
 export const onGetProduct = (product) => {
   return {
     type: types.EDIT_PRODUCT,
@@ -150,9 +151,9 @@ export const onEditProductResquest = (id) => {
   };
 };
 
-//Login to
 
-// Get Object 
+
+//Lấy tất cả danh sách Object
 
 export const fetchObject = (object) => {
   return {
@@ -170,7 +171,7 @@ export const fetchObjectResquest = () => {
     });
   };
 };
-
+//Lấy tất cả danh sách Sector
 export const fetchSector = (sector) => {
   return {
     type: types.FETCH_SECTOR,
@@ -188,7 +189,7 @@ export const fetchSectorResquest = () => {
   };
 };
 
-//get Caterogy
+//Lấy tất cả danh sách Categories
 export const fetchCategory = (category) => {
   return {
     type: types.FETCH_CATEGORY,

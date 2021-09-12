@@ -25,10 +25,10 @@ this.props.onGetAllProduct();
   showListProduct = (products) => {
     var {onAddToCart,match}=this.props;
     var result = null;
-    var url =match.url;
+    
     var id_Category = match.params.name_category;
  
-    // <NavLink to={`${url}/${product.title}`}></NavLink> Navlink is redirect detail product pass parameter on URL
+   
     result = products.filter((product)=>product.id_category===id_Category).map((product, index) => {
       return <Col lg="3" className="mt-4"><Item key={product.id} product={product} onAddToCart={onAddToCart}/></Col>;
     });

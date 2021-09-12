@@ -1,21 +1,12 @@
 import * as types from "./../constants/ActionTypes";
 
 var initialState = [];
-// var findIndex = (products, id) => {
-//   var result = -1;
-//   products.forEach((product, index) => {
-//     if (product.id === id) {
-//       result = index;
-//     }
-//   });
-//   return result;
-// };
+
 
 var users = (state = initialState, action) => {
-  // var index = -1;
-  // var { users } = action;
-  switch (action.type) {
 
+  switch (action.type) {
+// Lấy tất cả danh sách khách hàng
     case types.FETCH_USER:
       state = action.user;
       return [...state];
