@@ -1,9 +1,7 @@
 import * as types from "./../constants/ActionTypes";
 import uniqid from "uniqid";
 
-// var data = JSON.parse(localStorage.getItem("cart"));
 
-// var initialState = data ? data : [];
 var initialState = [];
 var findIndex = (cart, product) => {
   var result = -1;
@@ -47,7 +45,7 @@ var cart = (state = initialState, action) => {
         price: action.item.itemPrice,
         status: action.item.status,
       };
-      // console.log(newItem);
+
       state.push(newItem);
       sessionStorage.setItem("cart", JSON.stringify(state));
       return [...state];
@@ -59,7 +57,7 @@ var cart = (state = initialState, action) => {
       return [...state];
     case types.ADD_TO_CART:
       index = findProductCart(state, product);
-      console.log(index);
+
       if (index !== -1) {
         state[index].quantity += parseInt(quantity);
       } else {
@@ -73,7 +71,7 @@ var cart = (state = initialState, action) => {
       return [...state];
     case types.REMOVE_TO_CART:
       index = findProductCart(state, product);
-      console.log(index);
+
       if (index !== -1) {
         state.splice(index, 1);
       }

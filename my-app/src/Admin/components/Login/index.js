@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import HomePape from "../../containers/TheLayout";
 import { Route } from "react-router-dom";
 
-import { Link } from 'react-router-dom'
+
 import {
   CButton,
   CCard,

@@ -1,10 +1,10 @@
 import React from 'react'
-import CIcon from '@coreui/icons-react'
+
 // import {Route} from 'react-router-dom';
 // import Home from '../components/Home/index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faHome,
+  
   faListUl,
   faCheck,
   faExclamationCircle,

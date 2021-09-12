@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Image, Nav } from 'react-bootstrap';
-import Contact from "./../Contact/index"
-import Return_Policy from "./../Return_Policy/index"
-import Guide from "./../Guide/index"
-import Accessibility from "./../Accessibility/index"
-import Privacy_Policy from "./../Privacy_Policy/index"
+
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';

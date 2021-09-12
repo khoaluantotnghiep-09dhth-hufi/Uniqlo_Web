@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { Nav } from "react-bootstrap";
 import MenuChild from "./../Menu_Child/index";
-import { NavLink } from "react-router-dom";
+
 import { connect } from "react-redux";
 import * as actions from "./../../../../actions/index";
  class index extends Component {

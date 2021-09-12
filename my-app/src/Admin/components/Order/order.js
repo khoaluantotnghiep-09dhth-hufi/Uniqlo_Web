@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-    CBadge,
+ 
     CCard,
     CCardBody,
     CCardHeader,
@@ -9,7 +9,7 @@ import {
     CRow,
     CButton,
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCheck,

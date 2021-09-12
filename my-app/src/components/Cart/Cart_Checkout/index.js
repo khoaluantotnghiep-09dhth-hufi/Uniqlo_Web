@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Row, Col, Accordion, Form, Button } from "react-bootstrap";
 import "./Cart_Checkout.scss";
 class index extends Component {
-  showTotalAmount = (items) => {
+  showTotalAmount = (cart) => {
     
     const formatter = new Intl.NumberFormat("vi-VN", {
       style: "currency",
@@ -10,22 +10,22 @@ class index extends Component {
       minimumFractionDigits: 2,
     });
     var total = 0;
-    for (let index = 0; index < items.length; index++) {
-      total += items[index].product.price * items[index].quantity;
+    for (let index = 0; index < cart.length; index++) {
+      total += cart[index].product.price * cart[index].quantity;
      
     }
     return formatter.format(total);
   };
-showTotalProduct=(items)=>{
+showTotalProduct=(cart)=>{
     var total = 0;
-    for (let index = 0; index < items.length; index++) {
-      total += items[index].quantity;
+    for (let index = 0; index < cart.length; index++) {
+      total += cart[index].quantity;
 
     }
     return total;
 };
   render() {
-    const { items } = this.props;
+    const { cart } = this.props;
 
     return (
       <div>
@@ -35,7 +35,7 @@ showTotalProduct=(items)=>{
           </Col>
           <Col>
             <h6 className="d-flex justify-content-end">
-              {this.showTotalProduct(items)} Items
+              {this.showTotalProduct(cart)} cart
             </h6>
           </Col>
         </Row>
@@ -45,7 +45,7 @@ showTotalProduct=(items)=>{
           </Col>
           <Col>
             <h6 className="d-flex justify-content-end">
-              {this.showTotalAmount(items)}
+              {this.showTotalAmount(cart)}
             </h6>
           </Col>
         </Row>
@@ -58,7 +58,7 @@ showTotalProduct=(items)=>{
               <Accordion.Header>Áp Dụng Voucher</Accordion.Header>
               <Accordion.Body>
                 <Form>
-                  <Row className="align-items-center">
+                  <Row className="align-cart-center">
                     <Col lg="7">
                       <Form.Control
                         className="mb-2"

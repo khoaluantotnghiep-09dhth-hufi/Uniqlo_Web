@@ -17,8 +17,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import usersData from '../User/UserData';
-import CIcon from '@coreui/icons-react';
-import { Route, Link } from 'react-router-dom';
+
+import { Link } from 'react-router-dom';
 const getBadge = status => {
     switch (status) {
         case 'Active': return 'success'

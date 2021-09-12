@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-    CBadge,
+
     CCard,
     CCardBody,
     CCardHeader,
