@@ -22,13 +22,16 @@ this.props.onGetAllProduct();
       </Category_Products>
     );
   }
+  
   showListProduct = (products) => {
     var {onAddToCart,match}=this.props;
     var result = null;
     var url =match.url;
-    
-    result = products.map((product, index) => {
-      return <Col lg="3"><NavLink to={`${url}/${product.title}`}><Item key={product.id} product={product} onAddToCart={onAddToCart}/></NavLink></Col>;
+    var id_Category = match.params.name_category;
+    console.log(id_Category);
+    // <NavLink to={`${url}/${product.title}`}></NavLink> Navlink is redirect detail product pass parameter on URL
+    result = products.filter((product)=>product.id_category===id_Category).map((product, index) => {
+      return <Col lg="3" className="mt-4"><Item key={product.id} product={product} onAddToCart={onAddToCart}/></Col>;
     });
     return result;
   };

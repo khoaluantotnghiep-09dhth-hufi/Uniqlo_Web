@@ -62,7 +62,7 @@ class index extends Component {
               <Row className="Cart__Delete">
                 <Col>
                   <h6>Số lượng</h6>
-                  <select value={this.state.quantity} onChange={ this.handleChange(item.product,quantity)}  >
+                  <select value={this.state.quantity} onChange={ this.handleChange(item.product,item.quantity)}  >
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>

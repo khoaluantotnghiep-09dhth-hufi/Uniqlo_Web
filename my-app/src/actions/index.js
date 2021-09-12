@@ -152,3 +152,56 @@ export const onEditProductResquest = (id) => {
 
 //Login to
 
+// Get Object 
+
+export const fetchObject = (object) => {
+  return {
+    type: types.FETCH_OBJECT,
+    object,
+  };
+};
+
+export const fetchObjectResquest = () => {
+  return (dispatch) => {
+    return callApi("objects", "GET", null).then((response) => {
+     
+      dispatch(fetchObject(response.data));
+    
+    });
+  };
+};
+
+export const fetchSector = (sector) => {
+  return {
+    type: types.FETCH_SECTOR,
+    sector,
+  };
+};
+
+export const fetchSectorResquest = () => {
+  return (dispatch) => {
+    return callApi("sectors", "GET", null).then((response) => {
+     
+      dispatch(fetchSector(response.data));
+    
+    });
+  };
+};
+
+//get Caterogy
+export const fetchCategory = (category) => {
+  return {
+    type: types.FETCH_CATEGORY,
+    category,
+  };
+};
+
+export const fetchCategoryResquest = () => {
+  return (dispatch) => {
+    return callApi("categories", "GET", null).then((response) => {
+     
+      dispatch(fetchCategory(response.data));
+    
+    });
+  };
+};

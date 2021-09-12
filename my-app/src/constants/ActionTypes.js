@@ -21,3 +21,12 @@ export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 
 export const EDIT_PRODUCT = 'EDIT_PRODUCT';
 
+//Get object
+export const FETCH_OBJECT = 'FETCH_OBJECT';
+
+export const FETCH_SECTOR_BY_ID = ' FETCH_SECTOR_BY_ID';
+
+export const FETCH_SECTOR= ' FETCH_SECTOR';
+
+//Get category 
+export const FETCH_CATEGORY= ' FETCH_CATEGORY';

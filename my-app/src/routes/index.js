@@ -60,7 +60,7 @@ var routes = [
     main: () => <Privacy_Policy />,
   },
   {
-    path: "/category",
+    path: "/product/:name_object/:name_sectors/:name_category",
     exact: true,
     main: ({ match, location }) => (
       <Category match={match} location={location} />
