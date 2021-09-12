@@ -35,8 +35,7 @@ class index extends Component {
             </Col>
 
             <Col xl={1} className="img-tran">
-            <Image src="https://www.uniqlo.com/vn/explorer/img/logo_uq_01.gif" rounded />
-
+            <a id="imgFooter" href="#top"><Image src="https://www.uniqlo.com/vn/explorer/img/btn_footer_pagetop.gif" alt="" width="21" height="21" className="pagetop"/></a>        
             </Col>
 
           </Row>

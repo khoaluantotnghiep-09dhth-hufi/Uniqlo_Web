@@ -1,26 +1,24 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-
+import "./Contact.scss";
 class index extends Component{
     render(){
       return(
         <Container>
           <Row>
-            <Col xs="8" sm="8" md="8" lg="8">
-              <div className="companyMain">
+            <Col>
+              <div id="companyMain">
                 <div className="titCompany clearfix">
-                  <h1 className="tit"><img src="https://www.uniqlo.com/vn/img/tit_company_customer.gif" alt="Liên hệ chúng tôi"/></h1>
+                  <h3 className="tit">LIÊN HỆ VỚI CHÚNG TÔI</h3>
                 </div>
-                <div className="boxCompanyBasic">
-                  <p className="txt"></p>
-                  <h3>THÔNG TIN LIÊN HỆ</h3><br/>
+                <br/>
+                <div className="boxCompanyBasic txt">
+                  <strong><p>THÔNG TIN LIÊN HỆ</p></strong>
                     Trao đổi cởi mở là một trong những giá trị cốt lõi của UNIQLO, vì thế đừng ngại ngần liên hệ với chúng tôi.<br/>
                     Nếu bạn có bất kỳ câu hỏi, thắc mắc, hoặc cần hỗ trợ thêm, vui lòng gửi email về địa chỉ<br/>
                     <a href="mailto:customerservices@uniqlo.vn">customerservices@uniqlo.vn</a><br/>
-                    Giờ Làm Việc: 8:00 – 17:00 (Thứ Hai – Thứ Sáu, không bao gồm ngày lễ)
-                  <p></p>
-                  <p className="txt"></p>
-                  <h3>UNIQLO CHÍNH THỨC TRIỂN KHAI DỊCH VỤ ĐẶT HÀNG SỐ LƯỢNG LỚN</h3><br/>
+                    <p>Giờ Làm Việc: 8:00 – 17:00 (Thứ Hai – Thứ Sáu, không bao gồm ngày lễ)</p>
+                    <strong><p>UNIQLO CHÍNH THỨC TRIỂN KHAI DỊCH VỤ ĐẶT HÀNG SỐ LƯỢNG LỚN</p></strong>
                     <img src="https://www.uniqlo.com/vn/img/img_company_customer02.jpg" alt="UNIQLO CHÍNH THỨC TRIỂN KHAI DỊCH VỤ ĐẶT HÀNG SỐ LƯỢNG LỚN"/><br/>
                     <strong>Giao hàng miễn phí và ưu đãi đặc biệt</strong> khi đặt hàng số lượng lớn (Vui lòng liên hệ chúng tôi để biết thêm chi tiết)<br/>
                     <br/>
