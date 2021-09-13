@@ -9,7 +9,7 @@ class index extends Component {
         <Card.Img variant="top" src={product.image} />
         <span class="badge badge-danger" style={{transform: "translateX(190px)"}}>50<i class="fas fa-percent " aria-hidden="true"></i></span>
         <Card.Body>
-          <Card.Title>{product.title}</Card.Title>
+          <Card.Title>{product.name_product}</Card.Title>
 
           <Card.Text className="text-left">
             <span> <del>{product.price} VND</del></span>
