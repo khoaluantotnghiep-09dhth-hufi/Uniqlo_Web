@@ -4,8 +4,9 @@ import Search from './../../components/Search/index';
 
 class index extends Component {
     render() {
+        var{match} = this.props;
         return (
-           <Search/>
+           <Search match={match}/>
         );
     }
 }

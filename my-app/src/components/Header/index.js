@@ -14,6 +14,7 @@ class index extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: "",
       quantity: "",
     };
   }
@@ -36,8 +37,46 @@ class index extends Component {
       </Badge>
     );
   };
+  onHandleChange = (event) => {
+    var target = event.target;
+    var name = target.name;
+    var value = target.value;
+    this.setState({
+      [name]: value,
+    });
+  };
+  onBlurInputSearch=(event)=>{
+    //  var { input_Search } = this.state;
+    // var remove = input_Search?'':'';
+    // console.log(remove);
+    // this.setState({input_Search: remove})
+   
+   
+  }
+  onFocusInputSearch=(e)=>{
+ 
+    //    var { input_Search } = this.state;
+    // var remove = input_Search?'':'';
+    // console.log(remove);
+    // this.setState({input_Search: remove})
+  }
+  handleOnSearch=(event)=>{
+    // var { input_Search } = this.state;
+    // var remove = input_Search?'':'';
+    // console.log(remove);
+    // this.setState({input_Search: remove})
+  }
   render() {
     var { cart } = this.props;
+    var { input_Search } = this.state;
+    
+   
+    var showLinkSearch = (
+      <NavLink to={`/search/${input_Search}`}>
+        <MDBIcon icon="search" className="sizeIcon" onClick={this.handleOnSearch} />
+      </NavLink>
+    );
+    
     var isCheckAccount =
       sessionStorage.getItem("user") === null ? (
         <NavLink to="/login">
@@ -50,8 +89,8 @@ class index extends Component {
       );
 
     return (
-      <Container className="header"  >
-        <Row style={{width:'100%'}}>
+      <Container className="header">
+        <Row style={{ width: "100%" }}>
           <Col lg={1}>
             <NavLink to="/">
               <Image
@@ -68,16 +107,19 @@ class index extends Component {
           <Col lg={5}>
             <Row>
               <Col lg={9}>
-                <NavLink to="/search">
-                  <InputGroup>
-                    <MDBInput
-                      hint="Tìm Kiếm"
-                      type="text"
-                      containerClass="mt-0"
-                    />{" "}
-                    <MDBIcon icon="search" className="sizeIcon" />
-                  </InputGroup>
-                </NavLink>
+                <InputGroup>
+                  <MDBInput
+                    hint="Tìm Kiếm"
+                    type="text"
+                    containerClass="mt-0"
+                    name="input_Search"
+                    onChange={this.onHandleChange}
+                    onBlur={this.onBlurInputSearch}
+                    onFocus={this.onFocusInputSearch}
+                    
+                  />{" "}
+                  {showLinkSearch}
+                </InputGroup>
               </Col>
               <Col lg={1}>
                 {isCheckAccount}
@@ -93,7 +135,7 @@ class index extends Component {
                     icon="shopping-cart"
                     md="4"
                     className="sizeIcon icon"
-                    style={{fontSize:'22px'}}
+                    style={{ fontSize: "22px" }}
                   >
                     {this.showTotalQuantityCart(cart)}
                   </MDBIcon>

@@ -79,9 +79,9 @@ var routes = [
     main: ({ match }) => <Detail_Product match={match} />,
   },
   {
-    path: "/search",
+    path: "/search/:input_Search",
     exact: true,
-    main: () => <Search />,
+    main: ({ match }) => <Search match={match} />,
   },
 
   {
