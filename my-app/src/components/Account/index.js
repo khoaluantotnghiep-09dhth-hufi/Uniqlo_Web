@@ -45,7 +45,7 @@ class index extends Component {
             </Row>
             <Row>
               <Col>
-                <Table />
+                <Table phoneUser={sessionUser.phone}/>
               </Col>
             </Row>
           </Col>

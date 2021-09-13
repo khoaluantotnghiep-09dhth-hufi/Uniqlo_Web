@@ -7,7 +7,7 @@ class index extends Component {
     const formatter = new Intl.NumberFormat("vi-VN", {
       style: "currency",
       currency: "VND",
-      minimumFractionDigits: 2,
+      minimumFractionDigits: 0,
     });
     var total = 0;
     for (let index = 0; index < cart.length; index++) {

@@ -31,7 +31,7 @@ class index extends Component {
     const formatter = new Intl.NumberFormat('vi-Vn', {
       style: 'currency',
       currency: 'VND',
-      minimumFractionDigits: 3
+      minimumFractionDigits: 0
     })
     var total=price*quantity;
     return formatter.format(total); 
@@ -39,7 +39,11 @@ class index extends Component {
   render() {
     var { item } = this.props;
   const{quantity} = item.product.quantity>0?quantity:this.state;
-    
+  const formatter = new Intl.NumberFormat('vi-Vn', {
+    style: 'currency',
+    currency: 'VND',
+    minimumFractionDigits: 0
+  })
     return (
       <div className="Cart_Item--border">
         <Container className="mt-4 mb-4">
@@ -54,7 +58,7 @@ class index extends Component {
                 <h6>Màu sắc: {item.product.color}</h6>
                 <h6>Kích cỡ: {item.product.size}</h6>
                 
-                <h6>Giá: {item.product.price}</h6>
+                <h6>Giá: {formatter.format(item.product.price)}</h6>
               </div>
             </Col>
 
