@@ -48,7 +48,7 @@ class index extends Component {
           <MDBIcon icon="user" md="4" className="sizeIcon" />
         </NavLink>
       );
-    console.log(isCheckAccount);
+    
     return (
       <Container className="header">
         <Row>

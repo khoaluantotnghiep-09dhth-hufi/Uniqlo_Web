@@ -58,7 +58,7 @@ class index extends Component {
       );
     });
     return (
-      <Container>
+      <Container style={{marginBottom:'20%',marginTop:'3%'}}>
         <Row>
           <Col lg="6">
             <h3>GIỎ HÀNG</h3>

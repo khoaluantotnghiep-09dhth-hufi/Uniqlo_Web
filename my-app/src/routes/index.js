@@ -2,6 +2,7 @@ import React from "react";
 import Home from "./../screens/Screen_Home/index";
 import Login from "./../screens/Screen_Login/index";
 import Cart from "./../screens/Screen_Cart/index";
+import CheckOut from "./../screens/Screen_CheckOut/index";
 import Category from "./../screens/Screen_Category/index";
 import Detail_Product from "./../screens/Screen_DetailProduct/index";
 import Search from "./../screens/Screen_Search/index";
@@ -33,6 +34,11 @@ var routes = [
     path: "/cart",
     exact: true,
     main: () => <Cart />,
+  },
+  {
+    path: "/checkout",
+    exact: true,
+    main: () => <CheckOut />,
   },
   {
     path: "/contact",

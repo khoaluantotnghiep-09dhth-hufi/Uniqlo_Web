@@ -13,3 +13,4 @@ export default function Callapi(endpoint,method='GET',body){
         });
     
 };
+
