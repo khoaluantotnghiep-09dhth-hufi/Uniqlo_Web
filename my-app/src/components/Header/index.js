@@ -48,11 +48,11 @@ class index extends Component {
           <MDBIcon icon="user" md="4" className="sizeIcon" />
         </NavLink>
       );
-    
+
     return (
-      <Container className="header">
-        <Row>
-          <Col xl={1}>
+      <Container className="header"  >
+        <Row style={{width:'100%'}}>
+          <Col lg={1}>
             <NavLink to="/">
               <Image
                 src="https://www.uniqlo.com/vn/explorer/img/logo_uq_01.gif"
@@ -61,13 +61,13 @@ class index extends Component {
             </NavLink>{" "}
           </Col>
 
-          <Col xs="6" sm="6" md="6" lg="6">
+          <Col lg={6}>
             <Header_Center />
           </Col>
 
-          <Col>
+          <Col lg={5}>
             <Row>
-              <Col xs="9" sm="9" md="9" lg="9">
+              <Col lg={9}>
                 <NavLink to="/search">
                   <InputGroup>
                     <MDBInput
@@ -79,13 +79,13 @@ class index extends Component {
                   </InputGroup>
                 </NavLink>
               </Col>
-              <Col xs="1" sm="1" md="1" lg="1">
+              <Col lg={1}>
                 {isCheckAccount}
                 {/* <NavLink to="/login">
                   <MDBIcon icon="user" md="4" className="sizeIcon" />
                 </NavLink>{" "} */}
               </Col>
-              <Col xs="1" sm="1" md="1" lg="1">
+              <Col lg={1}>
                 {" "}
                 <NavLink to="/cart">
                   {" "}
@@ -93,6 +93,7 @@ class index extends Component {
                     icon="shopping-cart"
                     md="4"
                     className="sizeIcon icon"
+                    style={{fontSize:'22px'}}
                   >
                     {this.showTotalQuantityCart(cart)}
                   </MDBIcon>

@@ -54,10 +54,12 @@ class index extends Component {
   render() {
     var { object } = this.props;
     return (
-    
+    <React.Fragment>
 <MenuParent>
 
 </MenuParent>
+    </React.Fragment>
+
     );
   }
 }

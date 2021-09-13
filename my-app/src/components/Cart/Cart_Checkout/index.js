@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Accordion, Form, Button } from "react-bootstrap";
 import "./Cart_Checkout.scss";
+import { NavLink } from "react-router-dom";
 class index extends Component {
   showTotalAmount = (cart) => {
     
@@ -85,6 +86,7 @@ showTotalProduct=(cart)=>{
         </Row>
 
         <Row>
+        <NavLink to="/checkout">
           <Button
             variant="danger"
             type="button"
@@ -93,6 +95,7 @@ showTotalProduct=(cart)=>{
           >
             Thanh Toán
           </Button>
+          </NavLink>
         </Row>
       </div>
     );

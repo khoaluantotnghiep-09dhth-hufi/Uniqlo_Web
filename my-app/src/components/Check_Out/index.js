@@ -10,6 +10,7 @@ import {
   InputGroup,
   FormControl
 } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
@@ -208,6 +209,7 @@ class index extends Component {
             </Row>
             <Row>
               <Col lg={8}>
+              <NavLink to="/">
               <Button
             variant="danger"
             type="button"
@@ -216,6 +218,7 @@ class index extends Component {
           >
             Đặt Hàng
           </Button>
+          </NavLink>
               </Col>
              
             </Row>
