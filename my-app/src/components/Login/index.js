@@ -11,7 +11,6 @@ class index extends Component {
     this.state = {
       txtPhone: "",
       txtPassword: "",
-
       txtHo: "",
       txtTen: "",
       txtEmail: "",
@@ -60,6 +59,7 @@ class index extends Component {
   onHandleSubmitSignUp = (event) => {
     event.preventDefault();
   };
+  
   render() {
     var { users } = this.props;
     var { isCheckLogin } = this.state;
@@ -82,8 +82,9 @@ class index extends Component {
             <Form onSubmit={this.onHandleSubmitLogin(users)}>
               <Form.Group className="mb-3" controlId="formBasicPhone">
                 <Form.Control
+                  className="fas fa-phone-alt"
                   type="text"
-                  placeholder="Số Điện Thoại"
+                  placeholder="&#xf879; Số Điện Thoại"
                   ref="memberPhone"
                   onChange={this.onHandleChange}
                   name="txtSDT"
@@ -92,8 +93,9 @@ class index extends Component {
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Control
+                  className="fas fa-lock"
                   type="password"
-                  placeholder="Mật Khẩu"
+                  placeholder="&#xf023; Mật Khẩu"
                   ref="memberPassword"
                   onChange={this.onHandleChange}
                   name="txtPassword"
@@ -127,18 +129,21 @@ class index extends Component {
             <h5 className="text-center">Đăng Ký</h5>
             <Form onSubmit={this.onHandleSubmitSignUp}>
               <Form.Group className="mb-3" controlId="formBasicHo">
-                <Form.Control
+                <Form.Control       
+                  className="fas fa-user"          
                   type="text"
-                  placeholder="Họ"
+                  placeholder="&#xf007; Họ"
                   onChange={this.onHandleChange}
                   name="txtHo"
                 />
               </Form.Group>
+              
 
               <Form.Group className="mb-3" controlId="formBasicTen">
                 <Form.Control
+                  className="fas fa-user"          
                   type="text"
-                  placeholder="Tên"
+                  placeholder="&#xf007; Tên"
                   onChange={this.onHandleChange}
                   name="txtTen"
                 />
@@ -146,8 +151,9 @@ class index extends Component {
 
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control
+                  className="fas fa-envelope"
                   type="email"
-                  placeholder="Email"
+                  placeholder="&#xf0e0; Email"
                   onChange={this.onHandleChange}
                   name="txtEmail"
                 />
@@ -155,8 +161,9 @@ class index extends Component {
 
               <Form.Group className="mb-3" controlId="formBasicPhone">
                 <Form.Control
+                  className="fas fa-phone-alt"
                   type="text"
-                  placeholder="Số Điện Thoại"
+                  placeholder="&#xf879; Số Điện Thoại"
                   onChange={this.onHandleChange}
                   name="txtSDT"
                 />
@@ -164,8 +171,9 @@ class index extends Component {
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Control
+                  className="fas fa-lock"
                   type="password"
-                  placeholder="Mật Khẩu"
+                  placeholder="&#xf023; Mật Khẩu"
                   onChange={this.onHandleChange}
                   name="txtMatKhau"
                 />
