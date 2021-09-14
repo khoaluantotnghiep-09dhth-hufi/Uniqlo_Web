@@ -60,19 +60,32 @@ export const fetchUser = (user) => {
   return {
     type: types.FETCH_USER,
     user
-  }
-}
+  };
+};
 
 export const fetchUserRequest = () => {
   return dispatch=> {
     return callApi("users","GET", null).then((response=>{
       dispatch(fetchUser(response.data));
     }));
-  }
+  };
+};
+
+//Xoá khách hàng theo id
+export const onDeleteUser=(id)=>{
+  return{
+    type : types.DELETE_USER,
+    id,
+  };
+};
+
+export const onDeleteUserResquest=(id)=>{
+  return(dispatch)=>{
+    return callApi(`customers/${id}`, "DELETE", null).then((response)=>{
+      dispatch(onDeleteUserResquest(id));
+    });
+  };
 }
-
-
-
 // Lấy tất cả danh sách sản phẩm
 export const fetchProduct = (products) => {
   return {

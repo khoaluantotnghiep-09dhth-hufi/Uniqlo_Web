@@ -39,7 +39,6 @@ class index extends Component {
         };
         sessionStorage.setItem("user", JSON.stringify(user));
         sessionStorage.setItem("items", JSON.stringify(items));
-        
         this.setState({
           isCheckLogin: true,
         });
@@ -86,10 +85,10 @@ class index extends Component {
         onCloseForm={this.onCloseForm} 
         onHandleSubmitSignUp = {this.onHandleSubmitSignUp}/>
         ) : ("");
-    var elmDangNhap = !isForgotPass ? (
+    var elmSignIn = !isForgotPass ? (
       <Signin 
         onCloseForm={this.onCloseForm} 
-        onHandleSubmitSignUp = {this.onHandleSubmitSignUp}/>
+        onSubmit = {this.onHandleSubmitLogin(users)}/>
       ) : ("");
     if (isCheckLogin) {
       return (
@@ -103,9 +102,11 @@ class index extends Component {
     return (
       <Container>
         <Row className="Account-padding">    
-          {/* form đăng nhập */}
+
           {elmForgotPass}
-          {elmDangNhap}
+
+          {elmSignIn}
+          
           {/* <Signin className="col-sm-6 col-xs-12" onSubmit={this.onHandleSubmitLogin(users)}/> */}
           {/* <Form.Group
             className="mb-3 text-center"
@@ -117,7 +118,7 @@ class index extends Component {
                 Quên Mật Khẩu?
               </a>
           </Form.Group> */}
-          {/* form đăng ký */}
+
           <Register className="col-sm-6 col-xs-12" onSubmit={this.onHandleSubmitSignUp}/>
 
         </Row>

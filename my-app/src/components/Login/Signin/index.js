@@ -3,7 +3,6 @@ import { Component } from "react"
 class index extends Component{
   constructor(props) {
     super(props);
-    
   }
   
   onToggleForm=()=>{

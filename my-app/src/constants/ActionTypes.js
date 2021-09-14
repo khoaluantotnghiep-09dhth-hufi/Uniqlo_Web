@@ -10,10 +10,13 @@ export const UPDATE_QUANTITY_CART = 'UPDATE_QUANTITY_CART';
 export const RESET_CART = 'RESET_CART';
 
 
-
-
-// Axios
+//Get user
 export const FETCH_USER = 'FETCH_USER';
+export const DELETE_USER = 'DELETE_USER';
+export const ADD_USER = 'ADD_USER';
+export const UPDATE_USER = 'UPDATE_USER';
+export const EDIT_USER = 'EDIT_USER';
+// Axios
 export const FETCH_PRODUCT = 'FETCH_PRODUCT';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
