@@ -29,11 +29,9 @@ class index extends Component {
                  <Nav.Link className="font-nav" href="/privacy_policy">Chính sách bảo mật</Nav.Link>
               </Nav>
             </Col>
-
-            <Col xl={1} className="img-tran">
-            <a id="imgFooter" href="#top"><Image src="https://www.uniqlo.com/vn/explorer/img/btn_footer_pagetop.gif" alt="" width="21" height="21" className="pagetop"/></a>        
+            <Col xs="1" sm="1" md="1" lg="1" className="img-tran">
+              <a id="imgFooter" href="#top"><Image src="https://www.uniqlo.com/vn/explorer/img/btn_footer_pagetop.gif" alt="" width="21" height="21" className="pagetop"/></a>        
             </Col>
-
           </Row>
           <p className="mt-4">Tên doanh nghiệp: Công ty TNHH UNIQLO Việt Nam<br></br>
           Giấy chứng nhận đăng ký doanh nghiệp số: 0315304731, đăng ký lần đầu ngày 02/10/2018, đăng ký thay đổi lần thứ ba ngày 23/09/2019<br></br>
