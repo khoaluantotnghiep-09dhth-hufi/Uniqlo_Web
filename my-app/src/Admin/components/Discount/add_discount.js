@@ -35,17 +35,19 @@ class addDiscount extends React.Component {
     var { match } = this.props;
     if (NextProps && NextProps.edditPromotion) {
       var { edditPromotion } = NextProps;
-      
-      const result= edditPromotion.find(o => o.id === match.params.id_promotion);
-      console.log(result.id);
+      if (match.params.id_promotion) {
+        const result = edditPromotion.find(
+          (o) => o.id === match.params.id_promotion
+        );
 
-      this.setState({
-        idItem: result.id,
-        txtNameDiscount: result.name,
-        txtNameMota: result.desciption,
-        dateStart: result.date_start,
-        dateEnd: result.date_end,
-      });
+        this.setState({
+          idItem: result.id,
+          txtNameDiscount: result.name,
+          txtNameMota: result.desciption,
+          dateStart: result.date_start,
+          dateEnd: result.date_end,
+        });
+      }
     }
   }
   onChange = (event) => {
@@ -63,7 +65,7 @@ class addDiscount extends React.Component {
     var { history } = this.props;
     var { idItem, txtNameDiscount, txtNameMota, dateStart, dateEnd } =
       this.state;
-      console.log(idItem)
+    console.log(idItem);
     var promotion = {
       id: uniqid("promotion-"),
       namePromotion: txtNameDiscount,
@@ -79,7 +81,7 @@ class addDiscount extends React.Component {
       dateEnd: dateEnd,
     };
     if (idItem) {
-      this.props. onUpdateItemPromotion(promotionUpdate);
+      this.props.onUpdateItemPromotion(promotionUpdate);
       history.goBack();
     } else {
       this.props.onAddItemPromotion(promotion);
