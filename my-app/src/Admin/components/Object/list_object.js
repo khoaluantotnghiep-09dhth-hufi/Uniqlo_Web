@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-    
+
     CCard,
     CCardBody,
     CCardHeader,
@@ -12,13 +12,14 @@ import {
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faPlus,
-  faTimes,
-  faTools,
+    faPlus,
+    faTimes,
+    faTools,
 } from "@fortawesome/free-solid-svg-icons";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import usersData from '../User/UserData';
-
+import axios from "axios";
+import CallAPI from "../../utils/Callapi";
 // const getBadge = status => {
 //     switch (status) {
 //         case 'Active': return 'success'
@@ -28,15 +29,38 @@ import usersData from '../User/UserData';
 //         default: return 'primary'
 //     }
 // }
-const fields = ['Tên', 'registered', 'role', 'status', 'Hành Động']
+const fields = [ { key: 'id', label: 'Mã Đối Tượng' },,  { key: 'name', label: 'Tên Đối Tượng' },, 'Hành Động']
 
-class ListObject extends React.Component {
+class ListNews extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            objects: []
+        };
+    }
+    componentDidMount() {
+        // CallAPI('object', 'GET', null).then(res => {
+        //     this.setState({
+        //         objects: res.data
+        //     })
+        // });
+        axios({
+            method: 'GET',
+            url: 'http://127.0.0.1:8000/objects',
+            data: null
+          }).then(res => {
+              this.setState({
+                  objects: res.data
+              })
+          });
+    }
     render() {
+        var { objects } = this.state;
         return (
             <>
-                <Link to="/admin/manage/object/add">
+                <Link to="/admin/system/news/add">
                     <CButton type="button" className="btn btn-danger">
-                    <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg"/>Thêm Mới
+                        <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />Thêm Mới
                     </CButton>
                 </Link>
                 <CRow>
@@ -47,7 +71,7 @@ class ListObject extends React.Component {
                             </CCardHeader>
                             <CCardBody>
                                 <CDataTable
-                                    items={usersData}
+                                    items={objects}
                                     fields={fields}
                                     itemsPerPage={8}
                                     pagination
@@ -68,12 +92,12 @@ class ListObject extends React.Component {
                                                 <td>
                                                     <Link to="/admin/system/discount/../edit">
                                                         <CButton type="button" className="btn btn-primary">
-                                                        <FontAwesomeIcon icon={faTools} className="mr-2" size="lg"/>Sửa
+                                                            <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
                                                         </CButton>
                                                     </Link>
                                                     <Link to="/admin/system/discount/../delete">
                                                         <CButton type="button" className="btn btn-warning">
-                                                        <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg"/>Xóa
+                                                            <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
                                                         </CButton>
                                                     </Link>
 
@@ -95,4 +119,4 @@ class ListObject extends React.Component {
     }
 }
 
-export default ListObject
+export default ListNews

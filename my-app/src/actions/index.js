@@ -223,3 +223,83 @@ export const fetchBillsCustomerResquest = () => {
     });
   };
 };
+//Lấy tất cả danh sách Promotion
+export const fetchPromotions = (promotion) => {
+  return {
+    type: types.FETCH_PROMOTION,
+    promotion,
+  };
+};
+
+export const fetchPromotionsResquest = () => {
+  return (dispatch) => {
+    return callApi("promotions", "GET", null).then((response) => {
+     
+      dispatch(fetchPromotions(response.data));
+    
+    });
+  };
+};
+
+//Xóa Promotion
+export const onDeletePromotion = (id) => {
+  return {
+    type: types.DELETE_PROMOTION,
+    id,
+  };
+};
+
+export const onDeletePromotionResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`promotions/${id}`, "DELETE", null).then((response) => {
+      dispatch(onDeletePromotion(id));
+    });
+  };
+};
+//Thêm Promotion
+export const onAddPromotion = (promotion) => {
+  return {
+    type: types.ADD_PROMOTION,
+    promotion,
+  };
+};
+
+export const onAddPromotionResquest = (promotion) => {
+  return (dispatch) => {
+    return callApi("promotions", "POST", promotion).then((response) => {
+      dispatch(onAddPromotion(response.data));
+    });
+  };
+};
+//Cập Promotion
+export const onUpdatePromotion = (promotion) => {
+  return {
+    type: types.UPDATE_PROMOTION,
+    promotion,
+  };
+};
+export const onUpdatePromotionResquest = (promotion) => {
+  return (dispatch) => {
+    return callApi(`promotions/${promotion.id}`, "PUT", promotion).then(
+      (response) => {
+        dispatch(onUpdatePromotion(response.data));
+      }
+    );
+  };
+};
+
+//Sửa Promotion
+export const onGetPromotion = (promotion) => {
+  return {
+    type: types.EDIT_PROMOTION,
+    promotion,
+  };
+};
+export const onEditPromotionResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`promotions/${id}`, "GET", null).then((response) => {
+      dispatch(onGetPromotion(response.data));
+    });
+  };
+};
+
