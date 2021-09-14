@@ -1,5 +1,6 @@
 import React from "react";
 import uniqid from "uniqid";
+import { connect } from "react-redux";
 import {
   CForm,
   CLabel,
@@ -12,7 +13,9 @@ import {
 } from "@coreui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-export default class addDiscount extends React.Component {
+import * as actions from "./../../../actions/index";
+
+class addDiscount extends React.Component {
   constructor(props) {
     super(props);
     this.setState({
@@ -32,7 +35,7 @@ export default class addDiscount extends React.Component {
   };
   onSubmitForm = (event) => {
     event.preventDefault();
-   
+    var { history } = this.props;
     var { txtNameDiscount, txtNameMota, dateStart, dateEnd } = this.state;
     var promotion = {
       id: uniqid("promotion-"),
@@ -41,16 +44,18 @@ export default class addDiscount extends React.Component {
       dateStart: dateStart,
       dateEnd: dateEnd,
     };
-    console.log(promotion);
+    
+    if(promotion){
+      this.props.onAddItemPromotion(promotion);
+      history.goBack();
+    }
   };
   render() {
     return (
       <CContainer fluid>
         <CRow>
           <CCol sm="12">
-            <CForm action="" method="post" onSubmit={this.onSubmitForm}
-          
-            >
+            <CForm action="" method="post" onSubmit={this.onSubmitForm}>
               <CFormGroup>
                 <CLabel htmlFor="exampleFormControlInput1">
                   Tên Khuyến Mãi
@@ -119,3 +124,14 @@ export default class addDiscount extends React.Component {
     );
   }
 }
+var mapStateToProps = (state) => {
+  return {};
+};
+var mapDispatchToProps = (dispatch, props) => {
+  return {
+    onAddItemPromotion: (promotion) => {
+      dispatch(actions.onAddPromotionResquest(promotion));
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(addDiscount);

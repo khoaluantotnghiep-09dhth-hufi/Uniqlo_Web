@@ -267,6 +267,7 @@ export const onAddPromotion = (promotion) => {
 export const onAddPromotionResquest = (promotion) => {
   return (dispatch) => {
     return callApi("promotions", "POST", promotion).then((response) => {
+    
       dispatch(onAddPromotion(response.data));
     });
   };
