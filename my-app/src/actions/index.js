@@ -223,3 +223,20 @@ export const fetchBillsCustomerResquest = () => {
     });
   };
 };
+//Lấy tất cả danh sách Promotion
+export const fetchPromotions = (promotion) => {
+  return {
+    type: types.FETCH_PROMOTION,
+    promotion,
+  };
+};
+
+export const fetchPromotionsResquest = () => {
+  return (dispatch) => {
+    return callApi("promotions", "GET", null).then((response) => {
+     console.log(response);
+      dispatch(fetchPromotions(response.data));
+    
+    });
+  };
+};

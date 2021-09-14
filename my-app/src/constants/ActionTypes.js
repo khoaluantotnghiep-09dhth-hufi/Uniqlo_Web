@@ -33,3 +33,6 @@ export const FETCH_CATEGORY= ' FETCH_CATEGORY';
 
 //Get bills_customer
 export const FETCH_BILLS_CUSTOMER = ' FETCH_BILLS_CUSTOMER';
+
+//Get promotion
+export const FETCH_PROMOTION = ' FETCH_PROMOTION';
