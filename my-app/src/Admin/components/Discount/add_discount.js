@@ -19,11 +19,34 @@ class addDiscount extends React.Component {
   constructor(props) {
     super(props);
     this.setState({
+      idItem: "",
       txtNameDiscount: "",
       txtNameMota: "",
       dateStart: "",
       dateEnd: "",
     });
+  }
+  componentDidMount() {
+    var { match } = this.props;
+
+    this.props.onEditItemPromotion(match.params.id_promotion);
+  }
+  componentWillReceiveProps(NextProps) {
+    var { match } = this.props;
+    if (NextProps && NextProps.edditPromotion) {
+      var { edditPromotion } = NextProps;
+      
+      const result= edditPromotion.find(o => o.id === match.params.id_promotion);
+      console.log(result.id);
+
+      this.setState({
+        idItem: result.id,
+        txtNameDiscount: result.name,
+        txtNameMota: result.desciption,
+        dateStart: result.date_start,
+        dateEnd: result.date_end,
+      });
+    }
   }
   onChange = (event) => {
     var target = event.target;
@@ -34,9 +57,13 @@ class addDiscount extends React.Component {
     });
   };
   onSubmitForm = (event) => {
+    var { match } = this.props;
+
     event.preventDefault();
     var { history } = this.props;
-    var { txtNameDiscount, txtNameMota, dateStart, dateEnd } = this.state;
+    var { idItem, txtNameDiscount, txtNameMota, dateStart, dateEnd } =
+      this.state;
+      console.log(idItem)
     var promotion = {
       id: uniqid("promotion-"),
       namePromotion: txtNameDiscount,
@@ -44,8 +71,17 @@ class addDiscount extends React.Component {
       dateStart: dateStart,
       dateEnd: dateEnd,
     };
-    
-    if(promotion){
+    var promotionUpdate = {
+      id: match.params.id_promotion,
+      namePromotion: txtNameDiscount,
+      nameDescription: txtNameMota,
+      dateStart: dateStart,
+      dateEnd: dateEnd,
+    };
+    if (idItem) {
+      this.props. onUpdateItemPromotion(promotionUpdate);
+      history.goBack();
+    } else {
       this.props.onAddItemPromotion(promotion);
       history.goBack();
     }
@@ -125,12 +161,20 @@ class addDiscount extends React.Component {
   }
 }
 var mapStateToProps = (state) => {
-  return {};
+  return {
+    edditPromotion: state.edditPromotion,
+  };
 };
 var mapDispatchToProps = (dispatch, props) => {
   return {
     onAddItemPromotion: (promotion) => {
       dispatch(actions.onAddPromotionResquest(promotion));
+    },
+    onEditItemPromotion: (id) => {
+      dispatch(actions.onEditPromotionResquest(id));
+    },
+    onUpdateItemPromotion: (promotion) => {
+      dispatch(actions.onUpdatePromotionResquest(promotion));
     },
   };
 };

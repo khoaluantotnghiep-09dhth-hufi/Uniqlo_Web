@@ -87,7 +87,8 @@ class ListDiscount extends React.Component {
                   }}
                   scopedSlots={{
                     "Hành Động": (item) => (
-                      <td  onClick={()=>{this.onDeletePromotion(item.id)}}>
+                      <td  >
+                       <Link to={`/admin/system/discount/${item.id}/edit`}>
                         <CButton type="button" className="btn btn-primary">
                           <FontAwesomeIcon
                             icon={faTools}
@@ -96,11 +97,11 @@ class ListDiscount extends React.Component {
                           />
                           Sửa
                         </CButton>
-
+                      </Link>
                         <CButton
                           type="submit"
                           className="btn btn-warning"
-                         
+                          onClick={()=>{this.onDeletePromotion(item.id)}}
                         >
                           <FontAwesomeIcon
                             icon={faTimes}

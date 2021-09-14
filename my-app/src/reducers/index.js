@@ -6,6 +6,7 @@ import sector from "./Sectors/sector";
 import users from "./Users/users";
 import category from "./Categories/category";
 import promotion from "./Promotions/promotion";
+import edditPromotion from "./Promotions/edditPromotion";
 import itemEditting from "./itemEditting";
 import bills_customer from "./Bills_Customer/bills_customer";
 
@@ -19,6 +20,7 @@ const myReducer = combineReducers({
   users, // users
   bills_customer,
   promotion,
+  edditPromotion,
 });
 
 export default myReducer;
