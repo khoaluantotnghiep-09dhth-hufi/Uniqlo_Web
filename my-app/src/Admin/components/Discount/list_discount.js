@@ -47,7 +47,8 @@ class ListDiscount extends React.Component {
     this.props.fetchPromotions();
   }
   onDeletePromotion = (item) => {
-    console.log( item);
+    console.log(item);
+    this.props.onDeleteItemPromotion(item);
   };
   render() {
     var { promotion } = this.props;
@@ -86,7 +87,7 @@ class ListDiscount extends React.Component {
                   }}
                   scopedSlots={{
                     "Hành Động": (item) => (
-                      <td>
+                      <td  onClick={()=>{this.onDeletePromotion(item.id)}}>
                         <CButton type="button" className="btn btn-primary">
                           <FontAwesomeIcon
                             icon={faTools}
@@ -97,9 +98,9 @@ class ListDiscount extends React.Component {
                         </CButton>
 
                         <CButton
-                          type="button"
+                          type="submit"
                           className="btn btn-warning"
-                          onClick={this.onDeletePromotion(item.id)}
+                         
                         >
                           <FontAwesomeIcon
                             icon={faTimes}
@@ -130,6 +131,9 @@ var mapDispatchToProps = (dispatch, props) => {
     fetchPromotions: () => {
       return dispatch(actions.fetchPromotionsResquest());
     },
+    onDeleteItemPromotion:(id) => {
+      return dispatch(actions.onDeletePromotionResquest(id))
+    }
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ListDiscount);
