@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faPlus,
@@ -6,17 +6,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import CallAPI from '../../utils/Callapi';
 import { Link } from "react-router-dom";
-import uniqid from 'uniqid';
-import { Button, Form, Col, Container, Row } from 'react-bootstrap';
+import { Button, Form, Col, Container, Row, FormGroup, Label, InputGroup, Modal, Alert } from 'react-bootstrap';
 let data = [];
-
 export default class addObject extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             id: '',
-            txtName: '',
-            idObject: ''
+            name: '',
         }
     }
 
@@ -25,44 +22,41 @@ export default class addObject extends React.Component {
         var name = target.name;
         var value = target.type === 'dropdown' ? target.value : target.value;
         this.setState({
-            [name]: value,
+            [name]: value
         });
-
+    }
+    onEdit = (e) => {
+        e.preventDefault();
+        var { id, txtName, idObject } = this.state;
+        CallAPI(`/sectors/${id}`, 'PUT', {
+            name: txtName,
+            idObject: idObject,
+        }).then(res => {
+            alert('Sửa thành công !');
+        });
     }
 
-
-    onAdd = (e) => {
-        e.preventDefault();
-        var { id,txtName, idObject } = this.state;
-        const sector = {
-            id: uniqid('sector-'),
-            name: txtName,
-            id_object: idObject,
-        }
-        if (id) {
-            if (id) {
-                CallAPI(`/sectors/${id}`, 'PUT', {
-                    name: txtName,
-                    idObject: idObject,
-                }).then(res => {
-                    alert('Sửa thành công !');
+    componentDidMount() {
+        
+        var { match } = this.props;
+        if (match) {
+            var id = match.params.id;
+            CallAPI(`sectors/${id}`, 'GET', null).then(res => {
+                var data = res.data;
+                this.setState({
+                    id: data.id,
+                    name: data.name,
+                    idObject: data.id_object,
                 });
-            } else {
-            }
-            CallAPI('/sectors', 'POST', sector).then(res => {
-                alert('Thêm thành công !')
             });
         }
-    }
-    componentDidMount() {
-        CallAPI('objects', 'GET', null).then(res => {
-            data = res.data;
-            console.log(data);
-        });
+
+
     }
     render() {
         var { txtName, idObject } = this.state;
         return (
+
             <Container fluid>
                 <Row>
                     <Link to="/admin/manage/sectors">
@@ -100,9 +94,9 @@ export default class addObject extends React.Component {
                                     ))}
                                 </Form.Select>
                             </Form.Group>
-                            <Link to="/admin/manage/objects">
+                            <Link to="/admin/manage/sectors">
                                 <Button type="button" className="btn btn-danger" onClick={this.onAdd}>
-                                    <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />Thêm
+                                    <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />Lưu
                                 </Button>
                             </Link>
                         </Form>

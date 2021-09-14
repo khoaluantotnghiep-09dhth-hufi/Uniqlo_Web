@@ -7,8 +7,7 @@ export default function Callapi(endpoint,method='GET',body){
         method: method,
         url:` ${Config.API_URL}/${endpoint}`,
         data: body,
-      })
-        .catch((error) => {
+      }).catch((error) => {
           console.log(error);
         });
     

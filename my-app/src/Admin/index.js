@@ -3,7 +3,7 @@ import "./scss/style.scss";
 import { BrowserRouter as Router, Route, Switch, HashRouter} from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import Login from "./screens/Login/index";
-
+import Home from "./containers/TheLayout";
 
 
 
@@ -24,7 +24,6 @@ class index extends Component {
                 <Route to="/admin/login" component={Login} />
                 {/* <Route to="/admin/home" component={Home} /> */}
               </Switch>
-            
       </Router>
       
     );

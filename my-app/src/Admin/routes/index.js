@@ -29,9 +29,11 @@ const AddImportProduct = React.lazy(() => import('../components/ImportProduct/ad
 
 const ListObject = React.lazy(() => import('../components/Object/list_object'));
 const AddObject = React.lazy(() => import('../components/Object/add_object'));
+const EditObject = React.lazy(() => import('../components/Object/edit_object'));
 
 const ListSectors = React.lazy(() => import('../components/Sector/list_sectors'));
 const AddSector = React.lazy(() => import('../components/Sector/add_sector'));
+const EditSector = React.lazy(() => import('../components/Sector/edit_sector'));
 
 const ListCategories = React.lazy(() => import('../components/Category/list_categories'));
 const AddCategory = React.lazy(() => import('../components/Category/add_category'));
@@ -68,7 +70,7 @@ const routes = [
 
     { path: '/admin/manage/staffs', exact: true, name: 'Danh Sách Nhân Viên', component: ListStaffs },
     { path: '/admin/manage/staff/add', exact: true, name: 'Thêm Nhân Viên Mới', component: AddStaff },
-    
+
     { path: '/admin/manage/customers', exact: true, name: 'Danh Sách Khách Hàng', component: ListCustomers },
     { path: '/admin/manage/customer/add', exact: true, name: 'Thêm Khách Hàng Mới', component: AddCustomer },
 
@@ -80,9 +82,11 @@ const routes = [
 
     { path: '/admin/manage/objects', exact: true, name: 'Danh Sách Đối Tượng', component: ListObject },
     { path: '/admin/manage/object/add', exact: true, name: 'Thêm Đối Tượng Mới', component: AddObject },
-
+    { path: '/admin/manage/object/:id/edit', exact: true, name: 'Sửa Đối Tượng Mới', component: EditObject },
+///admin/system/discount/:id/edit
     { path: '/admin/manage/sectors', exact: true, name: 'Danh Sách Loại Sản Phẩm', component: ListSectors },
     { path: '/admin/manage/sector/add', exact: true, name: 'Thêm Loại Sản Phẩm Mới', component: AddSector },
+    { path: '/admin/manage/sector/:id/edit', exact: true, name: 'Sửa Loại Sản Phẩm Mới', component: EditSector },
 
     { path: '/admin/manage/categories', exact: true, name: 'Danh Sách Danh Mục', component: ListCategories },
     { path: '/admin/manage/category/add', exact: true, name: 'Thêm Danh Mục Mới', component: AddCategory },
