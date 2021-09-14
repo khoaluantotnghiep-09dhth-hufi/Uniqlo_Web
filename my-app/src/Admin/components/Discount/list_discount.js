@@ -46,17 +46,16 @@ class ListDiscount extends React.Component {
   componentDidMount() {
     this.props.fetchPromotions();
   }
+  onDeletePromotion = (item) => {
+    console.log( item);
+  };
   render() {
-     var{promotion}=this.props;
-     
-     var dataPromotion=promotion.map((item,index)=>{
-         return (
-             
-            item
+    var { promotion } = this.props;
 
-            )
-     })
-  console.log(dataPromotion)
+    var dataPromotion = promotion.map((item, index) => {
+      return item;
+    });
+
     return (
       <>
         {/* <Route to="/admin/system/discount/add"><CButton className="btn btn-danger" >Thêm Khuyến Mãi Mới</CButton></Route> */}
@@ -88,26 +87,27 @@ class ListDiscount extends React.Component {
                   scopedSlots={{
                     "Hành Động": (item) => (
                       <td>
-                        <Link to="/admin/system/discount/../edit">
-                          <CButton type="button" className="btn btn-primary">
-                            <FontAwesomeIcon
-                              icon={faTools}
-                              className="mr-2"
-                              size="lg"
-                            />
-                            Sửa
-                          </CButton>
-                        </Link>
-                        <Link to="/admin/system/discount/../delete">
-                          <CButton type="button" className="btn btn-warning">
-                            <FontAwesomeIcon
-                              icon={faTimes}
-                              className="mr-2"
-                              size="lg"
-                            />
-                            Xóa
-                          </CButton>
-                        </Link>
+                        <CButton type="button" className="btn btn-primary">
+                          <FontAwesomeIcon
+                            icon={faTools}
+                            className="mr-2"
+                            size="lg"
+                          />
+                          Sửa
+                        </CButton>
+
+                        <CButton
+                          type="button"
+                          className="btn btn-warning"
+                          onClick={this.onDeletePromotion(item.id)}
+                        >
+                          <FontAwesomeIcon
+                            icon={faTimes}
+                            className="mr-2"
+                            size="lg"
+                          />
+                          Xóa
+                        </CButton>
                       </td>
                     ),
                   }}
@@ -128,7 +128,7 @@ var mapStateToProps = (state) => {
 var mapDispatchToProps = (dispatch, props) => {
   return {
     fetchPromotions: () => {
-     return dispatch(actions.fetchPromotionsResquest());
+      return dispatch(actions.fetchPromotionsResquest());
     },
   };
 };
