@@ -4,7 +4,9 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "./../../actions/index";
-
+import Signin from "./Signin/index";
+import Register from "./Register/index";
+import Forgot_Password from "./Forgot_Pass/index";
 class index extends Component {
   constructor(props) {
     super(props);
@@ -17,6 +19,7 @@ class index extends Component {
       txtSDT: "",
       txtMatKhau: "",
       isCheckLogin: false,
+      isForgotPass: false,
     };
   }
   componentDidMount() {
@@ -48,6 +51,19 @@ class index extends Component {
       }
     }
   };
+
+  onToggleForm = () => {
+    this.setState({
+      isForgotPass: !this.state.isForgotPass
+    });
+  };
+
+  onCloseForm = () => {
+    this.setState({
+      isForgotPass: false
+    });
+  };
+
   onHandleChange = (event) => {
     var target = event.target;
     var name = target.name;
@@ -56,14 +72,25 @@ class index extends Component {
       [name]: value,
     });
   };
+
   onHandleSubmitSignUp = (event) => {
     event.preventDefault();
   };
   
   render() {
     var { users } = this.props;
-    var { isCheckLogin } = this.state;
+    var { isCheckLogin, isForgotPass } = this.state;
     
+    var elmForgotPass = isForgotPass ? (
+      <Forgot_Password 
+        onCloseForm={this.onCloseForm} 
+        onHandleSubmitSignUp = {this.onHandleSubmitSignUp}/>
+        ) : ("");
+    var elmDangNhap = !isForgotPass ? (
+      <Signin 
+        onCloseForm={this.onCloseForm} 
+        onHandleSubmitSignUp = {this.onHandleSubmitSignUp}/>
+      ) : ("");
     if (isCheckLogin) {
       return (
         <Redirect
@@ -73,128 +100,31 @@ class index extends Component {
         />
       );
     }
-   
     return (
       <Container>
-        <Row className="Account-padding">
-          <Col>
-            <h5 className="text-center">Đăng Nhập</h5>
-            <Form onSubmit={this.onHandleSubmitLogin(users)}>
-              <Form.Group className="mb-3" controlId="formBasicPhone">
-                <Form.Control
-                  className="fas fa-phone-alt"
-                  type="text"
-                  placeholder="&#xf879; Số Điện Thoại"
-                  ref="memberPhone"
-                  onChange={this.onHandleChange}
-                  name="txtSDT"
-                />
-              </Form.Group>
+        <Row className="Account-padding">    
+          {/* form đăng nhập */}
+          {elmForgotPass}
+          {elmDangNhap}
+          {/* <Signin className="col-sm-6 col-xs-12" onSubmit={this.onHandleSubmitLogin(users)}/> */}
+          {/* <Form.Group
+            className="mb-3 text-center"
+            controlId="formBasicPassword">
+              <a
+                href="#"
+                style={{ color: "#666", borderBottom: "1px solid #ccc" }}
+                onClick={this.onToggleForm}>
+                Quên Mật Khẩu?
+              </a>
+          </Form.Group> */}
+          {/* form đăng ký */}
+          <Register className="col-sm-6 col-xs-12" onSubmit={this.onHandleSubmitSignUp}/>
 
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Control
-                  className="fas fa-lock"
-                  type="password"
-                  placeholder="&#xf023; Mật Khẩu"
-                  ref="memberPassword"
-                  onChange={this.onHandleChange}
-                  name="txtPassword"
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3 " controlId="formBasicPassword">
-                <Button
-                  variant="outline-secondary"
-                  type="submit"
-                  className="button--width"
-                >
-                  Đăng Nhập
-                </Button>
-              </Form.Group>
-              <Form.Group
-                className="mb-3 text-center"
-                controlId="formBasicPassword"
-              >
-                <a
-                  href="#"
-                  style={{ color: "#666", borderBottom: "1px solid #ccc" }}
-                >
-                  Quên Mật Khẩu?
-                </a>
-              </Form.Group>
-            </Form>
-          </Col>
-
-          <Col>
-            <h5 className="text-center">Đăng Ký</h5>
-            <Form onSubmit={this.onHandleSubmitSignUp}>
-              <Form.Group className="mb-3" controlId="formBasicHo">
-                <Form.Control       
-                  className="fas fa-user"          
-                  type="text"
-                  placeholder="&#xf007; Họ"
-                  onChange={this.onHandleChange}
-                  name="txtHo"
-                />
-              </Form.Group>
-              
-
-              <Form.Group className="mb-3" controlId="formBasicTen">
-                <Form.Control
-                  className="fas fa-user"          
-                  type="text"
-                  placeholder="&#xf007; Tên"
-                  onChange={this.onHandleChange}
-                  name="txtTen"
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Control
-                  className="fas fa-envelope"
-                  type="email"
-                  placeholder="&#xf0e0; Email"
-                  onChange={this.onHandleChange}
-                  name="txtEmail"
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3" controlId="formBasicPhone">
-                <Form.Control
-                  className="fas fa-phone-alt"
-                  type="text"
-                  placeholder="&#xf879; Số Điện Thoại"
-                  onChange={this.onHandleChange}
-                  name="txtSDT"
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Control
-                  className="fas fa-lock"
-                  type="password"
-                  placeholder="&#xf023; Mật Khẩu"
-                  onChange={this.onHandleChange}
-                  name="txtMatKhau"
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Button
-                  variant="outline-secondary"
-                  type="submit"
-                  className="button--width"
-                >
-                  Đăng Ký
-                </Button>
-              </Form.Group>
-            </Form>
-          </Col>
         </Row>
       </Container>
     );
   }
 }
-
 var mapStateToProps = (state) => {
   return {
     users: state.users,

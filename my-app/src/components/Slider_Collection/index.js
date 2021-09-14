@@ -27,7 +27,7 @@ class index extends Component {
     render() {
         return (
             <div>
-                <Container className="mt-5">
+                <Container className="mt-5">	
                     <h2 className="d-flex justify-content-start">BỘ SƯU TẬP ĐẶC BIỆT</h2>
                     <Row className="mt-4">
                         <Col>
