@@ -6,65 +6,78 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import CallAPI from '../../utils/Callapi';
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import uniqid from 'uniqid';
 import { Button, Form, Col, Container, Row } from 'react-bootstrap';
-export default class addObject extends React.Component {
+import * as actions from "./../../../actions/index";
+class addObject extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      id:'',
-      txtName: ''
-    }
-  }
-
-  onChange = (e) => {
-    var target = e.target;
-    var name = target.name;
-    var value = target.value;
     this.setState({
-      [name]: value
+      idItem: "",
+      txtName: "",
+
     });
   }
   componentDidMount() {
     var { match } = this.props;
-    if (match) {
-      var id = match.params.id;
-      CallAPI(`objects/${id}`, 'GET', null).then(res => {
-        var data = res.data;
+
+    this.props.onEditItemObject(match.params.id_object);
+  }
+  componentWillReceiveProps(NextProps) {
+    var { match } = this.props;
+    if (NextProps && NextProps.object) {
+      var { object } = NextProps;
+      if (match.params.id_object) {
+        const result = object.find(
+          (o) => o.id === match.params.id_object
+        );
+
         this.setState({
-          name: data.name,
-         
+          idItem: result.id,
+          txtName: result.name,
         });
-        console.log(data.name);
-      });
+      }
     }
-
-
   }
-  onAdd = (e) => {
-    e.preventDefault();
-    var { id, txtName } = this.state;
+  onChange = (event) => {
+    var target = event.target;
+    var name = target.name;
+    var value = target.value;
+    this.setState({
+      [name]: value,
+    });
+  };
+  onSubmitForm = (event) => {
+    var { match } = this.props;
+
+    event.preventDefault();
     var { history } = this.props;
-    if (id) {
-      CallAPI(`/objects/${id}`, 'PUT', {
-        name: txtName,
-      }).then(res => {
-        alert('Sửa thành công !');
-      });
-    }
-    else {
-      CallAPI('/objects', 'POST', {
-        id: uniqid('object-'),
-        name: txtName,
-      }).then(res => {
-        alert('Thêm thành công !');
-        history.goBack();
-      });
-    }
-  }
+    var { idItem, txtName } =
+      this.state;
 
+    var object = {
+      id: uniqid("object-"),
+      nameSize: txtName,
+
+    };
+    var objectUpdate = {
+      id: idItem,
+      nameSize: txtName,
+    };
+
+    if (idItem) {
+      this.props.onUpdateItemObject(objectUpdate);
+      alert('Sửa thành công');
+      history.goBack();
+    } else {
+      this.props.onAddItemObject(object);
+      alert('Thêm thành công');
+      history.goBack();
+    }
+  };
   render() {
-    var { txtName } = this.state;
+
     return (
       <Container fluid>
         <Row>
@@ -74,7 +87,7 @@ export default class addObject extends React.Component {
             </Button>
           </Link>
           <Col sm="12">
-            <Form onSubmit={this.onAdd}>
+            <Form action="" method="post" onSubmit={this.onSubmitForm}>
               <Form.Group className="mb-3" controlId="formBasicObject">
                 <Form.Label>Tên Đối Tượng</Form.Label>
                 <Form.Control
@@ -82,23 +95,24 @@ export default class addObject extends React.Component {
                   type="text"
                   placeholder="Nhập tên đối tượng cần thêm..."
                   name="txtName"
-                  value={this.txtName}
+               
                   onChange={this.onChange} />
                 <Form.Control.Feedback
                   type="invalid" >
                   Vui lòng nhập tên cần thêm !
                 </Form.Control.Feedback>
               </Form.Group>
-              <Link to="/admin/manage/objects" onClick={this.onAdd}>
-                <Button type="button"
-                  className="btn btn-danger"
-                >
-                  <FontAwesomeIcon
-                    icon={faPlus}
-                    className="mr-2"
-                    size="lg" />Lưu
-                </Button>
-              </Link>
+              {/* <Link to="/admin/manage/objects" > */}
+              <Button type="button"
+                className="btn btn-danger"
+                onClick={this.onSubmitForm}
+              >
+                <FontAwesomeIcon
+                  icon={faPlus}
+                  className="mr-2"
+                  size="lg" />Lưu
+              </Button>
+              {/* </Link> */}
             </Form>
           </Col>
         </Row>
@@ -107,3 +121,22 @@ export default class addObject extends React.Component {
   }
 
 }
+var mapStateToProps = (state) => {
+  return {
+    object: state.object,
+  };
+};
+var mapDispatchToProps = (dispatch, props) => {
+  return {
+    onAddItemObject: (size) => {
+      dispatch(actions.onAddObjectResquest(size));
+    },
+    onEditItemObject: (id) => {
+      dispatch(actions.onEditObjectResquest(id));
+    },
+    onUpdateItemObject: (size) => {
+      dispatch(actions.onUpdateObjectResquest(size));
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(addObject)

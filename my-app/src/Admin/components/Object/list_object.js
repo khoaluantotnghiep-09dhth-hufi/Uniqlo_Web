@@ -7,7 +7,8 @@ import {
     CDataTable,
     CRow,
     CButton,
-} from '@coreui/react'
+} from '@coreui/react';
+import { connect } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faPlus,
@@ -17,47 +18,26 @@ import {
 import { Link } from "react-router-dom";
 import CallAPI from "../../utils/Callapi";
 import { Button, Form, Col, Container, Row, FormGroup, Label, InputGroup, Modal, Alert, Table } from 'react-bootstrap';
-const fields = ['STT', { key: 'id', label: 'Mã Đối Tượng' }, , { key: 'name', label: 'Tên Đối Tượng' }, , 'Thao Tác']
+import * as actions from "./../../../actions/index";
+const fields = ['STT',
+    { key: 'id', label: 'Mã Đối Tượng' },
+    { key: 'name', label: 'Tên Đối Tượng' },
+    'Thao Tác',
+]
 
 class ListObject extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            objects: []
-        };
-    }
     componentDidMount() {
-        CallAPI('objects', 'GET', null).then(res => {
-            this.setState({
-                objects: res.data
-            });
-        });
+        this.props.fetchObjects();
     }
-    onDelete = (id) => {
-        var { objects } = this.state;
-        if (window.confirm('Bạn có chắc muốn xóa không ?')) {
-            CallAPI(`objects/${id}`, 'DELETE', null).then(res => {
-                if (res.status === 200) {
-                    var index = this.findIndex(objects, id);
-                    if (index !== 1) {
-                        objects.splice(index, 1);
-                        this.setState({ objects: objects });
-                    }
-                }
-            });
-        }
-    }
-    findIndex = (objects, id) => {
-        var rss = -1;
-        objects.forEach((objects, index) => {
-            if (objects.id === id) {
-                rss = index;
-            }
-        });
-        return rss;
-    }
+    onDeleteObject = (id) => {
+        this.props.onDeleteItemObject(id);
+    };
     render() {
-        var { objects } = this.state;
+        var { object } = this.props;
+        var data = object.map((item, index) => {
+          
+            return item;
+        });
         return (
             <>
                 <Link to="/admin/manage/object/add">
@@ -73,7 +53,7 @@ class ListObject extends React.Component {
                             </CCardHeader>
                             <CCardBody>
                                 <CDataTable
-                                    items={objects}
+                                    items={data}
                                     fields={fields}
                                     itemsPerPage={8}
                                     pagination
@@ -87,7 +67,10 @@ class ListObject extends React.Component {
                                                         </CButton>
                                                     </Link>
                                                     {/* <Link to="/admin/system/discount/../delete"> */}
-                                                    <CButton type="button" className="btn btn-warning" onClick={() => this.onDelete(item.id)} >
+                                                    <CButton type="button"
+                                                        className="btn btn-warning"
+                                                        onClick={() => { this.onDeleteObject(item.id) }}
+                                                    >
                                                         <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
                                                     </CButton>
                                                     {/* </Link> */}
@@ -110,5 +93,19 @@ class ListObject extends React.Component {
         )
     }
 }
-
-export default ListObject
+var mapStateToProps = (state) => {
+    return {
+        object: state.object,
+    };
+};
+var mapDispatchToProps = (dispatch, props) => {
+    return {
+        fetchObjects: () => {
+            return dispatch(actions.fetchObjectResquest());
+        },
+        onDeleteItemObject: (id) => {
+            return dispatch(actions.onDeleteObjectResquest(id))
+        }
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ListObject);

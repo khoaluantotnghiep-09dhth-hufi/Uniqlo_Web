@@ -29,11 +29,11 @@ const AddImportProduct = React.lazy(() => import('../components/ImportProduct/ad
 
 const ListObject = React.lazy(() => import('../components/Object/list_object'));
 const AddObject = React.lazy(() => import('../components/Object/add_object'));
-const EditObject = React.lazy(() => import('../components/Object/edit_object'));
+
 
 const ListSectors = React.lazy(() => import('../components/Sector/list_sectors'));
 const AddSector = React.lazy(() => import('../components/Sector/add_sector'));
-const EditSector = React.lazy(() => import('../components/Sector/edit_sector'));
+
 
 const ListCategories = React.lazy(() => import('../components/Category/list_categories'));
 const AddCategory = React.lazy(() => import('../components/Category/add_category'));
@@ -87,14 +87,15 @@ const routes = [
 
     { path: '/admin/manage/objects', exact: true, name: 'Danh Sách Đối Tượng', component: ListObject },
     { path: '/admin/manage/object/add', exact: true, name: 'Thêm Đối Tượng Mới', component: AddObject },
-    { path: '/admin/manage/object/:id/edit', exact: true, name: 'Sửa Đối Tượng Mới', component: AddObject },
-    ///admin/system/discount/:id/edit
+    { path: '/admin/manage/object/:id_object/edit', exact: true, name: 'Sửa Đối Tượng', component: AddObject },
+
     { path: '/admin/manage/sectors', exact: true, name: 'Danh Sách Loại Sản Phẩm', component: ListSectors },
     { path: '/admin/manage/sector/add', exact: true, name: 'Thêm Loại Sản Phẩm Mới', component: AddSector },
-    { path: '/admin/manage/sector/:id/edit', exact: true, name: 'Sửa Loại Sản Phẩm Mới', component: EditSector },
+    { path: '/admin/manage/sector/:id/edit', exact: true, name: 'Sửa Loại Sản Phẩm', component: AddSector },
 
     { path: '/admin/manage/categories', exact: true, name: 'Danh Sách Danh Mục', component: ListCategories },
     { path: '/admin/manage/category/add', exact: true, name: 'Thêm Danh Mục Mới', component: AddCategory },
+    { path: '/admin/manage/category/:id/edit', exact: true, name: 'Sửa Danh Mục', component: AddCategory },
     
 
     { path: '/admin/manage/statistical', exact: true, name: 'Thống Kê Doanh Số', component: ListStatistical },

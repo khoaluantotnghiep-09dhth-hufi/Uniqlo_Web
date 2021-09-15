@@ -7,7 +7,8 @@ import {
     CDataTable,
     CRow,
     CButton,
-} from '@coreui/react'
+} from '@coreui/react';
+import { connect } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faPlus,
@@ -17,47 +18,27 @@ import {
 import { Link } from "react-router-dom";
 import CallAPI from "../../utils/Callapi";
 import { Button, Form, Col, Container, Row, FormGroup, Label, InputGroup, Modal, Alert, Table } from 'react-bootstrap';
-const fields = ['STT', { key: 'id', label: 'Mã Đối Tượng' }, , { key: 'name', label: 'Tên Đối Tượng' }, , 'Thao Tác']
+import * as actions from "./../../../actions/sectorsActions";
+const fields = ['STT',
+    { key: 'id', label: 'Mã Loại' },
+    { key: 'name', label: 'Tên Loại' },
+    { key: 'id_object', label: 'Mã Đối Tượng' },
+    'Thao Tác',
+]
 
-class ListSectors extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            sectors: []
-        };
-    }
+class ListSector extends React.Component {
     componentDidMount() {
-        CallAPI('sectors', 'GET', null).then(res => {
-            this.setState({ 
-               sectors : res.data 
-            });
-        });
+        this.props.fetchSectors();
     }
-    onDelete = (id) => {
-        var { sectors } = this.state;
-        if (window.confirm('Bạn có chắc muốn xóa không ?')) {
-            CallAPI(`sectors/${id}`, 'DELETE', null).then(res => {
-                if (res.status === 200) {
-                    var index = this.findIndex(sectors, id);
-                    if (index !== 1) {
-                        sectors.splice(index, 1);
-                        this.setState({ sectors: sectors });
-                    }
-                }
-            });
-        }
-    }
-    findIndex = (sectors, id) => {
-        var rss = -1;
-        sectors.forEach((sectors, index) => {
-            if (sectors.id === id) {
-                rss = index;
-            }
-        });
-        return rss;
-    }
+    onDeleteSector = (id) => {
+        this.props.onDeleteItemSector(id);
+    };
     render() {
-        var { sectors } = this.state;
+        var { sector } = this.props;
+        var data = sector.map((item, index) => {
+          
+            return item;
+        });
         return (
             <>
                 <Link to="/admin/manage/sector/add">
@@ -73,7 +54,7 @@ class ListSectors extends React.Component {
                             </CCardHeader>
                             <CCardBody>
                                 <CDataTable
-                                    items={sectors}
+                                    items={data}
                                     fields={fields}
                                     itemsPerPage={8}
                                     pagination
@@ -87,7 +68,10 @@ class ListSectors extends React.Component {
                                                         </CButton>
                                                     </Link>
                                                     {/* <Link to="/admin/system/discount/../delete"> */}
-                                                    <CButton type="button" className="btn btn-warning" onClick={() => this.onDelete(item.id)} >
+                                                    <CButton type="button"
+                                                        className="btn btn-warning"
+                                                        onClick={() => { this.onDeleteSector(item.id) }}
+                                                    >
                                                         <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
                                                     </CButton>
                                                     {/* </Link> */}
@@ -110,5 +94,19 @@ class ListSectors extends React.Component {
         )
     }
 }
-
-export default ListSectors
+var mapStateToProps = (state) => {
+    return {
+        sector: state.sector,
+    };
+};
+var mapDispatchToProps = (dispatch, props) => {
+    return {
+        fetchSectors: () => {
+            return dispatch(actions.fetchSectorResquest());
+        },
+        onDeleteItemSector: (id) => {
+            return dispatch(actions.onDeleteSectorResquest(id))
+        }
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ListSector);

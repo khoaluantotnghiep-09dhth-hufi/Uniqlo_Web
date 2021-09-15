@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-   
     CCard,
     CCardBody,
     CCardHeader,
@@ -8,35 +7,43 @@ import {
     CDataTable,
     CRow,
     CButton,
-} from '@coreui/react'
-
+} from '@coreui/react';
+import { connect } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faPlus,
-  faTimes,
-  faTools,
+    faPlus,
+    faTimes,
+    faTools,
 } from "@fortawesome/free-solid-svg-icons";
-import {Link} from "react-router-dom";
-import usersData from '../User/UserData';
-
-// const getBadge = status => {
-//     switch (status) {
-//         case 'Active': return 'success'
-//         case 'Inactive': return 'secondary'
-//         case 'Pending': return 'warning'
-//         case 'Banned': return 'danger'
-//         default: return 'primary'
-//     }
-// }
-const fields = ['Tên', 'registered', 'role', 'status', 'Hành Động']
+import { Link } from "react-router-dom";
+import CallAPI from "../../utils/Callapi";
+import { Button, Form, Col, Container, Row, FormGroup, Label, InputGroup, Modal, Alert, Table } from 'react-bootstrap';
+import * as actions from "./../../../actions/categoryActions";
+const fields = ['STT',
+    { key: 'id', label: 'Mã Danh Mục' },
+    { key: 'name', label: 'Tên Danh Mục' },
+    { key: 'id_sectors', label: 'Mã Loại' },
+    'Thao Tác',
+]
 
 class ListCategory extends React.Component {
+    componentDidMount() {
+        this.props.fetchCategories();
+    }
+    onDeleteCategory = (id) => {
+        this.props.onDeleteItemCategory(id);
+    };
     render() {
+        var { category } = this.props;
+        var data = category.map((item, index) => {
+          
+            return item;
+        });
         return (
             <>
                 <Link to="/admin/manage/category/add">
                     <CButton type="button" className="btn btn-danger">
-                    <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg"/>Thêm Mới
+                        <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />Thêm Mới
                     </CButton>
                 </Link>
                 <CRow>
@@ -47,52 +54,59 @@ class ListCategory extends React.Component {
                             </CCardHeader>
                             <CCardBody>
                                 <CDataTable
-                                    items={usersData}
+                                    items={data}
                                     fields={fields}
                                     itemsPerPage={8}
                                     pagination
                                     scopedSlots={{
-                                        'status':
+                                        'Thao Tác':
                                             (item) => (
                                                 <td>
-                                                    {/* <CBadge color={getBadge(item.status)}>
-                                                        {item.status}
-                                                    </CBadge> */}
-                                                </td>
-                                            )
-
-                                    }}
-                                    scopedSlots={{
-                                        'Hành Động':
-                                            (item) => (
-                                                <td>
-                                                    <Link to="/admin/system/discount/../edit">
+                                                    <Link to={`/admin/manage/category/${item.id}/edit`}>
                                                         <CButton type="button" className="btn btn-primary">
-                                                        <FontAwesomeIcon icon={faTools} className="mr-2" size="lg"/>Sửa
+                                                            <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
                                                         </CButton>
                                                     </Link>
-                                                    <Link to="/admin/system/discount/../delete">
-                                                        <CButton type="button" className="btn btn-warning">
-                                                        <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg"/>Xóa
-                                                        </CButton>
-                                                    </Link>
+                                                    {/* <Link to="/admin/system/discount/../delete"> */}
+                                                    <CButton type="button"
+                                                        className="btn btn-warning"
+                                                        onClick={() => { this.onDeleteCategory(item.id) }}
+                                                    >
+                                                        <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
+                                                    </CButton>
+                                                    {/* </Link> */}
 
                                                 </td>
-
+                                            ),
+                                        'STT':
+                                            (item, index) => (
+                                                <td>
+                                                    {index + 1}
+                                                </td>
                                             )
                                     }}
                                 />
                             </CCardBody>
                         </CCard>
                     </CCol>
-
-
                 </CRow>
-
-
             </>
         )
     }
 }
-
-export default ListCategory
+var mapStateToProps = (state) => {
+    return {
+        category: state.category,
+    };
+};
+var mapDispatchToProps = (dispatch, props) => {
+    return {
+        fetchCategories: () => {
+            return dispatch(actions.fetchCategoryResquest());
+        },
+        onDeleteItemCategory: (id) => {
+            return dispatch(actions.onDeleteCategoryResquest(id))
+        }
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ListCategory);

@@ -178,6 +178,7 @@ export const fetchObjectResquest = () => {
     });
   };
 };
+
 //Lấy tất cả danh sách Sector
 export const fetchSector = (sector) => {
   return {
@@ -262,7 +263,19 @@ export const onAddPromotion = (promotion) => {
     promotion,
   };
 };
-
+export const onAddObject = (object) => {
+  return {
+    type: types.ADD_OBJECT,
+    object,
+  };
+};
+export const onAddObjectResquest = (object) => {
+  return (dispatch) => {
+    return callApi("objects", "POST", object).then((response) => {
+      dispatch(onAddObject(response.data));
+    });
+  };
+};
 export const onAddPromotionResquest = (promotion) => {
   return (dispatch) => {
     return callApi("promotions", "POST", promotion).then((response) => {
@@ -286,6 +299,22 @@ export const onUpdatePromotionResquest = (promotion) => {
     );
   };
 };
+//cập nhật object
+export const onUpdateObject = (object) => {
+  return {
+    type: types.UPDATE_OBJECT,
+    object,
+  };
+};
+export const onUpdateObjectResquest = (object) => {
+  return (dispatch) => {
+    return callApi(`objects/${object.id}`, "PUT", object).then(
+      (response) => {
+        dispatch(onUpdateObject(response.data));
+      }
+    );
+  };
+};
 
 //Sửa Promotion
 export const onGetPromotion = (promotion) => {
@@ -301,7 +330,35 @@ export const onEditPromotionResquest = (id) => {
     });
   };
 };
+//xóa object 
+export const onDeleteObject = (id) => {
+  return {
+    type: types.DELETE_OBJECT,
+    id,
+  };
+};
 
+export const onDeleteObjectResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`objects/${id}`, "DELETE", null).then((response) => {
+      dispatch(onDeleteObject(id));
+    });
+  };
+};
+//sửa object 
+export const onGetObject = (object) => {
+  return {
+    type: types.EDIT_OBJECT,
+    object,
+  };
+};
+export const onEditObjectResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`objects/${id}`, "GET", null).then((response) => {
+      dispatch(onGetObject(response.data));
+    });
+  };
+};
 //Lấy tất cả danh sách Staff
 export const fetchStaffs = (staff) => {
   return {

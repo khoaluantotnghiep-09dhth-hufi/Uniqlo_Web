@@ -6,95 +6,131 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import CallAPI from '../../utils/Callapi';
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import uniqid from 'uniqid';
 import { Button, Form, Col, Container, Row } from 'react-bootstrap';
-let data = [];
-
-export default class addObject extends React.Component {
+import * as actions from "./../../../actions/sectorsActions";
+class AddSector extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            id: '',
-            txtName: '',
-            idObject: ''
+        this.setState({
+            idItem: "",
+            txtName: "",
+            id_object: "",
+        });
+    }
+    componentDidMount() {
+        var { match } = this.props;
+
+        this.props.onEditItemSector(match.params.idItem);
+    }
+    componentWillReceiveProps(NextProps) {
+        var { match } = this.props;
+        if (NextProps && NextProps.sector) {
+            var { sector } = NextProps;
+            if (match.params.idItem) {
+                const result = sector.find(
+                    (o) => o.id === match.params.idItem
+                );
+
+                this.setState({
+                    idItem: result.id,
+                    txtName: result.name,
+                    id_object: result.id_object,
+                });
+            }
         }
     }
-
-    onChange = (e) => {
-        var target = e.target;
+    onChange = (event) => {
+        var target = event.target;
         var name = target.name;
-        var value = target.type === 'dropdown' ? target.value : target.value;
+        var value = target.value;
         this.setState({
             [name]: value,
         });
+    };
+    onSubmitForm = (event) => {
+        var { match } = this.props;
 
-    }
+        event.preventDefault();
+        var { history } = this.props;
+        var { idItem, txtName, idObject } = this.state;
 
-
-    onAdd = (e) => {
-        e.preventDefault();
-        var { id, txtName, idObject } = this.state;
-        const sector = {
-            id: uniqid('sector-'),
+        var sector = {
+            id: uniqid("sector-"),
             name: txtName,
             id_object: idObject,
-        }
-        CallAPI('/sectors', 'POST', sector).then(res => {
-            alert('Thêm thành công !');
-            console.log(res);
-        });
+        };
+        var sectorUpdate = {
+            id: idItem,
+            name: txtName,
+            id_object: idObject,
+        };
 
-    }
-    componentDidMount() {
-        CallAPI('objects', 'GET', null).then(res => {
-            data = res.data;
-        });
-    }
+        if (idItem) {
+            this.props.onUpdateItemSector(sectorUpdate);
+            alert('Sửa thành công');
+            history.goBack();
+        } else {
+            this.props.onAddItemSector(sector);
+            alert('Thêm thành công');
+            history.goBack();
+        }
+    };
     render() {
-        var { txtName, idObject } = this.state;
+
         return (
             <Container fluid>
                 <Row>
-                    <Link to="/admin/manage/sectors">
+                    <Link to="/admin/manage/objects">
                         <Button type="button" className="btn btn-primary" size="sm">
                             <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />Trở về
                         </Button>
                     </Link>
                     <Col sm="12">
-                        <Form onSubmit={this.onAdd}>
+                        <Form action="" method="post" onSubmit={this.onSubmitForm}>
                             <Form.Group className="mb-3" controlId="formBasicObject">
-                                <Form.Label>Tên Loại Sản Phẩm</Form.Label>
+                                <Form.Label>Tên Loại</Form.Label>
                                 <Form.Control
                                     required
                                     type="text"
-                                    placeholder="Nhập tên loại sản phẩm cần thêm..."
+                                    placeholder="Nhập tên đối tượng cần thêm..."
                                     name="txtName"
-                                    onChange={this.onChange}
-                                    value={txtName}
-                                />
 
-                                <Form.Control.Feedback type="invalid" >
+                                    onChange={this.onChange} />
+                                <Form.Control.Feedback
+                                    type="invalid" >
                                     Vui lòng nhập tên cần thêm !
                                 </Form.Control.Feedback>
                             </Form.Group>
-
                             <Form.Group className="mb-3" controlId="formBasicObject">
                                 <Form.Select aria-label="Default select example" name="idObject"
                                     onChange={this.onChange}
-                                    value={idObject}
+                                   
                                 >
-                                    <option optionDisable="true">Chọn Đối Tượng</option>
+                                    {/* <option optionDisable="true">Chọn Đối Tượng</option>
                                     {data.map((option, i) => (
 
                                         <option value={option.id} key={i}>{option.name}</option>
-                                    ))}
+                                    ))} */}
+                                    <option value="object-1">Nam</option>
+                                    <option value="object-2">Nữ</option>
+                                    <option value="object-3">Trẻ Em</option>
+                                    <option value="object-4">Trẻ Sơ Sinh</option>
                                 </Form.Select>
+
                             </Form.Group>
-                            <Link to="/admin/manage/objects">
-                                <Button type="button" className="btn btn-danger" onClick={this.onAdd}>
-                                    <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />Thêm
-                                </Button>
-                            </Link>
+                            {/* <Link to="/admin/manage/objects" > */}
+                            <Button type="button"
+                                className="btn btn-danger"
+                                onClick={this.onSubmitForm}
+                            >
+                                <FontAwesomeIcon
+                                    icon={faPlus}
+                                    className="mr-2"
+                                    size="lg" />Lưu
+                            </Button>
+                            {/* </Link> */}
                         </Form>
                     </Col>
                 </Row>
@@ -103,3 +139,22 @@ export default class addObject extends React.Component {
     }
 
 }
+var mapStateToProps = (state) => {
+    return {
+        sector: state.sector,
+    };
+};
+var mapDispatchToProps = (dispatch, props) => {
+    return {
+        onAddItemSector: (sector) => {
+            dispatch(actions.onAddSectorResquest(sector));
+        },
+        onEditItemSector: (id) => {
+            dispatch(actions.onEditSectorResquest(id));
+        },
+        onUpdateItemSector: (sector) => {
+            dispatch(actions.onUpdateSectorResquest(sector));
+        },
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(AddSector)

@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as actions from "./../../../actions/index";
-
 import {
   CBadge,
   CCard,
@@ -14,9 +13,6 @@ import {
 } from "@coreui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTimes, faTools } from "@fortawesome/free-solid-svg-icons";
-
-import usersData from "../User/UserData";
-
 import { Link } from "react-router-dom";
 const getBadge = (status) => {
   switch (status) {
@@ -47,7 +43,7 @@ class ListDiscount extends React.Component {
     this.props.fetchPromotions();
   }
   onDeletePromotion = (item) => {
-   
+
     this.props.onDeleteItemPromotion(item);
   };
   render() {
@@ -88,20 +84,20 @@ class ListDiscount extends React.Component {
                   scopedSlots={{
                     "Hành Động": (item) => (
                       <td  >
-                       <Link to={`/admin/system/discount/${item.id}/edit`}>
-                        <CButton type="button" className="btn btn-primary">
-                          <FontAwesomeIcon
-                            icon={faTools}
-                            className="mr-2"
-                            size="lg"
-                          />
-                          Sửa
-                        </CButton>
-                      </Link>
+                        <Link to={`/admin/system/discount/${item.id}/edit`}>
+                          <CButton type="button" className="btn btn-primary">
+                            <FontAwesomeIcon
+                              icon={faTools}
+                              className="mr-2"
+                              size="lg"
+                            />
+                            Sửa
+                          </CButton>
+                        </Link>
                         <CButton
                           type="submit"
                           className="btn btn-warning"
-                          onClick={()=>{this.onDeletePromotion(item.id)}}
+                          onClick={() => { this.onDeletePromotion(item.id) }}
                         >
                           <FontAwesomeIcon
                             icon={faTimes}
@@ -132,7 +128,7 @@ var mapDispatchToProps = (dispatch, props) => {
     fetchPromotions: () => {
       return dispatch(actions.fetchPromotionsResquest());
     },
-    onDeleteItemPromotion:(id) => {
+    onDeleteItemPromotion: (id) => {
       return dispatch(actions.onDeletePromotionResquest(id))
     }
   };
