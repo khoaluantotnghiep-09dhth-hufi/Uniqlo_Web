@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
     CForm,
     CLabel,
@@ -13,7 +14,7 @@ import {
 } from '@coreui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faPlus,
+  faPlus, faUndo,
   
 } from "@fortawesome/free-solid-svg-icons";
 export default class addCustomer extends React.Component {
@@ -65,7 +66,7 @@ export default class addCustomer extends React.Component {
                 placeholder="Hình ảnh..."
                 autoComplete="img"
               />
-              <img src="..." className="img-fluid" alt="..."></img>
+              <img src="" className="img-fluid" alt=""></img>
             </CFormGroup>
             <CFormGroup>
               <CLabel htmlFor="exampleFormControlTextarea1">Email</CLabel>
@@ -91,8 +92,12 @@ export default class addCustomer extends React.Component {
             </CFormGroup>
             <CFormGroup >
               <CButton color='danger' className="m-2" > <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg"/>Thêm</CButton>
-             
-            </CFormGroup>
+              <Link to="/admin/manage/customers">
+              <CButton type="button" className="btn btn-warning">
+                <FontAwesomeIcon icon={faUndo} className="mr-2" size="lg"/>Quay lại
+              </CButton>
+            </Link> 
+            </CFormGroup>      
           </CForm>
         </CCol>
       </CRow>

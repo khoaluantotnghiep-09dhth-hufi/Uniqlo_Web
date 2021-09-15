@@ -52,22 +52,20 @@ export const onRestCart = (product) => {
   };
 };
 
-//Lấy tất cả danh sách Khách hàng
-export const fetchUser = (user) => {
-  return {
-    type: types.FETCH_USER,
-    user,
-  };
-};
 
 export const fetchUserRequest = () => {
   return (dispatch) => {
     return callApi("users", "GET", null).then((response) => {
       dispatch(fetchUser(response.data));
+
+
+export const onDeleteUserResquest=(id)=>{
+  return(dispatch)=>{
+    return callApi(`customers/${id}`, "DELETE", null).then((response)=>{
+      dispatch(onDeleteUserResquest(id));
     });
   };
-};
-
+}
 // Lấy tất cả danh sách sản phẩm
 export const fetchProduct = (products) => {
   return {
@@ -286,80 +284,3 @@ export const onEditPromotionResquest = (id) => {
   };
 };
 
-//Lấy tất cả danh sách Staff
-export const fetchStaffs = (staff) => {
-  return {
-    type: types.FETCH_STAFF,
-    staff,
-  };
-};
-
-export const fetchStaffsResquest = () => {
-  return (dispatch) => {
-    return callApi("staffs", "GET", null).then((response) => {
-      dispatch(fetchStaffs(response.data));
-    });
-  };
-};
-
-//Xóa Staff
-export const onDeleteStaffs = (id) => {
-  return {
-    type: types.DELETE_STAFF,
-    id,
-  };
-};
-
-export const onDeleteStaffsResquest = (id) => {
-  return (dispatch) => {
-    return callApi(`staffs/${id}`, "DELETE", null).then((response) => {
-      dispatch(onDeleteStaffs(id));
-    });
-  };
-};
-//Thêm Staff
-export const onAddStaffs = (staff) => {
-  return {
-    type: types.ADD_STAFF,
-    staff,
-  };
-};
-
-export const onAddStaffsResquest = (staff) => {
-  return (dispatch) => {
-    return callApi("staffs", "POST", staff).then((response) => {
-      dispatch(onAddStaffs(response.data));
-    });
-  };
-};
-//Cập Staff
-export const onUpdateStaffs = (staff) => {
-  return {
-    type: types.UPDATE_STAFF,
-    staff,
-  };
-};
-export const onUpdateStaffsResquest = (staff) => {
-  return (dispatch) => {
-    return callApi(`staffs/${staff.id}`, "PUT", staff).then(
-      (response) => {
-        dispatch(onUpdateStaffs(response.data));
-      }
-    );
-  };
-};
-
-//Sửa Staff
-export const onGetStaffs = (staff) => {
-  return {
-    type: types.EDIT_STAFF,
-    staff,
-  };
-};
-export const onEditStaffsResquest = (id) => {
-  return (dispatch) => {
-    return callApi(`staffs/${id}`, "GET", null).then((response) => {
-      dispatch(onGetStaffs(response.data));
-    });
-  };
-};

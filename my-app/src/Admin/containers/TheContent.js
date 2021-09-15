@@ -15,6 +15,7 @@ const loading = (
   </div>
 )
 const history = createBrowserHistory();
+
 const TheContent = () => {
   
   return (

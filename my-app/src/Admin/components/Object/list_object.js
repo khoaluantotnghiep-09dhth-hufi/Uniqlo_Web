@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-
     CCard,
     CCardBody,
     CCardHeader,
@@ -9,7 +8,6 @@ import {
     CRow,
     CButton,
 } from '@coreui/react'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faPlus,
@@ -17,21 +15,11 @@ import {
     faTools,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import usersData from '../User/UserData';
-import axios from "axios";
 import CallAPI from "../../utils/Callapi";
-// const getBadge = status => {
-//     switch (status) {
-//         case 'Active': return 'success'
-//         case 'Inactive': return 'secondary'
-//         case 'Pending': return 'warning'
-//         case 'Banned': return 'danger'
-//         default: return 'primary'
-//     }
-// }
-const fields = [ { key: 'id', label: 'Mã Đối Tượng' },,  { key: 'name', label: 'Tên Đối Tượng' },, 'Hành Động']
+import { Button, Form, Col, Container, Row, FormGroup, Label, InputGroup, Modal, Alert, Table } from 'react-bootstrap';
+const fields = ['STT', { key: 'id', label: 'Mã Đối Tượng' }, , { key: 'name', label: 'Tên Đối Tượng' }, , 'Thao Tác']
 
-class ListNews extends React.Component {
+class ListObject extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -39,26 +27,40 @@ class ListNews extends React.Component {
         };
     }
     componentDidMount() {
-        // CallAPI('object', 'GET', null).then(res => {
-        //     this.setState({
-        //         objects: res.data
-        //     })
-        // });
-        axios({
-            method: 'GET',
-            url: 'http://127.0.0.1:8000/objects',
-            data: null
-          }).then(res => {
-              this.setState({
-                  objects: res.data
-              })
-          });
+        CallAPI('objects', 'GET', null).then(res => {
+            this.setState({
+                objects: res.data
+            });
+        });
+    }
+    onDelete = (id) => {
+        var { objects } = this.state;
+        if (window.confirm('Bạn có chắc muốn xóa không ?')) {
+            CallAPI(`objects/${id}`, 'DELETE', null).then(res => {
+                if (res.status === 200) {
+                    var index = this.findIndex(objects, id);
+                    if (index !== 1) {
+                        objects.splice(index, 1);
+                        this.setState({ objects: objects });
+                    }
+                }
+            });
+        }
+    }
+    findIndex = (objects, id) => {
+        var rss = -1;
+        objects.forEach((objects, index) => {
+            if (objects.id === id) {
+                rss = index;
+            }
+        });
+        return rss;
     }
     render() {
         var { objects } = this.state;
         return (
             <>
-                <Link to="/admin/system/news/add">
+                <Link to="/admin/manage/object/add">
                     <CButton type="button" className="btn btn-danger">
                         <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />Thêm Mới
                     </CButton>
@@ -76,47 +78,37 @@ class ListNews extends React.Component {
                                     itemsPerPage={8}
                                     pagination
                                     scopedSlots={{
-                                        'status':
+                                        'Thao Tác':
                                             (item) => (
                                                 <td>
-                                                    {/* <CBadge color={getBadge(item.status)}>
-                                                        {item.status}
-                                                    </CBadge> */}
-                                                </td>
-                                            )
-
-                                    }}
-                                    scopedSlots={{
-                                        'Hành Động':
-                                            (item) => (
-                                                <td>
-                                                    <Link to="/admin/system/discount/../edit">
+                                                    <Link to={`/admin/manage/object/${item.id}/edit`}>
                                                         <CButton type="button" className="btn btn-primary">
                                                             <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
                                                         </CButton>
                                                     </Link>
-                                                    <Link to="/admin/system/discount/../delete">
-                                                        <CButton type="button" className="btn btn-warning">
-                                                            <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
-                                                        </CButton>
-                                                    </Link>
+                                                    {/* <Link to="/admin/system/discount/../delete"> */}
+                                                    <CButton type="button" className="btn btn-warning" onClick={() => this.onDelete(item.id)} >
+                                                        <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
+                                                    </CButton>
+                                                    {/* </Link> */}
 
                                                 </td>
-
+                                            ),
+                                        'STT':
+                                            (item, index) => (
+                                                <td>
+                                                    {index + 1}
+                                                </td>
                                             )
                                     }}
                                 />
                             </CCardBody>
                         </CCard>
                     </CCol>
-
-
                 </CRow>
-
-
             </>
         )
     }
 }
 
-export default ListNews
+export default ListObject

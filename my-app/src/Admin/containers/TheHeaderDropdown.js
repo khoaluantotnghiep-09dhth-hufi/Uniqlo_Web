@@ -21,12 +21,13 @@ const TheHeaderDropdown = () => {
       direction="down"
     >
       <CDropdownToggle className="c-header-nav-link" caret={false}>
-        <div className="c-avatar">
+        <div className="mr-5 c-avatar">
           <CImg
-            src={'avatars/6.jpg'}
+            src={'https://cdn2.iconfinder.com/data/icons/soleicons-solid-vol-2/64/admin_system_sysadmin_administrator_manager_supervisor-512.png'}
             className="c-avatar-img"
             alt="adminuniqlo@gmail.com"
           />
+          Uniqlo Admintrator
         </div>
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
