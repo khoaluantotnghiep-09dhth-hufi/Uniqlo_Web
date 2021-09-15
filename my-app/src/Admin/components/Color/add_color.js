@@ -1,4 +1,8 @@
 import React from 'react';
+import uniqid from "uniqid";
+import { connect } from "react-redux";
+import * as actions from "./../../../actions/index";
+
 import {
     CForm,
     CLabel,
@@ -15,7 +19,69 @@ import {
     faPlus,
 
 } from "@fortawesome/free-solid-svg-icons";
-export default class addColor extends React.Component {
+ class addColor extends React.Component {
+    constructor(props) {
+        super(props);
+        this.setState({
+          idItem: "",
+          txtName: "",
+          
+        });
+      }
+      componentDidMount() {
+        var { match } = this.props;
+    
+        this.props.onEditItemColor(match.params.id_color);
+      }
+      componentWillReceiveProps(NextProps) {
+        var { match } = this.props;
+        if (NextProps && NextProps.color) {
+          var { color } = NextProps;
+          if (match.params.id_color) {
+            const result = color.find(
+              (o) => o.id === match.params.id_color
+            );
+    
+            this.setState({
+              idItem: result.id,
+              txtName: result.name,
+            });
+          }
+        }
+      }
+      onChange = (event) => {
+        var target = event.target;
+        var name = target.name;
+        var value = target.value;
+        this.setState({
+          [name]: value,
+        });
+      };
+      onSubmitForm = (event) => {
+        var { match } = this.props;
+    
+        event.preventDefault();
+        var { history } = this.props;
+        var { idItem, txtName } =
+          this.state;
+  
+        var color = {
+          id: uniqid("color-"),
+          nameColor: txtName,
+          
+        };
+        var colorUpdate = {
+          id: match.params.id_color,
+          nameColor: txtName,
+        };
+        if (idItem) {
+          this.props.onUpdateItemColor(colorUpdate);
+          history.goBack();
+        } else {
+          this.props.onAddItemColor(color);
+          history.goBack();
+        }
+      };
     render() {
         return (
             <CContainer fluid>
@@ -30,11 +96,12 @@ export default class addColor extends React.Component {
                                     name="txtName"
                                     placeholder="Tên màu..."
                                     autoComplete="name"
+                                    onChange={this.onChange}
                                 />
                             </CFormGroup>
                            
                             <CFormGroup >
-                                <CButton color='danger' className="m-2" >  <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" /> Thêm</CButton>
+                                <CButton type="submit" color='danger' className="m-2" >  <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" /> Thêm</CButton>
 
                             </CFormGroup>
                         </CForm>
@@ -44,3 +111,22 @@ export default class addColor extends React.Component {
         )
     }
 }
+var mapStateToProps = (state) => {
+    return {
+      color: state.color,
+    };
+  };
+  var mapDispatchToProps = (dispatch, props) => {
+    return {
+      onAddItemColor: (color) => {
+        dispatch(actions.onAddColorResquest(color));
+      },
+      onEditItemColor: (id) => {
+        dispatch(actions.onEditColorResquest(id));
+      },
+      onUpdateItemColor: (color) => {
+        dispatch(actions.onUpdateColorResquest(color));
+      },
+    };
+  };
+export default connect(mapStateToProps, mapDispatchToProps)(addColor)

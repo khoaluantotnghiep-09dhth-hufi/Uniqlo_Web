@@ -95,6 +95,7 @@ const routes = [
 
     { path: '/admin/manage/categories', exact: true, name: 'Danh Sách Danh Mục', component: ListCategories },
     { path: '/admin/manage/category/add', exact: true, name: 'Thêm Danh Mục Mới', component: AddCategory },
+    { path: '/admin/manage/category/:id_color/edit', exact: true, name: 'Thêm Danh Mục Mới', component: AddCategory },
 
     { path: '/admin/manage/statistical', exact: true, name: 'Thống Kê Doanh Số', component: ListStatistical },
     { path: '/admin/manage/statistical-order-import', exact: true, name: 'Thống Kê Kho', component: ListStatisticalOrderImport },
