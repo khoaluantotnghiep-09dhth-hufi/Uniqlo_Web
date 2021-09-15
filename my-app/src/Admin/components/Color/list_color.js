@@ -72,7 +72,7 @@ class ListColor extends React.Component {
                                         'Hành Động':
                                             (item) => (
                                                 <td>
-                                                     <Link to={`/admin/manage/category/${item.id}/edit`}>
+                                                     <Link to={`/admin/manage/color/${item.id}/edit`}>
                                                         <CButton type="button" className="btn btn-primary">
                                                         <FontAwesomeIcon icon={faTools} className="mr-2" size="lg"/>Sửa
                                                         </CButton>

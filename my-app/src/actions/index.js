@@ -422,6 +422,7 @@ export const onAddColor = (color) => {
 export const onAddColorResquest = (color) => {
   return (dispatch) => {
     return callApi("color", "POST", color).then((response) => {
+      console.log(response);
       dispatch(onAddColor(response.data));
     });
   };

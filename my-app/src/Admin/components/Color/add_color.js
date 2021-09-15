@@ -74,6 +74,7 @@ import {
           id: match.params.id_color,
           nameColor: txtName,
         };
+        console.log(color);
         if (idItem) {
           this.props.onUpdateItemColor(colorUpdate);
           history.goBack();
@@ -101,7 +102,7 @@ import {
                             </CFormGroup>
                            
                             <CFormGroup >
-                                <CButton type="submit" color='danger' className="m-2" >  <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" /> Thêm</CButton>
+                                <CButton type="submit" color='danger' className="m-2" >  <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" /> Lưu</CButton>
 
                             </CFormGroup>
                         </CForm>
