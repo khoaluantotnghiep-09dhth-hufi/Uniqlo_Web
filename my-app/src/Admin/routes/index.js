@@ -106,7 +106,7 @@ const routes = [
 
     { path: '/admin/manage/size', exact: true, name: 'Danh Sách Kích Cỡ', component: ListSize },
     { path: '/admin/manage/size/add', exact: true, name: 'Thêm Kích Cỡ Mới', component: AddSize },
-    { path: '/admin/manage/size/:id_size:edit', exact: true, name: 'Thêm Kích Cỡ Mới', component: AddSize },
+    { path: '/admin/manage/size/:id_size/edit', exact: true, name: 'Thêm Kích Cỡ Mới', component: AddSize },
 ]
 ///admin/manage/categories
 export default routes

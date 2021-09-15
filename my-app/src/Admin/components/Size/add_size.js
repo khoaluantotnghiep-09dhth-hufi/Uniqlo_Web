@@ -65,7 +65,7 @@ import {
           this.state;
   
         var size = {
-          id: uniqid("color-"),
+          id: uniqid("size-"),
           nameSize: txtName,
           
         };
