@@ -39,7 +39,7 @@ class index extends Component {
     });
   };
   onSubmit = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     var { txtPhone, txtPassword } = this.state;
     if (txtPhone === "admin" && txtPassword === "admin") {
       var admin = {
