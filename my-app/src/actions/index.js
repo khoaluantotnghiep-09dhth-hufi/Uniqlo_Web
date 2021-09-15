@@ -459,7 +459,7 @@ export const onEditColorResquest = (id) => {
   };
 };
 
-//Lấy tất cả danh sách Color
+//Lấy tất cả danh sách  Size
 export const fetchSizes = (size) => {
   return {
     type: types.FETCH_SIZE,
@@ -475,7 +475,7 @@ export const fetchSizeResquest = () => {
   };
 };
 
-//Xóa Color
+//Xóa  Size
 export const onDeleteSize = (id) => {
   return {
     type: types.DELETE_SIZE,
@@ -490,7 +490,7 @@ export const onDeleteSizeResquest = (id) => {
     });
   };
 };
-//Thêm Color
+//Thêm  Size
 export const onAddSize = (size) => {
   return {
     type: types.ADD_SIZE,
@@ -506,7 +506,7 @@ export const onAddSizeResquest = (size) => {
     });
   };
 };
-//Cập Color
+//Cập  Size
 export const onUpdateSize = (size) => {
   return {
     type: types.UPDATE_SIZE,
@@ -523,7 +523,7 @@ export const onUpdateSizeResquest = (size) => {
   };
 };
 
-//Sửa Color
+//Sửa Size
 export const onGetSize = (size) => {
   return {
     type: types.EDIT_SIZE,

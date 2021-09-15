@@ -88,7 +88,7 @@ import {
             <CContainer fluid>
                 <CRow>
                     <CCol sm="12">
-                        <CForm action="" method="post">
+                        <CForm action="" method="post"  onSubmit={this.onSubmitForm}>
                             <CFormGroup>
                                 <CLabel htmlFor="exampleFormControlInput1">Tên Màu</CLabel>
                                 <CInput
