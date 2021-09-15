@@ -57,3 +57,10 @@ export const ADD_COLOR = 'ADD_COLOR';
 export const UPDATE_COLOR  = 'UPDATE_COLOR';
 export const DELETE_COLOR = 'DELETE_COLOR';
 export const EDIT_COLOR = 'EDIT_COLOR ';
+
+//Get size
+export const FETCH_SIZE = 'FETCH_SIZE';
+export const ADD_SIZE = 'ADD_SIZE';
+export const UPDATE_SIZE  = 'UPDATE_SIZE';
+export const DELETE_SIZE= 'DELETE_SIZE';
+export const EDIT_SIZE = 'EDIT_SIZE ';
