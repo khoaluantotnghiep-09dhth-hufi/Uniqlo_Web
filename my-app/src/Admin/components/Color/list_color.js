@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from "react-redux";
+import * as actions from "./../../../actions/index";
 import {
     CBadge,
     CCard,
@@ -19,19 +21,23 @@ import {
 import {Link} from "react-router-dom";
 import usersData from '../User/UserData';
 
-// const getBadge = status => {
-//     switch (status) {
-//         case 'Active': return 'success'
-//         case 'Inactive': return 'secondary'
-//         case 'Pending': return 'warning'
-//         case 'Banned': return 'danger'
-//         default: return 'primary'
-//     }
-// }
-const fields = ['Tên', 'registered', 'role', 'status', 'Hành Động']
+
+const fields = ['id', 'name', 'Hành Động']
 
 class ListColor extends React.Component {
+    componentDidMount() {
+        this.props.fetchColors();
+      }
+      onDeleteColor = (item) => {
+       
+        this.props.onDeleteItemColor(item);
+      };
     render() {
+        var { color } = this.props;
+
+    var dataColor = color.map((item, index) => {
+      return item;
+    });
         return (
             <>
                 <Link to="/admin/manage/color/add">
@@ -47,7 +53,7 @@ class ListColor extends React.Component {
                             </CCardHeader>
                             <CCardBody>
                                 <CDataTable
-                                    items={usersData}
+                                    items={dataColor}
                                     fields={fields}
                                     itemsPerPage={8}
                                     pagination
@@ -71,11 +77,11 @@ class ListColor extends React.Component {
                                                         <FontAwesomeIcon icon={faTools} className="mr-2" size="lg"/>Sửa
                                                         </CButton>
                                                     </Link>
-                                                    <Link to="/admin/system/discount/../delete">
+                                                    
                                                         <CButton type="button" className="btn btn-warning">
                                                         <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg"/>Xóa
                                                         </CButton>
-                                                    </Link>
+                                                    
 
                                                 </td>
 
@@ -94,5 +100,19 @@ class ListColor extends React.Component {
         )
     }
 }
-
-export default ListColor
+var mapStateToProps = (state) => {
+    return {
+      color: state.color,
+    };
+  };
+  var mapDispatchToProps = (dispatch, props) => {
+    return {
+      fetchColors: () => {
+        return dispatch(actions.fetchColorResquest());
+      },
+      onDeleteItemColor:(id) => {
+        return dispatch(actions.onDeleteColorResquest(id))
+      }
+    };
+  };
+export default connect(mapStateToProps, mapDispatchToProps)(ListColor);
