@@ -58,12 +58,12 @@ class addObject extends React.Component {
 
     var object = {
       id: uniqid("object-"),
-      nameSize: txtName,
+      name: txtName,
 
     };
     var objectUpdate = {
       id: idItem,
-      nameSize: txtName,
+      name: txtName,
     };
 
     if (idItem) {
@@ -87,22 +87,18 @@ class addObject extends React.Component {
             </Button>
           </Link>
           <Col sm="12">
-            <Form action="" method="post" onSubmit={this.onSubmitForm}>
+            <Form  onSubmit={this.onSubmitForm}>
               <Form.Group className="mb-3" controlId="formBasicObject">
                 <Form.Label>Tên Đối Tượng</Form.Label>
                 <Form.Control
-                  required
+                
                   type="text"
                   placeholder="Nhập tên đối tượng cần thêm..."
                   name="txtName"
-               
+                  autoComplete="name"
+                  id="txtName"
                   onChange={this.onChange} />
-                <Form.Control.Feedback
-                  type="invalid" >
-                  Vui lòng nhập tên cần thêm !
-                </Form.Control.Feedback>
               </Form.Group>
-              {/* <Link to="/admin/manage/objects" > */}
               <Button type="button"
                 className="btn btn-danger"
                 onClick={this.onSubmitForm}

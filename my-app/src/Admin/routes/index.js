@@ -76,6 +76,7 @@ const routes = [
     { path: '/admin/manage/staffs', exact: true, name: 'Danh Sách Nhân Viên', component: ListStaffs },
     { path: '/admin/manage/staff/add', exact: true, name: 'Thêm Nhân Viên Mới', component: AddStaff },
     { path: '/admin/manage/staff/:id_staff/edit', exact: true, name: 'Thêm Nhân Viên Mới', component: AddStaff },
+    
     { path: '/admin/manage/customers', exact: true, name: 'Danh Sách Khách Hàng', component: ListCustomers },
     { path: '/admin/manage/customer/add', exact: true, name: 'Thêm Khách Hàng Mới', component: AddCustomer },
 

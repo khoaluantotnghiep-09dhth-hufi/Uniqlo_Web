@@ -1,107 +1,210 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import {
-    CForm,
-    CLabel,
-    CContainer,
-    CInput,
-    CCol,
-  
-    CRow,
-    CFormGroup,
-    CButton,
-    
-} from '@coreui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faPlus, faUndo,
-  
+  faPlus,
+  faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
-export default class addCustomer extends React.Component {
-    render() {
-        return (
-            <CContainer fluid>
-      <CRow>
-        <CCol sm="12">
-          <CForm action="" method="post">
-            <CFormGroup>
-              <CLabel htmlFor="exampleFormControlInput1">Tên Khách Hàng</CLabel>
-              <CInput
-                type="text"
-                id="txtNamet"
-                name="txtName"
-                placeholder="Tên khách hàng..."
-                autoComplete="name"
-              />
-             
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="exampleFormControlInput1">Địa Chỉ</CLabel>
-              <CInput
-                type="text"
-                id="txtAddress"
-                name="txtAddress"
-                placeholder="Địa chỉ..."
-                autoComplete="address"
-              />
-             
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="exampleFormControlTextarea1">Số Điện Thoại</CLabel>
-              <CInput
-                type="text"
-                id="txtPhone"
-                name="txtPhone"
-                placeholder="Số điện thoại..."
-                autoComplete="phone"
-              />
-             
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="file-uploader">Hình Ảnh</CLabel>
-              <CInput
-                type="file"
-                id="fileIMG"
-                name="fileIMG"
-                placeholder="Hình ảnh..."
-                autoComplete="img"
-              />
-              <img src="" className="img-fluid" alt=""></img>
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="exampleFormControlTextarea1">Email</CLabel>
-              <CInput
-                type="text"
-                id="txtEmail"
-                name="txtEmail"
-                placeholder="Email..."
-                autoComplete="email"
-              />
-             
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="exampleFormControlTextarea1">Mật Khẩu</CLabel>
-              <CInput
-                type="password"
-                id="txtPassword"
-                name="txtPassword"
-                placeholder="Mật khẩu..."
-                autoComplete="password"
-              />
-             
-            </CFormGroup>
-            <CFormGroup >
-              <CButton color='danger' className="m-2" > <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg"/>Thêm</CButton>
-              <Link to="/admin/manage/customers">
-              <CButton type="button" className="btn btn-warning">
-                <FontAwesomeIcon icon={faUndo} className="mr-2" size="lg"/>Quay lại
-              </CButton>
-            </Link> 
-            </CFormGroup>      
-          </CForm>
-        </CCol>
-      </CRow>
-    </CContainer>
-        )
+import CallAPI from '../../utils/Callapi';
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import uniqid from 'uniqid';
+import { Button, Form, Col, Container, Row } from 'react-bootstrap';
+import * as actions from "./../../../actions/customerAction";
+class AddCustomer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.setState({
+      idItem: "",
+      name: "",
+      address: "",
+      phone: "",
+      image: "",
+      password: "",
+      email: "",
+    });
+  }
+  componentDidMount() {
+    var { match } = this.props;
+
+    this.props.onEditItemCustomer(match.params.idItem);
+  }
+  componentWillReceiveProps(NextProps) {
+    var { match } = this.props;
+    if (NextProps && NextProps.customer) {
+      var { customer } = NextProps;
+      if (match.params.idItem) {
+        const result = customer.find(
+          (o) => o.id === match.params.idItem
+        );
+
+        this.setState({
+          idItem: result.id,
+          name: result.name,
+          address: result.address,
+          phone: result.phone,
+          image: result.image,
+          password: result.password,
+          email: result.email,
+        });
+      }
     }
+  }
+  onChange = (event) => {
+    var target = event.target;
+    var name = target.name;
+    var value = target.value;
+    this.setState({
+      [name]: value,
+    });
+  };
+  onSubmitForm = (event) => {
+    var { match } = this.props;
+
+    event.preventDefault();
+    var { history } = this.props;
+    var { idItem, name, address, phone, image, password, email } = this.state;
+
+    var customer = {
+      id: uniqid("customer-"),
+      name: name,
+      address: address,
+      phone: phone,
+      image: image,
+      password: password,
+      email: email,
+    };
+    var customerUpdate = {
+      id: idItem,
+      name: name,
+      address: address,
+      phone: phone,
+      image: image,
+      password: password,
+      email: email,
+    };
+
+    if (idItem) {
+      this.props.onUpdateItemCustomer(customerUpdate);
+      alert('Sửa thành công');
+      history.goBack();
+    } else {
+      this.props.onAddItemCustomer(customer);
+      alert('Thêm thành công');
+      history.goBack();
+    }
+  };
+  render() {
+
+    return (
+      <Container fluid>
+        <Row>
+          <Link to="/admin/manage/customers">
+            <Button type="button" className="btn btn-primary" size="sm">
+              <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />Trở về
+            </Button>
+          </Link>
+          <Col sm="12">
+            <Form action="" method="post" onSubmit={this.onSubmitForm}>
+              <Form.Group className="mb-3" controlId="formBasicObject">
+                <Form.Label>Tên Khách Hàng</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="Nhập tên..."
+                  name="name"
+
+                  onChange={this.onChange} />
+                <Form.Control.Feedback
+                  type="invalid" >
+                  Vui lòng nhập tên cần thêm !
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicObject">
+                <Form.Label>Địa Chỉ</Form.Label>
+                <Form.Control
+                  required
+                  type="date"
+                  placeholder="Nhập địa chỉ..."
+                  name="address"
+
+                  onChange={this.onChange} />
+
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicObject">
+                <Form.Label>SĐT</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="Nhập số điện thoại..."
+                  name="phone"
+                  onChange={this.onChange} />
+
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicObject">
+                <Form.Label>Ảnh</Form.Label>
+                <Form.Control
+                  required
+                  type="file"
+                
+                  name="image"
+                  onChange={this.onChange} />
+
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicObject">
+                <Form.Label>Ảnh</Form.Label>
+                <Form.Control
+                  required
+                  type="password"
+                  placeholder="Mật khẩu..."
+                  name="password"
+                  onChange={this.onChange} />
+
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicObject">
+                <Form.Label>Gmail</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="Gmail..."
+                  name="email"
+                  onChange={this.onChange} />
+
+              </Form.Group>
+              {/* <Link to="/admin/manage/objects" > */}
+              <Button type="button"
+                className="btn btn-danger"
+                onClick={this.onSubmitForm}
+              >
+                <FontAwesomeIcon
+                  icon={faPlus}
+                  className="mr-2"
+                  size="lg" />Lưu
+              </Button>
+              {/* </Link> */}
+            </Form>
+          </Col>
+        </Row>
+      </Container>
+    )
+  }
+
 }
+var mapStateToProps = (state) => {
+  return {
+    news: state.news,
+  };
+};
+var mapDispatchToProps = (dispatch, props) => {
+  return {
+    onAddItemCustomer: (customer) => {
+      dispatch(actions.onAddCustomerResquest(customer));
+    },
+    onEditItemCustomer: (id) => {
+      dispatch(actions.onEditCustomerResquest(id));
+    },
+    onUpdateItemCustomer: (customer) => {
+      dispatch(actions.onUpdateCustomerResquest(customer));
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(AddCustomer)

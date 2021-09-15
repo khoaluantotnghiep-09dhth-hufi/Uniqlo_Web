@@ -7,7 +7,8 @@ import {
     CDataTable,
     CRow,
     CButton,
-} from '@coreui/react'
+} from '@coreui/react';
+import { connect } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faPlus,
@@ -17,58 +18,32 @@ import {
 import { Link } from "react-router-dom";
 import CallAPI from "../../utils/Callapi";
 import { Button, Form, Col, Container, Row, FormGroup, Label, InputGroup, Modal, Alert, Table } from 'react-bootstrap';
+import * as actions from "./../../../actions/newsAction";
 const fields = ['STT',
- { key: 'id', label: 'Mã' } , 
- { key: 'title', label: 'Tiêu Đề' }, 
- { key: 'date', label: 'Ngày Đăng' }, 
- { key: 'description', label: 'Nội Dung' } , 
- { key: 'id_staff', label: 'Nhân Viên' }, 
- { key: 'image', label: 'Ảnh' }, 
- { key: 'sub_title', label: '??' }, 
- 'Thao Tác']
+    { key: 'id', label: 'Mã Tin Tức' },
+    { key: 'title', label: 'Tiêu Đề' },
+    { key: 'date', label: 'Ngày Đăng' },
+    // { key: 'description', label: 'Nội Dung' },
+    { key: 'id_staff', label: 'Nhân Viên' },
+    { key: 'image', label: 'Ảnh' },
+    'Thao Tác',
+]
 
-class ListSectors extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            news: []
-        };
-    }
+class ListNews extends React.Component {
     componentDidMount() {
-        CallAPI('news', 'GET', null).then(res => {
-            this.setState({ 
-               news : res.data 
-            });
-        });
+        this.props.fetchNews();
     }
-    onDelete = (id) => {
-        var { news } = this.state;
-        if (window.confirm('Bạn có chắc muốn xóa không ?')) {
-            CallAPI(`news/${id}`, 'DELETE', null).then(res => {
-                if (res.status === 200) {
-                    var index = this.findIndex(news, id);
-                    if (index !== 1) {
-                        news.splice(index, 1);
-                        this.setState({ news: news });
-                    }
-                }
-            });
-        }
-    }
-    findIndex = (news, id) => {
-        var rss = -1;
-        news.forEach((news, index) => {
-            if (news.id === id) {
-                rss = index;
-            }
-        });
-        return rss;
-    }
+    onDeleteNews = (id) => {
+        this.props.onDeleteItemNews(id);
+    };
     render() {
-        var { news } = this.state;
+        var { news } = this.props;
+        var data = news.map((item, index) => {
+            return item;
+        });
         return (
             <>
-                <Link to="/admin/system/news/add">
+                <Link to="/admin/manage/news/add">
                     <CButton type="button" className="btn btn-danger">
                         <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />Thêm Mới
                     </CButton>
@@ -77,11 +52,11 @@ class ListSectors extends React.Component {
                     <CCol xs="12" lg="24">
                         <CCard>
                             <CCardHeader>
-                                Danh Sách Loại Sản Phẩm
+                                Danh Sách Tin Tức
                             </CCardHeader>
                             <CCardBody>
                                 <CDataTable
-                                    items={news}
+                                    items={data}
                                     fields={fields}
                                     itemsPerPage={8}
                                     pagination
@@ -95,7 +70,10 @@ class ListSectors extends React.Component {
                                                         </CButton>
                                                     </Link>
                                                     {/* <Link to="/admin/system/discount/../delete"> */}
-                                                    <CButton type="button" className="btn btn-warning" onClick={() => this.onDelete(item.id)} >
+                                                    <CButton type="button"
+                                                        className="btn btn-warning"
+                                                        onClick={() => { this.onDeleteNews(item.id) }}
+                                                    >
                                                         <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
                                                     </CButton>
                                                     {/* </Link> */}
@@ -118,5 +96,19 @@ class ListSectors extends React.Component {
         )
     }
 }
-
-export default ListSectors
+var mapStateToProps = (state) => {
+    return {
+        news: state.news,
+    };
+};
+var mapDispatchToProps = (dispatch, props) => {
+    return {
+        fetchNews: () => {
+            return dispatch(actions.fetchNewsResquest());
+        },
+        onDeleteItemNews: (id) => {
+            return dispatch(actions.onDeleteNewsResquest(id))
+        }
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ListNews);

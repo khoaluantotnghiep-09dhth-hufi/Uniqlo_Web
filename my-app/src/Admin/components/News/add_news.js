@@ -1,137 +1,197 @@
 import React from 'react';
-import {
-  CForm,
-  CLabel,
-  CContainer,
-  CInput,
-  CCol,
-
-  CRow,
-  CFormGroup,
-  CButton,
-
-} from '@coreui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPlus,
-
+  faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import uniqid from 'uniqid';
 import CallAPI from '../../utils/Callapi';
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import uniqid from 'uniqid';
 import { Button, Form, Col, Container, Row } from 'react-bootstrap';
-let data = [];
-export default class addNews extends React.Component {
+import * as actions from "./../../../actions/newsAction";
+class AddNews extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      id: '',
-      title: '',
-      date: '',
-      description: '',
-      id_staff: '',
-      image: '',
+    this.setState({
+      idItem: "",
+      title: "",
+      date: "",
+      description: "",
+      id_staff: "",
+      image: "",
+    });
+  }
+  componentDidMount() {
+    var { match } = this.props;
+
+    this.props.onEditItemNews(match.params.idItem);
+  }
+  componentWillReceiveProps(NextProps) {
+    var { match } = this.props;
+    if (NextProps && NextProps.news) {
+      var { news } = NextProps;
+      if (match.params.idItem) {
+        const result = news.find(
+          (o) => o.id === match.params.idItem
+        );
+
+        this.setState({
+          idItem: result.id,
+          title: result.title,
+          date: result.date,
+          description: result.description,
+          id_staff: result.id_staff,
+          image: result.image,
+        });
+      }
     }
   }
-  onChange = (e) => {
-    var target = e.target;
+  onChange = (event) => {
+    var target = event.target;
     var name = target.name;
-    var value = target.type === 'dropdown' ? target.value : target.value;
+    var value = target.value;
     this.setState({
       [name]: value,
     });
+  };
+  onSubmitForm = (event) => {
+    var { match } = this.props;
 
-  }
-  onAdd = (e) => {
-    e.preventDefault();
-    var { id, title, date, description, id_staff, image } = this.state;
+    event.preventDefault();
     var { history } = this.props;
-    const news = {
-      id: uniqid('news-'),
+    var { idItem, title, date, descripton, id_staff, image } = this.state;
+
+    var news = {
+      id: uniqid("news-"),
       title: title,
       date: date,
-      description: description,
+      description: descripton,
       id_staff: id_staff,
       image: image,
-    }
-    CallAPI('/news', 'POST', news).then(res => {
-      alert('Thêm thành công !');
+    };
+    var newsUpdate = {
+      id: idItem,
+      title: title,
+      date: date,
+      description: descripton,
+      id_staff: id_staff,
+      image: image,
+    };
+
+    if (idItem) {
+      this.props.onUpdateItemCategory(newsUpdate);
+      alert('Sửa thành công');
       history.goBack();
-    });
-
-  }
-  componentDidMount() {
-    CallAPI('news', 'GET', null).then(res => {
-      data = res.data;
-      console.log(data);
-    });
-  }
+    } else {
+      this.props.onAddItemCategory(news);
+      alert('Thêm thành công');
+      history.goBack();
+    }
+  };
   render() {
-    var { id, title, date, description, id_staff, image } = this.state;
+
     return (
-      <CContainer fluid>
-        <CRow>
-          <CCol sm="12">
-            <CForm action="" method="post" onSubmit={this.onAdd}>
-              <CFormGroup>
-                <CLabel htmlFor="exampleFormControlInput1">Tên Tin Tức</CLabel>
-                <CInput
+      <Container fluid>
+        <Row>
+          <Link to="/admin/system/news">
+            <Button type="button" className="btn btn-primary" size="sm">
+              <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />Trở về
+            </Button>
+          </Link>
+          <Col sm="12">
+            <Form action="" method="post" onSubmit={this.onSubmitForm}>
+              <Form.Group className="mb-3" controlId="formBasicObject">
+                <Form.Label>Tiêu Đề</Form.Label>
+                <Form.Control
+                  required
                   type="text"
-
+                  placeholder="Nhập tiêu đề..."
                   name="title"
-                  placeholder="Tên Tin Tức..."
-                  autoComplete="name"
-                />
 
-              </CFormGroup>
-              <CFormGroup>
-                <CLabel htmlFor="file-uploader">Hình Ảnh</CLabel>
-                <CInput
-                  type="file"
-
-                  name="image"
-                  placeholder="Hình Ảnh..."
-                  autoComplete="img"
-                />
-                <img src="..." className="img-fluid" alt="..."></img>
-              </CFormGroup>
-              <CFormGroup>
-                <CLabel htmlFor="exampleFormControlTextarea1">Nội Dung</CLabel>
-
-                <textarea className="form-control" name="description" placeholder="Nội Dung..." rows="10"></textarea>
-
-              </CFormGroup>
-              <CFormGroup>
-                <CLabel htmlFor="nf-password">Ngày Đăng</CLabel>
-                <CInput
+                  onChange={this.onChange} />
+                <Form.Control.Feedback
+                  type="invalid" >
+                  Vui lòng nhập tên cần thêm !
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicObject">
+                <Form.Label>Ngày Đăng</Form.Label>
+                <Form.Control
+                  required
                   type="date"
-
+                  placeholder="Nhập tiêu đề..."
                   name="date"
-                  placeholder="Ngày Đăng..."
-                  autoComplete="current-password"
-                />
 
-              </CFormGroup>
-              <CFormGroup>
-                <CLabel htmlFor="nf-password">Nhân Viên</CLabel>
-                <Form.Select aria-label="Default select example" name="idObject"
-                  onChange={this.onChange}
+                  onChange={this.onChange} />
 
-                >
-                  <option optionDisable="true">Nhân Viên</option>
-                  {data.map((option, i) => (
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicObject">
+                <Form.Label>Nội Dung</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="Nhập nội dung..."
+                  name="description"
+                  onChange={this.onChange} />
 
-                    <option value={option.id} key={i}>{option.name}</option>
-                  ))}
-                </Form.Select>
-              </CFormGroup>
-              <CFormGroup >
-                <CButton color='danger' className="m-2" >  <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" /> Thêm</CButton>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicObject">
+                <Form.Label>Nhân Viên</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="Nhân viên..."
+                  name="id_taff"
+                  onChange={this.onChange} />
 
-              </CFormGroup>
-            </CForm>
-          </CCol>
-        </CRow>
-      </CContainer>
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicObject">
+                <Form.Label>Ảnh</Form.Label>
+                <Form.Control
+                  required
+                  type="file"
+                  placeholder="ảnh..."
+                  name="image"
+                  onChange={this.onChange} />
+
+              </Form.Group>
+
+              {/* <Link to="/admin/manage/objects" > */}
+              <Button type="button"
+                className="btn btn-danger"
+                onClick={this.onSubmitForm}
+              >
+                <FontAwesomeIcon
+                  icon={faPlus}
+                  className="mr-2"
+                  size="lg" />Lưu
+              </Button>
+              {/* </Link> */}
+            </Form>
+          </Col>
+        </Row>
+      </Container>
     )
   }
+
 }
+var mapStateToProps = (state) => {
+  return {
+    news: state.news,
+  };
+};
+var mapDispatchToProps = (dispatch, props) => {
+  return {
+    onAddItemNews: (news) => {
+      dispatch(actions.onAddNewsResquest(news));
+    },
+    onEditItemNews: (id) => {
+      dispatch(actions.onEditNewsResquest(id));
+    },
+    onUpdateItemNews: (news) => {
+      dispatch(actions.onUpdateNewsResquest(news));
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(AddNews)

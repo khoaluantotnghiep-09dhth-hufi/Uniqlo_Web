@@ -77,3 +77,17 @@ export const ADD_SIZE = 'ADD_SIZE';
 export const UPDATE_SIZE = 'UPDATE_SIZE';
 export const DELETE_SIZE = 'DELETE_SIZE';
 export const EDIT_SIZE = 'EDIT_SIZE ';
+
+//Get news
+export const FETCH_NEWS = 'FETCH_NEWS';
+export const ADD_NEWS = 'ADD_NEWS';
+export const UPDATE_NEWS = 'UPDATE_NEWS';
+export const DELETE_NEWS = 'DELETE_NEWS';
+export const EDIT_NEWS = 'EDIT_NEWS ';
+
+//Get customer
+export const FETCH_CUSTOMER = 'FETCH_CUSTOMER';
+export const ADD_CUSTOMER = 'ADD_CUSTOMER';
+export const UPDATE_CUSTOMER = 'UPDATE_CUSTOMER';
+export const DELETE_CUSTOMER = 'DELETE_CUSTOMER';
+export const EDIT_CUSTOMER = 'EDIT_CUSTOMER ';

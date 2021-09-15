@@ -1,13 +1,13 @@
 import React from 'react'
 import {
-    CBadge,
-    CCard,
-    CCardBody,
-    CCardHeader,
-    CCol,
-    CDataTable,
-    CRow,
-    CButton,
+  CBadge,
+  CCard,
+  CCardBody,
+  CCardHeader,
+  CCol,
+  CDataTable,
+  CRow,
+  CButton,
 } from '@coreui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -15,77 +15,110 @@ import {
   faTimes,
   faTools,
 } from "@fortawesome/free-solid-svg-icons";
-
-import usersData from '../User/UserData';
-
-import {  Link } from 'react-router-dom';
-const getBadge = status => {
-  switch (status) {
-    case 'Active': return 'success'
-    case 'Inactive': return 'secondary'
-    case 'Pending': return 'warning'
-    case 'Banned': return 'danger'
-    default: return 'primary'
-  }
-}
-const fields = ['Tên', 'registered', 'role', 'status', 'Hành Động']
+import * as actions from "./../../../actions/customerAction";
+import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
+// const getBadge = status => {
+//   switch (status) {
+//     case 'Active': return 'success'
+//     case 'Inactive': return 'secondary'
+//     case 'Pending': return 'warning'
+//     case 'Banned': return 'danger'
+//     default: return 'primary'
+//   }
+// }
+const fields = ['STT',
+  { key: 'id', label: 'Mã Nhân Viên' },
+  { key: 'name', label: 'Tên Khách Hàng' },
+  { key: 'address', label: 'Địa Chỉ' },
+  { key: 'phone', label: 'SĐT' },
+  { key: 'img', label: 'Ảnh' },
+  { key: 'password', label: 'Mật Khẩu' },
+  { key: 'email', label: 'Gmail' },
+  'Thao Tác',
+]
 
 class ListCustomers extends React.Component {
+  componentDidMount() {
+    this.props.fetchCustomers();
+  }
+  onDeleteCustomer = (id) => {
+    this.props.onDeleteItemCustomer(id);
+  }
+
+
   render() {
+    var { customer } = this.props;
+    var data = customer.map((item, index) => {
+      return item;
+    });
     return (
-    <>
-    {/* <Route to="/admin/system/discount/add"><CButton className="btn btn-danger" >Thêm Khuyến Mãi Mới</CButton></Route> */}
-    <Link to="/admin/manage/customer/add">
-      <CButton type="button" className="btn btn-danger">
-      <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg"/>Thêm Mới
-      </CButton>
-    </Link>
-    <CRow>
-      <CCol xs="12" lg="24">
-        <CCard>
-          <CCardHeader>
-            Danh Sách Nhân Viên
-            </CCardHeader>
-            <CCardBody>
-              <CDataTable
-                items={usersData}
-                fields={fields}
-                itemsPerPage={8}
-                pagination
-                scopedSlots={{
-                  'status':
-                    (item) => (
-                      <td>
-                        <CBadge color={getBadge(item.status)}>
-                          {item.status}
-                          </CBadge>
-                      </td>
-                    )
-                    }}
-                    scopedSlots={{
-                      'Hành Động':
+      <>
+        {/* <Route to="/admin/system/discount/add"><CButton className="btn btn-danger" >Thêm Khuyến Mãi Mới</CButton></Route> */}
+        <Link to="/admin/manage/customer/add">
+          <CButton type="button" className="btn btn-danger">
+            <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />Thêm Mới
+          </CButton>
+        </Link>
+        <CRow>
+          <CCol xs="12" lg="24">
+            <CCard>
+              <CCardHeader>
+                Danh Sách Khách Hàng
+              </CCardHeader>
+              <CCardBody>
+                <CDataTable
+                  items={data}
+                  fields={fields}
+                  itemsPerPage={8}
+                  pagination
+                  scopedSlots={{
+                    'Thao Tác':
                       (item) => (
-                      <td>
-                        <Link to="/admin/manage/staf/../edit">
-                          <CButton type="button" className="btn btn-primary">
-                          <FontAwesomeIcon icon={faTools} className="mr-2" size="lg"/>Sửa
+                        <td>
+                          <Link to="/admin/manage/staf/../edit">
+                            <CButton type="button" className="btn btn-primary">
+                              <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
+                            </CButton>
+                          </Link>
+
+                          <CButton type="button"
+                            onClick={() => { this.onDeleteCustomer(item.id) }}
+                            className="btn btn-warning">
+                            <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
                           </CButton>
-                        </Link>
-                        <Link to="/admin/manage/staf/../delete">
-                          <CButton type="button" className="btn btn-warning">
-                          <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg"/>Xóa
-                          </CButton>
-                        </Link>
-                      </td>
+
+                        </td>
+                      ),
+                    'STT':
+                      (item, index) => (
+                        <td>
+                          {index + 1}
+                        </td>
                       )
-                    }}
-                  />
+                  }}
+                />
               </CCardBody>
-          </CCard>
-      </CCol>
-    </CRow>
-    </>
+            </CCard>
+          </CCol>
+        </CRow>
+      </>
     )
   }
 }
-export default ListCustomers
+var mapStateToProps = (state) => {
+  return {
+    customer: state.customer,
+  };
+};
+var mapDispatchToProps = (dispatch, props) => {
+  return {
+    fetchCustomers: () => {
+      return dispatch(actions.fetchCustomerResquest());
+    },
+    onDeleteItemCustomer: (id) => {
+      return dispatch(actions.onDeleteCustomerResquest(id))
+    }
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ListCustomers);

@@ -26,7 +26,18 @@ var object = (state = initialState, action) => {
       state.slice(index, 1);
       return [...state];
     case types.FETCH_SECTOR_BY_ID:
-
+      return action.object;
+    case types.ADD_OBJECT:
+      console.log(action.object);
+      state.push(action.object);
+      return [...state];
+    case types.UPDATE_OBJECT:
+      index = findIndex(state, action.object.id);
+      if (index !== -1) {
+        state[index] = object;
+      }
+      return [...state];
+    case types.EDIT_OBJECT:
       return action.object;
     default:
       return state;
