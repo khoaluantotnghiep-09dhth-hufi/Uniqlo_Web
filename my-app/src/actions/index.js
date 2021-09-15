@@ -458,3 +458,82 @@ export const onEditColorResquest = (id) => {
     });
   };
 };
+
+//Lấy tất cả danh sách Color
+export const fetchSizes = (size) => {
+  return {
+    type: types.FETCH_SIZE,
+    size,
+  };
+};
+
+export const fetchSizeResquest = () => {
+  return (dispatch) => {
+    return callApi("size", "GET", null).then((response) => {
+      dispatch(fetchSizes(response.data));
+    });
+  };
+};
+
+//Xóa Color
+export const onDeleteSize = (id) => {
+  return {
+    type: types.DELETE_SIZE,
+    id,
+  };
+};
+
+export const onDeleteSizeResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`size/${id}`, "DELETE", null).then((response) => {
+      dispatch(onDeleteSize(id));
+    });
+  };
+};
+//Thêm Color
+export const onAddSize = (size) => {
+  return {
+    type: types.ADD_SIZE,
+    size,
+  };
+};
+
+export const onAddSizeResquest = (size) => {
+  return (dispatch) => {
+    return callApi("size", "POST", size).then((response) => {
+     
+      dispatch(onAddSize(response.data));
+    });
+  };
+};
+//Cập Color
+export const onUpdateSize = (size) => {
+  return {
+    type: types.UPDATE_SIZE,
+    size,
+  };
+};
+export const onUpdateSizeResquest = (size) => {
+  return (dispatch) => {
+    return callApi(`size/${size.id}`, "PUT", size).then(
+      (response) => {
+        dispatch(onUpdateSize(response.data));
+      }
+    );
+  };
+};
+
+//Sửa Color
+export const onGetSize = (size) => {
+  return {
+    type: types.EDIT_SIZE,
+    size,
+  };
+};
+export const onEditSizeResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`size/${id}`, "GET", null).then((response) => {
+      dispatch(onGetSize(response.data));
+    });
+  };
+};
