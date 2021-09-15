@@ -379,3 +379,81 @@ export const onEditStaffsResquest = (id) => {
     });
   };
 };
+
+//Lấy tất cả danh sách Color
+export const fetchColors = (color) => {
+  return {
+    type: types.FETCH_COLOR,
+    color,
+  };
+};
+
+export const fetchColorResquest = () => {
+  return (dispatch) => {
+    return callApi("color", "GET", null).then((response) => {
+      dispatch(fetchColors(response.data));
+    });
+  };
+};
+
+//Xóa Color
+export const onDeleteColor = (id) => {
+  return {
+    type: types.DELETE_COLOR,
+    id,
+  };
+};
+
+export const onDeleteColorResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`color/${id}`, "DELETE", null).then((response) => {
+      dispatch(onDeleteColor(id));
+    });
+  };
+};
+//Thêm Color
+export const onAddColor = (color) => {
+  return {
+    type: types.ADD_COLOR,
+    color,
+  };
+};
+
+export const onAddColorResquest = (color) => {
+  return (dispatch) => {
+    return callApi("color", "POST", color).then((response) => {
+      dispatch(onAddColor(response.data));
+    });
+  };
+};
+//Cập Color
+export const onUpdateColor = (color) => {
+  return {
+    type: types.UPDATE_COLOR,
+    color,
+  };
+};
+export const onUpdateColorResquest = (color) => {
+  return (dispatch) => {
+    return callApi(`color/${color.id}`, "PUT", color).then(
+      (response) => {
+        dispatch(onUpdateColor(response.data));
+      }
+    );
+  };
+};
+
+//Sửa Color
+export const onGetColor = (color) => {
+  return {
+    type: types.EDIT_COLOR,
+    color,
+  };
+};
+export const onEditColorResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`color/${id}`, "GET", null).then((response) => {
+      dispatch(onGetColor(response.data));
+    });
+  };
+};

@@ -50,3 +50,10 @@ export const ADD_STAFF  = 'ADD_STAFF';
 export const UPDATE_STAFF  = 'UPDATE_STAFF';
 export const DELETE_STAFF = 'DELETE_STAFF';
 export const EDIT_STAFF = 'EDIT_STAFF ';
+
+//Get color
+export const FETCH_COLOR = 'FETCH_COLOR';
+export const ADD_COLOR = 'ADD_COLOR';
+export const UPDATE_COLOR  = 'UPDATE_COLOR';
+export const DELETE_COLOR = 'DELETE_COLOR';
+export const EDIT_COLOR = 'EDIT_COLOR ';
