@@ -49,29 +49,24 @@ export const onRestCart = (product) => {
   return {
     type: types.RESET_CART,
     product,
-   
   };
 };
-
-
 
 //Lấy tất cả danh sách Khách hàng
 export const fetchUser = (user) => {
   return {
     type: types.FETCH_USER,
-    user
-  }
-}
+    user,
+  };
+};
 
 export const fetchUserRequest = () => {
-  return dispatch=> {
-    return callApi("users","GET", null).then((response=>{
+  return (dispatch) => {
+    return callApi("users", "GET", null).then((response) => {
       dispatch(fetchUser(response.data));
-    }));
-  }
-}
-
-
+    });
+  };
+};
 
 // Lấy tất cả danh sách sản phẩm
 export const fetchProduct = (products) => {
@@ -151,8 +146,6 @@ export const onEditProductResquest = (id) => {
   };
 };
 
-
-
 //Lấy tất cả danh sách Object
 
 export const fetchObject = (object) => {
@@ -165,9 +158,7 @@ export const fetchObject = (object) => {
 export const fetchObjectResquest = () => {
   return (dispatch) => {
     return callApi("objects", "GET", null).then((response) => {
-     
       dispatch(fetchObject(response.data));
-    
     });
   };
 };
@@ -182,9 +173,7 @@ export const fetchSector = (sector) => {
 export const fetchSectorResquest = () => {
   return (dispatch) => {
     return callApi("sectors", "GET", null).then((response) => {
-     
       dispatch(fetchSector(response.data));
-    
     });
   };
 };
@@ -200,9 +189,7 @@ export const fetchCategory = (category) => {
 export const fetchCategoryResquest = () => {
   return (dispatch) => {
     return callApi("categories", "GET", null).then((response) => {
-     
       dispatch(fetchCategory(response.data));
-    
     });
   };
 };
@@ -217,9 +204,7 @@ export const fetchBillsCustomer = (bills_customer) => {
 export const fetchBillsCustomerResquest = () => {
   return (dispatch) => {
     return callApi("bill-customer", "GET", null).then((response) => {
-     
       dispatch(fetchBillsCustomer(response.data));
-    
     });
   };
 };
@@ -234,9 +219,7 @@ export const fetchPromotions = (promotion) => {
 export const fetchPromotionsResquest = () => {
   return (dispatch) => {
     return callApi("promotions", "GET", null).then((response) => {
-     
       dispatch(fetchPromotions(response.data));
-    
     });
   };
 };
@@ -267,7 +250,6 @@ export const onAddPromotion = (promotion) => {
 export const onAddPromotionResquest = (promotion) => {
   return (dispatch) => {
     return callApi("promotions", "POST", promotion).then((response) => {
-    
       dispatch(onAddPromotion(response.data));
     });
   };
@@ -304,3 +286,80 @@ export const onEditPromotionResquest = (id) => {
   };
 };
 
+//Lấy tất cả danh sách Staff
+export const fetchStaffs = (staff) => {
+  return {
+    type: types.FETCH_STAFF,
+    staff,
+  };
+};
+
+export const fetchStaffsResquest = () => {
+  return (dispatch) => {
+    return callApi("staffs", "GET", null).then((response) => {
+      dispatch(fetchStaffs(response.data));
+    });
+  };
+};
+
+//Xóa Staff
+export const onDeleteStaffs = (id) => {
+  return {
+    type: types.DELETE_STAFF,
+    id,
+  };
+};
+
+export const onDeleteStaffsResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`staffs/${id}`, "DELETE", null).then((response) => {
+      dispatch(onDeleteStaffs(id));
+    });
+  };
+};
+//Thêm Staff
+export const onAddStaffs = (staff) => {
+  return {
+    type: types.ADD_STAFF,
+    staff,
+  };
+};
+
+export const onAddStaffsResquest = (staff) => {
+  return (dispatch) => {
+    return callApi("staffs", "POST", staff).then((response) => {
+      dispatch(onAddStaffs(response.data));
+    });
+  };
+};
+//Cập Staff
+export const onUpdateStaffs = (staff) => {
+  return {
+    type: types.UPDATE_STAFF,
+    staff,
+  };
+};
+export const onUpdateStaffsResquest = (staff) => {
+  return (dispatch) => {
+    return callApi(`staffs/${staff.id}`, "PUT", staff).then(
+      (response) => {
+        dispatch(onUpdateStaffs(response.data));
+      }
+    );
+  };
+};
+
+//Sửa Staff
+export const onGetStaffs = (staff) => {
+  return {
+    type: types.EDIT_STAFF,
+    staff,
+  };
+};
+export const onEditStaffsResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`staffs/${id}`, "GET", null).then((response) => {
+      dispatch(onGetStaffs(response.data));
+    });
+  };
+};

@@ -47,7 +47,7 @@ class ListDiscount extends React.Component {
     this.props.fetchPromotions();
   }
   onDeletePromotion = (item) => {
-    console.log(item);
+   
     this.props.onDeleteItemPromotion(item);
   };
   render() {

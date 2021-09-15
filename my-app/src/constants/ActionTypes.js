@@ -40,3 +40,10 @@ export const ADD_PROMOTION = 'ADD_PROMOTION';
 export const UPDATE_PROMOTION = 'UPDATE_PROMOTION';
 export const DELETE_PROMOTION= 'DELETE_PROMOTION';
 export const EDIT_PROMOTION= 'EDIT_PROMOTION';
+
+//Get staff
+export const FETCH_STAFF = 'FETCH_STAFF';
+export const ADD_STAFF  = 'ADD_STAFF';
+export const UPDATE_STAFF  = 'UPDATE_STAFF';
+export const DELETE_STAFF = 'DELETE_STAFF';
+export const EDIT_STAFF = 'EDIT_STAFF ';

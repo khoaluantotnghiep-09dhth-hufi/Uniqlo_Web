@@ -33,10 +33,10 @@ class addDiscount extends React.Component {
   }
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
-    if (NextProps && NextProps.edditPromotion) {
-      var { edditPromotion } = NextProps;
+    if (NextProps && NextProps.promotion) {
+      var { promotion } = NextProps;
       if (match.params.id_promotion) {
-        const result = edditPromotion.find(
+        const result = promotion.find(
           (o) => o.id === match.params.id_promotion
         );
 
@@ -152,7 +152,7 @@ class addDiscount extends React.Component {
                 <CButton color="danger" className="m-2" type="submit">
                   {" "}
                   <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />
-                  Thêm
+                  Lưu 
                 </CButton>
               </CFormGroup>
             </CForm>
@@ -165,6 +165,7 @@ class addDiscount extends React.Component {
 var mapStateToProps = (state) => {
   return {
     edditPromotion: state.edditPromotion,
+    promotion: state.promotion,
   };
 };
 var mapDispatchToProps = (dispatch, props) => {

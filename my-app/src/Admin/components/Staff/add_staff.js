@@ -1,110 +1,219 @@
-import React from 'react';
+import React from "react";
+import uniqid from "uniqid";
+
 import {
-    CForm,
-    CLabel,
-    CContainer,
-    CInput,
-    CCol,
-    
-    CRow,
-    CFormGroup,
-    CButton,
+  CForm,
+  CLabel,
+  CContainer,
+  CInput,
+  CCol,
+  CRow,
+  CFormGroup,
+  CButton,
+} from "@coreui/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import * as actions from "./../../../actions/index";
+import { connect } from "react-redux";
 
-} from '@coreui/react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faPlus,
+class addStaff extends React.Component {
+  constructor(props) {
+    super(props);
+    this.setState({
+      idItem: "",
+      txtNameStaff: "",
+      txtEmail: "",
+      txtPhone: "",
+      txtAddress: "",
+      txtPassword: "",
+      txtChucVu: "",
+    });
+  }
+  componentDidMount() {
+    var { match } = this.props;
 
-} from "@fortawesome/free-solid-svg-icons";
-
-export default class addStaff extends React.Component {
-
-    render() {
-        return (
-            <CContainer fluid>
-                <CRow>
-                    <CCol sm="12">
-                        <CForm action="" method="post">
-                            <CFormGroup>
-                                <CLabel htmlFor="exampleFormControlInput1">Tên Nhân Viên</CLabel>
-                                <CInput
-                                    type="text"
-                                    id="txtNameStaff"
-                                    name="txtNameStaff"
-                                    placeholder="Tên nhân viên..."
-                                    autoComplete="name"
-                                />
-
-                            </CFormGroup>
-                            <CFormGroup>
-                                <CLabel htmlFor="exampleFormControlInput1">Email</CLabel>
-                                <CInput
-                                    type="text"
-                                    id="txtEmail"
-                                    name="txtEmail"
-                                    placeholder="Email..."
-                                    autoComplete="email"
-                                />
-
-                            </CFormGroup>
-                            <CFormGroup>
-                                <CLabel htmlFor="exampleFormControlTextarea1">Số Điện Thoại</CLabel>
-                                <CInput
-                                    type="text"
-                                    id="txtPhone"
-                                    name="txtPhone"
-                                    placeholder="Số điện thoại..."
-                                    autoComplete="phone"
-
-                                />
-
-
-                            </CFormGroup>
-                            <CFormGroup>
-                                <CLabel htmlFor="exampleFormControlTextarea1">Địa Chỉ</CLabel>
-                                <CInput
-                                    type="text"
-                                    id="txtAddress"
-                                    name="txtAddress"
-                                    placeholder="Địa chỉ..."
-                                    autoComplete="address"
-
-                                />
-
-
-                            </CFormGroup>
-                            <CFormGroup>
-                                <CLabel htmlFor="exampleFormControlTextarea1">Mật Khẩu</CLabel>
-                                <CInput
-                                    type="password"
-                                    id="txtPassword"
-                                    name="txtPassword"
-                                    placeholder="Mật khẩu..."
-                                    autoComplete="password"
-
-                                />
-
-
-                            </CFormGroup>
-
-                            <CFormGroup>
-                                <CLabel htmlFor="exampleFormControlTextarea1">Chức Vụ</CLabel>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Chọn Chức Vụ</option>
-                                    <option value="1">Nhân Viên</option>
-                                    <option value="2">Quản Lý</option>
-                                </select>
-
-                            </CFormGroup>
-
-                            <CFormGroup >
-                                <CButton color='danger' className="m-2" > <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />Thêm</CButton>
-
-                            </CFormGroup>
-                        </CForm>
-                    </CCol>
-                </CRow>
-            </CContainer>
-        )
+    this.props.onEditItemStaff(match.params.id_staff);
+  }
+  componentWillReceiveProps(NextProps) {
+    var { match } = this.props;
+    if (NextProps && NextProps.staff) {
+      var { staff } = NextProps;
+      if (match.params.id_staff) {
+        const result = staff.find((o) => o.id === match.params.id_staff);
+console.log(result);
+        this.setState({
+          idItem: result.id,
+          txtNameStaff: result.name,
+          txtEmail: result.email,
+          txtPhone: result.phone,
+          txtAddress: result.address,
+          txtPassword: result.password,
+          txtChucVu: result.postion,
+        });
+      }
     }
+  }
+  onChange = (event) => {
+    var target = event.target;
+    var name = target.name;
+    var value = target.value;
+    this.setState({
+      [name]: value,
+    });
+  };
+  onSubmitForm = (event) => {
+    var { match } = this.props;
+
+    event.preventDefault();
+    var { history } = this.props;
+    var {
+      idItem,
+      txtNameStaff,
+      txtEmail,
+      txtPhone,
+      txtAddress,
+      txtPassword,
+      txtChucVu,
+    } = this.state;
+   
+    var staff = {
+      id: uniqid("staff-"),
+      nameStaff: txtNameStaff,
+      email: txtEmail,
+      phone: txtPhone,
+      address: txtAddress,
+      password: txtPassword,
+      position: txtChucVu,
+    };
+    
+    var staffUpdate = {
+      id: match.params.id_staff,
+      nameStaff: txtNameStaff,
+      email: txtEmail,
+      phone: txtPhone,
+      address: txtAddress,
+      password: txtPassword,
+      position: txtChucVu,
+    };
+    if (idItem) {
+      this.props.onUpdateItemStaff(staffUpdate);
+      history.goBack();
+    } else {
+      this.props.onAddItemStaff(staff);
+      history.goBack();
+    }
+  };
+  render() {
+    return (
+      <CContainer fluid>
+        <CRow>
+          <CCol sm="12">
+            <CForm  onSubmit={this.onSubmitForm}>
+              <CFormGroup>
+                <CLabel htmlFor="exampleFormControlInput1">
+                  Tên Nhân Viên
+                </CLabel>
+                <CInput
+                  type="text"
+                  id="txtNameStaff"
+                  name="txtNameStaff"
+                  placeholder="Tên nhân viên..."
+                  autoComplete="name"
+                  onChange={this.onChange}
+                />
+              </CFormGroup>
+              <CFormGroup>
+                <CLabel htmlFor="exampleFormControlInput1">Email</CLabel>
+                <CInput
+                  type="text"
+                  id="txtEmail"
+                  name="txtEmail"
+                  placeholder="Email..."
+                  autoComplete="email"
+                  onChange={this.onChange}
+                />
+              </CFormGroup>
+              <CFormGroup>
+                <CLabel htmlFor="exampleFormControlTextarea1">
+                  Số Điện Thoại
+                </CLabel>
+                <CInput
+                  type="text"
+                  id="txtPhone"
+                  name="txtPhone"
+                  placeholder="Số điện thoại..."
+                  autoComplete="phone"
+                  onChange={this.onChange}
+                />
+              </CFormGroup>
+              <CFormGroup>
+                <CLabel htmlFor="exampleFormControlTextarea1">Địa Chỉ</CLabel>
+                <CInput
+                  type="text"
+                  id="txtAddress"
+                  name="txtAddress"
+                  placeholder="Địa chỉ..."
+                  autoComplete="address"
+                  onChange={this.onChange}
+                />
+              </CFormGroup>
+              <CFormGroup>
+                <CLabel htmlFor="exampleFormControlTextarea1">Mật Khẩu</CLabel>
+                <CInput
+                  type="password"
+                  id="txtPassword"
+                  name="txtPassword"
+                  placeholder="Mật khẩu..."
+                  autoComplete="password"
+                  onChange={this.onChange}
+                />
+              </CFormGroup>
+
+              <CFormGroup>
+                <CLabel htmlFor="exampleFormControlTextarea1">Chức Vụ</CLabel>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  name="txtChucVu"
+                  onChange={this.onChange}
+                  //   value={this.state.txtChucVu}
+                >
+                  <option selected>Chọn Chức Vụ</option>
+                  <option value="1">Nhân Viên</option>
+                  <option value="2">Quản Lý</option>
+                </select>
+              </CFormGroup>
+
+              <CFormGroup>
+                <CButton color="danger" className="m-2" type="submit">
+                  {" "}
+                  <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />
+                  Lưu
+                </CButton>
+              </CFormGroup>
+            </CForm>
+          </CCol>
+        </CRow>
+      </CContainer>
+    );
+  }
 }
+var mapStateToProps = (state) => {
+  return {
+    staff: state.staff,
+  };
+};
+var mapDispatchToProps = (dispatch, props) => {
+  return {
+    onAddItemStaff: (staff) => {
+      dispatch(actions.onAddStaffsResquest(staff));
+    },
+    onEditItemStaff: (id) => {
+      dispatch(actions.onEditStaffsResquest(id));
+    },
+    onUpdateItemStaff: (staff) => {
+      dispatch(actions.onUpdateStaffsResquest(staff));
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(addStaff);

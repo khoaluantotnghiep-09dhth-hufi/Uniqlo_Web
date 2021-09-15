@@ -4,9 +4,10 @@ import products from "./Products/products";
 import object from "./Objects/object";
 import sector from "./Sectors/sector";
 import users from "./Users/users";
+import staff from "./Staffs/staff";
 import category from "./Categories/category";
 import promotion from "./Promotions/promotion";
-import edditPromotion from "./Promotions/edditPromotion";
+
 import itemEditting from "./itemEditting";
 import bills_customer from "./Bills_Customer/bills_customer";
 
@@ -20,7 +21,7 @@ const myReducer = combineReducers({
   users, // users
   bills_customer,
   promotion,
-  edditPromotion,
+  staff,
 });
 
 export default myReducer;

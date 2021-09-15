@@ -33,14 +33,14 @@ var promotion = (state = initialState, action) => {
       return [...state];
     //Cập Nhật Khuyen Mai
     case types.UPDATE_PROMOTION:
-      
       index = findIndex(state, action.promotion.idItem);
       if (index !== -1) {
         state[index] = promotion;
       }
 
       return [...state];
-    
+    case types.EDIT_PROMOTION:
+      return action.promotion;
     default:
       return state;
   }
