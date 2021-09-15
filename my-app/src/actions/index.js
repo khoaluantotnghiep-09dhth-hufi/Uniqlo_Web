@@ -517,6 +517,7 @@ export const onUpdateSizeResquest = (size) => {
   return (dispatch) => {
     return callApi(`size/${size.id}`, "PUT", size).then(
       (response) => {
+        console.log(response);
         dispatch(onUpdateSize(response.data));
       }
     );

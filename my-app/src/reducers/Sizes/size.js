@@ -34,7 +34,7 @@ var size = (state = initialState, action) => {
       return [...state];
     //Cập Nhật Size
     case types.UPDATE_SIZE:
-      index = findIndex(state, action.size.idItem);
+      index = findIndex(state, action.size.id);
       if (index !== -1) {
         state[index] = size;
       }

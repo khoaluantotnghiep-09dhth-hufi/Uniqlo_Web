@@ -82,7 +82,7 @@ class ListColor extends React.Component {
                         </Link>
                       
                           <CButton type="button" className="btn btn-warning"
-                            onClick={()=>{this.onDeleteColor(item.id)}}
+                            onClick={()=>{this.onDeleteSize(item.id)}}
                           >
                             <FontAwesomeIcon
                               icon={faTimes}

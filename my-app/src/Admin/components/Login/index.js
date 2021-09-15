@@ -53,7 +53,7 @@ class index extends Component {
   };
   render() {
     var { isCheckLogin } = this.state;
-    console.log(isCheckLogin);
+   
     if (isCheckLogin) {
       return <Route pathname="/admin/home" component={HomePape} />;
     }

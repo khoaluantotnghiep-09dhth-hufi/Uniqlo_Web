@@ -70,7 +70,7 @@ import {
           
         };
         var sizeUpdate = {
-          id: match.params.id_color,
+          id: idItem,
           nameSize: txtName,
         };
        
