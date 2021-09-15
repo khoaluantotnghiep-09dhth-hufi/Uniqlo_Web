@@ -33,7 +33,6 @@ const _nav =  [
     _tag: 'CSidebarNavItem',
     name: 'Trang Chủ',
      to: '/admin',
-    // icon: <Fon name="cil-home" customClasses="c-sidebar-nav-icon"/>,
     icon: <FontAwesomeIcon icon={faStore} className="mr-2"/>
  
   },

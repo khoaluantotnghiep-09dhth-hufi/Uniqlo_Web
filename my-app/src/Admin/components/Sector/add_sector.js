@@ -33,31 +33,21 @@ export default class addObject extends React.Component {
 
     onAdd = (e) => {
         e.preventDefault();
-        var { id,txtName, idObject } = this.state;
+        var { id, txtName, idObject } = this.state;
         const sector = {
             id: uniqid('sector-'),
             name: txtName,
             id_object: idObject,
         }
-        if (id) {
-            if (id) {
-                CallAPI(`/sectors/${id}`, 'PUT', {
-                    name: txtName,
-                    idObject: idObject,
-                }).then(res => {
-                    alert('Sửa thành công !');
-                });
-            } else {
-            }
-            CallAPI('/sectors', 'POST', sector).then(res => {
-                alert('Thêm thành công !')
-            });
-        }
+        CallAPI('/sectors', 'POST', sector).then(res => {
+            alert('Thêm thành công !');
+            console.log(res);
+        });
+
     }
     componentDidMount() {
         CallAPI('objects', 'GET', null).then(res => {
             data = res.data;
-            console.log(data);
         });
     }
     render() {

@@ -48,7 +48,12 @@ const ListSize = React.lazy(() => import('../components/Size/list_size'));
 const AddSize = React.lazy(() => import('../components/Size/add_size'));
 // const Page404 = React.lazy(() => import('../screens/page404/Page404'));
 const routes = [
-    { path: '/admin', exact: true, name: 'Trang Chủ', component: Home },
+    {
+        path: '/admin',
+        exact: true,
+        name: 'Trang Chủ',
+        component: Home
+    },
     // { path: '', exact: true, component: Page404 },
 
     { path: '/admin/system/order/all', exact: true, name: 'Tất Cả Đơn Hàng', component: Order },
@@ -59,7 +64,7 @@ const routes = [
     { path: '/admin/system/news/add', exact: true, name: 'Thêm Tin Tức Mới', component: AddNews },
 
     { path: '/admin/system/discount', exact: true, name: 'Danh Sách Khuyến Mãi', component: ListDiscount },
-    
+
     { path: '/admin/system/discount/:id_promotion/edit', exact: true, name: 'Thêm Khuyến Mãi Mới', component: AddDiscount },
     { path: '/admin/system/discount/add', exact: true, name: 'Thêm Khuyến Mãi Mới', component: AddDiscount },
 
@@ -82,8 +87,8 @@ const routes = [
 
     { path: '/admin/manage/objects', exact: true, name: 'Danh Sách Đối Tượng', component: ListObject },
     { path: '/admin/manage/object/add', exact: true, name: 'Thêm Đối Tượng Mới', component: AddObject },
-    { path: '/admin/manage/object/:id/edit', exact: true, name: 'Sửa Đối Tượng Mới', component: EditObject },
-///admin/system/discount/:id/edit
+    { path: '/admin/manage/object/:id/edit', exact: true, name: 'Sửa Đối Tượng Mới', component: AddObject },
+    ///admin/system/discount/:id/edit
     { path: '/admin/manage/sectors', exact: true, name: 'Danh Sách Loại Sản Phẩm', component: ListSectors },
     { path: '/admin/manage/sector/add', exact: true, name: 'Thêm Loại Sản Phẩm Mới', component: AddSector },
     { path: '/admin/manage/sector/:id/edit', exact: true, name: 'Sửa Loại Sản Phẩm Mới', component: EditSector },
