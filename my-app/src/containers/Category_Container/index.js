@@ -28,7 +28,7 @@ this.props.onGetAllProduct();
     
     var id_Category = match.params.name_category;
  
-   
+   console.log(products)
     result = products.filter((product)=>product.id_category===id_Category).map((product, index) => {
       return <Col lg="3" className="mt-4"><Item key={product.id} product={product} onAddToCart={onAddToCart}/></Col>;
     });

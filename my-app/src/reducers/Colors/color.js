@@ -14,25 +14,25 @@ var color = (state = initialState, action) => {
   var index = -1;
   var { id } = action;
   switch (action.type) {
-    //Lấy Tất cả Danh Sách Nhân Viên
+    //Lấy Tất cả Danh Sách Mau
     case types.FETCH_COLOR:
       state = action.color;
 
       return [...state];
-    //Xóa Nhân Viên
+    //Xóa Mau
     case types.DELETE_COLOR:
       index = findIndex(state, id);
 
       state.splice(index, 1);
 
       return [...state];
-    //Thêm Nhân Viên
+    //Thêm Mau
     case types.ADD_COLOR:
       console.log(action.color);
       state.push(action.color);
 
       return [...state];
-    //Cập Nhật Nhân Viên
+    //Cập Nhật Mau
     case types.UPDATE_COLOR:
       index = findIndex(state, action.color.id);
       if (index !== -1) {
@@ -40,7 +40,7 @@ var color = (state = initialState, action) => {
       }
 
       return [...state];
-    //Lấy Nhân Viên Để Eddit
+    //Lấy Mau Để Eddit
     case types.EDIT_COLOR:
       return action.color;
     default:
