@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from "react-redux";
+import * as actions from "./../../../actions/index";
 import {
  
     CCard,
@@ -8,6 +10,7 @@ import {
     CDataTable,
     CRow,
     CButton,
+    CBadge
 } from '@coreui/react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -27,10 +30,29 @@ import usersData from '../User/UserData';
 //         default: return 'primary'
 //     }
 // }
-const fields = ['Tên', 'registered', 'role', 'Trạng Thái', 'Hành Động']
+const fields = ['id', 'date', 'address', 'email','phone','total','status', 'Hành Động']
 
 class ListOrder extends React.Component {
+    componentDidMount() {
+        this.props.fetchBills();
+      }
+      onDeleteBill = (item) => {
+        this.props.onDeleteItemBill(item);
+      };
+      getBadge=(status) => {
+        switch (status) {
+            case '0': return 'success'
+            case '1': return 'secondary'
+            default: return 'primary'
+       
+          }
+      }
     render() {
+        var { bill } = this.props;
+
+        var dataBill = bill.map((item, index) => {
+          return item;
+        });
         return (
             <>
                 {/* <Link to="/admin/system/news/add">
@@ -46,7 +68,7 @@ class ListOrder extends React.Component {
                             </CCardHeader>
                             <CCardBody>
                                 <CDataTable
-                                    items={usersData}
+                                    items={dataBill}
                                     fields={fields}
                                     itemsPerPage={8}
                                     pagination
@@ -54,9 +76,14 @@ class ListOrder extends React.Component {
                                         'status':
                                             (item) => (
                                                 <td>
-                                                    {/* <CBadge color={getBadge(item.status)}>
-                                                        {item.status}
-                                                    </CBadge> */}
+                                                    <CBadge color={()=>{this.getBadge(item.status)}}>
+                                                        {
+                                                            item.status
+                                                           
+                                                    
+                                                        }
+                                                       
+                                                    </CBadge>
                                                 </td>
                                             )
 
@@ -70,11 +97,13 @@ class ListOrder extends React.Component {
                                                             <FontAwesomeIcon icon={faCheck} className="mr-2" size="lg"/>Xác Nhận Đơn
                                                         </CButton>
                                                     </Link>
-                                                    <Link to="/admin/system/discount/../delete">
-                                                        <CButton type="button" className="btn btn-warning">
+                                                    
+                                                        <CButton type="button" className="btn btn-warning"
+                                                          onClick={()=>{this.onDeleteBill(item.id)}}
+                                                        >
                                                         <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg"/>Hủy Đơn
                                                         </CButton>
-                                                    </Link>
+                                               
 
                                                 </td>
 
@@ -93,5 +122,19 @@ class ListOrder extends React.Component {
         )
     }
 }
-
-export default ListOrder
+var mapStateToProps = (state) => {
+    return {
+      bill: state.bill,
+    };
+  };
+  var mapDispatchToProps = (dispatch, props) => {
+    return {
+      fetchBills: () => {
+        return dispatch(actions.fetchBillResquest());
+      },
+      onDeleteItemBill: (id) => {
+        return dispatch(actions.onDeleteBillResquest(id));
+      },
+    };
+  };
+export default connect(mapStateToProps, mapDispatchToProps)(ListOrder)
