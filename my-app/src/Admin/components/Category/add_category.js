@@ -62,7 +62,7 @@ class AddCategory extends React.Component {
             idSector: ibSector,
         };
         var categoryUpdate = {
-            id: idItem,
+            id: match.params.id_category,
             name: txtName,
             idSector: ibSector,
         };

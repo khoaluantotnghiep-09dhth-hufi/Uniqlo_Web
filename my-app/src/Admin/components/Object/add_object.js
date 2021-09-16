@@ -9,7 +9,21 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import uniqid from 'uniqid';
 import { Button, Form, Col, Container, Row } from 'react-bootstrap';
-import * as actions from "./../../../actions/index";
+import {
+  CCard,
+  CCardBody,
+  CCardHeader,
+  CCol,
+  CDataTable,
+  CRow,
+  CButton,
+  CContainer,
+  CForm,
+  CLabel,
+  CFormGroup,
+  CInput,
+} from '@coreui/react';
+import * as actions from "./../../../actions/objectAction";
 class addObject extends React.Component {
   constructor(props) {
     super(props);
@@ -26,10 +40,10 @@ class addObject extends React.Component {
   }
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
-    if (NextProps && NextProps.objects) {
-      var { objects } = NextProps;
+    if (NextProps && NextProps.object) {
+      var { object } = NextProps;
       if (match.params.id_object) {
-        const result = objects.find(
+        const result = object.find(
           (o) => o.id === match.params.id_object
         );
 
@@ -56,81 +70,85 @@ class addObject extends React.Component {
     var { idItem, txtName } =
       this.state;
 
-    var objects = {
+    var object = {
       id: uniqid("object-"),
       name: txtName,
 
     };
     var objectUpdate = {
-      id: idItem,
+      id: match.params.id_object,
       name: txtName,
     };
 
     if (idItem) {
       this.props.onUpdateItemObject(objectUpdate);
-      alert('Sửa thành công');
+      
       history.goBack();
     } else {
-      this.props.onAddItemObject(objects);
+      this.props.onAddItemObject(object);
       history.goBack();
     }
   };
   render() {
 
     return (
-      <Container fluid>
-        <Row>
-          <Link to="/admin/manage/objects">
+      <CContainer fluid>
+        <CRow>
+          <Link to="/admin/manage/object">
             <Button type="button" className="btn btn-primary" size="sm">
-              <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />Trở về
+              <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg"/>Trở về
             </Button>
           </Link>
-          <Col sm="12">
-            <Form  onSubmit={this.onSubmitForm}>
-              <Form.Group className="mb-3" controlId="formBasicObject">
-                <Form.Label>Tên Đối Tượng</Form.Label>
-                <Form.Control
-                
+          <CCol sm="12">
+            <CForm action="" method="post" onSubmit={this.onSubmitForm}>
+              <CFormGroup>
+                <CLabel htmlFor="exampleFormControlInput1">Tên Màu</CLabel>
+                <CInput
                   type="text"
-                  placeholder="Nhập tên đối tượng cần thêm..."
-                  name="txtName"
-                  autoComplete="name"
                   id="txtName"
-                  onChange={this.onChange} />
-              </Form.Group>
-              <Button type="button"
-                className="btn btn-danger"
-               
-              >
-                <FontAwesomeIcon
-                  icon={faPlus}
-                  className="mr-2"
-                  size="lg" />Lưu
-              </Button>
-              {/* </Link> */}
-            </Form>
-          </Col>
-        </Row>
-      </Container>
+                  name="txtName"
+                  placeholder="Tên màu..."
+                  autoComplete="name"
+                  onChange={this.onChange}
+                />
+              </CFormGroup>
+
+              <CFormGroup >
+                <CButton
+                  type="submit"
+                  color='danger'
+                  className="m-2" >
+                  <FontAwesomeIcon
+                    icon={faPlus}
+                    className="mr-2"
+                    size="lg" />
+                  Lưu
+                </CButton>
+
+              </CFormGroup>
+            </CForm>
+          </CCol>
+        </CRow>
+      </CContainer>
     )
   }
 
 }
 var mapStateToProps = (state) => {
   return {
-    object2: state.object2,
+    object: state.object,
   };
 };
 var mapDispatchToProps = (dispatch, props) => {
   return {
-    onAddItemObject: (object2) => {
-      dispatch(actions.onAddObjectResquest(object2));
+    onAddItemObject: (object) => {
+      dispatch(actions.onAddObjectsResquest(object));
     },
     onEditItemObject: (id) => {
-      dispatch(actions.onEditObjectResquest(id));
+      dispatch(actions.onEditObjectsResquest(id));
     },
-    onUpdateItemObject: (object2) => {
-      dispatch(actions.onUpdateObjectResquest(object2));
+    onUpdateItemObject: (object) => {
+      dispatch(actions.onUpdateObjectsResquest(object));
     },
   };
 };

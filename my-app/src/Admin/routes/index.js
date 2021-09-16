@@ -47,6 +47,8 @@ const AddColor = React.lazy(() => import('../components/Color/add_color'));
 
 const ListSize = React.lazy(() => import('../components/Size/list_size'));
 const AddSize = React.lazy(() => import('../components/Size/add_size'));
+
+
 // const Page404 = React.lazy(() => import('../screens/page404/Page404'));
 const routes = [
     {

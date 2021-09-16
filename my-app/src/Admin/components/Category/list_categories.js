@@ -36,8 +36,8 @@ class ListCategory extends React.Component {
     render() {
         var { category } = this.props;
         var data = category.map((item, index) => {
-          
-            return item;
+
+            return { ...item, index };
         });
         return (
             <>

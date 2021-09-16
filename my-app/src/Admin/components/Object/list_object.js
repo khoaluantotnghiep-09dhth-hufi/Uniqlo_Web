@@ -8,6 +8,7 @@ import {
     CRow,
     CButton,
 } from '@coreui/react';
+
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -18,7 +19,7 @@ import {
 import { Link } from "react-router-dom";
 import CallAPI from "../../utils/Callapi";
 import { Button, Form, Col, Container, Row, FormGroup, Label, InputGroup, Modal, Alert, Table } from 'react-bootstrap';
-import * as actions from "./../../../actions/index";
+import * as actions from "./../../../actions/objectAction";
 const fields = ['STT',
     { key: 'id', label: 'Mã Đối Tượng' },
     { key: 'name', label: 'Tên Đối Tượng' },
@@ -30,12 +31,16 @@ class ListObject extends React.Component {
         this.props.fetchObjects();
     }
     onDeleteObject = (id) => {
-        this.props.onDeleteItemObject(id);
+        if (confirm('Bạn chắc chắn muốn xóa ?')) { //eslint-disable-line
+            this.props.onDeleteItemObject(id);
+        }
+        
     };
     render() {
-        var { objects } = this.props;
-        var dataObjects = objects.map((item, index) => {
-            return item;
+        var { object } = this.props;
+        var dataObjects = object.map((item, index) => {
+            console.log(item);
+            return { ...item, index };
         });
         return (
             <>
@@ -94,16 +99,16 @@ class ListObject extends React.Component {
 }
 var mapStateToProps = (state) => {
     return {
-        objects: state.objects,
+        object: state.object,
     };
 };
 var mapDispatchToProps = (dispatch, props) => {
     return {
         fetchObjects: () => {
-            return dispatch(actions.fetchObjectResquest());
+            return dispatch(actions.fetchObjectsResquest());
         },
         onDeleteItemObject: (id) => {
-            return dispatch(actions.onDeleteObjectResquest(id))
+            return dispatch(actions.onDeleteObjectsResquest(id))
         }
     };
 };

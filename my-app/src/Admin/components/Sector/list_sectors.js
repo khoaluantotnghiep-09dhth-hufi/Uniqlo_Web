@@ -37,7 +37,7 @@ class ListSector extends React.Component {
         var { sector } = this.props;
         var data = sector.map((item, index) => {
           
-            return item;
+            return { ...item, index };
         });
         return (
             <>

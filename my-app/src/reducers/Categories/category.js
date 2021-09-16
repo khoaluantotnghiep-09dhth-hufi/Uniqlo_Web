@@ -3,8 +3,8 @@ import * as types from "./../../constants/ActionTypes";
 var initialState = [];
 var findIndex = (category, id) => {
   var rs = -1;
-  category.forEach((category, index) => {
-    if (category.id === id) {
+  category.forEach((item, index) => {
+    if (item.id === id) {
       rs = index;
     }
   });
