@@ -22,7 +22,7 @@ import {Link} from "react-router-dom";
 import usersData from '../User/UserData';
 
 
-const fields = ['id', 'name', 'Hành Động']
+const fields = ['index','id', 'name', 'Hành Động']
 
 class ListColor extends React.Component {
     componentDidMount() {
@@ -36,7 +36,7 @@ class ListColor extends React.Component {
         var { color } = this.props;
 
     var dataColor = color.map((item, index) => {
-      return item;
+      return {...item,index};
     });
         return (
             <>

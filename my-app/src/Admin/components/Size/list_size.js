@@ -25,7 +25,7 @@ import usersData from "../User/UserData";
 //         default: return 'primary'
 //     }
 // }
-const fields = ["id", "name", "Hành Động"];
+const fields = ["index","id", "name", "Hành Động"];
 
 class ListColor extends React.Component {
   componentDidMount() {
@@ -38,7 +38,7 @@ class ListColor extends React.Component {
     var { size } = this.props;
 
     var dataSize = size.map((item, index) => {
-      return item;
+      return {...item,index};
     });
     return (
       <>

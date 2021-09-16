@@ -30,6 +30,7 @@ const getBadge = (status) => {
 };
 
 const fields = [
+  "index",
   "id",
   "name",
   "desciption",
@@ -50,7 +51,7 @@ class ListDiscount extends React.Component {
     var { promotion } = this.props;
 
     var dataPromotion = promotion.map((item, index) => {
-      return item;
+      return {...item,index};
     });
 
     return (
