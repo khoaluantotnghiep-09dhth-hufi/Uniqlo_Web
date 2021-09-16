@@ -4,10 +4,12 @@ import { Card, Button } from "react-bootstrap";
 class index extends Component {
   render() {
     var { product } = this.props;
+    // product.desciption==='' && 
+    var elementSale= product.desciption==='0'?'':  <span class="badge badge-danger" style={{transform: "translateX(190px)"}}>{product.desciption}<i class="fas fa-percent " aria-hidden="true"></i></span>;
     return (
       <Card>
         <Card.Img variant="top" src={product.image} />
-        <span class="badge badge-danger" style={{transform: "translateX(190px)"}}>50<i class="fas fa-percent " aria-hidden="true"></i></span>
+      {elementSale}
         <Card.Body>
           <Card.Title>{product.name_product}</Card.Title>
 
