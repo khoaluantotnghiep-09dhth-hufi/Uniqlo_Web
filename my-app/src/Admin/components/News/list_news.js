@@ -43,7 +43,7 @@ class ListNews extends React.Component {
         });
         return (
             <>
-                <Link to="/admin/manage/news/add">
+                <Link to="/admin/system/news/add">
                     <CButton type="button" className="btn btn-danger">
                         <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />Thêm Mới
                     </CButton>
@@ -64,7 +64,7 @@ class ListNews extends React.Component {
                                         'Thao Tác':
                                             (item) => (
                                                 <td>
-                                                    <Link to={`/admin/manage/news/${item.id}/edit`}>
+                                                    <Link to={`/admin/system/news/${item.id}/edit`}>
                                                         <CButton type="button" className="btn btn-primary">
                                                             <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
                                                         </CButton>

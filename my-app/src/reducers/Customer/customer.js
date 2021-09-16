@@ -7,7 +7,6 @@ var findIndex = (customer, id) => {
   customer.forEach((customer, index) => {
     if (customer.id === id) {
       rs = index;
-
     }
   });
   return rs;
@@ -16,23 +15,27 @@ var customer = (state = initialState, action) => {
   var index = -1;
   var { id } = action;
   switch (action.type) {
-
+    //Lấy Danh Sách Khách Hàng
     case types.FETCH_CUSTOMER:
       state = action.customer;
       return [...state];
+    //Xoá Khách Hàng
     case types.DELETE_CUSTOMER:
       index = findIndex(state, id);
       state.slice(index, 1);
       return [...state];
+    //Thêm Khách Hàng
     case types.ADD_CUSTOMER:
       state.push(action.customer);
       return [...state];
+    //Cập Nhập Nhân Viên
     case types.UPDATE_CUSTOMER:
       index = findIndex(state, action.customer.id);
       if (index !== -1) {
         state[index] = customer;
       }
       return [...state];
+    //Chỉnh Sửa Nhân Viên
     case types.EDIT_CUSTOMER:
       return action.customer;
     default:

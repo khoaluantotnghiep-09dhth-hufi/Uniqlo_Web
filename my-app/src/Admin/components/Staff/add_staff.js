@@ -12,9 +12,14 @@ import {
   CButton,
 } from "@coreui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import * as actions from "./../../../actions/index";
 import { connect } from "react-redux";
+import {
+  faPlus,faArrowLeft
+
+} from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import { Button, Form, Col, Container, Row } from 'react-bootstrap';
 
 class addStaff extends React.Component {
   constructor(props) {
@@ -107,6 +112,11 @@ console.log(result);
     return (
       <CContainer fluid>
         <CRow>
+          <Link to="/admin/manage/staffs">
+            <Button type="button" className="btn btn-primary" size="sm">
+              <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg"/>Trở về
+            </Button>
+          </Link>
           <CCol sm="12">
             <CForm  onSubmit={this.onSubmitForm}>
               <CFormGroup>

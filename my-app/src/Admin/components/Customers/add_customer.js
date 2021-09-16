@@ -100,7 +100,7 @@ class AddCustomer extends React.Component {
         <Row>
           <Link to="/admin/manage/customers">
             <Button type="button" className="btn btn-primary" size="sm">
-              <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />Trở về
+              <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg"/>Trở về
             </Button>
           </Link>
           <Col sm="12">
@@ -123,10 +123,9 @@ class AddCustomer extends React.Component {
                 <Form.Label>Địa Chỉ</Form.Label>
                 <Form.Control
                   required
-                  type="date"
+                  type="text"
                   placeholder="Nhập địa chỉ..."
                   name="address"
-
                   onChange={this.onChange} />
 
               </Form.Group>
@@ -151,7 +150,7 @@ class AddCustomer extends React.Component {
 
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicObject">
-                <Form.Label>Ảnh</Form.Label>
+                <Form.Label>Password</Form.Label>
                 <Form.Control
                   required
                   type="password"
@@ -164,7 +163,7 @@ class AddCustomer extends React.Component {
                 <Form.Label>Gmail</Form.Label>
                 <Form.Control
                   required
-                  type="text"
+                  type="email"
                   placeholder="Gmail..."
                   name="email"
                   onChange={this.onChange} />

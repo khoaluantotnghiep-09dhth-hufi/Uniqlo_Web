@@ -10,7 +10,7 @@ export const fetchCustomer = (customer) => {
 
 export const fetchCustomerResquest = () => {
     return (dispatch) => {
-        return callApi("customer", "GET", null).then((response) => {
+        return callApi("customers", "GET", null).then((response) => {
             dispatch(fetchCustomer(response.data));
         });
     };
@@ -24,7 +24,7 @@ export const onAddCustomer = (customer) => {
 };
 export const onAddCustomerResquest = (customer) => {
     return (dispatch) => {
-        return callApi("customer", "POST", customer).then((response) => {
+        return callApi("customers", "POST", customer).then((response) => {
             dispatch(onAddCustomer(response.data));
         });
     };
@@ -36,9 +36,10 @@ export const onUpdateCustomer = (customer) => {
         customer,
     };
 };
+
 export const onUpdateCustomerResquest = (customer) => {
     return (dispatch) => {
-        return callApi(`customer/${customer.id}`, "PUT", customer).then(
+        return callApi(`customers/${customer.id}`, "PUT", customer).then(
             (response) => {
                 dispatch(onUpdateCustomer(response.data));
             }
@@ -54,20 +55,20 @@ export const onDeleteCustomer = (id) => {
 
 export const onDeleteCustomerResquest = (id) => {
     return (dispatch) => {
-        return callApi(`customer/${id}`, "DELETE", null).then((response) => {
+        return callApi(`customers/${id}`, "DELETE", null).then((response) => {
             dispatch(onDeleteCustomer(id));
         });
     };
 };
-export const onGetCustomer = (news) => {
+export const onGetCustomer = (customer) => {
     return {
       type: types.EDIT_CUSTOMER,
-      news,
+      customer,
     };
   };
   export const onEditCustomerResquest = (id) => {
     return (dispatch) => {
-      return callApi(`customer/${id}`, "GET", null).then((response) => {
+      return callApi(`customers/${id}`, "GET", null).then((response) => {
         dispatch(onGetCustomer(response.data));
       });
     };

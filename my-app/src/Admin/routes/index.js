@@ -64,6 +64,7 @@ const routes = [
 
     { path: '/admin/system/news', exact: true, name: 'Danh Sách Tin Tức', component: ListNews },
     { path: '/admin/system/news/add', exact: true, name: 'Thêm Tin Tức Mới', component: AddNews },
+    { path: '/admin/system/news/:id_news/edit', exact: true, name: 'Thêm Tin Tức Mới', component: AddNews },
 
     { path: '/admin/system/discount', exact: true, name: 'Danh Sách Khuyến Mãi', component: ListDiscount },
 
@@ -81,6 +82,7 @@ const routes = [
     
     { path: '/admin/manage/customers', exact: true, name: 'Danh Sách Khách Hàng', component: ListCustomers },
     { path: '/admin/manage/customer/add', exact: true, name: 'Thêm Khách Hàng Mới', component: AddCustomer },
+    { path: '/admin/manage/customer/:id_customer/edit', exact: true, name: 'Thêm Khách Hàng Mới', component: AddCustomer },
 
     { path: '/admin/manage/order-product', exact: true, name: 'Danh Sách Đặt Hàng', component: ListOrderProduct },
     { path: '/admin/manage/order-product/add', exact: true, name: 'Lập Đơn Đặt Hàng', component: AddOrderProduct },

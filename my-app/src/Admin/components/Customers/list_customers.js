@@ -18,32 +18,44 @@ import {
 import * as actions from "./../../../actions/customerAction";
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
-// const getBadge = status => {
-//   switch (status) {
-//     case 'Active': return 'success'
-//     case 'Inactive': return 'secondary'
-//     case 'Pending': return 'warning'
-//     case 'Banned': return 'danger'
-//     default: return 'primary'
-//   }
-// }
-const fields = ['STT',
-  { key: 'id', label: 'Mã Nhân Viên' },
-  { key: 'name', label: 'Tên Khách Hàng' },
-  { key: 'address', label: 'Địa Chỉ' },
-  { key: 'phone', label: 'SĐT' },
-  { key: 'img', label: 'Ảnh' },
-  { key: 'password', label: 'Mật Khẩu' },
-  { key: 'email', label: 'Gmail' },
-  'Thao Tác',
-]
+const getBadge = (status) => {
+  switch (status) {
+    case 'Active': return 'success'
+    case 'Inactive': return 'secondary'
+    case 'Pending': return 'warning'
+    case 'Banned': return 'danger'
+    default: return 'primary'
+  }
+};
+
+// const fields = ['STT',
+//   { key: 'id', label: 'Mã Nhân Viên' },
+//   { key: 'name', label: 'Tên Khách Hàng' },
+//   { key: 'address', label: 'Địa Chỉ' },
+//   { key: 'phone', label: 'SĐT' },
+//   { key: 'img', label: 'Ảnh' },
+//   { key: 'password', label: 'Mật Khẩu' },
+//   { key: 'email', label: 'Gmail' },
+//   'Thao Tác',
+// ]
+
+const fields = [
+  "id",
+  "name",
+  "address",
+  "phone",
+  "img",
+  "password",
+  "email",
+  "Thao Tác",
+];
 
 class ListCustomers extends React.Component {
   componentDidMount() {
     this.props.fetchCustomers();
   }
-  onDeleteCustomer = (id) => {
-    this.props.onDeleteItemCustomer(id);
+  onDeleteCustomer = (item) => {
+    this.props.onDeleteItemCustomer(item);
   }
 
 
@@ -73,10 +85,19 @@ class ListCustomers extends React.Component {
                   itemsPerPage={8}
                   pagination
                   scopedSlots={{
-                    'Thao Tác':
+                    status: (item) => (
+                      <td>
+                        <CBadge color={getBadge(item.status)}>
+                          {item.status}
+                        </CBadge>
+                      </td>
+                    ),
+                  }}
+                  scopedSlots={{
+                    "Thao Tác":
                       (item) => (
                         <td>
-                          <Link to="/admin/manage/staf/../edit">
+                          <Link to={`/admin/manage/customer/${item.id}/edit`}>
                             <CButton type="button" className="btn btn-primary">
                               <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
                             </CButton>
@@ -90,7 +111,7 @@ class ListCustomers extends React.Component {
 
                         </td>
                       ),
-                    'STT':
+                    "STT":
                       (item, index) => (
                         <td>
                           {index + 1}
