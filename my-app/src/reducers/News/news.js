@@ -40,4 +40,4 @@ var news = (state = initialState, action) => {
   }
 };
 
-export default object;
+export default news;

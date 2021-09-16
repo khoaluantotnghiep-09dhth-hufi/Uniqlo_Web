@@ -8,6 +8,7 @@ import staff from "./Staffs/staff";
 import color from "./Colors/color";
 import bill from "./Bills/bill";
 import size from "./Sizes/size";
+import news from "./News/news";
 import category from "./Categories/category";
 import promotion from "./Promotions/promotion";
 
@@ -26,6 +27,7 @@ const myReducer = combineReducers({
   promotion,
   staff,
   bill,
+  news
 });
 
 export default myReducer;
