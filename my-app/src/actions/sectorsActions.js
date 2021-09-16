@@ -61,7 +61,7 @@ export const onDeleteSectorResquest = (id) => {
 };
 export const onGetSector = (sector) => {
     return {
-      type: types.EDIT_OBJECT,
+      type: types.EDIT_SECTOR,
       sector,
     };
   };

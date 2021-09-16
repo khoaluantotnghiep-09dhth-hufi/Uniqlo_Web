@@ -11,14 +11,14 @@ import {
 } from '@coreui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faPlus,
-  faTimes,
-  faTools,
+    faPlus,
+    faTimes,
+    faTools,
 } from "@fortawesome/free-solid-svg-icons";
-
-import usersData from '../User/UserData';
-
-import {  Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { connect } from "react-redux";
+import * as actions from "./../../../actions/productActions";
+import { Image } from 'react-bootstrap';
 const getBadge = status => {
     switch (status) {
         case 'Active': return 'success'
@@ -28,16 +28,42 @@ const getBadge = status => {
         default: return 'primary'
     }
 }
-const fields = ['Tên', 'registered', 'role', 'status', 'Hành Động']
+const fields = [
+    'STT',
+    { key: 'id', label: 'Mã' },
+    { key: 'name', label: 'Tên' },
+    { key: 'price', label: 'Giá' },
+    { key: 'description', label: 'Mô Tả' },
+    { key: 'like_product', label: 'Lượt Thích' },
+    { key: 'dislike_product', label: 'Không Thích' },
+    { key: 'nameCategory', label: 'Danh Mục' },
+    { key: 'image', label: 'Ảnh' },
+    { key: 'namePromotion', label: 'Khuyến Mãi' },
+    { key: 'quantity', label: 'Số Lượng' },
+    { key: 'nameColor', label: 'Màu' },
+    { key: 'nameSize', label: 'Kích Cỡ' },
+    'Thao Tác',
+]
 
 class ListProducts extends React.Component {
+    componentDidMount() {
+        this.props.fetchProducts();
+    }
+    onDeleteProduct = (id) => {
+        this.props.onDeleteItemProduct(id);
+    };
     render() {
+        var { products } = this.props;
+        var data = products.map((item, index) => {
+
+            return item;
+        });
         return (
             <>
                 {/* <Route to="/admin/system/discount/add"><CButton className="btn btn-danger" >Thêm Khuyến Mãi Mới</CButton></Route> */}
                 <Link to="/admin/manage/product/add">
                     <CButton type="button" className="btn btn-danger">
-                    <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg"/>Thêm Mới
+                        <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />Thêm Mới
                     </CButton>
                 </Link>
                 <CRow>
@@ -48,7 +74,7 @@ class ListProducts extends React.Component {
                             </CCardHeader>
                             <CCardBody>
                                 <CDataTable
-                                    items={usersData}
+                                    items={data}
                                     fields={fields}
                                     itemsPerPage={8}
                                     pagination
@@ -64,22 +90,34 @@ class ListProducts extends React.Component {
 
                                     }}
                                     scopedSlots={{
-                                        'Hành Động':
+                                        'Thao Tác':
                                             (item) => (
                                                 <td>
-                                                <Link to="/admin/manage/product/../edit">
-                                                    <CButton type="button" className="btn btn-primary">
-                                                    <FontAwesomeIcon icon={faTools} className="mr-2" size="lg"/>Sửa
-                                                    </CButton>
-                                                </Link>
-                                                <Link to="/admin/manage/product/../delete">
-                                                    <CButton type="button" className="btn btn-warning">
-                                                    <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg"/>Xóa
-                                                    </CButton>
-                                                </Link>
+                                                    <Link to="/admin/manage/product/../edit">
+                                                        <CButton type="button" className="btn btn-primary">
+                                                            <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
+                                                        </CButton>
+                                                    </Link>
+                                                    <Link to="/admin/manage/product/../delete">
+                                                        <CButton type="button" className="btn btn-warning">
+                                                            <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
+                                                        </CButton>
+                                                    </Link>
 
-                                            </td>
+                                                </td>
 
+                                            ),
+                                        'STT':
+                                            (item, index) => (
+                                                <td>
+                                                    {index + 1}
+                                                </td>
+                                            ),
+                                            'image':
+                                            (item, index) => (
+                                                <td>
+                                                    <Image src={item.image} thumbnail />
+                                                </td>
                                             )
                                     }}
                                 />
@@ -96,4 +134,19 @@ class ListProducts extends React.Component {
     }
 }
 
-export default ListProducts
+var mapStateToProps = (state) => {
+    return {
+        products: state.products,
+    };
+};
+var mapDispatchToProps = (dispatch, props) => {
+    return {
+        fetchProducts: () => {
+            return dispatch(actions.fetchProductResquest());
+        },
+        onDeleteItemProduct: (id) => {
+            return dispatch(actions.onDeleteProductResquest(id))
+        }
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ListProducts);

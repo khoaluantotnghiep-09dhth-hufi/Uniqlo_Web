@@ -40,13 +40,14 @@ const getBadge = (status) => {
 // ]
 
 const fields = [
-  "id",
-  "name",
-  "address",
-  "phone",
-  "img",
-  "password",
-  "email",
+  'STT',
+  { key: 'id', label: 'Mã' },
+  { key: 'name', label: 'Tên' },
+  { key: 'address', label: 'Địa Chỉ' },
+  { key: 'phone', label: 'SĐT' },
+  { key: 'image', label: 'Ảnh' },
+  { key: 'password', label: 'Mật Khẩu' },
+  { key: 'email', label: 'Gmail' },
   "Thao Tác",
 ];
 

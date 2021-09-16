@@ -33,9 +33,8 @@ class ListObject extends React.Component {
         this.props.onDeleteItemObject(id);
     };
     render() {
-        var { object } = this.props;
-        var data = object.map((item, index) => {
-          
+        var { objects } = this.props;
+        var dataObjects = objects.map((item, index) => {
             return item;
         });
         return (
@@ -53,7 +52,7 @@ class ListObject extends React.Component {
                             </CCardHeader>
                             <CCardBody>
                                 <CDataTable
-                                    items={data}
+                                    items={dataObjects}
                                     fields={fields}
                                     itemsPerPage={8}
                                     pagination
@@ -95,7 +94,7 @@ class ListObject extends React.Component {
 }
 var mapStateToProps = (state) => {
     return {
-        object: state.object,
+        objects: state.objects,
     };
 };
 var mapDispatchToProps = (dispatch, props) => {

@@ -26,10 +26,10 @@ class addObject extends React.Component {
   }
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
-    if (NextProps && NextProps.object) {
-      var { object } = NextProps;
+    if (NextProps && NextProps.objects) {
+      var { objects } = NextProps;
       if (match.params.id_object) {
-        const result = object.find(
+        const result = objects.find(
           (o) => o.id === match.params.id_object
         );
 
@@ -56,7 +56,7 @@ class addObject extends React.Component {
     var { idItem, txtName } =
       this.state;
 
-    var object = {
+    var objects = {
       id: uniqid("object-"),
       name: txtName,
 
@@ -71,8 +71,7 @@ class addObject extends React.Component {
       alert('Sửa thành công');
       history.goBack();
     } else {
-      this.props.onAddItemObject(object);
-      alert('Thêm thành công');
+      this.props.onAddItemObject(objects);
       history.goBack();
     }
   };
@@ -101,7 +100,7 @@ class addObject extends React.Component {
               </Form.Group>
               <Button type="button"
                 className="btn btn-danger"
-                onClick={this.onSubmitForm}
+               
               >
                 <FontAwesomeIcon
                   icon={faPlus}
@@ -119,19 +118,19 @@ class addObject extends React.Component {
 }
 var mapStateToProps = (state) => {
   return {
-    object: state.object,
+    object2: state.object2,
   };
 };
 var mapDispatchToProps = (dispatch, props) => {
   return {
-    onAddItemObject: (size) => {
-      dispatch(actions.onAddObjectResquest(size));
+    onAddItemObject: (object2) => {
+      dispatch(actions.onAddObjectResquest(object2));
     },
     onEditItemObject: (id) => {
       dispatch(actions.onEditObjectResquest(id));
     },
-    onUpdateItemObject: (size) => {
-      dispatch(actions.onUpdateObjectResquest(size));
+    onUpdateItemObject: (object2) => {
+      dispatch(actions.onUpdateObjectResquest(object2));
     },
   };
 };

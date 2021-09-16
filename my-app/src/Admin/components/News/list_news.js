@@ -17,8 +17,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import CallAPI from "../../utils/Callapi";
-import { Button, Form, Col, Container, Row, FormGroup, Label, InputGroup, Modal, Alert, Table } from 'react-bootstrap';
 import * as actions from "./../../../actions/newsAction";
+import { Image } from 'react-bootstrap';
 const fields = ['STT',
     { key: 'id', label: 'Mã Tin Tức' },
     { key: 'title', label: 'Tiêu Đề' },
@@ -89,7 +89,7 @@ class ListNews extends React.Component {
                                             'image':
                                             (item, index) => (
                                                 <td>
-                                                    <img  src={item.image}/>
+                                                    <Image src={item.image} thumbnail />
                                                 </td>
                                             )
                                     }}

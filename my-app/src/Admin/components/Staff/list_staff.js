@@ -31,13 +31,14 @@ const getBadge = (status) => {
   }
 };
 const fields = [
-  "id",
-  "name",
-  "email",
-  "phone",
-  "address",
-  "password",
-  "postion",
+  'STT',
+  { key: 'id', label: 'Mã Nhân Viên' },
+  { key: 'name', label: 'Tên' },
+  { key: 'email', label: 'Gmail' },
+  { key: 'phone', label: 'SĐT' },
+  { key: 'address', label: 'Địa Chỉ' },
+  { key: 'password', label: 'Mật Khẩu' },
+  { key: 'postion', label: 'Chức Vụ' },
   "Hành Động",
 ];
 
@@ -112,6 +113,12 @@ class ListStaffs extends React.Component {
                         </CButton>
                       </td>
                     ),
+                    "STT":
+                      (item, index) => (
+                        <td>
+                          {index + 1}
+                        </td>
+                      )
                   }}
                 />
               </CCardBody>

@@ -25,7 +25,12 @@ import usersData from "../User/UserData";
 //         default: return 'primary'
 //     }
 // }
-const fields = ["index","id", "name", "Hành Động"];
+const fields = [
+  "STT",
+  { key: 'id', label: 'Mã' },
+  { key: 'name', label: 'Tên' },
+   "Hành Động"
+  ];
 
 class ListColor extends React.Component {
   componentDidMount() {
@@ -94,6 +99,12 @@ class ListColor extends React.Component {
                       
                       </td>
                     ),
+                    "STT":
+                      (item, index) => (
+                        <td>
+                          {index + 1}
+                        </td>
+                      )
                   }}
                 />
               </CCardBody>
