@@ -39,8 +39,8 @@ class ListOrder extends React.Component {
   };
     getBadge=(status) => {
       switch (status) {
-          case 0: return 'success'
-          case 1: return 'danger'
+          case 1: return 'success'
+          case 0: return 'danger'
           default: return 'primary'
 
         }
@@ -72,7 +72,7 @@ class ListOrder extends React.Component {
                   scopedSlots={{
                     "Hành Động": (item) => (
                       <td>
-                        <Link to="/admin/system/discount/../edit">
+                        <Link to={`/admin/system/order/${item.id}/edit`}>
                           <CButton type="button" className="btn btn-primary">
                             <FontAwesomeIcon
                               icon={faCheck}
@@ -103,7 +103,7 @@ class ListOrder extends React.Component {
                       <td>
                         <Alert  variant={this.getBadge(item.status)}>
                        
-                        {  item.status===0?'Đã Xác Nhận':'Chưa Xác Nhận'}
+                        {  item.status===0?'Chưa Xác Nhận':'Đã Xác Nhận'}
                         </Alert>
 
                        

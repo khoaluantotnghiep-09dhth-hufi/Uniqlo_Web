@@ -35,9 +35,9 @@ class OrderConfirmed extends React.Component {
   };
   getBadge = (status) => {
     switch (status) {
-      case 0:
-        return "success";
       case 1:
+        return "success";
+      case 0:
         return "danger";
       default:
         return "primary";
@@ -67,7 +67,7 @@ class OrderConfirmed extends React.Component {
                     status: (item) => (
                       <td>
                         <Alert variant={this.getBadge(item.status)}>
-                          {item.status === 0 ? "Đã Xác Nhận" : "Chưa Xác Nhận"}
+                        {  item.status===0?'Chưa Xác Nhận':'Đã Xác Nhận'}
                         </Alert>
                       </td>
                     ),
