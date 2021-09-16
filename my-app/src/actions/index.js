@@ -69,7 +69,7 @@ export const onDeleteUser=(id)=>{
 };
 export const fetchUserRequest = () => {
   return (dispatch) => {
-    return callApi("users", "GET", null).then((response) => {
+    return callApi("customers", "GET", null).then((response) => {
       dispatch(fetchUser(response.data));
 
     });
