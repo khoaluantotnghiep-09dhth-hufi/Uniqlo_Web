@@ -595,3 +595,69 @@ export const onEditSizeResquest = (id) => {
     });
   };
 };
+
+
+//Lấy tất cả danh sách  Bill
+export const fetchBills = (bill) => {
+  return {
+    type: types.FETCH_BILL,
+    bill,
+  };
+};
+
+export const fetchBillResquest = () => {
+  return (dispatch) => {
+    return callApi("bills", "GET", null).then((response) => {
+      dispatch(fetchBills(response.data));
+    });
+  };
+};
+
+//Xóa  Bill
+export const onDeleteBill = (id) => {
+  return {
+    type: types.DELETE_BILL,
+    id,
+  };
+};
+
+export const onDeleteBillResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`bills/${id}`, "DELETE", null).then((response) => {
+      dispatch(onDeleteBill(id));
+    });
+  };
+};
+
+//Cập  Bill
+export const onUpdateBill = (bill) => {
+  return {
+    type: types.UPDATE_BILL,
+    bill,
+  };
+};
+export const onUpdateBillResquest = (bill) => {
+  return (dispatch) => {
+    return callApi(`bills/${bill.id}`, "PUT", bill).then(
+      (response) => {
+        console.log(response);
+        dispatch(onUpdateBill(response.data));
+      }
+    );
+  };
+};
+
+//Sửa Bill
+export const onGetBill = (bill) => {
+  return {
+    type: types.EDIT_BILL,
+    bill,
+  };
+};
+export const onEditBillResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`bills/${id}`, "GET", null).then((response) => {
+      dispatch(onGetBill(response.data));
+    });
+  };
+};

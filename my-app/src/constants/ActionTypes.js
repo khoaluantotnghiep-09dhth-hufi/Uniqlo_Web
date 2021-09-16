@@ -91,3 +91,10 @@ export const ADD_CUSTOMER = 'ADD_CUSTOMER';
 export const UPDATE_CUSTOMER = 'UPDATE_CUSTOMER';
 export const DELETE_CUSTOMER = 'DELETE_CUSTOMER';
 export const EDIT_CUSTOMER = 'EDIT_CUSTOMER ';
+
+//Get Bill For Admin Confirm
+export const FETCH_BILL = 'FETCH_BILL';
+export const ADD_BILL = 'ADD_BILL';
+export const UPDATE_BILL = 'UPDATE_BILL';
+export const DELETE_BILL = 'DELETE_BILL';
+export const EDIT_BILL = 'EDIT_BILL ';

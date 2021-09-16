@@ -6,6 +6,7 @@ import sector from "./Sectors/sector";
 import users from "./Users/users";
 import staff from "./Staffs/staff";
 import color from "./Colors/color";
+import bill from "./Bills/bill";
 import size from "./Sizes/size";
 import category from "./Categories/category";
 import promotion from "./Promotions/promotion";
@@ -24,6 +25,7 @@ const myReducer = combineReducers({
   bills_customer,
   promotion,
   staff,
+  bill,
 });
 
 export default myReducer;
