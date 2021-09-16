@@ -40,4 +40,4 @@ var customer = (state = initialState, action) => {
   }
 };
 
-export default object;
+export default customer;
