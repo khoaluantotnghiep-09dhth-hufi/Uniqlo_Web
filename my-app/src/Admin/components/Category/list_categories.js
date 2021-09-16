@@ -22,7 +22,7 @@ import * as actions from "./../../../actions/categoryActions";
 const fields = ['STT',
     { key: 'id', label: 'Mã Danh Mục' },
     { key: 'name', label: 'Tên Danh Mục' },
-    { key: 'id_sectors', label: 'Mã Loại' },
+    { key: 'nameSector', label: 'Loại' },
     'Thao Tác',
 ]
 

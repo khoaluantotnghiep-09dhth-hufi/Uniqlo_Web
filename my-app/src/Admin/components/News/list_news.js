@@ -24,7 +24,7 @@ const fields = ['STT',
     { key: 'title', label: 'Tiêu Đề' },
     { key: 'date', label: 'Ngày Đăng' },
     // { key: 'description', label: 'Nội Dung' },
-    { key: 'id_staff', label: 'Nhân Viên' },
+    { key: 'nameStaff', label: 'Nhân Viên' },
     { key: 'image', label: 'Ảnh' },
     'Thao Tác',
 ]
@@ -84,6 +84,12 @@ class ListNews extends React.Component {
                                             (item, index) => (
                                                 <td>
                                                     {index + 1}
+                                                </td>
+                                            ),
+                                            'image':
+                                            (item, index) => (
+                                                <td>
+                                                    <img  src={item.image}/>
                                                 </td>
                                             )
                                     }}
