@@ -65,7 +65,7 @@ class updateOrder extends React.Component {
     
     
     var billUpdate = {
-      id: match.params.id_order,
+      id: idItem,
       nameDate: txtDate,
       nameStatus: txtConfirm,
      

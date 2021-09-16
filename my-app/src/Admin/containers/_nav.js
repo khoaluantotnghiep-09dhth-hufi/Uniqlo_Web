@@ -123,7 +123,7 @@ const _nav =  [
   },
   {
     _tag: 'CSidebarNavDropdown',
-    name:  'Danh Sách',
+    name:  'Quản Lý Menu',
     route: '/admin/manage/cate',
     icon: <FontAwesomeIcon icon={faGripHorizontal} className="mr-2" />,
     _children: [
