@@ -34,7 +34,6 @@ class ListColor extends React.Component {
     this.props.fetchColors();
   }
   onDeleteColor = (item) => {
-
     this.props.onDeleteItemColor(item);
   };
   render() {

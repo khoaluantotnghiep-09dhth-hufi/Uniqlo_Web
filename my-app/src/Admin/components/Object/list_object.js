@@ -34,13 +34,11 @@ class ListObject extends React.Component {
         if (confirm('Bạn chắc chắn muốn xóa ?')) { //eslint-disable-line
             this.props.onDeleteItemObject(id);
         }
-        
     };
     render() {
         var { object } = this.props;
         var dataObjects = object.map((item, index) => {
-            console.log(item);
-            return { ...item, index };
+            return { ...item,index};
         });
         return (
             <>

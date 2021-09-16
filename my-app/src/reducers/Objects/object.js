@@ -17,6 +17,7 @@ var object = (state = initialState, action) => {
   switch (action.type) {
     case types.FETCH_OBJECT:
       state = action.object;
+      // return {...state, object: action.payload};
       return [...state];
 
     case types.DELETE_OBJECT:
@@ -37,7 +38,7 @@ var object = (state = initialState, action) => {
         state[index] = object;
       }
       return [...state];
-      
+
     case types.EDIT_OBJECT:
       return action.object;
     default:

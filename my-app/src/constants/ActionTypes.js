@@ -16,12 +16,18 @@ export const DELETE_USER = 'DELETE_USER';
 export const ADD_USER = 'ADD_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const EDIT_USER = 'EDIT_USER';
-// Axios
+// product
 export const FETCH_PRODUCT = 'FETCH_PRODUCT';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 export const EDIT_PRODUCT = 'EDIT_PRODUCT';
+//order
+export const FETCH_ORDER = 'FETCH_ORDER';
+export const ADD_ORDER = 'ADD_ORDER';
+export const UPDATE_ORDER = 'UPDATE_ORDER';
+export const DELETE_ORDER = 'DELETE_ORDER';
+export const EDIT_ORDER = 'EDIT_ORDER';
 
 
 

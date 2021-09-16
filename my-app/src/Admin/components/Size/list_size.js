@@ -10,27 +10,15 @@ import {
   CRow,
   CButton,
 } from "@coreui/react";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTimes, faTools } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import usersData from "../User/UserData";
-
-// const getBadge = status => {
-//     switch (status) {
-//         case 'Active': return 'success'
-//         case 'Inactive': return 'secondary'
-//         case 'Pending': return 'warning'
-//         case 'Banned': return 'danger'
-//         default: return 'primary'
-//     }
-// }
 const fields = [
   "STT",
   { key: 'id', label: 'Mã' },
   { key: 'name', label: 'Tên' },
-   "Hành Động"
-  ];
+  "Hành Động"
+];
 
 class ListColor extends React.Component {
   componentDidMount() {
@@ -43,7 +31,7 @@ class ListColor extends React.Component {
     var { size } = this.props;
 
     var dataSize = size.map((item, index) => {
-      return {...item,index};
+      return { ...item, index };
     });
     return (
       <>
@@ -75,7 +63,7 @@ class ListColor extends React.Component {
                   scopedSlots={{
                     "Hành Động": (item) => (
                       <td>
-                     <Link to={`/admin/manage/size/${item.id}/edit`}>
+                        <Link to={`/admin/manage/size/${item.id}/edit`}>
                           <CButton type="button" className="btn btn-primary">
                             <FontAwesomeIcon
                               icon={faTools}
@@ -85,18 +73,18 @@ class ListColor extends React.Component {
                             Sửa
                           </CButton>
                         </Link>
-                      
-                          <CButton type="button" className="btn btn-warning"
-                            onClick={()=>{this.onDeleteSize(item.id)}}
-                          >
-                            <FontAwesomeIcon
-                              icon={faTimes}
-                              className="mr-2"
-                              size="lg"
-                            />
-                            Xóa
-                          </CButton>
-                      
+
+                        <CButton type="button" className="btn btn-warning"
+                          onClick={() => { this.onDeleteSize(item.id) }}
+                        >
+                          <FontAwesomeIcon
+                            icon={faTimes}
+                            className="mr-2"
+                            size="lg"
+                          />
+                          Xóa
+                        </CButton>
+
                       </td>
                     ),
                     "STT":

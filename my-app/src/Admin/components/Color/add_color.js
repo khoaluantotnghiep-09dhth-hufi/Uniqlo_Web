@@ -32,7 +32,6 @@ class addColor extends React.Component {
   }
   componentDidMount() {
     var { match } = this.props;
-
     this.props.onEditItemColor(match.params.id_color);
   }
   componentWillReceiveProps(NextProps) {

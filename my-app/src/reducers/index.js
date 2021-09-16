@@ -12,7 +12,7 @@ import news from "./News/news";
 import customer from "./Customer/customer";
 import category from "./Categories/category";
 import promotion from "./Promotions/promotion";
-
+import order from "./Order/order";
 import bills_customer from "./Bills_Customer/bills_customer";
 
 const myReducer = combineReducers({
@@ -29,7 +29,8 @@ const myReducer = combineReducers({
   staff,
   bill,
   news,
-  customer
+  customer,
+  order,
 });
 
 export default myReducer;

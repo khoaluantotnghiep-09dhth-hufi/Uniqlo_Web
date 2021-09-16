@@ -15,8 +15,8 @@ import {
     faTimes,
     faTools,
     faInfo,
+    faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import usersData from '../User/UserData';
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import * as actions from "./../../../actions/orderActions";
@@ -53,9 +53,9 @@ class ListOrderProducts extends React.Component {
         });
         return (
             <>
-                <Link to="/admin/manage/order-product/add">
+                <Link to="/admin/manage/order-product">
                     <CButton type="button" className="btn btn-danger">
-                        <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />Lập Đơn Đặt Hàng
+                        <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />Trở Về
                     </CButton>
                 </Link>
                 <CRow>
@@ -80,7 +80,6 @@ class ListOrderProducts extends React.Component {
                                                             <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
                                                         </CButton>
                                                     </Link> : ''}
-                                                    <Link to="/admin/manage/order-product/info">
                                                     <CButton
                                                         type="button"
                                                         className="btn btn-danger"                                                      
@@ -92,7 +91,6 @@ class ListOrderProducts extends React.Component {
                                                         />
                                                         Xem Chi Tiết Đơn
                                                     </CButton>
-                                                    </Link>
                                                 </td>
 
                                             ),

@@ -46,7 +46,6 @@ class addObject extends React.Component {
         const result = object.find(
           (o) => o.id === match.params.id_object
         );
-
         this.setState({
           idItem: result.id,
           txtName: result.name,
@@ -82,10 +81,10 @@ class addObject extends React.Component {
 
     if (idItem) {
       this.props.onUpdateItemObject(objectUpdate);
-      
       history.goBack();
     } else {
       this.props.onAddItemObject(object);
+      alert("Thêm thành công");
       history.goBack();
     }
   };
@@ -107,7 +106,7 @@ class addObject extends React.Component {
                   type="text"
                   id="txtName"
                   name="txtName"
-                  placeholder="Tên màu..."
+                  placeholder="Tên đối tượng..."
                   autoComplete="name"
                   onChange={this.onChange}
                 />
