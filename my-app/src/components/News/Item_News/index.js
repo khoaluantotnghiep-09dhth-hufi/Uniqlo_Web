@@ -1,14 +1,17 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+
 import "./Item_News.scss";
-import { connect } from "react-redux";
-import {Card,Button} from "react-bootstrap";
+
+import {Card} from "react-bootstrap";
+import { NavLink } from "react-router-dom";
+
 
 class index extends Component {
   render() {
       var{ itemNew }=this.props;
     return (
       <React.Fragment>
+      <NavLink to={`/Tin Tức/${itemNew.id}`}>
         <Card className="Adjust_Image" style={{ width: "18rem" }}>
           <Card.Img variant="top" src={itemNew.image} />
           <Card.Body className="text-left">
@@ -20,6 +23,7 @@ class index extends Component {
             {/* <Button variant="primary">Go somewhere</Button> */}
           </Card.Body>
         </Card>
+        </NavLink>
       </React.Fragment>
     );
   }

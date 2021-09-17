@@ -1,0 +1,18 @@
+.Adjust_Image{
+    max-width: 770;
+    max-height:513px;
+    display: flex;
+}
+.Adjust_Text{
+    
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: block;
+    display: -webkit-box;
+    overflow: hidden;
+
+}
+.Adjust_Text_Body{
+    line-height:1.4;
+    text-align: justify;
+}

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import {  Col } from "react-bootstrap";
 import Item_News from "../Item_News/index";
-import { connect } from "react-redux";
+
 
 class index extends Component {
   showListNews = (news) => {

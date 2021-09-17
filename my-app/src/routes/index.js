@@ -5,15 +5,16 @@ import Cart from "./../screens/Screen_Cart/index";
 import CheckOut from "./../screens/Screen_CheckOut/index";
 import Category from "./../screens/Screen_Category/index";
 import Detail_Product from "./../screens/Screen_DetailProduct/index";
+import Detail_News from "./../screens/Screen_DetailNews/index";
 import Search from "./../screens/Screen_Search/index";
 import News from "./../screens/Screen_News/index";
 import Account from "./../screens/Screen_Account/index";
 import NotFound from "./../screens/Screen_NotFound/index";
-import Contact from "./../screens/Screen_Contact/index"
-import Return_Policy from "./../screens/Screen_ReturnPolicy/index"
-import Guide from "./../screens/Screen_Guide/index"
-import Accessibility from "./../screens/Screen_Accessibility/index"
-import Privacy_Policy from "./../screens/Screen_PrivacyPolicy/index"
+import Contact from "./../screens/Screen_Contact/index";
+import Return_Policy from "./../screens/Screen_ReturnPolicy/index";
+import Guide from "./../screens/Screen_Guide/index";
+import Accessibility from "./../screens/Screen_Accessibility/index";
+import Privacy_Policy from "./../screens/Screen_PrivacyPolicy/index";
 
 var routes = [
   {
@@ -89,25 +90,31 @@ var routes = [
     exact: true,
     main: () => <News />,
   },
+
+  {
+    path: "/Tin Tức/:id_news",
+    exact: true,
+    main: ({ match }) => <Detail_News match={match} />,
+  },
   {
     path: "/Nam",
     exact: true,
-    main: () => <Home  />,
+    main: () => <Home />,
   },
   {
     path: "/Nữ",
     exact: true,
-    main: () => <Home  />,
+    main: () => <Home />,
   },
   {
     path: "/Trẻ Em",
     exact: true,
-    main: () => <Home  />,
+    main: () => <Home />,
   },
   {
     path: "/Trẻ Sơ Sinh",
     exact: true,
-    main: () => <Home  />,
+    main: () => <Home />,
   },
   {
     path: "",
