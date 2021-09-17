@@ -164,10 +164,10 @@ export const onEditProductResquest = (id) => {
 
 //Lấy tất cả danh sách Object
 
-export const fetchObject = (objects) => {
+export const fetchObject = (object) => {
   return {
     type: types.FETCH_OBJECT,
-    objects,
+    object,
   };
 };
 
@@ -300,15 +300,15 @@ export const onUpdatePromotionResquest = (promotion) => {
   };
 };
 //cập nhật object
-export const onUpdateObject = (objects) => {
+export const onUpdateObject = (object) => {
   return {
     type: types.UPDATE_OBJECT,
-    objects,
+    object,
   };
 };
-export const onUpdateObjectResquest = (objects) => {
+export const onUpdateObjectResquest = (object) => {
   return (dispatch) => {
-    return callApi(`objects/${objects.id}`, "PUT", objects).then(
+    return callApi(`objects/${object.id}`, "PUT", object).then(
       (response) => {
         dispatch(onUpdateObject(response.data));
       }
@@ -346,10 +346,10 @@ export const onDeleteObjectResquest = (id) => {
   };
 };
 //sửa object 
-export const onGetObject = (objects) => {
+export const onGetObject = (object) => {
   return {
     type: types.EDIT_OBJECT,
-    objects,
+    object,
   };
 };
 export const onEditObjectResquest = (id) => {

@@ -11,20 +11,20 @@ class index extends Component {
       minimumFractionDigits: 0,
     });
     var elementSale =
-      product.desciption === "0" ? (
+      product.percentSale === "0" ? (
         ""
       ) : (
         <span
           class="badge badge-danger"
           style={{ transform: "translateX(190px)" }}
         >
-          {product.desciption}
+          {product.percentSale}
           <i class="fas fa-percent " aria-hidden="true"></i>
         </span>
       );
 
-    if (product.desciption) {
-      var newPrice = (parseInt(product.desciption) / 100) * product.price;
+    if (product.percentSale) {
+      var newPrice = (parseInt(product.percentSale) / 100) * product.price;
     }
 
     var elementNewPrice = newPrice ? (

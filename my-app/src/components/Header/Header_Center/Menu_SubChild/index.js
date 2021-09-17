@@ -18,7 +18,7 @@ class index extends Component {
     
         return (
           <li>
-            <NavLink to={`/product/${name_object}/${name_sectors}/${item.id}`}>
+            <NavLink to={`/product/${name_object}/${name_sectors}/${item.name}`}>
               <a class="dropdown-item">{item.name}</a>
             </NavLink>
           </li>

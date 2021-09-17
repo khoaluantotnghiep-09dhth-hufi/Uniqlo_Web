@@ -6,6 +6,7 @@ import CheckOut from "./../screens/Screen_CheckOut/index";
 import Category from "./../screens/Screen_Category/index";
 import Detail_Product from "./../screens/Screen_DetailProduct/index";
 import Search from "./../screens/Screen_Search/index";
+import News from "./../screens/Screen_News/index";
 import Account from "./../screens/Screen_Account/index";
 import NotFound from "./../screens/Screen_NotFound/index";
 import Contact from "./../screens/Screen_Contact/index"
@@ -83,7 +84,11 @@ var routes = [
     exact: true,
     main: ({ match }) => <Search match={match} />,
   },
-
+  {
+    path: "/news",
+    exact: true,
+    main: () => <News />,
+  },
   {
     path: "",
     exact: false,
