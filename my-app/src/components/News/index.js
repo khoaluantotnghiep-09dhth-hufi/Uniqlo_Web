@@ -1,18 +1,25 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 
 import { connect } from "react-redux";
-import List_News from './List_News/index'
-import * as actions from "./../../actions/index";
+import List_News from "./List_News/index";
+import * as actions from "./../../actions/newsAction";
 class index extends Component {
-  
+  componentDidMount() {
+    this.props.onGetAllNews();
+  }
   render() {
-    
-   
+    var { news } = this.props;
     return (
-      <Container>    
+      <Container>
+        <h4
+          className="font-weight-normal text-center"
+          style={{ marginTop: "10%", marginBottom: "5%" }}
+        >
+          Tin Tức
+        </h4>
         <Row>
-<List_News/>
+          <List_News news={news} />
         </Row>
       </Container>
     );
@@ -20,17 +27,14 @@ class index extends Component {
 }
 var mapStateToProps = (state) => {
   return {
-    products: state.products,
+    news: state.news,
   };
 };
 
 var mapDispatchToProps = (dispatch, props) => {
   return {
-    onAddToCart: (product) => {
-      dispatch(actions.addToCart(product, 1));
-    },
-    onGetAllProduct: () => {
-      dispatch(actions.fetchProductResquest());
+    onGetAllNews: () => {
+      dispatch(actions.fetchNewsResquest());
     },
   };
 };
