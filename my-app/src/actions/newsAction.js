@@ -26,6 +26,7 @@ export const onAddNewsResquest = (news) => {
     return (dispatch) => {
         return callApi("news", "POST", news).then((response) => {
             dispatch(onAddNews(response.data));
+            console.log(response.data);
         });
     };
 };
@@ -61,7 +62,7 @@ export const onDeleteNewsResquest = (id) => {
 };
 export const onGetNew = (news) => {
     return {
-      type: types.EDIT_CATEGORY,
+      type: types.EDIT_NEWS,
       news,
     };
   };

@@ -37,8 +37,8 @@ class ListObject extends React.Component {
     };
     render() {
         var { object } = this.props;
-        var dataObjects = object.map((item, index) => {
-            return { ...item,index};
+        var dataObject = object.map((item, index) => {
+            return { ...item, index };
         });
         return (
             <>
@@ -55,7 +55,7 @@ class ListObject extends React.Component {
                             </CCardHeader>
                             <CCardBody>
                                 <CDataTable
-                                    items={dataObjects}
+                                    items={dataObject}
                                     fields={fields}
                                     itemsPerPage={8}
                                     pagination
@@ -68,14 +68,14 @@ class ListObject extends React.Component {
                                                             <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
                                                         </CButton>
                                                     </Link>
-                                                    {/* <Link to="/admin/system/discount/../delete"> */}
+                                                 
                                                     <CButton type="button"
                                                         className="btn btn-warning"
                                                         onClick={() => { this.onDeleteObject(item.id) }}
                                                     >
                                                         <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
                                                     </CButton>
-                                                    {/* </Link> */}
+                                              
 
                                                 </td>
                                             ),

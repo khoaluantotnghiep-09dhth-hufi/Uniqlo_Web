@@ -117,7 +117,7 @@ class addOrderProduct extends React.Component {
               <CFormGroup>
                 <CLabel htmlFor="exampleFormControlInput1">Ngày Lập</CLabel>
                 <CInput
-                  type="datetime-local"
+                  type="date"
                   id="txtDate"
                   name="txtDate"
                  onChange={this.onChange}

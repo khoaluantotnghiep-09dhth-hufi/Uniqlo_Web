@@ -29,7 +29,12 @@ export const UPDATE_ORDER = 'UPDATE_ORDER';
 export const DELETE_ORDER = 'DELETE_ORDER';
 export const EDIT_ORDER = 'EDIT_ORDER';
 
-
+//order info
+export const FETCH_ORDERINFO = 'FETCH_ORDERINFO';
+export const ADD_ORDERINFO = 'ADD_ORDERINFO';
+export const UPDATE_ORDERINFO = 'UPDATE_ORDERINFO';
+export const DELETE_ORDERINFO = 'DELETE_ORDERINFO';
+export const EDIT_ORDERINFO = 'EDIT_ORDERINFO';
 
 
 export const FETCH_SECTOR_BY_ID = ' FETCH_SECTOR_BY_ID';
@@ -56,12 +61,7 @@ export const ADD_PROMOTION = 'ADD_PROMOTION';
 export const UPDATE_PROMOTION = 'UPDATE_PROMOTION';
 export const DELETE_PROMOTION = 'DELETE_PROMOTION';
 export const EDIT_PROMOTION = 'EDIT_PROMOTION';
-//Get object
-export const FETCH_OBJECT = 'FETCH_OBJECT';
-export const ADD_OBJECT = 'ADD_OBJECT';
-export const UPDATE_OBJECT = 'UPDATE_OBJECT';
-export const DELETE_OBJECT = 'DELETE_OBJECT';
-export const EDIT_OBJECT = 'EDIT_OBJECT';
+
 //Get staff
 export const FETCH_STAFF = 'FETCH_STAFF';
 export const ADD_STAFF = 'ADD_STAFF';
@@ -76,6 +76,12 @@ export const UPDATE_COLOR = 'UPDATE_COLOR';
 export const DELETE_COLOR = 'DELETE_COLOR';
 export const EDIT_COLOR = 'EDIT_COLOR ';
 
+//Get object
+export const FETCH_OBJECT = 'FETCH_OBJECT';
+export const ADD_OBJECT = 'ADD_OBJECT';
+export const UPDATE_OBJECT = 'UPDATE_OBJECT';
+export const DELETE_OBJECT = 'DELETE_OBJECT';
+export const EDIT_OBJECT = 'EDIT_OBJECT';
 //Get size
 export const FETCH_SIZE = 'FETCH_SIZE';
 export const ADD_SIZE = 'ADD_SIZE';
@@ -103,3 +109,4 @@ export const ADD_BILL = 'ADD_BILL';
 export const UPDATE_BILL = 'UPDATE_BILL';
 export const DELETE_BILL = 'DELETE_BILL';
 export const EDIT_BILL = 'EDIT_BILL ';
+

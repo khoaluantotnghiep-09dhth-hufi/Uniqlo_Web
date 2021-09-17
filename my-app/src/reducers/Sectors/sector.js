@@ -8,7 +8,6 @@ var findIndex = (sector, id) => {
   sector.forEach((sector, index) => {
     if (sector.id === id) {
       rs = index;
-
     }
   });
   return rs;
@@ -20,9 +19,8 @@ var sector = (state = initialState, action) => {
     //Lấy Tất cả Danh Sách Danh Mục
     case types.FETCH_SECTOR:
       state = action.sector;
-
       return [...state];
-
+      
     case types.DELETE_SECTOR:
       index = findIndex(state, id);
       state.slice(index, 1);

@@ -3,13 +3,13 @@ import callApi from "./../Admin/utils/Callapi";
 export const fetchObjects = (object) => {
   return {
     type: types.FETCH_OBJECT,
-    object,
+     object,
   };
 };
 
 export const fetchObjectsResquest = () => {
-  return (dispatch) => {
-    return callApi("objects", "GET", null).then((response) => {
+  return async (dispatch) => {
+    return await callApi("objects", "GET", null).then((response) => {
       dispatch(fetchObjects(response.data));
     });
   };
@@ -31,14 +31,14 @@ export const onDeleteObjectsResquest = (id) => {
   };
 };
 //Thêm objects
-export const onAddObjects = object => {
+export const onAddObjects = (object) => {
   return {
     type: types.ADD_OBJECT,
     object,
   };
 };
 
-export const onAddObjectsResquest = object => {
+export const onAddObjectsResquest = (object) => {
   return (dispatch) => {
     return callApi("objects", "POST", object).then((response) => {
       console.log(response);

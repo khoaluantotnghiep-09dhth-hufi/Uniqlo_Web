@@ -36,15 +36,15 @@ class addObject extends React.Component {
   componentDidMount() {
     var { match } = this.props;
 
-    this.props.onEditItemObject(match.params.id_object);
+    this.props.onEditItemObject(match.params.id);
   }
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
     if (NextProps && NextProps.object) {
       var { object } = NextProps;
-      if (match.params.id_object) {
+      if (match.params.id) {
         const result = object.find(
-          (o) => o.id === match.params.id_object
+          (o) => o.id === match.params.id
         );
         this.setState({
           idItem: result.id,
@@ -75,7 +75,7 @@ class addObject extends React.Component {
 
     };
     var objectUpdate = {
-      id: match.params.id_object,
+      id: match.params.id,
       name: txtName,
     };
 

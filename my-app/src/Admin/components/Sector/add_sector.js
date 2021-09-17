@@ -10,18 +10,18 @@ import { connect } from "react-redux";
 import uniqid from 'uniqid';
 import { Button, Form, Col, Container, Row } from 'react-bootstrap';
 import * as actions from "./../../../actions/sectorsActions";
+import * as actionsObject from "./../../../actions/objectAction";
 class AddSector extends React.Component {
     constructor(props) {
         super(props);
         this.setState({
             idItem: "",
             txtName: "",
-            id_object: "",
+            idobject:"",
         });
     }
     componentDidMount() {
         var { match } = this.props;
-
         this.props.onEditItemSector(match.params.idItem);
     }
     componentWillReceiveProps(NextProps) {
@@ -54,17 +54,17 @@ class AddSector extends React.Component {
 
         event.preventDefault();
         var { history } = this.props;
-        var { idItem, txtName, idObject } = this.state;
+        var { idItem, txtName, idobject } = this.state;
 
         var sector = {
             id: uniqid("sector-"),
             name: txtName,
-            id_object: idObject,
+            id_object: idobject,
         };
         var sectorUpdate = {
-            id: idItem,
+            id: match.params.id_sectors,
             name: txtName,
-            id_object: idObject,
+            id_object: idobject,
         };
 
         if (idItem) {
@@ -78,7 +78,7 @@ class AddSector extends React.Component {
         }
     };
     render() {
-
+       var data = this.props.fetchObjects();
         return (
             <Container fluid>
                 <Row>
@@ -104,19 +104,19 @@ class AddSector extends React.Component {
                                 </Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicObject">
-                                <Form.Select aria-label="Default select example" name="idObject"
+                                <Form.Select value="object-1" aria-label="Default select example" name="idObject"
                                     onChange={this.onChange}
                                    
                                 >
-                                    {/* <option optionDisable="true">Chọn Đối Tượng</option>
+                                  
                                     {data.map((option, i) => (
 
                                         <option value={option.id} key={i}>{option.name}</option>
-                                    ))} */}
-                                    <option value="object-1">Nam</option>
+                                    ))}
+                                    {/* <option value="object-1">Nam</option>
                                     <option value="object-2">Nữ</option>
                                     <option value="object-3">Trẻ Em</option>
-                                    <option value="object-4">Trẻ Sơ Sinh</option>
+                                    <option value="object-4">Trẻ Sơ Sinh</option> */}
                                 </Form.Select>
 
                             </Form.Group>
@@ -142,12 +142,16 @@ class AddSector extends React.Component {
 var mapStateToProps = (state) => {
     return {
         sector: state.sector,
+        object: state.object,
     };
 };
 var mapDispatchToProps = (dispatch, props) => {
     return {
         onAddItemSector: (sector) => {
             dispatch(actions.onAddSectorResquest(sector));
+        },
+        fetchObjects: () => {
+            return dispatch(actionsObject.fetchObjectsResquest());
         },
         onEditItemSector: (id) => {
             dispatch(actions.onEditSectorResquest(id));
