@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Nav } from "react-bootstrap";
 import MenuChild from "./../Menu_Child/index";
+import { NavLink } from "react-router-dom";
 
 import { connect } from "react-redux";
 import * as actions from "./../../../../actions/index";
@@ -9,7 +10,9 @@ class index extends Component {
     this.props.onGetAllObject();
     this.props.onGetAllSector();
   }
-
+  onClick = (event) => {
+    event.preventDefault();
+  };
   showListObject(object) {
     var result = null;
 
@@ -17,17 +20,22 @@ class index extends Component {
       return (
         <li class="nav-item dropdown ">
           {" "}
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            id="navbarDropdownMenuLink"
-            role="button"
-            data-mdb-toggle="dropdown"
-            aria-expanded="false"
-          >
-            {item.name}
-            <MenuChild id_object={item.id} name_object={item.name}></MenuChild>
-          </a>{" "}
+          <NavLink to={`/${item.name}`}>
+            <a
+              class="nav-link dropdown-toggle"
+              href="javascript:void(0);"
+              id="navbarDropdownMenuLink"
+              role="button"
+              data-mdb-toggle="dropdown"
+              aria-expanded="false"
+            >
+              {item.name}
+              <MenuChild
+                id_object={item.id}
+                name_object={item.name}
+              ></MenuChild>
+            </a>{" "}
+          </NavLink>
         </li>
       );
     });

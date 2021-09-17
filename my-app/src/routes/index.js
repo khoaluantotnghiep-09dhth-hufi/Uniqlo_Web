@@ -85,9 +85,29 @@ var routes = [
     main: ({ match }) => <Search match={match} />,
   },
   {
-    path: "/news",
+    path: "/Tin Tức",
     exact: true,
     main: () => <News />,
+  },
+  {
+    path: "/Nam",
+    exact: true,
+    main: () => <Home  />,
+  },
+  {
+    path: "/Nữ",
+    exact: true,
+    main: () => <Home  />,
+  },
+  {
+    path: "/Trẻ Em",
+    exact: true,
+    main: () => <Home  />,
+  },
+  {
+    path: "/Trẻ Sơ Sinh",
+    exact: true,
+    main: () => <Home  />,
   },
   {
     path: "",

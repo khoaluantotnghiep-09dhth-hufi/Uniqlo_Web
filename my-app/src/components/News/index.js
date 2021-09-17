@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
 import { connect } from "react-redux";
-
+import List_News from './List_News/index'
 import * as actions from "./../../actions/index";
 class index extends Component {
   
   render() {
-    var { match, products } = this.props;
-    var getName = match.params.input_Search;
+    
    
     return (
-      <Container>
-        <h4 className="font-weight-normal" style={{marginTop:'10%',marginBottom:'5%'}}>Tìm kết quả với từ khóa "{getName}"...</h4>
-        <Row>{this.showListProduct(products, getName)}</Row>
+      <Container>    
+        <Row>
+<List_News/>
+        </Row>
       </Container>
     );
   }
