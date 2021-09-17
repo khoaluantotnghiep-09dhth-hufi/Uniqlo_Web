@@ -1,9 +1,14 @@
 .Adjust_Text{
     
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     display: block;
     display: -webkit-box;
     overflow: hidden;
 
+}
+.Adjust_Image{
+    // max-width: 288px;
+    // max-height:217px;
+    // object-fit: cover;
 }

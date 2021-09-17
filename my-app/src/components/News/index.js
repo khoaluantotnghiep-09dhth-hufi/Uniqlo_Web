@@ -12,13 +12,13 @@ class index extends Component {
     var { news } = this.props;
     return (
       <Container>
-        <h4
+        <h2
           className="font-weight-normal text-center"
           style={{ marginTop: "10%", marginBottom: "5%" }}
         >
           Tin Tức
-        </h4>
-        <Row>
+        </h2>
+        <Row style={{justifyContent: "center"}}>
           <List_News news={news} />
         </Row>
       </Container>

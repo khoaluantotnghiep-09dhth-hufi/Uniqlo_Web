@@ -9,7 +9,7 @@ class index extends Component {
 
     result = news.map((item, index) => {
       return (
-        <Col lg="4" className="mt-4">
+        <Col lg="3"  className="mt-4 mr-2" style={{padding:"0",margin:"0"}}>
           <Item_News key={item.id} itemNew={item} />
         </Col>
       );
