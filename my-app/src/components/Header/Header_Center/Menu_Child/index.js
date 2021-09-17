@@ -38,7 +38,7 @@ class index extends Component {
   }
   render() {
     var { sector, id_object, name_object } = this.props;
-    console.log($("#id_Sector").children("li"));
+    // console.log($("#id_Sector").children("li"));
     return (
       <React.Fragment>
         {$("#id_Sector").children("li") ? (

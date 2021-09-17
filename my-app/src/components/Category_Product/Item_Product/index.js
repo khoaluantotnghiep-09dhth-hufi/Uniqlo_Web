@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Card, Button } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 class index extends Component {
   render() {
@@ -50,16 +51,19 @@ class index extends Component {
 
     return (
       <Card>
+       <NavLink to={`/product/${product.id}`}>
         <Card.Img variant="top" src={product.image} />
         {elementSale}
+        </NavLink>
         <Card.Body>
-          <Card.Title>{product.name_product}</Card.Title>
+         
+            <Card.Title>{product.name_product}</Card.Title>
 
-          <Card.Text className="text-left">
-            {elementPrice}
-            {elementNewPrice}
-          </Card.Text>
-
+            <Card.Text className="text-left">
+              {elementPrice}
+              {elementNewPrice}
+            </Card.Text>
+         
           <Button
             variant="dark"
             style={{ width: "100%" }}

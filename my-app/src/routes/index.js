@@ -76,7 +76,7 @@ var routes = [
   },
 
   {
-    path: "/category/:name",
+    path: "/product/:id_product",
     exact: true,
     main: ({ match }) => <Detail_Product match={match} />,
   },
