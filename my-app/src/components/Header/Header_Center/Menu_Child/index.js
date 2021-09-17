@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import $ from "jquery";
 import MenuSubChild from "./../Menu_SubChild/index";
 
 import { connect } from "react-redux";
@@ -8,34 +8,58 @@ class index extends Component {
   componentDidMount() {
     this.props.onGetAllObject();
     this.props.onGetAllSector();
+    var object = this.refs.id_Sector;
   }
 
-  showListSector(sector, id_object,name_object) {
+  showListSector(sector, id_object, name_object) {
     var result = null;
     result = sector
       .filter((item) => item.id_object === id_object)
       .map((item, index) => {
-        return (
-          <li>
-            <a class="dropdown-item">{item.name}</a>
+        if (item) {
+          return (
+            <li id="id_SectorLi">
+              <a class="dropdown-item">{item.name}</a>
 
-            <MenuSubChild id_sectors={item.id} name_object={name_object} name_sectors={item.name} />
-          </li>
-        );
+              <MenuSubChild
+                id_sectors={item.id}
+                name_object={name_object}
+                name_sectors={item.name}
+              />
+            </li>
+          );
+        }
+        else{
+          return ''
+        }
       });
 
     return result;
   }
   render() {
-    var { sector, id_object,name_object } = this.props;
+    var { sector, id_object, name_object } = this.props;
+    console.log($("#id_Sector").children("li"));
     return (
       <React.Fragment>
-        <ul
-          class="dropdown-menu dropdown--one"
-          aria-labelledby="navbarDropdownMenuLink"
-        >
-          {this.showListSector(sector, id_object,name_object)}
-        </ul>
+        {$("#id_Sector").children("li") ? (
+          <ul
+            id="id_Sector"
+            class="dropdown-menu dropdown--one"
+            aria-labelledby="navbarDropdownMenuLink"
+          >
+            {this.showListSector(sector, id_object, name_object)}
+          </ul>
+        ) : (
+          <ul
+            id="id_Sector"
+            class="dropdown-menu dropdown--one"
+            aria-labelledby="navbarDropdownMenuLink"
+          >
+            {this.showListSector(sector, id_object, name_object) === ""
+              ? ""
+              : this.showListSector(sector, id_object, name_object)}
+          </ul>
+        )}
       </React.Fragment>
     );
   }
