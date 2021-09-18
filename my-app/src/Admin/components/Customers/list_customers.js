@@ -10,11 +10,7 @@ import {
   CButton,
 } from '@coreui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faPlus,
-  faTimes,
-  faTools,
-} from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faTimes, faTools } from "@fortawesome/free-solid-svg-icons";
 import * as actions from "./../../../actions/index";
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
@@ -28,20 +24,9 @@ const getBadge = (status) => {
   }
 };
 
-// const fields = ['STT',
-//   { key: 'id', label: 'Mã Nhân Viên' },
-//   { key: 'name', label: 'Tên Khách Hàng' },
-//   { key: 'address', label: 'Địa Chỉ' },
-//   { key: 'phone', label: 'SĐT' },
-//   { key: 'img', label: 'Ảnh' },
-//   { key: 'password', label: 'Mật Khẩu' },
-//   { key: 'email', label: 'Gmail' },
-//   'Thao Tác',
-// ]
-
 const fields = [
   'STT',
-  { key: 'id', label: 'Mã' },
+  { key: 'id', label: 'Mã Khách Hàng' },
   { key: 'name', label: 'Tên' },
   { key: 'address', label: 'Địa Chỉ' },
   { key: 'phone', label: 'SĐT' },
@@ -62,7 +47,7 @@ class ListCustomers extends React.Component {
 
   render() {
     var { customer } = this.props;
-    var data = customer.map((item, index) => {
+    var dataCustomer = customer.map((item, index) => {
       return item;
     });
     return (
@@ -81,7 +66,7 @@ class ListCustomers extends React.Component {
               </CCardHeader>
               <CCardBody>
                 <CDataTable
-                  items={data}
+                  items={dataCustomer}
                   fields={fields}
                   itemsPerPage={8}
                   pagination
@@ -105,7 +90,9 @@ class ListCustomers extends React.Component {
                           </Link>
 
                           <CButton type="button"
-                            onClick={() => { this.onDeleteCustomer(item.id) }}
+                            onClick={() => {
+                            this.onDeleteCustomer(item.id);
+                            }}
                             className="btn btn-warning">
                             <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
                           </CButton>
@@ -125,7 +112,7 @@ class ListCustomers extends React.Component {
           </CCol>
         </CRow>
       </>
-    )
+    );
   }
 }
 var mapStateToProps = (state) => {
@@ -139,8 +126,8 @@ var mapDispatchToProps = (dispatch, props) => {
       return dispatch(actions.fetchCustomerResquest());
     },
     onDeleteItemCustomer: (id) => {
-      return dispatch(actions.onDeleteCustomerResquest(id))
-    }
+      return dispatch(actions.onDeleteCustomerResquest(id));
+    },
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ListCustomers);

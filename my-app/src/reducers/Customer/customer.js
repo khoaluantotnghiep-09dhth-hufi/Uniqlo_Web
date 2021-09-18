@@ -3,13 +3,13 @@ import * as types from "./../../constants/ActionTypes";
 var initialState = [];
 
 var findIndex = (customer, id) => {
-  var rs = -1;
-  customer.forEach((customer, index) => {
-    if (customer.id === id) {
-      rs = index;
+  var result = -1;
+  customer.forEach((item, index) => {
+    if (item.id === id) {
+      result = index;
     }
   });
-  return rs;
+  return result;
 }
 var customer = (state = initialState, action) => {
   var index = -1;
@@ -22,7 +22,7 @@ var customer = (state = initialState, action) => {
     //Xoá Khách Hàng
     case types.DELETE_CUSTOMER:
       index = findIndex(state, id);
-      state.slice(index, 1);
+      state.splice(index, 1);
       return [...state];
     //Thêm Khách Hàng
     case types.ADD_CUSTOMER:

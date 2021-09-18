@@ -824,22 +824,23 @@ export const onAddCustomerResquest = (customer) => {
   };
 };
 
-export const onUpdateCustomer = (customer) => {
+export const onUpdateCustomers = (customer) => {
   return {
-      type: types.UPDATE_CUSTOMER,
-      customer,
+    type: types.UPDATE_CUSTOMER,
+    customer,
   };
 };
 
-export const onUpdateCustomerResquest = (customer) => {
+export const onUpdateCustomersResquest = (customer) => {
   return (dispatch) => {
-      return callApi(`customers/${customer.id}`, "PUT", customer).then(
-          (response) => {
-              dispatch(onUpdateCustomer(response.data));
-          }
-      );
+    return callApi(`customers/${customer.id}`, "PUT", customer).then(
+      (response) => {
+        dispatch(onUpdateCustomers(response.data));
+      }
+    );
   };
 };
+
 export const onDeleteCustomer = (id) => {
   return {
       type: types.DELETE_CUSTOMER,

@@ -26,15 +26,15 @@ class AddCustomer extends React.Component {
   componentDidMount() {
     var { match } = this.props;
 
-    this.props.onEditItemCustomer(match.params.idItem);
+    this.props.onEditItemCustomer(match.params.id_customer);
   }
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
     if (NextProps && NextProps.customer) {
       var { customer } = NextProps;
-      if (match.params.idItem) {
+      if (match.params.id_customer) {
         const result = customer.find(
-          (o) => o.id === match.params.idItem
+          (o) => o.id === match.params.id_customer
         );
 
         this.setState({
@@ -66,7 +66,7 @@ class AddCustomer extends React.Component {
 
     var customer = {
       id: uniqid("customer-"),
-      name: name,
+      nameCustomer: name,
       address: address,
       phone: phone,
       image: image,
@@ -74,8 +74,8 @@ class AddCustomer extends React.Component {
       email: email,
     };
     var customerUpdate = {
-      id: idItem,
-      name: name,
+      id: match.params.id_customer,
+      nameCustomer: name,
       address: address,
       phone: phone,
       image: image,
@@ -104,7 +104,7 @@ class AddCustomer extends React.Component {
             </Button>
           </Link>
           <Col sm="12">
-            <Form action="" method="post" onSubmit={this.onSubmitForm}>
+            <Form onSubmit={this.onSubmitForm}>
               <Form.Group className="mb-3" controlId="formBasicObject">
                 <Form.Label>Tên Khách Hàng</Form.Label>
                 <Form.Control
@@ -112,7 +112,7 @@ class AddCustomer extends React.Component {
                   type="text"
                   placeholder="Nhập tên..."
                   name="name"
-
+                  id="name"
                   onChange={this.onChange} />
                 <Form.Control.Feedback
                   type="invalid" >
@@ -126,6 +126,7 @@ class AddCustomer extends React.Component {
                   type="text"
                   placeholder="Nhập địa chỉ..."
                   name="address"
+                  id="address"
                   onChange={this.onChange} />
 
               </Form.Group>
@@ -136,6 +137,7 @@ class AddCustomer extends React.Component {
                   type="text"
                   placeholder="Nhập số điện thoại..."
                   name="phone"
+                  id="phone"
                   onChange={this.onChange} />
 
               </Form.Group>
@@ -144,7 +146,7 @@ class AddCustomer extends React.Component {
                 <Form.Control
                   required
                   type="file"
-                
+                  id="name"
                   name="image"
                   onChange={this.onChange} />
 
@@ -156,6 +158,7 @@ class AddCustomer extends React.Component {
                   type="password"
                   placeholder="Mật khẩu..."
                   name="password"
+                  id="password"
                   onChange={this.onChange} />
 
               </Form.Group>
@@ -166,6 +169,7 @@ class AddCustomer extends React.Component {
                   type="email"
                   placeholder="Gmail..."
                   name="email"
+                  id="email"
                   onChange={this.onChange} />
 
               </Form.Group>
@@ -190,7 +194,7 @@ class AddCustomer extends React.Component {
 }
 var mapStateToProps = (state) => {
   return {
-    news: state.news,
+    customer: state.customer,
   };
 };
 var mapDispatchToProps = (dispatch, props) => {
@@ -202,7 +206,7 @@ var mapDispatchToProps = (dispatch, props) => {
       dispatch(actions.onEditCustomerResquest(id));
     },
     onUpdateItemCustomer: (customer) => {
-      dispatch(actions.onUpdateCustomerResquest(customer));
+      dispatch(actions.onUpdateCustomersResquest(customer));
     },
   };
 };

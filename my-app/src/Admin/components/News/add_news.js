@@ -99,7 +99,7 @@ class AddNews extends React.Component {
             </Button>
           </Link>
           <Col sm="12">
-            <Form action="" method="post" onSubmit={this.onSubmitForm}>
+            <Form onSubmit={this.onSubmitForm}>
               <Form.Group className="mb-3" controlId="formBasicObject">
                 <Form.Label>Tiêu Đề</Form.Label>
                 <Form.Control
