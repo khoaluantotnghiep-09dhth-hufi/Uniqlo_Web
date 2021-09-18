@@ -33,9 +33,7 @@ const myReducer = combineReducers({
   news,
   customer,
   order,
-
   products_category,
-
   order_info,
 
 });
