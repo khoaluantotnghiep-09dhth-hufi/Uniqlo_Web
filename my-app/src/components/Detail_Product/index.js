@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import $ from "jquery";
 import {
   Container,
   Row,
@@ -126,7 +127,12 @@ class index extends Component {
 
     return result;
   };
-
+  onClickColor = (nameColor, obj) => {
+    // $(`"#${nameColor}"`).addClass("active");
+    console.log(nameColor);
+    console.log(this.refs);
+    console.log(`"#${nameColor}"`);
+  };
   ShowColor = (products, id_product) => {
     var result = null;
     result = products
@@ -134,8 +140,17 @@ class index extends Component {
       .map((product, index) => {
         return (
           <React.Fragment>
-            <Col lg="4" style={{paddingRight:"0"}}>
-              <Button variant="outline-secondary" size="sm">
+            <Col lg="4" style={{ paddingRight: "0" }}>
+              <Button
+              type="button"
+                id={`${product.nameColor}`}
+                ref={product.nameColor}
+                variant="outline-secondary"
+                size="sm"
+                onClick={() => {
+                  this.onClickColor(this, product.nameColor);
+                }}
+              >
                 {product.nameColor}
               </Button>
             </Col>
@@ -177,11 +192,12 @@ class index extends Component {
         <Container>
           <Row className="mt-4">
             {this.showDetailProduct(products_category, id_product)}
-            <Col className="ml-4"  style={{ backgroundColor: "#ECECEC" }}>
+            <Col className="ml-4" style={{ backgroundColor: "#ECECEC" }}>
               <p className="font-weight-bold " style={{ marginTop: "50px" }}>
                 Màu:
               </p>
               <Row>{this.ShowColor(products, id_product)}</Row>
+
               <p className="font-weight-bold mt-5">Kích Cỡ:</p>
               <Row>{this.ShowSize(products, id_product)}</Row>
               <h5 style={{ marginTop: "11px" }}>
