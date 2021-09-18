@@ -134,12 +134,10 @@ class index extends Component {
       .map((product, index) => {
         return (
           <React.Fragment>
-            <Col lg="4">
-              
-                <Button variant="outline-secondary" size="sm">
-                  {product.nameColor}
-                </Button>
-         
+            <Col lg="4" style={{paddingRight:"0"}}>
+              <Button variant="outline-secondary" size="sm">
+                {product.nameColor}
+              </Button>
             </Col>
           </React.Fragment>
         );
@@ -155,11 +153,13 @@ class index extends Component {
         return (
           <React.Fragment>
             <Col lg="3">
-        
-                <Button variant="outline-secondary" size="sm">
-                  {product.nameSize}
-                </Button>
-            
+              <Button
+                style={{ margin: "0" }}
+                variant="outline-secondary"
+                size="sm"
+              >
+                {product.nameSize}
+              </Button>
             </Col>
           </React.Fragment>
         );
@@ -177,15 +177,16 @@ class index extends Component {
         <Container>
           <Row className="mt-4">
             {this.showDetailProduct(products_category, id_product)}
-            <Col className="ml-4" lg="3" style={{ backgroundColor: "#ECECEC" }}>
+            <Col className="ml-4"  style={{ backgroundColor: "#ECECEC" }}>
               <p className="font-weight-bold " style={{ marginTop: "50px" }}>
                 Màu:
               </p>
               <Row>{this.ShowColor(products, id_product)}</Row>
               <p className="font-weight-bold mt-5">Kích Cỡ:</p>
               <Row>{this.ShowSize(products, id_product)}</Row>
-              <h5 style={{ marginTop: "40px" }}>--------------------------------------------</h5>
-
+              <h5 style={{ marginTop: "11px" }}>
+                --------------------------------------------------------
+              </h5>
             </Col>
           </Row>
         </Container>
