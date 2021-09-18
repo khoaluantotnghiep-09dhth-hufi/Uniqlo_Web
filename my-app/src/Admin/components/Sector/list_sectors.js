@@ -30,6 +30,7 @@ const fields = ['STT',
 class ListSector extends React.Component {
     componentDidMount() {
         this.props.fetchSectors();
+        console.log("sector", this.props.fetchSectors());
     }
     onDeleteSector = (id) => {
         this.props.onDeleteItemSector(id);
@@ -38,8 +39,9 @@ class ListSector extends React.Component {
         var { sector } = this.props;
         var data = sector.map((item, index) => {
             return { ...item, index };
+
         });
-      
+        console.log(data);
         return (
             <>
                 <Link to="/admin/manage/sector/add">

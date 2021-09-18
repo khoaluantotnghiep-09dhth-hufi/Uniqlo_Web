@@ -22,15 +22,15 @@ class AddCategory extends React.Component {
     componentDidMount() {
         var { match } = this.props;
 
-        this.props.onEditItemCategory(match.params.idItem);
+        this.props.onEditItemCategory(match.params.id_category);
     }
     componentWillReceiveProps(NextProps) {
         var { match } = this.props;
         if (NextProps && NextProps.category) {
             var { category } = NextProps;
-            if (match.params.idItem) {
+            if (match.params.id_category) {
                 const result = category.find(
-                    (o) => o.id === match.params.idItem
+                    (o) => o.id === match.params.id_category
                 );
 
                 this.setState({
@@ -58,13 +58,13 @@ class AddCategory extends React.Component {
 
         var category = {
             id: uniqid("category-"),
-            name: txtName,
-            idSector: id_sector,
+            nameCategory: txtName,
+            id_sector: id_sector,
         };
         var categoryUpdate = {
             id: match.params.id_category,
-            name: txtName,
-            idSector: id_sector,
+            nameCategory: txtName,
+            id_sector: id_sector,
         };
 
         if (idItem) {
@@ -104,38 +104,46 @@ class AddCategory extends React.Component {
                                 </Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicObject">
-                                <Form.Select aria-label="Default select example" name="id_sector"
+                                {/* <Form.Select aria-label="Default select example" name="id_sector"
                                     value={this.setState.id_sector}
                                     onChange={this.onChange}
 
-                                >
-                                    {/* <option optionDisable="true">Chọn Đối Tượng</option>
+                                > */}
+                                {/* <option optionDisable="true">Chọn Đối Tượng</option>
                                     {data.map((option, i) => (
 
                                         <option value={option.id} key={i}>{option.name}</option>
                                     ))} */}
-                                    <option value="selector-1">Hàng Mới</option>
+                                {/* <option value="selector-1">Hàng Mới</option>
                                     <option value="selector-2">Đặc Biệt</option>
                                     <option value="selector-3">Giảm Giá</option>
+                                     */}
 
-                                </Form.Select>
+                                <Form.Control
+                                    required
+                                    type="text"
+                                    placeholder="Nhập tên đối tượng cần thêm..."
+                                    name="id_sector"
+                                    value="selector-1"
+                                    onChange={this.onChange} />
+                            {/* </Form.Select> */}
 
-                            </Form.Group>
-                            {/* <Link to="/admin/manage/objects" > */}
-                            <Button type="button"
-                                className="btn btn-danger"
-                                onClick={this.onSubmitForm}
-                            >
-                                <FontAwesomeIcon
-                                    icon={faPlus}
-                                    className="mr-2"
-                                    size="lg" />Lưu
-                            </Button>
-                            {/* </Link> */}
-                        </Form>
-                    </Col>
-                </Row>
-            </Container>
+                        </Form.Group>
+                        {/* <Link to="/admin/manage/objects" > */}
+                        <Button type="button"
+                            className="btn btn-danger"
+                            onClick={this.onSubmitForm}
+                        >
+                            <FontAwesomeIcon
+                                icon={faPlus}
+                                className="mr-2"
+                                size="lg" />Lưu
+                        </Button>
+                        {/* </Link> */}
+                    </Form>
+                </Col>
+            </Row>
+            </Container >
         )
     }
 

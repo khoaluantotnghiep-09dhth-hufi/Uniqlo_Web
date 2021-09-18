@@ -19,14 +19,10 @@ var sector = (state = initialState, action) => {
     case types.FETCH_SECTOR:
       state = action.sector;
       return [...state];
-    // case types.FETCH_OBJECT:
-    //   let coppyState = { ...state };
-    //   coppyState.objectArr = action.data;
-    //   console.log("log coppy state", coppyState);
-    //   return { ...coppyState };
+
     case types.DELETE_SECTOR:
       index = findIndex(state, id);
-      state.slice(index, 1);
+      state.splice(index, 1);
       return [...state];
     case types.ADD_SECTOR:
       state.push(action.sector);

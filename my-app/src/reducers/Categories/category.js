@@ -21,7 +21,7 @@ var category = (state = initialState, action) => {
       return [...state];
     case types.DELETE_CATEGORY:
       index = findIndex(state, id);
-      state.slice(index, 1);
+      state.splice(index, 1);
       return [...state];
     case types.ADD_CATEGORY:
       console.log(action.category);

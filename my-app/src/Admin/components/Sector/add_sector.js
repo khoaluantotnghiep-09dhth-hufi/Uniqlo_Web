@@ -8,29 +8,37 @@ import CallAPI from '../../utils/Callapi';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import uniqid from 'uniqid';
-import { Button, Form, Col, Container, Row } from 'react-bootstrap';
+import { Button, Form, Col, Container, Row, Select } from 'react-bootstrap';
 import * as actions from "./../../../actions/index";
-
+let isLoadingExternally = false;
 class AddSector extends React.Component {
     constructor(props) {
         super(props);
         this.setState({
             idItem: "",
             txtName: "",
-            id_object: "",
+            id_object: [],
         });
     }
     componentDidMount() {
         var { match } = this.props;
-        this.props.onEditItemSector(match.params.idItem);
+        isLoadingExternally = true;
+        this.props.onEditItemSector(match.params.id_sector);
+        this.setState({
+            ib_object: this.props.fetchObjects()
+        })
+
+    }
+    handleChange(selectedOption) {
+        this.setState({ selectedOption });
     }
     componentWillReceiveProps(NextProps) {
         var { match } = this.props;
         if (NextProps && NextProps.sector) {
             var { sector } = NextProps;
-            if (match.params.idItem) {
+            if (match.params.id_sector) {
                 const result = sector.find(
-                    (o) => o.id === match.params.idItem
+                    (o) => o.id === match.params.id_sector
                 );
 
                 this.setState({
@@ -78,7 +86,12 @@ class AddSector extends React.Component {
         }
     };
     render() {
-        console.log(this.props.object);
+        var { object } = this.props;
+        var data = object.map((item, index) => {
+            return { ...item, index };
+
+        });
+        console.log(data);
         return (
             <Container fluid>
                 <Row>
@@ -104,20 +117,22 @@ class AddSector extends React.Component {
                                 </Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicObject">
-                                <Form.Select aria-label="Default select example" name="id_object"
+                                <Form.Select name="form-field-name"
                                     value={this.setState.id_object}
-                                    onChange={this.onChange}
+                                    onChange={this.handleChange}
+                                    labelKey={'Tên'}
+                                    valueKey={'Mã'}
+                                    isLoading={isLoadingExternally}
+                                    options={this.setState.ib_object}
                                 >
 
-                                    {/* {data.map((option, i) => (
-
-                                        <option value={option.id} key={i}>{option.name}</option>
-                                    ))} */}
-                                    <option value="object-1">Nam</option>
-                                    <option value="object-2">Nữ</option>
-                                    <option value="object-3">Trẻ Em</option>
-                                    <option value="object-4">Trẻ Sơ Sinh</option>
+                                    {object.map((option) => (
+                                        <option value={option.id}>{option.name}</option>
+                                       
+                                    ))}
+                                     console.log(object.map);
                                 </Form.Select>
+
 
                             </Form.Group>
                             {/* <Link to="/admin/manage/objects" > */}
@@ -149,6 +164,9 @@ var mapDispatchToProps = (dispatch, props) => {
     return {
         onAddItemSector: (sector) => {
             dispatch(actions.onAddSectorResquest(sector));
+        },
+        fetchObjects: () => {
+            return dispatch(actions.fetchObjectsResquest());
         },
         onEditItemSector: (id) => {
             dispatch(actions.onEditSectorResquest(id));

@@ -60,9 +60,9 @@ export const fetchUser = (user) => {
 
   };
 };
-export const onDeleteUser=(id)=>{
-  return{
-    type : types.DELETE_USER,
+export const onDeleteUser = (id) => {
+  return {
+    type: types.DELETE_USER,
     id,
 
   };
@@ -74,12 +74,12 @@ export const fetchUserRequest = () => {
 
     });
 
-        
-      };
-    };
-export const onDeleteUserResquest=(id)=>{
-  return(dispatch)=>{
-    return callApi(`customers/${id}`, "DELETE", null).then((response)=>{
+
+  };
+};
+export const onDeleteUserResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`customers/${id}`, "DELETE", null).then((response) => {
       dispatch(onDeleteUserResquest(id));
     });
   };
@@ -164,17 +164,17 @@ export const onEditProductResquest = (id) => {
 
 //Lấy tất cả danh sách Object
 
-export const fetchObject = (object) => {
+export const fetchObjects = (object) => {
   return {
     type: types.FETCH_OBJECT,
     object,
   };
 };
 
-export const fetchObjectResquest = () => {
+export const fetchObjectsResquest = () => {
   return (dispatch) => {
     return callApi("objects", "GET", null).then((response) => {
-      dispatch(fetchObject(response.data));
+      dispatch(fetchObjects(response.data));
     });
   };
 };
@@ -263,16 +263,27 @@ export const onAddPromotion = (promotion) => {
     promotion,
   };
 };
+<<<<<<< Updated upstream
 export const onAddObject = (object) => {
+=======
+export const onAddObjects = (objects) => {
+>>>>>>> Stashed changes
   return {
     type: types.ADD_OBJECT,
     object,
   };
 };
+<<<<<<< Updated upstream
 export const onAddObjectResquest = (object) => {
   return (dispatch) => {
     return callApi("objects", "POST", object).then((response) => {
       dispatch(onAddObject(response.data));
+=======
+export const onAddObjectsResquest = (objects) => {
+  return (dispatch) => {
+    return callApi("objects", "POST", objects).then((response) => {
+      dispatch(onAddObjects(response.data));
+>>>>>>> Stashed changes
     });
   };
 };
@@ -300,17 +311,17 @@ export const onUpdatePromotionResquest = (promotion) => {
   };
 };
 //cập nhật object
-export const onUpdateObject = (object) => {
+export const onUpdateObjects = (object) => {
   return {
     type: types.UPDATE_OBJECT,
     object,
   };
 };
-export const onUpdateObjectResquest = (object) => {
+export const onUpdateObjectsResquest = (object) => {
   return (dispatch) => {
     return callApi(`objects/${object.id}`, "PUT", object).then(
       (response) => {
-        dispatch(onUpdateObject(response.data));
+        dispatch(onUpdateObjects(response.data));
       }
     );
   };
@@ -331,31 +342,31 @@ export const onEditPromotionResquest = (id) => {
   };
 };
 //xóa object 
-export const onDeleteObject = (id) => {
+export const onDeleteObjects = (id) => {
   return {
     type: types.DELETE_OBJECT,
     id,
   };
 };
 
-export const onDeleteObjectResquest = (id) => {
+export const onDeleteObjectsResquest = (id) => {
   return (dispatch) => {
     return callApi(`objects/${id}`, "DELETE", null).then((response) => {
-      dispatch(onDeleteObject(id));
+      dispatch(onDeleteObjects(id));
     });
   };
 };
 //sửa object 
-export const onGetObject = (object) => {
+export const onGetObjects = (object) => {
   return {
     type: types.EDIT_OBJECT,
     object,
   };
 };
-export const onEditObjectResquest = (id) => {
+export const onEditObjectsResquest = (id) => {
   return (dispatch) => {
     return callApi(`objects/${id}`, "GET", null).then((response) => {
-      dispatch(onGetObject(response.data));
+      dispatch(onGetObjects(response.data));
     });
   };
 };
@@ -558,7 +569,7 @@ export const onAddSize = (size) => {
 export const onAddSizeResquest = (size) => {
   return (dispatch) => {
     return callApi("size", "POST", size).then((response) => {
-     
+
       dispatch(onAddSize(response.data));
     });
   };
@@ -665,61 +676,61 @@ export const onEditBillResquest = (id) => {
 //news 
 export const fetchNews = (news) => {
   return {
-      type: types.FETCH_NEWS,
-      news,
+    type: types.FETCH_NEWS,
+    news,
   };
 };
 
 export const fetchNewsResquest = () => {
   return (dispatch) => {
-      return callApi("news", "GET", null).then((response) => {
-          dispatch(fetchNews(response.data));
-      });
+    return callApi("news", "GET", null).then((response) => {
+      dispatch(fetchNews(response.data));
+    });
   };
 };
 
 export const onAddNews = (news) => {
   return {
-      type: types.ADD_NEWS,
-      news,
+    type: types.ADD_NEWS,
+    news,
   };
 };
 export const onAddNewsResquest = (news) => {
   return (dispatch) => {
-      return callApi("news", "POST", news).then((response) => {
-          dispatch(onAddNews(response.data));
-          console.log(response.data);
-      });
+    return callApi("news", "POST", news).then((response) => {
+      dispatch(onAddNews(response.data));
+      console.log(response.data);
+    });
   };
 };
 
 export const onUpdateNews = (news) => {
   return {
-      type: types.UPDATE_NEWS,
-      news,
+    type: types.UPDATE_NEWS,
+    news,
   };
 };
 export const onUpdateNewsResquest = (news) => {
   return (dispatch) => {
-      return callApi(`news/${news.id}`, "PUT", news).then(
-          (response) => {
-              dispatch(onUpdateNews(response.data));
-          }
-      );
+    return callApi(`news/${news.id}`, "PUT", news).then(
+      (response) => {
+        dispatch(onUpdateNews(response.data));
+      }
+    );
   };
 };
 export const onDeleteNews = (id) => {
   return {
-      type: types.DELETE_NEWS,
-      id,
+    type: types.DELETE_NEWS,
+    id,
   };
 };
 
 export const onDeleteNewsResquest = (id) => {
   return (dispatch) => {
-      return callApi(`news/${id}`, "DELETE", null).then((response) => {
-          dispatch(onDeleteNews(id));
-      });
+    return callApi(`news/${id}`, "DELETE", null).then((response) => {
+      dispatch(onDeleteNews(id));
+    });
   };
 };
 export const onGetNew = (news) => {
@@ -740,45 +751,46 @@ export const onEditNewsResquest = (id) => {
 
 export const onAddCategory = (category) => {
   return {
-      type: types.ADD_CATEGORY,
-      category,
+    type: types.ADD_CATEGORY,
+    category,
   };
 };
 export const onAddCategoryResquest = (category) => {
   return (dispatch) => {
-      return callApi("categories", "POST", category).then((response) => {
-          dispatch(onAddCategory(response.data));
-      });
+    return callApi("categories", "POST", category).then((response) => {
+      console.log(response.data);
+      dispatch(onAddCategory(response.data));
+    });
   };
 };
 
 export const onUpdateCategory = (category) => {
   return {
-      type: types.UPDATE_CATEGORY,
-      category,
+    type: types.UPDATE_CATEGORY,
+    category,
   };
 };
 export const onUpdateCategoryResquest = (category) => {
   return (dispatch) => {
-      return callApi(`categories/${category.id}`, "PUT", category).then(
-          (response) => {
-              dispatch(onUpdateCategory(response.data));
-          }
-      );
+    return callApi(`categories/${category.id}`, "PUT", category).then(
+      (response) => {
+        dispatch(onUpdateCategory(response.data));
+      }
+    );
   };
 };
 export const onDeleteCategory = (id) => {
   return {
-      type: types.DELETE_CATEGORY,
-      id,
+    type: types.DELETE_CATEGORY,
+    id,
   };
 };
 
 export const onDeleteCategoryResquest = (id) => {
   return (dispatch) => {
-      return callApi(`categories/${id}`, "DELETE", null).then((response) => {
-          dispatch(onDeleteCategory(id));
-      });
+    return callApi(`categories/${id}`, "DELETE", null).then((response) => {
+      dispatch(onDeleteCategory(id));
+    });
   };
 };
 export const onGetCategory = (category) => {
@@ -797,30 +809,30 @@ export const onEditCategoryResquest = (id) => {
 //customer
 export const fetchCustomer = (customer) => {
   return {
-      type: types.FETCH_CUSTOMER,
-      customer,
+    type: types.FETCH_CUSTOMER,
+    customer,
   };
 };
 
 export const fetchCustomerResquest = () => {
   return (dispatch) => {
-      return callApi("customers", "GET", null).then((response) => {
-          dispatch(fetchCustomer(response.data));
-      });
+    return callApi("customers", "GET", null).then((response) => {
+      dispatch(fetchCustomer(response.data));
+    });
   };
 };
 
 export const onAddCustomer = (customer) => {
   return {
-      type: types.ADD_CUSTOMER,
-      customer,
+    type: types.ADD_CUSTOMER,
+    customer,
   };
 };
 export const onAddCustomerResquest = (customer) => {
   return (dispatch) => {
-      return callApi("customers", "POST", customer).then((response) => {
-          dispatch(onAddCustomer(response.data));
-      });
+    return callApi("customers", "POST", customer).then((response) => {
+      dispatch(onAddCustomer(response.data));
+    });
   };
 };
 
@@ -843,16 +855,16 @@ export const onUpdateCustomersResquest = (customer) => {
 
 export const onDeleteCustomer = (id) => {
   return {
-      type: types.DELETE_CUSTOMER,
-      id,
+    type: types.DELETE_CUSTOMER,
+    id,
   };
 };
 
 export const onDeleteCustomerResquest = (id) => {
   return (dispatch) => {
-      return callApi(`customers/${id}`, "DELETE", null).then((response) => {
-          dispatch(onDeleteCustomer(id));
-      });
+    return callApi(`customers/${id}`, "DELETE", null).then((response) => {
+      dispatch(onDeleteCustomer(id));
+    });
   };
 };
 export const onGetCustomer = (customer) => {
@@ -966,46 +978,46 @@ export const fetchOrderInfoResquest = (id) => {
 
 export const onAddSector = (sector) => {
   return {
-      type: types.ADD_SECTOR,
-      sector,
+    type: types.ADD_SECTOR,
+    sector,
   };
 };
 export const onAddSectorResquest = (sector) => {
   return (dispatch) => {
-      return callApi("sectors", "POST", sector).then((response) => {
-        console.log(response);
-          dispatch(onAddSector(response.data));
-      });
+    return callApi("sectors", "POST", sector).then((response) => {
+      console.log(response);
+      dispatch(onAddSector(response.data));
+    });
   };
 };
 
 export const onUpdateSector = (sector) => {
   return {
-      type: types.UPDATE_SECTOR,
-      sector,
+    type: types.UPDATE_SECTOR,
+    sector,
   };
 };
 export const onUpdateSectorResquest = (sector) => {
   return (dispatch) => {
-      return callApi(`sectors/${sector.id}`, "PUT", sector).then(
-          (response) => {
-              dispatch(onUpdateSector(response.data));
-          }
-      );
+    return callApi(`sectors/${sector.id}`, "PUT", sector).then(
+      (response) => {
+        dispatch(onUpdateSector(response.data));
+      }
+    );
   };
 };
 export const onDeleteSector = (id) => {
   return {
-      type: types.DELETE_SECTOR,
-      id,
+    type: types.DELETE_SECTOR,
+    id,
   };
 };
 
 export const onDeleteSectorResquest = (id) => {
   return (dispatch) => {
-      return callApi(`sectors/${id}`, "DELETE", null).then((response) => {
-          dispatch(onDeleteSector(id));
-      });
+    return callApi(`sectors/${id}`, "DELETE", null).then((response) => {
+      dispatch(onDeleteSector(id));
+    });
   };
 };
 export const onGetSector = (sector) => {

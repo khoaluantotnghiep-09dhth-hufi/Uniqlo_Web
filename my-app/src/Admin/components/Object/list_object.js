@@ -29,15 +29,15 @@ class ListObject extends React.Component {
     componentDidMount() {
         this.props.fetchObjects();
     }
-    onDeleteObject = (id) => {
+    onDeleteObject = (item) => {
         if (confirm('Bạn chắc chắn muốn xóa ?')) { //eslint-disable-line
-            this.props.onDeleteItemObject(id);
+            this.props.onDeleteItemObject(item);
         }
     };
     render() {
         var { object } = this.props;
         var dataObject = object.map((item, index) => {
-            return { ...item, index };
+            return item;
         });
         return (
             <>
@@ -91,7 +91,7 @@ class ListObject extends React.Component {
                     </CCol>
                 </CRow>
             </>
-        )
+        );
     }
 }
 var mapStateToProps = (state) => {
@@ -102,10 +102,10 @@ var mapStateToProps = (state) => {
 var mapDispatchToProps = (dispatch, props) => {
     return {
         fetchObjects: () => {
-            return dispatch(actions.fetchObjectResquest());
+             dispatch(actions.fetchObjectsResquest());
         },
         onDeleteItemObject: (id) => {
-            return dispatch(actions.onDeleteObjectResquest(id))
+             dispatch(actions.onDeleteObjectsResquest(id))
         }
     };
 };

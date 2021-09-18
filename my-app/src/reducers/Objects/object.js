@@ -30,8 +30,11 @@ var object = (state = initialState, action) => {
 
     case types.ADD_OBJECT:
       console.log(action.object);
+<<<<<<< Updated upstream
       state.push(action.object);
       
+=======
+>>>>>>> Stashed changes
       return [...state];
 
     case types.UPDATE_OBJECT:

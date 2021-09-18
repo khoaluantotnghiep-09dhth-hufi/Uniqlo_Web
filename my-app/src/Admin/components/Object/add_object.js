@@ -41,7 +41,7 @@ class addObject extends React.Component {
     var { match } = this.props;
     if (NextProps && NextProps.object) {
       var { object } = NextProps;
-      if (match.params.id) {
+      if (match.params.id_object) {
         const result = object.find(
           (o) => o.id === match.params.id_object
         );
@@ -70,12 +70,16 @@ class addObject extends React.Component {
 
     var object = {
       id: uniqid("object-"),
-      name: txtName,
+      nameObject: txtName,
 
     };
     var objectUpdate = {
       id: match.params.id_object,
+<<<<<<< Updated upstream
       name: txtName,
+=======
+      nameObject: txtName,
+>>>>>>> Stashed changes
     };
 
     if (idItem) {
@@ -98,12 +102,16 @@ class addObject extends React.Component {
             </Button>
           </Link>
           <CCol sm="12">
+<<<<<<< Updated upstream
             <CForm onSubmit={this.onSubmitForm}>
+=======
+            <CForm  onSubmit={this.onSubmitForm}>
+>>>>>>> Stashed changes
               <CFormGroup>
                 <CLabel htmlFor="exampleFormControlInput1">Tên Đối Tượng</CLabel>
                 <CInput
                   type="text"
-                  id="txtName"
+         
                   name="txtName"
                   placeholder="Tên đối tượng..."
                   autoComplete="name"
@@ -140,13 +148,13 @@ var mapStateToProps = (state) => {
 var mapDispatchToProps = (dispatch, props) => {
   return {
     onAddItemObject: (object) => {
-      dispatch(actions.onAddObjectResquest(object));
+      dispatch(actions.onAddObjectsResquest(object));
     },
     onEditItemObject: (id) => {
-      dispatch(actions.onEditObjectResquest(id));
+      dispatch(actions.onEditObjectsResquest(id));
     },
     onUpdateItemObject: (object) => {
-      dispatch(actions.onUpdateObjectResquest(object));
+      dispatch(actions.onUpdateObjectsResquest(object));
     },
   };
 };

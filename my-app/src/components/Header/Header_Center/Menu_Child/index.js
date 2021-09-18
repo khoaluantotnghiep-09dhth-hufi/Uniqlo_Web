@@ -73,7 +73,7 @@ var mapStateToProps = (state) => {
 var mapDispatchToProps = (dispatch, props) => {
   return {
     onGetAllObject: () => {
-      dispatch(actions.fetchObjectResquest());
+      dispatch(actions.fetchObjectsResquest());
     },
     onGetAllSector: () => {
       dispatch(actions.fetchSectorResquest());
