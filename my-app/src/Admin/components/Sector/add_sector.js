@@ -17,7 +17,7 @@ class AddSector extends React.Component {
         this.setState({
             idItem: "",
             txtName: "",
-            idobject:"",
+            id_object: "",
         });
     }
     componentDidMount() {
@@ -54,17 +54,17 @@ class AddSector extends React.Component {
 
         event.preventDefault();
         var { history } = this.props;
-        var { idItem, txtName, idobject } = this.state;
+        var { idItem, txtName, id_object } = this.state;
 
         var sector = {
             id: uniqid("sector-"),
             name: txtName,
-            id_object: idobject,
+            id_object: id_object,
         };
         var sectorUpdate = {
             id: match.params.id_sectors,
             name: txtName,
-            id_object: idobject,
+            id_object: id_object,
         };
 
         if (idItem) {
@@ -78,7 +78,7 @@ class AddSector extends React.Component {
         }
     };
     render() {
-       var data = this.props.fetchObjects();
+        console.log(this.props.object);
         return (
             <Container fluid>
                 <Row>
@@ -96,7 +96,7 @@ class AddSector extends React.Component {
                                     type="text"
                                     placeholder="Nhập tên đối tượng cần thêm..."
                                     name="txtName"
-
+                                    value={this.setState.txtName}
                                     onChange={this.onChange} />
                                 <Form.Control.Feedback
                                     type="invalid" >
@@ -104,19 +104,19 @@ class AddSector extends React.Component {
                                 </Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicObject">
-                                <Form.Select value="object-1" aria-label="Default select example" name="idObject"
+                                <Form.Select aria-label="Default select example" name="id_object"
+                                    value={this.setState.id_object}
                                     onChange={this.onChange}
-                                   
                                 >
-                                  
-                                    {data.map((option, i) => (
+
+                                    {/* {data.map((option, i) => (
 
                                         <option value={option.id} key={i}>{option.name}</option>
-                                    ))}
-                                    {/* <option value="object-1">Nam</option>
+                                    ))} */}
+                                    <option value="object-1">Nam</option>
                                     <option value="object-2">Nữ</option>
                                     <option value="object-3">Trẻ Em</option>
-                                    <option value="object-4">Trẻ Sơ Sinh</option> */}
+                                    <option value="object-4">Trẻ Sơ Sinh</option>
                                 </Form.Select>
 
                             </Form.Group>

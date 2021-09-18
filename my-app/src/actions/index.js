@@ -946,16 +946,16 @@ export const onEditOrderResquest = (id) => {
 };
 
 //order info
-export const fetchOrderInfo = (orderInfo) => {
+export const fetchOrderInfo = (id) => {
   return {
     type: types.FETCH_ORDERINFO,
-    orderInfo,
+    id,
   };
 };
 
-export const fetchOrderInfoResquest = (orderInfo) => {
+export const fetchOrderInfoResquest = (id) => {
   return (dispatch) => {
-    return callApi(`orders-info/${orderInfo.id_order}`, "GET", null).then((response) => {
+    return callApi(`orders-info/${id}`, "GET", null).then((response) => {
       dispatch(fetchOrderInfo(response.data));
     });
   };
@@ -972,6 +972,7 @@ export const onAddSector = (sector) => {
 export const onAddSectorResquest = (sector) => {
   return (dispatch) => {
       return callApi("sectors", "POST", sector).then((response) => {
+        console.log(response);
           dispatch(onAddSector(response.data));
       });
   };

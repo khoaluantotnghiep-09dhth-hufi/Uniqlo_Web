@@ -57,24 +57,24 @@ class index extends Component {
     }
     return (
       <div className="login-background">
-        <div className="login-container">
+        <div className="login-container login-background">
           <div className="login-content row">
-            <div className="col-12 text-center">Đăng Nhập</div>
+            <div className="col-12 text-center"><h2>Đăng Nhập</h2></div>
             <div className="col-12 form-group login-input">
-              <label>Tài Khoản</label>
+              <label><h4>Tài Khoản</h4></label>
               <input 
               type="text" 
-              className="form-control" 
+              className="form-control form-control-lg" 
               placeholder="Tên đăng nhập"
               value={this.state.txtName}
               onChange={(event) => this.handleChangeName(event)}
               />
             </div>
             <div className="col-12 form-group login-input">
-              <label>Mật Khẩu</label>
+              <label><h4>Mật Khẩu</h4></label>
               <input 
               type="text" 
-              className="form-control" 
+              className="form-control form-control-lg" 
               placeholder="Mật khẩu" 
               onChange={(event) => this.handleChangePass(event)}
               value={this.state.txtPassword}
@@ -82,8 +82,8 @@ class index extends Component {
             </div>
             <div className="col-12">
               <button type="submit" 
-              className="btn-login" 
-              onClick={(event) => {this.onSubmit(event)}}>Đăng Nhập</button>
+              className="btn btn-danger btn-login" 
+              onClick={(event) => {this.onSubmit(event)}}><h3>Đăng Nhập</h3></button>
             </div>
           </div>
         </div>

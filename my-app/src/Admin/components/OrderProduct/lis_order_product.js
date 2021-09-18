@@ -75,12 +75,13 @@ class ListOrderProducts extends React.Component {
                                             (item) => (
 
                                                 <td>
+                                                    {/* `/admin/manage/color/${item.id}/edit` */}
                                                     {item.status === 0 ? <Link to="/admin/manage/staf/../edit">
                                                         <CButton type="button" className="btn btn-primary">
                                                             <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
                                                         </CButton>
                                                     </Link> : ''}
-                                                    <Link to="/admin/manage/order-product/info">
+                                                    <Link to={`/admin/manage/order-info/${item.id}`}>
                                                     <CButton
                                                         type="button"
                                                         className="btn btn-danger"                                                      
