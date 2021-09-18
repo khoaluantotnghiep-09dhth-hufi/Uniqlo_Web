@@ -1,7 +1,7 @@
 import React from 'react';
 import uniqid from "uniqid";
 import { connect } from "react-redux";
-import * as actions from "./../../../actions/orderActions";
+import * as actions from "./../../../actions/index";
 import { Link } from "react-router-dom";
 import {
   CForm,

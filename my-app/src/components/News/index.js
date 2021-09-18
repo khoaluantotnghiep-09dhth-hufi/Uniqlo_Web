@@ -3,7 +3,7 @@ import { Container, Row } from "react-bootstrap";
 
 import { connect } from "react-redux";
 import List_News from "./List_News/index";
-import * as actions from "./../../actions/newsAction";
+import * as actions from "./../../actions/index";
 class index extends Component {
   componentDidMount() {
     this.props.onGetAllNews();

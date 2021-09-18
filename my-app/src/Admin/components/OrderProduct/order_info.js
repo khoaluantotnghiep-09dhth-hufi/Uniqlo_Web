@@ -19,7 +19,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
-import * as actions from "./../../../actions/orderInfoActions";
+import * as actions from "./../../../actions/index";
 import { Image } from 'react-bootstrap';
 
 const getBadge = status => {

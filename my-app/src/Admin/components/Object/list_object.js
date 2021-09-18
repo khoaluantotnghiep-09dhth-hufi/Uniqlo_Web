@@ -17,9 +17,8 @@ import {
     faTools,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import CallAPI from "../../utils/Callapi";
 import { Button, Form, Col, Container, Row, FormGroup, Label, InputGroup, Modal, Alert, Table } from 'react-bootstrap';
-import * as actions from "./../../../actions/objectAction";
+import * as actions from "./../../../actions/index";
 const fields = ['STT',
     { key: 'id', label: 'Mã Đối Tượng' },
     { key: 'name', label: 'Tên Đối Tượng' },
@@ -103,10 +102,10 @@ var mapStateToProps = (state) => {
 var mapDispatchToProps = (dispatch, props) => {
     return {
         fetchObjects: () => {
-            return dispatch(actions.fetchObjectsResquest());
+            return dispatch(actions.fetchObjectResquest());
         },
         onDeleteItemObject: (id) => {
-            return dispatch(actions.onDeleteObjectsResquest(id))
+            return dispatch(actions.onDeleteObjectResquest(id))
         }
     };
 };

@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import uniqid from 'uniqid';
 import { Button, Form, Col, Container, Row } from 'react-bootstrap';
-import * as actions from "./../../../actions/categoryActions";
+import * as actions from "./../../../actions/index";
 class AddCategory extends React.Component {
     constructor(props) {
         super(props);

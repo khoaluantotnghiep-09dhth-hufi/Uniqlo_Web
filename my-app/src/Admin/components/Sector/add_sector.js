@@ -9,8 +9,8 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import uniqid from 'uniqid';
 import { Button, Form, Col, Container, Row } from 'react-bootstrap';
-import * as actions from "./../../../actions/sectorsActions";
-import * as actionsObject from "./../../../actions/objectAction";
+import * as actions from "./../../../actions/index";
+
 class AddSector extends React.Component {
     constructor(props) {
         super(props);
@@ -149,9 +149,6 @@ var mapDispatchToProps = (dispatch, props) => {
     return {
         onAddItemSector: (sector) => {
             dispatch(actions.onAddSectorResquest(sector));
-        },
-        fetchObjects: () => {
-            return dispatch(actionsObject.fetchObjectsResquest());
         },
         onEditItemSector: (id) => {
             dispatch(actions.onEditSectorResquest(id));

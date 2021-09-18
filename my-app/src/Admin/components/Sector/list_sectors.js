@@ -18,8 +18,8 @@ import {
 import { Link } from "react-router-dom";
 import CallAPI from "../../utils/Callapi";
 import { Button, Form, Col, Container, Row, FormGroup, Label, InputGroup, Modal, Alert, Table } from 'react-bootstrap';
-import * as actions from "./../../../actions/sectorsActions";
-import * as actionsObject from "./../../../actions/objectAction";
+import * as actions from "./../../../actions/index";
+
 const fields = ['STT',
     { key: 'id', label: 'Mã Loại' },
     { key: 'name', label: 'Tên Loại' },
