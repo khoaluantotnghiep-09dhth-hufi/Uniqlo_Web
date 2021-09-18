@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import { connect } from "react-redux";
-import * as actions from "../../actions/index";
+import * as actions from "./../../actions/productActions";
 class index extends Component {
   componentDidMount() {
     
@@ -14,7 +14,7 @@ class index extends Component {
       .filter((product) => product.id === id_product)
       .map((product, index) => {
         return (
-          <Container>
+          <Container >
             <Row className="mt-4">
               <h4 className="text-center mb-4">CHI TIẾT SẢN PHẨM</h4>
               <Col lg="3" style={{ backgroundColor: "red" }}>

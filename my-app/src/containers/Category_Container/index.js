@@ -12,12 +12,12 @@ this.props.onGetAllProduct();
   }
 
   render() {
-    var { products,location } = this.props;
+    var {  products_category,location } = this.props;
 
 
     return (
       <Category_Products >
-        {this.showListProduct(products)}
+        {this.showListProduct( products_category)}
       </Category_Products>
     );
   }
@@ -39,7 +39,7 @@ this.props.onGetAllProduct();
 
 var mapStateToProps = (state) => {
   return {
-    products: state.products,
+    products_category: state.products_category,
 
   };
 };

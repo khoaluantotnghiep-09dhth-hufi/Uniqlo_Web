@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
 import cart from "./Carts/cart";
 import products from "./Products/products";
+import products_category from "./Products_Category/products_category";
+
 import object from "./Objects/object";
 import sector from "./Sectors/sector";
 import users from "./Users/users";
@@ -31,6 +33,7 @@ const myReducer = combineReducers({
   news,
   customer,
   order,
+  products_category,
 });
 
 export default myReducer;
