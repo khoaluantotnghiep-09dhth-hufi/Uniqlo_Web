@@ -85,16 +85,16 @@ export const onDeleteUserResquest=(id)=>{
   };
 }
 // Lấy tất cả danh sách sản phẩm
-export const fetchProduct = (products) => {
+export const fetchProduct = (products_category) => {
   return {
-    type: types.FETCH_PRODUCT,
-    products,
+    type: types.FETCH_PRODUCT_CATEGORY,
+    products_category,
   };
 };
 
 export const fetchProductResquest = () => {
   return (dispatch) => {
-    return callApi("products", "GET", null).then((response) => {
+    return callApi("products-category", "GET", null).then((response) => {
       dispatch(fetchProduct(response.data));
     });
   };

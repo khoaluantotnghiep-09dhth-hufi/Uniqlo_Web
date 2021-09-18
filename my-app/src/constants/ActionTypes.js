@@ -16,6 +16,8 @@ export const DELETE_USER = 'DELETE_USER';
 export const ADD_USER = 'ADD_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const EDIT_USER = 'EDIT_USER';
+// product for category
+export const FETCH_PRODUCT_CATEGORY = 'FETCH_PRODUCT_CATEGORY';
 // product
 export const FETCH_PRODUCT = 'FETCH_PRODUCT';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
