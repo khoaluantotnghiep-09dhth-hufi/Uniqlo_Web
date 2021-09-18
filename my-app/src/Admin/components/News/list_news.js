@@ -16,8 +16,7 @@ import {
     faTools,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import CallAPI from "../../utils/Callapi";
-import * as actions from "./../../../actions/newsAction";
+import * as actions from "./../../../actions/index";
 import { Image } from 'react-bootstrap';
 const fields = ['STT',
     { key: 'id', label: 'Mã Tin Tức' },

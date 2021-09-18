@@ -15,7 +15,7 @@ import {
   faTimes,
   faTools,
 } from "@fortawesome/free-solid-svg-icons";
-import * as actions from "./../../../actions/customerAction";
+import * as actions from "./../../../actions/index";
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 const getBadge = (status) => {

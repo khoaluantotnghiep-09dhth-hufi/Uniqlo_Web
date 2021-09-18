@@ -661,3 +661,367 @@ export const onEditBillResquest = (id) => {
     });
   };
 };
+
+//news 
+export const fetchNews = (news) => {
+  return {
+      type: types.FETCH_NEWS,
+      news,
+  };
+};
+
+export const fetchNewsResquest = () => {
+  return (dispatch) => {
+      return callApi("news", "GET", null).then((response) => {
+          dispatch(fetchNews(response.data));
+      });
+  };
+};
+
+export const onAddNews = (news) => {
+  return {
+      type: types.ADD_NEWS,
+      news,
+  };
+};
+export const onAddNewsResquest = (news) => {
+  return (dispatch) => {
+      return callApi("news", "POST", news).then((response) => {
+          dispatch(onAddNews(response.data));
+          console.log(response.data);
+      });
+  };
+};
+
+export const onUpdateNews = (news) => {
+  return {
+      type: types.UPDATE_NEWS,
+      news,
+  };
+};
+export const onUpdateNewsResquest = (news) => {
+  return (dispatch) => {
+      return callApi(`news/${news.id}`, "PUT", news).then(
+          (response) => {
+              dispatch(onUpdateNews(response.data));
+          }
+      );
+  };
+};
+export const onDeleteNews = (id) => {
+  return {
+      type: types.DELETE_NEWS,
+      id,
+  };
+};
+
+export const onDeleteNewsResquest = (id) => {
+  return (dispatch) => {
+      return callApi(`news/${id}`, "DELETE", null).then((response) => {
+          dispatch(onDeleteNews(id));
+      });
+  };
+};
+export const onGetNew = (news) => {
+  return {
+    type: types.EDIT_NEWS,
+    news,
+  };
+};
+export const onEditNewsResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`news/${id}`, "GET", null).then((response) => {
+      dispatch(onGetNew(response.data));
+    });
+  };
+};
+
+//category =
+
+export const onAddCategory = (category) => {
+  return {
+      type: types.ADD_CATEGORY,
+      category,
+  };
+};
+export const onAddCategoryResquest = (category) => {
+  return (dispatch) => {
+      return callApi("categories", "POST", category).then((response) => {
+          dispatch(onAddCategory(response.data));
+      });
+  };
+};
+
+export const onUpdateCategory = (category) => {
+  return {
+      type: types.UPDATE_CATEGORY,
+      category,
+  };
+};
+export const onUpdateCategoryResquest = (category) => {
+  return (dispatch) => {
+      return callApi(`categories/${category.id}`, "PUT", category).then(
+          (response) => {
+              dispatch(onUpdateCategory(response.data));
+          }
+      );
+  };
+};
+export const onDeleteCategory = (id) => {
+  return {
+      type: types.DELETE_CATEGORY,
+      id,
+  };
+};
+
+export const onDeleteCategoryResquest = (id) => {
+  return (dispatch) => {
+      return callApi(`categories/${id}`, "DELETE", null).then((response) => {
+          dispatch(onDeleteCategory(id));
+      });
+  };
+};
+export const onGetCategory = (category) => {
+  return {
+    type: types.EDIT_CATEGORY,
+    category,
+  };
+};
+export const onEditCategoryResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`categories/${id}`, "GET", null).then((response) => {
+      dispatch(onGetCategory(response.data));
+    });
+  };
+};
+//customer
+export const fetchCustomer = (customer) => {
+  return {
+      type: types.FETCH_CUSTOMER,
+      customer,
+  };
+};
+
+export const fetchCustomerResquest = () => {
+  return (dispatch) => {
+      return callApi("customers", "GET", null).then((response) => {
+          dispatch(fetchCustomer(response.data));
+      });
+  };
+};
+
+export const onAddCustomer = (customer) => {
+  return {
+      type: types.ADD_CUSTOMER,
+      customer,
+  };
+};
+export const onAddCustomerResquest = (customer) => {
+  return (dispatch) => {
+      return callApi("customers", "POST", customer).then((response) => {
+          dispatch(onAddCustomer(response.data));
+      });
+  };
+};
+
+export const onUpdateCustomer = (customer) => {
+  return {
+      type: types.UPDATE_CUSTOMER,
+      customer,
+  };
+};
+
+export const onUpdateCustomerResquest = (customer) => {
+  return (dispatch) => {
+      return callApi(`customers/${customer.id}`, "PUT", customer).then(
+          (response) => {
+              dispatch(onUpdateCustomer(response.data));
+          }
+      );
+  };
+};
+export const onDeleteCustomer = (id) => {
+  return {
+      type: types.DELETE_CUSTOMER,
+      id,
+  };
+};
+
+export const onDeleteCustomerResquest = (id) => {
+  return (dispatch) => {
+      return callApi(`customers/${id}`, "DELETE", null).then((response) => {
+          dispatch(onDeleteCustomer(id));
+      });
+  };
+};
+export const onGetCustomer = (customer) => {
+  return {
+    type: types.EDIT_CUSTOMER,
+    customer,
+  };
+};
+export const onEditCustomerResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`customers/${id}`, "GET", null).then((response) => {
+      dispatch(onGetCustomer(response.data));
+    });
+  };
+};
+//orders
+export const fetchOrder = (order) => {
+  return {
+    type: types.FETCH_ORDER,
+    order,
+  };
+};
+
+export const fetchOrderResquest = () => {
+  return (dispatch) => {
+    return callApi("orders", "GET", null).then((response) => {
+      dispatch(fetchOrder(response.data));
+    });
+  };
+};
+
+//Xóa Color
+export const onDeleteOrder = (id) => {
+  return {
+    type: types.DELETE_ORDER,
+    id,
+  };
+};
+
+export const onDeleteOrderResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`orders/${id}`, "DELETE", null).then((response) => {
+      dispatch(onDeleteOrder(id));
+    });
+  };
+};
+//Thêm Color
+export const onAddOrder = (order) => {
+  return {
+    type: types.ADD_ORDER,
+    order,
+  };
+};
+
+export const onAddOrderResquest = (order) => {
+  return (dispatch) => {
+    return callApi("orders", "POST", order).then((response) => {
+      dispatch(onAddOrder(response.data));
+    });
+  };
+};
+//Cập Color
+export const onUpdateOrder = (order) => {
+  return {
+    type: types.UPDATE_ORDER,
+    order,
+  };
+};
+export const onUpdateOrderResquest = (order) => {
+  return (dispatch) => {
+    return callApi(`orders/${order.id}`, "PUT", order).then(
+      (response) => {
+        dispatch(onUpdateOrder(response.data));
+      }
+    );
+  };
+};
+
+//Sửa Color
+export const onGetOrder = (order) => {
+  return {
+    type: types.EDIT_ORDER,
+    order,
+  };
+};
+export const onEditOrderResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`orders/${id}`, "GET", null).then((response) => {
+      dispatch(onGetOrder(response.data));
+    });
+  };
+};
+
+//order info
+export const fetchOrderInfo = (orderInfo) => {
+  return {
+    type: types.FETCH_ORDERINFO,
+    orderInfo,
+  };
+};
+
+export const fetchOrderInfoResquest = (orderInfo) => {
+  return (dispatch) => {
+    return callApi(`orders-info/${orderInfo.id_order}`, "GET", null).then((response) => {
+      dispatch(fetchOrderInfo(response.data));
+    });
+  };
+};
+//sector 
+
+
+export const onAddSector = (sector) => {
+  return {
+      type: types.ADD_SECTOR,
+      sector,
+  };
+};
+export const onAddSectorResquest = (sector) => {
+  return (dispatch) => {
+      return callApi("sectors", "POST", sector).then((response) => {
+          dispatch(onAddSector(response.data));
+      });
+  };
+};
+
+export const onUpdateSector = (sector) => {
+  return {
+      type: types.UPDATE_SECTOR,
+      sector,
+  };
+};
+export const onUpdateSectorResquest = (sector) => {
+  return (dispatch) => {
+      return callApi(`sectors/${sector.id}`, "PUT", sector).then(
+          (response) => {
+              dispatch(onUpdateSector(response.data));
+          }
+      );
+  };
+};
+export const onDeleteSector = (id) => {
+  return {
+      type: types.DELETE_SECTOR,
+      id,
+  };
+};
+
+export const onDeleteSectorResquest = (id) => {
+  return (dispatch) => {
+      return callApi(`sectors/${id}`, "DELETE", null).then((response) => {
+          dispatch(onDeleteSector(id));
+      });
+  };
+};
+export const onGetSector = (sector) => {
+  return {
+    type: types.EDIT_SECTOR,
+    sector,
+  };
+};
+export const onEditSectorResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`sectors/${id}`, "GET", null).then((response) => {
+      dispatch(onGetSector(response.data));
+    });
+  };
+};
+
+
+
+
+
+

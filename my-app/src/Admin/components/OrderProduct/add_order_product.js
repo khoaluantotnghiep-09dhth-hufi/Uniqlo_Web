@@ -1,7 +1,7 @@
 import React from 'react';
 import uniqid from "uniqid";
 import { connect } from "react-redux";
-import * as actions from "./../../../actions/orderActions";
+import * as actions from "./../../../actions/index";
 import { Link } from "react-router-dom";
 import {
   CForm,
@@ -117,7 +117,7 @@ class addOrderProduct extends React.Component {
               <CFormGroup>
                 <CLabel htmlFor="exampleFormControlInput1">Ngày Lập</CLabel>
                 <CInput
-                  type="datetime-local"
+                  type="date"
                   id="txtDate"
                   name="txtDate"
                  onChange={this.onChange}

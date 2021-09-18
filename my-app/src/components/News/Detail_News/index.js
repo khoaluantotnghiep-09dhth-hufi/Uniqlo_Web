@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import * as actions from "./../../../actions/newsAction";
+import * as actions from "./../../../actions/index";
 import "./Detail_News.scss";
 import { connect } from "react-redux";
 import { Card, Button, Image } from "react-bootstrap";

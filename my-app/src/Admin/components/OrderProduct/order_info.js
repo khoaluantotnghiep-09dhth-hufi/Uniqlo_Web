@@ -19,8 +19,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
-import * as actions from "./../../../actions/orderActions";
-import { Alert } from 'react-bootstrap'
+import * as actions from "./../../../actions/index";
+import { Image } from 'react-bootstrap';
+
 const getBadge = status => {
     switch (status) {
         case 1: return 'success'
@@ -31,24 +32,25 @@ const getBadge = status => {
 const fields = [
     'STT',
     { key: 'id', label: 'Mã' },
-    { key: 'date_order', label: 'Ngày Đặt' },
-    { key: 'name_warehouse', label: 'Kho' },
-    { key: 'status', label: 'Trạng Thái' },
+    { key: 'nameProduct', label: 'Tên Sản Phẩm' },
+    { key: 'image', label: 'Ảnh' },
+    { key: 'retail_price', label: 'Giá Bán' },
+    { key: 'quantity', label: 'Số Lượng' },
+    { key: 'nameColor', label: 'Màu' },
+    { key: 'nameSize', label: 'Kích Cỡ' },
     'Thao Tác'
 ]
 
 class ListOrderProducts extends React.Component {
 
     componentDidMount() {
-        this.props.fetchOrders();
+        this.props.fetchOrdersInfo();
     }
-    onDeleteOrder = (item) => {
-        this.props.onDeleteItemOrder(item);
-    };
-    render() {
-        var { order } = this.props;
 
-        var dataOrder = order.map((item, index) => {
+    render() {
+        var { orderInfo } = this.props;
+
+        var dataOrderInfo = orderInfo.map((item, index) => {
             return { ...item, index };
         });
         return (
@@ -62,53 +64,40 @@ class ListOrderProducts extends React.Component {
                     <CCol xs="12" lg="24">
                         <CCard>
                             <CCardHeader>
-                                Danh Sách Đơn Đặt Hàng
+                                Danh Sách Chi Tiết Đơn Đặt Hàng
                             </CCardHeader>
                             <CCardBody>
                                 <CDataTable
-                                    items={dataOrder}
+                                    items={dataOrderInfo}
                                     fields={fields}
                                     itemsPerPage={8}
                                     pagination
                                     scopedSlots={{
-                                        'Thao Tác':
-                                            (item) => (
+                                        // 'Thao Tác':
+                                        //     (item) => (
 
-                                                <td>
-                                                    {item.status === 0 ? <Link to="/admin/manage/staf/../edit">
-                                                        <CButton type="button" className="btn btn-primary">
-                                                            <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
-                                                        </CButton>
-                                                    </Link> : ''}
-                                                    <CButton
-                                                        type="button"
-                                                        className="btn btn-danger"                                                      
-                                                    >
-                                                        <FontAwesomeIcon
-                                                            icon={faInfo}
-                                                            className="mr-2"
-                                                            size="lg"
-                                                        />
-                                                        Xem Chi Tiết Đơn
-                                                    </CButton>
-                                                </td>
+                                        //         <td>
+                                        //             {item.status === 0 ? <Link to="/admin/manage/staf/../edit">
+                                        //                 <CButton type="button" className="btn btn-primary">
+                                        //                     <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
+                                        //                 </CButton>
+                                        //             </Link> : ''}
 
-                                            ),
+                                        //         </td>
+
+                                        //     ),
                                         "STT":
                                             (item, index) => (
                                                 <td>
                                                     {index + 1}
                                                 </td>
                                             ),
-                                        "status": (item) => (
-                                            <td>
-                                                <Alert variant={getBadge(item.status)}>
-                                                    {item.status === 0 ? 'Chưa Giao' : 'Đã Giao'}
-                                                </Alert>
-
-
-                                            </td>
-                                        ),
+                                        'image':
+                                            (item, index) => (
+                                                <td>
+                                                    <Image src={item.image} thumbnail />
+                                                </td>
+                                            )
                                     }}
                                 />
                             </CCardBody>
@@ -126,17 +115,15 @@ class ListOrderProducts extends React.Component {
 
 var mapStateToProps = (state) => {
     return {
-        order: state.order,
+        orderInfo: state.orderInfo,
     };
 };
 var mapDispatchToProps = (dispatch, props) => {
     return {
-        fetchOrders: () => {
-            return dispatch(actions.fetchOrderResquest());
+        fetchOrdersInfo: () => {
+            return dispatch(actions.fetchOrderInfoResquest());
         },
-        onDeleteItemOrder: (id) => {
-            return dispatch(actions.onDeleteOrderResquest(id));
-        },
+
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ListOrderProducts);

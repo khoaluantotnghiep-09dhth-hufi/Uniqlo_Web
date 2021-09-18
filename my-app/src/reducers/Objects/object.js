@@ -17,12 +17,12 @@ var object = (state = initialState, action) => {
   switch (action.type) {
     case types.FETCH_OBJECT:
       state = action.object;
-      // return {...state, object: action.payload};
       return [...state];
 
     case types.DELETE_OBJECT:
       index = findIndex(state, id);
       state.slice(index, 1);
+
       return [...state];
 
     case types.FETCH_SECTOR_BY_ID:
@@ -30,6 +30,9 @@ var object = (state = initialState, action) => {
 
     case types.ADD_OBJECT:
       state.push(action.object);
+      console.log(action.object);
+
+
       return [...state];
 
     case types.UPDATE_OBJECT:

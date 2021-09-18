@@ -4,7 +4,6 @@ import {
   faPlus,
   faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import CallAPI from '../../utils/Callapi';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import uniqid from 'uniqid';
@@ -23,7 +22,7 @@ import {
   CFormGroup,
   CInput,
 } from '@coreui/react';
-import * as actions from "./../../../actions/objectAction";
+import * as actions from "./../../../actions/index";
 class addObject extends React.Component {
   constructor(props) {
     super(props);
@@ -36,15 +35,15 @@ class addObject extends React.Component {
   componentDidMount() {
     var { match } = this.props;
 
-    this.props.onEditItemObject(match.params.id_object);
+    this.props.onEditItemObject(match.params.id);
   }
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
     if (NextProps && NextProps.object) {
       var { object } = NextProps;
-      if (match.params.id_object) {
+      if (match.params.id) {
         const result = object.find(
-          (o) => o.id === match.params.id_object
+          (o) => o.id === match.params.id
         );
         this.setState({
           idItem: result.id,
@@ -75,7 +74,7 @@ class addObject extends React.Component {
 
     };
     var objectUpdate = {
-      id: match.params.id_object,
+      id: match.params.id,
       name: txtName,
     };
 
@@ -101,7 +100,7 @@ class addObject extends React.Component {
           <CCol sm="12">
             <CForm action="" method="post" onSubmit={this.onSubmitForm}>
               <CFormGroup>
-                <CLabel htmlFor="exampleFormControlInput1">Tên Màu</CLabel>
+                <CLabel htmlFor="exampleFormControlInput1">Tên Đối Tượng</CLabel>
                 <CInput
                   type="text"
                   id="txtName"
@@ -141,13 +140,13 @@ var mapStateToProps = (state) => {
 var mapDispatchToProps = (dispatch, props) => {
   return {
     onAddItemObject: (object) => {
-      dispatch(actions.onAddObjectsResquest(object));
+      dispatch(actions.onAddObjectResquest(object));
     },
     onEditItemObject: (id) => {
-      dispatch(actions.onEditObjectsResquest(id));
+      dispatch(actions.onEditObjectResquest(id));
     },
     onUpdateItemObject: (object) => {
-      dispatch(actions.onUpdateObjectsResquest(object));
+      dispatch(actions.onUpdateObjectResquest(object));
     },
   };
 };

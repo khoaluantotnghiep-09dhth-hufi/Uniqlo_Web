@@ -4,12 +4,11 @@ import {
   faPlus,
   faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import CallAPI from '../../utils/Callapi';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import uniqid from 'uniqid';
 import { Button, Form, Col, Container, Row } from 'react-bootstrap';
-import * as actions from "./../../../actions/newsAction";
+import * as actions from "./../../../actions/index";
 class AddNews extends React.Component {
   constructor(props) {
     super(props);
