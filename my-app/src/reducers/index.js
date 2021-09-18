@@ -34,7 +34,7 @@ const myReducer = combineReducers({
   customer,
   order,
 
-  
+  products_category,
 
   order_info,
 
