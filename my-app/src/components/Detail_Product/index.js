@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import { connect } from "react-redux";
 import * as actions from "./../../actions/productActions";
+import "./Detail_Product.scss";
 class index extends Component {
   componentDidMount() {
     this.props.onGetAllProduct();
@@ -19,14 +20,14 @@ class index extends Component {
       .filter((product) => product.id === id_product)
 
       .map((product, index) => {
-        console.log(product.percentSale);
         if (product.percentSale) {
           var newPrice = (parseInt(product.percentSale) / 100) * product.price;
         }
         var elementNewPrice = newPrice ? (
           <span
           // style={{ marginLeft: "40px", color: "red" }}
-          // className="font-weight-bold "
+          className="font-weight-bold "
+          style={{color: "red"}}
           >
             {" "}
             {formatter.format(newPrice)}{" "}
@@ -41,26 +42,73 @@ class index extends Component {
             <del>{formatter.format(product.price)} </del>
           </span>
         ) : (
-          <span> {formatter.format(product.price)}</span>
+          <span  className="font-weight-bold " style={{color: "red"}}> {formatter.format(product.price)}</span>
         );
         return (
           <React.Fragment>
-            <h4 className="text-center mb-4">CHI TIẾT SẢN PHẨM</h4>
-            <Col lg="3" style={{ backgroundColor: "red" }}>
+            <Col lg="3" style={{ backgroundColor: "#ECECEC" }}>
               <Row>
                 <Col>
-                  <h3>{product.name}</h3>
+                  <h3 style={{ marginTop: "50px" }}>{product.name}</h3>
                 </Col>
               </Row>
               <Row>
-                <Col>{elementPrice}</Col>
+                <Col className="mt-2">
+                  <h5  className="font-weight-normal ">Giá Bán:</h5>
+                </Col>
               </Row>
               <Row>
-                <Col>{elementNewPrice}</Col>
+                <Col className="mt-4">
+                  <h5>{elementPrice}</h5>
+                </Col>
+              </Row>
+              <Row>
+                <Col className="mt-2">
+                  <h5>{elementNewPrice}</h5>
+                </Col>
+              </Row>
+              <Row>
+                <Col className="mt-2">
+                  <h5>--------------------------------------------</h5>
+                </Col>
               </Row>
             </Col>
-            <Col lg="6">
-              <Image src={product.image}></Image>
+            <Col lg="5">
+              <Row>
+                <Col>
+                  <Image
+                    class="Adjust__Image"
+                    src={product.image}
+                    style={{ maxWidth: "470px" }}
+                  ></Image>
+                </Col>
+              </Row>
+              <Row>
+                <Col
+                  className="ml-4 mt-2"
+                  style={{ backgroundColor: "#666666" }}
+                >
+                  <p
+                    className="font-weight-normal text-left"
+                    style={{ color: "#f0f0f0", marginBottom: "0" }}
+                  >
+                    Thông Tin Về Sản Phẩm
+                  </p>
+                </Col>
+              </Row>
+              <Row>
+                <Col
+                  className="ml-4 mt-2"
+                  style={{ backgroundColor: "#f0f0f0" }}
+                >
+                  <h4
+                    className="font-weight-normal text-left"
+                    style={{ color: "#666", marginBottom: "0" }}
+                  >
+                    {product.description}
+                  </h4>
+                </Col>
+              </Row>
             </Col>
           </React.Fragment>
         );
@@ -101,7 +149,7 @@ class index extends Component {
         <Container>
           <Row className="mt-4">
             {this.showDetailProduct(products_category, id_product)}
-            <Col lg="3" style={{ backgroundColor: "red" }}>
+            <Col className="ml-4" lg="3" style={{ backgroundColor: "#ECECEC" }}>
               {this.ShowColorAndSize(products, id_product)}
             </Col>
           </Row>
