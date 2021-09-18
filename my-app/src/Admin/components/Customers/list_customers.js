@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTimes, faTools } from "@fortawesome/free-solid-svg-icons";
 import * as actions from "./../../../actions/index";
 import { connect } from "react-redux";
+import { Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 const getBadge = (status) => {
   switch (status) {
@@ -91,7 +92,7 @@ class ListCustomers extends React.Component {
 
                           <CButton type="button"
                             onClick={() => {
-                            this.onDeleteCustomer(item.id);
+                              this.onDeleteCustomer(item.id);
                             }}
                             className="btn btn-warning">
                             <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
@@ -103,6 +104,12 @@ class ListCustomers extends React.Component {
                       (item, index) => (
                         <td>
                           {index + 1}
+                        </td>
+                      ),
+                    'image':
+                      (item, index) => (
+                        <td>
+                          <Image src={item.image} thumbnail />
                         </td>
                       )
                   }}

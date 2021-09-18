@@ -19,7 +19,7 @@ import {
 
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { Button, Form, Col, Container, Row } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
  class addColor extends React.Component {
     constructor(props) {
         super(props);
@@ -72,7 +72,7 @@ import { Button, Form, Col, Container, Row } from 'react-bootstrap';
           
         };
         var sizeUpdate = {
-          id: idItem,
+          id: match.params.id_size,
           nameSize: txtName,
         };
        

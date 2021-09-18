@@ -16,8 +16,8 @@ import {
     faTools,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import CallAPI from "../../utils/Callapi";
-import { Button, Form, Col, Container, Row, FormGroup, Label, InputGroup, Modal, Alert, Table } from 'react-bootstrap';
+
+
 import * as actions from "./../../../actions/index";
 
 const fields = ['STT',
@@ -37,11 +37,11 @@ class ListSector extends React.Component {
     };
     render() {
         var { sector } = this.props;
-        var data = sector.map((item, index) => {
+        var dataSector = sector.map((item, index) => {
             return { ...item, index };
 
         });
-        console.log(data);
+    
         return (
             <>
                 <Link to="/admin/manage/sector/add">
@@ -57,7 +57,7 @@ class ListSector extends React.Component {
                             </CCardHeader>
                             <CCardBody>
                                 <CDataTable
-                                    items={data}
+                                    items={dataSector}
                                     fields={fields}
                                     itemsPerPage={8}
                                     pagination

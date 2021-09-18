@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-// import { Container, Row, Col, Form, Button } from "react-bootstrap";
-
 import HomePape from "../../containers/TheLayout";
 import { Route } from "react-router-dom";
-import { Button, Form, Col, Container, Row } from 'react-bootstrap';
 import './login.scss';
 class index extends Component {
   constructor(props) {

@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  CBadge,
   CCard,
   CCardBody,
   CCardHeader,
@@ -12,24 +11,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTimes, faTools } from "@fortawesome/free-solid-svg-icons";
 import * as actions from "./../../../actions/index";
-
-import usersData from "../User/UserData";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-const getBadge = (status) => {
-  switch (status) {
-    case "Active":
-      return "success";
-    case "Inactive":
-      return "secondary";
-    case "Pending":
-      return "warning";
-    case "Banned":
-      return "danger";
-    default:
-      return "primary";
-  }
-};
 const fields = [
   'STT',
   { key: 'id', label: 'Mã Nhân Viên' },
@@ -74,15 +57,6 @@ class ListStaffs extends React.Component {
                   fields={fields}
                   itemsPerPage={8}
                   pagination
-                  scopedSlots={{
-                    status: (item) => (
-                      <td>
-                        <CBadge color={getBadge(item.status)}>
-                          {item.status}
-                        </CBadge>
-                      </td>
-                    ),
-                  }}
                   scopedSlots={{
                     "Hành Động": (item) => (
                       <td>

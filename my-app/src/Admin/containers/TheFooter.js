@@ -12,7 +12,7 @@ const TheFooter = () => {
       </div>
       <div className="mfs-auto">
         <span className="mr-1">Khóa Luận Tốt Nghiệp</span>
-        <a href="#"  rel="noopener noreferrer">React JS</a>
+        <a href="https://www.facebook.com/taquangtrung.115/"  rel="noopener noreferrer">React JS</a>
       </div>
     </CFooter>
   )

@@ -7,13 +7,8 @@ import {
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import uniqid from 'uniqid';
-import { Button, Form, Col, Container, Row } from 'react-bootstrap';
 import {
-  CCard,
-  CCardBody,
-  CCardHeader,
   CCol,
-  CDataTable,
   CRow,
   CButton,
   CContainer,
@@ -75,11 +70,9 @@ class addObject extends React.Component {
     };
     var objectUpdate = {
       id: match.params.id_object,
-<<<<<<< Updated upstream
       name: txtName,
-=======
       nameObject: txtName,
->>>>>>> Stashed changes
+
     };
 
     if (idItem) {
@@ -97,21 +90,21 @@ class addObject extends React.Component {
       <CContainer fluid>
         <CRow>
           <Link to="/admin/manage/object">
-            <Button type="button" className="btn btn-primary" size="sm">
-              <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg"/>Trở về
-            </Button>
+            <CButton type="button" className="btn btn-primary" size="sm">
+              <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />Trở về
+            </CButton>
           </Link>
           <CCol sm="12">
-<<<<<<< Updated upstream
+
+
+
             <CForm onSubmit={this.onSubmitForm}>
-=======
-            <CForm  onSubmit={this.onSubmitForm}>
->>>>>>> Stashed changes
+
               <CFormGroup>
                 <CLabel htmlFor="exampleFormControlInput1">Tên Đối Tượng</CLabel>
                 <CInput
                   type="text"
-         
+
                   name="txtName"
                   placeholder="Tên đối tượng..."
                   autoComplete="name"

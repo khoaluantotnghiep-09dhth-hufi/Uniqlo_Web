@@ -4,11 +4,10 @@ import {
     faPlus,
     faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import CallAPI from '../../utils/Callapi';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import uniqid from 'uniqid';
-import { Button, Form, Col, Container, Row, Select } from 'react-bootstrap';
+import { Button, Form, Col, Container, Row } from 'react-bootstrap';
 import * as actions from "./../../../actions/index";
 let isLoadingExternally = false;
 class AddSector extends React.Component {
@@ -28,9 +27,6 @@ class AddSector extends React.Component {
             ib_object: this.props.fetchObjects()
         })
 
-    }
-    handleChange(selectedOption) {
-        this.setState({ selectedOption });
     }
     componentWillReceiveProps(NextProps) {
         var { match } = this.props;
@@ -57,6 +53,10 @@ class AddSector extends React.Component {
             [name]: value,
         });
     };
+    handleChange(e) {
+        console.log("Fruit Selected!!");
+        this.setState({ fruit: e.target.value });
+      }
     onSubmitForm = (event) => {
         var { match } = this.props;
 
@@ -87,15 +87,10 @@ class AddSector extends React.Component {
     };
     render() {
         var { object } = this.props;
-        var data = object.map((item, index) => {
-            return { ...item, index };
-
-        });
-        console.log(data);
         return (
             <Container fluid>
                 <Row>
-                    <Link to="/admin/manage/objects">
+                    <Link to="/admin/manage/sector">
                         <Button type="button" className="btn btn-primary" size="sm">
                             <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />Trở về
                         </Button>
@@ -117,20 +112,19 @@ class AddSector extends React.Component {
                                 </Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicObject">
+                                <Form.Label>Đối Tượng</Form.Label>
                                 <Form.Select name="form-field-name"
                                     value={this.setState.id_object}
-                                    onChange={this.handleChange}
+                                    onChange={this.onChange}
                                     labelKey={'Tên'}
                                     valueKey={'Mã'}
                                     isLoading={isLoadingExternally}
                                     options={this.setState.ib_object}
                                 >
-
                                     {object.map((option) => (
                                         <option value={option.id}>{option.name}</option>
-                                       
                                     ))}
-                                     console.log(object.map);
+                                    console.log(object.map);
                                 </Form.Select>
 
 

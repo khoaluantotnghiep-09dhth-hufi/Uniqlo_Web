@@ -19,15 +19,7 @@ import {
 import usersData from '../User/UserData';
 
 import { Link } from 'react-router-dom';
-const getBadge = status => {
-    switch (status) {
-        case 'Active': return 'success'
-        case 'Inactive': return 'secondary'
-        case 'Pending': return 'warning'
-        case 'Banned': return 'danger'
-        default: return 'primary'
-    }
-}
+
 const fields = ['Tên', 'registered', 'role', 'status', 'Hành Động']
 
 class ListImportProduct extends React.Component {
@@ -52,17 +44,6 @@ class ListImportProduct extends React.Component {
                                     fields={fields}
                                     itemsPerPage={8}
                                     pagination
-                                    scopedSlots={{
-                                        'status':
-                                            (item) => (
-                                                <td>
-                                                    <CBadge color={getBadge(item.status)}>
-                                                        {item.status}
-                                                    </CBadge>
-                                                </td>
-                                            )
-
-                                    }}
                                     scopedSlots={{
                                         'Hành Động':
                                             (item) => (

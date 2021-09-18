@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-    CBadge,
     CCard,
     CCardBody,
     CCardHeader,
@@ -17,17 +16,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
-import * as actions from "./../../../actions/index";
-import { Image } from 'react-bootstrap';
-const getBadge = status => {
-    switch (status) {
-        case 'Active': return 'success'
-        case 'Inactive': return 'secondary'
-        case 'Pending': return 'warning'
-        case 'Banned': return 'danger'
-        default: return 'primary'
-    }
-}
+import * as actions from "./../../../actions/productActions";
+import { Image, Alert } from 'react-bootstrap';
 const fields = [
     'STT',
     { key: 'id', label: 'Mã' },
@@ -39,11 +29,20 @@ const fields = [
     { key: 'nameCategory', label: 'Danh Mục' },
     { key: 'image', label: 'Ảnh' },
     { key: 'namePromotion', label: 'Khuyến Mãi' },
-    { key: 'quantity', label: 'Số Lượng' },
+    { key: 'quantityAllProduct', label: 'Số Lượng' },
     { key: 'nameColor', label: 'Màu' },
     { key: 'nameSize', label: 'Kích Cỡ' },
     'Thao Tác',
 ]
+const getBadge = color => {
+    switch (color) {
+        case "Red": return 'danger'
+        case "Blue": return 'primary'
+        case "Pink": return 'dark'
+        case "Orange": return 'warning'
+        default: return 'white'
+    }
+}
 
 class ListProducts extends React.Component {
     componentDidMount() {
@@ -79,17 +78,6 @@ class ListProducts extends React.Component {
                                     itemsPerPage={8}
                                     pagination
                                     scopedSlots={{
-                                        'status':
-                                            (item) => (
-                                                <td>
-                                                    <CBadge color={getBadge(item.status)}>
-                                                        {item.status}
-                                                    </CBadge>
-                                                </td>
-                                            )
-
-                                    }}
-                                    scopedSlots={{
                                         'Thao Tác':
                                             (item) => (
                                                 <td>
@@ -113,12 +101,21 @@ class ListProducts extends React.Component {
                                                     {index + 1}
                                                 </td>
                                             ),
-                                            'image':
+                                        'image':
                                             (item, index) => (
                                                 <td>
                                                     <Image src={item.image} thumbnail />
                                                 </td>
-                                            )
+                                            ),
+                                        // "nameColor": (item) => (
+                                        //     <td>
+                                        //         <Alert variant={getBadge(item.nameColor)}>
+                                        //             {/* {item.status === 0 ? 'Chưa Giao' : 'Đã Giao'} */}
+                                        //         </Alert>
+
+
+                                        //     </td>
+                                        // ),
                                     }}
                                 />
                             </CCardBody>
@@ -144,9 +141,9 @@ var mapDispatchToProps = (dispatch, props) => {
         fetchProducts: () => {
             return dispatch(actions.fetchProductResquest());
         },
-        onDeleteItemProduct: (id) => {
-            return dispatch(actions.onDeleteProductResquest(id))
-        }
+        // onDeleteItemProduct: (id) => {
+        //     return dispatch(actions.onDeleteProductResquest(id))
+        // }
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ListProducts);

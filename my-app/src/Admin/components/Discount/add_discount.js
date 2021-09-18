@@ -15,7 +15,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import * as actions from "./../../../actions/index";
 import { Link } from "react-router-dom";
-import { Button, Form, Col, Container, Row } from 'react-bootstrap';
 import {faArrowLeft} from "@fortawesome/free-solid-svg-icons";
 class addDiscount extends React.Component {
   constructor(props) {
@@ -95,9 +94,9 @@ class addDiscount extends React.Component {
       <CContainer fluid>
         <CRow>
         <Link to="/admin/system/discount">
-            <Button type="button" className="btn btn-primary" size="sm">
+            <CButton type="button" className="btn btn-primary" size="sm">
               <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg"/>Trở về
-            </Button>
+            </CButton>
           </Link>
           <CCol sm="12">
             <CForm action="" method="post" onSubmit={this.onSubmitForm}>

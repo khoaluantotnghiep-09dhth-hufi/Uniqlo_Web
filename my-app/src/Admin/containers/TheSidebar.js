@@ -11,21 +11,6 @@ import {
   CSidebarNavDropdown,
   CSidebarNavItem,
 } from '@coreui/react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faHome,
-  faFileAlt,
-  faHandHoldingUsd,
-  faSignOutAlt,
-  faTable,
-  faTimes,
-  faCalendarAlt,
-  faMapPin,
-
-  faUsers,
-  faEnvelope
-} from "@fortawesome/free-solid-svg-icons";
-import CIcon from '@coreui/icons-react'
 import logo from '../assets/logo_uq_01.jpg';
 // sidebar nav config
 import navigation from './_nav'

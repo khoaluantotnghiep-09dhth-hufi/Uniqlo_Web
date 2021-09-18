@@ -11,7 +11,6 @@ import {
   CRow,
   CButton,
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPlus,
@@ -19,9 +18,6 @@ import {
   faTools,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import usersData from '../User/UserData';
-
-
 const fields = [
   "STT",
   { key: 'id', label: 'Mã' },

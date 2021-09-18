@@ -12,15 +12,12 @@ import {
   CRow,
   CFormGroup,
   CButton,
-
 } from '@coreui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPlus,faArrowLeft
-
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { Button, Form, Col, Container, Row } from 'react-bootstrap';
 class addColor extends React.Component {
   constructor(props) {
     super(props);
@@ -89,9 +86,9 @@ class addColor extends React.Component {
       <CContainer fluid>
         <CRow>
           <Link to="/admin/manage/color">
-            <Button type="button" className="btn btn-primary" size="sm">
+            <CButton type="button" className="btn btn-primary" size="sm">
               <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg"/>Trở về
-            </Button>
+            </CButton>
           </Link>
           <CCol sm="12">
             <CForm action="" method="post" onSubmit={this.onSubmitForm}>

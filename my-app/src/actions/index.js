@@ -116,51 +116,7 @@ export const onDeleteProductResquest = (id) => {
   };
 };
 //Thêm sản phẩm
-export const onAddProduct = (product) => {
-  return {
-    type: types.ADD_PRODUCT,
-    product,
-  };
-};
 
-export const onAddProductResquest = (product) => {
-  return (dispatch) => {
-    return callApi("products", "POST", product).then((response) => {
-      dispatch(onAddProduct(response.data));
-    });
-  };
-};
-//Cập nhật sản phẩm
-export const onUpdateProduct = (product) => {
-  return {
-    type: types.UPDATE_PRODUCT,
-    product,
-  };
-};
-export const onUpdateProductResquest = (product) => {
-  return (dispatch) => {
-    return callApi(`products/${product.id}`, "PUT", product).then(
-      (response) => {
-        dispatch(onUpdateProduct(response.data));
-      }
-    );
-  };
-};
-
-//Sửa sản phẩm
-export const onGetProduct = (product) => {
-  return {
-    type: types.EDIT_PRODUCT,
-    product,
-  };
-};
-export const onEditProductResquest = (id) => {
-  return (dispatch) => {
-    return callApi(`products/${id}`, "GET", null).then((response) => {
-      dispatch(onGetProduct(response.data));
-    });
-  };
-};
 
 //Lấy tất cả danh sách Object
 
@@ -263,27 +219,19 @@ export const onAddPromotion = (promotion) => {
     promotion,
   };
 };
-<<<<<<< Updated upstream
-export const onAddObject = (object) => {
-=======
-export const onAddObjects = (objects) => {
->>>>>>> Stashed changes
+
+
+
+export const onAddObjects = (object) => {
   return {
     type: types.ADD_OBJECT,
     object,
   };
 };
-<<<<<<< Updated upstream
-export const onAddObjectResquest = (object) => {
+export const onAddObjectsResquest = (object) => {
   return (dispatch) => {
     return callApi("objects", "POST", object).then((response) => {
-      dispatch(onAddObject(response.data));
-=======
-export const onAddObjectsResquest = (objects) => {
-  return (dispatch) => {
-    return callApi("objects", "POST", objects).then((response) => {
       dispatch(onAddObjects(response.data));
->>>>>>> Stashed changes
     });
   };
 };

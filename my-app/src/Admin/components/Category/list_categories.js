@@ -16,8 +16,8 @@ import {
     faTools,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import CallAPI from "../../utils/Callapi";
-import { Button, Form, Col, Container, Row, FormGroup, Label, InputGroup, Modal, Alert, Table } from 'react-bootstrap';
+
+
 import * as actions from "./../../../actions/index";
 const fields = ['STT',
     { key: 'id', label: 'Mã Danh Mục' },

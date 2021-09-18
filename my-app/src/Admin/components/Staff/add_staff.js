@@ -16,10 +16,9 @@ import * as actions from "./../../../actions/index";
 import { connect } from "react-redux";
 import {
   faPlus,faArrowLeft
-
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { Button, Form, Col, Container, Row } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 class addStaff extends React.Component {
   constructor(props) {

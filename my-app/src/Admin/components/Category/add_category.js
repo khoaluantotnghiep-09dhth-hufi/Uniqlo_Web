@@ -4,25 +4,31 @@ import {
     faPlus,
     faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import CallAPI from '../../utils/Callapi';
+
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import uniqid from 'uniqid';
 import { Button, Form, Col, Container, Row } from 'react-bootstrap';
 import * as actions from "./../../../actions/index";
+let isLoadingExternally = false;
 class AddCategory extends React.Component {
     constructor(props) {
         super(props);
         this.setState({
             idItem: "",
             txtName: "",
-            id_sector: "",
+            id_sector: [],
         });
     }
     componentDidMount() {
         var { match } = this.props;
 
         this.props.onEditItemCategory(match.params.id_category);
+        isLoadingExternally = true;
+
+        this.setState({
+            id_sector: this.props.fetchSectors()
+        })
     }
     componentWillReceiveProps(NextProps) {
         var { match } = this.props;
@@ -78,7 +84,7 @@ class AddCategory extends React.Component {
         }
     };
     render() {
-
+        var { sector } = this.props;
         return (
             <Container fluid>
                 <Row>
@@ -104,45 +110,38 @@ class AddCategory extends React.Component {
                                 </Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicObject">
-                                {/* <Form.Select aria-label="Default select example" name="id_sector"
+                                <Form.Label>Loại</Form.Label>
+                                <Form.Select name="form-field-name"
                                     value={this.setState.id_sector}
                                     onChange={this.onChange}
+                                    labelKey={'Tên'}
+                                    valueKey={'Mã'}
+                                    isLoading={isLoadingExternally}
+                                    options={this.setState.id_sector}
+                                >
+                                    {sector.map((option) => (
+                                        <option value={option.id}>{option.name}</option>
 
-                                > */}
-                                {/* <option optionDisable="true">Chọn Đối Tượng</option>
-                                    {data.map((option, i) => (
+                                    ))}
+                                    console.log(sector.map);
+                                </Form.Select>
 
-                                        <option value={option.id} key={i}>{option.name}</option>
-                                    ))} */}
-                                {/* <option value="selector-1">Hàng Mới</option>
-                                    <option value="selector-2">Đặc Biệt</option>
-                                    <option value="selector-3">Giảm Giá</option>
-                                     */}
 
-                                <Form.Control
-                                    required
-                                    type="text"
-                                    placeholder="Nhập tên đối tượng cần thêm..."
-                                    name="id_sector"
-                                    value="selector-1"
-                                    onChange={this.onChange} />
-                            {/* </Form.Select> */}
-
-                        </Form.Group>
-                        {/* <Link to="/admin/manage/objects" > */}
-                        <Button type="button"
-                            className="btn btn-danger"
-                            onClick={this.onSubmitForm}
-                        >
-                            <FontAwesomeIcon
-                                icon={faPlus}
-                                className="mr-2"
-                                size="lg" />Lưu
-                        </Button>
-                        {/* </Link> */}
-                    </Form>
-                </Col>
-            </Row>
+                            </Form.Group>
+                            {/* <Link to="/admin/manage/objects" > */}
+                            <Button type="button"
+                                className="btn btn-danger"
+                                onClick={this.onSubmitForm}
+                            >
+                                <FontAwesomeIcon
+                                    icon={faPlus}
+                                    className="mr-2"
+                                    size="lg" />Lưu
+                            </Button>
+                            {/* </Link> */}
+                        </Form>
+                    </Col>
+                </Row>
             </Container >
         )
     }
@@ -151,18 +150,22 @@ class AddCategory extends React.Component {
 var mapStateToProps = (state) => {
     return {
         category: state.category,
+        sector: state.sector,
     };
 };
 var mapDispatchToProps = (dispatch, props) => {
     return {
         onAddItemCategory: (category) => {
-            dispatch(actions.onAddCategoryResquest(category));
+            return dispatch(actions.onAddCategoryResquest(category));
+        },
+        fetchSectors: () => {
+            return dispatch(actions.fetchSectorResquest());
         },
         onEditItemCategory: (id) => {
-            dispatch(actions.onEditCategoryResquest(id));
+            return dispatch(actions.onEditCategoryResquest(id));
         },
         onUpdateItemCategory: (category) => {
-            dispatch(actions.onUpdateCategoryResquest(category));
+            return dispatch(actions.onUpdateCategoryResquest(category));
         },
     };
 };

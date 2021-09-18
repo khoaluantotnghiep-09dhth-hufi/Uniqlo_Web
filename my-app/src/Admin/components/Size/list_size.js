@@ -52,15 +52,6 @@ class ListColor extends React.Component {
                   itemsPerPage={8}
                   pagination
                   scopedSlots={{
-                    status: (item) => (
-                      <td>
-                        {/* <CBadge color={getBadge(item.status)}>
-                                                        {item.status}
-                                                    </CBadge> */}
-                      </td>
-                    ),
-                  }}
-                  scopedSlots={{
                     "Hành Động": (item) => (
                       <td>
                         <Link to={`/admin/manage/size/${item.id}/edit`}>
