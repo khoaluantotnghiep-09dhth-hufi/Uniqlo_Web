@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Image } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Image,
+  ButtonGroup,
+  Button,
+} from "react-bootstrap";
 import { connect } from "react-redux";
 import * as actions from "./../../actions/productActions";
 import "./Detail_Product.scss";
@@ -25,9 +32,9 @@ class index extends Component {
         }
         var elementNewPrice = newPrice ? (
           <span
-          // style={{ marginLeft: "40px", color: "red" }}
-          className="font-weight-bold "
-          style={{color: "red"}}
+            // style={{ marginLeft: "40px", color: "red" }}
+            className="font-weight-bold "
+            style={{ color: "red" }}
           >
             {" "}
             {formatter.format(newPrice)}{" "}
@@ -42,7 +49,10 @@ class index extends Component {
             <del>{formatter.format(product.price)} </del>
           </span>
         ) : (
-          <span  className="font-weight-bold " style={{color: "red"}}> {formatter.format(product.price)}</span>
+          <span className="font-weight-bold " style={{ color: "red" }}>
+            {" "}
+            {formatter.format(product.price)}
+          </span>
         );
         return (
           <React.Fragment>
@@ -54,7 +64,7 @@ class index extends Component {
               </Row>
               <Row>
                 <Col className="mt-2">
-                  <h5  className="font-weight-normal ">Giá Bán:</h5>
+                  <h5 className="font-weight-normal ">Giá Bán:</h5>
                 </Col>
               </Row>
               <Row>
@@ -117,28 +127,46 @@ class index extends Component {
     return result;
   };
 
-  ShowColorAndSize = (products, id_product) => {
+  ShowColor = (products, id_product) => {
     var result = null;
     result = products
       .filter((product) => product.id === id_product)
       .map((product, index) => {
         return (
           <React.Fragment>
-            <Row>
-              <Col>
-                <h3>doan 1</h3>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <h3>doan 2</h3>
-              </Col>
-            </Row>
+            <Col lg="4">
+              
+                <Button variant="outline-secondary" size="sm">
+                  {product.nameColor}
+                </Button>
+         
+            </Col>
           </React.Fragment>
         );
       });
     return result;
   };
+
+  ShowSize = (products, id_product) => {
+    var result = null;
+    result = products
+      .filter((product) => product.id === id_product)
+      .map((product, index) => {
+        return (
+          <React.Fragment>
+            <Col lg="3">
+        
+                <Button variant="outline-secondary" size="sm">
+                  {product.nameSize}
+                </Button>
+            
+            </Col>
+          </React.Fragment>
+        );
+      });
+    return result;
+  };
+
   render() {
     var { match, products, products_category } = this.props;
 
@@ -150,7 +178,14 @@ class index extends Component {
           <Row className="mt-4">
             {this.showDetailProduct(products_category, id_product)}
             <Col className="ml-4" lg="3" style={{ backgroundColor: "#ECECEC" }}>
-              {this.ShowColorAndSize(products, id_product)}
+              <p className="font-weight-bold " style={{ marginTop: "50px" }}>
+                Màu:
+              </p>
+              <Row>{this.ShowColor(products, id_product)}</Row>
+              <p className="font-weight-bold mt-5">Kích Cỡ:</p>
+              <Row>{this.ShowSize(products, id_product)}</Row>
+              <h5 style={{ marginTop: "40px" }}>--------------------------------------------</h5>
+
             </Col>
           </Row>
         </Container>
