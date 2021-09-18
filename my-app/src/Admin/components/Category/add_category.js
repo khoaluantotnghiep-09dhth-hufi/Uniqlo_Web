@@ -16,7 +16,7 @@ class AddCategory extends React.Component {
         this.setState({
             idItem: "",
             txtName: "",
-            idSector: "",
+            id_sector: "",
         });
     }
     componentDidMount() {
@@ -36,7 +36,7 @@ class AddCategory extends React.Component {
                 this.setState({
                     idItem: result.id,
                     txtName: result.name,
-                    idSector: result.idSector,
+                    id_sector: result.id_sector,
                 });
             }
         }
@@ -54,17 +54,17 @@ class AddCategory extends React.Component {
 
         event.preventDefault();
         var { history } = this.props;
-        var { idItem, txtName, ibSector } = this.state;
+        var { idItem, txtName, id_sector } = this.state;
 
         var category = {
             id: uniqid("category-"),
             name: txtName,
-            idSector: ibSector,
+            idSector: id_sector,
         };
         var categoryUpdate = {
             id: match.params.id_category,
             name: txtName,
-            idSector: ibSector,
+            idSector: id_sector,
         };
 
         if (idItem) {
@@ -96,7 +96,7 @@ class AddCategory extends React.Component {
                                     type="text"
                                     placeholder="Nhập tên đối tượng cần thêm..."
                                     name="txtName"
-
+                                    value={this.setState.txtName}
                                     onChange={this.onChange} />
                                 <Form.Control.Feedback
                                     type="invalid" >
@@ -104,9 +104,10 @@ class AddCategory extends React.Component {
                                 </Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicObject">
-                                <Form.Select aria-label="Default select example" name="idSector"
+                                <Form.Select aria-label="Default select example" name="id_sector"
+                                    value={this.setState.id_sector}
                                     onChange={this.onChange}
-                                   
+
                                 >
                                     {/* <option optionDisable="true">Chọn Đối Tượng</option>
                                     {data.map((option, i) => (
@@ -116,7 +117,7 @@ class AddCategory extends React.Component {
                                     <option value="selector-1">Hàng Mới</option>
                                     <option value="selector-2">Đặc Biệt</option>
                                     <option value="selector-3">Giảm Giá</option>
-                               
+
                                 </Form.Select>
 
                             </Form.Group>

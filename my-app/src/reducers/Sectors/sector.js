@@ -1,12 +1,11 @@
 import * as types from "./../../constants/ActionTypes";
 
 var initialState = [];
-var initialState = [];
 
 var findIndex = (sector, id) => {
   var rs = -1;
-  sector.forEach((sector, index) => {
-    if (sector.id === id) {
+  sector.forEach((item, index) => {
+    if (item.id === id) {
       rs = index;
     }
   });
@@ -20,7 +19,11 @@ var sector = (state = initialState, action) => {
     case types.FETCH_SECTOR:
       state = action.sector;
       return [...state];
-      
+    // case types.FETCH_OBJECT:
+    //   let coppyState = { ...state };
+    //   coppyState.objectArr = action.data;
+    //   console.log("log coppy state", coppyState);
+    //   return { ...coppyState };
     case types.DELETE_SECTOR:
       index = findIndex(state, id);
       state.slice(index, 1);

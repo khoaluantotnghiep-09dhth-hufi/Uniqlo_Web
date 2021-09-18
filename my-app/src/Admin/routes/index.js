@@ -89,7 +89,7 @@ const routes = [
 
     { path: '/admin/manage/order-product', exact: true, name: 'Danh Sách Đặt Hàng', component: ListOrderProduct },
     { path: '/admin/manage/order-product/add', exact: true, name: 'Lập Đơn Đặt Hàng', component: AddOrderProduct },
-    { path: '/admin/manage/order-product/info', exact: true, name: 'Chi Tiết Đơn Đặt Hàng', component: OrderProductInfo },
+    { path: '/admin/manage/order-info/:id', exact: true, name: 'Chi Tiết Đơn Đặt Hàng', component: OrderProductInfo },
 
     { path: '/admin/manage/import-product', exact: true, name: 'Danh Sách Nhập Hàng', component: ListImportProduct },
     { path: '/admin/manage/import-product/add', exact: true, name: 'Lập Đơn Nhập Hàng', component: AddImportProduct },
