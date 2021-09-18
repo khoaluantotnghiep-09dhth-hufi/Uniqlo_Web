@@ -3,14 +3,14 @@ import * as types from "./../../constants/ActionTypes";
 var initialState = [];
 
 var findIndex = (object, id) => {
-  var rs = -1;
+  var result = -1;
   object.forEach((item, index) => {
     if (item.id === id) {
-      rs = index;
+      result = index;
     }
   });
-  return rs;
-}
+  return result;
+};
 var object = (state = initialState, action) => {
   var index = -1;
   var { id } = action;
@@ -21,18 +21,17 @@ var object = (state = initialState, action) => {
 
     case types.DELETE_OBJECT:
       index = findIndex(state, id);
-      state.slice(index, 1);
+      state.splice(index, 1);
 
       return [...state];
 
-    case types.FETCH_SECTOR_BY_ID:
-      return action.object;
+    // case types.FETCH_SECTOR_BY_ID:
+    //   return action.object;
 
     case types.ADD_OBJECT:
-      state.push(action.object);
       console.log(action.object);
-
-
+      state.push(action.object);
+      
       return [...state];
 
     case types.UPDATE_OBJECT:

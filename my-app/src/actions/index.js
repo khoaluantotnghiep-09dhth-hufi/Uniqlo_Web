@@ -263,15 +263,15 @@ export const onAddPromotion = (promotion) => {
     promotion,
   };
 };
-export const onAddObject = (objects) => {
+export const onAddObject = (object) => {
   return {
     type: types.ADD_OBJECT,
-    objects,
+    object,
   };
 };
-export const onAddObjectResquest = (objects) => {
+export const onAddObjectResquest = (object) => {
   return (dispatch) => {
-    return callApi("objects", "POST", objects).then((response) => {
+    return callApi("objects", "POST", object).then((response) => {
       dispatch(onAddObject(response.data));
     });
   };

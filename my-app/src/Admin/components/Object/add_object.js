@@ -35,7 +35,7 @@ class addObject extends React.Component {
   componentDidMount() {
     var { match } = this.props;
 
-    this.props.onEditItemObject(match.params.id);
+    this.props.onEditItemObject(match.params.id_object);
   }
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
@@ -43,7 +43,7 @@ class addObject extends React.Component {
       var { object } = NextProps;
       if (match.params.id) {
         const result = object.find(
-          (o) => o.id === match.params.id
+          (o) => o.id === match.params.id_object
         );
         this.setState({
           idItem: result.id,
@@ -74,7 +74,7 @@ class addObject extends React.Component {
 
     };
     var objectUpdate = {
-      id: match.params.id,
+      id: match.params.id_object,
       name: txtName,
     };
 
@@ -98,7 +98,7 @@ class addObject extends React.Component {
             </Button>
           </Link>
           <CCol sm="12">
-            <CForm action="" method="post" onSubmit={this.onSubmitForm}>
+            <CForm onSubmit={this.onSubmitForm}>
               <CFormGroup>
                 <CLabel htmlFor="exampleFormControlInput1">Tên Đối Tượng</CLabel>
                 <CInput
