@@ -34,7 +34,8 @@ class addObject extends React.Component {
       var { object_menu } = NextProps;
 
       if (match.params.id_object_menu) {
-        var result = object_menu.find((o) => o.id === match.params.id_object);
+        const result = object_menu.find((o) => o.id === match.params.id_object);
+        console.log(result);
         this.setState({
           idItem: result.id,
           txtName: result.name,
@@ -62,18 +63,19 @@ class addObject extends React.Component {
       nameObject: txtName,
     };
     var objectUpdate = {
-      id: match.params.id_object,
-
+      idItem: match.params.id_object,
       nameObject: txtName,
     };
-
-    if (idItem) {
+console.log(objectUpdate);
+console.log(idItem)
+    if (match.params.id_object) {
       this.props.onUpdateItemObject(objectUpdate);
-      // history.goBack();
+      // alert("Sửa thành công");
+      history.goBack();
     } else {
       this.props.onAddItemObject(object_menu);
-      //alert("Thêm thành công");
-      // history.goBack();
+      // alert("Thêm thành công");
+      history.goBack();
     }
   };
   render() {

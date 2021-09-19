@@ -931,6 +931,7 @@ export const fetchObjectsResquest = () => {
     });
   };
 };
+//Them
 export const onAddObjects = (object_menu) => {
   return {
     type: types.ADD_OBJECT,
@@ -940,7 +941,7 @@ export const onAddObjects = (object_menu) => {
 export const onAddObjectsResquest = (object_menu) => {
   return (dispatch) => {
     return callApi("objects", "POST", object_menu).then((response) => {
-      console.log(response.data)
+     
       dispatch(onAddObjects(response.data));
     });
   };

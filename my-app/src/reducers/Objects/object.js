@@ -29,7 +29,7 @@ var object_menu= (state = initialState, action) => {
      
       console.log(state)
       if(state){
-        state.unShift(object_menu);
+        state.push(object_menu);
       }
      else{
        console.log("State Dang Rong")

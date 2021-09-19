@@ -34,7 +34,7 @@ class ListObject extends React.Component {
   render() {
     var { object_menu } = this.props;
 
-    console.log(object_menu);
+  
     var dataObject = object_menu.map((item, index) => {
       return { ...item, index };
     });
