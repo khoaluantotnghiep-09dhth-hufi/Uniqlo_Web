@@ -66,7 +66,7 @@ class addDiscount extends React.Component {
     var { history } = this.props;
     var { idItem, txtNameDiscount, txtNameMota, dateStart, dateEnd } =
       this.state;
-    console.log(idItem);
+   
     var promotion = {
       id: uniqid("promotion-"),
       namePromotion: txtNameDiscount,

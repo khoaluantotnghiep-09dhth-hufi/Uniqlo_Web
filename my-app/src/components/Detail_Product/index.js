@@ -189,7 +189,7 @@ class index extends Component {
 
     return (
       <React.Fragment>
-        <Container>
+        <Container  style={{ marginTop: "5%", marginBottom: "15%" }}>
           <Row className="mt-4">
             {this.showDetailProduct(products_category, id_product)}
             <Col className="ml-4" style={{ backgroundColor: "#ECECEC" }}>

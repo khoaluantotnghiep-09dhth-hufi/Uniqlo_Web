@@ -3,7 +3,7 @@ import cart from "./Carts/cart";
 import products from "./Products/products";
 import products_category from "./Products_Category/products_category";
 
-import object from "./Objects/object";
+import object_menu from "./Objects/object";
 import sector from "./Sectors/sector";
 import users from "./Users/users";
 import staff from "./Staffs/staff";
@@ -18,9 +18,9 @@ import order from "./Order/order";
 import bills_customer from "./Bills_Customer/bills_customer";
 import order_info from "./OrderInfo/orderInfo";
 const myReducer = combineReducers({
-  cart, // items:items
+  cart,
   products, // products:
-  object,
+  object_menu,
   sector,
   category,
   color,

@@ -34,10 +34,11 @@ class addObject extends React.Component {
   }
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
-    if (NextProps && NextProps.object) {
-      var { object } = NextProps;
-      if (match.params.id_object) {
-        const result = object.find(
+    if (NextProps && NextProps.object_menu) {
+      var { object_menu } = NextProps;
+      console.log(object_menu)
+      if (match.params.id_object_menu) {
+        var result = object_menu.find(
           (o) => o.id === match.params.id_object
         );
         this.setState({
@@ -62,26 +63,26 @@ class addObject extends React.Component {
     var { history } = this.props;
     var { idItem, txtName } =
       this.state;
-
-    var object = {
+console.log(idItem, txtName)
+    var object_menu = {
       id: uniqid("object-"),
       nameObject: txtName,
 
     };
     var objectUpdate = {
       id: match.params.id_object,
-      name: txtName,
+      
       nameObject: txtName,
 
     };
 
     if (idItem) {
       this.props.onUpdateItemObject(objectUpdate);
-      history.goBack();
+      // history.goBack();
     } else {
-      this.props.onAddItemObject(object);
-      alert("Thêm thành công");
-      history.goBack();
+      this.props.onAddItemObject(object_menu);
+      //alert("Thêm thành công");
+      // history.goBack();
     }
   };
   render() {
@@ -135,19 +136,19 @@ class addObject extends React.Component {
 }
 var mapStateToProps = (state) => {
   return {
-    object: state.object,
+    object_menu: state.object_menu,
   };
 };
 var mapDispatchToProps = (dispatch, props) => {
   return {
-    onAddItemObject: (object) => {
-      dispatch(actions.onAddObjectsResquest(object));
+    onAddItemObject: (object_menu) => {
+     return dispatch(actions.onAddObjectsResquest(object_menu));
     },
     onEditItemObject: (id) => {
-      dispatch(actions.onEditObjectsResquest(id));
+     return dispatch(actions.onEditObjectsResquest(id));
     },
-    onUpdateItemObject: (object) => {
-      dispatch(actions.onUpdateObjectsResquest(object));
+    onUpdateItemObject: (object_menu) => {
+      return dispatch(actions.onUpdateObjectsResquest(object_menu));
     },
   };
 };

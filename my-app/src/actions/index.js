@@ -118,22 +118,7 @@ export const onDeleteProductResquest = (id) => {
 //Thêm sản phẩm
 
 
-//Lấy tất cả danh sách Object
 
-export const fetchObjects = (object) => {
-  return {
-    type: types.FETCH_OBJECT,
-    object,
-  };
-};
-
-export const fetchObjectsResquest = () => {
-  return (dispatch) => {
-    return callApi("objects", "GET", null).then((response) => {
-      dispatch(fetchObjects(response.data));
-    });
-  };
-};
 
 //Lấy tất cả danh sách Sector
 export const fetchSector = (sector) => {
@@ -222,19 +207,7 @@ export const onAddPromotion = (promotion) => {
 
 
 
-export const onAddObjects = (object) => {
-  return {
-    type: types.ADD_OBJECT,
-    object,
-  };
-};
-export const onAddObjectsResquest = (object) => {
-  return (dispatch) => {
-    return callApi("objects", "POST", object).then((response) => {
-      dispatch(onAddObjects(response.data));
-    });
-  };
-};
+
 export const onAddPromotionResquest = (promotion) => {
   return (dispatch) => {
     return callApi("promotions", "POST", promotion).then((response) => {
@@ -258,22 +231,7 @@ export const onUpdatePromotionResquest = (promotion) => {
     );
   };
 };
-//cập nhật object
-export const onUpdateObjects = (object) => {
-  return {
-    type: types.UPDATE_OBJECT,
-    object,
-  };
-};
-export const onUpdateObjectsResquest = (object) => {
-  return (dispatch) => {
-    return callApi(`objects/${object.id}`, "PUT", object).then(
-      (response) => {
-        dispatch(onUpdateObjects(response.data));
-      }
-    );
-  };
-};
+
 
 //Sửa Promotion
 export const onGetPromotion = (promotion) => {
@@ -289,35 +247,7 @@ export const onEditPromotionResquest = (id) => {
     });
   };
 };
-//xóa object 
-export const onDeleteObjects = (id) => {
-  return {
-    type: types.DELETE_OBJECT,
-    id,
-  };
-};
 
-export const onDeleteObjectsResquest = (id) => {
-  return (dispatch) => {
-    return callApi(`objects/${id}`, "DELETE", null).then((response) => {
-      dispatch(onDeleteObjects(id));
-    });
-  };
-};
-//sửa object 
-export const onGetObjects = (object) => {
-  return {
-    type: types.EDIT_OBJECT,
-    object,
-  };
-};
-export const onEditObjectsResquest = (id) => {
-  return (dispatch) => {
-    return callApi(`objects/${id}`, "GET", null).then((response) => {
-      dispatch(onGetObjects(response.data));
-    });
-  };
-};
 //Lấy tất cả danh sách Staff
 export const fetchStaffs = (staff) => {
   return {
@@ -985,5 +915,78 @@ export const onEditSectorResquest = (id) => {
 
 
 
+//Lấy tất cả danh sách Object
 
+export const fetchObjects = (object_menu) => {
+  return {
+    type: types.FETCH_OBJECT,
+    object_menu,
+  };
+};
 
+export const fetchObjectsResquest = () => {
+  return (dispatch) => {
+    return callApi("objects", "GET", null).then((response) => {
+      dispatch(fetchObjects(response.data));
+    });
+  };
+};
+export const onAddObjects = (object_menu) => {
+  return {
+    type: types.ADD_OBJECT,
+    object_menu,
+  };
+};
+export const onAddObjectsResquest = (object_menu) => {
+  return (dispatch) => {
+    return callApi("objects", "POST", object_menu).then((response) => {
+      console.log(response.data)
+      dispatch(onAddObjects(response.data));
+    });
+  };
+};
+//xóa object 
+export const onDeleteObjects = (id) => {
+  return {
+    type: types.DELETE_OBJECT,
+    id,
+  };
+};
+
+export const onDeleteObjectsResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`objects/${id}`, "DELETE", null).then((response) => {
+      dispatch(onDeleteObjects(id));
+    });
+  };
+};
+//sửa object 
+export const onGetObjects = (object_menu) => {
+  return {
+    type: types.EDIT_OBJECT,
+    object_menu,
+  };
+};
+export const onEditObjectsResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`objects/${id}`, "GET", null).then((response) => {
+      dispatch(onGetObjects(response.data));
+    });
+  };
+};
+//cập nhật object
+export const onUpdateObjects = (object_menu) => {
+  return {
+    type: types.UPDATE_OBJECT,
+    object_menu,
+  };
+};
+export const onUpdateObjectsResquest = (object_menu) => {
+  return (dispatch) => {
+    return callApi(`objects/${object_menu.id}`, "PUT", object_menu).then(
+      (response) => {
+        dispatch(onUpdateObjects(response.data));
+      }
+    );
+  };
+};

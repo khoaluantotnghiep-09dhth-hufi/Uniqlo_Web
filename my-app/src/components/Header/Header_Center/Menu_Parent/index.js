@@ -13,10 +13,10 @@ class index extends Component {
   onClick = (event) => {
     event.preventDefault();
   };
-  showListObject(object) {
+  showListObject(object_menu) {
     var result = null;
 
-    result = object.map((item, index) => {
+    result = object_menu.map((item, index) => {
       return (
         <li class="nav-item dropdown ">
           {" "}
@@ -42,11 +42,11 @@ class index extends Component {
     return result;
   }
   render() {
-    var { object } = this.props;
+    var { object_menu } = this.props;
     return (
       <React.Fragment>
         <Nav className="justify-content-around font-nav">
-          {this.showListObject(object)}
+          {this.showListObject(object_menu)}
         </Nav>
       </React.Fragment>
     );
@@ -54,7 +54,7 @@ class index extends Component {
 }
 var mapStateToProps = (state) => {
   return {
-    object: state.object,
+    object_menu: state.object_menu,
   };
 };
 var mapDispatchToProps = (dispatch, props) => {

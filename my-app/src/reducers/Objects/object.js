@@ -2,49 +2,47 @@ import * as types from "./../../constants/ActionTypes";
 
 var initialState = [];
 
-var findIndex = (object, id) => {
+var findIndex = (object_menu, id) => {
   var result = -1;
-  object.forEach((item, index) => {
+  object_menu.forEach((item, index) => {
     if (item.id === id) {
       result = index;
     }
   });
   return result;
-};
-var object = (state = initialState, action) => {
+}
+var object_menu= (state = initialState, action) => {
   var index = -1;
-  var { id } = action;
+  var { id,object_menu } = action;
   switch (action.type) {
+    //Lấy Danh Sách Khách Hàng
     case types.FETCH_OBJECT:
-      state = action.object;
+      state = action.object_menu;
       return [...state];
-
+    //Xoá Khách Hàng
     case types.DELETE_OBJECT:
       index = findIndex(state, id);
       state.splice(index, 1);
-
       return [...state];
-
-    // case types.FETCH_SECTOR_BY_ID:
-    //   return action.object;
-
+    //Thêm Khách Hàng
     case types.ADD_OBJECT:
-      console.log(action.object);
-      state.push(action.object);
+     
+      console.log(state)
+      state.push(object_menu);
       return [...state];
-
+    //Cập Nhập Nhân Viên
     case types.UPDATE_OBJECT:
-      index = findIndex(state, action.object.id);
+      index = findIndex(state, action.object_menu.id);
       if (index !== -1) {
-        state[index] = object;
+        state[index] = object_menu;
       }
       return [...state];
-
+    //Chỉnh Sửa Nhân Viên
     case types.EDIT_OBJECT:
-      return action.object;
+      return action.object_menu;
     default:
       return state;
   }
 };
 
-export default object;
+export default object_menu;
