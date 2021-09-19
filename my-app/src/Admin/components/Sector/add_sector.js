@@ -31,27 +31,34 @@ class AddSector extends React.Component {
     }
     componentWillReceiveProps(NextProps) {
         var { match } = this.props;
+
         if (NextProps && NextProps.sector) {
           var { sector } = NextProps;
-    
           if (match.params.id_sector) {
             const result = sector.find((o) => o.id === match.params.id_sector);
-            console.log("result",result);
+            console.log("rusuild",result);
             this.setState({
               idItem: result.id,
               txtName: result.name,
+              id_object: result.id_object,
             });
+
           }
         }
       }
     // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     if (prevProps.object_menu !== this.props.object_menu) {
-    //         let arrObject_menu = this.props.object_menu;
-    //         this.setState({
-    //             object_menuArr: arrObject_menu,
-    //             id_object: arrObject_menu && arrObject_menu.length > 0 ? arrObject_menu[0].key : ''
+    //     var { match } = this.props;
+    //     if (prevProps.sector !== this.props.sector) {
+    //         var { sector } = prevState;
+    //         if (match.params.id_sector) {
+    //             const result = sector.find((o) => o.id === match.params.id_sector);
+    //             this.setState({
+    //                 idItem: result.id,
+    //                 txtName: result.name,
+    //                 id_object: result.id_object,
 
-    //         })
+    //             })
+    //         }
     //     }
     // }
     onChange = (e, id) => {
@@ -83,13 +90,10 @@ class AddSector extends React.Component {
         var { history } = this.props;
         event.preventDefault();
         if (isValid === false) return;
-        
         var { match } = this.props;
-
         event.preventDefault();
         var { history } = this.props;
         var { idItem, txtName, id_object } = this.state;
-
         var sector = {
             id: uniqid("sector-"),
             nameSector: txtName,

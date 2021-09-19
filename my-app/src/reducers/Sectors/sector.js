@@ -13,18 +13,18 @@ var findIndex = (sector, id) => {
 }
 var sector = (state = initialState, action) => {
   var index = -1;
-  var { id,sector } = action;
+  var { id, sector } = action;
   switch (action.type) {
     //Lấy Tất cả Danh Sách Danh Mục
     case types.FETCH_SECTOR:
-      state = action.sector;
+      state = sector;
       return [...state];
     case types.DELETE_SECTOR:
       index = findIndex(state, id);
       state.splice(index, 1);
       return [...state];
     case types.ADD_SECTOR:
-        state.push(sector);
+      state.push(sector);
       return [...state];
     case types.UPDATE_SECTOR:
       index = findIndex(state, action.sector.id);

@@ -38,9 +38,11 @@ class ListSector extends React.Component {
     };
     render() {
         var { sector } = this.props;
+      
         var dataSector = sector.map((item, index) => {
             return { ...item, index };
         });
+      
         return (
             <>
                 <Link to="/admin/manage/sector/add">
