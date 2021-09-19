@@ -30,18 +30,17 @@ const fields = ['STT',
 class ListSector extends React.Component {
     componentDidMount() {
         this.props.fetchSectors();
-        console.log("sector", this.props.fetchSectors());
     }
     onDeleteSector = (id) => {
-        this.props.onDeleteItemSector(id);
+        if (window.confirm("Bạn chắc chắn muốn xóa ?")) {
+            this.props.onDeleteItemSector(id);
+        }
     };
     render() {
         var { sector } = this.props;
         var dataSector = sector.map((item, index) => {
             return { ...item, index };
-
         });
-    
         return (
             <>
                 <Link to="/admin/manage/sector/add">

@@ -16,7 +16,8 @@ class AddSector extends React.Component {
         this.setState({
             idItem: "",
             txtName: "",
-            id_object: [],
+            id_object: "",
+            object_menuArr: [],
         });
     }
     componentDidMount() {
@@ -24,40 +25,65 @@ class AddSector extends React.Component {
         isLoadingExternally = true;
         this.props.onEditItemSector(match.params.id_sector);
         this.setState({
-            ib_object: this.props.fetchObjects()
+            object_menu: this.props.fetchObjects()
         })
 
     }
     componentWillReceiveProps(NextProps) {
         var { match } = this.props;
         if (NextProps && NextProps.sector) {
-            var { sector } = NextProps;
-            if (match.params.id_sector) {
-                const result = sector.find(
-                    (o) => o.id === match.params.id_sector
-                );
-
-                this.setState({
-                    idItem: result.id,
-                    txtName: result.name,
-                    id_object: result.id_object,
-                });
-            }
+          var { sector } = NextProps;
+    
+          if (match.params.id_sector) {
+            const result = sector.find((o) => o.id === match.params.id_sector);
+            console.log("result",result);
+            this.setState({
+              idItem: result.id,
+              txtName: result.name,
+            });
+          }
         }
-    }
-    onChange = (event) => {
-        var target = event.target;
-        var name = target.name;
-        var value = target.value;
-        this.setState({
-            [name]: value,
-        });
-    };
-    handleChange(e) {
-        console.log("Fruit Selected!!");
-        this.setState({ fruit: e.target.value });
       }
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     if (prevProps.object_menu !== this.props.object_menu) {
+    //         let arrObject_menu = this.props.object_menu;
+    //         this.setState({
+    //             object_menuArr: arrObject_menu,
+    //             id_object: arrObject_menu && arrObject_menu.length > 0 ? arrObject_menu[0].key : ''
+
+    //         })
+    //     }
+    // }
+    onChange = (e, id) => {
+        let coppyState = { ...this.state };
+        coppyState[id] = e.target.value;
+        this.setState({
+            ...coppyState
+        })
+        // var target = e.target;
+        // var name = target.name;
+        // var value = target.value;
+        // this.setState({
+        //     [name]: value,
+        // });
+    };
+    checkValidate = () => {
+        let check = ['txtName'];
+        let isValid = true;
+
+        if (!this.state[check[0]]) {
+            isValid = false;
+            alert("Vui lòng nhập tên");
+
+        }
+        return isValid;
+    }
     onSubmitForm = (event) => {
+        let isValid = this.checkValidate();
+        var { history } = this.props;
+        event.preventDefault();
+        if (isValid === false) return;
+        
         var { match } = this.props;
 
         event.preventDefault();
@@ -66,12 +92,12 @@ class AddSector extends React.Component {
 
         var sector = {
             id: uniqid("sector-"),
-            name: txtName,
+            nameSector: txtName,
             id_object: id_object,
         };
         var sectorUpdate = {
             id: match.params.id_sectors,
-            name: txtName,
+            nameSector: txtName,
             id_object: id_object,
         };
 
@@ -86,17 +112,17 @@ class AddSector extends React.Component {
         }
     };
     render() {
-        var { object } = this.props;
+        let { object_menu } = this.props;
         return (
             <Container fluid>
                 <Row>
-                    <Link to="/admin/manage/sector">
+                    <Link to="/admin/manage/sectors">
                         <Button type="button" className="btn btn-primary" size="sm">
                             <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />Trở về
                         </Button>
                     </Link>
                     <Col sm="12">
-                        <Form action="" method="post" onSubmit={this.onSubmitForm}>
+                        <Form onSubmit={this.onSubmitForm}>
                             <Form.Group className="mb-3" controlId="formBasicObject">
                                 <Form.Label>Tên Loại</Form.Label>
                                 <Form.Control
@@ -105,7 +131,7 @@ class AddSector extends React.Component {
                                     placeholder="Nhập tên đối tượng cần thêm..."
                                     name="txtName"
                                     value={this.setState.txtName}
-                                    onChange={this.onChange} />
+                                    onChange={(e) => { this.onChange(e, 'txtName') }} />
                                 <Form.Control.Feedback
                                     type="invalid" >
                                     Vui lòng nhập tên cần thêm !
@@ -115,16 +141,18 @@ class AddSector extends React.Component {
                                 <Form.Label>Đối Tượng</Form.Label>
                                 <Form.Select name="form-field-name"
                                     value={this.setState.id_object}
-                                    onChange={this.onChange}
+                                    onChange={(e) => { this.onChange(e, 'id_object') }}
                                     labelKey={'Tên'}
                                     valueKey={'Mã'}
                                     isLoading={isLoadingExternally}
-                                    options={this.setState.ib_object}
+
                                 >
-                                    {object.map((option) => (
-                                        <option value={option.id}>{option.name}</option>
-                                    ))}
-                                    console.log(object.map);
+                                    <option value="object-1">Chọn</option>
+                                    {object_menu && object_menu.length > 0 &&
+                                        object_menu.map((option, index) => (
+
+                                            <option value={option.id} key={index}>{option.name}</option>
+                                        ))}
                                 </Form.Select>
 
 
@@ -151,7 +179,7 @@ class AddSector extends React.Component {
 var mapStateToProps = (state) => {
     return {
         sector: state.sector,
-        object: state.object,
+        object_menu: state.object_menu,
     };
 };
 var mapDispatchToProps = (dispatch, props) => {

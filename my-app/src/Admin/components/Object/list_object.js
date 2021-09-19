@@ -26,7 +26,7 @@ class ListObject extends React.Component {
     this.props.fetchObjects();
   }
   onDeleteObject = (item) => {
-    if (confirm("Bạn chắc chắn muốn xóa ?")) {  //eslint-disable-line
+    if (window.confirm("Bạn chắc chắn muốn xóa ?")) {  //eslint-disable-line
     
       this.props.onDeleteItemObject(item);
     }

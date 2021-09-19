@@ -14,7 +14,7 @@ import {
   CFormGroup,
   CInput,
 } from "@coreui/react";
-import * as actions from "./../../../actions/index";
+import * as actions from "../../../actions/index";
 class addObject extends React.Component {
   constructor(props) {
     super(props);
@@ -70,11 +70,11 @@ console.log(objectUpdate);
 console.log(idItem)
     if (match.params.id_object) {
       this.props.onUpdateItemObject(objectUpdate);
-      // alert("Sửa thành công");
+      alert("Sửa thành công");
       history.goBack();
     } else {
       this.props.onAddItemObject(object_menu);
-      // alert("Thêm thành công");
+     alert("Thêm thành công");
       history.goBack();
     }
   };
@@ -82,7 +82,7 @@ console.log(idItem)
     return (
       <CContainer fluid>
         <CRow>
-          <Link to="/admin/manage/object">
+          <Link to="/admin/manage/objects">
             <CButton type="button" className="btn btn-primary" size="sm">
               <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />
               Trở về
