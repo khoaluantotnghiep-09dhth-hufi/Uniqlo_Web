@@ -66,7 +66,7 @@ class index extends Component {
 }
 var mapStateToProps = (state) => {
   return {
-    object: state.object,
+    object_menu: state.object_menu,
     sector: state.sector,
   };
 };
