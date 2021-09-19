@@ -611,7 +611,8 @@ export const onDeleteNewsResquest = (id) => {
     });
   };
 };
-export const onGetNew = (news) => {
+
+export const onGetNews = (news) => {
   return {
     type: types.EDIT_NEWS,
     news,
@@ -620,7 +621,7 @@ export const onGetNew = (news) => {
 export const onEditNewsResquest = (id) => {
   return (dispatch) => {
     return callApi(`news/${id}`, "GET", null).then((response) => {
-      dispatch(onGetNew(response.data));
+      dispatch(onGetNews(response.data));
     });
   };
 };
@@ -684,7 +685,7 @@ export const onEditCategoryResquest = (id) => {
     });
   };
 };
-//customer
+// lấy ds khách hàng
 export const fetchCustomer = (customer) => {
   return {
     type: types.FETCH_CUSTOMER,
@@ -700,6 +701,7 @@ export const fetchCustomerResquest = () => {
   };
 };
 
+//thêm khách hàng
 export const onAddCustomer = (customer) => {
   return {
     type: types.ADD_CUSTOMER,
@@ -714,13 +716,13 @@ export const onAddCustomerResquest = (customer) => {
   };
 };
 
+//cập nhập khách hàng
 export const onUpdateCustomers = (customer) => {
   return {
     type: types.UPDATE_CUSTOMER,
     customer,
   };
 };
-
 export const onUpdateCustomersResquest = (customer) => {
   return (dispatch) => {
     return callApi(`customers/${customer.id}`, "PUT", customer).then(
@@ -731,6 +733,22 @@ export const onUpdateCustomersResquest = (customer) => {
   };
 };
 
+//sửa tt khách hàng
+export const onGetCustomer = (customer) => {
+  return {
+    type: types.EDIT_CUSTOMER,
+    customer,
+  };
+};
+export const onEditCustomerResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`customers/${id}`, "GET", null).then((response) => {
+      dispatch(onGetCustomer(response.data));
+    });
+  };
+};
+
+//Xoá khách hàng
 export const onDeleteCustomer = (id) => {
   return {
     type: types.DELETE_CUSTOMER,
@@ -745,19 +763,8 @@ export const onDeleteCustomerResquest = (id) => {
     });
   };
 };
-export const onGetCustomer = (customer) => {
-  return {
-    type: types.EDIT_CUSTOMER,
-    customer,
-  };
-};
-export const onEditCustomerResquest = (id) => {
-  return (dispatch) => {
-    return callApi(`customers/${id}`, "GET", null).then((response) => {
-      dispatch(onGetCustomer(response.data));
-    });
-  };
-};
+
+
 //orders
 export const fetchOrder = (order) => {
   return {

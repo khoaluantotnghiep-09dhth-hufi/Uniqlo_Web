@@ -11,7 +11,7 @@ var findIndex = (customer, id) => {
   });
   return result;
 }
-var customer = (state = initialState, action) => {
+var customer= (state = initialState, action) => {
   var index = -1;
   var { id } = action;
   switch (action.type) {
@@ -26,9 +26,11 @@ var customer = (state = initialState, action) => {
       return [...state];
     //Thêm Khách Hàng
     case types.ADD_CUSTOMER:
-      state.push(action.customer);
+     
+      console.log(state)
+      state.push(customer);
       return [...state];
-    //Cập Nhập Nhân Viên
+    //Cập Nhập Khách Hàng
     case types.UPDATE_CUSTOMER:
       index = findIndex(state, action.customer.id);
       if (index !== -1) {

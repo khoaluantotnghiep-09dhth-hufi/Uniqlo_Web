@@ -35,7 +35,6 @@ const myReducer = combineReducers({
   order,
   products_category,
   order_info,
-
 });
 
 export default myReducer;

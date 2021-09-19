@@ -3,30 +3,38 @@ import * as types from "./../../constants/ActionTypes";
 var initialState = [];
 
 var findIndex = (news, id) => {
-  var rs = -1;
-  news.forEach((news, index) => {
-    if (news.id === id) {
-      rs = index;
-
+  var result = -1;
+  news.forEach((item, index) => {
+    if (item.id === id) {
+      result = index;
     }
   });
-  return rs;
+  return result;
 }
 var news = (state = initialState, action) => {
   var index = -1;
-  var { id } = action;
+  var { id, news } = action;
   switch (action.type) {
-
+    //Lấy ds news
     case types.FETCH_NEWS:
       state = action.news;
       return [...state];
+    //Xoá tin tức
     case types.DELETE_NEWS:
       index = findIndex(state, id);
-      state.slice(index, 1);
+      state.splice(index, 1);
       return [...state];
+      //Thêm tin tức
     case types.ADD_NEWS:
-      state.push(action.news);
+      console.log(state)
+      if(state){
+        state.push(news);
+      }
+      else{
+       console.log("State đang rỗng")
+      }
       return [...state];
+      //Cập nhập tin tức
     case types.UPDATE_NEWS:
       index = findIndex(state, action.news.id);
       if (index !== -1) {

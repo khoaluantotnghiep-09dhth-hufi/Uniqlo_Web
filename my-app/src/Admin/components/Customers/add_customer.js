@@ -33,9 +33,7 @@ class AddCustomer extends React.Component {
     if (NextProps && NextProps.customer) {
       var { customer } = NextProps;
       if (match.params.id_customer) {
-        const result = customer.find(
-          (o) => o.id === match.params.id_customer
-        );
+        const result = customer.find((o) => o.id === match.params.id_customer);
 
         this.setState({
           idItem: result.id,
@@ -74,7 +72,7 @@ class AddCustomer extends React.Component {
       email: email,
     };
     var customerUpdate = {
-      id: match.params.id_customer,
+      idItem: match.params.id_customer,
       nameCustomer: name,
       address: address,
       phone: phone,
@@ -83,7 +81,7 @@ class AddCustomer extends React.Component {
       email: email,
     };
 
-    if (idItem) {
+    if (match.params.id_customer) {
       this.props.onUpdateItemCustomer(customerUpdate);
       alert('Sửa thành công');
       history.goBack();

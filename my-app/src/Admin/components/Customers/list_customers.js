@@ -26,14 +26,14 @@ const getBadge = (status) => {
 };
 
 const fields = [
-  'STT',
-  { key: 'id', label: 'Mã Khách Hàng' },
-  { key: 'name', label: 'Tên' },
-  { key: 'address', label: 'Địa Chỉ' },
-  { key: 'phone', label: 'SĐT' },
-  { key: 'image', label: 'Ảnh' },
-  { key: 'password', label: 'Mật Khẩu' },
-  { key: 'email', label: 'Gmail' },
+  "STT",
+  { key: "id", label: "Mã Khách Hàng" },
+  { key: "name", label: "Tên" },
+  { key: "address", label: "Địa Chỉ" },
+  { key: "phone", label: "SĐT" },
+  { key: "image", label: "Ảnh" },
+  { key: "password", label: "Mật Khẩu" },
+  { key: "email", label: "Gmail" },
   "Thao Tác",
 ];
 
@@ -42,14 +42,14 @@ class ListCustomers extends React.Component {
     this.props.fetchCustomers();
   }
   onDeleteCustomer = (item) => {
-    this.props.onDeleteItemCustomer(item);
-  }
-
-
+    if (confirm("Bạn chắc chắn muốn xóa ?")) {  //eslint-disable-line
+      this.props.onDeleteItemCustomer(item);
+    }
+  };
   render() {
     var { customer } = this.props;
     var dataCustomer = customer.map((item, index) => {
-      return item;
+      return { ...item, index };
     });
     return (
       <>

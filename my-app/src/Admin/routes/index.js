@@ -67,7 +67,7 @@ const routes = [
 
     { path: '/admin/system/news', exact: true, name: 'Danh Sách Tin Tức', component: ListNews },
     { path: '/admin/system/news/add', exact: true, name: 'Thêm Tin Tức Mới', component: AddNews },
-    { path: '/admin/system/news/:id_news/edit', exact: true, name: 'Thêm Tin Tức Mới', component: AddNews },
+    { path: '/admin/system/news/:id_news/edit', exact: true, name: 'Chỉnh Sửa Tin Tức', component: AddNews },
 
     { path: '/admin/system/discount', exact: true, name: 'Danh Sách Khuyến Mãi', component: ListDiscount },
 

@@ -24,17 +24,15 @@ class AddNews extends React.Component {
   componentDidMount() {
     var { match } = this.props;
 
-    this.props.onEditItemNews(match.params.idItem);
+    this.props.onEditItemNews(match.params.id_news);
   }
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
     if (NextProps && NextProps.news) {
       var { news } = NextProps;
-      if (match.params.idItem) {
-        const result = news.find(
-          (o) => o.id === match.params.idItem
-        );
-
+      if (match.params.id_news) {
+        const result = news.find((o) => o.id === match.params.id_news);
+        console.log(result);
         this.setState({
           idItem: result.id,
           title: result.title,
@@ -70,7 +68,7 @@ class AddNews extends React.Component {
       image: image,
     };
     var newsUpdate = {
-      id: idItem,
+      id: match.params.id_news,
       title: title,
       date: date,
       description: descripton,
@@ -79,11 +77,12 @@ class AddNews extends React.Component {
     };
 
     if (idItem) {
-      this.props.onUpdateItemCategory(newsUpdate);
+      this.props.onUpdateItemNews(newsUpdate);
       alert('Sửa thành công');
       history.goBack();
-    } else {
-      this.props.onAddItemCategory(news);
+    } 
+    else {
+      this.props.onAddItemNews(news);
       alert('Thêm thành công');
       history.goBack();
     }
@@ -107,7 +106,7 @@ class AddNews extends React.Component {
                   type="text"
                   placeholder="Nhập tiêu đề..."
                   name="title"
-
+                  id="title"
                   onChange={this.onChange} />
                 <Form.Control.Feedback
                   type="invalid" >
@@ -121,7 +120,7 @@ class AddNews extends React.Component {
                   type="date"
                   placeholder="Nhập tiêu đề..."
                   name="date"
-
+                  id="date"
                   onChange={this.onChange} />
 
               </Form.Group>
@@ -132,6 +131,7 @@ class AddNews extends React.Component {
                   type="text"
                   placeholder="Nhập nội dung..."
                   name="description"
+                  id="description"
                   onChange={this.onChange} />
 
               </Form.Group>
@@ -141,7 +141,8 @@ class AddNews extends React.Component {
                   required
                   type="text"
                   placeholder="Nhân viên..."
-                  name="id_taff"
+                  name="id_staff"
+                  id="id_staff"
                   onChange={this.onChange} />
 
               </Form.Group>
@@ -152,6 +153,7 @@ class AddNews extends React.Component {
                   type="file"
                   placeholder="ảnh..."
                   name="image"
+                  id="image"
                   onChange={this.onChange} />
 
               </Form.Group>
