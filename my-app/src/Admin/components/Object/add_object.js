@@ -1,12 +1,9 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faPlus,
-  faArrowLeft,
-} from "@fortawesome/free-solid-svg-icons";
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import uniqid from 'uniqid';
+import uniqid from "uniqid";
 import {
   CCol,
   CRow,
@@ -16,7 +13,7 @@ import {
   CLabel,
   CFormGroup,
   CInput,
-} from '@coreui/react';
+} from "@coreui/react";
 import * as actions from "./../../../actions/index";
 class addObject extends React.Component {
   constructor(props) {
@@ -24,7 +21,6 @@ class addObject extends React.Component {
     this.setState({
       idItem: "",
       txtName: "",
-
     });
   }
   componentDidMount() {
@@ -36,11 +32,9 @@ class addObject extends React.Component {
     var { match } = this.props;
     if (NextProps && NextProps.object_menu) {
       var { object_menu } = NextProps;
-      console.log(object_menu)
+
       if (match.params.id_object_menu) {
-        var result = object_menu.find(
-          (o) => o.id === match.params.id_object
-        );
+        var result = object_menu.find((o) => o.id === match.params.id_object);
         this.setState({
           idItem: result.id,
           txtName: result.name,
@@ -61,19 +55,16 @@ class addObject extends React.Component {
 
     event.preventDefault();
     var { history } = this.props;
-    var { idItem, txtName } =
-      this.state;
-console.log(idItem, txtName)
+    var { idItem, txtName } = this.state;
+
     var object_menu = {
       id: uniqid("object-"),
       nameObject: txtName,
-
     };
     var objectUpdate = {
       id: match.params.id_object,
-      
-      nameObject: txtName,
 
+      nameObject: txtName,
     };
 
     if (idItem) {
@@ -86,26 +77,23 @@ console.log(idItem, txtName)
     }
   };
   render() {
-
     return (
       <CContainer fluid>
         <CRow>
           <Link to="/admin/manage/object">
             <CButton type="button" className="btn btn-primary" size="sm">
-              <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />Trở về
+              <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />
+              Trở về
             </CButton>
           </Link>
           <CCol sm="12">
-
-
-
             <CForm onSubmit={this.onSubmitForm}>
-
               <CFormGroup>
-                <CLabel htmlFor="exampleFormControlInput1">Tên Đối Tượng</CLabel>
+                <CLabel htmlFor="exampleFormControlInput1">
+                  Tên Đối Tượng
+                </CLabel>
                 <CInput
                   type="text"
-
                   name="txtName"
                   placeholder="Tên đối tượng..."
                   autoComplete="name"
@@ -113,26 +101,18 @@ console.log(idItem, txtName)
                 />
               </CFormGroup>
 
-              <CFormGroup >
-                <CButton
-                  type="submit"
-                  color='danger'
-                  className="m-2" >
-                  <FontAwesomeIcon
-                    icon={faPlus}
-                    className="mr-2"
-                    size="lg" />
+              <CFormGroup>
+                <CButton type="submit" color="danger" className="m-2">
+                  <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />
                   Lưu
                 </CButton>
-
               </CFormGroup>
             </CForm>
           </CCol>
         </CRow>
       </CContainer>
-    )
+    );
   }
-
 }
 var mapStateToProps = (state) => {
   return {
@@ -142,14 +122,14 @@ var mapStateToProps = (state) => {
 var mapDispatchToProps = (dispatch, props) => {
   return {
     onAddItemObject: (object_menu) => {
-     return dispatch(actions.onAddObjectsResquest(object_menu));
+      return dispatch(actions.onAddObjectsResquest(object_menu));
     },
     onEditItemObject: (id) => {
-     return dispatch(actions.onEditObjectsResquest(id));
+      return dispatch(actions.onEditObjectsResquest(id));
     },
     onUpdateItemObject: (object_menu) => {
       return dispatch(actions.onUpdateObjectsResquest(object_menu));
     },
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(addObject)
+export default connect(mapStateToProps, mapDispatchToProps)(addObject);

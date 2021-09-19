@@ -15,29 +15,34 @@ var object_menu= (state = initialState, action) => {
   var index = -1;
   var { id,object_menu } = action;
   switch (action.type) {
-    //Lấy Danh Sách Khách Hàng
+    //Lấy Danh Sách 
     case types.FETCH_OBJECT:
-      state = action.object_menu;
+      state = object_menu;
       return [...state];
-    //Xoá Khách Hàng
+    //Xoá 
     case types.DELETE_OBJECT:
       index = findIndex(state, id);
       state.splice(index, 1);
       return [...state];
-    //Thêm Khách Hàng
+    //Thêm 
     case types.ADD_OBJECT:
      
       console.log(state)
-      state.push(object_menu);
+      if(state){
+        state.unShift(object_menu);
+      }
+     else{
+       console.log("State Dang Rong")
+     }
       return [...state];
-    //Cập Nhập Nhân Viên
+    //Cập Nhập 
     case types.UPDATE_OBJECT:
       index = findIndex(state, action.object_menu.id);
       if (index !== -1) {
         state[index] = object_menu;
       }
       return [...state];
-    //Chỉnh Sửa Nhân Viên
+    //Chỉnh Sửa 
     case types.EDIT_OBJECT:
       return action.object_menu;
     default:
