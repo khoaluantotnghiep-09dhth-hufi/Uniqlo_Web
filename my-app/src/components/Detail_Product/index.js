@@ -142,7 +142,7 @@ class index extends Component {
   };
   ShowColor = (products, id_product) => {
     var result = null;
-var{checkColor}=this.state;
+
     result = products
       .filter((product) => product.id === id_product)
       .map((product, index) => {
@@ -155,7 +155,7 @@ var{checkColor}=this.state;
                 ref={product.nameColor}
                 variant="outline-secondary"
                 size="sm"
-                className={`${checkColor}==="Red"?'active':''`}
+                // className={`${checkColor}==="Red"?'active':''`}
                 onClick={() => {
                   this.onClickColor(this, product.nameColor);
                 }}
