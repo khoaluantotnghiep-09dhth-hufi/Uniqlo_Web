@@ -149,7 +149,7 @@ class index extends Component {
   ShowSize = (color_by_size, txtSize,isChooseColor) => {
     var result = null;
     var resultFilter = null;
-   
+   const colorChoose="#000"
     result = color_by_size.filter((item) => item.nameSize === txtSize);
     resultFilter = result ? (
       result.map((item, index) => {
@@ -177,7 +177,7 @@ class index extends Component {
                   style={{ margin: "0" }}
                   variant="outline-secondary"
                   size="sm"
-                  className={`mt-1 ${isChooseColor===item.nameColor?"active":""}`}
+                  className={`mt-1 ${isChooseColor===item.nameColor?"active Adjust__Color-Choose":""}`}
                   onClick={() => {this.onClickChooseColor(this,item.nameColor)}}
                 >
                   {item.nameColor}
