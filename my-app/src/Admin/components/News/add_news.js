@@ -179,7 +179,7 @@ class AddNews extends React.Component {
 }
 var mapStateToProps = (state) => {
   return {
-    news: state.news,
+    news:state.news,
   };
 };
 var mapDispatchToProps = (dispatch, props) => {

@@ -15,12 +15,12 @@ class AddCustomer extends React.Component {
     super(props);
     this.state={
       idItem: "",
-      name: "",
-      address: "",
-      phone: "",
-      image: "",
-      password: "",
-      email: "",
+      txtName:"",
+      txtAddress:"",
+      txtPhone:"",
+      txtImage:"",
+      txtPassword: "",
+      txtEmail: "",
     };
   }
   componentDidMount() {
@@ -37,12 +37,12 @@ class AddCustomer extends React.Component {
 
         this.setState({
           idItem: result.id,
-          name: result.name,
-          address: result.address,
-          phone: result.phone,
-          image: result.image,
-          password: result.password,
-          email: result.email,
+          txtName: result.name,
+          txtAddress: result.address,
+          txtPhone: result.phone,
+          txtImage: result.image,
+          txtPassword: result.password,
+          txtEmail: result.email,
         });
       }
     }
@@ -60,25 +60,33 @@ class AddCustomer extends React.Component {
 
     event.preventDefault();
     var { history } = this.props;
-    var { idItem, name, address, phone, image, password, email } = this.state;
-
+    var{
+      idItem,
+      txtName,
+      txtAddress,
+      txtPhone,
+      txtImage,
+      txtPassword,
+      txtEmail,
+    }= this.state;
+    
     var customer = {
       id: uniqid("customer-"),
-      nameCustomer: name,
-      address: address,
-      phone: phone,
-      image: image,
-      password: password,
-      email: email,
+      nameCustomer: txtName,
+      address: txtAddress,
+      phone: txtPhone,
+      image: txtImage,
+      password: txtPassword,
+      email: txtEmail,
     };
     var customerUpdate = {
       idItem: match.params.id_customer,
-      nameCustomer: name,
-      address: address,
-      phone: phone,
-      image: image,
-      password: password,
-      email: email,
+      nameCustomer: txtName,
+      address: txtAddress,
+      phone: txtPhone,
+      image: txtImage,
+      password: txtPassword,
+      email: txtEmail,
     };
 
     if (match.params.id_customer) {
@@ -109,8 +117,8 @@ class AddCustomer extends React.Component {
                   required
                   type="text"
                   placeholder="Nhập tên..."
-                  name="name"
-                  id="name"
+                  name ="txtName"
+                  id="txtName"
                   onChange={this.onChange} />
                 <Form.Control.Feedback
                   type="invalid" >
@@ -123,8 +131,8 @@ class AddCustomer extends React.Component {
                   required
                   type="text"
                   placeholder="Nhập địa chỉ..."
-                  name="address"
-                  id="address"
+                  name="txtAddress"
+                  id="txtAddress"
                   onChange={this.onChange} />
 
               </Form.Group>
@@ -134,8 +142,8 @@ class AddCustomer extends React.Component {
                   required
                   type="text"
                   placeholder="Nhập số điện thoại..."
-                  name="phone"
-                  id="phone"
+                  name="txtPhone"
+                  id="txtPhone"
                   onChange={this.onChange} />
 
               </Form.Group>
@@ -144,8 +152,8 @@ class AddCustomer extends React.Component {
                 <Form.Control
                   required
                   type="file"
-                  id="name"
-                  name="image"
+                  id="txtImage"
+                  name="txtImage"
                   onChange={this.onChange} />
 
               </Form.Group>
@@ -155,8 +163,8 @@ class AddCustomer extends React.Component {
                   required
                   type="password"
                   placeholder="Mật khẩu..."
-                  name="password"
-                  id="password"
+                  name="txtPassword"
+                  id="txtPassword"
                   onChange={this.onChange} />
 
               </Form.Group>
@@ -166,8 +174,8 @@ class AddCustomer extends React.Component {
                   required
                   type="email"
                   placeholder="Gmail..."
-                  name="email"
-                  id="email"
+                  name="txtEmail"
+                  id="txtEmail"
                   onChange={this.onChange} />
 
               </Form.Group>
@@ -188,7 +196,6 @@ class AddCustomer extends React.Component {
       </Container>
     )
   }
-
 }
 var mapStateToProps = (state) => {
   return {
