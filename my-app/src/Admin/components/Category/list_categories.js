@@ -31,7 +31,9 @@ class ListCategory extends React.Component {
         this.props.fetchCategories();
     }
     onDeleteCategory = (id) => {
-        this.props.onDeleteItemCategory(id);
+        if (window.confirm("Bạn chắc chắn muốn xóa ?")) {
+            this.props.onDeleteItemCategory(id);
+        }
     };
     render() {
         var { category } = this.props;

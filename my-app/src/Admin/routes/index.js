@@ -100,7 +100,7 @@ const routes = [
 
     { path: '/admin/manage/sectors', exact: true, name: 'Danh Sách Loại Sản Phẩm', component: ListSectors },
     { path: '/admin/manage/sector/add', exact: true, name: 'Thêm Loại Sản Phẩm Mới', component: AddSector },
-    { path: '/admin/manage/sector/:id/edit', exact: true, name: 'Sửa Loại Sản Phẩm', component: AddSector },
+    { path: '/admin/manage/sector/:id_sector/edit', exact: true, name: 'Sửa Loại Sản Phẩm', component: AddSector },
 
     { path: '/admin/manage/categories', exact: true, name: 'Danh Sách Danh Mục', component: ListCategories },
     { path: '/admin/manage/category/add', exact: true, name: 'Thêm Danh Mục Mới', component: AddCategory },

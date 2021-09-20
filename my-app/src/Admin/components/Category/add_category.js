@@ -14,11 +14,13 @@ let isLoadingExternally = false;
 class AddCategory extends React.Component {
     constructor(props) {
         super(props);
-        this.setState({
+        this.state={
             idItem: "",
             txtName: "",
-            id_sector: [],
-        });
+            id_sector: "",
+            sectorArr: [],
+        };
+        
     }
     componentDidMount() {
         var { match } = this.props;
@@ -27,7 +29,7 @@ class AddCategory extends React.Component {
         isLoadingExternally = true;
 
         this.setState({
-            id_sector: this.props.fetchSectors()
+            sectorArr: this.props.fetchSectors()
         })
     }
     componentWillReceiveProps(NextProps) {
@@ -35,10 +37,8 @@ class AddCategory extends React.Component {
         if (NextProps && NextProps.category) {
             var { category } = NextProps;
             if (match.params.id_category) {
-                const result = category.find(
-                    (o) => o.id === match.params.id_category
-                );
-
+                const result = category.find((o) => o.id === match.params.id_category);
+                console.log("result",result);
                 this.setState({
                     idItem: result.id,
                     txtName: result.name,
@@ -47,17 +47,29 @@ class AddCategory extends React.Component {
             }
         }
     }
-    onChange = (event) => {
-        var target = event.target;
-        var name = target.name;
-        var value = target.value;
+    onChange = (e, id) => {
+        let coppyState = { ...this.state };
+        coppyState[id] = e.target.value;
         this.setState({
-            [name]: value,
-        });
+            ...coppyState
+        }        )
+        
     };
-    onSubmitForm = (event) => {
-        var { match } = this.props;
+    checkValidate = () => {
+        let check = ['txtName'];
+        let isValid = true;
 
+        if (!this.state[check[0]]) {
+            isValid = false;
+            alert("Vui lòng nhập tên");
+
+        }
+        return isValid;
+    }
+    onSubmitForm = (event) => {
+        let isValid = this.checkValidate();
+        var { match } = this.props;
+        if (isValid === false) return;
         event.preventDefault();
         var { history } = this.props;
         var { idItem, txtName, id_sector } = this.state;
@@ -88,7 +100,7 @@ class AddCategory extends React.Component {
         return (
             <Container fluid>
                 <Row>
-                    <Link to="/admin/manage/objects">
+                    <Link to="/admin/manage/categories">
                         <Button type="button" className="btn btn-primary" size="sm">
                             <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />Trở về
                         </Button>
@@ -103,7 +115,7 @@ class AddCategory extends React.Component {
                                     placeholder="Nhập tên đối tượng cần thêm..."
                                     name="txtName"
                                     value={this.setState.txtName}
-                                    onChange={this.onChange} />
+                                    onChange={(e) => { this.onChange(e, 'txtName') }} />
                                 <Form.Control.Feedback
                                     type="invalid" >
                                     Vui lòng nhập tên cần thêm !
@@ -113,17 +125,19 @@ class AddCategory extends React.Component {
                                 <Form.Label>Loại</Form.Label>
                                 <Form.Select name="form-field-name"
                                     value={this.setState.id_sector}
-                                    onChange={this.onChange}
+                                    onChange={(e) => { this.onChange(e, 'id_sector') }}
                                     labelKey={'Tên'}
                                     valueKey={'Mã'}
                                     isLoading={isLoadingExternally}
                                     options={this.setState.id_sector}
                                 >
-                                    {sector.map((option) => (
-                                        <option value={option.id}>{option.name}</option>
+                                      <option value="object-1">Chọn</option>
+                                      {sector && sector.length > 0 &&
+                                        sector.map((option, index) => (
 
-                                    ))}
-                                    console.log(sector.map);
+                                            <option value={option.id} key={index}>{option.name}</option>
+                                        ))}
+       
                                 </Form.Select>
 
 

@@ -31,49 +31,26 @@ class AddSector extends React.Component {
     }
     componentWillReceiveProps(NextProps) {
         var { match } = this.props;
-
         if (NextProps && NextProps.sector) {
           var { sector } = NextProps;
           if (match.params.id_sector) {
             const result = sector.find((o) => o.id === match.params.id_sector);
-            console.log("rusuild",result);
             this.setState({
               idItem: result.id,
               txtName: result.name,
               id_object: result.id_object,
             });
-
           }
         }
       }
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     var { match } = this.props;
-    //     if (prevProps.sector !== this.props.sector) {
-    //         var { sector } = prevState;
-    //         if (match.params.id_sector) {
-    //             const result = sector.find((o) => o.id === match.params.id_sector);
-    //             console.log(result);
-    //             this.setState({
-    //                 idItem: result.id,
-    //                 txtName: result.name,
-    //                 id_object: result.id_object,
-
-    //             })
-    //         }
-    //     }
-    // }
+   
     onChange = (e, id) => {
         let coppyState = { ...this.state };
         coppyState[id] = e.target.value;
         this.setState({
             ...coppyState
         })
-        // var target = e.target;
-        // var name = target.name;
-        // var value = target.value;
-        // this.setState({
-        //     [name]: value,
-        // });
+        
     };
     checkValidate = () => {
         let check = ['txtName'];
@@ -92,8 +69,8 @@ class AddSector extends React.Component {
         event.preventDefault();
         if (isValid === false) return;
         var { match } = this.props;
-        event.preventDefault();
-        var { history } = this.props;
+      
+      
         var { idItem, txtName, id_object } = this.state;
         var sector = {
             id: uniqid("sector-"),
@@ -101,12 +78,12 @@ class AddSector extends React.Component {
             id_object: id_object,
         };
         var sectorUpdate = {
-            id: match.params.id_sectors,
+            id: match.params.id_sector,
             nameSector: txtName,
             id_object: id_object,
         };
 
-        if (match.params.id_sectors) {
+        if (idItem) {
             this.props.onUpdateItemSector(sectorUpdate);
             alert('Sửa thành công');
             history.goBack();
