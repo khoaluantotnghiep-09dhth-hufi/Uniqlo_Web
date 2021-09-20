@@ -14,11 +14,12 @@ class AddNews extends React.Component {
     super(props);
     this.setState({
       idItem: "",
-      title: "",
-      date: "",
-      description: "",
+      txtTitle: "",
+      txtDate: "",
+      txtDescription: "",
       id_staff: "",
-      image: "",
+      txtImage: "",
+      txtSubtitle: "",
     });
   }
   componentDidMount() {
@@ -35,11 +36,12 @@ class AddNews extends React.Component {
         console.log(result);
         this.setState({
           idItem: result.id,
-          title: result.title,
-          date: result.date,
-          description: result.description,
+          txtTitle: result.title,
+          txtDate: result.date,
+          txtDescription: result.description,
           id_staff: result.id_staff,
-          image: result.image,
+          txtImage: result.image,
+          txtSubtitle: result.sub_title,
         });
       }
     }
@@ -57,23 +59,32 @@ class AddNews extends React.Component {
 
     event.preventDefault();
     var { history } = this.props;
-    var { idItem, title, date, descripton, id_staff, image } = this.state;
+    var { 
+      idItem, 
+      txtTitle, 
+      txtDate, 
+      txtDescription, 
+      id_staff, 
+      txtImage,
+      txtSubtitle, } = this.state;
 
     var news = {
       id: uniqid("news-"),
-      title: title,
-      date: date,
-      description: descripton,
+      title: txtTitle,
+      date: txtDate,
+      description: txtDescription,
       id_staff: id_staff,
-      image: image,
+      image: txtImage,
+      sub_title: txtSubtitle,
     };
     var newsUpdate = {
       id: match.params.id_news,
-      title: title,
-      date: date,
-      description: descripton,
+      title: txtTitle,
+      date: txtDate,
+      description: txtDescription,
       id_staff: id_staff,
-      image: image,
+      image: txtImage,
+      sub_title: txtSubtitle,
     };
 
     if (idItem) {
@@ -105,8 +116,8 @@ class AddNews extends React.Component {
                   required
                   type="text"
                   placeholder="Nhập tiêu đề..."
-                  name="title"
-                  id="title"
+                  name="txtTitle"
+                  id="txtTitle"
                   onChange={this.onChange} />
                 <Form.Control.Feedback
                   type="invalid" >
@@ -119,8 +130,8 @@ class AddNews extends React.Component {
                   required
                   type="date"
                   placeholder="Nhập tiêu đề..."
-                  name="date"
-                  id="date"
+                  name="txtDate"
+                  id="txtDate"
                   onChange={this.onChange} />
 
               </Form.Group>
@@ -130,8 +141,8 @@ class AddNews extends React.Component {
                   required
                   type="text"
                   placeholder="Nhập nội dung..."
-                  name="description"
-                  id="description"
+                  name="txtDescription"
+                  id="txtDescription"
                   onChange={this.onChange} />
 
               </Form.Group>
@@ -152,12 +163,22 @@ class AddNews extends React.Component {
                   required
                   type="file"
                   placeholder="ảnh..."
-                  name="image"
-                  id="image"
+                  name="txtImage"
+                  id="txtImage"
                   onChange={this.onChange} />
 
               </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicObject">
+                <Form.Label>Phụ đề</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="phụ đề..."
+                  name="txtSubtitle"
+                  id="txtSubtitle"
+                  onChange={this.onChange} />
 
+              </Form.Group>
               {/* <Link to="/admin/manage/objects" > */}
               <Button type="button"
                 className="btn btn-danger"

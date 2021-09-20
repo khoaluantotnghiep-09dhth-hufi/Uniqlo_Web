@@ -27,6 +27,7 @@ const fields =
     { key: "description", label: "Nội Dung" },
     { key: "nameStaff", label: "Nhân Viên" },
     { key: "image", label: "Ảnh" },
+    { key: "sub_title", label: "Phụ Đề"},
     "Thao Tác",
 ]
 
@@ -40,7 +41,7 @@ class ListNews extends React.Component {
   render() {
       var { news } = this.props;
       var dataNews = news.map((item, index) => {
-          return item;
+          return { ...item, index };
       });
       return (
           <>
