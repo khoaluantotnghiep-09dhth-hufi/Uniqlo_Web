@@ -12,7 +12,7 @@ import * as actions from "./../../../actions/index";
 class AddNews extends React.Component {
   constructor(props) {
     super(props);
-    this.setState({
+    this.setState = {
       idItem: "",
       txtTitle: "",
       txtDate: "",
@@ -20,7 +20,7 @@ class AddNews extends React.Component {
       id_staff: "",
       txtImage: "",
       txtSubtitle: "",
-    });
+    };
   }
   componentDidMount() {
     var { match } = this.props;
@@ -41,7 +41,7 @@ class AddNews extends React.Component {
           txtDescription: result.description,
           id_staff: result.id_staff,
           txtImage: result.image,
-          txtSubtitle: result.sub_title,
+          txtSubtitle: result.subtitle,
         });
       }
     }
@@ -50,9 +50,9 @@ class AddNews extends React.Component {
     var target = event.target;
     var name = target.name;
     var value = target.value;
-    this.setState({
+    this.setState = {
       [name]: value,
-    });
+    };
   };
   onSubmitForm = (event) => {
     var { match } = this.props;
@@ -66,28 +66,29 @@ class AddNews extends React.Component {
       txtDescription, 
       id_staff, 
       txtImage,
-      txtSubtitle, } = this.state;
+      txtSubtitle, 
+    } = this.state;
 
     var news = {
       id: uniqid("news-"),
-      title: txtTitle,
+      titleName: txtTitle,
       date: txtDate,
       description: txtDescription,
       id_staff: id_staff,
       image: txtImage,
-      sub_title: txtSubtitle,
+      subtitle: txtSubtitle,
     };
     var newsUpdate = {
-      id: match.params.id_news,
-      title: txtTitle,
+      idItem: match.params.id_news,
+      titleName: txtTitle,
       date: txtDate,
       description: txtDescription,
       id_staff: id_staff,
       image: txtImage,
-      sub_title: txtSubtitle,
+      subtitle: txtSubtitle,
     };
 
-    if (idItem) {
+    if (match.params.id_news) {
       this.props.onUpdateItemNews(newsUpdate);
       alert('Sửa thành công');
       history.goBack();

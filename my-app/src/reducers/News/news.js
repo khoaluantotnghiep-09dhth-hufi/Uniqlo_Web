@@ -17,7 +17,7 @@ var news = (state = initialState, action) => {
   switch (action.type) {
     //Lấy ds news
     case types.FETCH_NEWS:
-      state = news;
+      state = action.news;
       return [...state];
     //Xoá tin tức
     case types.DELETE_NEWS:
