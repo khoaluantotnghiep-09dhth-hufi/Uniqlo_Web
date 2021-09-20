@@ -15,7 +15,7 @@ var findIndex = (cart, product) => {
 var findProductCart = (cart, product) => {
   var index = -1;
   for (var i = 0; i < cart.length; i++) {
-    if (cart[i].product.id === product.id) {
+    if (cart[i].product.id === product.id && cart[i].product.quantityOfSize === product.quantityOfSize && cart[i].product.txtSize === product.txtSize ) {
       index = i;
       break;
     }
@@ -59,7 +59,7 @@ var cart = (state = initialState, action) => {
       return [...state];
     //Thêm sản phẩm vào giỏ hàng
     case types.ADD_TO_CART:
-      console.log(product)
+      
       index = findProductCart(state, product);
 
       if (index !== -1) {
