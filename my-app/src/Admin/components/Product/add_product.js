@@ -142,7 +142,7 @@ class addProduct extends React.Component {
         };
         var propductinfo = {
             id: uniqid("product-info-"),
-            id_product: product.id, 
+            id_product: product.id,
             id_size: id_size,
             id_color: id_color,
             quantity: txtQuantity
@@ -163,7 +163,7 @@ class addProduct extends React.Component {
             this.props.onAddItemProductInfo(propductinfo);
             alert('Thêm thành công');
             history.goBack();
-           
+
         }
     };
     render() {
@@ -172,7 +172,7 @@ class addProduct extends React.Component {
         var { size } = this.props;
         var { color } = this.props;
 
-        let { txtName, txtPrice, txtDescription, id_category, id_promotion,txtQuantity } = this.state;
+        let { txtName, txtPrice, txtDescription, id_category, id_promotion, txtQuantity } = this.state;
         return (
             <Container fluid>
                 <Row>
@@ -303,14 +303,7 @@ class addProduct extends React.Component {
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
-                                <Col sm="10">
-                                    <Form.Group className="d-flex justify-content-center">
-                                        <Button type="button" className="btn btn-danger"
-                                            onClick={this.onSubmitForm}
-                                        > <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg"
-                                            />Thêm</Button>
-                                    </Form.Group>
-                                </Col>
+
                             </Row>
                         </Form>
                     </Col>
@@ -375,6 +368,14 @@ class addProduct extends React.Component {
                                 Vui lòng nhập tên cần thêm !
                             </Form.Control.Feedback>
 
+                        </Form.Group>
+                    </Col>
+                    <Col sm="10">
+                        <Form.Group className="d-flex justify-content-center">
+                            <Button type="button" className="btn btn-danger"
+                                onClick={this.onSubmitForm}
+                            > <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg"
+                                />Thêm</Button>
                         </Form.Group>
                     </Col>
                 </Row>
