@@ -70,7 +70,8 @@ export const ADD_STAFF = 'ADD_STAFF';
 export const UPDATE_STAFF = 'UPDATE_STAFF';
 export const DELETE_STAFF = 'DELETE_STAFF';
 export const EDIT_STAFF = 'EDIT_STAFF ';
-
+//product info 
+export const ADD_PRODCUTINFO = 'ADD_PRODCUTINFO';
 //Get color
 export const FETCH_COLOR = 'FETCH_COLOR';
 export const ADD_COLOR = 'ADD_COLOR';

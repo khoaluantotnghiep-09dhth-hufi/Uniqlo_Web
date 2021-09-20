@@ -18,7 +18,7 @@ import * as actions from "../../../actions/index";
 class addObject extends React.Component {
   constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       idItem: "",
       txtName: "",
     };
@@ -66,15 +66,15 @@ class addObject extends React.Component {
       idItem: match.params.id_object,
       nameObject: txtName,
     };
-console.log(objectUpdate);
-console.log(idItem)
+    console.log(objectUpdate);
+    console.log(idItem)
     if (match.params.id_object) {
       this.props.onUpdateItemObject(objectUpdate);
       alert("Sửa thành công");
       history.goBack();
     } else {
       this.props.onAddItemObject(object_menu);
-     alert("Thêm thành công");
+      alert("Thêm thành công");
       history.goBack();
     }
   };

@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import cart from "./Carts/cart";
 import products from "./Products/products";
 import products_category from "./Products_Category/products_category";
-
+import productInfo from "./ProductInfo/productInfo";
 import object_menu from "./Objects/object";
 import sector from "./Sectors/sector";
 import users from "./Users/users";
@@ -37,6 +37,7 @@ const myReducer = combineReducers({
   products_category,
   order_info,
   color_by_size,
+  productInfo,
 });
 
 export default myReducer;

@@ -13,12 +13,12 @@ let isLoadingExternally = false;
 class AddSector extends React.Component {
     constructor(props) {
         super(props);
-        this.setState({
+        this.state = {
             idItem: "",
             txtName: "",
             id_object: "",
             object_menuArr: [],
-        });
+        };
     }
     componentDidMount() {
         var { match } = this.props;
@@ -32,25 +32,25 @@ class AddSector extends React.Component {
     componentWillReceiveProps(NextProps) {
         var { match } = this.props;
         if (NextProps && NextProps.sector) {
-          var { sector } = NextProps;
-          if (match.params.id_sector) {
-            const result = sector.find((o) => o.id === match.params.id_sector);
-            this.setState({
-              idItem: result.id,
-              txtName: result.name,
-              id_object: result.id_object,
-            });
-          }
+            var { sector } = NextProps;
+            if (match.params.id_sector) {
+                const result = sector.find((o) => o.id === match.params.id_sector);
+                this.setState({
+                    idItem: result.id,
+                    txtName: result.name,
+                    id_object: result.id_object,
+                });
+            }
         }
-      }
-   
+    }
+
     onChange = (e, id) => {
         let coppyState = { ...this.state };
         coppyState[id] = e.target.value;
         this.setState({
             ...coppyState
         })
-        
+
     };
     checkValidate = () => {
         let check = ['txtName'];
@@ -69,8 +69,8 @@ class AddSector extends React.Component {
         event.preventDefault();
         if (isValid === false) return;
         var { match } = this.props;
-      
-      
+
+
         var { idItem, txtName, id_object } = this.state;
         var sector = {
             id: uniqid("sector-"),
