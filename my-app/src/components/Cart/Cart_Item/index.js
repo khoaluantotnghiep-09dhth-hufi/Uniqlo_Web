@@ -7,26 +7,28 @@ class index extends Component {
     super(props);
     this.state = {
       quantity: 1,
-   
+      txtInputQuantity: "",
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange = (product, quantity,quantityOfSize) => (event) => {
-    const re = /^[0-9\b]+$/;
-    if(event.target.value<quantityOfSize || event.target.value<0){
-      alert("Không Đủ Số Lượng Để Mua");
-    }else if(event.target.value === '' || re.test(event.target.value)){
-      this.setState({
-     
-        quantity: event.target.value,
-    
-      });
+  handleChange = (product, quantity, quantityOfSize) => (event) => {
   
-      this.props.onUpdateQuantityCart(product, event.target.value);
+    const value = event.target.value.replace(/\D/g, "");
+    // parseInt(event.target.value).replace(/\D/g, "");
+    if (value > quantityOfSize || value < 0) {
+      alert("Không Đủ Số Lượng Để Mua");
+      this.setState({
+        quantity: 1,
+      });
+      this.props.onUpdateQuantityCart(product, 1);
+    } else {
+      this.setState({
+        quantity: value,
+      });
+
+      this.props.onUpdateQuantityCart(product, value);
     }
-   
-   
   };
 
   onDelete = (product) => {
@@ -44,8 +46,8 @@ class index extends Component {
   };
   render() {
     var { item } = this.props;
- 
-    const { quantity} = this.state;
+
+    const { quantity } = this.state;
 
     const formatter = new Intl.NumberFormat("vi-Vn", {
       style: "currency",
@@ -74,10 +76,7 @@ class index extends Component {
                       : item.product.priceProduct
                   )}
                 </h6>
-                <h6>
-                  Số Lượng Tồn:{" "}
-                  {item.product.quantityOfSize}
-                </h6>
+                <h6>Số Lượng Tồn: {item.product.quantityOfSize}</h6>
               </div>
             </Col>
 
@@ -86,10 +85,13 @@ class index extends Component {
                 <Col>
                   <h6>Số lượng</h6>
                   <Form.Control
-                    type="number"
+                    type="text"
                     name="txtInputQuantity"
-                    onChange={this.handleChange(item.product, item.quantity,item.product.quantityOfSize)}
-                  
+                    onKeyUp={this.handleChange(
+                      item.product,
+                      item.quantity,
+                      item.product.quantityOfSize
+                    )}
                   />
 
                   {/* <select
