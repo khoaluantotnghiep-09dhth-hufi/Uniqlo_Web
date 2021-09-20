@@ -12,6 +12,12 @@ import { connect } from "react-redux";
 import * as actions from "./../../actions/productActions";
 import "./Detail_Product.scss";
 class index extends Component {
+  constructor(props) {
+    super(props);
+    this.setState({
+      checkColor: 'Red',
+    });
+  }
   componentDidMount() {
     this.props.onGetAllProduct();
   }
@@ -129,12 +135,14 @@ class index extends Component {
   };
   onClickColor = (nameColor, obj) => {
     // $(`"#${nameColor}"`).addClass("active");
-    console.log(nameColor);
-    console.log(this.refs);
-    console.log(`"#${nameColor}"`);
+    console.log(obj);
+    this.setState({
+      checkColor: obj,
+    });
   };
   ShowColor = (products, id_product) => {
     var result = null;
+var{checkColor}=this.state;
     result = products
       .filter((product) => product.id === id_product)
       .map((product, index) => {
@@ -142,11 +150,12 @@ class index extends Component {
           <React.Fragment>
             <Col lg="4" style={{ paddingRight: "0" }}>
               <Button
-              type="button"
+                type="button"
                 id={`${product.nameColor}`}
                 ref={product.nameColor}
                 variant="outline-secondary"
                 size="sm"
+                className={`${checkColor}==="Red"?'active':''`}
                 onClick={() => {
                   this.onClickColor(this, product.nameColor);
                 }}
@@ -184,12 +193,11 @@ class index extends Component {
 
   render() {
     var { match, products, products_category } = this.props;
-
     var id_product = match.params.id_product;
 
     return (
       <React.Fragment>
-        <Container  style={{ marginTop: "5%", marginBottom: "15%" }}>
+        <Container style={{ marginTop: "5%", marginBottom: "15%" }}>
           <Row className="mt-4">
             {this.showDetailProduct(products_category, id_product)}
             <Col className="ml-4" style={{ backgroundColor: "#ECECEC" }}>

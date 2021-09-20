@@ -52,6 +52,7 @@ class AddSector extends React.Component {
     //         var { sector } = prevState;
     //         if (match.params.id_sector) {
     //             const result = sector.find((o) => o.id === match.params.id_sector);
+    //             console.log(result);
     //             this.setState({
     //                 idItem: result.id,
     //                 txtName: result.name,
@@ -105,7 +106,7 @@ class AddSector extends React.Component {
             id_object: id_object,
         };
 
-        if (idItem) {
+        if (match.params.id_sectors) {
             this.props.onUpdateItemSector(sectorUpdate);
             alert('Sửa thành công');
             history.goBack();
