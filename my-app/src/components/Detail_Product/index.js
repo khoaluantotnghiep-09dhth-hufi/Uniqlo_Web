@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 import $ from "jquery";
 import {
   Container,
@@ -17,8 +18,13 @@ class index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isChooseColor: '',
+      nameProduct: "",
+      imageProduct: "",
+      priceProduct: 0,
+      priceSaleProduct: 0,
       txtSize: "",
+      quantityOfSize: 0,
+      isChooseColor: "",
     };
   }
   componentDidMount() {
@@ -37,119 +43,126 @@ class index extends Component {
     });
 
     var result = null;
-    result = products_category
-      .filter((product) => product.id === id_product)
+    var resultFilter = null;
+    result = products_category.filter((product) => product.id === id_product);
+    if (result.percentSale) {
+      var newPrice = (parseInt(result.percentSale) / 100) * result.price;
+    }
 
-      .map((product, index) => {
-        if (product.percentSale) {
-          var newPrice = (parseInt(product.percentSale) / 100) * product.price;
-        }
-        var elementNewPrice = newPrice ? (
-          <span
-            // style={{ marginLeft: "40px", color: "red" }}
-            className="font-weight-bold "
-            style={{ color: "red" }}
-          >
-            {" "}
-            {formatter.format(newPrice)}{" "}
-          </span>
-        ) : (
-          ""
-        );
+    // this.setState({
+    //   nameProduct:result.name,
+    //   imageProduct:result.image,
+    //   priceProduct: result.price,
+    //   priceSaleProduct: newPrice ,
 
-        var elementPrice = elementNewPrice ? (
-          <span>
-            {" "}
-            <del>{formatter.format(product.price)} </del>
-          </span>
-        ) : (
-          <span className="font-weight-bold " style={{ color: "red" }}>
-            {" "}
-            {formatter.format(product.price)}
-          </span>
-        );
-        return (
-          <React.Fragment>
-            <Col lg="3" style={{ backgroundColor: "#ECECEC" }}>
-              <Row>
-                <Col>
-                  <h3 style={{ marginTop: "50px" }}>{product.name}</h3>
-                </Col>
-              </Row>
-              <Row>
-                <Col className="mt-2">
-                  <h5 className="font-weight-normal ">Giá Bán:</h5>
-                </Col>
-              </Row>
-              <Row>
-                <Col className="mt-4">
-                  <h5>{elementPrice}</h5>
-                </Col>
-              </Row>
-              <Row>
-                <Col className="mt-2">
-                  <h5>{elementNewPrice}</h5>
-                </Col>
-              </Row>
-              <Row>
-                <Col className="mt-2">
-                  <h5>--------------------------------------------</h5>
-                </Col>
-              </Row>
-            </Col>
-            <Col lg="5">
-              <Row>
-                <Col>
-                  <Image
-                    class="Adjust__Image"
-                    src={product.image}
-                    style={{ maxWidth: "470px" }}
-                  ></Image>
-                </Col>
-              </Row>
-              <Row>
-                <Col
-                  className="ml-4 mt-2"
-                  style={{ backgroundColor: "#666666" }}
+    // })
+    resultFilter = result.map((product, index) => {
+      if (product.percentSale) {
+        var newPrice = (parseInt(product.percentSale) / 100) * product.price;
+      }
+      var elementNewPrice = newPrice ? (
+        <span
+          // style={{ marginLeft: "40px", color: "red" }}
+          className="font-weight-bold "
+          style={{ color: "red" }}
+        >
+          {" "}
+          {formatter.format(newPrice)}{" "}
+        </span>
+      ) : (
+        ""
+      );
+
+      var elementPrice = elementNewPrice ? (
+        <span>
+          {" "}
+          <del>{formatter.format(product.price)} </del>
+        </span>
+      ) : (
+        <span className="font-weight-bold " style={{ color: "red" }}>
+          {" "}
+          {formatter.format(product.price)}
+        </span>
+      );
+      return (
+        <React.Fragment>
+          <Col lg="3" style={{ backgroundColor: "#ECECEC" }}>
+            <Row>
+              <Col>
+                <h3 style={{ marginTop: "50px" }} name="nameProduct">
+                  {product.name}
+                </h3>
+              </Col>
+            </Row>
+            <Row>
+              <Col className="mt-2">
+                <h5 className="font-weight-normal ">Giá Bán:</h5>
+              </Col>
+            </Row>
+            <Row>
+              <Col className="mt-4">
+                <h5>{elementPrice}</h5>
+              </Col>
+            </Row>
+            <Row>
+              <Col className="mt-2">
+                <h5>{elementNewPrice}</h5>
+              </Col>
+            </Row>
+            <Row>
+              <Col className="mt-2">
+                <h5>--------------------------------------------</h5>
+              </Col>
+            </Row>
+          </Col>
+          <Col lg="5">
+            <Row>
+              <Col>
+                <Image
+                  class="Adjust__Image"
+                  src={product.image}
+                  style={{ maxWidth: "470px" }}
+                ></Image>
+              </Col>
+            </Row>
+            <Row>
+              <Col className="ml-4 mt-2" style={{ backgroundColor: "#666666" }}>
+                <p
+                  className="font-weight-normal text-left"
+                  style={{ color: "#f0f0f0", marginBottom: "0" }}
                 >
-                  <p
-                    className="font-weight-normal text-left"
-                    style={{ color: "#f0f0f0", marginBottom: "0" }}
-                  >
-                    Thông Tin Về Sản Phẩm
-                  </p>
-                </Col>
-              </Row>
-              <Row>
-                <Col
-                  className="ml-4 mt-2"
-                  style={{ backgroundColor: "#f0f0f0" }}
+                  Thông Tin Về Sản Phẩm
+                </p>
+              </Col>
+            </Row>
+            <Row>
+              <Col className="ml-4 mt-2" style={{ backgroundColor: "#f0f0f0" }}>
+                <h4
+                  className="font-weight-normal text-left"
+                  style={{ color: "#666", marginBottom: "0" }}
                 >
-                  <h4
-                    className="font-weight-normal text-left"
-                    style={{ color: "#666", marginBottom: "0" }}
-                  >
-                    {product.description}
-                  </h4>
-                </Col>
-              </Row>
-            </Col>
-          </React.Fragment>
-        );
-      });
+                  {product.description}
+                </h4>
+              </Col>
+            </Row>
+          </Col>
+        </React.Fragment>
+      );
+    });
 
-    return result;
+    return resultFilter;
   };
-  onClickChooseColor=(obj,nameColor)=>{
-    console.log(obj,nameColor)
+  onClickChooseColor = (obj, nameColor, totalQuantityProduct) => {
+    console.log(obj, nameColor, totalQuantityProduct);
     this.setState({
-      isChooseColor: nameColor
-    })
-  }
-  ShowSize = (color_by_size, txtSize,isChooseColor) => {
+      isChooseColor: nameColor,
+      quantityOfSize: totalQuantityProduct,
+    });
+  };
+  ShowSize = (color_by_size, txtSize, isChooseColor) => {
     var result = null;
     var resultFilter = null;
-   const colorChoose="#000"
+
     result = color_by_size.filter((item) => item.nameSize === txtSize);
     resultFilter = result ? (
       result.map((item, index) => {
@@ -177,8 +190,18 @@ class index extends Component {
                   style={{ margin: "0" }}
                   variant="outline-secondary"
                   size="sm"
-                  className={`mt-1 ${isChooseColor===item.nameColor?"active Adjust__Color-Choose":""}`}
-                  onClick={() => {this.onClickChooseColor(this,item.nameColor)}}
+                  className={`mt-1 ${
+                    isChooseColor === item.nameColor
+                      ? "active Adjust__Color-Choose"
+                      : ""
+                  }`}
+                  onClick={() => {
+                    this.onClickChooseColor(
+                      this,
+                      item.nameColor,
+                      item.totalQuantityProduct
+                    );
+                  }}
                 >
                   {item.nameColor}
                 </Button>
@@ -192,8 +215,7 @@ class index extends Component {
         <h4>Mời Bạn Chọn Size</h4>
       </Col>
     );
-    console.log(isChooseColor);
-    
+
     return resultFilter;
   };
   onChange = (event) => {
@@ -205,10 +227,29 @@ class index extends Component {
     });
   };
   render() {
-    var { match, products_category, color_by_size } = this.props;
+    var { match, products_category, color_by_size} = this.props;
     var id_product = match.params.id_product;
-    var { txtSize,isChooseColor } = this.state;
-    console.log(txtSize);
+    var { txtSize, isChooseColor, quantityOfSize } = this.state;
+
+
+    var result = null;
+    
+    result = products_category.find((product) => product.id === id_product);
+    if (result.percentSale) {
+      var newPrice = (parseInt(result.percentSale) / 100) * result.price;
+    }
+
+    var product={
+      nameProduct:result.name,
+      imageProduct:result.image,
+      priceProduct: result.price,
+      priceSaleProduct: newPrice ,
+      txtSize,
+      isChooseColor,
+      quantityOfSize
+
+    }
+    console.log(product);
     return (
       <React.Fragment>
         <Container style={{ marginTop: "5%", marginBottom: "15%" }}>
@@ -218,7 +259,7 @@ class index extends Component {
               <p className="font-weight-bold " style={{ marginTop: "50px" }}>
                 Màu:
               </p>
-              <Row>{this.ShowSize(color_by_size, txtSize,isChooseColor)}</Row>
+              <Row>{this.ShowSize(color_by_size, txtSize, isChooseColor)}</Row>
 
               <p className="font-weight-bold mt-5">Kích Cỡ:</p>
               <Row>
@@ -242,6 +283,18 @@ class index extends Component {
               <h5 style={{ marginTop: "11px" }}>
                 --------------------------------------------------------
               </h5>
+              <Row>
+                <Col>
+                  <Button
+                    variant="danger"
+                    type="button"
+                    size="lg"
+                    className="Cart__Checkout-button mt-5"
+                  >
+                    Thêm Vào Giỏ Hàng
+                  </Button>
+                </Col>
+              </Row>
             </Col>
           </Row>
         </Container>
