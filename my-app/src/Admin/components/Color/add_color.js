@@ -21,11 +21,11 @@ import { Link } from "react-router-dom";
 class addColor extends React.Component {
   constructor(props) {
     super(props);
-    this.setState({
+    this.state={
       idItem: "",
       txtName: "",
 
-    });
+    };
   }
   componentDidMount() {
     var { match } = this.props;

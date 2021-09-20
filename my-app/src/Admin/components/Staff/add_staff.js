@@ -23,7 +23,7 @@ import { Button } from 'react-bootstrap';
 class addStaff extends React.Component {
   constructor(props) {
     super(props);
-    this.setState({
+    this.state={
       idItem: "",
       txtNameStaff: "",
       txtEmail: "",
@@ -31,7 +31,7 @@ class addStaff extends React.Component {
       txtAddress: "",
       txtPassword: "",
       txtChucVu: "",
-    });
+    };
   }
   componentDidMount() {
     var { match } = this.props;

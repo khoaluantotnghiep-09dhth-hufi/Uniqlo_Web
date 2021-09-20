@@ -7,19 +7,26 @@ import {
   Image,
   ButtonGroup,
   Button,
+  Form,
 } from "react-bootstrap";
 import { connect } from "react-redux";
 import * as actions from "./../../actions/productActions";
+import * as actions_of_index from "./../../actions/index";
 import "./Detail_Product.scss";
 class index extends Component {
   constructor(props) {
     super(props);
-    this.setState({
-      checkColor: 'Red',
-    });
+    this.state = {
+      isChooseColor: '',
+      txtSize: "",
+    };
   }
   componentDidMount() {
+    var { match } = this.props;
+    var id_product = match.params.id_product;
+
     this.props.onGetAllProduct();
+    this.props.onGetAllSizeByProduct(id_product);
   }
 
   showDetailProduct = (products_category, id_product) => {
@@ -133,68 +140,75 @@ class index extends Component {
 
     return result;
   };
-  onClickColor = (nameColor, obj) => {
-    // $(`"#${nameColor}"`).addClass("active");
-    console.log(obj);
+  onClickChooseColor=(obj,nameColor)=>{
+    console.log(obj,nameColor)
     this.setState({
-      checkColor: obj,
+      isChooseColor: nameColor
+    })
+  }
+  ShowSize = (color_by_size, txtSize,isChooseColor) => {
+    var result = null;
+    var resultFilter = null;
+   
+    result = color_by_size.filter((item) => item.nameSize === txtSize);
+    resultFilter = result ? (
+      result.map((item, index) => {
+        if (parseInt(item.totalQuantityProduct) === 0) {
+          return (
+            <React.Fragment>
+              <Col lg="4">
+                <Button
+                  style={{ margin: "0" }}
+                  variant="link"
+                  size="sm"
+                  className="mt-1"
+                  disabled
+                >
+                  <del>{item.nameColor}</del>
+                </Button>
+              </Col>
+            </React.Fragment>
+          );
+        } else {
+          return (
+            <React.Fragment>
+              <Col lg="4">
+                <Button
+                  style={{ margin: "0" }}
+                  variant="outline-secondary"
+                  size="sm"
+                  className={`mt-1 ${isChooseColor===item.nameColor?"active":""}`}
+                  onClick={() => {this.onClickChooseColor(this,item.nameColor)}}
+                >
+                  {item.nameColor}
+                </Button>
+              </Col>
+            </React.Fragment>
+          );
+        }
+      })
+    ) : (
+      <Col>
+        <h4>Mời Bạn Chọn Size</h4>
+      </Col>
+    );
+    console.log(isChooseColor);
+    
+    return resultFilter;
+  };
+  onChange = (event) => {
+    var target = event.target;
+    var name = target.name;
+    var value = target.value;
+    this.setState({
+      [name]: value,
     });
   };
-  ShowColor = (products, id_product) => {
-    var result = null;
-
-    result = products
-      .filter((product) => product.id === id_product)
-      .map((product, index) => {
-        return (
-          <React.Fragment>
-            <Col lg="4" style={{ paddingRight: "0" }}>
-              <Button
-                type="button"
-                id={`${product.nameColor}`}
-                ref={product.nameColor}
-                variant="outline-secondary"
-                size="sm"
-                // className={`${checkColor}==="Red"?'active':''`}
-                onClick={() => {
-                  this.onClickColor(this, product.nameColor);
-                }}
-              >
-                {product.nameColor}
-              </Button>
-            </Col>
-          </React.Fragment>
-        );
-      });
-    return result;
-  };
-
-  ShowSize = (products, id_product) => {
-    var result = null;
-    result = products
-      .filter((product) => product.id === id_product)
-      .map((product, index) => {
-        return (
-          <React.Fragment>
-            <Col lg="3">
-              <Button
-                style={{ margin: "0" }}
-                variant="outline-secondary"
-                size="sm"
-              >
-                {product.nameSize}
-              </Button>
-            </Col>
-          </React.Fragment>
-        );
-      });
-    return result;
-  };
-
   render() {
-    var { match, products, products_category } = this.props;
+    var { match, products_category, color_by_size } = this.props;
     var id_product = match.params.id_product;
-
+    var { txtSize,isChooseColor } = this.state;
+    console.log(txtSize);
     return (
       <React.Fragment>
         <Container style={{ marginTop: "5%", marginBottom: "15%" }}>
@@ -204,10 +218,27 @@ class index extends Component {
               <p className="font-weight-bold " style={{ marginTop: "50px" }}>
                 Màu:
               </p>
-              <Row>{this.ShowColor(products, id_product)}</Row>
+              <Row>{this.ShowSize(color_by_size, txtSize,isChooseColor)}</Row>
 
               <p className="font-weight-bold mt-5">Kích Cỡ:</p>
-              <Row>{this.ShowSize(products, id_product)}</Row>
+              <Row>
+                <Col>
+                  <Form.Select
+                    name="txtSize"
+                    onChange={this.onChange}
+                    value={this.state.txtSize}
+                  >
+                    <option selected value="default">
+                      ---
+                    </option>
+                    <option value="S">Size S</option>
+                    <option value="M">Size M</option>
+                    <option value="L">Size L</option>
+                    <option value="XL">Size XL</option>
+                    <option value="XXL">Size XXL</option>
+                  </Form.Select>
+                </Col>
+              </Row>
               <h5 style={{ marginTop: "11px" }}>
                 --------------------------------------------------------
               </h5>
@@ -222,12 +253,16 @@ var mapStateToProps = (state) => {
   return {
     products: state.products,
     products_category: state.products_category,
+    color_by_size: state.color_by_size,
   };
 };
 var mapDispatchToProps = (dispatch, props) => {
   return {
     onGetAllProduct: () => {
       dispatch(actions.fetchProductResquest());
+    },
+    onGetAllSizeByProduct: (id_product) => {
+      dispatch(actions_of_index.onGetAllColorBySizeResquest(id_product));
     },
   };
 };

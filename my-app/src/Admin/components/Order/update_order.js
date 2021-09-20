@@ -17,12 +17,12 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 class updateOrder extends React.Component {
   constructor(props) {
     super(props);
-    this.setState({
+    this.state={
       idItem: "",
       txtDate: "",
       txtConfirm: "",
      
-    });
+    };
   }
   componentDidMount() {
     var { match } = this.props;

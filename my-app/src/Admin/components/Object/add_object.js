@@ -18,10 +18,10 @@ import * as actions from "../../../actions/index";
 class addObject extends React.Component {
   constructor(props) {
     super(props);
-    this.setState({
+    this.state={
       idItem: "",
       txtName: "",
-    });
+    };
   }
   componentDidMount() {
     var { match } = this.props;

@@ -998,3 +998,18 @@ export const onUpdateObjectsResquest = (object_menu) => {
     );
   };
 };
+
+//lấy Tất cả Color Theo Size
+export const onGetAllColorBySize = (color_by_size) => {
+  return {
+    type: types.GET_ALL_COLOR_BY_SIZE,
+    color_by_size,
+  };
+};
+export const onGetAllColorBySizeResquest = (id_product) => {
+  return (dispatch) => {
+    return callApi(`product-sizes/${id_product}`, "GET", null).then((response) => {
+      dispatch(onGetAllColorBySize(response.data));
+    });
+  };
+};

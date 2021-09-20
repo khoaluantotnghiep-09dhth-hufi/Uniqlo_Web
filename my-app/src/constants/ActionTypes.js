@@ -91,6 +91,8 @@ export const UPDATE_SIZE = 'UPDATE_SIZE';
 export const DELETE_SIZE = 'DELETE_SIZE';
 export const EDIT_SIZE = 'EDIT_SIZE ';
 
+export const GET_ALL_COLOR_BY_SIZE = 'GET_ALL_COLOR_BY_SIZE';
+
 //Get news
 export const FETCH_NEWS = 'FETCH_NEWS';
 export const ADD_NEWS = 'ADD_NEWS';

@@ -19,13 +19,13 @@ import {faArrowLeft} from "@fortawesome/free-solid-svg-icons";
 class addDiscount extends React.Component {
   constructor(props) {
     super(props);
-    this.setState({
+    this.state={
       idItem: "",
       txtNameDiscount: "",
       txtNameMota: "",
       dateStart: "",
       dateEnd: "",
-    });
+    };
   }
   componentDidMount() {
     var { match } = this.props;

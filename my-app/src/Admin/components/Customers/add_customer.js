@@ -13,7 +13,7 @@ import * as actions from "./../../../actions/index";
 class AddCustomer extends React.Component {
   constructor(props) {
     super(props);
-    this.setState({
+    this.state={
       idItem: "",
       name: "",
       address: "",
@@ -21,7 +21,7 @@ class AddCustomer extends React.Component {
       image: "",
       password: "",
       email: "",
-    });
+    };
   }
   componentDidMount() {
     var { match } = this.props;
