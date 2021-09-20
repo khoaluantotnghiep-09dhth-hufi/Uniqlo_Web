@@ -59,6 +59,7 @@ var cart = (state = initialState, action) => {
       return [...state];
     //Thêm sản phẩm vào giỏ hàng
     case types.ADD_TO_CART:
+      console.log(product)
       index = findProductCart(state, product);
 
       if (index !== -1) {

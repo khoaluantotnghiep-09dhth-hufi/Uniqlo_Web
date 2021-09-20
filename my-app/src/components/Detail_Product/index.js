@@ -18,10 +18,6 @@ class index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nameProduct: "",
-      imageProduct: "",
-      priceProduct: 0,
-      priceSaleProduct: 0,
       txtSize: "",
       quantityOfSize: 0,
       isChooseColor: "",
@@ -153,7 +149,6 @@ class index extends Component {
     return resultFilter;
   };
   onClickChooseColor = (obj, nameColor, totalQuantityProduct) => {
-    console.log(obj, nameColor, totalQuantityProduct);
     this.setState({
       isChooseColor: nameColor,
       quantityOfSize: totalQuantityProduct,
@@ -226,30 +221,33 @@ class index extends Component {
       [name]: value,
     });
   };
+  onAddToCart = (product) => {
+    console.log(product)
+    this.props.onAddToCart(product);
+  };
   render() {
-    var { match, products_category, color_by_size} = this.props;
+    var { match, products_category, color_by_size } = this.props;
     var id_product = match.params.id_product;
     var { txtSize, isChooseColor, quantityOfSize } = this.state;
 
-
     var result = null;
-    
+
     result = products_category.find((product) => product.id === id_product);
     if (result.percentSale) {
       var newPrice = (parseInt(result.percentSale) / 100) * result.price;
     }
 
-    var product={
-      nameProduct:result.name,
-      imageProduct:result.image,
+    var product = {
+      id_product:match.params.id_product,
+      nameProduct: result.name,
+      imageProduct: result.image,
       priceProduct: result.price,
-      priceSaleProduct: newPrice ,
+      priceSaleProduct: newPrice,
       txtSize,
       isChooseColor,
-      quantityOfSize
-
-    }
-    console.log(product);
+      quantityOfSize,
+    };
+   
     return (
       <React.Fragment>
         <Container style={{ marginTop: "5%", marginBottom: "15%" }}>
@@ -286,10 +284,14 @@ class index extends Component {
               <Row>
                 <Col>
                   <Button
+                  type="submit"
                     variant="danger"
                     type="button"
                     size="lg"
                     className="Cart__Checkout-button mt-5"
+                    onClick={() => {
+                      this.onAddToCart(product);
+                    }}
                   >
                     Thêm Vào Giỏ Hàng
                   </Button>
@@ -316,6 +318,9 @@ var mapDispatchToProps = (dispatch, props) => {
     },
     onGetAllSizeByProduct: (id_product) => {
       dispatch(actions_of_index.onGetAllColorBySizeResquest(id_product));
+    },
+    onAddToCart: (product) => {
+      dispatch(actions_of_index.addToCart(product, 1));
     },
   };
 };

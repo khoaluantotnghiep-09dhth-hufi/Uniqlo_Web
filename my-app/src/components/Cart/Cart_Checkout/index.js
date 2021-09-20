@@ -12,7 +12,12 @@ class index extends Component {
     });
     var total = 0;
     for (let index = 0; index < cart.length; index++) {
-      total += cart[index].product.price * cart[index].quantity;
+      if(cart[index].product.priceSaleProduct){
+        total += cart[index].product.priceSaleProduct * cart[index].quantity;
+      }else{
+        total += cart[index].product.priceProduct * cart[index].quantity;
+      }
+     
      
     }
     return formatter.format(total);
