@@ -14,9 +14,9 @@ class index extends Component {
 
   handleChange = (product, quantity, quantityOfSize) => (event) => {
   
-    const value = event.target.value.replace(/\D/g, "");
+    var value = parseInt(event.target.value);
     // parseInt(event.target.value).replace(/\D/g, "");
-    if (value > quantityOfSize || value < 0) {
+    if (value> quantityOfSize || value< 1) {
       alert("Không Đủ Số Lượng Để Mua");
       this.setState({
         quantity: 1,
@@ -85,18 +85,19 @@ class index extends Component {
                 <Col>
                   <h6>Số lượng</h6>
                   <Form.Control
-                    type="text"
+                    type="number"
                     name="txtInputQuantity"
-                    onKeyUp={this.handleChange(
+                    onChange={this.handleChange(
                       item.product,
                       item.quantity,
                       item.product.quantityOfSize
                     )}
+                    value={this.state.quantity}
                   />
 
                   {/* <select
                     value={this.state.quantity}
-                    onChange={this.handleChange(item.product, item.quantity)}
+                    onChange={this.handleChange(item.product, item.quantity,)}
                   >
                     <option value="1">1</option>
                     <option value="2">2</option>
