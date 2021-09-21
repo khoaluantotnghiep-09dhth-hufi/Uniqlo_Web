@@ -13,7 +13,7 @@ var findIndex = (news, id) => {
 }
 var news = (state = initialState, action) => {
   var index = -1;
-  var { new2,id } = action;
+  var { news, id } = action;
   switch (action.type) {
     //Lấy ds news
     case types.FETCH_NEWS:

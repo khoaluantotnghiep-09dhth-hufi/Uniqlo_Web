@@ -206,15 +206,24 @@ class AddNews extends React.Component {
             <Row sm="12">
               <Col sm="2">
                 <Form.Group >
-                  <Form.Label className="border border-dark" style={{ backgroundColor: "#ffe6e6", padding: "10px", marginTop: "100px", cursor: "pointer" }} htmlFor="txtImage"><FontAwesomeIcon icon={faUpload} className="mr-2 fa-3x" />Tải Ảnh</Form.Label>
-                  <Form.Control
+                  {/* <Form.Label className="border border-dark" style={{ backgroundColor: "#ffe6e6", padding: "10px", marginTop: "100px", cursor: "pointer" }} htmlFor="txtImage"><FontAwesomeIcon icon={faUpload} className="mr-2 fa-3x" />Tải Ảnh</Form.Label> */}
+                  {/* <Form.Control
                     type="file"
                     id="txtImage"
                     name="txtImage"
                     hidden
                     onChange={(e) => { this.onChangeImage(e) }}
                     required
-                  />
+                  /> */}
+                  <Form.Label>Image</Form.Label>
+                    <Form.Control
+                      required
+                      type="text"
+                      placeholder="Image"
+                      name="txtImage"
+                      id="txtImage"
+                      value={txtImage}
+                      onChange={(e) => { this.onChange(e, 'txtImage') }} />
                 </Form.Group>
               </Col>
               <Col sm="4">
@@ -262,11 +271,11 @@ class AddNews extends React.Component {
               </Form.Group>
             </Col>
             <Form.Group className="mb-3" controlId="formBasicObject">
-              <Form.Label>Phụ đề</Form.Label>
+              <Form.Label>Banner</Form.Label>
               <Form.Control
                 required
                 type="text"
-                placeholder="phụ đề..."
+                placeholder="Image banner"
                 name="txtImageBanner"
                 id="txtImageBanner"
                 value={txtImageBanner}

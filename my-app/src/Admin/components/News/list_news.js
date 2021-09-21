@@ -28,7 +28,7 @@ const fields =
         { key: "desciption", label: "Nội Dung" },
         { key: "name", label: "Nhân Viên" },
         { key: "image", label: "Ảnh" },
-        { key: "sub_title", label: "chưa để tên" },
+        { key: "image_banner", label: "Ảnh Banner" },
         "Thao Tác",
     ]
 class ListNews extends React.Component {
@@ -46,7 +46,7 @@ class ListNews extends React.Component {
 
         var { news } = this.props;
         var dataNews = news.map((item, index) => {
-           return item;
+           return {...item, index};
         });
         return (
             <>

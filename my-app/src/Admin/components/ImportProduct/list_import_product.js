@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-    CBadge,
     CCard,
     CCardBody,
     CCardHeader,
@@ -8,73 +7,106 @@ import {
     CDataTable,
     CRow,
     CButton,
-} from '@coreui/react'
+} from '@coreui/react';
+import { connect } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faPlus,
-  faTimes,
-  faTools,
+    faPlus,
+    faTimes,
+    faTools,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
-import usersData from '../User/UserData';
 
-import { Link } from 'react-router-dom';
-
-const fields = ['Tên', 'registered', 'role', 'status', 'Hành Động']
+import * as actions from "./../../../actions/index";
+const fields = [
+    'STT',
+    { key: 'id', label: 'Mã Phiếu Nhập' },
+    { key: 'date_import', label: 'Ngày Nhập' },
+    { key: 'nameWarehouse', label: 'Kho Nhập' },
+    { key: 'total_import', label: 'Tổng Nhập' },
+    'Thao Tác',
+]
 
 class ListImportProduct extends React.Component {
-    render() {
-        return (
-            <>
-                {/* <Route to="/admin/system/discount/add"><CButton className="btn btn-danger" >Thêm Khuyến Mãi Mới</CButton></Route> */}
-                <Link to="/admin/manage/import_product/add">
-                    <CButton type="button" className="btn btn-danger">
-                    <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg"/>Lập Đơn Đặt Hàng
-                    </CButton>
-                </Link>
-                <CRow>
-                    <CCol xs="12" lg="24">
-                        <CCard>
-                            <CCardHeader>
-                                Danh Sách Đơn Đặt Hàng
-                            </CCardHeader>
-                            <CCardBody>
-                                <CDataTable
-                                    items={usersData}
-                                    fields={fields}
-                                    itemsPerPage={8}
-                                    pagination
-                                    scopedSlots={{
-                                        'Hành Động':
-                                            (item) => (
-                                                <td>
-                                                <Link to="/admin/manage/staf/../edit">
-                                                    <CButton type="button" className="btn btn-primary">
-                                                    <FontAwesomeIcon icon={faTools} className="mr-2" size="lg"/>Sửa
-                                                    </CButton>
-                                                </Link>
-                                                <Link to="/admin/manage/staf/../delete">
-                                                    <CButton type="button" className="btn btn-warning">
-                                                    <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg"/>Xóa
-                                                    </CButton>
-                                                </Link>
-
-                                            </td>
-
-                                            )
-                                    }}
-                                />
-                            </CCardBody>
-                        </CCard>
-                    </CCol>
-
-
-                </CRow>
-
-
-            </>
-        )
+    componentDidMount() {
+      this.props.fetchImportProducts();
     }
+    onDeleteImportProduct = (id) => {
+      if (window.confirm("Bạn chắc chắn muốn xóa ?")) {
+        this.props.onDeleteItemImportProduct(id);
+      }
+    };
+    render() {
+      var { import_product } = this.props;
+      var data = import_product.map((item, index) => {
+        return { ...item, index };
+      });
+      return (
+        <>
+          <Link to="/admin/manage/import-product/add">
+            <CButton type="button" className="btn btn-danger">
+                <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />Thêm Mới
+            </CButton>
+          </Link>
+            <CRow>
+              <CCol xs="12" lg="24">
+                <CCard>
+                  <CCardHeader>
+                    Danh Sách Danh Mục
+                  </CCardHeader>
+                  <CCardBody>
+                    <CDataTable
+                      items={data}
+                      fields={fields}
+                      itemsPerPage={8}
+                      pagination
+                      scopedSlots={{
+                        'Thao Tác':
+                          (item) => (
+                            <td>
+                              <Link to={`/admin/manage/import-product/${item.id}/edit`}>
+                                <CButton type="button" className="btn btn-primary">
+                                  <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
+                                </CButton>
+                              </Link>
+                                <CButton type="button"
+                                  className="btn btn-warning"
+                                  onClick={() => { this.onDeleteImportProduct(item.id) }}
+                              >
+                                  <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
+                                </CButton>
+                            </td>
+                          ),
+                        'STT':
+                          (item, index) => (
+                            <td>
+                              {index + 1}
+                            </td>
+                          )
+                      }}
+                    />
+                  </CCardBody>
+              </CCard>
+            </CCol>
+        </CRow>
+      </>
+    )
+  }
 }
-
-export default ListImportProduct
+var mapStateToProps = (state) => {
+    return {
+      import_product: state.import_product,
+    };
+};
+var mapDispatchToProps = (dispatch, props) => {
+    return {
+        fetchImportProducts: () => {
+            return dispatch(actions.fetchImportProductsResquest());
+        },
+        onDeleteItemImportProduct: (id) => {
+            return dispatch(actions.onDeleteImportProductResquest(id))
+        }
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ListImportProduct);
