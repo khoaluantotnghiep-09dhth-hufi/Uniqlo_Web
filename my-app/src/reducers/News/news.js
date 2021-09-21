@@ -13,7 +13,7 @@ var findIndex = (news, id) => {
 }
 var news = (state = initialState, action) => {
   var index = -1;
-  var { id, news } = action;
+  var { new2,id } = action;
   switch (action.type) {
     //Lấy ds news
     case types.FETCH_NEWS:
@@ -26,13 +26,7 @@ var news = (state = initialState, action) => {
       return [...state];
       //Thêm tin tức
     case types.ADD_NEWS:
-      console.log(state)
-      if(state){
-        state.push(news);
-      }
-      else{
-       console.log("State đang rỗng")
-      }
+        state.push(action.news);
       return [...state];
       //Cập nhập tin tức
     case types.UPDATE_NEWS:

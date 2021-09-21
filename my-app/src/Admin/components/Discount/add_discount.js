@@ -69,17 +69,17 @@ class addDiscount extends React.Component {
    
     var promotion = {
       id: uniqid("promotion-"),
-      namePromotion: txtNameDiscount,
-      nameDescription: txtNameMota,
-      dateStart: dateStart,
-      dateEnd: dateEnd,
+      name: txtNameDiscount,
+      desciption: txtNameMota,
+      date_start: dateStart,
+      date_end: dateEnd,
     };
     var promotionUpdate = {
       id: match.params.id_promotion,
-      namePromotion: txtNameDiscount,
-      nameDescription: txtNameMota,
-      dateStart: dateStart,
-      dateEnd: dateEnd,
+      name: txtNameDiscount,
+      desciption: txtNameMota,
+      date_start: dateStart,
+      date_end: dateEnd,
     };
     if (idItem) {
       this.props.onUpdateItemPromotion(promotionUpdate);

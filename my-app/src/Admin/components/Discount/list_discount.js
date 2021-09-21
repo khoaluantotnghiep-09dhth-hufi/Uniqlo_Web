@@ -30,13 +30,13 @@ const getBadge = (status) => {
 };
 
 const fields = [
-  "index",
-  "id",
-  "name",
-  "desciption",
-  "date_start",
-  "date_end",
-  "Hành Động",
+  "STT",
+  { key: 'id', label: 'Mã' },
+  { key: 'name', label: 'Tên Khuyến Mãi' },
+  { key: 'desciption', label: 'Mô Tả' },
+  { key: 'date_start', label: 'Ngày Bắt Đầu' },
+  { key: 'date_end', label: 'Ngày Kết Thúc' },
+  "Thao Tác",
 ];
 
 class ListDiscount extends React.Component {
@@ -44,14 +44,15 @@ class ListDiscount extends React.Component {
     this.props.fetchPromotions();
   }
   onDeletePromotion = (item) => {
-
-    this.props.onDeleteItemPromotion(item);
+    if (window.confirm("Bạn có chắc muốn xóa không ?")) {
+      this.props.onDeleteItemPromotion(item);
+    }
   };
   render() {
     var { promotion } = this.props;
 
     var dataPromotion = promotion.map((item, index) => {
-      return {...item,index};
+      return { ...item, index };
     });
 
     return (
@@ -73,17 +74,9 @@ class ListDiscount extends React.Component {
                   fields={fields}
                   itemsPerPage={8}
                   pagination
+
                   scopedSlots={{
-                    status: (item) => (
-                      <td>
-                        <CBadge color={getBadge(item.status)}>
-                          {item.status}
-                        </CBadge>
-                      </td>
-                    ),
-                  }}
-                  scopedSlots={{
-                    "Hành Động": (item) => (
+                    "Thao Tác": (item) => (
                       <td  >
                         <Link to={`/admin/system/discount/${item.id}/edit`}>
                           <CButton type="button" className="btn btn-primary">
@@ -109,6 +102,12 @@ class ListDiscount extends React.Component {
                         </CButton>
                       </td>
                     ),
+                    'STT':
+                      (item, index) => (
+                        <td>
+                          {index + 1}
+                        </td>
+                      ),
                   }}
                 />
               </CCardBody>

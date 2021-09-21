@@ -31,7 +31,6 @@ var products = (state = initialState, action) => {
     //Thêm Sản Phẩm
     case types.ADD_PRODUCT:
       state.push(action.product);
-
       return [...state];
     //Cập Nhật Sản Phẩm
     case types.UPDATE_PRODUCT:

@@ -34,7 +34,6 @@ class addProduct extends React.Component {
             id_promotion: "",
             id_size: "",
             id_color: "",
-
             ImgPrivew: "",
             promotionArr: [],
             categoryArr: [],
@@ -122,11 +121,8 @@ class addProduct extends React.Component {
         return isValid;
     }
     onSubmitForm = (event) => {
-
-
         let isValid = this.checkValidate();
         if (isValid === false) return;
-        console.log(this.state);
         event.preventDefault();
         var { match } = this.props;
         var { history } = this.props;
@@ -274,10 +270,7 @@ class addProduct extends React.Component {
                                     </Form.Group>
                                 </Col>
                                 <Col sm="4">
-                                    <Form.Control.Feedback
-                                        type="invalid" >
-                                        Vui lòng nhập tên cần thêm !
-                                    </Form.Control.Feedback>
+                                   
                                     <div style={{ backgroundImage: `url(${this.state.ImgPrivew})`, height: "200px", width: "300px", align: "center", background: "center center no-repeat", backgroundSize: "contain", cursor: "pointer", margin: "30px" }}
                                         onClick={() => this.openPreviewIMG()}
                                     ></div>

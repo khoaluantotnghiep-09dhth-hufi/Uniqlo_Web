@@ -3,16 +3,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPlus,
   faArrowLeft,
+  faUpload,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import uniqid from 'uniqid';
 import { Button, Form, Col, Container, Row } from 'react-bootstrap';
 import * as actions from "./../../../actions/index";
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css';
+let isLoadingExternally = false;
 class AddNews extends React.Component {
   constructor(props) {
     super(props);
-    this.setState = {
+    this.state = {
       idItem: "",
       txtTitle: "",
       txtDate: "",
@@ -20,12 +24,51 @@ class AddNews extends React.Component {
       id_staff: "",
       txtImage: "",
       txtSubtitle: "",
+      ImgPrivewIMG: "",
+      ImgPrivewSubTitle: "",
+      staffArr: [],
+      isOpen: false,
     };
   }
+  openPreviewIMG = () => {
+    this.setState({
+      isOpen: true
+    })
+  }
+  onChangeImage = (e) => {
+    let data = e.target.files;
+    let file = data[0];
+
+    if (file) {
+      let objectURL = URL.createObjectURL(file);
+      this.setState({
+        ImgPrivew: objectURL,
+        txtImage: objectURL,
+      })
+
+    }
+  }
+  // onChangeImageSubTitle = (e) =>{ 
+  //   let data = e.target.files;
+  //   let file = data[0];
+
+  //   if (file) {
+  //     let objectURLTitle = URL.createObjectURL(file);
+  //     this.setState({
+  //       ImgPrivewSubTitle: objectURLTitle,
+  //       txtSubtitle: objectURLTitle,
+  //     })
+
+  //   }
+  // }
   componentDidMount() {
     var { match } = this.props;
-
     this.props.onEditItemNews(match.params.id_news);
+    isLoadingExternally = true;
+    this.setState({
+      staffArr: this.props.fetchStaffs()
+    })
+
   }
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
@@ -33,179 +76,242 @@ class AddNews extends React.Component {
       var { news } = NextProps;
       if (match.params.id_news) {
         const result = news.find((o) => o.id === match.params.id_news);
-        console.log(result);
         this.setState({
           idItem: result.id,
           txtTitle: result.title,
           txtDate: result.date,
           txtDescription: result.description,
-          id_staff: result.id_staff,
+          id_staff: result.id_staff.id,
           txtImage: result.image,
-          txtSubtitle: result.subtitle,
+          txtSubtitle: result.sub_title,
         });
       }
     }
   }
-  onChange = (event) => {
-    var target = event.target;
-    var name = target.name;
-    var value = target.value;
-    this.setState = {
-      [name]: value,
-    };
+  onChange = (e, id) => {
+    let coppyState = { ...this.state };
+    coppyState[id] = e.target.value;
+    this.setState({
+      ...coppyState
+    })
+
   };
   onSubmitForm = (event) => {
     var { match } = this.props;
 
     event.preventDefault();
     var { history } = this.props;
-    var { 
-      idItem, 
-      txtTitle, 
-      txtDate, 
-      txtDescription, 
-      id_staff, 
+    var {
+      idItem,
+      txtTitle,
+      txtDate,
+      txtDescription,
+      id_staff,
       txtImage,
-      txtSubtitle, 
+      txtSubtitle,
     } = this.state;
 
     var news = {
       id: uniqid("news-"),
-      titleName: txtTitle,
+      title: txtTitle,
       date: txtDate,
       description: txtDescription,
       id_staff: id_staff,
       image: txtImage,
-      subtitle: txtSubtitle,
+      sub_title: txtSubtitle,
     };
     var newsUpdate = {
       idItem: match.params.id_news,
-      titleName: txtTitle,
+      title: txtTitle,
       date: txtDate,
       description: txtDescription,
       id_staff: id_staff,
       image: txtImage,
-      subtitle: txtSubtitle,
+      sub_title: txtSubtitle,
     };
 
-    if (match.params.id_news) {
+    if (idItem) {
       this.props.onUpdateItemNews(newsUpdate);
       history.goBack();
-    } 
+    }
     else {
       this.props.onAddItemNews(news);
       history.goBack();
     }
   };
   render() {
-
+    let { staff } = this.props;
+    let { txtTitle, txtDate, txtDescription, id_staff, txtImage, txtSubtitle } = this.state;
     return (
       <Container fluid>
-        <Row>
+        <Row sm="12">
           <Link to="/admin/system/news">
             <Button type="button" className="btn btn-primary" size="sm">
               <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />Trở về
             </Button>
           </Link>
-          <Col sm="12">
-            <Form onSubmit={this.onSubmitForm}>
-              <Form.Group className="mb-3" controlId="formBasicObject">
-                <Form.Label>Tiêu Đề</Form.Label>
-                <Form.Control
-                  required
-                  type="text"
-                  placeholder="Nhập tiêu đề..."
-                  name="txtTitle"
-                  id="txtTitle"
-                  onChange={this.onChange} />
-                <Form.Control.Feedback
-                  type="invalid" >
-                  Vui lòng nhập tên cần thêm !
-                </Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicObject">
-                <Form.Label>Ngày Đăng</Form.Label>
-                <Form.Control
-                  required
-                  type="date"
-                  placeholder="Nhập tiêu đề..."
-                  name="txtDate"
-                  id="txtDate"
-                  onChange={this.onChange} />
 
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicObject">
-                <Form.Label>Nội Dung</Form.Label>
-                <Form.Control
-                  required
-                  type="text"
-                  placeholder="Nhập nội dung..."
-                  name="txtDescription"
-                  id="txtDescription"
-                  onChange={this.onChange} />
+          <Form onSubmit={this.onSubmitForm}>
+            <Row>
 
-              </Form.Group>
+              <Col sm="6">
+                <Form.Group className="mb-3" controlId="formBasicObject">
+                  <Form.Label>Tiêu Đề</Form.Label>
+                  <Form.Control
+                    required
+                    type="text"
+                    placeholder="Nhập tiêu đề..."
+                    name="txtTitle"
+                    id="txtTitle"
+                    value={txtTitle}
+                    onChange={(e) => { this.onChange(e, 'txtTitle') }} />
+                  <Form.Control.Feedback
+                    type="invalid" >
+                    Vui lòng nhập tên cần thêm !
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Col>
+              <Col sm="6">
+                <Form.Group className="mb-3" controlId="formBasicObject">
+                  <Form.Label>Ngày Đăng</Form.Label>
+                  <Form.Control
+                    required
+                    type="date"
+                    placeholder="Nhập tiêu đề..."
+                    name="txtDate"
+                    id="txtDate"
+                    value={txtDate}
+                    onChange={(e) => { this.onChange(e, 'txtDate') }} />
+
+                </Form.Group>
+              </Col>
+            </Row>
+            <Form.Group className="mb-3" controlId="formBasicObject">
+              <Form.Label>Nội Dung</Form.Label>
+              <textarea
+                className="form-control"
+                id="txtDescription"
+                name="txtDescription"
+                value={txtDescription}
+                placeholder="Mô tả..."
+                onChange={(e) => { this.onChange(e, 'txtDescription') }}
+                rows="8"
+                required
+              ></textarea>
+
+            </Form.Group>
+
+
+
+            <Row sm="12">
+              <Col sm="2">
+                <Form.Group >
+                  <Form.Label className="border border-dark" style={{ backgroundColor: "#ffe6e6", padding: "10px", marginTop: "100px", cursor: "pointer" }} htmlFor="txtImage"><FontAwesomeIcon icon={faUpload} className="mr-2 fa-3x" />Tải Ảnh</Form.Label>
+                  <Form.Control
+                    type="file"
+                    id="txtImage"
+                    name="txtImage"
+                    hidden
+                    onChange={(e) => { this.onChangeImage(e) }}
+                    required
+                  />
+                </Form.Group>
+              </Col>
+              <Col sm="4">
+                <div style={{ backgroundImage: `url(${this.state.ImgPrivew})`, height: "200px", width: "300px", align: "center", background: "center center no-repeat", backgroundSize: "contain", cursor: "pointer", margin: "30px" }}
+                  onClick={() => this.openPreviewIMG()}
+                ></div>
+              </Col>
+              <Col sm="2">
+                {/* <Form.Group >
+                  <Form.Label className="border border-dark" style={{ backgroundColor: "#ffe6e6", padding: "10px", marginTop: "100px", cursor: "pointer" }} htmlFor="txtImage"><FontAwesomeIcon icon={faUpload} className="mr-2 fa-3x" />Tải Ảnh Tiêu Đề</Form.Label>
+                  <Form.Control
+                    type="file"
+                    id="txtImage"
+                    name="txtSubtitle"
+                    hidden
+                    onChange={(e) => { this.onChangeImageSubTitle(e) }}
+                    required
+                  />
+                </Form.Group>
+              </Col>
+              <Col sm="4">
+                <div style={{ backgroundImage: `url(${this.state.ImgPrivewSubTitle})`, height: "200px", width: "300px", align: "center", background: "center center no-repeat", backgroundSize: "contain", cursor: "pointer", margin: "30px" }}
+                  onClick={() => this.openPreviewIMG()}
+                ></div> */}
+              </Col>
+
+            </Row>
+            <Col sm="12">
               <Form.Group className="mb-3" controlId="formBasicObject">
                 <Form.Label>Nhân Viên</Form.Label>
-                <Form.Control
-                  required
-                  type="text"
-                  placeholder="Nhân viên..."
-                  name="id_staff"
-                  id="id_staff"
-                  onChange={this.onChange} />
+                <Form.Select name="form-field-name"
+                  value={this.setState.id_staff}
+                  onChange={(e) => { this.onChange(e, 'id_staff') }}
+                  labelKey={'Tên'}
+                  valueKey={'Mã'}
+                  isLoading={isLoadingExternally}
+                >
+                  <option value="staff-1">Chọn</option>
+                  {staff && staff.length > 0 &&
+                    staff.map((option, index) => (
 
+                      <option value={option.id} key={index}>{option.name}</option>
+                    ))}
+                </Form.Select>
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicObject">
-                <Form.Label>Ảnh</Form.Label>
-                <Form.Control
-                  required
-                  type="file"
-                  placeholder="ảnh..."
-                  name="txtImage"
-                  id="txtImage"
-                  onChange={this.onChange} />
+            </Col>
+            <Form.Group className="mb-3" controlId="formBasicObject">
+              <Form.Label>Phụ đề</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                placeholder="phụ đề..."
+                name="txtSubtitle"
+                id="txtSubtitle"
+                value={txtSubtitle}
+                onChange={(e) => { this.onChange(e, 'txtSubtitle') }} />
 
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicObject">
-                <Form.Label>Phụ đề</Form.Label>
-                <Form.Control
-                  required
-                  type="text"
-                  placeholder="phụ đề..."
-                  name="txtSubtitle"
-                  id="txtSubtitle"
-                  onChange={this.onChange} />
-
-              </Form.Group>
-              {/* <Link to="/admin/manage/objects" > */}
-              <Button type="button"
-                className="btn btn-danger"
-                onClick={this.onSubmitForm}
-              >
-                <FontAwesomeIcon
-                  icon={faPlus}
-                  className="mr-2"
-                  size="lg" />Lưu
-              </Button>
-              {/* </Link> */}
-            </Form>
-          </Col>
+            </Form.Group>
+            {/* <Link to="/admin/manage/objects" > */}
+            <Button type="button"
+              className="btn btn-danger"
+              onClick={this.onSubmitForm}
+            >
+              <FontAwesomeIcon
+                icon={faPlus}
+                className="mr-2"
+                size="lg" />Lưu
+            </Button>
+            {/* </Link> */}
+          </Form>
         </Row>
-      </Container>
+        {
+          this.state.isOpen === true &&
+          <Lightbox
+            mainSrc={this.state.ImgPrivew}
+            onCloseRequest={() => this.setState({ isOpen: false })}
+          />
+        }
+
+      </Container >
     )
   }
 
 }
 var mapStateToProps = (state) => {
   return {
-    news:state.news,
+    news: state.news,
+    staff: state.staff,
   };
 };
 var mapDispatchToProps = (dispatch, props) => {
   return {
     onAddItemNews: (news) => {
       dispatch(actions.onAddNewsResquest(news));
+    },
+    fetchStaffs: (staff) => {
+      dispatch(actions.fetchStaffsResquest(staff));
     },
     onEditItemNews: (id) => {
       dispatch(actions.onEditNewsResquest(id));
