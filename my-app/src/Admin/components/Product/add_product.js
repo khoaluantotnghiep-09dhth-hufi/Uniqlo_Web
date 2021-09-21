@@ -243,7 +243,7 @@ class addProduct extends React.Component {
                                 </Col>
                                 <Col sm="2">
                                     <Form.Group className="mb-3" >
-                                        <Form.Label>Kích Cỡ</Form.Label>
+                                        <Form.Label>Khuyến Mãi</Form.Label>
                                         <Form.Select name="form-field-name"
                                             value={this.setState.id_promotion}
                                             onChange={(e) => { this.onChange(e, 'id_promotion') }}

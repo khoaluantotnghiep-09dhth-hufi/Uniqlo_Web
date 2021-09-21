@@ -76,12 +76,12 @@ class AddCategory extends React.Component {
 
         var category = {
             id: uniqid("category-"),
-            nameCategory: txtName,
+            name: txtName,
             id_sector: id_sector,
         };
         var categoryUpdate = {
             id: match.params.id_category,
-            nameCategory: txtName,
+            name: txtName,
             id_sector: id_sector,
         };
 

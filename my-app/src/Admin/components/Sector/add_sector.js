@@ -74,12 +74,12 @@ class AddSector extends React.Component {
         var { idItem, txtName, id_object } = this.state;
         var sector = {
             id: uniqid("sector-"),
-            nameSector: txtName,
+            name: txtName,
             id_object: id_object,
         };
         var sectorUpdate = {
             id: match.params.id_sector,
-            nameSector: txtName,
+            name: txtName,
             id_object: id_object,
         };
 
