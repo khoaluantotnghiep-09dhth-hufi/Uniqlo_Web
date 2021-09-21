@@ -23,7 +23,7 @@ class AddNews extends React.Component {
       txtDescription: "",
       id_staff: "",
       txtImage: "",
-      txtSubtitle: "",
+      txtImageBanner: "",
       ImgPrivewIMG: "",
       ImgPrivewSubTitle: "",
       staffArr: [],
@@ -56,7 +56,7 @@ class AddNews extends React.Component {
   //     let objectURLTitle = URL.createObjectURL(file);
   //     this.setState({
   //       ImgPrivewSubTitle: objectURLTitle,
-  //       txtSubtitle: objectURLTitle,
+  //       txtImageBanner: objectURLTitle,
   //     })
 
   //   }
@@ -83,7 +83,7 @@ class AddNews extends React.Component {
           txtDescription: result.description,
           id_staff: result.id_staff.id,
           txtImage: result.image,
-          txtSubtitle: result.sub_title,
+          txtImageBanner: result.image_banner,
         });
       }
     }
@@ -108,7 +108,7 @@ class AddNews extends React.Component {
       txtDescription,
       id_staff,
       txtImage,
-      txtSubtitle,
+      txtImageBanner,
     } = this.state;
 
     var news = {
@@ -118,7 +118,7 @@ class AddNews extends React.Component {
       description: txtDescription,
       id_staff: id_staff,
       image: txtImage,
-      sub_title: txtSubtitle,
+      image_banner: txtImageBanner,
     };
     var newsUpdate = {
       idItem: match.params.id_news,
@@ -127,7 +127,7 @@ class AddNews extends React.Component {
       description: txtDescription,
       id_staff: id_staff,
       image: txtImage,
-      sub_title: txtSubtitle,
+      image_banner: txtImageBanner,
     };
 
     if (idItem) {
@@ -141,7 +141,7 @@ class AddNews extends React.Component {
   };
   render() {
     let { staff } = this.props;
-    let { txtTitle, txtDate, txtDescription, id_staff, txtImage, txtSubtitle } = this.state;
+    let { txtTitle, txtDate, txtDescription, id_staff, txtImage, txtImageBanner } = this.state;
     return (
       <Container fluid>
         <Row sm="12">
@@ -228,7 +228,7 @@ class AddNews extends React.Component {
                   <Form.Control
                     type="file"
                     id="txtImage"
-                    name="txtSubtitle"
+                    name="txtImageBanner"
                     hidden
                     onChange={(e) => { this.onChangeImageSubTitle(e) }}
                     required
@@ -267,10 +267,10 @@ class AddNews extends React.Component {
                 required
                 type="text"
                 placeholder="phụ đề..."
-                name="txtSubtitle"
-                id="txtSubtitle"
-                value={txtSubtitle}
-                onChange={(e) => { this.onChange(e, 'txtSubtitle') }} />
+                name="txtImageBanner"
+                id="txtImageBanner"
+                value={txtImageBanner}
+                onChange={(e) => { this.onChange(e, 'txtImageBanner') }} />
 
             </Form.Group>
             {/* <Link to="/admin/manage/objects" > */}
@@ -293,11 +293,9 @@ class AddNews extends React.Component {
             onCloseRequest={() => this.setState({ isOpen: false })}
           />
         }
-
-      </Container >
+      </Container>
     )
   }
-
 }
 var mapStateToProps = (state) => {
   return {
