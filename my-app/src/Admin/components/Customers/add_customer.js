@@ -91,11 +91,9 @@ class AddCustomer extends React.Component {
 
     if (match.params.id_customer) {
       this.props.onUpdateItemCustomer(customerUpdate);
-      alert('Sửa thành công');
       history.goBack();
     } else {
       this.props.onAddItemCustomer(customer);
-      alert('Thêm thành công');
       history.goBack();
     }
   };

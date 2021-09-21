@@ -90,12 +90,10 @@ class AddNews extends React.Component {
 
     if (match.params.id_news) {
       this.props.onUpdateItemNews(newsUpdate);
-      alert('Sửa thành công');
       history.goBack();
     } 
     else {
       this.props.onAddItemNews(news);
-      alert('Thêm thành công');
       history.goBack();
     }
   };

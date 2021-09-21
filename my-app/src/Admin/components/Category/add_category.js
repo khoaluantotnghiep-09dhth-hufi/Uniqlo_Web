@@ -87,11 +87,9 @@ class AddCategory extends React.Component {
 
         if (idItem) {
             this.props.onUpdateItemCategory(categoryUpdate);
-            alert('Sửa thành công');
             history.goBack();
         } else {
             this.props.onAddItemCategory(category);
-            alert('Thêm thành công');
             history.goBack();
         }
     };

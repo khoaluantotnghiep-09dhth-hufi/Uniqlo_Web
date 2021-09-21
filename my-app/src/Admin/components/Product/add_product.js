@@ -156,12 +156,10 @@ class addProduct extends React.Component {
 
         if (idItem) {
             this.props.onUpdateItemCategory(productUpdate);
-            alert('Sửa thành công');
             history.goBack();
         } else {
             this.props.onAddItemProduct(product);
             this.props.onAddItemProductInfo(propductinfo);
-            alert('Thêm thành công');
             history.goBack();
 
         }

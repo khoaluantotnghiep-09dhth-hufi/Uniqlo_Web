@@ -1,5 +1,6 @@
 import * as types from "./../constants/ActionTypes";
 import callApi from "./../Admin/utils/Callapi";
+import {  toast } from 'react-toastify';
 //Giỏ Hàng
 export const listAll = () => {
   return {
@@ -80,6 +81,7 @@ export const fetchUserRequest = () => {
 export const onDeleteUserResquest = (id) => {
   return (dispatch) => {
     return callApi(`customers/${id}`, "DELETE", null).then((response) => {
+      toast.success("Xóa thành công !");
       dispatch(onDeleteUserResquest(id));
     });
   };
@@ -111,6 +113,7 @@ export const onDeleteProduct = (id) => {
 export const onDeleteProductResquest = (id) => {
   return (dispatch) => {
     return callApi(`products/${id}`, "DELETE", null).then((response) => {
+      toast.success("Xóa thành công !");
       dispatch(onDeleteProduct(id));
     });
   };
@@ -193,6 +196,7 @@ export const onDeletePromotion = (id) => {
 export const onDeletePromotionResquest = (id) => {
   return (dispatch) => {
     return callApi(`promotions/${id}`, "DELETE", null).then((response) => {
+      toast.success("Xóa thành công !");
       dispatch(onDeletePromotion(id));
     });
   };
@@ -211,6 +215,7 @@ export const onAddPromotion = (promotion) => {
 export const onAddPromotionResquest = (promotion) => {
   return (dispatch) => {
     return callApi("promotions", "POST", promotion).then((response) => {
+      toast.success("Thêm thành công !");
       dispatch(onAddPromotion(response.data));
     });
   };
@@ -226,6 +231,7 @@ export const onUpdatePromotionResquest = (promotion) => {
   return (dispatch) => {
     return callApi(`promotions/${promotion.id}`, "PUT", promotion).then(
       (response) => {
+        toast.success("Sửa thành công !");
         dispatch(onUpdatePromotion(response.data));
       }
     );
@@ -275,6 +281,7 @@ export const onDeleteStaffs = (id) => {
 export const onDeleteStaffsResquest = (id) => {
   return (dispatch) => {
     return callApi(`staffs/${id}`, "DELETE", null).then((response) => {
+      toast.success("Xóa thành công !");
       dispatch(onDeleteStaffs(id));
     });
   };
@@ -290,6 +297,7 @@ export const onAddStaffs = (staff) => {
 export const onAddStaffsResquest = (staff) => {
   return (dispatch) => {
     return callApi("staffs", "POST", staff).then((response) => {
+      toast.success("Thêm thành công !");
       dispatch(onAddStaffs(response.data));
     });
   };
@@ -305,6 +313,7 @@ export const onUpdateStaffsResquest = (staff) => {
   return (dispatch) => {
     return callApi(`staffs/${staff.id}`, "PUT", staff).then(
       (response) => {
+        toast.success("Sửa thành công !");
         dispatch(onUpdateStaffs(response.data));
       }
     );
@@ -353,6 +362,7 @@ export const onDeleteColor = (id) => {
 export const onDeleteColorResquest = (id) => {
   return (dispatch) => {
     return callApi(`color/${id}`, "DELETE", null).then((response) => {
+      toast.success("Xóa thành công !");
       dispatch(onDeleteColor(id));
     });
   };
@@ -368,7 +378,7 @@ export const onAddColor = (color) => {
 export const onAddColorResquest = (color) => {
   return (dispatch) => {
     return callApi("color", "POST", color).then((response) => {
-      console.log(response);
+      toast.success("Thêm thành công !");
       dispatch(onAddColor(response.data));
     });
   };
@@ -384,6 +394,7 @@ export const onUpdateColorResquest = (color) => {
   return (dispatch) => {
     return callApi(`color/${color.id}`, "PUT", color).then(
       (response) => {
+        toast.success("Sửa thành công !");
         dispatch(onUpdateColor(response.data));
       }
     );
@@ -432,6 +443,7 @@ export const onDeleteSize = (id) => {
 export const onDeleteSizeResquest = (id) => {
   return (dispatch) => {
     return callApi(`size/${id}`, "DELETE", null).then((response) => {
+      toast.success("Xóa thành công !");
       dispatch(onDeleteSize(id));
     });
   };
@@ -447,7 +459,7 @@ export const onAddSize = (size) => {
 export const onAddSizeResquest = (size) => {
   return (dispatch) => {
     return callApi("size", "POST", size).then((response) => {
-
+      toast.success("Thêm thành công !");
       dispatch(onAddSize(response.data));
     });
   };
@@ -463,7 +475,7 @@ export const onUpdateSizeResquest = (size) => {
   return (dispatch) => {
     return callApi(`size/${size.id}`, "PUT", size).then(
       (response) => {
-        console.log(response);
+        toast.success("Sửa thành công !");
         dispatch(onUpdateSize(response.data));
       }
     );
@@ -513,6 +525,7 @@ export const onDeleteBill = (id) => {
 export const onDeleteBillResquest = (id) => {
   return (dispatch) => {
     return callApi(`bills/${id}`, "DELETE", null).then((response) => {
+      toast.success("Xóa thành công !");
       dispatch(onDeleteBill(id));
     });
   };
@@ -529,7 +542,7 @@ export const onUpdateBillResquest = (bill) => {
   return (dispatch) => {
     return callApi(`bills/${bill.id}`, "PUT", bill).then(
       (response) => {
-        console.log(response);
+        toast.success("Sửa thành công !");
         dispatch(onUpdateBill(response.data));
       }
     );
@@ -576,6 +589,7 @@ export const onAddNews = (news) => {
 export const onAddNewsResquest = (news) => {
   return (dispatch) => {
     return callApi("news", "POST", news).then((response) => {
+      toast.success("Thêm thành công !");
       dispatch(onAddNews(response.data));
       console.log(response.data);
     });
@@ -592,6 +606,7 @@ export const onUpdateNewsResquest = (news) => {
   return (dispatch) => {
     return callApi(`news/${news.id}`, "PUT", news).then(
       (response) => {
+        toast.success("Sửa thành công !");
         dispatch(onUpdateNews(response.data));
       }
     );
@@ -607,6 +622,7 @@ export const onDeleteNews = (id) => {
 export const onDeleteNewsResquest = (id) => {
   return (dispatch) => {
     return callApi(`news/${id}`, "DELETE", null).then((response) => {
+      toast.success("Xóa thành công !");
       dispatch(onDeleteNews(id));
     });
   };
@@ -637,7 +653,7 @@ export const onAddCategory = (category) => {
 export const onAddCategoryResquest = (category) => {
   return (dispatch) => {
     return callApi("categories", "POST", category).then((response) => {
-      console.log(response.data);
+      toast.success("Thêm thành công !");
       dispatch(onAddCategory(response.data));
     });
   };
@@ -653,6 +669,7 @@ export const onUpdateCategoryResquest = (category) => {
   return (dispatch) => {
     return callApi(`categories/${category.id}`, "PUT", category).then(
       (response) => {
+        toast.success("Sửa thành công !");
         dispatch(onUpdateCategory(response.data));
       }
     );
@@ -668,6 +685,7 @@ export const onDeleteCategory = (id) => {
 export const onDeleteCategoryResquest = (id) => {
   return (dispatch) => {
     return callApi(`categories/${id}`, "DELETE", null).then((response) => {
+      toast.success("Xóa thành công !");
       dispatch(onDeleteCategory(id));
     });
   };
@@ -711,6 +729,7 @@ export const onAddCustomer = (customer) => {
 export const onAddCustomerResquest = (customer) => {
   return (dispatch) => {
     return callApi("customers", "POST", customer).then((response) => {
+      toast.success("Thêm thành công !");
       dispatch(onAddCustomer(response.data));
     });
   };
@@ -726,7 +745,9 @@ export const onUpdateCustomers = (customer) => {
 export const onUpdateCustomersResquest = (customer) => {
   return (dispatch) => {
     return callApi(`customers/${customer.id}`, "PUT", customer).then(
+
       (response) => {
+        toast.success("Sửa thành công !");
         dispatch(onUpdateCustomers(response.data));
       }
     );
@@ -759,6 +780,7 @@ export const onDeleteCustomer = (id) => {
 export const onDeleteCustomerResquest = (id) => {
   return (dispatch) => {
     return callApi(`customers/${id}`, "DELETE", null).then((response) => {
+      toast.success("Xóa thành công !");
       dispatch(onDeleteCustomer(id));
     });
   };
@@ -792,6 +814,7 @@ export const onDeleteOrder = (id) => {
 export const onDeleteOrderResquest = (id) => {
   return (dispatch) => {
     return callApi(`orders/${id}`, "DELETE", null).then((response) => {
+      toast.success("Xóa thành công !");
       dispatch(onDeleteOrder(id));
     });
   };
@@ -807,6 +830,7 @@ export const onAddOrder = (order) => {
 export const onAddOrderResquest = (order) => {
   return (dispatch) => {
     return callApi("orders", "POST", order).then((response) => {
+      toast.success("Thêm thành công !");
       dispatch(onAddOrder(response.data));
     });
   };
@@ -822,6 +846,7 @@ export const onUpdateOrderResquest = (order) => {
   return (dispatch) => {
     return callApi(`orders/${order.id}`, "PUT", order).then(
       (response) => {
+        toast.success("Sửa thành công !");
         dispatch(onUpdateOrder(response.data));
       }
     );
@@ -870,7 +895,7 @@ export const onAddSector = (sector) => {
 export const onAddSectorResquest = (sector) => {
   return (dispatch) => {
     return callApi("sectors", "POST", sector).then((response) => {
-      console.log(response);
+      toast.success("Thêm thành công !");
       dispatch(onAddSector(response.data));
     });
   };
@@ -886,6 +911,7 @@ export const onUpdateSectorResquest = (sector) => {
   return (dispatch) => {
     return callApi(`sectors/${sector.id}`, "PUT", sector).then(
       (response) => {
+        toast.success("Sửa thành công !");
         dispatch(onUpdateSector(response.data));
       }
     );
@@ -901,6 +927,7 @@ export const onDeleteSector = (id) => {
 export const onDeleteSectorResquest = (id) => {
   return (dispatch) => {
     return callApi(`sectors/${id}`, "DELETE", null).then((response) => {
+      toast.success("Xóa thành công !");
       dispatch(onDeleteSector(id));
     });
   };
@@ -948,7 +975,7 @@ export const onAddObjects = (object_menu) => {
 export const onAddObjectsResquest = (object_menu) => {
   return (dispatch) => {
     return callApi("objects", "POST", object_menu).then((response) => {
-     
+      toast.success("Thêm thành công !");
       dispatch(onAddObjects(response.data));
     });
   };
@@ -964,6 +991,7 @@ export const onDeleteObjects = (id) => {
 export const onDeleteObjectsResquest = (id) => {
   return (dispatch) => {
     return callApi(`objects/${id}`, "DELETE", null).then((response) => {
+      toast.success("Xóa thành công !");
       dispatch(onDeleteObjects(id));
     });
   };
@@ -993,6 +1021,7 @@ export const onUpdateObjectsResquest = (object_menu) => {
   return (dispatch) => {
     return callApi(`objects/${object_menu.id}`, "PUT", object_menu).then(
       (response) => {
+        toast.success("Sửa thành công !");
         dispatch(onUpdateObjects(response.data));
       }
     );

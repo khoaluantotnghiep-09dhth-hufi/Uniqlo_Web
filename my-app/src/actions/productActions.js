@@ -1,6 +1,6 @@
 import * as types from "./../constants/ActionTypes";
 import callApi from "./../Admin/utils/Callapi";
-
+import {  toast } from 'react-toastify';
 export const fetchProduct = (products) => {
   return {
     type: types.FETCH_PRODUCT,
@@ -27,6 +27,7 @@ export const onAddProduct = (product) => {
 export const onAddProductResquest = (product) => {
   return (dispatch) => {
     return callApi("products", "POST", product).then((response) => {
+      toast.success("Thêm thành công !");
       dispatch(onAddProduct(response.data));
     });
   };
@@ -42,6 +43,7 @@ export const onUpdateProductResquest = (product) => {
   return (dispatch) => {
     return callApi(`products/${product.id}`, "PUT", product).then(
       (response) => {
+        toast.success("Sửa thành công !");
         dispatch(onUpdateProduct(response.data));
       }
     );

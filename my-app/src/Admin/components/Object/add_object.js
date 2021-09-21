@@ -60,21 +60,20 @@ class addObject extends React.Component {
 
     var object_menu = {
       id: uniqid("object-"),
-      nameObject: txtName,
+      name: txtName,
     };
     var objectUpdate = {
       idItem: match.params.id_object,
-      nameObject: txtName,
+      name: txtName,
     };
     console.log(objectUpdate);
     console.log(idItem)
     if (match.params.id_object) {
       this.props.onUpdateItemObject(objectUpdate);
-      alert("Sửa thành công");
+     
       history.goBack();
     } else {
       this.props.onAddItemObject(object_menu);
-      alert("Thêm thành công");
       history.goBack();
     }
   };

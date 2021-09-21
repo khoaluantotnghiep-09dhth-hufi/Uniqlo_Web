@@ -85,11 +85,9 @@ class AddSector extends React.Component {
 
         if (idItem) {
             this.props.onUpdateItemSector(sectorUpdate);
-            alert('Sửa thành công');
             history.goBack();
         } else {
             this.props.onAddItemSector(sector);
-            alert('Thêm thành công');
             history.goBack();
         }
     };
