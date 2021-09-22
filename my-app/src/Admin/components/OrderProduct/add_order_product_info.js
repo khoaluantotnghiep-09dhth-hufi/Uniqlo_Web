@@ -17,10 +17,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { Button, Form, Col, Container, Row, Image } from 'react-bootstrap';
-import * as actions from "../../../actions/index";
-import * as actionsProduct from "../../../actions/productActions";
 import * as actionsProductInfo from "../../../actions/product_infoActions";
 import * as actionsOrderInfo from "../../../actions/orderInfoActions";
+import {  toast } from 'react-toastify';
 import { connect } from "react-redux";
 import uniqid from 'uniqid';
 const fields = [
@@ -91,12 +90,12 @@ class addProduct extends React.Component {
     }
 
     checkValidate = () => {
-        let check = ['txtQuantity'];
+        let check = ['txtQuantity', 'txtRetal_price'];
         let isValid = true;
         for (let i = 0; i <= check.length; i++) {
             if (!this.state[check[0]]) {
                 isValid = false;
-                alert("Vui lòng nhập: Số Lượng");
+                toast.error("Vui lòng nhập và chọn đủ các thông tin !");
                 break;
             }
         }
@@ -117,10 +116,7 @@ class addProduct extends React.Component {
             quantity: txtQuantity,
             retail_price: txtRetal_price
         };
-        var productUpdate = {
-        };
         this.props.onAddItemOrderInfo(orderInfo);
-        // history.goBack();
     };
     render() {
 
@@ -142,27 +138,26 @@ class addProduct extends React.Component {
                     <Col sm="12">
                         <Form action="" method="post" onSubmit={() => this.onSubmitForm()}>
                             <Row sm="12">
-                                <Col sm="2">
+                                <Col sm="8">
                                     <Form.Group className="mb-3" controlId="formBasicObject">
                                         <Form.Label>Sản Phẩm</Form.Label>
                                         <Form.Select name="form-field-name"
-                                            value={this.setState.id_product_info}
+                                            value={id_product_info}
                                             onChange={(e) => { this.onChange(e, 'id_product_info') }}
                                             labelKey={'Tên'}
                                             valueKey={'Mã'}
                                             isLoading={isLoadingExternally}
-
                                         >
-                                            <option value="size-L">Chọn</option>
+                                            <option value="product-info-2">Chọn</option>
                                             {productInfo && productInfo.length > 0 &&
                                                 productInfo.map((option, index) => (
-                                                    <option value={option.id} key={index}>{option.name}</option>
+                                                    <option value={option.id} key={index}>Tên: {option.name}, Kích Cỡ: {option.nameSize}, Màu: {option.nameColor}</option>
                                                 ))}
                                         </Form.Select>
                                     </Form.Group>
                                 </Col>
 
-                                <Col sm="4">
+                                <Col sm="2">
                                     <Form.Group >
                                         <Form.Label htmlFor="exampleFormControlTextarea1">Số Lượng</Form.Label>
                                         <Form.Control
@@ -174,30 +169,20 @@ class addProduct extends React.Component {
                                             onChange={(e) => { this.onChange(e, 'txtQuantity') }}
                                             required
                                         />
-                                        <Form.Control.Feedback
-                                            type="invalid" >
-                                            Vui lòng nhập tên cần thêm !
-                                        </Form.Control.Feedback>
-
                                     </Form.Group>
                                 </Col>
-                                <Col sm="4">
+                                <Col sm="2">
                                     <Form.Group >
-                                        <Form.Label htmlFor="exampleFormControlTextarea1">Số Lượng</Form.Label>
+                                        <Form.Label htmlFor="exampleFormControlTextarea1">Giá</Form.Label>
                                         <Form.Control
                                             type="number"
                                             id="txtRetal_price"
                                             name="txtRetal_price"
-                                            placeholder="Số Lượng..."
+                                            placeholder="Giá..."
                                             value={txtRetal_price}
                                             onChange={(e) => { this.onChange(e, 'txtRetal_price') }}
                                             required
                                         />
-                                        <Form.Control.Feedback
-                                            type="invalid" >
-                                            Vui lòng nhập tên cần thêm !
-                                        </Form.Control.Feedback>
-
                                     </Form.Group>
                                 </Col>
                                 <Col sm="10">
@@ -217,7 +202,7 @@ class addProduct extends React.Component {
                     <CCol xs="12" lg="24">
                         <CCard>
                             <CCardHeader>
-                                Danh Sách Chi Tiết Sản Phẩm
+                                Danh Sách Chi Tiết Đặt Hàng
                             </CCardHeader>
                             <CCardBody>
                                 <CDataTable
@@ -229,6 +214,11 @@ class addProduct extends React.Component {
                                         'Thao Tác':
                                             (item) => (
                                                 <td>
+                                                     <Link to="/admin/manage/product/../edit">
+                                                        <CButton type="button" className="btn btn-primary">
+                                                            <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
+                                                        </CButton>
+                                                    </Link>
                                                     <CButton type="button" className="btn btn-warning"
                                                         onClick={() => { this.onDeleteOrderInfo(item.id) }}
                                                     >
@@ -275,7 +265,6 @@ class addProduct extends React.Component {
 var mapStateToProps = (state) => {
     return {
         productInfo: state.productInfo,
-
         orderInfo: state.orderInfo,
     };
 };

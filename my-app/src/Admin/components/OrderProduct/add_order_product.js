@@ -91,7 +91,7 @@ class addOrderProduct extends React.Component {
       history.goBack();
     } else {
       this.props.onAddItemOrder(order);
-      history.goBack();
+
     }
   };
   state = {
@@ -153,11 +153,13 @@ class addOrderProduct extends React.Component {
                 <CLabel htmlFor="nf-password">0 = Chưa Giao</CLabel>
               </CFormGroup>
               <CFormGroup >
-                  <CButton
-                    color='danger'
-                    className="m-2"
-                    onClick={this.onSubmitForm}
-                  >  <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" /> Thêm</CButton>
+                <CButton
+                  color='danger'
+                  className="m-2"
+                  onClick={this.onSubmitForm}
+                >  <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />
+                 Thêm
+                 </CButton>
               </CFormGroup>
             </CForm>
           </CCol>

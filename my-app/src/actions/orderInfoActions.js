@@ -11,7 +11,6 @@ export const fetchOrderInfo = (orderInfo) => {
 export const fetchOrderInfoResquest = (id) => {
   return (dispatch) => {
     return callApi(`orders-info/${id}`, "GET", null).then((response) => {
-      console.log(response.data);
       dispatch(fetchOrderInfo(response.data));
     });
   };
@@ -40,7 +39,7 @@ export const onAddOrderInfo = (orderInfo) => {
   
   export const onDeleteOrderInfoResquest = (id) => {
     return (dispatch) => {
-      return callApi(`order-info/${id}`, "DELETE", null).then((response) => {
+      return callApi(`orders-info/${id}`, "DELETE", null).then((response) => {
         toast.success("Xóa thành công !");
         dispatch(onDeleteOrderInfo(id));
       });
