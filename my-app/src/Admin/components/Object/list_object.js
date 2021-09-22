@@ -27,14 +27,17 @@ class ListObject extends React.Component {
   }
   onDeleteObject = (item) => {
     if (window.confirm("Bạn chắc chắn muốn xóa ?")) {  //eslint-disable-line
-    
+
       this.props.onDeleteItemObject(item);
     }
   };
+  handleEdit = (item) => {
+    console.log("lấy đt", item);
+  }
   render() {
     var { object_menu } = this.props;
 
-  
+
     var dataObject = object_menu.map((item, index) => {
       return { ...item, index };
     });
@@ -58,14 +61,14 @@ class ListObject extends React.Component {
                     "Thao Tác": (item) => (
                       <td>
                         <Link to={`/admin/manage/object/${item.id}/edit`}>
-                          <CButton type="button" className="btn btn-primary">
-                            <FontAwesomeIcon
-                              icon={faTools}
-                              className="mr-2"
-                              size="lg"
-                            />
-                            Sửa
-                          </CButton>
+                        <CButton type="button" className="btn btn-primary">
+                          <FontAwesomeIcon
+                            icon={faTools}
+                            className="mr-2"
+                            size="lg"
+                          />
+                          Sửa
+                        </CButton>
                         </Link>
 
                         <CButton

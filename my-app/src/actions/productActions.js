@@ -64,3 +64,18 @@ export const onEditProductResquest = (id) => {
     });
   };
 };
+export const onDeleteProduct = (id) => {
+  return {
+    type: types.DELETE_PRODUCT,
+    id,
+  };
+};
+
+export const onDeleteProductResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`products/${id}`, "DELETE", null).then((response) => {
+      toast.success("Xóa thành công !");
+      dispatch(onDeleteProduct(id));
+    });
+  };
+};

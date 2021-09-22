@@ -16,6 +16,7 @@ const AddAccountAdmin = React.lazy(() => import('../components/Account_Admin/add
 const ListProducts = React.lazy(() => import('../components/Product/list_product'));
 const AddProduct = React.lazy(() => import('../components/Product/add_product'));
 const AddProductInfo = React.lazy(() => import('../components/Product/add_prodcut_info'));
+const EditProductInfo = React.lazy(() => import('../components/Product/edit_product_info.js'));
 
 const ListStaffs = React.lazy(() => import('../components/Staff/list_staff'));
 const AddStaff = React.lazy(() => import('../components/Staff/add_staff'));
@@ -81,7 +82,9 @@ const routes = [
 
     { path: '/admin/manage/products', exact: true, name: 'Danh Sách Sản Phẩm', component: ListProducts },
     { path: '/admin/manage/product/add', exact: true, name: 'Thêm Sản Phẩm Mới', component: AddProduct },
+    { path: '/admin/manage/product/:id_product/edit', exact: true, name: 'Sửa Sản Phẩm', component: AddProduct },
     { path: '/admin/manage/product-info/add/:id_product', exact: true, name: 'Thêm Chi Tiết Sản Phẩm Mới', component: AddProductInfo },
+    { path: '/admin/manage/product-info/:id_product_info/edit', exact: true, name: 'Sửa Chi Tiết Sản Phẩm', component: EditProductInfo },
 
     { path: '/admin/manage/staffs', exact: true, name: 'Danh Sách Nhân Viên', component: ListStaffs },
     { path: '/admin/manage/staff/add', exact: true, name: 'Thêm Nhân Viên Mới', component: AddStaff },
@@ -101,7 +104,7 @@ const routes = [
 
     { path: '/admin/manage/objects', exact: true, name: 'Danh Sách Đối Tượng', component: ListObject },
     { path: '/admin/manage/object/add', exact: true, name: 'Thêm Đối Tượng Mới', component: AddObject },
-    { path: '/admin/manage/object/:id_object/edit', exact: true, name: 'Sửa Đối Tượng', component: AddObject },
+    { path: '/admin/manage/object/:id_object_menu/edit', exact: true, name: 'Sửa Đối Tượng', component: AddObject },
 
     { path: '/admin/manage/sectors', exact: true, name: 'Danh Sách Loại Sản Phẩm', component: ListSectors },
     { path: '/admin/manage/sector/add', exact: true, name: 'Thêm Loại Sản Phẩm Mới', component: AddSector },

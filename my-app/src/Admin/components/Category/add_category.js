@@ -38,12 +38,11 @@ class AddCategory extends React.Component {
             var { category } = NextProps;
             if (match.params.id_category) {
                 const result = category.find((o) => o.id === match.params.id_category);
-                console.log("result",result);
-                this.setState({
-                    idItem: result.id,
-                    txtName: result.name,
-                    id_sector: result.id_sector,
-                });
+                // this.setState({
+                //     idItem: result.id,
+                //     txtName: result.name,
+                //     id_sector: result.id_sector,
+                // });
             }
         }
     }
@@ -85,7 +84,7 @@ class AddCategory extends React.Component {
             id_sector: id_sector,
         };
 
-        if (idItem) {
+        if (match.params.id_category) {
             this.props.onUpdateItemCategory(categoryUpdate);
             history.goBack();
         } else {
