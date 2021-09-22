@@ -17,7 +17,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-
+const formatter = new Intl.NumberFormat("vi-VN", {
+  style: "currency",
+  currency: "VND",
+  minimumFractionDigits: 0,
+});
+const options = { dateStyle: 'short' };
 const fields = [
   
   { key: "index", label:"STT" },
@@ -110,6 +115,27 @@ class ListOrder extends React.Component {
                         {  item.status===0?'Chưa Xác Nhận':'Đã Xác Nhận'}
                         </Alert>
 
+                       
+                      </td>
+                    ),
+                    
+                    "total": (item) => (
+                      <td>
+                       {formatter.format(item.total)}
+                       
+                      </td>
+                    ),
+                    
+                    "order_date": (item) => (
+                      <td>
+                       {item.order_date.toLocaleString("en-NZ",options)}
+                       
+                      </td>
+                    ),
+                    
+                    "delivery_date": (item) => (
+                      <td>
+                       {item.delivery_date.toLocaleString("en-NZ",options)}
                        
                       </td>
                     ),
