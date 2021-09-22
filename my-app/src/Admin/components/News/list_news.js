@@ -45,7 +45,7 @@ class ListNews extends React.Component {
     render() {
 
         var { news } = this.props;
-        var dataNews = news.map((item, index) => {
+        var data = news.map((item, index) => {
            return {...item, index};
         });
         return (
@@ -63,7 +63,7 @@ class ListNews extends React.Component {
                             </CCardHeader>
                             <CCardBody>
                                 <CDataTable
-                                    items={dataNews}
+                                    items={data}
                                     fields={fields}
                                     itemsPerPage={8}
                                     pagination

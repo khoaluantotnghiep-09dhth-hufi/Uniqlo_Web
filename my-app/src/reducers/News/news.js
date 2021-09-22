@@ -1,7 +1,5 @@
 import * as types from "./../../constants/ActionTypes";
-
 var initialState = [];
-
 var findIndex = (news, id) => {
   var result = -1;
   news.forEach((item, index) => {
@@ -13,7 +11,8 @@ var findIndex = (news, id) => {
 }
 var news = (state = initialState, action) => {
   var index = -1;
-  var { news, id } = action;
+  //var { news, id } = action;
+  var { id } = action;
   switch (action.type) {
     //Lấy ds news
     case types.FETCH_NEWS:
