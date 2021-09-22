@@ -221,8 +221,25 @@ class index extends Component {
       [name]: value,
     });
   };
+  onTakeIdProductInfo = () => {
+    var result = null;
+    var { match, products } = this.props;
+    var { txtSize, isChooseColor, txtSize } = this.state;
+    var id_product = match.params.id_product;
+    if (isChooseColor && txtSize) {
+      result = products.find(
+        (product) =>
+          product.id === id_product &&
+          product.nameColor === isChooseColor &&
+          product.nameSize === txtSize
+      );
+      var id = result.id_product_info;
+    }
+
+    return id;
+  };
   onAddToCart = (product) => {
-    console.log(product)
+    console.log(product);
     this.props.onAddToCart(product);
   };
   render() {
@@ -238,16 +255,17 @@ class index extends Component {
     }
 
     var product = {
-      id_product:match.params.id_product,
+      id_product_info: this.onTakeIdProductInfo(),
+      id_product: match.params.id_product,
       nameProduct: result.name,
       imageProduct: result.image,
       priceProduct: result.price,
       priceSaleProduct: newPrice,
-      txtSize,
-      isChooseColor,
-      quantityOfSize,
+      sizeProduct: txtSize,
+      colorProduct: isChooseColor,
+      quantityAllProduct: quantityOfSize,
     };
-   
+
     return (
       <React.Fragment>
         <Container style={{ marginTop: "5%", marginBottom: "15%" }}>
@@ -284,7 +302,7 @@ class index extends Component {
               <Row>
                 <Col>
                   <Button
-                  type="submit"
+                    type="submit"
                     variant="danger"
                     type="button"
                     size="lg"
