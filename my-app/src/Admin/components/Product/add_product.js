@@ -32,13 +32,9 @@ class addProduct extends React.Component {
             txtQuantity: "",
             id_category: "",
             id_promotion: "",
-            id_size: "",
-            id_color: "",
             ImgPrivew: "",
             promotionArr: [],
             categoryArr: [],
-            sizeArr: [],
-            colorArr: [],
             isOpen: false,
         };
     }
@@ -51,8 +47,6 @@ class addProduct extends React.Component {
         this.setState({
             promotionArr: this.props.fetchPromotions(),
             categoryArr: this.props.fetchCategorys(),
-            sizeArr: this.props.fetchSizes(),
-            colorArr: this.props.fetchColors(),
         })
     }
     componentWillReceiveProps(NextProps) {
@@ -72,8 +66,6 @@ class addProduct extends React.Component {
                     txtQuantity: result.quantity,
                     id_promotion: result.id_promotion.id,
                     id_category: result.id_category.id,
-                    id_size: result.id_size.id,
-                    id_color: result.id_color.id,
                 });
             }
         }
@@ -126,7 +118,7 @@ class addProduct extends React.Component {
         event.preventDefault();
         var { match } = this.props;
         var { history } = this.props;
-        var { idItem, txtName, txtPrice, txtDescription, txtImage, txtQuantity, id_promotion, id_category, id_size, id_color } = this.state;
+        var { idItem, txtName, txtPrice, txtDescription, txtImage, id_promotion, id_category } = this.state;
         var product = {
             id: uniqid("product-"),
             name: txtName,
@@ -136,26 +128,21 @@ class addProduct extends React.Component {
             id_category: id_category,
             id_promotion: id_promotion,
         };
-        var propductinfo = {
-            id: uniqid("product-info-"),
-            id_product: product.id,
-            id_size: id_size,
-            id_color: id_color,
-            quantity: txtQuantity
-
-        };
         var productUpdate = {
-            id: match.params.id_category,
-            nameCategory: txtName,
-            // id_sector: id_sector,
+            idItem: match.params.id_product,
+            name: txtName,
+            price: txtPrice,
+            description: txtDescription,
+            image: txtImage,
+            id_category: id_category,
+            id_promotion: id_promotion,
         };
 
-        if (idItem) {
-            this.props.onUpdateItemCategory(productUpdate);
+        if (match.params.id_product) {
+            this.props.onUpdateItemProduct(productUpdate);
             history.goBack();
         } else {
             this.props.onAddItemProduct(product);
-            this.props.onAddItemProductInfo(propductinfo);
             history.goBack();
 
         }
@@ -163,19 +150,16 @@ class addProduct extends React.Component {
     render() {
         var { promotion } = this.props;
         var { category } = this.props;
-        var { size } = this.props;
-        var { color } = this.props;
-
-        let { txtName, txtPrice, txtDescription, id_category, id_promotion, txtQuantity } = this.state;
+        let { txtName, txtPrice, txtDescription, id_category, id_promotion } = this.state;
         return (
             <Container fluid>
+                <Link to="/admin/manage/products">
+                    <Button type="button" className="btn btn-primary" size="sm">
+                        <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />
+                        Trở về
+                    </Button>
+                </Link>
                 <Row>
-                    <Link to="/admin/manage/products">
-                        <Button type="button" className="btn btn-primary" size="sm">
-                            <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />
-                            Trở về
-                        </Button>
-                    </Link>
                     <Col sm="12">
                         <Form action="" method="post" onSubmit={() => this.onSubmitForm()}>
                             <Row sm="24">
@@ -197,7 +181,7 @@ class addProduct extends React.Component {
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
-                                <Col sm="4">
+                                <Col sm="2">
                                     <Form.Group >
                                         <Form.Label htmlFor="exampleFormControlTextarea1">Giá Bán</Form.Label>
                                         <Form.Control
@@ -237,7 +221,7 @@ class addProduct extends React.Component {
                                         </Form.Select>
                                     </Form.Group>
                                 </Col>
-                                <Col sm="2">
+                                <Col sm="4">
                                     <Form.Group className="mb-3" >
                                         <Form.Label>Khuyến Mãi</Form.Label>
                                         <Form.Select name="form-field-name"
@@ -270,7 +254,7 @@ class addProduct extends React.Component {
                                     </Form.Group>
                                 </Col>
                                 <Col sm="4">
-                                   
+
                                     <div style={{ backgroundImage: `url(${this.state.ImgPrivew})`, height: "200px", width: "300px", align: "center", background: "center center no-repeat", backgroundSize: "contain", cursor: "pointer", margin: "30px" }}
                                         onClick={() => this.openPreviewIMG()}
                                     ></div>
@@ -305,62 +289,6 @@ class addProduct extends React.Component {
                             onCloseRequest={() => this.setState({ isOpen: false })}
                         />
                     }
-                    <Col sm="2">
-                        <Form.Group className="mb-3" controlId="formBasicObject">
-                            <Form.Label>Kích Cỡ</Form.Label>
-                            <Form.Select name="form-field-name"
-                                value={this.setState.id_size}
-                                onChange={(e) => { this.onChange(e, 'id_size') }}
-                                labelKey={'Tên'}
-                                valueKey={'Mã'}
-                                isLoading={isLoadingExternally}
-
-                            >
-                                <option value="size-L">Chọn</option>
-                                {size && size.length > 0 &&
-                                    size.map((option, index) => (
-                                        <option value={option.id} key={index}>{option.name}</option>
-                                    ))}
-                            </Form.Select>
-                        </Form.Group>
-                    </Col>
-                    <Col sm="2">
-                        <Form.Group className="mb-3" controlId="formBasicObject">
-                            <Form.Label>Màu</Form.Label>
-                            <Form.Select name="form-field-name"
-                                value={this.setState.id_color}
-                                onChange={(e) => { this.onChange(e, 'id_color') }}
-                                labelKey={'Tên'}
-                                valueKey={'Mã'}
-                                isLoading={isLoadingExternally}
-                            >
-                                <option value="color-1">Chọn</option>
-                                {color && color.length > 0 &&
-                                    color.map((option, index) => (
-                                        <option value={option.id} key={index}>{option.name}</option>
-                                    ))}
-                            </Form.Select>
-                        </Form.Group>
-                    </Col>
-                    <Col sm="4">
-                        <Form.Group >
-                            <Form.Label htmlFor="exampleFormControlTextarea1">Số Lượng</Form.Label>
-                            <Form.Control
-                                type="number"
-                                id="txtQuantity"
-                                name="txtQuantity"
-                                placeholder="Số Lượng..."
-                                value={txtQuantity}
-                                onChange={(e) => { this.onChange(e, 'txtQuantity') }}
-                                required
-                            />
-                            <Form.Control.Feedback
-                                type="invalid" >
-                                Vui lòng nhập tên cần thêm !
-                            </Form.Control.Feedback>
-
-                        </Form.Group>
-                    </Col>
                     <Col sm="10">
                         <Form.Group className="d-flex justify-content-center">
                             <Button type="button" className="btn btn-danger"
@@ -378,8 +306,6 @@ var mapStateToProps = (state) => {
     return {
         category: state.category,
         promotion: state.promotion,
-        size: state.size,
-        color: state.color,
     };
 };
 var mapDispatchToProps = (dispatch, props) => {
@@ -395,12 +321,6 @@ var mapDispatchToProps = (dispatch, props) => {
         },
         fetchPromotions: () => {
             return dispatch(actions.fetchPromotionsResquest());
-        },
-        fetchSizes: () => {
-            return dispatch(actions.fetchSizeResquest());
-        },
-        fetchColors: () => {
-            return dispatch(actions.fetchColorResquest());
         },
         onEditItemProduct: (id) => {
             return dispatch(actionsProduct.onEditProductResquest(id));

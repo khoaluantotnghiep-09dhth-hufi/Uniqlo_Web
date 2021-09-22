@@ -28,21 +28,19 @@ class addObject extends React.Component {
 
     this.props.onEditItemObject(match.params.id_object);
   }
-  componentWillReceiveProps(NextProps) {
-    var { match } = this.props;
-    if (NextProps && NextProps.object_menu) {
-      var { object_menu } = NextProps;
-
-      if (match.params.id_object_menu) {
-        const result = object_menu.find((o) => o.id === match.params.id_object);
-        console.log(result);
-        this.setState({
-          idItem: result.id,
-          txtName: result.name,
-        });
-      }
-    }
-  }
+  // componentWillReceiveProps(NextProps) {
+  //   var { match } = this.props;
+  //   if (NextProps && NextProps.object_menu) {
+  //     var { object_menu } = NextProps;
+  //     if (match.params.id_object_menu) {
+  //       const result = object_menu.find((o) => o.id === match.params.id_object_menu);
+  //       this.setState({
+  //         idItem: result.id,
+  //         txtName: result.name,
+  //       });
+  //     }
+  //   }
+  // }
   onChange = (event) => {
     var target = event.target;
     var name = target.name;
@@ -63,14 +61,11 @@ class addObject extends React.Component {
       name: txtName,
     };
     var objectUpdate = {
-      idItem: match.params.id_object,
+      idItem: match.params.id_object_menu,
       name: txtName,
     };
-    console.log(objectUpdate);
-    console.log(idItem)
-    if (match.params.id_object) {
+    if (match.params.id_object_menu) {
       this.props.onUpdateItemObject(objectUpdate);
-     
       history.goBack();
     } else {
       this.props.onAddItemObject(object_menu);
@@ -99,6 +94,7 @@ class addObject extends React.Component {
                   placeholder="Tên đối tượng..."
                   autoComplete="name"
                   onChange={this.onChange}
+                  value={this.state.txtName}
                 />
               </CFormGroup>
 

@@ -13,6 +13,7 @@ import {
     faPlus,
     faTimes,
     faTools,
+    faInfo,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
@@ -27,11 +28,11 @@ const fields = [
     { key: 'like_product', label: 'Lượt Thích' },
     { key: 'dislike_product', label: 'Không Thích' },
     { key: 'nameCategory', label: 'Danh Mục' },
-    { key: 'image', label: 'Ảnh' },
     { key: 'namePromotion', label: 'Khuyến Mãi' },
-    { key: 'quantityAllProduct', label: 'Số Lượng' },
-    { key: 'nameColor', label: 'Màu' },
-    { key: 'nameSize', label: 'Kích Cỡ' },
+    { key: 'image', label: 'Ảnh' },
+    // { key: 'quantityAllProduct', label: 'Số Lượng' },
+    // { key: 'nameColor', label: 'Màu' },
+    // { key: 'nameSize', label: 'Kích Cỡ' },
     'Thao Tác',
 ]
 const getBadge = color => {
@@ -49,7 +50,9 @@ class ListProducts extends React.Component {
         this.props.fetchProducts();
     }
     onDeleteProduct = (id) => {
-        this.props.onDeleteItemProduct(id);
+        if (window.confirm("Bạn có chắc muốn xóa không ?")) {
+            this.props.onDeleteItemProduct(id);
+        }
     };
     render() {
         var { products } = this.props;
@@ -81,16 +84,38 @@ class ListProducts extends React.Component {
                                         'Thao Tác':
                                             (item) => (
                                                 <td>
-                                                    {/* <Link to="/admin/manage/product/../edit">
+                                                    <Link to={`/admin/manage/product/${item.id}/edit`}>
                                                         <CButton type="button" className="btn btn-primary">
                                                             <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
                                                         </CButton>
-                                                    </Link> */}
+                                                    </Link>
                                                     <Link to={`/admin/manage/product-info/add/${item.id}`}>
-                                                        <CButton type="button" className="btn btn-primary">
-                                                            <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />Bổ Sung
+                                                        <CButton
+                                                            type="button"
+                                                            className="btn btn-danger"
+                                                        >
+                                                            <FontAwesomeIcon
+                                                                icon={faInfo}
+                                                                className="mr-2"
+                                                                size="lg"
+                                                            />
+                                                            Xem Chi Tiết
                                                         </CButton>
                                                     </Link>
+                                                    <CButton
+                                                        type="button"
+                                                        className="btn btn-warning"
+                                                        onClick={() => {
+                                                            this.onDeleteProduct(item.id);
+                                                        }}
+                                                    >
+                                                        <FontAwesomeIcon
+                                                            icon={faTimes}
+                                                            className="mr-2"
+                                                            size="lg"
+                                                        />
+                                                        Xóa
+                                                    </CButton>
                                                 </td>
 
                                             ),
@@ -140,9 +165,9 @@ var mapDispatchToProps = (dispatch, props) => {
         fetchProducts: () => {
             return dispatch(actions.fetchProductResquest());
         },
-        // onDeleteItemProduct: (id) => {
-        //     return dispatch(actions.onDeleteProductResquest(id))
-        // }
+        onDeleteItemProduct: (id) => {
+            return dispatch(actions.onDeleteProductResquest(id))
+        }
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ListProducts);

@@ -1,6 +1,6 @@
 import * as types from "./../constants/ActionTypes";
 import callApi from "./../Admin/utils/Callapi";
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 export const fetchProductInfo = (productInfo) => {
   return {
     type: types.FETCH_PRODCUTINFO,
@@ -32,32 +32,63 @@ export const fetchProductInfoResquestNoID = () => {
   };
 };
 export const onAddProductInfo = (productInfo) => {
-    return {
-      type: types.ADD_PRODUCTINFO,
-      productInfo,
-    };
+  return {
+    type: types.ADD_PRODUCTINFO,
+    productInfo,
   };
-  
-  export const onAddProductInfoResquest = (productInfo) => {
-    return (dispatch) => {
-      return callApi("product-info", "POST", productInfo).then((response) => {
-        toast.success("Bổ sung thành công !");
-        dispatch(onAddProductInfo(response.data));
-      });
-    };
+};
+
+export const onAddProductInfoResquest = (productInfo) => {
+  return (dispatch) => {
+    return callApi("product-info", "POST", productInfo).then((response) => {
+      toast.success("Bổ sung thành công !");
+      dispatch(onAddProductInfo(response.data));
+    });
   };
-  export const onDeleteProductInfo = (id) => {
-    return {
-      type: types.DELETE_PRODUCTINFO,
-      id,
-    };
+};
+export const onDeleteProductInfo = (id) => {
+  return {
+    type: types.DELETE_PRODUCTINFO,
+    id,
   };
-  
-  export const onDeleteProductInfoResquest = (id) => {
-    return (dispatch) => {
-      return callApi(`product-info/${id}`, "DELETE", null).then((response) => {
-        toast.success("Xóa thành công !");
-        dispatch(onDeleteProductInfo(id));
-      });
-    };
+};
+
+export const onDeleteProductInfoResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`product-info/${id}`, "DELETE", null).then((response) => {
+      toast.success("Xóa thành công !");
+      dispatch(onDeleteProductInfo(id));
+    });
   };
+};
+export const onUpdateProductInfo = (productInfo) => {
+  return {
+    type: types.UPDATE_PRODUCTINFO,
+    productInfo,
+  };
+};
+export const onUpdateProductInfoResquest = (productInfo) => {
+  return (dispatch) => {
+    return callApi(`product-info/${productInfo.idItem}`, "PUT", productInfo).then(
+      (response) => {
+        toast.success("Sửa thành công !");
+        dispatch(onUpdateProductInfo(response.data));
+      }
+    );
+  };
+};
+
+//Sửa sản phẩm
+export const onGetProductInfo = (productInfo) => {
+  return {
+    type: types.EDIT_PRODUCTINFO,
+    productInfo,
+  };
+};
+export const onEditProductResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`product-info2/${id}`, "GET", null).then((response) => {
+      dispatch(onGetProductInfo(response.data));
+    });
+  };
+};

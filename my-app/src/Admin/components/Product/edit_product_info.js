@@ -45,6 +45,7 @@ class addProduct extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            idItem: "",
             txtQuantity: "",
             id_size: "",
             id_color: "",
@@ -55,28 +56,24 @@ class addProduct extends React.Component {
     componentDidMount() {
         var { match } = this.props;
 
-        this.props.onEditItemProduct(match.params.id_product);
-        this.props.fetchProductInfo(match.params.id_product);
+        this.props.onEditItemProductInfo(match.params.id_product_info);
+       
         isLoadingExternally = true;
         this.setState({
             sizeArr: this.props.fetchSizes(),
             colorArr: this.props.fetchColors(),
         })
     }
-    onDeleteProductInfo = (item) => {
-        if (window.confirm("Bạn có chắc muốn xóa không ?")) {
-            this.props.onDeleteItemProductInfo(item);
-        }
-    }
     // componentWillReceiveProps(NextProps) {
     //     var { match } = this.props;
     //     if (NextProps && NextProps.productInfo) {
     //         var { productInfo } = NextProps;
-    //         if (match.params.id_product) {
+    //         if (match.params.id_product_info) {
     //             const result = productInfo.find(
-    //                 (o) => o.id === match.params.id_product
+    //                 (o) => o.id === match.params.id_product_info
     //             );
     //             this.setState({
+                  
     //                 txtQuantity: result.quantity,
     //                 id_size: result.id_size.id,
     //                 id_color: result.id_color.id,
@@ -115,16 +112,15 @@ class addProduct extends React.Component {
         event.preventDefault();
         var { match } = this.props;
         var { history } = this.props;
-        var { txtQuantity, id_size, id_color } = this.state;
-        var propductinfo = {
-            id: uniqid("product-info-"),
-            id_product: match.params.id_product,
+        var {idItem, txtQuantity, id_size, id_color } = this.state;
+        var updatepropductinfo = {
+            idItem: match.params.id_product_info,
             id_size: id_size,
             id_color: id_color,
             quantity: txtQuantity
         };
-        this.props.onAddItemProductInfo(propductinfo);
-        history.goBack();
+            this.props.onUpdateItemProductInfo(updatepropductinfo);
+            history.goBack();
     };
     // onEditHandle = (item) => {
 
@@ -148,9 +144,6 @@ class addProduct extends React.Component {
         var { size } = this.props;
         var { color } = this.props;
         var { productInfo } = this.props;
-        var dataProductInfo = productInfo.map((item, index) => {
-            return item;
-        })
         let { txtQuantity } = this.state;
         return (
             <Container fluid>
@@ -234,64 +227,7 @@ class addProduct extends React.Component {
                     </Col>
 
                 </CRow>
-                <CRow>
-                    <CCol xs="12" lg="24">
-                        <CCard>
-                            <CCardHeader>
-                                Danh Sách Chi Tiết Sản Phẩm
-                            </CCardHeader>
-                            <CCardBody>
-                                <CDataTable
-                                    items={dataProductInfo}
-                                    fields={fields}
-                                    itemsPerPage={8}
-                                    pagination
-                                    scopedSlots={{
-                                        'Thao Tác':
-                                            (item) => (
-                                                <td>
-                                                    <Link to={`/admin/manage/product-info/${item.id}/edit`}>
-                                                        <CButton type="button" className="btn btn-primary"
-                                                        >
-                                                            <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
-                                                        </CButton>
-                                                    </Link>
-                                                    <CButton type="button" className="btn btn-warning"
-                                                        onClick={() => { this.onDeleteProductInfo(item.id) }}
-                                                    >
-                                                        <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
-                                                    </CButton>
-                                                </td>
-                                            ),
-                                        'STT':
-                                            (item, index) => (
-                                                <td>
-                                                    {index + 1}
-                                                </td>
-                                            ),
-                                        'image':
-                                            (item, index) => (
-                                                <td>
-                                                    <Image src={item.image} thumbnail />
-                                                </td>
-                                            ),
-                                        // "nameColor": (item) => (
-                                        //     <td>
-                                        //         <Alert variant={getBadge(item.nameColor)}>
-                                        //             {/* {item.status === 0 ? 'Chưa Giao' : 'Đã Giao'} */}
-                                        //         </Alert>
-
-
-                                        //     </td>
-                                        // ),
-                                    }}
-                                />
-                            </CCardBody>
-                        </CCard>
-                    </CCol>
-
-
-                </CRow>
+                
             </Container>
         )
     }
@@ -317,14 +253,11 @@ var mapDispatchToProps = (dispatch, props) => {
         fetchColors: () => {
             return dispatch(actions.fetchColorResquest());
         },
-        onEditItemProduct: (id) => {
-            return dispatch(actionsProduct.onEditProductResquest(id));
-        },
-        onDeleteItemProductInfo: (id) => {
+        onEditItemProductInfo: (id) => {
             return dispatch(actionsProductInfo.onDeleteProductInfoResquest(id));
         },
-        onUpdateItemProduct: (product) => {
-            return dispatch(actionsProduct.onUpdateProductResquest(product));
+        onUpdateItemProductInfo: (productInfo) => {
+            return dispatch(actionsProductInfo.onUpdateProductInfoResquest(productInfo));
         },
     };
 };
