@@ -118,7 +118,30 @@ class index extends Component {
 
     return result;
   };
-  onHandleSubmitForm=() => {
+  showTotalAmount = (cart) => {
+    
+    var total = 0;
+    for (let index = 0; index < cart.length; index++) {
+      if(cart[index].product.priceSaleProduct){
+        total += cart[index].product.priceSaleProduct * cart[index].quantity;
+      }else{
+        total += cart[index].product.priceProduct * cart[index].quantity;
+      }
+     
+     
+    }
+    return total;
+  };
+showTotalProduct=(cart)=>{
+    var total = 0;
+    for (let index = 0; index < cart.length; index++) {
+      total += cart[index].quantity;
+
+    }
+    return total;
+};
+  onHandleSubmitForm=(e) => {
+    e.preventDefault();
     var{
       txtEmail, 
       txtHoTen,
@@ -127,18 +150,30 @@ class index extends Component {
       txtCity,
       txtPhuong,
       txtXa,
-      txtGhiChu
-    }= this.props;
+      txtGhiChu,
+      
+    }= this.state;
+   var sessionUser= JSON.parse( sessionStorage.getItem("user"));
+   var sessionCart= JSON.parse( sessionStorage.getItem("cart"));
     let dateNow= new Date().toISOString().slice(0, 10)
     
     var bill={
       id: uniqid("bill-"),
       order_date:dateNow,
-      total:'',
+      total:this.showTotalAmount(sessionCart),
       status:0,
-      id_customer:'',
+      id_customer:sessionUser.id_user,
+      name_customer:txtHoTen,
+      address:txtDiaChi +" , "+txtCity+" , "+txtPhuong+" , "+txtXa,
+      phone:txtSDT,
+      email:txtEmail,
+      total_quantity: this.showTotalProduct(sessionCart),
+      note:txtGhiChu
 
     }
+
+console.log(bill)
+
   }
   render() {
     var { cities, display, districts, wards } = this.state;
@@ -148,7 +183,7 @@ class index extends Component {
         <Row>
           <Col lg={4}>
             <h5 className="font-weight-normal">Thông Tin Nhận Hàng</h5>
-            <Form onSubmit={this.onHandleSubmitForm}>
+            <Form  onSubmit={this.onHandleSubmitForm}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control
                   type="text"
@@ -225,6 +260,15 @@ class index extends Component {
                   style={{ height: "100px" }}
                 />
               </FloatingLabel>
+              <Button
+            variant="danger"
+            type="submit"
+            size="lg"
+            className="Cart__Checkout-button mt-5"
+           
+          >
+            Đặt Hàng
+          </Button>
             </Form>
           </Col>
           <Col lg={8}>
@@ -246,16 +290,9 @@ class index extends Component {
             </Row>
             <Row>
               <Col lg={8}>
-              <NavLink to="/">
-              <Button
-            variant="danger"
-            type="button"
-            size="lg"
-            className="Cart__Checkout-button mt-5"
-          >
-            Đặt Hàng
-          </Button>
-          </NavLink>
+           
+             
+       
               </Col>
              
             </Row>

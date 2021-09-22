@@ -35,16 +35,17 @@ console.log(users)
         
       
         var user = {
-          id: users[i].id,
+          id_user: users[i].id,
           name: users[i].name,
           phone: users[i].phone,
           password: users[i].password,
         };
-        sessionStorage.setItem("user", JSON.stringify(user));
-     
         this.setState({
           isCheckLogin: true,
         });
+        sessionStorage.setItem("user", JSON.stringify(user));
+     
+        
       } else {
         this.setState({
           isCheckLogin: true,
