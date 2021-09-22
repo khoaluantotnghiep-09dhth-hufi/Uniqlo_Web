@@ -104,6 +104,7 @@ import { Button } from 'react-bootstrap';
                                     placeholder="Tên kích cỡ..."
                                     autoComplete="name"
                                     onChange={this.onChange}
+                                    required
                                 />
                             </CFormGroup>
                            

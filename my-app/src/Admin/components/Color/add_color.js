@@ -101,6 +101,7 @@ class addColor extends React.Component {
                   placeholder="Tên màu..."
                   autoComplete="name"
                   onChange={this.onChange}
+                  required
                 />
               </CFormGroup>
 

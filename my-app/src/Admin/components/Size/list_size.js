@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 const fields = [
   "STT",
   { key: 'id', label: 'Mã' },
-  { key: 'name', label: 'Tên' },
+  { key: 'name', label: 'Tên Kich Cỡ' },
   "Hành Động"
 ];
 
