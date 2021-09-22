@@ -15,16 +15,22 @@ import {
 } from "@coreui/react";
 
 const fields = [
-  "index",
-  "id",
-  "date",
-  "address",
-  "email",
-  "phone",
-  "total",
-  "status",
+  
+  { key: "index", label:"STT" },
+        { key: "order_date", label: "Ngày Đặt Hàng" },
+        { key: "delivery_date", label: "Ngày Giao Hàng" },
+        { key: "name_customer", label: "Tên Khách Hàng" },
+        { key: "address", label: "Địa Chỉ" },
+        { key: "phone", label: "SDT" },
+        { key: "email", label: "Email" },
+        { key: "total_quantity", label: "Tổng Số Lượng" },
+        { key: "total", label: "Tổng Tiền" },
+        { key: "note", label: "Ghi Chú" },
+        { key: "status", label: "Tình Trạng" },
   "Hành Động",
 ];
+
+
 
 class OrderUnConfirmedOrder extends React.Component {
   componentDidMount() {

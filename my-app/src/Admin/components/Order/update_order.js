@@ -1,6 +1,8 @@
 import React from "react";
 import uniqid from "uniqid";
 import { connect } from "react-redux";
+import { toast } from "react-toastify";
+
 import * as actions from "./../../../actions/index";
 import {
   CForm,
@@ -17,11 +19,10 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 class updateOrder extends React.Component {
   constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       idItem: "",
       txtDate: "",
       txtConfirm: "",
-     
     };
   }
   componentDidMount() {
@@ -34,15 +35,12 @@ class updateOrder extends React.Component {
     if (NextProps && NextProps.bill) {
       var { bill } = NextProps;
       if (match.params.id_order) {
-        const result = bill.find(
-          (o) => o.id === match.params.id_order
-        );
+        const result = bill.find((o) => o.id === match.params.id_order);
 
         this.setState({
           idItem: result.id,
           txtDate: result.date,
           txtConfirm: result.status,
-         
         });
       }
     }
@@ -55,28 +53,39 @@ class updateOrder extends React.Component {
       [name]: value,
     });
   };
+  isCheckForm = () => {
+    var data = ["txtDate", "txtConfirm"];
+    var isCheckForm = true;
+    for (var i = 0; i <= data.length; i++) {
+      if (!this.state[!data[0]]) {
+        isCheckForm = false;
+        toast.error("Vui Lòng Nhập Dữ Liệu!");
+        break;
+      }
+    }
+    return isCheckForm;
+  };
   onSubmitForm = (event) => {
-    var { match } = this.props;
-
+    var { match, bill } = this.props;
+    
     event.preventDefault();
     var { history } = this.props;
-    var { idItem, txtDate,txtConfirm } =
-      this.state;
-    
-    
-    var billUpdate = {
-      id: idItem,
-      nameDate: txtDate,
-      nameStatus: txtConfirm,
-     
-    };
-    if (idItem) {
+    var { idItem, txtDate, txtConfirm } = this.state;
+    let dateNow = new Date().toISOString().slice(0, 10);
+
+    if (idItem && txtDate >= dateNow) {
+      var billUpdate = {
+        id: idItem,
+        delivery_date: txtDate,
+        status: txtConfirm,
+      };
       this.props.onUpdateItemBill(billUpdate);
       history.goBack();
-    } 
+    } else {
+      toast.error("Ngày Giao Phải Lớn Hơn Ngày Hiện Tại !");
+    }
   };
   render() {
-    
     return (
       <CContainer fluid>
         <CRow>
@@ -89,19 +98,23 @@ class updateOrder extends React.Component {
                   name="txtDate"
                   autoComplete="current-password"
                   onChange={this.onChange}
+                  required
                 />
               </CFormGroup>
 
               <CFormGroup>
                 <CLabel htmlFor="nf-password">Trạng Thái</CLabel>
-                <select class="form-select" aria-label="Default select example"
-                name="txtConfirm"
-                // value={this.state.txtConfirm}
-                onChange={this.onChange}>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  name="txtConfirm"
+                  // value={this.state.txtConfirm}
+                  onChange={this.onChange}
+                  required
+                >
                   <option selected>---</option>
                   <option value="1">Đã Xác Nhận</option>
                   <option value="0">Chưa Xác Nhận</option>
-               
                 </select>
               </CFormGroup>
 
