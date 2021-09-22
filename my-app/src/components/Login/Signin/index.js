@@ -29,8 +29,7 @@ class index extends Component {
 console.log(users)
     for (let i = 0; i < users.length; i++) {
       if (users[i].phone === txtSDT && users[i].password === txtPassword) {
-        console.log(users[i].phone ,txtSDT)
-        console.log(users[i].password ,txtPassword)
+       
 
         
       

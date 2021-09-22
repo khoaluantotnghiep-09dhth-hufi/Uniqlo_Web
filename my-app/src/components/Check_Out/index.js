@@ -8,7 +8,7 @@ import {
   FloatingLabel,
   Alert,
   InputGroup,
-  FormControl
+  FormControl,
 } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import uniqid from "uniqid";
@@ -21,14 +21,14 @@ class index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      txtEmail:'', 
-      txtHoTen:'',
-      txtSDT:'', 
-      txtDiaChi:'',
-      txtCity:'',
-      txtPhuong:'',
-      txtXa:'',
-      txtGhiChu:'',
+      txtEmail: "",
+      txtHoTen: "",
+      txtSDT: "",
+      txtDiaChi: "",
+      txtCity: "",
+      txtPhuong: "",
+      txtXa: "",
+      txtGhiChu: "",
       display: "---",
       cities: [],
       districts: [],
@@ -74,12 +74,11 @@ class index extends Component {
     var { id_district } = this.state;
     var result = null;
 
-    console.log(id_district);
     var query = wards.filter((item) => item.district_code === id_district);
-    console.log(query);
+
     result = query.map((ward, index) => {
       return (
-        <option key={index} value={ward.code}>
+        <option key={index} value={ward.name}>
           {ward.name}
         </option>
       );
@@ -89,18 +88,20 @@ class index extends Component {
 
   handleChangeDistricts = (e) => {
     var { id_city } = this.state;
-
+    let index = e.target.selectedIndex;
+    // console.log(e.target[index].text)
     var number = parseInt(e.target.value);
 
-    this.setState({ id_city: number });
+    this.setState({ id_city: number, txtCity: e.target[index].text });
   };
 
   handleChangeWards = (e) => {
     var { id_district } = this.state;
+    let index = e.target.selectedIndex;
 
     var number = parseInt(e.target.value);
 
-    this.setState({ id_district: number });
+    this.setState({ id_district: number, txtPhuong: e.target[index].text });
   };
 
   showListDistrict = (districts) => {
@@ -119,62 +120,63 @@ class index extends Component {
     return result;
   };
   showTotalAmount = (cart) => {
-    
     var total = 0;
     for (let index = 0; index < cart.length; index++) {
-      if(cart[index].product.priceSaleProduct){
+      if (cart[index].product.priceSaleProduct) {
         total += cart[index].product.priceSaleProduct * cart[index].quantity;
-      }else{
+      } else {
         total += cart[index].product.priceProduct * cart[index].quantity;
       }
-     
-     
     }
     return total;
   };
-showTotalProduct=(cart)=>{
+  showTotalProduct = (cart) => {
     var total = 0;
     for (let index = 0; index < cart.length; index++) {
       total += cart[index].quantity;
-
     }
     return total;
-};
-  onHandleSubmitForm=(e) => {
+  };
+  onHandleSubmitForm = (e) => {
     e.preventDefault();
-    var{
-      txtEmail, 
+    var {
+      txtEmail,
       txtHoTen,
-      txtSDT, 
+      txtSDT,
       txtDiaChi,
       txtCity,
       txtPhuong,
       txtXa,
       txtGhiChu,
-      
-    }= this.state;
-   var sessionUser= JSON.parse( sessionStorage.getItem("user"));
-   var sessionCart= JSON.parse( sessionStorage.getItem("cart"));
-    let dateNow= new Date().toISOString().slice(0, 10)
-    
-    var bill={
+    } = this.state;
+    var sessionUser = JSON.parse(sessionStorage.getItem("user"));
+    var sessionCart = JSON.parse(sessionStorage.getItem("cart"));
+    let dateNow = new Date().toISOString().slice(0, 10);
+
+    var bill = {
       id: uniqid("bill-"),
-      order_date:dateNow,
-      total:this.showTotalAmount(sessionCart),
-      status:0,
-      id_customer:sessionUser.id_user,
-      name_customer:txtHoTen,
-      address:txtDiaChi +" , "+txtCity+" , "+txtPhuong+" , "+txtXa,
-      phone:txtSDT,
-      email:txtEmail,
+      order_date: dateNow,
+      total: this.showTotalAmount(sessionCart),
+      status: 0,
+      id_customer: sessionUser.id_user,
+      name_customer: txtHoTen,
+      address: txtDiaChi + " , " + txtCity + " , " + txtPhuong + " , " + txtXa,
+      phone: txtSDT,
+      email: txtEmail,
       total_quantity: this.showTotalProduct(sessionCart),
-      note:txtGhiChu
+      note: txtGhiChu,
+    };
 
-    }
-
-console.log(bill)
-
-  }
+    console.log(bill);
+  };
+  onHandleChange = (event) => {
+    var target = event.target;
+    var name = target.name;
+    var value = target.value;
+    this.setState({
+      [name]: value,
+    });
+  };
   render() {
     var { cities, display, districts, wards } = this.state;
 
@@ -183,8 +185,8 @@ console.log(bill)
         <Row>
           <Col lg={4}>
             <h5 className="font-weight-normal">Thông Tin Nhận Hàng</h5>
-            <Form  onSubmit={this.onHandleSubmitForm}>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form onSubmit={this.onHandleSubmitForm}>
+              <Form.Group className="mb-3">
                 <Form.Control
                   type="text"
                   placeholder="Email"
@@ -193,7 +195,7 @@ console.log(bill)
                 />
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicHoTen">
+              <Form.Group className="mb-3">
                 <Form.Control
                   type="text"
                   placeholder="Họ và Tên"
@@ -202,7 +204,7 @@ console.log(bill)
                 />
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicSDT">
+              <Form.Group className="mb-3">
                 <Form.Control
                   type="text"
                   placeholder="Số Điện Thoại"
@@ -211,7 +213,7 @@ console.log(bill)
                 />
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicDC">
+              <Form.Group className="mb-3">
                 <Form.Control
                   type="text"
                   placeholder="Địa Chỉ"
@@ -220,7 +222,7 @@ console.log(bill)
                 />
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Group className="mb-3">
                 <Form.Select
                   defaultValue={display}
                   onChange={this.handleChangeDistricts}
@@ -229,46 +231,46 @@ console.log(bill)
                   <option>---</option>
                   {cities.map((city, index) => {
                     return (
-                      <option key={index} value={city.code}>
+                      <option
+                        key={index}
+                        value={city.code}
+                        namecity={city.name}
+                      >
                         {city.name}
                       </option>
                     );
                   })}
                 </Form.Select>
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Select onChange={this.handleChangeWards}
-                  name="txtPhuong"
-                >
+              <Form.Group className="mb-3">
+                <Form.Select onChange={this.handleChangeWards} name="txtPhuong">
                   <option>---</option>
                   {this.showListDistrict(districts)}
                 </Form.Select>
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Select
-                  name="txtXa"
-                >
+              <Form.Group className="mb-3">
+                <Form.Select name="txtXa" onChange={this.onHandleChange}>
                   <option>---</option>
                   {this.showListWards(wards)}
                 </Form.Select>
               </Form.Group>
-              <FloatingLabel controlId="floatingTextarea2" label="Ghi Chú">
+              <FloatingLabel label="Ghi Chú" name="txtGhiChu">
                 <Form.Control
                   as="textarea"
                   placeholder="Ghi Chú"
                   name="txtGhiChu"
                   style={{ height: "100px" }}
+                  onChange={this.onHandleChange}
                 />
               </FloatingLabel>
               <Button
-            variant="danger"
-            type="submit"
-            size="lg"
-            className="Cart__Checkout-button mt-5"
-           
-          >
-            Đặt Hàng
-          </Button>
+                variant="danger"
+                type="submit"
+                size="lg"
+                className="Cart__Checkout-button mt-5"
+              >
+                Đặt Hàng
+              </Button>
             </Form>
           </Col>
           <Col lg={8}>
@@ -284,17 +286,16 @@ console.log(bill)
               <Col lg={8}>
                 <h5 className="font-weight-normal">Vận chuyển</h5>
                 <Alert variant="danger">
-                Thanh toán khi giao hàng (COD) <i style={{color:'#2194C8',fontSize:'20px'}} class="far fa-money-bill-alt"></i>
+                  Thanh toán khi giao hàng (COD){" "}
+                  <i
+                    style={{ color: "#2194C8", fontSize: "20px" }}
+                    class="far fa-money-bill-alt"
+                  ></i>
                 </Alert>
               </Col>
             </Row>
             <Row>
-              <Col lg={8}>
-           
-             
-       
-              </Col>
-             
+              <Col lg={8}></Col>
             </Row>
           </Col>
         </Row>
