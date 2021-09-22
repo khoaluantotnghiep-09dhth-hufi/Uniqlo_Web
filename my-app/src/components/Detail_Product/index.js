@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import $ from "jquery";
+import { toast } from "react-toastify";
+
 import {
   Container,
   Row,
@@ -239,8 +241,15 @@ class index extends Component {
     return id;
   };
   onAddToCart = (product) => {
-    console.log(product);
-    this.props.onAddToCart(product);
+    var { quantityOfSize } = this.state;
+    if(quantityOfSize>0){
+
+      this.props.onAddToCart(product);
+    }
+    else{
+      toast.error("Sản Phẩm Đã Hết !",{autoClose: 2500})
+
+    }
   };
   render() {
     var { match, products_category, color_by_size } = this.props;
@@ -262,7 +271,7 @@ class index extends Component {
       priceProduct: result.price,
       priceSaleProduct: newPrice,
       sizeProduct: txtSize,
-      colorProduct: isChooseColor,
+      isChooseColor,
       quantityAllProduct: quantityOfSize,
     };
 
