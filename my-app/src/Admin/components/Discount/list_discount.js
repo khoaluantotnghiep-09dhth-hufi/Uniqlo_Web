@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as actions from "./../../../actions/index";
+import Moment from "react-moment";
+import { Image, Alert } from 'react-bootstrap';
 import {
   CBadge,
   CCard,
@@ -10,6 +12,7 @@ import {
   CDataTable,
   CRow,
   CButton,
+  CImage,
 } from "@coreui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTimes, faTools } from "@fortawesome/free-solid-svg-icons";
@@ -28,14 +31,15 @@ const getBadge = (status) => {
       return "primary";
   }
 };
-
+const options = { dateStyle: "short" };
 const fields = [
   "STT",
-  { key: 'id', label: 'Mã' },
-  { key: 'name', label: 'Tên Khuyến Mãi' },
-  { key: 'desciption', label: 'Mô Tả' },
-  { key: 'date_start', label: 'Ngày Bắt Đầu' },
-  { key: 'date_end', label: 'Ngày Kết Thúc' },
+  { key: "id", label: "Mã" },
+  { key: "name", label: "Tên Khuyến Mãi" },
+  { key: "desciption", label: "Phần Trăm Khuyến Mãi" },
+  { key: "image", label: "Hình Ảnh Chương Trình" },
+  { key: "date_start", label: "Ngày Bắt Đầu" },
+  { key: "date_end", label: "Ngày Kết Thúc" },
   "Thao Tác",
 ];
 
@@ -74,10 +78,24 @@ class ListDiscount extends React.Component {
                   fields={fields}
                   itemsPerPage={8}
                   pagination
-
                   scopedSlots={{
+                    date_start: (item) => (
+                      <td>
+                        <Moment format="DD/MM/YYYY">{item.date_start}</Moment>
+                      </td>
+                    ),
+                    date_end: (item) => (
+                      <td>
+                        <Moment format="DD/MM/YYYY">{item.date_end}</Moment>
+                      </td>
+                    ),
+                    image: (item) => (
+                      <td>
+                        <Image src={item.image} thumbnail />
+                      </td>
+                    ),
                     "Thao Tác": (item) => (
-                      <td  >
+                      <td>
                         <Link to={`/admin/system/discount/${item.id}/edit`}>
                           <CButton type="button" className="btn btn-primary">
                             <FontAwesomeIcon
@@ -91,7 +109,9 @@ class ListDiscount extends React.Component {
                         <CButton
                           type="submit"
                           className="btn btn-warning"
-                          onClick={() => { this.onDeletePromotion(item.id) }}
+                          onClick={() => {
+                            this.onDeletePromotion(item.id);
+                          }}
                         >
                           <FontAwesomeIcon
                             icon={faTimes}
@@ -102,12 +122,8 @@ class ListDiscount extends React.Component {
                         </CButton>
                       </td>
                     ),
-                    'STT':
-                      (item, index) => (
-                        <td>
-                          {index + 1}
-                        </td>
-                      ),
+
+                    STT: (item, index) => <td>{index + 1}</td>,
                   }}
                 />
               </CCardBody>
@@ -129,8 +145,8 @@ var mapDispatchToProps = (dispatch, props) => {
       return dispatch(actions.fetchPromotionsResquest());
     },
     onDeleteItemPromotion: (id) => {
-      return dispatch(actions.onDeletePromotionResquest(id))
-    }
+      return dispatch(actions.onDeletePromotionResquest(id));
+    },
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ListDiscount);

@@ -4,6 +4,8 @@ import * as actions from "./../../../actions/index";
 import { Alert } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import Moment from "react-moment";
+
 import {
   CButton,
   CCard,
@@ -93,6 +95,19 @@ class OrderUnConfirmedOrder extends React.Component {
                           />
                           Xóa
                         </CButton>
+                      </td>
+                    ),
+                    order_date: (item) => (
+                      <td>
+                        <Moment format="DD/MM/YYYY">{item.order_date}</Moment>
+                      </td>
+                    ),
+
+                    delivery_date: (item) => (
+                      <td>
+                        <Moment format="DD/MM/YYYY">
+                          {item.delivery_date}
+                        </Moment>
                       </td>
                     ),
                   }}

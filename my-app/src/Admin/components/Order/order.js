@@ -1,7 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as actions from "./../../../actions/index";
-import {Alert} from 'react-bootstrap'
+import { Alert } from "react-bootstrap";
+import Moment from "react-moment";
+
 import {
   CCard,
   CCardBody,
@@ -10,7 +12,6 @@ import {
   CDataTable,
   CRow,
   CButton,
-  
 } from "@coreui/react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,20 +23,19 @@ const formatter = new Intl.NumberFormat("vi-VN", {
   currency: "VND",
   minimumFractionDigits: 0,
 });
-const options = { dateStyle: 'short' };
+const options = { dateStyle: "short" };
 const fields = [
-  
-  { key: "index", label:"STT" },
-        { key: "order_date", label: "Ngày Đặt Hàng" },
-        { key: "delivery_date", label: "Ngày Giao Hàng" },
-        { key: "name_customer", label: "Tên Khách Hàng" },
-        { key: "address", label: "Địa Chỉ" },
-        { key: "phone", label: "SDT" },
-        { key: "email", label: "Email" },
-        { key: "total_quantity", label: "Tổng Số Lượng" },
-        { key: "total", label: "Tổng Tiền" },
-        { key: "note", label: "Ghi Chú" },
-        { key: "status", label: "Tình Trạng" },
+  { key: "index", label: "STT" },
+  { key: "order_date", label: "Ngày Đặt Hàng" },
+  { key: "delivery_date", label: "Ngày Giao Hàng" },
+  { key: "name_customer", label: "Tên Khách Hàng" },
+  { key: "address", label: "Địa Chỉ" },
+  { key: "phone", label: "SDT" },
+  { key: "email", label: "Email" },
+  { key: "total_quantity", label: "Tổng Số Lượng" },
+  { key: "total", label: "Tổng Tiền" },
+  { key: "note", label: "Ghi Chú" },
+  { key: "status", label: "Tình Trạng" },
   "Hành Động",
 ];
 
@@ -46,14 +46,16 @@ class ListOrder extends React.Component {
   onDeleteBill = (item) => {
     this.props.onDeleteItemBill(item);
   };
-    getBadge=(status) => {
-      switch (status) {
-          case 1: return 'success'
-          case 0: return 'danger'
-          default: return 'primary'
-
-        }
+  getBadge = (status) => {
+    switch (status) {
+      case 1:
+        return "success";
+      case 0:
+        return "danger";
+      default:
+        return "primary";
     }
+  };
   render() {
     var { bill } = this.props;
 
@@ -77,7 +79,6 @@ class ListOrder extends React.Component {
                   fields={fields}
                   itemsPerPage={8}
                   pagination
-                
                   scopedSlots={{
                     "Hành Động": (item) => (
                       <td>
@@ -108,42 +109,31 @@ class ListOrder extends React.Component {
                         </CButton>
                       </td>
                     ),
-                    "status": (item) => (
+                    status: (item) => (
                       <td>
-                        <Alert  variant={this.getBadge(item.status)}>
-                       
-                        {  item.status===0?'Chưa Xác Nhận':'Đã Xác Nhận'}
+                        <Alert variant={this.getBadge(item.status)}>
+                          {item.status === 0 ? "Chưa Xác Nhận" : "Đã Xác Nhận"}
                         </Alert>
+                      </td>
+                    ),
 
-                       
+                    total: (item) => <td>{formatter.format(item.total)}</td>,
+
+                    order_date: (item) => (
+                      <td>
+                        <Moment format="DD/MM/YYYY">{item.order_date}</Moment>
                       </td>
                     ),
-                    
-                    "total": (item) => (
+
+                    delivery_date: (item) => (
                       <td>
-                       {formatter.format(item.total)}
-                       
-                      </td>
-                    ),
-                    
-                    "order_date": (item) => (
-                      <td>
-                       {item.order_date.toLocaleString("en-NZ",options)}
-                       
-                      </td>
-                    ),
-                    
-                    "delivery_date": (item) => (
-                      <td>
-                       {item.delivery_date.toLocaleString("en-NZ",options)}
-                       
+                        <Moment format="DD/MM/YYYY">
+                          {item.delivery_date}
+                        </Moment>
                       </td>
                     ),
                   }}
-                >
-
-                    
-                </CDataTable>
+                ></CDataTable>
               </CCardBody>
             </CCard>
           </CCol>

@@ -1,6 +1,8 @@
 import React from "react";
 import uniqid from "uniqid";
 import { connect } from "react-redux";
+import { toast } from "react-toastify";
+
 import {
   CForm,
   CLabel,
@@ -11,20 +13,25 @@ import {
   CFormGroup,
   CButton,
 } from "@coreui/react";
+import Lightbox from "react-image-lightbox";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faUpload } from "@fortawesome/free-solid-svg-icons";
 import * as actions from "./../../../actions/index";
 import { Link } from "react-router-dom";
-import {faArrowLeft} from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 class addDiscount extends React.Component {
   constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       idItem: "",
       txtNameDiscount: "",
       txtNameMota: "",
       dateStart: "",
       dateEnd: "",
+      txtImage: "",
+      ImgPrivew: "",
+      isOpen: false,
     };
   }
   componentDidMount() {
@@ -59,43 +66,72 @@ class addDiscount extends React.Component {
       [name]: value,
     });
   };
+  onChangeImage = (e) => {
+    let data = e.target.files;
+    let file = data[0];
+
+    if (file) {
+      let objectURL = URL.createObjectURL(file);
+      this.setState({
+        ImgPrivew: objectURL,
+        txtImage: objectURL,
+      });
+    }
+  };
   onSubmitForm = (event) => {
     var { match } = this.props;
 
     event.preventDefault();
     var { history } = this.props;
-    var { idItem, txtNameDiscount, txtNameMota, dateStart, dateEnd } =
+    var { idItem, txtNameDiscount, txtNameMota, dateStart, dateEnd, txtImage } =
       this.state;
-   
+    let dateNow = new Date().toISOString().slice(0, 10);
     var promotion = {
       id: uniqid("promotion-"),
       name: txtNameDiscount,
       desciption: txtNameMota,
       date_start: dateStart,
       date_end: dateEnd,
+      image: txtImage,
     };
+
     var promotionUpdate = {
       id: match.params.id_promotion,
       name: txtNameDiscount,
       desciption: txtNameMota,
       date_start: dateStart,
       date_end: dateEnd,
+      image: txtImage,
     };
+    
     if (idItem) {
-      this.props.onUpdateItemPromotion(promotionUpdate);
-      history.goBack();
+     
+     
+      if (dateEnd >= dateStart && dateStart >= dateNow) {
+        this.props.onUpdateItemPromotion(promotionUpdate);
+
+        history.goBack();
+      } else {
+        toast.error("Ngày Bắt Đầu Phải Nhỏ Hơn Ngày Kết Thúc!");
+      }
     } else {
-      this.props.onAddItemPromotion(promotion);
-      history.goBack();
+      
+      if (dateEnd >= dateStart && dateStart >= dateNow) {
+        this.props.onAddItemPromotion(promotion);
+        history.goBack();
+      } else {
+        toast.error("Ngày Bắt Đầu Phải Nhỏ Hơn Ngày Kết Thúc!");
+      }
     }
   };
   render() {
     return (
       <CContainer fluid>
         <CRow>
-        <Link to="/admin/system/discount">
+          <Link to="/admin/system/discount">
             <CButton type="button" className="btn btn-primary" size="sm">
-              <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg"/>Trở về
+              <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />
+              Trở về
             </CButton>
           </Link>
           <CCol sm="12">
@@ -105,6 +141,7 @@ class addDiscount extends React.Component {
                   Tên Khuyến Mãi
                 </CLabel>
                 <CInput
+                  required
                   type="text"
                   name="txtNameDiscount"
                   placeholder="Tên Khuyến Mãi..."
@@ -112,23 +149,14 @@ class addDiscount extends React.Component {
                   onChange={this.onChange}
                 />
               </CFormGroup>
-              {/* <CFormGroup>
-              <CLabel htmlFor="exampleFormControlInput1">Mã Khuyến Mãi</CLabel>
-              <CInput
-                type="text"
-                id="txtIDDiscount"
-                name="txtIDDiscount"
-                placeholder="Mã Khuyến Mãi..."
-                autoComplete="name"
-              />
-             
-            </CFormGroup> */}
+
               <CFormGroup>
                 <CLabel htmlFor="exampleFormControlTextarea1">
-                  Nội Dung Khuyến Mãi
+                  Phần Trăm Khuyến Mãi
                 </CLabel>
 
                 <textarea
+                  required
                   className="form-control"
                   name="txtNameMota"
                   placeholder="Nội Dung..."
@@ -137,8 +165,51 @@ class addDiscount extends React.Component {
                 ></textarea>
               </CFormGroup>
               <CFormGroup>
+                <CCol sm="8">
+                  <CLabel
+                    className="border border-dark"
+                    style={{
+                      backgroundColor: "#ffe6e6",
+                      padding: "10px",
+                      marginTop: "100px",
+                      cursor: "pointer",
+                    }}
+                    htmlFor="txtImage"
+                  >
+                    <FontAwesomeIcon icon={faUpload} className="mr-2 fa-3x" />
+                    Tải Ảnh
+                  </CLabel>
+                  <CInput
+                    type="file"
+                    id="txtImage"
+                    name="txtImage"
+                    hidden
+                    onChange={(e) => {
+                      this.onChangeImage(e);
+                    }}
+                    required
+                  />
+                </CCol>
+                <CCol sm="4">
+                  <div
+                    style={{
+                      backgroundImage: `url(${this.state.ImgPrivew})`,
+                      height: "200px",
+                      width: "300px",
+                      align: "center",
+                      background: "center center no-repeat",
+                      backgroundSize: "contain",
+                      cursor: "pointer",
+                      margin: "30px",
+                    }}
+                    onClick={() => this.openPreviewIMG()}
+                  ></div>
+                </CCol>
+              </CFormGroup>
+              <CFormGroup>
                 <CLabel htmlFor="nf-password">Ngày Bắt Đầu</CLabel>
                 <CInput
+                  required
                   type="date"
                   name="dateStart"
                   autoComplete="current-password"
@@ -148,6 +219,7 @@ class addDiscount extends React.Component {
               <CFormGroup>
                 <CLabel htmlFor="nf-password">Ngày Kết Thúc</CLabel>
                 <CInput
+                  required
                   type="date"
                   name="dateEnd"
                   autoComplete="current-password"
@@ -158,7 +230,7 @@ class addDiscount extends React.Component {
                 <CButton color="danger" className="m-2" type="submit">
                   {" "}
                   <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />
-                  Lưu 
+                  Lưu
                 </CButton>
               </CFormGroup>
             </CForm>
