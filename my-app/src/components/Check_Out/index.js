@@ -171,7 +171,7 @@ class index extends Component {
     var bill_info = sessionCart.map((item) => ({
       id: uniqid("bill-customer-info-"),
       id_bill: bill.id,
-      id_prducr_info: item.product.id_product_info,
+      id_product_info: item.product.id_product_info,
       into_money: item.product.priceSaleProduct
         ? item.product.priceSaleProduct
         : item.product.priceProduct,
@@ -181,7 +181,8 @@ class index extends Component {
     if (bill && bill_info) {
       console.log(bill_info)
       this.props.onCreateBill(bill);
-      this.props.onCreateBillInfo(bill_info);
+    this.props.onCreateBillInfo(bill_info);
+      
       this.props.onResetCart()
     }
   };
