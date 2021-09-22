@@ -97,6 +97,12 @@ class ListNews extends React.Component {
                                                     <Image src={item.image} thumbnail />
                                                 </td>
                                             ),
+                                            "image_banner":
+                                            (item, index) => (
+                                                <td>
+                                                    <Image src={item.image_banner} thumbnail />
+                                                </td>
+                                            ),
                                         "desciption":
                                             (item, index) => (
                                                 <td>

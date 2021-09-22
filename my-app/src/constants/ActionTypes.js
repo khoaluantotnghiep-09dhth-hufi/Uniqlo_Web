@@ -71,7 +71,9 @@ export const UPDATE_STAFF = 'UPDATE_STAFF';
 export const DELETE_STAFF = 'DELETE_STAFF';
 export const EDIT_STAFF = 'EDIT_STAFF ';
 //product info 
-export const ADD_PRODCUTINFO = 'ADD_PRODCUTINFO';
+export const ADD_PRODUCTINFO = 'ADD_PRODUCTINFO';
+export const FETCH_PRODCUTINFO = 'FETCH_PRODCUTINFO';
+export const DELETE_PRODUCTINFO = 'DELETE_PRODUCTINFO';
 //Get color
 export const FETCH_COLOR = 'FETCH_COLOR';
 export const ADD_COLOR = 'ADD_COLOR';

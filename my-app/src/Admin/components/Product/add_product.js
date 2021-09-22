@@ -129,7 +129,7 @@ class addProduct extends React.Component {
         var { idItem, txtName, txtPrice, txtDescription, txtImage, txtQuantity, id_promotion, id_category, id_size, id_color } = this.state;
         var product = {
             id: uniqid("product-"),
-            nameProduct: txtName,
+            name: txtName,
             price: txtPrice,
             description: txtDescription,
             image: txtImage,

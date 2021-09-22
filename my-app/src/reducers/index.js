@@ -17,7 +17,7 @@ import category from "./Categories/category";
 import promotion from "./Promotions/promotion";
 import order from "./Order/order";
 import bills_customer from "./Bills_Customer/bills_customer";
-import order_info from "./OrderInfo/orderInfo";
+import orderInfo from "./OrderInfo/orderInfo";
 import import_product from "./ImportProduct/import_product";
 const myReducer = combineReducers({
   cart,
@@ -36,7 +36,7 @@ const myReducer = combineReducers({
   customer,
   order,
   products_category,
-  order_info,
+  orderInfo,
   color_by_size,
   productInfo,
   import_product,

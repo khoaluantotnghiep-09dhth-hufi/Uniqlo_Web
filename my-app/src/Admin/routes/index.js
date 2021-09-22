@@ -15,6 +15,7 @@ const AddAccountAdmin = React.lazy(() => import('../components/Account_Admin/add
 
 const ListProducts = React.lazy(() => import('../components/Product/list_product'));
 const AddProduct = React.lazy(() => import('../components/Product/add_product'));
+const AddProductInfo = React.lazy(() => import('../components/Product/add_prodcut_info'));
 
 const ListStaffs = React.lazy(() => import('../components/Staff/list_staff'));
 const AddStaff = React.lazy(() => import('../components/Staff/add_staff'));
@@ -24,7 +25,7 @@ const AddCustomer = React.lazy(() => import('../components/Customers/add_custome
 
 const ListOrderProduct = React.lazy(() => import('../components/OrderProduct/lis_order_product'));
 const AddOrderProduct = React.lazy(() => import('../components/OrderProduct/add_order_product'));
-const OrderProductInfo = React.lazy(() => import('../components/OrderProduct/order_info'));
+const OrderProductInfo = React.lazy(() => import('../components/OrderProduct/add_order_product_info'));
 
 const ListImportProduct = React.lazy(() => import('../components/ImportProduct/list_import_product'));
 const AddImportProduct = React.lazy(() => import('../components/ImportProduct/add_import_product'));
@@ -80,6 +81,7 @@ const routes = [
 
     { path: '/admin/manage/products', exact: true, name: 'Danh Sách Sản Phẩm', component: ListProducts },
     { path: '/admin/manage/product/add', exact: true, name: 'Thêm Sản Phẩm Mới', component: AddProduct },
+    { path: '/admin/manage/product-info/add/:id_product', exact: true, name: 'Thêm Chi Tiết Sản Phẩm Mới', component: AddProductInfo },
 
     { path: '/admin/manage/staffs', exact: true, name: 'Danh Sách Nhân Viên', component: ListStaffs },
     { path: '/admin/manage/staff/add', exact: true, name: 'Thêm Nhân Viên Mới', component: AddStaff },
@@ -91,7 +93,7 @@ const routes = [
 
     { path: '/admin/manage/order-product', exact: true, name: 'Danh Sách Đặt Hàng', component: ListOrderProduct },
     { path: '/admin/manage/order-product/add', exact: true, name: 'Lập Đơn Đặt Hàng', component: AddOrderProduct },
-    { path: '/admin/manage/order-info/:id', exact: true, name: 'Chi Tiết Đơn Đặt Hàng', component: OrderProductInfo },
+    { path: '/admin/manage/order-info/:id_order', exact: true, name: 'Chi Tiết Đơn Đặt Hàng', component: OrderProductInfo },
 
     { path: '/admin/manage/import-product', exact: true, name: 'Danh Sách Nhập Hàng', component: ListImportProduct },
     { path: '/admin/manage/import-product/add', exact: true, name: 'Lập Đơn Nhập Hàng', component: AddImportProduct },
