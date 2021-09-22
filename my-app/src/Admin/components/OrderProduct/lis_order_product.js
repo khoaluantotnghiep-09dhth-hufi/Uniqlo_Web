@@ -49,7 +49,7 @@ class ListOrderProducts extends React.Component {
         var { order } = this.props;
 
         var dataOrder = order.map((item, index) => {
-            return { ...item, index };
+            return item;
         });
         return (
             <>

@@ -81,17 +81,16 @@ class ListProducts extends React.Component {
                                         'Thao Tác':
                                             (item) => (
                                                 <td>
-                                                    <Link to="/admin/manage/product/../edit">
+                                                    {/* <Link to="/admin/manage/product/../edit">
                                                         <CButton type="button" className="btn btn-primary">
                                                             <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
                                                         </CButton>
-                                                    </Link>
-                                                    <Link to="/admin/manage/product/../delete">
-                                                        <CButton type="button" className="btn btn-warning">
-                                                            <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
+                                                    </Link> */}
+                                                    <Link to={`/admin/manage/product-info/add/${item.id}`}>
+                                                        <CButton type="button" className="btn btn-primary">
+                                                            <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />Bổ Sung
                                                         </CButton>
                                                     </Link>
-
                                                 </td>
 
                                             ),

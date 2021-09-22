@@ -23,13 +23,13 @@ import {
 class addOrderProduct extends React.Component {
   constructor(props) {
     super(props);
-    this.setState({
+    this.state = {
       idItem: "",
       txtDate: "",
       txtHouse: "",
       txtStatus: "",
 
-    });
+    }
   }
   componentDidMount() {
     var { match } = this.props;
@@ -54,14 +54,17 @@ class addOrderProduct extends React.Component {
       }
     }
   }
-  onChange = (event) => {
-    var target = event.target;
-    var name = target.name;
-    var value = target.value;
+  onChange = (e, id) => {
+    let coppyState = { ...this.state };
+    coppyState[id] = e.target.value;
     this.setState({
-      [name]: value,
-    });
-  };
+      ...coppyState
+    }, () => {
+      console.log(this.state);
+    })
+
+
+  }
   onSubmitForm = (event) => {
     var { match } = this.props;
 
@@ -71,15 +74,15 @@ class addOrderProduct extends React.Component {
 
     var order = {
       id: uniqid("order-"),
-      date: txtDate,
-      house: txtHouse,
+      date_order: txtDate,
+      name_warehouse: txtHouse,
       status: txtStatus,
 
     };
     var orderUpdate = {
-      id: idItem,
-      date: txtDate,
-      house: txtHouse,
+      id: match.params.id_order,
+      date_order: txtDate,
+      name_warehouse: txtHouse,
       status: txtStatus,
     };
 
@@ -88,7 +91,6 @@ class addOrderProduct extends React.Component {
       history.goBack();
     } else {
       this.props.onAddItemOrder(order);
-      alert("Thêm thành công !");
       history.goBack();
     }
   };
@@ -104,14 +106,16 @@ class addOrderProduct extends React.Component {
   };
 
   render() {
+    let { txtDate, txtHouse, txtStatus } = this.state;
+    var { match } = this.props;
     return (
       <CContainer fluid>
         <CRow>
-        <Link to="/admin/manage/order-product">
-                  <CButton type="button" className="btn btn-primary" size="sm">
-                    <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg"/>Trở về
-                  </CButton>
-                </Link>
+          <Link to="/admin/manage/order-product">
+            <CButton type="button" className="btn btn-primary" size="sm">
+              <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />Trở về
+            </CButton>
+          </Link>
           <CCol sm="12">
             <CForm action="" method="post" onSubmit={this.onSubmitForm}>
               <CFormGroup>
@@ -120,7 +124,8 @@ class addOrderProduct extends React.Component {
                   type="date"
                   id="txtDate"
                   name="txtDate"
-                 onChange={this.onChange}
+                  value={txtDate}
+                  onChange={(e) => { this.onChange(e, 'txtDate') }}
                 />
 
               </CFormGroup>
@@ -131,7 +136,8 @@ class addOrderProduct extends React.Component {
                   id="txtHouse"
                   name="txtHouse"
                   placeholder="Kho..."
-                  onChange={this.onChange}
+                  value={txtHouse}
+                  onChange={(e) => { this.onChange(e, 'txtHouse') }}
                 />
               </CFormGroup>
               <CFormGroup>
@@ -141,16 +147,17 @@ class addOrderProduct extends React.Component {
                   id="txtStatus"
                   name="txtStatus"
                   placeholder="Trạng thái..."
-                  onChange={this.onChange}
+                  value={txtStatus}
+                  onChange={(e) => { this.onChange(e, 'txtStatus') }}
                 />
                 <CLabel htmlFor="nf-password">0 = Chưa Giao</CLabel>
               </CFormGroup>
               <CFormGroup >
-                <CButton 
-                color='danger' 
-                className="m-2" 
-                onClick={this.onSubmitForm}
-                >  <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" /> Thêm</CButton>
+                  <CButton
+                    color='danger'
+                    className="m-2"
+                    onClick={this.onSubmitForm}
+                  >  <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" /> Thêm</CButton>
               </CFormGroup>
             </CForm>
           </CCol>
