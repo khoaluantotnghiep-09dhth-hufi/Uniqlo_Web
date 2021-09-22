@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { toast } from "react-toastify";
+
 import { Container, Row, Col, Image, Form } from "react-bootstrap";
 import "./Cart_Item.scss";
 
@@ -12,12 +14,12 @@ class index extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange = (product, quantity, quantityOfSize) => (event) => {
-  
+  handleChange = (product, quantity, quantityAllProduct) => (event) => {
     var value = parseInt(event.target.value);
     // parseInt(event.target.value).replace(/\D/g, "");
-    if (value> quantityOfSize || value< 1) {
-      alert("Không Đủ Số Lượng Để Mua");
+    if (value > quantityAllProduct || value < 1) {
+      toast.error("Không Đủ Số Lượng Để Mua !", { autoClose: 2500 });
+
       this.setState({
         quantity: 1,
       });
@@ -76,7 +78,7 @@ class index extends Component {
                       : item.product.priceProduct
                   )}
                 </h6>
-                <h6>Số Lượng Tồn: {item.product.quantityOfSize}</h6>
+                <h6>Số Lượng Tồn: {item.product.quantityAllProduct}</h6>
               </div>
             </Col>
 
@@ -90,7 +92,7 @@ class index extends Component {
                     onChange={this.handleChange(
                       item.product,
                       item.quantity,
-                      item.product.quantityOfSize
+                      item.product.quantityAllProduct
                     )}
                     value={this.state.quantity}
                   />

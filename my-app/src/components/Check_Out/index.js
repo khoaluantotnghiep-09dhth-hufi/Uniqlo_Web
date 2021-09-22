@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import {
   Container,
   Row,
@@ -154,7 +155,7 @@ class index extends Component {
     let dateNow = new Date().toISOString().slice(0, 10);
 
     var bill = {
-      id: uniqid("bill-"),
+      id: uniqid("bill-customer-"),
       order_date: dateNow,
       total: this.showTotalAmount(sessionCart),
       status: 0,
@@ -167,7 +168,22 @@ class index extends Component {
       note: txtGhiChu,
     };
 
-    console.log(bill);
+    var bill_info = sessionCart.map((item) => ({
+      id: uniqid("bill-customer-info-"),
+      id_bill: bill.id,
+      id_prducr_info: item.product.id_product_info,
+      into_money: item.product.priceSaleProduct
+        ? item.product.priceSaleProduct
+        : item.product.priceProduct,
+      quantity: item.quantity,
+    }));
+
+    if (bill && bill_info) {
+      console.log(bill_info)
+      this.props.onCreateBill(bill);
+      this.props.onCreateBillInfo(bill_info);
+      this.props.onResetCart()
+    }
   };
   onHandleChange = (event) => {
     var target = event.target;
@@ -228,7 +244,7 @@ class index extends Component {
                   onChange={this.handleChangeDistricts}
                   name="txtCity"
                 >
-                  <option>---</option>
+                  <option>Tỉnh, Thành Phố</option>
                   {cities.map((city, index) => {
                     return (
                       <option
@@ -244,13 +260,13 @@ class index extends Component {
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Select onChange={this.handleChangeWards} name="txtPhuong">
-                  <option>---</option>
+                  <option>Quận, Huyện</option>
                   {this.showListDistrict(districts)}
                 </Form.Select>
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Select name="txtXa" onChange={this.onHandleChange}>
-                  <option>---</option>
+                  <option>Phường, Xã</option>
                   {this.showListWards(wards)}
                 </Form.Select>
               </Form.Group>
@@ -312,6 +328,12 @@ var mapDispatchToProps = (dispatch, props) => {
   return {
     onResetCart: (product) => {
       dispatch(actions.onRestCart(product));
+    },
+    onCreateBill: (bills_customer) => {
+      dispatch(actions.onAddBillCustomerResquest(bills_customer));
+    },
+    onCreateBillInfo: (bills_info_customer) => {
+      dispatch(actions.onAddBillInfoCustomerResquest(bills_info_customer));
     },
   };
 };

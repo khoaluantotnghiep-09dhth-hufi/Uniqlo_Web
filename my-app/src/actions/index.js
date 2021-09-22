@@ -23,7 +23,7 @@ export const deleteItem = (id) => {
 };
 //Thêm sản phẩm vào giỏ hàng
 export const addToCart = (product, quantity) => {
-  toast.success("Thêm thành công !");
+  toast.success("Thêm thành công !",{autoClose: 2500});
   return {
     type: types.ADD_TO_CART,
     product,
@@ -1100,8 +1100,8 @@ export const onEditImportProductResquest = (id) => {
 export const onAddBillCustomerResquest = (bills_customer) => {
   return (dispatch) => {
     return callApi("bill-customer", "POST", bills_customer).then((response) => {
-      toast.success("Thêm thành công !");
-      dispatch(onAddObjects(response.data));
+     
+    
     });
   };
 };
@@ -1110,9 +1110,10 @@ export const onAddBillInfoCustomerResquest = (bills_info_customer) => {
   return (dispatch) => {
     return callApi("bill-info-customer", "POST", bills_info_customer).then(
       (response) => {
-        toast.success("Thêm thành công !");
-        dispatch(onAddObjects(response.data));
+        toast.success("Cảm Ơn Khách Hàng Đã Mua Hàng Của Chúng Tôi !");
+     
       }
-    );
+    )
+    
   };
 };

@@ -15,7 +15,7 @@ var findIndex = (cart, product) => {
 var findProductCart = (cart, product) => {
   var index = -1;
   for (var i = 0; i < cart.length; i++) {
-    if (cart[i].product.id === product.id && cart[i].product.quantityOfSize === product.quantityOfSize && cart[i].product.txtSize === product.txtSize ) {
+    if (cart[i].product.id === product.id && cart[i].product.quantityAllProduct === product.quantityAllProduct && cart[i].product.sizeProduct === product.sizeProduct && cart[i].product.isChooseColor === product.isChooseColor ) {
       index = i;
       break;
     }
