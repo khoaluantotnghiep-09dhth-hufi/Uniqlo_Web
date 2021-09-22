@@ -11,6 +11,7 @@ import {
   FormControl
 } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import uniqid from "uniqid";
 
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
@@ -20,6 +21,14 @@ class index extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      txtEmail:'', 
+      txtHoTen:'',
+      txtSDT:'', 
+      txtDiaChi:'',
+      txtCity:'',
+      txtPhuong:'',
+      txtXa:'',
+      txtGhiChu:'',
       display: "---",
       cities: [],
       districts: [],
@@ -109,6 +118,28 @@ class index extends Component {
 
     return result;
   };
+  onHandleSubmitForm=() => {
+    var{
+      txtEmail, 
+      txtHoTen,
+      txtSDT, 
+      txtDiaChi,
+      txtCity,
+      txtPhuong,
+      txtXa,
+      txtGhiChu
+    }= this.props;
+    let dateNow= new Date().toISOString().slice(0, 10)
+    
+    var bill={
+      id: uniqid("bill-"),
+      order_date:dateNow,
+      total:'',
+      status:0,
+      id_customer:'',
+
+    }
+  }
   render() {
     var { cities, display, districts, wards } = this.state;
 
@@ -117,7 +148,7 @@ class index extends Component {
         <Row>
           <Col lg={4}>
             <h5 className="font-weight-normal">Thông Tin Nhận Hàng</h5>
-            <Form onSubmit={this.onHandleSubmitSignUp}>
+            <Form onSubmit={this.onHandleSubmitForm}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control
                   type="text"
@@ -158,6 +189,7 @@ class index extends Component {
                 <Form.Select
                   defaultValue={display}
                   onChange={this.handleChangeDistricts}
+                  name="txtCity"
                 >
                   <option>---</option>
                   {cities.map((city, index) => {
@@ -170,13 +202,17 @@ class index extends Component {
                 </Form.Select>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Select onChange={this.handleChangeWards}>
+                <Form.Select onChange={this.handleChangeWards}
+                  name="txtPhuong"
+                >
                   <option>---</option>
                   {this.showListDistrict(districts)}
                 </Form.Select>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Select>
+                <Form.Select
+                  name="txtXa"
+                >
                   <option>---</option>
                   {this.showListWards(wards)}
                 </Form.Select>
@@ -185,6 +221,7 @@ class index extends Component {
                 <Form.Control
                   as="textarea"
                   placeholder="Ghi Chú"
+                  name="txtGhiChu"
                   style={{ height: "100px" }}
                 />
               </FloatingLabel>

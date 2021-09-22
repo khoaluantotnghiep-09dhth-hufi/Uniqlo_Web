@@ -29,7 +29,7 @@ class index extends Component {
   }
   render() {
     var {category, id_sectors,name_object,name_sectors} = this.props;
-    console.log(category,id_sectors,name_object);
+   
     return (
       <React.Fragment>
         <ul class="dropdown-menu dropdown-submenu">

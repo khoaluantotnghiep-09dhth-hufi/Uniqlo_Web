@@ -1,6 +1,6 @@
 import * as types from "./../constants/ActionTypes";
 import callApi from "./../Admin/utils/Callapi";
-import {  toast } from 'react-toastify';
+import { toast } from "react-toastify";
 //Giỏ Hàng
 export const listAll = () => {
   return {
@@ -23,6 +23,7 @@ export const deleteItem = (id) => {
 };
 //Thêm sản phẩm vào giỏ hàng
 export const addToCart = (product, quantity) => {
+  toast.success("Thêm thành công !");
   return {
     type: types.ADD_TO_CART,
     product,
@@ -58,24 +59,19 @@ export const fetchUser = (user) => {
   return {
     type: types.FETCH_USER,
     user,
-
   };
 };
 export const onDeleteUser = (id) => {
   return {
     type: types.DELETE_USER,
     id,
-
   };
 };
 export const fetchUserRequest = () => {
   return (dispatch) => {
     return callApi("customers", "GET", null).then((response) => {
       dispatch(fetchUser(response.data));
-
     });
-
-
   };
 };
 export const onDeleteUserResquest = (id) => {
@@ -85,7 +81,7 @@ export const onDeleteUserResquest = (id) => {
       dispatch(onDeleteUserResquest(id));
     });
   };
-}
+};
 // Lấy tất cả danh sách sản phẩm
 export const fetchProduct = (products_category) => {
   return {
@@ -119,9 +115,6 @@ export const onDeleteProductResquest = (id) => {
   };
 };
 //Thêm sản phẩm
-
-
-
 
 //Lấy tất cả danh sách Sector
 export const fetchSector = (sector) => {
@@ -209,9 +202,6 @@ export const onAddPromotion = (promotion) => {
   };
 };
 
-
-
-
 export const onAddPromotionResquest = (promotion) => {
   return (dispatch) => {
     return callApi("promotions", "POST", promotion).then((response) => {
@@ -237,7 +227,6 @@ export const onUpdatePromotionResquest = (promotion) => {
     );
   };
 };
-
 
 //Sửa Promotion
 export const onGetPromotion = (promotion) => {
@@ -311,12 +300,10 @@ export const onUpdateStaffs = (staff) => {
 };
 export const onUpdateStaffsResquest = (staff) => {
   return (dispatch) => {
-    return callApi(`staffs/${staff.id}`, "PUT", staff).then(
-      (response) => {
-        toast.success("Sửa thành công !");
-        dispatch(onUpdateStaffs(response.data));
-      }
-    );
+    return callApi(`staffs/${staff.id}`, "PUT", staff).then((response) => {
+      toast.success("Sửa thành công !");
+      dispatch(onUpdateStaffs(response.data));
+    });
   };
 };
 
@@ -392,12 +379,10 @@ export const onUpdateColor = (color) => {
 };
 export const onUpdateColorResquest = (color) => {
   return (dispatch) => {
-    return callApi(`color/${color.id}`, "PUT", color).then(
-      (response) => {
-        toast.success("Sửa thành công !");
-        dispatch(onUpdateColor(response.data));
-      }
-    );
+    return callApi(`color/${color.id}`, "PUT", color).then((response) => {
+      toast.success("Sửa thành công !");
+      dispatch(onUpdateColor(response.data));
+    });
   };
 };
 
@@ -473,12 +458,10 @@ export const onUpdateSize = (size) => {
 };
 export const onUpdateSizeResquest = (size) => {
   return (dispatch) => {
-    return callApi(`size/${size.id}`, "PUT", size).then(
-      (response) => {
-        toast.success("Sửa thành công !");
-        dispatch(onUpdateSize(response.data));
-      }
-    );
+    return callApi(`size/${size.id}`, "PUT", size).then((response) => {
+      toast.success("Sửa thành công !");
+      dispatch(onUpdateSize(response.data));
+    });
   };
 };
 
@@ -496,7 +479,6 @@ export const onEditSizeResquest = (id) => {
     });
   };
 };
-
 
 //Lấy tất cả danh sách  Bill
 export const fetchBills = (bill) => {
@@ -540,12 +522,10 @@ export const onUpdateBill = (bill) => {
 };
 export const onUpdateBillResquest = (bill) => {
   return (dispatch) => {
-    return callApi(`bills/${bill.id}`, "PUT", bill).then(
-      (response) => {
-        toast.success("Sửa thành công !");
-        dispatch(onUpdateBill(response.data));
-      }
-    );
+    return callApi(`bills/${bill.id}`, "PUT", bill).then((response) => {
+      toast.success("Sửa thành công !");
+      dispatch(onUpdateBill(response.data));
+    });
   };
 };
 
@@ -564,7 +544,7 @@ export const onEditBillResquest = (id) => {
   };
 };
 
-//news 
+//news
 export const fetchNews = (news) => {
   return {
     type: types.FETCH_NEWS,
@@ -604,12 +584,10 @@ export const onUpdateNews = (news) => {
 };
 export const onUpdateNewsResquest = (news) => {
   return (dispatch) => {
-    return callApi(`news/${news.id}`, "PUT", news).then(
-      (response) => {
-        toast.success("Sửa thành công !");
-        dispatch(onUpdateNews(response.data));
-      }
-    );
+    return callApi(`news/${news.id}`, "PUT", news).then((response) => {
+      toast.success("Sửa thành công !");
+      dispatch(onUpdateNews(response.data));
+    });
   };
 };
 export const onDeleteNews = (id) => {
@@ -745,7 +723,6 @@ export const onUpdateCustomers = (customer) => {
 export const onUpdateCustomersResquest = (customer) => {
   return (dispatch) => {
     return callApi(`customers/${customer.id}`, "PUT", customer).then(
-
       (response) => {
         toast.success("Sửa thành công !");
         dispatch(onUpdateCustomers(response.data));
@@ -785,7 +762,6 @@ export const onDeleteCustomerResquest = (id) => {
     });
   };
 };
-
 
 //orders
 export const fetchOrder = (order) => {
@@ -844,12 +820,10 @@ export const onUpdateOrder = (order) => {
 };
 export const onUpdateOrderResquest = (order) => {
   return (dispatch) => {
-    return callApi(`orders/${order.id}`, "PUT", order).then(
-      (response) => {
-        toast.success("Sửa thành công !");
-        dispatch(onUpdateOrder(response.data));
-      }
-    );
+    return callApi(`orders/${order.id}`, "PUT", order).then((response) => {
+      toast.success("Sửa thành công !");
+      dispatch(onUpdateOrder(response.data));
+    });
   };
 };
 
@@ -883,8 +857,7 @@ export const fetchOrderInfoResquest = (id) => {
     });
   };
 };
-//sector 
-
+//sector
 
 export const onAddSector = (sector) => {
   return {
@@ -909,12 +882,10 @@ export const onUpdateSector = (sector) => {
 };
 export const onUpdateSectorResquest = (sector) => {
   return (dispatch) => {
-    return callApi(`sectors/${sector.id}`, "PUT", sector).then(
-      (response) => {
-        toast.success("Sửa thành công !");
-        dispatch(onUpdateSector(response.data));
-      }
-    );
+    return callApi(`sectors/${sector.id}`, "PUT", sector).then((response) => {
+      toast.success("Sửa thành công !");
+      dispatch(onUpdateSector(response.data));
+    });
   };
 };
 export const onDeleteSector = (id) => {
@@ -945,9 +916,6 @@ export const onEditSectorResquest = (id) => {
     });
   };
 };
-
-
-
 
 //Lấy tất cả danh sách Object
 
@@ -980,7 +948,7 @@ export const onAddObjectsResquest = (object_menu) => {
     });
   };
 };
-//xóa object 
+//xóa object
 export const onDeleteObjects = (id) => {
   return {
     type: types.DELETE_OBJECT,
@@ -996,7 +964,7 @@ export const onDeleteObjectsResquest = (id) => {
     });
   };
 };
-//sửa object 
+//sửa object
 export const onGetObjects = (object_menu) => {
   return {
     type: types.EDIT_OBJECT,
@@ -1037,15 +1005,15 @@ export const onGetAllColorBySize = (color_by_size) => {
 };
 export const onGetAllColorBySizeResquest = (id_product) => {
   return (dispatch) => {
-    return callApi(`product-sizes/${id_product}`, "GET", null).then((response) => {
-      dispatch(onGetAllColorBySize(response.data));
-    });
+    return callApi(`product-sizes/${id_product}`, "GET", null).then(
+      (response) => {
+        dispatch(onGetAllColorBySize(response.data));
+      }
+    );
   };
 };
 
-
 //import product
-
 
 //Lấy tất cả danh sách import
 
@@ -1071,10 +1039,12 @@ export const onAddImportProduct = (import_product) => {
 };
 export const onAddImportProductResquest = (import_product) => {
   return (dispatch) => {
-    return callApi("import-products", "POST", import_product).then((response) => {
-      toast.success("Thêm thành công !");
-      dispatch(onAddImportProduct(response.data));
-    });
+    return callApi("import-products", "POST", import_product).then(
+      (response) => {
+        toast.success("Thêm thành công !");
+        dispatch(onAddImportProduct(response.data));
+      }
+    );
   };
 };
 
@@ -1086,12 +1056,14 @@ export const onUpdateImportProduct = (import_product) => {
 };
 export const onUpdateImportProductResquest = (import_product) => {
   return (dispatch) => {
-    return callApi(`import-products/${import_product.id}`, "PUT", import_product).then(
-      (response) => {
-        toast.success("Sửa thành công !");
-        dispatch(onUpdateImportProduct(response.data));
-      }
-    );
+    return callApi(
+      `import-products/${import_product.id}`,
+      "PUT",
+      import_product
+    ).then((response) => {
+      toast.success("Sửa thành công !");
+      dispatch(onUpdateImportProduct(response.data));
+    });
   };
 };
 export const onDeleteImportProduct = (id) => {
@@ -1120,5 +1092,27 @@ export const onEditImportProductResquest = (id) => {
     return callApi(`import-products/${id}`, "GET", null).then((response) => {
       dispatch(onGetImportProduct(response.data));
     });
+  };
+};
+
+// Khách Hàng Order sản phẩm
+
+export const onAddBillCustomerResquest = (bills_customer) => {
+  return (dispatch) => {
+    return callApi("bill-customer", "POST", bills_customer).then((response) => {
+      toast.success("Thêm thành công !");
+      dispatch(onAddObjects(response.data));
+    });
+  };
+};
+
+export const onAddBillInfoCustomerResquest = (bills_info_customer) => {
+  return (dispatch) => {
+    return callApi("bill-info-customer", "POST", bills_info_customer).then(
+      (response) => {
+        toast.success("Thêm thành công !");
+        dispatch(onAddObjects(response.data));
+      }
+    );
   };
 };

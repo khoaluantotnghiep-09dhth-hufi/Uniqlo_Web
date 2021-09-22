@@ -51,6 +51,15 @@ export const EDIT_SECTOR = 'EDIT_SECTOR';
 
 //Get bills_customer
 export const FETCH_BILLS_CUSTOMER = ' FETCH_BILLS_CUSTOMER';
+
+
+//Import Bill and Bill Info
+export const ADD_BILL_CUSTOMER = 'ADD_BILL_CUSTOMER ';
+export const ADD_BILL_INFO_CUSTOMER = 'ADD_BILL_INFO_CUSTOMER';
+
+
+
+
 //Get category
 export const FETCH_CATEGORY = ' FETCH_CATEGORY';
 export const ADD_CATEGORY = 'ADD_CATEGORY';
