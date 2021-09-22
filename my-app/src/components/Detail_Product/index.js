@@ -223,36 +223,9 @@ class index extends Component {
       [name]: value,
     });
   };
-  onTakeIdProductInfo = () => {
-    var result = null;
-    var { match, products } = this.props;
-    var { txtSize, isChooseColor, txtSize } = this.state;
-    var id_product = match.params.id_product;
-    if (isChooseColor && txtSize) {
-      result = products.find(
-        (product) =>
-          product.id === id_product &&
-          product.nameColor === isChooseColor &&
-          product.nameSize === txtSize
-      );
-      var id = result.id_product_info;
-    }
 
-    return id;
-  };
   onAddToCart = (product) => {
-    var { quantityOfSize } = this.state;
-    if(quantityOfSize>0){
-
-      this.props.onAddToCart(product);
-    }
-    else{
-      toast.error("Sản Phẩm Đã Hết !",{autoClose: 2500})
-
-    }
-  };
-  render() {
-    var { match, products_category, color_by_size } = this.props;
+    var { match, products_category, color_by_size, products } = this.props;
     var id_product = match.params.id_product;
     var { txtSize, isChooseColor, quantityOfSize } = this.state;
 
@@ -263,8 +236,15 @@ class index extends Component {
       var newPrice = (parseInt(result.percentSale) / 100) * result.price;
     }
 
+    var onTakeIdProductInfo = products.find(
+      (item) =>
+        item.id === id_product &&
+        item.nameColor === isChooseColor &&
+        item.nameSize === txtSize
+    );
+
     var product = {
-      id_product_info: this.onTakeIdProductInfo(),
+      id_product_info: onTakeIdProductInfo.id_product_info,
       id_product: match.params.id_product,
       nameProduct: result.name,
       imageProduct: result.image,
@@ -274,6 +254,23 @@ class index extends Component {
       isChooseColor,
       quantityAllProduct: quantityOfSize,
     };
+    if (quantityOfSize > 0) {
+      this.props.onAddToCart(product);
+    } else {
+      toast.error("Sản Phẩm Đã Hết !", { autoClose: 2500 });
+    }
+  };
+  render() {
+    var { match, products_category, color_by_size, products } = this.props;
+    var id_product = match.params.id_product;
+    var { txtSize, isChooseColor, quantityOfSize } = this.state;
+
+    var result = null;
+
+    result = products_category.find((product) => product.id === id_product);
+    if (result.percentSale) {
+      var newPrice = (parseInt(result.percentSale) / 100) * result.price;
+    }
 
     return (
       <React.Fragment>
@@ -317,7 +314,7 @@ class index extends Component {
                     size="lg"
                     className="Cart__Checkout-button mt-5"
                     onClick={() => {
-                      this.onAddToCart(product);
+                      this.onAddToCart();
                     }}
                   >
                     Thêm Vào Giỏ Hàng
