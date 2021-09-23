@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { Row, Col, Accordion, Form, Button } from "react-bootstrap";
 import "./Cart_Checkout.scss";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
+
 class index extends Component {
   showTotalAmount = (cart) => {
-    
     const formatter = new Intl.NumberFormat("vi-VN", {
       style: "currency",
       currency: "VND",
@@ -12,26 +13,24 @@ class index extends Component {
     });
     var total = 0;
     for (let index = 0; index < cart.length; index++) {
-      if(cart[index].product.priceSaleProduct){
+      if (cart[index].product.priceSaleProduct) {
         total += cart[index].product.priceSaleProduct * cart[index].quantity;
-      }else{
+      } else {
         total += cart[index].product.priceProduct * cart[index].quantity;
       }
-     
-     
     }
     return formatter.format(total);
   };
-showTotalProduct=(cart)=>{
+  showTotalProduct = (cart) => {
     var total = 0;
     for (let index = 0; index < cart.length; index++) {
       total += cart[index].quantity;
-
     }
     return total;
-};
+  };
   render() {
     const { cart } = this.props;
+    var checkLogin = sessionStorage.getItem("user");
 
     return (
       <div>
@@ -91,16 +90,29 @@ showTotalProduct=(cart)=>{
         </Row>
 
         <Row>
-        <NavLink to="/checkout">
-          <Button
-            variant="danger"
-            type="button"
-            size="lg"
-            className="Cart__Checkout-button mt-5"
-          >
-            Thanh Toán
-          </Button>
-          </NavLink>
+          {checkLogin ? (
+            <NavLink to="/checkout">
+              <Button
+                variant="danger"
+                type="button"
+                size="lg"
+                className="Cart__Checkout-button mt-5"
+              >
+                Thanh Toán
+              </Button>
+            </NavLink>
+          ) : (
+            <NavLink to="/login">
+              <Button
+                variant="danger"
+                type="button"
+                size="lg"
+                className="Cart__Checkout-button mt-5"
+              >
+                Thanh Toán
+              </Button>
+            </NavLink>
+          )}
         </Row>
       </div>
     );

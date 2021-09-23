@@ -224,8 +224,8 @@ class index extends Component {
     });
   };
 
-  onAddToCart = (product) => {
-    var { match, products_category, color_by_size, products } = this.props;
+  onAddToCart = () => {
+    var { match, products_category, color_by_size,products } = this.props;
     var id_product = match.params.id_product;
     var { txtSize, isChooseColor, quantityOfSize } = this.state;
 
@@ -236,6 +236,12 @@ class index extends Component {
       var newPrice = (parseInt(result.percentSale) / 100) * result.price;
     }
 
+    if(!isChooseColor){
+      toast.error("Xin Chọn Màu Và Kích Cỡ", { autoClose: 2500 });
+
+      return;
+    }
+   
     var onTakeIdProductInfo = products.find(
       (item) =>
         item.id === id_product &&
@@ -254,6 +260,7 @@ class index extends Component {
       isChooseColor,
       quantityAllProduct: quantityOfSize,
     };
+    
     if (quantityOfSize > 0) {
       this.props.onAddToCart(product);
     } else {
@@ -263,7 +270,7 @@ class index extends Component {
   render() {
     var { match, products_category, color_by_size, products } = this.props;
     var id_product = match.params.id_product;
-    var { txtSize, isChooseColor, quantityOfSize } = this.state;
+    var { txtSize, isChooseColor} = this.state;
 
     var result = null;
 

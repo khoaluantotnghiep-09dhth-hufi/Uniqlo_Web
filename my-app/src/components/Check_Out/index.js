@@ -179,11 +179,10 @@ class index extends Component {
     }));
 
     if (bill && bill_info) {
-      console.log(bill_info)
       this.props.onCreateBill(bill);
-    this.props.onCreateBillInfo(bill_info);
-      
-      this.props.onResetCart()
+      this.props.onCreateBillInfo(bill_info);
+
+      this.props.onResetCart();
     }
   };
   onHandleChange = (event) => {
@@ -205,10 +204,12 @@ class index extends Component {
             <Form onSubmit={this.onHandleSubmitForm}>
               <Form.Group className="mb-3">
                 <Form.Control
-                  type="text"
+                  type="email"
                   placeholder="Email"
                   onChange={this.onHandleChange}
                   name="txtEmail"
+                  required
+                  autofocus
                 />
               </Form.Group>
 
@@ -218,15 +219,23 @@ class index extends Component {
                   placeholder="Họ và Tên"
                   onChange={this.onHandleChange}
                   name="txtHoTen"
+                  autofocus
+                  required
                 />
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Control
-                  type="text"
+                  type="tel"
                   placeholder="Số Điện Thoại"
                   onChange={this.onHandleChange}
                   name="txtSDT"
+                
+                  minlength="10"
+                  pattern="^[0-9]*$"
+                  required
+                  autofocus
+                  required
                 />
               </Form.Group>
 
@@ -236,6 +245,8 @@ class index extends Component {
                   placeholder="Địa Chỉ"
                   onChange={this.onHandleChange}
                   name="txtDiaChi"
+                  required
+                  autofocus
                 />
               </Form.Group>
 

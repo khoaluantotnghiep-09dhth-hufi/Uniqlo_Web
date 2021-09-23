@@ -112,6 +112,7 @@ class index extends Component {
                     hint="Tìm Kiếm"
                     type="text"
                     containerClass="mt-0"
+                    maxlength="100"
                     name="input_Search"
                     onChange={this.onHandleChange}
                     onBlur={this.onBlurInputSearch}
