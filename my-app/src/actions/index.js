@@ -1026,7 +1026,7 @@ export const fetchImportProducts = (import_product) => {
 
 export const fetchImportProductsResquest = () => {
   return (dispatch) => {
-    return callApi("import-products", "GET", null).then((response) => {
+    return callApi("import-product", "GET", null).then((response) => {
       dispatch(fetchImportProducts(response.data));
     });
   };
@@ -1039,7 +1039,7 @@ export const onAddImportProduct = (import_product) => {
 };
 export const onAddImportProductResquest = (import_product) => {
   return (dispatch) => {
-    return callApi("import-products", "POST", import_product).then(
+    return callApi("import-product", "POST", import_product).then(
       (response) => {
         toast.success("Thêm thành công !");
         dispatch(onAddImportProduct(response.data));
@@ -1057,7 +1057,7 @@ export const onUpdateImportProduct = (import_product) => {
 export const onUpdateImportProductResquest = (import_product) => {
   return (dispatch) => {
     return callApi(
-      `import-products/${import_product.id}`,
+      `import-product/${import_product.id}`,
       "PUT",
       import_product
     ).then((response) => {
@@ -1075,7 +1075,7 @@ export const onDeleteImportProduct = (id) => {
 
 export const onDeleteImportProductResquest = (id) => {
   return (dispatch) => {
-    return callApi(`import-products/${id}`, "DELETE", null).then((response) => {
+    return callApi(`import-product/${id}`, "DELETE", null).then((response) => {
       toast.success("Xóa thành công !");
       dispatch(onDeleteImportProduct(id));
     });
@@ -1089,7 +1089,7 @@ export const onGetImportProduct = (import_product) => {
 };
 export const onEditImportProductResquest = (id) => {
   return (dispatch) => {
-    return callApi(`import-products/${id}`, "GET", null).then((response) => {
+    return callApi(`import-product/${id}`, "GET", null).then((response) => {
       dispatch(onGetImportProduct(response.data));
     });
   };
