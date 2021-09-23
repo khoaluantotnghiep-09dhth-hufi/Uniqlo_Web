@@ -39,6 +39,8 @@ class index extends Component {
       isCheckSignOut: false,
       show: false,
       setShow: false,
+      txtHuyDon: "",
+      isCheckRequest: false,
     };
   }
   componentDidMount() {
@@ -63,10 +65,26 @@ class index extends Component {
 
     this.setState({ isCheckSignOut: true });
   };
-
+  onChange = (event) => {
+    var target = event.target;
+    var name = target.name;
+    var value = target.value;
+    this.setState({
+      [name]: value,
+    });
+  };
+  onSubmitForm = (event) => {
+    var { txtHuyDon } = this.state;
+    event.preventDefault();
+    this.setState({
+      isCheckRequest: true,
+    });
+    console.log(txtHuyDon);
+    this.handleClose();
+  };
   render() {
     var { bills_customer } = this.props;
-    var { show } = this.state;
+    var { show, isCheckRequest } = this.state;
     var sessionUser = JSON.parse(sessionStorage.getItem("user"));
     console.log(sessionUser);
     var { isCheckSignOut } = this.state;
@@ -143,7 +161,11 @@ class index extends Component {
                               className="mr-2"
                               size="sm"
                             />
-                            <small> Hủy Đơn</small>
+                            {isCheckRequest ? (
+                              <small> Chờ Xác Nhận</small>
+                            ) : (
+                              <small> Hủy Đơn</small>
+                            )}
                           </Button>
                         ) : (
                           ""
@@ -190,25 +212,34 @@ class index extends Component {
             <Modal.Title>Yêu Cầu Hủy Đơn Hàng</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-          <Form>
-            <FloatingLabel
-              controlId="floatingTextarea"
-              label="Xin Mời Nhập Lý Do"
-              className="mb-3"
-              required 
-            >
-              <Form.Control as="textarea" placeholder="Leave a comment here" maxlenght='100' required  autofocus/>
-            </FloatingLabel>
-            <Button type="submit" variant="outline-secondary">
-              Gửi Yêu Cầu
-            </Button>
+            <Form onSubmit={this.onSubmitForm}>
+              <FloatingLabel
+                controlId="floatingTextarea"
+                label="Xin Mời Nhập Lý Do"
+                className="mb-3"
+                required
+                name="txtHuyDon"
+              
+              >
+                <Form.Control
+                  as="textarea"
+                  name="txtHuyDon"
+                  placeholder="Leave a comment here"
+                  maxlenght="100"
+                  required
+                  autofocus
+                  onChange={this.onChange}
+                />
+              </FloatingLabel>
+              <Button type="submit" variant="outline-secondary">
+                Gửi Yêu Cầu
+              </Button>
             </Form>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="outline-secondary" onClick={this.handleClose}>
               Đóng
             </Button>
-            
           </Modal.Footer>
         </Modal>
       </Container>
