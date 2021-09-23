@@ -235,7 +235,7 @@ class index extends Component {
                   pattern="^[0-9]*$"
                   required
                   autofocus
-                  required
+                 
                 />
               </Form.Group>
 
