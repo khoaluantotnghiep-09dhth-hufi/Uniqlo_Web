@@ -115,8 +115,7 @@ class index extends Component {
                     maxlength="100"
                     name="input_Search"
                     onChange={this.onHandleChange}
-                    onBlur={this.onBlurInputSearch}
-                    onFocus={this.onFocusInputSearch}
+                   
                     
                   />{" "}
                   {showLinkSearch}

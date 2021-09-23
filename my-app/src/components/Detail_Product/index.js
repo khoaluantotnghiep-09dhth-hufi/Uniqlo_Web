@@ -163,7 +163,7 @@ class index extends Component {
     result = color_by_size.filter((item) => item.nameSize === txtSize);
     resultFilter = result ? (
       result.map((item, index) => {
-        if (parseInt(item.totalQuantityProduct) === 0) {
+        if (parseInt(item.totalQuantityProduct) <= 0) {
           return (
             <React.Fragment>
               <Col lg="4">
@@ -268,16 +268,14 @@ class index extends Component {
     }
   };
   render() {
-    var { match, products_category, color_by_size, products } = this.props;
+    var { match, products_category, color_by_size } = this.props;
     var id_product = match.params.id_product;
     var { txtSize, isChooseColor} = this.state;
 
-    var result = null;
+    
 
-    result = products_category.find((product) => product.id === id_product);
-    if (result.percentSale) {
-      var newPrice = (parseInt(result.percentSale) / 100) * result.price;
-    }
+ 
+    
 
     return (
       <React.Fragment>

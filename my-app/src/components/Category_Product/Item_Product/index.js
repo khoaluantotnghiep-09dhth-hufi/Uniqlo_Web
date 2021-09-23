@@ -57,14 +57,14 @@ class index extends Component {
         </NavLink>
         <Card.Body>
          
-            <Card.Title>{product.name_product}</Card.Title>
+            <Card.Title>{product.name}</Card.Title>
 
             <Card.Text className="text-left">
               {elementPrice}
               {elementNewPrice}
             </Card.Text>
          
-          <Button
+          {/* <Button
             variant="dark"
             style={{ width: "100%" }}
             onClick={() => {
@@ -72,7 +72,7 @@ class index extends Component {
             }}
           >
             Mua
-          </Button>
+          </Button> */}
         </Card.Body>
       </Card>
     );

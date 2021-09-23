@@ -2,13 +2,31 @@ import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Item from "./../../components/Category_Product/Item_Product/index";
 import { connect } from "react-redux";
+import * as actions_of_index from "./../../actions/productActions";
 
 import * as actions from "./../../actions/index";
 class index extends Component {
+  componentDidMount() {
+    this.props.onGetAllProduct();
+  }
+  
   showListProduct = (products, getName) => {
     var { onAddToCart } = this.props;
     var result = null;
-    result = products.filter((product) => product.name.toLowerCase().includes(getName.toLowerCase())).map((product, index) => {
+      var resultFilter = null;
+
+      if(getName){
+        result = products.filter((product) => product.nameCategory.toLowerCase().includes(getName.toLowerCase())||product.name.toLowerCase().includes(getName.toLowerCase()))
+      }
+    //Xoa Phan Tu Trung
+      var resultRemoveDulicate = result.reduce((unique, o) => {
+        if(!unique.some(obj => obj.id === o.id && obj.value === o.value)) {
+          unique.push(o);
+        }
+        return unique;
+    },[]);
+
+    resultFilter=resultRemoveDulicate.filter(product=>product.name).map((product, index) => {
       return (
           <Col lg="3" className="mt-4">
             <Item
@@ -19,7 +37,9 @@ class index extends Component {
           </Col>
         );
       });
-    return result;
+   
+
+    return  resultFilter;
   };
   render() {
     var { match, products } = this.props;
@@ -45,7 +65,7 @@ var mapDispatchToProps = (dispatch, props) => {
       dispatch(actions.addToCart(product, 1));
     },
     onGetAllProduct: () => {
-      dispatch(actions.fetchProductResquest());
+      dispatch(actions_of_index.fetchProductResquest());
     },
   };
 };
