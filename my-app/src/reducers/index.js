@@ -19,6 +19,7 @@ import order from "./Order/order";
 import bills_customer from "./Bills_Customer/bills_customer";
 import orderInfo from "./OrderInfo/orderInfo";
 import import_product from "./ImportProduct/import_product";
+import productsAdmin from "./Product_Admin/product_admin";
 const myReducer = combineReducers({
   cart,
   products, // products:
@@ -40,6 +41,7 @@ const myReducer = combineReducers({
   color_by_size,
   productInfo,
   import_product,
+  productsAdmin,
 });
 
 export default myReducer;

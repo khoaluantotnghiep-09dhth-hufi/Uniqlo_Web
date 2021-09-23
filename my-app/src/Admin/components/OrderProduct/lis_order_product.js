@@ -73,22 +73,45 @@ class ListOrderProducts extends React.Component {
                                     scopedSlots={{
                                         'Thao Tác':
                                             (item) => (
-
                                                 <td>
-                                                   
-                                                    <Link to={`/admin/manage/order-info/${item.id}`}>
-                                                    <CButton
-                                                        type="button"
-                                                        className="btn btn-danger"                                                      
-                                                    >
-                                                        <FontAwesomeIcon
-                                                            icon={faInfo}
-                                                            className="mr-2"
-                                                            size="lg"
-                                                        />
-                                                        Xem Chi Tiết Đơn và Đặt Hàng
-                                                    </CButton>
-                                                    </Link>
+                                                    {item.status === 1 ?
+                                                        <Link to={`/admin/manage/order-info/${item.id}`}>
+                                                            <CButton
+                                                                type="button"
+                                                                className="btn btn-danger"
+                                                            >
+                                                                <FontAwesomeIcon
+                                                                    icon={faInfo}
+                                                                    className="mr-2"
+                                                                    size="lg"
+                                                                />
+                                                                Xem Chi Tiết
+                                                            </CButton>
+                                                        </Link>
+
+                                                        :
+                                                        <Link to={`/admin/manage/order-product/${item.id}/edit`}>
+                                                            <CButton type="button" className="btn btn-primary">
+                                                                <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
+                                                            </CButton>
+                                                        </Link>
+                                                    }
+                                                    {item.status === 0 ?
+                                                        <Link to={`/admin/manage/order-info/${item.id}`}>
+                                                            <CButton
+                                                                type="button"
+                                                                className="btn btn-danger"
+                                                            >
+                                                                <FontAwesomeIcon
+                                                                    icon={faInfo}
+                                                                    className="mr-2"
+                                                                    size="lg"
+                                                                />
+                                                                Xem Chi Tiết Đơn và Đặt Hàng
+                                                            </CButton>
+                                                        </Link>
+                                                        : ""
+                                                    }
                                                 </td>
 
                                             ),

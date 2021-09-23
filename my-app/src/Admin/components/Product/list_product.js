@@ -17,7 +17,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
-import * as actions from "./../../../actions/productActions";
+import * as actions from "./../../../actions/productAdminActions";
 import { Image, Alert } from 'react-bootstrap';
 const fields = [
     'STT',

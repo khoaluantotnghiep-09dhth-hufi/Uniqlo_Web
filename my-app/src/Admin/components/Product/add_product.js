@@ -12,7 +12,7 @@ import {
 import { Link } from "react-router-dom";
 import { Button, Form, Col, Container, Row } from 'react-bootstrap';
 import * as actions from "./../../../actions/index";
-import * as actionsProduct from "./../../../actions/productActions";
+import * as actionsProduct from "./../../../actions/productAdminActions";
 import * as actionsProductInfo from "./../../../actions/product_infoActions";
 import { connect } from "react-redux";
 import uniqid from 'uniqid';
@@ -144,7 +144,7 @@ class addProduct extends React.Component {
         } else {
             this.props.onAddItemProduct(product);
             history.goBack();
-
+            
         }
     };
     render() {

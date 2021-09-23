@@ -26,7 +26,7 @@ export const onAddProduct = (product) => {
 
 export const onAddProductResquest = (product) => {
   return (dispatch) => {
-    return callApi("products", "POST", product).then((response) => {
+    return callApi("products-admin", "POST", product).then((response) => {
       toast.success("Thêm thành công !");
       dispatch(onAddProduct(response.data));
     });
@@ -41,7 +41,7 @@ export const onUpdateProduct = (product) => {
 };
 export const onUpdateProductResquest = (product) => {
   return (dispatch) => {
-    return callApi(`products/${product.id}`, "PUT", product).then(
+    return callApi(`products-admin/${product.id}`, "PUT", product).then(
       (response) => {
         toast.success("Sửa thành công !");
         dispatch(onUpdateProduct(response.data));
@@ -59,7 +59,7 @@ export const onGetProduct = (product) => {
 };
 export const onEditProductResquest = (id) => {
   return (dispatch) => {
-    return callApi(`products/${id}`, "GET", null).then((response) => {
+    return callApi(`products-admin/${id}`, "GET", null).then((response) => {
       dispatch(onGetProduct(response.data));
     });
   };
@@ -73,7 +73,7 @@ export const onDeleteProduct = (id) => {
 
 export const onDeleteProductResquest = (id) => {
   return (dispatch) => {
-    return callApi(`products/${id}`, "DELETE", null).then((response) => {
+    return callApi(`products-admin/${id}`, "DELETE", null).then((response) => {
       toast.success("Xóa thành công !");
       dispatch(onDeleteProduct(id));
     });
