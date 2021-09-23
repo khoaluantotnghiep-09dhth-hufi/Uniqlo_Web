@@ -52,6 +52,10 @@ var mapDispatchToProps = (dispatch,props) => {
     onGetAllProduct:()=>{
       dispatch(actions.fetchProductResquest())
     }
+    ,
+    onGetAllProduct:()=>{
+      dispatch(actions.fetchProductResquest())
+    }
   };
 };
 
