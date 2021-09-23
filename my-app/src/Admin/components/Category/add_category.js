@@ -132,7 +132,7 @@ class AddCategory extends React.Component {
                                       {sector && sector.length > 0 &&
                                         sector.map((option, index) => (
 
-                                            <option value={option.id} key={index}>{option.name}</option>
+                                            <option value={option.id} key={index}>Mã: {option.id}, Tên: {option.name}</option>
                                         ))}
        
                                 </Form.Select>

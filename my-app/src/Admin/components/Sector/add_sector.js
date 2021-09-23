@@ -131,7 +131,7 @@ class AddSector extends React.Component {
                                     {object_menu && object_menu.length > 0 &&
                                         object_menu.map((option, index) => (
 
-                                            <option value={option.id} key={index}>{option.name}</option>
+                                            <option value={option.id} key={index}>Mã: {option.id}, Tên: {option.name}</option>
                                         ))}
                                 </Form.Select>
 

@@ -216,7 +216,7 @@ class addProduct extends React.Component {
                                             {category && category.length > 0 &&
                                                 category.map((option, index) => (
 
-                                                    <option value={option.id} key={index}>{option.name}</option>
+                                                    <option value={option.id} key={index}>Mã: {option.id}, Tên: {option.name}</option>
                                                 ))}
                                         </Form.Select>
                                     </Form.Group>
@@ -235,7 +235,7 @@ class addProduct extends React.Component {
                                             <option value="0">Chọn</option>
                                             {promotion && promotion.length > 0 &&
                                                 promotion.map((option, index) => (
-                                                    <option value={option.id} key={index}>{option.name}</option>
+                                                    <option value={option.id} key={index}>Mã: {option.id}, Tên: {option.name}</option>
                                                 ))}
                                         </Form.Select>
                                     </Form.Group>

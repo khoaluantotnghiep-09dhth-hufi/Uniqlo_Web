@@ -244,7 +244,7 @@ class addProduct extends React.Component {
                                 <CDataTable
                                     items={dataProductInfo}
                                     fields={fields}
-                                    itemsPerPage={8}
+                                    itemsPerPage={5}
                                     pagination
                                     scopedSlots={{
                                         'Thao Tác':
