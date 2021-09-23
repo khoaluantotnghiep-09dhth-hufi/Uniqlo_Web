@@ -5,12 +5,12 @@ import Banner from '../../components/Banner/index';
 
 class index extends Component {
     render() {
-        var {match,location}=this.props;
+        var {match,location,history}=this.props;
         return (
             <div >
                
               
-                <Category_Product_Container match={match} location={location}/>
+                <Category_Product_Container match={match} location={location} history={history}/>
               
             </div>
         );

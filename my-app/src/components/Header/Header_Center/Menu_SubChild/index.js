@@ -10,7 +10,9 @@ class index extends Component {
     this.props.onGetAllCategory();
     this.props.onGetAllSector();
   }
-
+  refresh = () => {
+    window.location.reload();
+}
   showListCategory(category, id_sectors,name_object,name_sectors) {
     var result = null;
  

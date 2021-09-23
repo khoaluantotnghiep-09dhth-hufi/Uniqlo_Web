@@ -70,8 +70,8 @@ var routes = [
   {
     path: "/product/:name_object/:name_sectors/:name_category",
     exact: true,
-    main: ({ match, location }) => (
-      <Category match={match} location={location} />
+    main: ({ match, location,history }) => (
+      <Category match={match} location={location} history={history} />
     ),
   },
 

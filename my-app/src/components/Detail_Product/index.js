@@ -44,7 +44,8 @@ class index extends Component {
     var resultFilter = null;
     result = products_category.filter((product) => product.id === id_product);
     if (result.percentSale) {
-      var newPrice = (parseInt(result.percentSale) / 100) * result.price;
+      var cacularSale = (parseInt(result.percentSale) / 100) *result.price;
+      var newPrice=result.price-cacularSale;
     }
 
     // this.setState({
@@ -56,7 +57,8 @@ class index extends Component {
     // })
     resultFilter = result.map((product, index) => {
       if (product.percentSale) {
-        var newPrice = (parseInt(product.percentSale) / 100) * product.price;
+        var cacularSale = (parseInt(product.percentSale) / 100) *product.price;
+      var newPrice=product.price-cacularSale;
       }
       var elementNewPrice = newPrice ? (
         <span
