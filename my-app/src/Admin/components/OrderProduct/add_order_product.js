@@ -27,29 +27,26 @@ class addOrderProduct extends React.Component {
       idItem: "",
       txtDate: "",
       txtHouse: "",
-      txtStatus: "",
-
     }
   }
   componentDidMount() {
     var { match } = this.props;
 
-    this.props.onEditItemOrder(match.params.id_order);
+    this.props.onEditItemOrder(match.params.id_order_product);
   }
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
     if (NextProps && NextProps.order) {
       var { order } = NextProps;
-      if (match.params.id_order) {
+      if (match.params.id_order_product) {
         const result = order.find(
-          (o) => o.id === match.params.id_order
+          (o) => o.id === match.params.id_order_product
         );
 
         this.setState({
           idItem: result.id,
           txtDate: result.date_order,
           txtHouse: result.name_warehouse,
-          txtStatus: result.status,
         });
       }
     }
@@ -70,28 +67,26 @@ class addOrderProduct extends React.Component {
 
     event.preventDefault();
     var { history } = this.props;
-    var { idItem, txtDate, txtHouse, txtStatus } = this.state;
+    var { idItem, txtDate, txtHouse } = this.state;
 
     var order = {
       id: uniqid("order-"),
       date_order: txtDate,
       name_warehouse: txtHouse,
-      status: txtStatus,
 
     };
     var orderUpdate = {
-      id: match.params.id_order,
+      id: match.params.id_order_product,
       date_order: txtDate,
       name_warehouse: txtHouse,
-      status: txtStatus,
     };
 
-    if (idItem) {
+    if (match.params.id_order_product) {
       this.props.onUpdateItemOrder(orderUpdate);
       history.goBack();
     } else {
       this.props.onAddItemOrder(order);
-
+      history.goBack();
     }
   };
   state = {
@@ -139,18 +134,6 @@ class addOrderProduct extends React.Component {
                   value={txtHouse}
                   onChange={(e) => { this.onChange(e, 'txtHouse') }}
                 />
-              </CFormGroup>
-              <CFormGroup>
-                <CLabel htmlFor="nf-password">Trạng Thái</CLabel>
-                <CInput
-                  type="number"
-                  id="txtStatus"
-                  name="txtStatus"
-                  placeholder="Trạng thái..."
-                  value={txtStatus}
-                  onChange={(e) => { this.onChange(e, 'txtStatus') }}
-                />
-                <CLabel htmlFor="nf-password">0 = Chưa Giao</CLabel>
               </CFormGroup>
               <CFormGroup >
                 <CButton

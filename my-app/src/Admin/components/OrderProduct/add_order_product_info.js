@@ -31,7 +31,6 @@ const fields = [
     { key: 'quantity', label: 'Số Lượng' },
     { key: 'retail_price', label: 'Giá Bán' },
     { key: 'image', label: 'Ảnh' },
-    { key: 'status', label: 'status' },
     'Thao Tác',
 ]
 //Thư viện img 
@@ -119,6 +118,7 @@ class addProduct extends React.Component {
             retail_price: txtRetal_price
         };
         this.props.onAddItemOrderInfo(orderInfo);
+        history.goBack();
     };
     render() {
         var { productInfo } = this.props;
@@ -487,8 +487,8 @@ class addProduct extends React.Component {
                                                                 <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
                                                             </CButton>
                                                         }
-                                                        {item.status === 0 ?
-                                                            <Link to="/admin/manage/product/../edit">
+                                                        {item.status === 0 ?     
+                                                            <Link to={`/admin/manage/order-info/${item.id}/edit`}>
                                                                 <CButton type="button" className="btn btn-primary">
                                                                     <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
                                                                 </CButton>

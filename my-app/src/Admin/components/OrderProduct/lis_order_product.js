@@ -34,7 +34,8 @@ const fields = [
     { key: 'date_order', label: 'Ngày Đặt' },
     { key: 'name_warehouse', label: 'Kho' },
     { key: 'status', label: 'Trạng Thái' },
-    'Thao Tác'
+    'Thao Tác',
+    ''
 ]
 
 class ListOrderProducts extends React.Component {
@@ -43,7 +44,10 @@ class ListOrderProducts extends React.Component {
         this.props.fetchOrders();
     }
     onDeleteOrder = (item) => {
-        this.props.onDeleteItemOrder(item);
+        if (window.confirm("Bạn có chắc muốn xóa không ?")) {
+            this.props.onDeleteItemOrder(item);
+        }
+
     };
     render() {
         var { order } = this.props;
@@ -95,6 +99,11 @@ class ListOrderProducts extends React.Component {
                                                                 <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
                                                             </CButton>
                                                         </Link>
+                                                        // <Link to={`/admin/manage/order-product/${item.id}/edit`}>
+                                                        //     <CButton type="button" className="btn btn-warning">
+                                                        //         <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Xóa
+                                                        //     </CButton>
+                                                        // </Link>
                                                     }
                                                     {item.status === 0 ?
                                                         <Link to={`/admin/manage/order-info/${item.id}`}>
@@ -128,6 +137,20 @@ class ListOrderProducts extends React.Component {
                                                 </Alert>
 
 
+                                            </td>
+                                        ),
+                                        '': (item) => (
+                                            <td>
+                                                {item.status === 0 ?
+                                                    <CButton type="button" className="btn btn-warning"
+                                                        onClick={() => {
+                                                            this.onDeleteOrder(item.id);
+                                                        }}
+                                                    >
+                                                        <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Xóa
+                                                    </CButton>
+                                                    : ""
+                                                }
                                             </td>
                                         ),
                                     }}
