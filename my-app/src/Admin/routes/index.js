@@ -31,6 +31,7 @@ const EditOrderProductInfo = React.lazy(() => import('../components/OrderProduct
 
 const ListImportProduct = React.lazy(() => import('../components/ImportProduct/list_import_product'));
 const AddImportProduct = React.lazy(() => import('../components/ImportProduct/add_import_product'));
+const AddImportInfoProduct = React.lazy(() => import('../components/ImportProduct/list_import_info'));
 
 const ListObject = React.lazy(() => import('../components/Object/list_object'));
 const AddObject = React.lazy(() => import('../components/Object/add_object'));
@@ -105,6 +106,7 @@ const routes = [
     { path: '/admin/manage/import-product', exact: true, name: 'Danh Sách Nhập Hàng', component: ListImportProduct },
     { path: '/admin/manage/import-product/add', exact: true, name: 'Lập Đơn Nhập Hàng', component: AddImportProduct },
     { path: '/admin/manage/import-product/:id_import/edit', exact: true, name: 'Chỉnh Sửa Đơn Nhập Hàng', component: AddImportProduct },
+    { path: '/admin/manage/import-info/:id_import', exact: true, name: 'Chi Tiết Đơn Nhập Hàng', component: AddImportInfoProduct },
 
     { path: '/admin/manage/objects', exact: true, name: 'Danh Sách Đối Tượng', component: ListObject },
     { path: '/admin/manage/object/add', exact: true, name: 'Thêm Đối Tượng Mới', component: AddObject },

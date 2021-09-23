@@ -48,7 +48,6 @@ class addProduct extends React.Component {
         super(props);
         this.state = {
             txtQuantity: "",
-            txtRetal_price: "",
             id_product_info: "",
             productArr: [],
         };
@@ -114,7 +113,6 @@ class addProduct extends React.Component {
             id: match.params.id_order_info,
             id_product_info: id_product_info,
             quantity: txtQuantity,
-            retail_price: txtRetal_price
         };
         this.props.onUpdateItemOrderInfo(orderInfo);
         history.goBack();
@@ -122,7 +120,7 @@ class addProduct extends React.Component {
     render() {
         var { productInfo } = this.props;
         var { orderInfo } = this.props;
-        let { txtQuantity, txtRetal_price, id_product_info } = this.state;
+        let { txtQuantity, id_product_info } = this.state;
         return (
             <>
                 <Container fluid>
@@ -136,7 +134,7 @@ class addProduct extends React.Component {
                         <Col sm="12">
                             <Form action="" method="post" onSubmit={() => this.onSubmitForm()}>
                                 <Row sm="12">
-                                    <Col sm="8">
+                                    <Col sm="10">
                                         <Form.Group className="mb-3" controlId="formBasicObject">
                                             <Form.Label>Sản Phẩm</Form.Label>
                                             <Form.Select name="form-field-name"
@@ -168,21 +166,7 @@ class addProduct extends React.Component {
                                                 required
                                             />
                                         </Form.Group>
-                                    </Col>
-                                    <Col sm="2">
-                                        <Form.Group >
-                                            <Form.Label htmlFor="exampleFormControlTextarea1">Giá</Form.Label>
-                                            <Form.Control
-                                                type="number"
-                                                id="txtRetal_price"
-                                                name="txtRetal_price"
-                                                placeholder="Giá..."
-                                                value={txtRetal_price}
-                                                onChange={(e) => { this.onChange(e, 'txtRetal_price') }}
-                                                required
-                                            />
-                                        </Form.Group>
-                                    </Col>
+                                    </Col>  
                                     <Col sm="10">
                                         <Form.Group className="d-flex justify-content-center">
                                             <Button type="button" className="btn btn-danger"

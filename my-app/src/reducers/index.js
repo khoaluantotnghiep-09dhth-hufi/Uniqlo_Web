@@ -20,6 +20,7 @@ import bills_customer from "./Bills_Customer/bills_customer";
 import orderInfo from "./OrderInfo/orderInfo";
 import import_product from "./ImportProduct/import_product";
 import productsAdmin from "./Product_Admin/product_admin";
+import importInfo from "./ImportInfo/importInfo";
 const myReducer = combineReducers({
   cart,
   products, // products:
@@ -42,6 +43,7 @@ const myReducer = combineReducers({
   productInfo,
   import_product,
   productsAdmin,
+  importInfo,
 });
 
 export default myReducer;

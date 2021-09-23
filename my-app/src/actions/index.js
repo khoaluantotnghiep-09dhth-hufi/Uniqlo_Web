@@ -779,6 +779,20 @@ export const fetchOrderResquest = () => {
   };
 };
 
+export const fetchOrderImport = (order) => {
+  return {
+    type: types.FETCH_ORDER,
+    order,
+  };
+};
+
+export const fetchOrderImportResquest = () => {
+  return (dispatch) => {
+    return callApi("orders-import", "GET", null).then((response) => {
+      dispatch(fetchOrderImport(response.data));
+    });
+  };
+};
 //Xóa Color
 export const onDeleteOrder = (id) => {
   return {
@@ -1013,87 +1027,7 @@ export const onGetAllColorBySizeResquest = (id_product) => {
   };
 };
 
-//import product
 
-//Lấy tất cả danh sách import
-
-export const fetchImportProducts = (import_product) => {
-  return {
-    type: types.FETCH_IMPORTPRODUCT,
-    import_product,
-  };
-};
-
-export const fetchImportProductsResquest = () => {
-  return (dispatch) => {
-    return callApi("import-product", "GET", null).then((response) => {
-      dispatch(fetchImportProducts(response.data));
-    });
-  };
-};
-export const onAddImportProduct = (import_product) => {
-  return {
-    type: types.ADD_IMPORTPRODUCT,
-    import_product,
-  };
-};
-export const onAddImportProductResquest = (import_product) => {
-  return (dispatch) => {
-    return callApi("import-product", "POST", import_product).then(
-      (response) => {
-        toast.success("Thêm thành công !");
-        dispatch(onAddImportProduct(response.data));
-      }
-    );
-  };
-};
-
-export const onUpdateImportProduct = (import_product) => {
-  return {
-    type: types.UPDATE_IMPORTPRODUCT,
-    import_product,
-  };
-};
-export const onUpdateImportProductResquest = (import_product) => {
-  return (dispatch) => {
-    return callApi(
-      `import-product/${import_product.id}`,
-      "PUT",
-      import_product
-    ).then((response) => {
-      toast.success("Sửa thành công !");
-      dispatch(onUpdateImportProduct(response.data));
-    });
-  };
-};
-export const onDeleteImportProduct = (id) => {
-  return {
-    type: types.DELETE_IMPORTPRODUCT,
-    id,
-  };
-};
-
-export const onDeleteImportProductResquest = (id) => {
-  return (dispatch) => {
-    return callApi(`import-product/${id}`, "DELETE", null).then((response) => {
-      toast.success("Xóa thành công !");
-      dispatch(onDeleteImportProduct(id));
-    });
-  };
-};
-export const onGetImportProduct = (import_product) => {
-  return {
-    type: types.EDIT_IMPORTPRODUCT,
-    import_product,
-  };
-};
-export const onEditImportProductResquest = (id) => {
-  return (dispatch) => {
-    return callApi(`import-product/${id}`, "GET", null).then((response) => {
-      dispatch(onGetImportProduct(response.data));
-    });
-  };
-};
 
 // Khách Hàng Order sản phẩm
 

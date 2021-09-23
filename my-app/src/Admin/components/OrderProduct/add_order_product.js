@@ -113,37 +113,45 @@ class addOrderProduct extends React.Component {
           </Link>
           <CCol sm="12">
             <CForm action="" method="post" onSubmit={this.onSubmitForm}>
-              <CFormGroup>
-                <CLabel htmlFor="exampleFormControlInput1">Ngày Lập</CLabel>
-                <CInput
-                  type="date"
-                  id="txtDate"
-                  name="txtDate"
-                  value={txtDate}
-                  onChange={(e) => { this.onChange(e, 'txtDate') }}
-                />
+              <CRow sm="12">
+                <CCol sm="6">
+                  <CFormGroup>
+                    <CLabel htmlFor="exampleFormControlInput1">Ngày Lập</CLabel>
+                    <CInput
+                      type="date"
+                      id="txtDate"
+                      name="txtDate"
+                      value={txtDate}
+                      onChange={(e) => { this.onChange(e, 'txtDate') }}
+                    />
 
-              </CFormGroup>
-              <CFormGroup>
-                <CLabel htmlFor="exampleFormControlInput2">Kho</CLabel>
-                <CInput
-                  type="text"
-                  id="txtHouse"
-                  name="txtHouse"
-                  placeholder="Kho..."
-                  value={txtHouse}
-                  onChange={(e) => { this.onChange(e, 'txtHouse') }}
-                />
-              </CFormGroup>
-              <CFormGroup >
-                <CButton
-                  color='danger'
-                  className="m-2"
-                  onClick={this.onSubmitForm}
-                >  <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />
-                 Thêm
-                 </CButton>
-              </CFormGroup>
+                  </CFormGroup>
+                </CCol>
+                <CCol sm="6">
+                  <CFormGroup>
+                    <CLabel htmlFor="exampleFormControlInput2">Kho</CLabel>
+                    <CInput
+                      type="text"
+                      id="txtHouse"
+                      name="txtHouse"
+                      placeholder="Kho..."
+                      value={txtHouse}
+                      onChange={(e) => { this.onChange(e, 'txtHouse') }}
+                    />
+                  </CFormGroup>
+                </CCol>
+
+                <CFormGroup className="d-flex justify-content-center">
+                  <CButton
+                    color='danger'
+                    className="m-2"
+                    onClick={this.onSubmitForm}
+                  >  <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />
+                    Thêm
+                  </CButton>
+                </CFormGroup>
+
+              </CRow>
             </CForm>
           </CCol>
         </CRow>

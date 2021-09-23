@@ -16,7 +16,6 @@ import {
     faTools,
     faInfo,
 } from "@fortawesome/free-solid-svg-icons";
-import usersData from '../User/UserData';
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import * as actions from "./../../../actions/index";

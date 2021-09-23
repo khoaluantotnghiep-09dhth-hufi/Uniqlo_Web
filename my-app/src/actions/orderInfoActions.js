@@ -15,6 +15,20 @@ export const fetchOrderInfoResquest = (id) => {
     });
   };
 };
+export const fetchOrderInfoNoID = (orderInfo) => {
+  return {
+    type: types.FETCH_ORDERINFO,
+    orderInfo,
+  };
+};
+
+export const fetchOrderInfoResquestNoID = () => {
+  return (dispatch) => {
+    return callApi("orders-info", "GET", null).then((response) => {
+      dispatch(fetchOrderInfo(response.data));
+    });
+  };
+};
 export const onAddOrderInfo = (orderInfo) => {
   return {
     type: types.ADD_ORDERINFO,

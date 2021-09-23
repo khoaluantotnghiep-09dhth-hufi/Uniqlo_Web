@@ -19,13 +19,14 @@ import { Link } from "react-router-dom";
 import { Button, Form, Col, Container, Row, Image, Alert } from 'react-bootstrap';
 import * as actionsProductInfo from "../../../actions/product_infoActions";
 import * as actionsOrderInfo from "../../../actions/orderInfoActions";
+import * as actionsImportInfo from "../../../actions/importInfoActions";
 import { toast } from 'react-toastify';
 import { connect } from "react-redux";
 import uniqid from 'uniqid';
 const fields = [
     'STT',
     { key: 'id', label: 'Mã' },
-    { key: 'nameProduct', label: 'Tên' },
+    { key: 'name', label: 'Tên' },
     { key: 'nameColor', label: 'Màu' },
     { key: 'nameSize', label: 'Kích Cỡ' },
     { key: 'quantity', label: 'Số Lượng' },
@@ -47,16 +48,18 @@ class addProduct extends React.Component {
         this.state = {
             txtQuantity: "",
             id_product_info: "",
+            id_order_info: "",
             productArr: [],
-            status: "",
+            orderInfoArr:[],
         };
     }
     componentDidMount() {
         var { match } = this.props;
-        this.props.fetchOrderInfo(match.params.id_order);
+        this.props.fetchImportInfo(match.params.id_import);
         isLoadingExternally = true;
         this.setState({
             productArr: this.props.fetchProductsInfo(),
+            orderInfoArr: this.props.fetchOrderInfo(),
         })
     }
     onDeleteOrderInfo = (item) => {
@@ -120,8 +123,9 @@ class addProduct extends React.Component {
     render() {
         var { productInfo } = this.props;
         var { orderInfo } = this.props;
+        var { importInfo } = this.props;
         let { txtQuantity, id_product_info } = this.state;
-        var dataOrderInfo = orderInfo.map((item, index) => {
+        var dataOrderInfo = importInfo.map((item, index) => {
             return { ...item, index };
         })
         console.log("data order info", dataOrderInfo);
@@ -379,7 +383,7 @@ class addProduct extends React.Component {
             <>
                 <Container fluid>
                     <CRow>
-                        <Link to="/admin/manage/order-product">
+                        <Link to="/admin/manage/import-product">
                             <Button type="button" className="btn btn-primary" size="sm">
                                 <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />
                                 Trở về
@@ -446,7 +450,7 @@ class addProduct extends React.Component {
                         <CCol xs="12" lg="24">
                             <CCard>
                                 <CCardHeader>
-                                    Danh Sách Chi Tiết Đặt Hàng
+                                    Danh Sách Chi Tiết Nhập Hàng
                                 </CCardHeader>
                                 <CCardBody>
                                     <CDataTable
@@ -470,7 +474,7 @@ class addProduct extends React.Component {
                                                                 <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
                                                             </CButton>
                                                         }
-                                                        {item.status === 0 ?     
+                                                        {item.status === 0 ?
                                                             <Link to={`/admin/manage/order-info/${item.id}/edit`}>
                                                                 <CButton type="button" className="btn btn-primary">
                                                                     <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
@@ -497,7 +501,7 @@ class addProduct extends React.Component {
                                                 ),
                                             'image':
                                                 (item, index) => (
-                                                    <td>
+                                                    <td xs={6} md={4}>
                                                         <Image style={{width:"200px", height:"200px"}} src={item.image} thumbnail />
                                                     </td>
                                                 ),
@@ -525,21 +529,25 @@ var mapStateToProps = (state) => {
     return {
         productInfo: state.productInfo,
         orderInfo: state.orderInfo,
+        importInfo: state.importInfo,
     };
 };
 var mapDispatchToProps = (dispatch, props) => {
     return {
-        onAddItemOrderInfo: (orderInfo) => {
-            return dispatch(actionsOrderInfo.onAddOrderInfoResquest(orderInfo));
+        onAddItemImportInfo: (importInfo) => {
+            return dispatch(actionsImportInfo.onAddImportInfoResquest(importInfo));
         },
         fetchProductsInfo: () => {
             return dispatch(actionsProductInfo.fetchProductInfoResquestNoID());
         },
-        fetchOrderInfo: (id) => {
-            return dispatch(actionsOrderInfo.fetchOrderInfoResquest(id));
+        fetchOrderInfo: () => {
+            return dispatch(actionsOrderInfo.fetchOrderInfoResquest());
         },
-        onDeleteItemOrderInfo: (id) => {
-            return dispatch(actionsOrderInfo.onDeleteOrderInfoResquest(id));
+        fetchImportInfo: (id) => {
+            return dispatch(actionsImportInfo.fetchImportInfoResquest(id));
+        },
+        onDeleteItemImportInfo: (id) => {
+            return dispatch(actionsImportInfo.onDeleteImportInfoResquest(id));
         },
     };
 };

@@ -60,7 +60,7 @@ class ListSector extends React.Component {
                                 <CDataTable
                                     items={dataSector}
                                     fields={fields}
-                                    itemsPerPage={8}
+                                    itemsPerPage={5}
                                     pagination
                                     scopedSlots={{
                                         'Thao Tác':

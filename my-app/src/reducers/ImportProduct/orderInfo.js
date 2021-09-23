@@ -1,25 +1,25 @@
 import * as types from "../../constants/ActionTypes";
 var initialState = [];
-var findIndex = (import_product, id) => {
+var findIndex = (orderInfo, id) => {
   var result = -1;
-  import_product.forEach((item, index) => {
+  orderInfo.forEach((item, index) => {
     if (item.id === id) {
       result = index;
     }
   });
   return result;
 };
-var import_product = (state = initialState, action) => {
+var orderInfo = (state = initialState, action) => {
   var index = -1;
   var { id } = action;
   switch (action.type) {
-    case types.FETCH_IMPORTPRODUCT:
-      state = action.import_product;
+    case types.FETCH_ORDERINFO:
+      state = action.orderInfo;
       return [...state];
-    case types.ADD_IMPORTPRODUCT:
-      state.push(action.import_product);
+    case types.ADD_ORDERINFO:
+      state.push(action.orderInfo);
       return [...state];
-    case types.DELETE_IMPORTPRODUCT:
+    case types.DELETE_ORDERINFO:
       index = findIndex(state, id);
       state.splice(index, 1);
       return [...state];
@@ -27,4 +27,4 @@ var import_product = (state = initialState, action) => {
       return state;
   }
 };
-export default import_product;
+export default orderInfo;

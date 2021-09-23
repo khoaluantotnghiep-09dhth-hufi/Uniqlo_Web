@@ -9,27 +9,28 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import uniqid from 'uniqid';
 import { Button, Form, Col, Container, Row } from 'react-bootstrap';
-import * as actions from "./../../../actions/index";
+import * as actions from "./../../../actions/importActions";
+import * as actionsOrder from "./../../../actions/index";
 let isLoadingExternally = false;
 class AddImportProduct extends React.Component {
     constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             idItem: "",
             txtDateImport: "",
             id_order: "",
             txtTotalImport: "",
-            orderArr: [],           
-        };      
+            orderArr: [],
+        };
     }
     componentDidMount() {
         var { match } = this.props;
 
-        this.props.onEditItemImportProduct(match.params.id_import);
+        this.props.onEditItemImport(match.params.id_import);
         isLoadingExternally = true;
 
         this.setState({
-          orderArr: this.props.fetchOrders()
+            orderArr: this.props.fetchOrdersImport()
         })
     }
     componentWillReceiveProps(NextProps) {
@@ -70,26 +71,23 @@ class AddImportProduct extends React.Component {
         if (isValid === false) return;
         event.preventDefault();
         var { history } = this.props;
-        var { idItem, txtDateImport, id_order, txtTotalImport} = this.state;
-
+        var { idItem, txtDateImport, id_order } = this.state;
         var import_product = {
             id: uniqid("import-"),
             date_import: txtDateImport,
             id_order: id_order,
-            total_import: txtTotalImport,
         };
         var import_productUpdate = {
             id: match.params.id_import,
             date_import: txtDateImport,
             id_order: id_order,
-            total_import: txtTotalImport,
         };
 
         if (match.params.id_import) {
-            this.props.onUpdateItemCategory(import_productUpdate);
+            this.props.onUpdateItemImport(import_productUpdate);
             history.goBack();
         } else {
-            this.props.onAddItemCategory(import_product);
+            this.props.onAddItemImport(import_product);
             history.goBack();
         }
     };
@@ -120,9 +118,6 @@ class AddImportProduct extends React.Component {
                                     Vui lòng chọn ngày nhập !
                                 </Form.Control.Feedback>
                             </Form.Group>
-
-                            {/* <Link to="/admin/manage/objects" > */}
-
                             <Form.Group className="mb-3" controlId="formBasicObject">
                                 <Form.Label>Mã đặt hàng</Form.Label>
                                 <Form.Select name="form-field-name"
@@ -133,30 +128,14 @@ class AddImportProduct extends React.Component {
                                     isLoading={isLoadingExternally}
                                     options={this.setState.id_order}
                                 >
-                                      <option value="order-1">Chọn</option>
-                                      {order && order.length > 0 &&
+                                    <option value="order-1">Chọn</option>
+                                    {order && order.length > 0 &&
                                         order.map((option, index) => (
 
-                                            <option value={option.id} key={index}>{option.name}</option>
+                                            <option value={option.id} key={index}>Mã: {option.id}, Ngày Đặt: {option.date_order}, Kho: {option.name_warehouse}</option>
                                         ))}
-       
                                 </Form.Select>
-
-
                             </Form.Group>
-
-                            <Form.Group >
-                              <Form.Label htmlFor="exampleFormControlTextarea1">Tổng nhập</Form.Label>
-                              <Form.Control
-                                type="number"
-                                id="txtTotalImport"
-                                name="txtTotalImport"
-                                placeholder="Tổng nhập..."
-                                value={this.setState.txtTotalImport}
-                                onChange={(e) => { this.onChange(e, 'txtTotalImport') }}
-                                required
-                              />
-                          </Form.Group>
                             <Button type="button"
                                 className="btn btn-danger"
                                 onClick={this.onSubmitForm}
@@ -183,17 +162,17 @@ var mapStateToProps = (state) => {
 };
 var mapDispatchToProps = (dispatch, props) => {
     return {
-        onAddItemImportProduct: (import_product) => {
-            return dispatch(actions.onAddImportProductResquest(import_product));
+        onAddItemImport: (import_product) => {
+            return dispatch(actions.onAddImportResquest(import_product));
         },
-        fetchOrders: () => {
-            return dispatch(actions.fetchOrderResquest());
+        fetchOrdersImport: () => {
+            return dispatch(actionsOrder.fetchOrderImportResquest());
         },
-        onEditItemImportProduct: (id) => {
-            return dispatch(actions.onEditImportProductResquest(id));
+        onEditItemImport: (id) => {
+            return dispatch(actions.onEditImportResquest(id));
         },
-        onUpdateItemImportProduct: (import_product) => {
-            return dispatch(actions.onUpdateImportProductResquest(import_product));
+        onUpdateItemImport: (import_product) => {
+            return dispatch(actions.onUpdateImportResquest(import_product));
         },
     };
 };

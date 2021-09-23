@@ -272,7 +272,7 @@ class addProduct extends React.Component {
                                         'image':
                                             (item, index) => (
                                                 <td>
-                                                    <Image src={item.image} thumbnail />
+                                                    <Image style={{width:"200px", height:"200px"}} src={item.image} thumbnail />
                                                 </td>
                                             ),
                                         // "nameColor": (item) => (
