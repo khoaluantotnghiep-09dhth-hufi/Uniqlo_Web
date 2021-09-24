@@ -306,7 +306,21 @@ export const onUpdateStaffsResquest = (staff) => {
     });
   };
 };
-
+//Cập Nhật vị trí của staff
+export const onUpdatePositionStaffs = (staff) => {
+  return {
+    type: types.UPDATE_POSITION_BY_STAFF,
+    staff,
+  };
+};
+export const onUpdatePositionStaffsResquest = (staff) => {
+  return (dispatch) => {
+    return callApi(`staff-account/${staff.id}`, "PUT", staff).then((response) => {
+      toast.success("Sửa thành công !");
+      dispatch(onUpdatePositionStaffs(response.data));
+    });
+  };
+};
 //Sửa Staff
 export const onGetStaffs = (staff) => {
   return {

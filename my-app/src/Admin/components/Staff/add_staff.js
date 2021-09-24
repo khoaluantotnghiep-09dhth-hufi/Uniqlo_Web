@@ -166,7 +166,7 @@ console.log(result);
                   onChange={this.onChange}
                 />
               </CFormGroup>
-              <CFormGroup>
+              {/* <CFormGroup>
                 <CLabel htmlFor="exampleFormControlTextarea1">Mật Khẩu</CLabel>
                 <CInput
                   type="password"
@@ -176,9 +176,9 @@ console.log(result);
                   autoComplete="password"
                   onChange={this.onChange}
                 />
-              </CFormGroup>
+              </CFormGroup> */}
 
-              <CFormGroup>
+              {/* <CFormGroup>
                 <CLabel htmlFor="exampleFormControlTextarea1">Chức Vụ</CLabel>
                 <select
                   class="form-select"
@@ -189,9 +189,9 @@ console.log(result);
                 >
                   <option selected>Chọn Chức Vụ</option>
                   <option value="1">Nhân Viên</option>
-                  <option value="2">Quản Lý</option>
+                  <option value="0">Quản Lý</option>
                 </select>
-              </CFormGroup>
+              </CFormGroup> */}
 
               <CFormGroup>
                 <CButton color="danger" className="m-2" type="submit">

@@ -10,6 +10,9 @@ const ListNews = React.lazy(() => import('../components/News/list_news'));
 const AddNews = React.lazy(() => import('../components/News/add_news'));
 const ListDiscount = React.lazy(() => import('../components/Discount/list_discount'));
 const AddDiscount = React.lazy(() => import('../components/Discount/add_discount'));
+
+const ListAccountAdmin = React.lazy(() => import('../components/Account_Admin/list_accountadmin'));
+const UpdateAccountAdmin = React.lazy(() => import('../components/Account_Admin/update_account'));
 const AddAccountAdmin = React.lazy(() => import('../components/Account_Admin/add_accountAdmin'));
 
 
@@ -80,6 +83,8 @@ const routes = [
     { path: '/admin/system/discount/:id_promotion/edit', exact: true, name: 'Thêm Khuyến Mãi Mới', component: AddDiscount },
     { path: '/admin/system/discount/add', exact: true, name: 'Thêm Khuyến Mãi Mới', component: AddDiscount },
 
+     { path: '/admin/account', exact: true, name: 'Thêm Tài Khoản Admin Mới', component: ListAccountAdmin },
+     { path: '/admin/account/:id_staff/edit', exact: true, name: 'Thêm Tài Khoản Admin Mới', component: UpdateAccountAdmin },
     { path: '/admin/account/add', exact: true, name: 'Thêm Tài Khoản Admin Mới', component: AddAccountAdmin },
 
     { path: '/admin/manage/products', exact: true, name: 'Danh Sách Sản Phẩm', component: ListProducts },
