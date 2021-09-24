@@ -7,8 +7,11 @@ class Screen_Account extends Component {
     render() {
         var{location} = this.props;
         return (
-            <div >             
+            <div >
+              
+               
                 <Login location={location}/>
+           
             </div>
 
         );
