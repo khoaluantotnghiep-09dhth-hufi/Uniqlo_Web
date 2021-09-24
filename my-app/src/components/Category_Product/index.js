@@ -1,12 +1,20 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Dropdown } from "react-bootstrap";
 import Silder_Collection from "./../Slider_Collection/index";
+import Slider from "../../components/Slider/index";
+
 import { connect } from "react-redux";
 import "./Category_Product.scss";
 import ReactPaginate from "react-paginate";
 import * as actions from "./../../actions/index";
 import Item from "./Item_Product/index";
-import axios from 'axios'
+import axios from "axios";
+
+const formatter = new Intl.NumberFormat("vi-VN", {
+  style: "currency",
+  currency: "VND",
+  minimumFractionDigits: 0,
+});
 class index extends Component {
   constructor(props) {
     super(props);
@@ -15,15 +23,14 @@ class index extends Component {
       data: [],
       perPage: 4,
       currentPage: 0,
+      txtFilter: 0,
     };
     this.handlePageClick = this.handlePageClick.bind(this);
   }
   componentDidMount() {
     //  this.showListProduct();
     this.props.onGetAllProduct();
-    
   }
-  
 
   handlePageClick = (e) => {
     const selectedPage = e.selected;
@@ -39,20 +46,83 @@ class index extends Component {
       }
     );
   };
+  onSelectChange = (eventkey) => {
+    this.setState({
+      txtFilter: parseInt(eventkey),
+    });
+  };
 
   render() {
-    var { location,history, products_category  } = this.props;
-    
+    var { location, history, products_category } = this.props;
+    var { txtFilter } = this.state;
+    console.log(txtFilter);
+    var ListimagesNewStyle = [
+      {
+        id: 1,
 
+        image:
+          "https://www.uniqlo.com/vn/top/img/topic/20210812_1130_gl8340.jpg",
+        status: true,
+      },
+      {
+        id: 2,
+
+        image:
+          "https://www.uniqlo.com/vn/top/img/topic/20210812_1130_gl5261.jpg",
+        status: true,
+      },
+      {
+        id: 3,
+
+        image:
+          "https://www.uniqlo.com/vn/top/img/topic/20210812_1130_gl0393.jpg",
+        status: true,
+      },
+      {
+        id: 4,
+
+        image:
+          "https://www.uniqlo.com/vn/top/img/topic/20210812_1130_gl2679.jpg",
+        status: true,
+      },
+    ];
     return (
-
       <Container className="mt-4">
         <Row>
-          <Silder_Collection />
+          <Slider chooseSize="mr-2" arrayList={ListimagesNewStyle} />
         </Row>
+        <Row className="Filter__Wrap">
+          <Col>
+            <Dropdown onSelect={this.onSelectChange}>
+              <Dropdown.Toggle
+                variant="outline-secondary"
+                id="dropdown-basic"
+                title="Dropdown button"
+                txt="txtFilter"
+              >
+                Lọc Giá
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item eventKey="0">Tất Cả</Dropdown.Item>
+                <Dropdown.Item eventKey="1">
+                  { "Dưới " + formatter.format(400000)}
+                </Dropdown.Item>
+                <Dropdown.Item eventKey="2">
+                  {formatter.format(500000) + " - " + formatter.format(900000)}
+                </Dropdown.Item>
+                <Dropdown.Item eventKey="3">
+                  {"Trên " + formatter.format(900000)}
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </Col>
+          <Col></Col>
+        </Row>
+
         <Row>
-         {this.showListProduct(products_category)}
-      
+          {this.showListProduct(products_category, txtFilter)}
+
           {/* {this.state.result}
          
           <ReactPaginate
@@ -77,8 +147,8 @@ class index extends Component {
   }
   refresh = () => {
     window.location.reload();
-}
-  showListProduct = (products_category) => {
+  };
+  showListProduct = (products_category, idFilter) => {
     var { match } = this.props;
     var result = null;
 
@@ -99,16 +169,48 @@ class index extends Component {
     //       </Col>
     //     </React.Fragment>
     //   ));
-      // this.setState({
-      //   pageCount: Math.ceil(data.length / this.state.perPage),
-  
-      //  result
-      // });
+    // this.setState({
+    //   pageCount: Math.ceil(data.length / this.state.perPage),
+
+    //  result
+    // });
     // })
-    console.log(products_category)
+
     var data = products_category.filter(
-        (product) => product.nameCategory === id_Category
+      (product) => product.nameCategory === id_Category
+    );
+    if (idFilter === 1) {
+      var dataFilter = data.filter(
+        (product) => product.price < 400000 
       );
+      result = dataFilter.map((product) => (
+        <React.Fragment>
+          <Col lg="3" className="mt-4">
+            <Item key={product.id} product={product} />
+          </Col>
+        </React.Fragment>
+      ));
+    } else if (idFilter === 2) {
+      var dataFilter = data.filter(
+        (product) => product.price <= 500000 && product.price <= 900000
+      );
+      result = dataFilter.map((product) => (
+        <React.Fragment>
+          <Col lg="3" className="mt-4">
+            <Item key={product.id} product={product} />
+          </Col>
+        </React.Fragment>
+      ));
+    } else if (idFilter === 3) {
+      var dataFilter = data.filter((product) => product.price > 900000);
+      result = dataFilter.map((product) => (
+        <React.Fragment>
+          <Col lg="3" className="mt-4">
+            <Item key={product.id} product={product} />
+          </Col>
+        </React.Fragment>
+      ));
+    } else {
       result = data.map((product) => (
         <React.Fragment>
           <Col lg="3" className="mt-4">
@@ -116,9 +218,8 @@ class index extends Component {
           </Col>
         </React.Fragment>
       ));
-      return result;
-   
-    
+    }
+    return result;
   };
 }
 
