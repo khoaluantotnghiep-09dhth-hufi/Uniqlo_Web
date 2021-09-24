@@ -25,7 +25,7 @@ export const onAddImportInfo = (importInfo) => {
 export const onAddImportInfoResquest = (importInfo) => {
   return (dispatch) => {
     return callApi("import-info", "POST", importInfo).then((response) => {
-      toast.success("Bổ sung thành công !");
+      toast.success("Nhập hàng thành công !");
       dispatch(onAddImportInfo(response.data));
     });
   };

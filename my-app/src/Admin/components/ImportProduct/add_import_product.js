@@ -1,4 +1,5 @@
 import React from 'react';
+import {  toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faPlus,
@@ -19,7 +20,6 @@ class AddImportProduct extends React.Component {
             idItem: "",
             txtDateImport: "",
             id_order: "",
-            txtTotalImport: "",
             orderArr: [],
         };
     }
@@ -57,10 +57,9 @@ class AddImportProduct extends React.Component {
     checkValidate = () => {
         let check = ['txtDateImport'];
         let isValid = true;
-
         if (!this.state[check[0]]) {
             isValid = false;
-            alert("Vui lòng chọn ngày");
+            toast.error("Vui lòng chọn ngày và đơn đặt");
 
         }
         return isValid;

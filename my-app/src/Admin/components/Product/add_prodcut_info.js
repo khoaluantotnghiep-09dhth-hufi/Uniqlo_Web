@@ -1,4 +1,5 @@
 import React from 'react';
+import {  toast } from 'react-toastify';
 import {
     CRow,
     CCol,
@@ -102,7 +103,7 @@ class addProduct extends React.Component {
         for (let i = 0; i <= check.length; i++) {
             if (!this.state[check[0]]) {
                 isValid = false;
-                alert("Vui lòng nhập: Số Lượng");
+                toast.error("Vui lòng nhập: Số Lượng");
                 break;
             }
         }
