@@ -15,6 +15,36 @@ export const fetchOrderInfoResquest = (id) => {
     });
   };
 };
+// to import
+export const fetchOrderInfoToImport = (orderInfo) => {
+  return {
+    type: types.FETCH_ORDERINFO,
+    orderInfo,
+  };
+};
+
+export const fetchOrderInfoToImportResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`orders-info-import/${id}`, "GET", null).then((response) => {
+      dispatch(fetchOrderInfoToImport(response.data));
+    });
+  };
+};
+// to import
+export const fetchOrderInfoQuantity = (orderInfo) => {
+  return {
+    type: types.FETCH_ORDERINFO,
+    orderInfo,
+  };
+};
+
+export const fetchOrderInfoQuantityResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`orders-info-quantity/${id}`, "GET", null).then((response) => {
+      dispatch(fetchOrderInfoQuantity(response.data));
+    });
+  };
+};
 export const fetchOrderInfoNoID = (orderInfo) => {
   return {
     type: types.FETCH_ORDERINFO,
