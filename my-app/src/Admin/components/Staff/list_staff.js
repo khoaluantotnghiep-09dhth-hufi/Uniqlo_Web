@@ -14,14 +14,14 @@ import * as actions from "./../../../actions/index";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 const fields = [
-  'STT',
-  { key: 'id', label: 'Mã Nhân Viên' },
-  { key: 'name', label: 'Tên' },
-  { key: 'email', label: 'Gmail' },
-  { key: 'phone', label: 'SĐT' },
-  { key: 'address', label: 'Địa Chỉ' },
-  { key: 'password', label: 'Mật Khẩu' },
-  { key: 'postion', label: 'Chức Vụ' },
+  "STT",
+  { key: "id", label: "Mã Nhân Viên" },
+  { key: "name", label: "Tên" },
+  { key: "email", label: "Gmail" },
+  { key: "phone", label: "SĐT" },
+  { key: "address", label: "Địa Chỉ" },
+
+  { key: "postion", label: "Chức Vụ" },
   "Hành Động",
 ];
 
@@ -36,7 +36,7 @@ class ListStaffs extends React.Component {
     var { staff } = this.props;
 
     var dataStaff = staff.map((item, index) => {
-      return item;
+      return { ...item, index };
     });
     return (
       <>
@@ -87,12 +87,12 @@ class ListStaffs extends React.Component {
                         </CButton>
                       </td>
                     ),
-                    "STT":
-                      (item, index) => (
-                        <td>
-                          {index + 1}
-                        </td>
-                      )
+                    STT: (item, index) => <td>{index + 1}</td>,
+                    postion: (item) => (
+                      <td>
+                        {item.postion === "1" ? "Quản Lý" : "Nhân Viên Bán Hàng"}
+                      </td>
+                    ),
                   }}
                 />
               </CCardBody>
