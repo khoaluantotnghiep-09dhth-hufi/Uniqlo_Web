@@ -32,7 +32,7 @@ const fields = [
   { key: 'id_order', label: 'Mã Phiếu Đặt' },
   { key: 'date_import', label: 'Ngày Nhập' },
   { key: 'name_warehouse', label: 'Kho Nhập' },
-  // { key: 'status', label: 'Trạng Thái' },
+  { key: 'status', label: 'Trạng Thái' },
   'Thao Tác',
 ]
 
@@ -74,7 +74,7 @@ class ListImportProduct extends React.Component {
                       (item) => (
                         <td>
                           {item.status === 1 ?
-                            <Link to={`/admin/manage/import-info/${item.id}/${item.id_order}`}>
+                            <Link to={`/admin/manage/import-info/${item.id}`}>
                               <CButton
                                 type="button"
                                 className="btn btn-danger"
@@ -87,13 +87,13 @@ class ListImportProduct extends React.Component {
                                 Xem Chi Tiết
                               </CButton>
                             </Link>
-                            : ""
-                            // :
-                            // <Link to={`/admin/manage/import-product/${item.id}/edit`}>
-                            //   <CButton type="button" className="btn btn-primary">
-                            //     <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
-                            //   </CButton>
-                            // </Link>
+
+                            :
+                            <Link to={`/admin/manage/import-product/${item.id}/edit`}>
+                              <CButton type="button" className="btn btn-primary">
+                                <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
+                              </CButton>
+                            </Link>
                             // <Link to={`/admin/manage/order-product/${item.id}/edit`}>
                             //     <CButton type="button" className="btn btn-warning">
                             //         <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Xóa
@@ -101,7 +101,7 @@ class ListImportProduct extends React.Component {
                             // </Link>
                           }
                           {item.status === 0 ?
-                            <Link to={`/admin/manage/import-info/${item.id}/${item.id_order}`}>
+                            <Link to={`/admin/manage/import-info/${item.id}`}>
                               <CButton
                                 type="button"
                                 className="btn btn-danger"
@@ -119,13 +119,13 @@ class ListImportProduct extends React.Component {
                         </td>
 
                       ),
-                    // "status": (item) => (
-                    //   <td>
-                    //     <Alert variant={getBadge(item.status)}>
-                    //       {item.status === 0 ? 'Chưa Nhập' : 'Đã Nhập'}
-                    //     </Alert>
-                    //   </td>
-                    // ),
+                    "status": (item) => (
+                      <td>
+                        <Alert variant={getBadge(item.status)}>
+                          {item.status === 0 ? 'Chưa Nhập' : 'Đã Nhập'}
+                        </Alert>
+                      </td>
+                    ),
                     'STT':
                       (item, index) => (
                         <td>

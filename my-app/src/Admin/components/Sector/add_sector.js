@@ -1,5 +1,4 @@
 import React from 'react';
-import {  toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faPlus,
@@ -59,7 +58,7 @@ class AddSector extends React.Component {
 
         if (!this.state[check[0]]) {
             isValid = false;
-            toast.error("Vui lòng nhập tên");
+            alert("Vui lòng nhập tên");
 
         }
         return isValid;

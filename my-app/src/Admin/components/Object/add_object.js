@@ -4,7 +4,6 @@ import { faPlus, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import uniqid from "uniqid";
-import {  toast } from 'react-toastify';
 import {
   CCol,
   CRow,

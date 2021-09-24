@@ -11,6 +11,7 @@ export const fetchImport = (import_product) => {
 export const fetchImportResquest = () => {
   return (dispatch) => {
     return callApi("import-product", "GET", null).then((response) => {
+      console.log(response.data);
       dispatch(fetchImport(response.data));
     });
   };

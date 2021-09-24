@@ -1,5 +1,4 @@
 import React from 'react';
-import {  toast } from 'react-toastify';
 import {
 
 
@@ -106,7 +105,7 @@ class addProduct extends React.Component {
         for (let i = 0; i <= check.length; i++) {
             if (!this.state[check[0]]) {
                 isValid = false;
-                toast.error("Vui lòng nhập: " + check[i]);
+                alert("Vui lòng nhập: " + check[i]);
                 break;
             }
         }

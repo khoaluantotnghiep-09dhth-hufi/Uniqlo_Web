@@ -1,6 +1,5 @@
 import React from 'react';
 import uniqid from "uniqid";
-import {  toast } from 'react-toastify';
 import { connect } from "react-redux";
 import * as actions from "./../../../actions/index";
 import { Link } from "react-router-dom";

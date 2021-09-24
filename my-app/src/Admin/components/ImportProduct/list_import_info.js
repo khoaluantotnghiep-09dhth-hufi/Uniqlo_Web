@@ -1,5 +1,4 @@
 import React from 'react';
-import {  toast } from 'react-toastify';
 import {
     CRow,
     CCol,
@@ -21,7 +20,7 @@ import { Button, Form, Col, Container, Row, Image, Alert } from 'react-bootstrap
 import * as actionsProductInfo from "../../../actions/product_infoActions";
 import * as actionsOrderInfo from "../../../actions/orderInfoActions";
 import * as actionsImportInfo from "../../../actions/importInfoActions";
-
+import { toast } from 'react-toastify';
 import { connect } from "react-redux";
 import uniqid from 'uniqid';
 const fields = [
@@ -51,8 +50,7 @@ class addProduct extends React.Component {
             id_product_info: "",
             id_order_info: "",
             productArr: [],
-            orderInfoArr: [],
-            quantityArr:[],
+            orderInfoArr:[],
         };
     }
     componentDidMount() {
@@ -60,38 +58,14 @@ class addProduct extends React.Component {
         this.props.fetchImportInfo(match.params.id_import);
         isLoadingExternally = true;
         this.setState({
-            // txtQuantity: this.props.fetchOrderInfoQuantity(this.state.id_order_info),
-            // productArr: this.props.fetchProductsInfo(this.state.id_order_info),
-            orderInfoArr: this.props.fetchOrderInfoToImport(match.params.id_order),
+            productArr: this.props.fetchProductsInfo(),
+            orderInfoArr: this.props.fetchOrderInfo(),
         })
     }
     onDeleteOrderInfo = (item) => {
         if (window.confirm("Bạn có chắc muốn xóa không ?")) {
             this.props.onDeleteItemOrderInfo(item);
         }
-    }
-    componentDidUpdate(prevProps,prevState,snapshot) {
-        if (prevProps.productInfo !== this.props.productInfo){
-            let arrProductInfo = this.props.productInfo;
-            this.setState({
-                productArr : arrProductInfo,
-                id_product_info : arrProductInfo && arrProductInfo.length > 0 ? arrProductInfo[0].id : ''
-            })
-        }
-        if (prevProps.orderInfo !== this.props.orderInfo){
-            let arrOrderInfo = this.props.orderInfo;
-            this.setState({
-                orderInfoArr : arrOrderInfo,
-                id_order_info : arrOrderInfo && arrOrderInfo.length > 0 ? arrOrderInfo[0].id : ''
-            })
-        }
-        // if (prevProps.orderInfo !== this.props.orderInfo){
-        //     let arrQuantity = this.props.orderInfo;
-        //     this.setState({
-        //         quantityArr : arrQuantity,
-        //         txtQuantity : arrQuantity && arrQuantity.length > 0 ? arrQuantity[0].id : ''
-        //     })
-        // }
     }
     // componentWillReceiveProps(NextProps) {
     //     var { match } = this.props;
@@ -113,16 +87,12 @@ class addProduct extends React.Component {
         let coppyState = { ...this.state };
         coppyState[id] = e.target.value;
         this.setState({
-            ...coppyState,
-            productArr: this.props.fetchProductsInfo(this.state.id_order_info),
-            // txtQuantity: this.props.fetchOrderInfoQuantity(this.state.id_order_info),
-        },()=> {
-            console.log("state",this.state);
+            ...coppyState
         })
     }
 
     checkValidate = () => {
-        let check = ['txtQuantity'];
+        let check = ['txtQuantity', 'txtRetal_price'];
         let isValid = true;
         for (let i = 0; i <= check.length; i++) {
             if (!this.state[check[0]]) {
@@ -140,26 +110,25 @@ class addProduct extends React.Component {
         event.preventDefault();
         var { match } = this.props;
         var { history } = this.props;
-        var { txtQuantity, id_product_info, id_order_info } = this.state;
-        var ImportInfo = {
-            id: uniqid("import-info-"),
-            id_order_info: id_order_info,
+        var { txtQuantity, id_product_info, txtRetal_price } = this.state;
+        var orderInfo = {
+            id: uniqid("order-info-"),
+            id_order: match.params.id_order,
             id_product_info: id_product_info,
             quantity: txtQuantity,
-            id_import: match.params.id_import,
-            
         };
-        this.props.onAddItemImportInfo(ImportInfo);
+        this.props.onAddItemOrderInfo(orderInfo);
         history.goBack();
     };
     render() {
         var { productInfo } = this.props;
         var { orderInfo } = this.props;
         var { importInfo } = this.props;
-        let { txtQuantity, id_product_info, id_order_info } = this.state;
-        var dataImportInfo = importInfo.map((item, index) => {
+        let { txtQuantity, id_product_info } = this.state;
+        var dataOrderInfo = importInfo.map((item, index) => {
             return { ...item, index };
         })
+        console.log("data order info", dataOrderInfo);
         // if (dataOrderInfo.status === 0) {
         //     return (
         //         <>
@@ -425,22 +394,23 @@ class addProduct extends React.Component {
                                 <Row sm="12">
                                     <Col sm="10">
                                         <Form.Group className="mb-3" controlId="formBasicObject">
-                                            <Form.Label>Chi Tiết Đơn Đặt Hàng</Form.Label>
+                                            <Form.Label>Sản Phẩm</Form.Label>
                                             <Form.Select name="form-field-name"
-                                                value={id_order_info}
-                                                onChange={(e) => { this.onChange(e, 'id_order_info') }}
+                                                value={id_product_info}
+                                                onChange={(e) => { this.onChange(e, 'id_product_info') }}
                                                 labelKey={'Tên'}
                                                 valueKey={'Mã'}
                                                 isLoading={isLoadingExternally}
                                             >
-                                                <option value="abc" key="1">Chọn</option>
-                                                {orderInfo && orderInfo.length > 0 &&
-                                                    orderInfo.map((option, index) => (
-                                                        <option  value={option.id} key={index}>Tên: {option.name} | Màu: {option.nameColor} | Kích Cỡ: {option.nameSize} | Số Lượng: {option.quantity}</option>
+                                                <option value="product-info-2">Chọn</option>
+                                                {productInfo && productInfo.length > 0 &&
+                                                    productInfo.map((option, index) => (
+                                                        <option value={option.id} key={index}>Tên: {option.name}, Kích Cỡ: {option.nameSize}, Màu: {option.nameColor}</option>
                                                     ))}
                                             </Form.Select>
                                         </Form.Group>
                                     </Col>
+
                                     <Col sm="2">
                                         <Form.Group >
                                             <Form.Label htmlFor="exampleFormControlTextarea1">Số Lượng</Form.Label>
@@ -455,28 +425,6 @@ class addProduct extends React.Component {
                                             />
                                         </Form.Group>
                                     </Col>
-                                </Row>
-                                <Row sm="12">
-                                    <Col sm="12">
-                                        <Form.Group className="mb-3" controlId="formBasicObject">
-                                            <Form.Label>Chi Tiết Sản Phẩm</Form.Label>
-                                            <Form.Select name="form-field-name"
-                                                value={id_product_info}
-                                                onChange={(e) => { this.onChange(e, 'id_product_info') }}
-                                                labelKey={'Tên'}
-                                                valueKey={'Mã'}
-                                                isLoading={isLoadingExternally}
-                                            >
-                                                {productInfo && productInfo.length > 0 &&
-                                                    productInfo.map((option, index) => (
-                                                        <option selected={option.id} value={option.id} key={index}>Tên: {option.name} | Màu: {option.nameColor} | Kích Cỡ: {option.nameSize} | Số Lượng: {option.quantity}</option>
-                                                    ))}
-                                            </Form.Select>
-                                        </Form.Group>
-                                    </Col>
-                                </Row>
-                                <Row sm="12">
-
                                     <Col sm="10">
                                         <Form.Group className="d-flex justify-content-center">
                                             <Button type="button" className="btn btn-danger"
@@ -506,7 +454,7 @@ class addProduct extends React.Component {
                                 </CCardHeader>
                                 <CCardBody>
                                     <CDataTable
-                                        items={dataImportInfo}
+                                        items={dataOrderInfo}
                                         fields={fields}
                                         itemsPerPage={8}
                                         pagination
@@ -514,7 +462,7 @@ class addProduct extends React.Component {
                                             'Thao Tác':
                                                 (item) => (
                                                     <td>
-                                                        {/* {item.status === 1 ?
+                                                        {item.status === 1 ?
                                                             <Alert variant={getBadge(item.status)}>
                                                                 {item.status === 0 ? 'Chưa Giao' : 'Đã Giao'}
                                                             </Alert>
@@ -525,7 +473,7 @@ class addProduct extends React.Component {
                                                             >
                                                                 <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
                                                             </CButton>
-                                                        } */}
+                                                        }
                                                         {item.status === 0 ?
                                                             <Link to={`/admin/manage/order-info/${item.id}/edit`}>
                                                                 <CButton type="button" className="btn btn-primary">
@@ -554,7 +502,7 @@ class addProduct extends React.Component {
                                             'image':
                                                 (item, index) => (
                                                     <td xs={6} md={4}>
-                                                        <Image style={{ width: "200px", height: "200px" }} src={item.image} thumbnail />
+                                                        <Image style={{width:"200px", height:"200px"}} src={item.image} thumbnail />
                                                     </td>
                                                 ),
                                             // "nameColor": (item) => (
@@ -572,7 +520,7 @@ class addProduct extends React.Component {
                             </CCard>
                         </CCol>
                     </CRow>
-                </Container >
+                </Container>
             </>
         )
     }
@@ -589,17 +537,17 @@ var mapDispatchToProps = (dispatch, props) => {
         onAddItemImportInfo: (importInfo) => {
             return dispatch(actionsImportInfo.onAddImportInfoResquest(importInfo));
         },
-        fetchProductsInfo: (id) => {
-            return dispatch(actionsProductInfo.fetchProductInfoImportResquest(id));
+        fetchProductsInfo: () => {
+            return dispatch(actionsProductInfo.fetchProductInfoResquestNoID());
         },
-        fetchOrderInfoToImport: (id) => {
-            return dispatch(actionsOrderInfo.fetchOrderInfoToImportResquest(id));
-        },
-        fetchOrderInfoQuantity: (id) => {
-            return dispatch(actionsOrderInfo.fetchOrderInfoQuantity(id));
+        fetchOrderInfo: () => {
+            return dispatch(actionsOrderInfo.fetchOrderInfoResquest());
         },
         fetchImportInfo: (id) => {
             return dispatch(actionsImportInfo.fetchImportInfoResquest(id));
+        },
+        onDeleteItemImportInfo: (id) => {
+            return dispatch(actionsImportInfo.onDeleteImportInfoResquest(id));
         },
     };
 };
