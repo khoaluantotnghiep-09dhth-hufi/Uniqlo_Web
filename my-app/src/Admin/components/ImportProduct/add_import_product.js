@@ -1,5 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {  toast } from 'react-toastify';
 import {
     faPlus,
     faArrowLeft,
@@ -60,7 +61,7 @@ class AddImportProduct extends React.Component {
 
         if (!this.state[check[0]]) {
             isValid = false;
-            alert("Vui lòng chọn ngày");
+            toast.error("Vui lòng chọn ngày và đơn đặt");
 
         }
         return isValid;
