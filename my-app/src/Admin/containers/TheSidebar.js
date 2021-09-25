@@ -25,17 +25,12 @@ const TheSidebar = () => {
       onShowChange={(val) => dispatch({type: 'set', sidebarShow: val })}
     >
       <CSidebarBrand className="d-md-down-none " to="/">
-       
         <img src={logo} className="c-sidebar-brand-full mr-2" height={35} />
         <h3 className="c-sidebar-brand-full text-danger font-weight-bolder" height={35} >Uniqlo Admin</h3>
-        
         <img src={logo} className="c-sidebar-brand-minimized" height={35} />
-        
       </CSidebarBrand>
       <CSidebarNav>
-
         <CCreateElement
-          // items={navigation}
           items={sessionUser.role === 1 ? navigation : navigationStaff}
           components={{
             CSidebarNavDivider,

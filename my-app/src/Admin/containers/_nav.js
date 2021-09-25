@@ -28,10 +28,7 @@ import {
   faPalette,
   faDraftingCompass,
 } from "@fortawesome/free-solid-svg-icons";
-
-
 const _nav = [
-
   {
     _tag: 'CSidebarNavItem',
     name: 'Trang Chủ',

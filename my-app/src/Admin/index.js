@@ -5,8 +5,6 @@ import "react-pro-sidebar/dist/css/styles.css";
 import Login from "./screens/Login/index";
 import Home from "./containers/TheContent";
 class index extends Component {
-  
-  
   render() {
     return (
       <Router>

@@ -1,20 +1,21 @@
 import React from "react";
 
-
 const Home = React.lazy(() => import('../components/Home/index'));
+
 const Order = React.lazy(() => import('../components/Order/order'));
 const UpdateOrder = React.lazy(() => import('../components/Order/update_order'));
 const ConfirmedOrder = React.lazy(() => import('../components/Order/confirmedOrder'));
 const UnConfirmedOrder = React.lazy(() => import('../components/Order/unconfimredOrder'));
+
 const ListNews = React.lazy(() => import('../components/News/list_news'));
 const AddNews = React.lazy(() => import('../components/News/add_news'));
+
 const ListDiscount = React.lazy(() => import('../components/Discount/list_discount'));
 const AddDiscount = React.lazy(() => import('../components/Discount/add_discount'));
 
 const ListAccountAdmin = React.lazy(() => import('../components/Account_Admin/list_accountadmin'));
 const UpdateAccountAdmin = React.lazy(() => import('../components/Account_Admin/update_account'));
 const AddAccountAdmin = React.lazy(() => import('../components/Account_Admin/add_accountAdmin'));
-
 
 const ListProducts = React.lazy(() => import('../components/Product/list_product'));
 const AddProduct = React.lazy(() => import('../components/Product/add_product'));
@@ -39,10 +40,8 @@ const AddImportInfoProduct = React.lazy(() => import('../components/ImportProduc
 const ListObject = React.lazy(() => import('../components/Object/list_object'));
 const AddObject = React.lazy(() => import('../components/Object/add_object'));
 
-
 const ListSectors = React.lazy(() => import('../components/Sector/list_sectors'));
 const AddSector = React.lazy(() => import('../components/Sector/add_sector'));
-
 
 const ListCategories = React.lazy(() => import('../components/Category/list_categories'));
 const AddCategory = React.lazy(() => import('../components/Category/add_category'));
@@ -56,10 +55,6 @@ const AddColor = React.lazy(() => import('../components/Color/add_color'));
 const ListSize = React.lazy(() => import('../components/Size/list_size'));
 const AddSize = React.lazy(() => import('../components/Size/add_size'));
 
-
-
-
-// const Page404 = React.lazy(() => import('../screens/page404/Page404'));
 const routes = [
     {
         path: '/admin/home',
@@ -67,13 +62,7 @@ const routes = [
         name: 'Trang Chủ',
         component: Home
     },
-    // {
-    //     path: '/admin/login',
-    //     exact: true,
-    //     name: 'Trang Chủ',
-    //     component: Login
-    // },
-    // { path: '', exact: true, component: Page404 },
+
     { path: '/admin/system/order/all', exact: true, name: 'Tất Cả Đơn Hàng', component: Order },
     { path: '/admin/system/order/:id_order/edit', exact: true, name: 'Xác Nhận Đơn Hàng', component: UpdateOrder },
     { path: '/admin/system/order/confirmed', exact: true, name: 'Đơn Hàng Đã Xác Nhận', component: ConfirmedOrder },
@@ -142,5 +131,5 @@ const routes = [
     { path: '/admin/manage/size/add', exact: true, name: 'Thêm Kích Cỡ Mới', component: AddSize },
     { path: '/admin/manage/size/:id_size/edit', exact: true, name: 'Thêm Kích Cỡ Mới', component: AddSize },
 ]
-///admin/manage/categories
+
 export default routes
