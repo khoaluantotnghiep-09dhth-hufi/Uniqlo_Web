@@ -16,6 +16,19 @@ export const fetchProductInfoResquest = (id) => {
     });
   };
 };
+export const fetchProductInfoImport = (productInfo) => {
+  return {
+    type: types.FETCH_PRODCUTINFO,
+    productInfo,
+  };
+};
+export const fetchProductInfoImportResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`product-info-order-info/${id}`, "GET", null).then((response) => {
+      dispatch(fetchProductInfoImport(response.data));
+    });
+  };
+};
 export const fetchProductInfoNoID = (productInfo) => {
   return {
     type: types.FETCH_PRODCUTINFO,
@@ -73,6 +86,22 @@ export const onUpdateProductInfoResquest = (productInfo) => {
       (response) => {
         toast.success("Sửa thành công !");
         dispatch(onUpdateProductInfo(response.data));
+      }
+    );
+  };
+};
+export const onUpdateProductInfoImport = (productInfo) => {
+  return {
+    type: types.UPDATE_PRODUCTINFO,
+    productInfo,
+  };
+};
+export const onUpdateProductInfoImportResquest = (productInfo) => {
+  return (dispatch) => {
+    return callApi(`product-info-import/${productInfo.id}`, "PUT", productInfo).then(
+      (response) => {
+        toast.success("Sửa thành công !");
+        dispatch(onUpdateProductInfoImport(response.data));
       }
     );
   };
