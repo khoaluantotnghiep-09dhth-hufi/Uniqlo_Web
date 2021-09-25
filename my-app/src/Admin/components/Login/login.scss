@@ -18,7 +18,7 @@
   bottom: 0;
   right: 0;
   left: 0;
-  height: 450px;
+  height: 350px;
   .login-input {
     margin: 3px;
   }
@@ -34,11 +34,10 @@
       rgb(206, 77, 105) 100%
     );
     border-radius: 15px;
-    width: 100%;
+    width: 97%;
     margin: 10px;
     height: 60px;
     outline:none;
     border: none;
-    color: white;
-    
+    margin-left: 10px;
   }

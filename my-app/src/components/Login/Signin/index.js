@@ -26,13 +26,13 @@ class index extends Component {
     event.preventDefault(); //Xoá dòng này sẽ tự chuyển trang chứ ko chuyển trang bằng tay
     var { txtSDT, txtPassword, items } = this.state;
 
-console.log(users)
+    console.log("data user",users)
     for (let i = 0; i < users.length; i++) {
       if (users[i].phone === txtSDT && users[i].password === txtPassword) {
-       
 
-        
-      
+
+
+
         var user = {
           id_user: users[i].id,
           name: users[i].name,
@@ -43,8 +43,8 @@ console.log(users)
           isCheckLogin: true,
         });
         sessionStorage.setItem("user", JSON.stringify(user));
-     
-        
+
+
       } else {
         this.setState({
           isCheckLogin: true,

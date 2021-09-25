@@ -15,7 +15,7 @@ import routes from '../routes'
 
 import { 
   TheHeaderDropdown,
- 
+ TheHeaderDropdownNoti
   
 }  from './index'
 
@@ -54,9 +54,7 @@ const TheHeader = () => {
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
-  
-       
-       
+      <TheHeaderDropdownNoti/>
         <TheHeaderDropdown/>
       </CHeaderNav>
 

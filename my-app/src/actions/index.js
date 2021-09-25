@@ -254,6 +254,7 @@ export const fetchStaffs = (staff) => {
 export const fetchStaffsResquest = () => {
   return (dispatch) => {
     return callApi("staffs", "GET", null).then((response) => {
+      console.log(response.data);
       dispatch(fetchStaffs(response.data));
     });
   };

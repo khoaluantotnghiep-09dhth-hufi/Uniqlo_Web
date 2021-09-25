@@ -5,12 +5,14 @@ import TheHeaderDropdown from './TheHeaderDropdown'
 // import TheHeaderDropdownTasks from './TheHeaderDropdownTasks'
 import TheLayout from './TheLayout'
 import TheSidebar from './TheSidebar'
+import TheHeaderDropdownNoti from './TheHeaderDropdownNotif'
 
 export {
   TheContent,
   TheFooter,
   TheHeader,
   TheHeaderDropdown,
+  TheHeaderDropdownNoti,
   TheLayout,
   TheSidebar
 }
