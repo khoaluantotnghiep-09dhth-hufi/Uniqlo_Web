@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import uniqid from 'uniqid';
 import { Button, Form, Col, Container, Row } from 'react-bootstrap';
 import * as actions from "./../../../actions/index";
+import { toast } from "react-toastify";
 class index extends React.Component {
   constructor(props) {
     super(props);
@@ -52,7 +53,8 @@ class index extends React.Component {
       email: txtEmail,
     };
     if(txtName === "" || txtAddress === "" || txtPhone === "" || txtEmail === "" || txtPassword === ""){
-      alert("Bạn chưa nhập thông tin")
+      toast.error(<div>Đăng ký thất bại.<br /> Bạn cần nhập đủ thông tin!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+
     }
     else{
       this.props.onAddItemCustomer(customer);
