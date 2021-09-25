@@ -4,7 +4,7 @@ import React from 'react'
 // import Home from '../components/Home/index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-
+  faExchangeAlt,
   faListUl,
   faCheck,
   faExclamationCircle,
@@ -62,8 +62,13 @@ const _nav = [
         _tag: 'CSidebarNavItem',
         name: 'Chưa Xác Nhận',
         to: '/admin/system/order/unconfirmed',
-
         icon: <FontAwesomeIcon icon={faExclamationCircle} className="mr-2" />,
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Đổi Trả',
+        to: '/admin/system/order/exchange',
+        icon: <FontAwesomeIcon icon={faExchangeAlt} className="mr-2" />,
       },
 
     ]
