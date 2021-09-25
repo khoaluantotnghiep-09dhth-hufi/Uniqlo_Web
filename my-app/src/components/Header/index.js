@@ -16,6 +16,8 @@ class index extends Component {
     this.state = {
       name: "",
       quantity: "",
+      txtPhone: "",
+      txtPassword: "",
     };
   }
   onClick() {
@@ -66,6 +68,8 @@ class index extends Component {
     // console.log(remove);
     // this.setState({input_Search: remove})
   }
+
+
   render() {
     var { cart } = this.props;
     var { input_Search } = this.state;
@@ -78,12 +82,13 @@ class index extends Component {
     );
     
     var isCheckAccount =
-      sessionStorage.getItem("user") === null ? (
-        <NavLink to="/login">
+      sessionStorage.getItem("user") !== null ? (
+        <NavLink to="/account">
           <MDBIcon icon="user" md="4" className="sizeIcon" />
         </NavLink>
+        
       ) : (
-        <NavLink to="/account">
+        <NavLink to="/login">
           <MDBIcon icon="user" md="4" className="sizeIcon" />
         </NavLink>
       );
@@ -124,7 +129,7 @@ class index extends Component {
               <Col lg={1}>
                 {isCheckAccount}
                 {/* <NavLink to="/login">
-                  <MDBIcon icon="user" md="4" className="sizeIcon" />
+                  <MDBIcon icon="user" md="4" className="sizeIcon" onClick={this.onHandleSubmit}/>
                 </NavLink>{" "} */}
               </Col>
               <Col lg={1}>

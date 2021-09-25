@@ -40,6 +40,8 @@ class index extends Component {
       show: false,
       setShow: false,
       txtHuyDon: "",
+      txtPhone: "",
+      txtPassword: "",
       isCheckRequest: false,
     };
   }
@@ -73,12 +75,28 @@ class index extends Component {
       [name]: value,
     });
   };
-  onSubmitForm = (event) => {
-    var { txtHuyDon } = this.state;
+  onSubmitForm = (users) => (event) => {
+    var {txtPhone, txtPassword, txtHuyDon } = this.state;    
     event.preventDefault();
-    this.setState({
-      isCheckRequest: true,
-    });
+
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].phone === txtPhone && users[i].password === txtPassword) {
+        var user = {
+          id_user: users[i].id,
+          name: users[i].name,
+          phone: users[i].phone,
+          password: users[i].password,
+        };
+        this.setState({
+          isCheckLogin: true,
+        });
+        sessionStorage.setItem("user", JSON.stringify(user));
+      } else {
+        this.setState({
+          isCheckLogin: true,
+        });
+      }
+    }
     console.log(txtHuyDon);
     this.handleClose();
   };
@@ -102,7 +120,7 @@ class index extends Component {
                 <h3>THÔNG TIN TÀI KHOẢN</h3>
                 <br></br>
                 <h6>
-                  Xin chào, <span>{sessionUser.name}</span>
+                  {/* Xin chào, <span>{sessionUser.name}</span> */}
                 </h6>
               </Col>
             </Row>
@@ -186,7 +204,7 @@ class index extends Component {
             </Row>
             <Row>
               <Col>
-                <h6>Tên tài khoản: {sessionUser.name}</h6>
+                {/* <h6>Tên tài khoản: {sessionUser.name}</h6> */}
               </Col>
             </Row>
             <Row>
