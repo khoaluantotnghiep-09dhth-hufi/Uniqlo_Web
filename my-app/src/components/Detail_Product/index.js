@@ -243,14 +243,14 @@ class index extends Component {
 
       return;
     }
-   
+    console.log(products)
     var onTakeIdProductInfo = products.find(
       (item) =>
         item.id === id_product &&
         item.nameColor === isChooseColor &&
         item.nameSize === txtSize
     );
-
+console.log(onTakeIdProductInfo)
     var product = {
       id_product_info: onTakeIdProductInfo.id_product_info,
       id_product: match.params.id_product,
