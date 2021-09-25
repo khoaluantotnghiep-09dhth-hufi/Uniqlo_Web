@@ -90,7 +90,7 @@ class ListStaffs extends React.Component {
                     STT: (item, index) => <td>{index + 1}</td>,
                     role: (item) => (
                       <td>
-                        {item.role === "0" ? "Quản Lý" : "Nhân Viên Bán Hàng"}
+                        {item.role === 0 ? "Quản Lý" : "Nhân Viên Bán Hàng"}
                       </td>
                     ),
                   }}

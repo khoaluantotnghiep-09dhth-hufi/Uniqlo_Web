@@ -76,7 +76,7 @@ class List_Customers extends React.Component {
                     ),
                     role: (item) => (
                       <td>
-                        {item.role === "0" ? "Quản Lý" : "Nhân Viên Bán Hàng"}
+                        {item.role === 0 ? "Quản Lý" : "Nhân Viên Bán Hàng"}
                       </td>
                     ),
                   }}

@@ -89,7 +89,7 @@ class addDiscount extends React.Component {
     var promotion = {
       id: uniqid("promotion-"),
       name: txtNameDiscount,
-      desciption: txtNameMota,
+      description: txtNameMota,
       date_start: dateStart,
       date_end: dateEnd,
       image: txtImage,
@@ -98,7 +98,7 @@ class addDiscount extends React.Component {
     var promotionUpdate = {
       id: match.params.id_promotion,
       name: txtNameDiscount,
-      desciption: txtNameMota,
+      description: txtNameMota,
       date_start: dateStart,
       date_end: dateEnd,
       image: txtImage,

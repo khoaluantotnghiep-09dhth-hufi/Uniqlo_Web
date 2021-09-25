@@ -36,7 +36,7 @@ const fields = [
   "STT",
   { key: "id", label: "Mã" },
   { key: "name", label: "Tên Khuyến Mãi" },
-  { key: "desciption", label: "Phần Trăm Khuyến Mãi" },
+  { key: "description", label: "Phần Trăm Khuyến Mãi" },
   { key: "image", label: "Hình Ảnh Chương Trình" },
   { key: "date_start", label: "Ngày Bắt Đầu" },
   { key: "date_end", label: "Ngày Kết Thúc" },
