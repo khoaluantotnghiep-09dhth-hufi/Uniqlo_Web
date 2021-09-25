@@ -42,7 +42,7 @@ class index extends Component {
         this.setState({
           isCheckLogin: true,
         });
-        sessionStorage.setItem("user", JSON.stringify(user));
+        sessionStorage.setItem("client", JSON.stringify(user));
 
 
       } else {

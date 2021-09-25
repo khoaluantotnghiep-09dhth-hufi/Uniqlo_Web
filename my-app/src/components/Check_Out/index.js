@@ -150,7 +150,7 @@ class index extends Component {
       txtXa,
       txtGhiChu,
     } = this.state;
-    var sessionUser = JSON.parse(sessionStorage.getItem("user"));
+    var sessionUser = JSON.parse(sessionStorage.getItem("client"));
     var sessionCart = JSON.parse(sessionStorage.getItem("cart"));
     let dateNow = new Date().toISOString().slice(0, 10);
 
