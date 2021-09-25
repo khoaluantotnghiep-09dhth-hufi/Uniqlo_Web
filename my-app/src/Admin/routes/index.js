@@ -62,13 +62,18 @@ const AddSize = React.lazy(() => import('../components/Size/add_size'));
 // const Page404 = React.lazy(() => import('../screens/page404/Page404'));
 const routes = [
     {
-        path: '/admin',
+        path: '/admin/home',
         exact: true,
         name: 'Trang Chủ',
         component: Home
     },
+    // {
+    //     path: '/admin/login',
+    //     exact: true,
+    //     name: 'Trang Chủ',
+    //     component: Login
+    // },
     // { path: '', exact: true, component: Page404 },
-
     { path: '/admin/system/order/all', exact: true, name: 'Tất Cả Đơn Hàng', component: Order },
     { path: '/admin/system/order/:id_order/edit', exact: true, name: 'Xác Nhận Đơn Hàng', component: UpdateOrder },
     { path: '/admin/system/order/confirmed', exact: true, name: 'Đơn Hàng Đã Xác Nhận', component: ConfirmedOrder },

@@ -8,16 +8,16 @@ import {
 
 
 } from '@coreui/react';
-import {  CBreadcrumbRouter} from '@coreui/react'
+import { CBreadcrumbRouter } from '@coreui/react'
 
 // routes config
 import routes from '../routes'
 
-import { 
+import {
   TheHeaderDropdown,
- TheHeaderDropdownNoti
-  
-}  from './index'
+  TheHeaderDropdownNoti
+
+} from './index'
 
 const TheHeader = () => {
   const dispatch = useDispatch()
@@ -25,12 +25,12 @@ const TheHeader = () => {
 
   const toggleSidebar = () => {
     const val = [true, 'responsive'].includes(sidebarShow) ? false : 'responsive'
-    dispatch({type: 'set', sidebarShow: val})
+    dispatch({ type: 'set', sidebarShow: val })
   }
 
   const toggleSidebarMobile = () => {
     const val = [false, 'responsive'].includes(sidebarShow) ? true : 'responsive'
-    dispatch({type: 'set', sidebarShow: val})
+    dispatch({ type: 'set', sidebarShow: val })
   }
 
   return (
@@ -50,20 +50,20 @@ const TheHeader = () => {
       </CHeaderBrand> */}
 
       <CHeaderNav className="d-md-down-none mr-auto">
-       
+
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
-      <TheHeaderDropdownNoti/>
-        <TheHeaderDropdown/>
+        <TheHeaderDropdownNoti />
+        <TheHeaderDropdown />
       </CHeaderNav>
 
       <CSubheader className="px-3 justify-content-between">
-        <CBreadcrumbRouter 
-          className="border-0 c-subheader-nav m-0 px-0 px-md-3" 
-          routes={routes} 
+        <CBreadcrumbRouter
+          className="border-0 c-subheader-nav m-0 px-0 px-md-3"
+          routes={routes}
         />
-         
+
       </CSubheader>
     </CHeader>
   )

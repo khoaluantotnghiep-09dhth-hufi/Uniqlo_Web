@@ -13,12 +13,12 @@ import {
 } from '@coreui/react'
 import logo from '../assets/logo_uq_01.jpg';
 // sidebar nav config
-import navigation from './_nav'
-
+import navigation from './_nav';
+import navigationStaff from './_navStaff';
 const TheSidebar = () => {
   const dispatch = useDispatch()
   const show = useSelector(state => state.sidebarShow)
-
+  var sessionUser = JSON.parse(sessionStorage.getItem("user"));
   return (
     <CSidebar
       show={show}
@@ -35,7 +35,8 @@ const TheSidebar = () => {
       <CSidebarNav>
 
         <CCreateElement
-          items={navigation}
+          // items={navigation}
+          items={sessionUser.role === 1 ? navigation : navigationStaff}
           components={{
             CSidebarNavDivider,
             CSidebarNavDropdown,

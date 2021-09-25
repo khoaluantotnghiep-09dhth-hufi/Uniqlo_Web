@@ -28,16 +28,15 @@ import {
   faPalette,
   faDraftingCompass,
 } from "@fortawesome/free-solid-svg-icons";
+var sessionUser = JSON.parse(sessionStorage.getItem("user"));
 
-
-const _nav = [
+const _navStaff = [
 
   {
     _tag: 'CSidebarNavItem',
     name: 'Trang Chủ',
     to: '/admin',
     icon: <FontAwesomeIcon icon={faStore} className="mr-2" />
-
   },
   {
     _tag: 'CSidebarNavTitle',
@@ -80,13 +79,6 @@ const _nav = [
 
   },
   {
-    _tag: 'CSidebarNavItem',
-    name: 'Khuyến Mãi',
-    to: '/admin/system/discount',
-    icon: <FontAwesomeIcon icon={faPercent} className="mr-2" />,
-
-  },
-  {
     _tag: 'CSidebarNavTitle',
     _children: ['Quản Lý']
   },
@@ -124,75 +116,10 @@ const _nav = [
     ]
 
   },
-  {
-    _tag: 'CSidebarNavDropdown',
-    name: 'Quản Lý Menu',
-    route: '/admin/manage/cate',
-    icon: <FontAwesomeIcon icon={faGripHorizontal} className="mr-2" />,
-    _children: [
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Đối Tượng',
-        to: '/admin/manage/objects',
-        icon: <FontAwesomeIcon icon={faBars} className="mr-2" />,
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Loại Sản Phẩm',
-        to: '/admin/manage/sectors',
-        icon: <FontAwesomeIcon icon={faGripLines} className="mr-2" />,
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Danh Mục',
-        to: '/admin/manage/categories',
-        icon: <FontAwesomeIcon icon={faMinus} className="mr-2" />,
-      },
-    ]
-  },
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Sản Phẩm',
-    to: '/admin/manage/products',
-    icon: <FontAwesomeIcon icon={faTshirt} className="mr-2" size="lg" />,
-  },
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Màu',
-    to: '/admin/manage/color',
-    icon: <FontAwesomeIcon icon={faPalette} className="mr-2" />,
-  },
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Kích Cỡ',
-    to: '/admin/manage/size',
-    icon: <FontAwesomeIcon icon={faDraftingCompass} className="mr-2" />,
-  },
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Nhân Viên',
-    to: '/admin/manage/staffs',
-    icon: <FontAwesomeIcon icon={faIdCard} className="mr-2" />,
-  },
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Khách Hàng',
-    to: '/admin/manage/customers',
-    icon: <FontAwesomeIcon icon={faUsers} className="mr-2" />,
-  },
-  {
-    _tag: 'CSidebarNavTitle',
-    _children: ['Admin']
-  },
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Phân Quyền',
-    to: '/admin/account',
-    icon: <FontAwesomeIcon icon={faUserCog} className="mr-2" />,
-
-  },
-
-
+  
+  
+ 
+  
 ]
 
-export default _nav
+export default _navStaff

@@ -15,15 +15,19 @@ import {
   faSignOutAlt,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-const isCheckSignOut = false;
-const [check, setCheck] = useState({isCheckSignOut : false});
-const onSignOut = () => {
-  sessionStorage.clear("user");
-  localStorage.clear();
-  setCheck(true);
-};
+import Login from "../screens/Login/index";
+import { useHistory, Route, Link, Redirect } from 'react-router-dom';
 const TheHeaderDropdown = () => {
+  let isLogOut = false;
+  const history = useHistory();
   var sessionUser = JSON.parse(sessionStorage.getItem("user"));
+  function onSignOut() {
+    sessionStorage.clear();
+    // if (sessionStorage.length === 0) {
+    //   return <Redirect push to={{ path: "/admin" }} />;
+    // }
+    window.location.href = "/admin";
+  };
   return (
     <CDropdown
       inNav
@@ -38,7 +42,7 @@ const TheHeaderDropdown = () => {
             alt="adminuniqlo@gmail.com"
 
           />
-          <p> {sessionUser.name}</p>
+          <p> {sessionUser && sessionUser.name}</p>
         </div>
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
@@ -69,18 +73,9 @@ const TheHeaderDropdown = () => {
           <CBadge color="primary" className="mfs-auto">42</CBadge>
         </CDropdownItem>
         <CDropdownItem divider />
-        <CDropdownItem>
-          <CButton
-            type="submit"
-            variant="outline-secondary"
-            size="sm"
-            style={{ margin: 0 }}
-            onClick={onSignOut}
-          >
-            <FontAwesomeIcon icon={faSignOutAlt} size="lg" className="mr-2" />
-            Đăng Xuất
-          </CButton>{" "}
-
+        <CDropdownItem onClick={onSignOut}>
+          <FontAwesomeIcon icon={faSignOutAlt} size="lg" className="mr-2" />
+          Đăng Xuất
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>
