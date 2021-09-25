@@ -22,10 +22,9 @@ import { Image } from 'react-bootstrap';
 
 const fields =
     ["STT",
-        { key: "id", label: "Mã Tin Tức" },
         { key: "title", label: "Tiêu Đề" },
         { key: "date", label: "Ngày Đăng" },
-        { key: "desciption", label: "Nội Dung" },
+        { key: "description", label: "Nội Dung" },
         { key: "name", label: "Nhân Viên" },
         { key: "image", label: "Ảnh" },
         { key: "image_banner", label: "Ảnh Banner" },
@@ -46,8 +45,9 @@ class ListNews extends React.Component {
 
         var { news } = this.props;
         var data = news.map((item, index) => {
-           return {...item, index};
+            return item;
         });
+        console.log("data nè",data);
         return (
             <>
                 <Link to="/admin/system/news/add">
@@ -97,24 +97,24 @@ class ListNews extends React.Component {
                                                     <Image src={item.image} thumbnail />
                                                 </td>
                                             ),
-                                            "image_banner":
+                                        "image_banner":
                                             (item, index) => (
                                                 <td>
                                                     <Image src={item.image_banner} thumbnail />
                                                 </td>
                                             ),
-                                        "desciption":
-                                            (item, index) => (
-                                                <td>
-                                                    <textarea
-                                                        className="form-control"
-                                                        rows="6"
-                                                        value={item.desciption}
-                                                    />
+                                        // "description":
+                                        //     (item, index) => (
+                                        //         <td>
+                                        //             <textarea
+                                        //                 className="form-control"
+                                        //                 rows="6"
+                                        //                 value={item.description}
+                                        //             />
 
 
-                                                </td>
-                                            ),
+                                        //         </td>
+                                        //     ),
                                     }}
                                 />
                             </CCardBody>

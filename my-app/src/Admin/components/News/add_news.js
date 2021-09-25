@@ -12,7 +12,7 @@ import { Button, Form, Col, Container, Row } from 'react-bootstrap';
 import * as actions from "./../../../actions/index";
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
-let isLoadingExternally = false;
+const sessionUser = JSON.parse(sessionStorage.getItem("user"));
 class AddNews extends React.Component {
   constructor(props) {
     super(props);
@@ -26,7 +26,6 @@ class AddNews extends React.Component {
       txtImageBanner: "",
       ImgPrivewIMG: "",
       ImgPrivewSubTitle: "",
-      staffArr: [],
       isOpen: false,
     };
   }
@@ -64,12 +63,16 @@ class AddNews extends React.Component {
   componentDidMount() {
     var { match } = this.props;
     this.props.onEditItemNews(match.params.id_news);
-    isLoadingExternally = true;
-    this.setState({
-      staffArr: this.props.fetchStaffs()
-    })
-
   }
+  //   componentDidUpdate(prevProps,prevState,snapshot) {
+  //     if (prevProps.staff !== this.props.staff){
+  //         let arrStaff = this.props.staff;
+  //         this.setState({
+  //           staffArr : arrStaff,
+  //           id_staff : arrStaff && arrStaff.length > 0 ? arrStaff[0].id : ''
+  //         })
+  //     }
+  // }
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
     if (NextProps && NextProps.news) {
@@ -93,6 +96,8 @@ class AddNews extends React.Component {
     coppyState[id] = e.target.value;
     this.setState({
       ...coppyState
+    }, () => {
+      console.log(this.state)
     })
 
   };
@@ -116,7 +121,7 @@ class AddNews extends React.Component {
       title: txtTitle,
       date: txtDate,
       description: txtDescription,
-      id_staff: id_staff,
+      id_staff: sessionUser.id_user,
       image: txtImage,
       image_banner: txtImageBanner,
     };
@@ -125,7 +130,7 @@ class AddNews extends React.Component {
       title: txtTitle,
       date: txtDate,
       description: txtDescription,
-      id_staff: id_staff,
+      id_staff: sessionUser.id_user,
       image: txtImage,
       image_banner: txtImageBanner,
     };
@@ -140,7 +145,6 @@ class AddNews extends React.Component {
     }
   };
   render() {
-    let { staff } = this.props;
     let { txtTitle, txtDate, txtDescription, id_staff, txtImage, txtImageBanner } = this.state;
     return (
       <Container fluid>
@@ -150,10 +154,8 @@ class AddNews extends React.Component {
               <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />Trở về
             </Button>
           </Link>
-
           <Form onSubmit={this.onSubmitForm}>
             <Row>
-
               <Col sm="6">
                 <Form.Group className="mb-3" controlId="formBasicObject">
                   <Form.Label>Tiêu Đề</Form.Label>
@@ -182,7 +184,6 @@ class AddNews extends React.Component {
                     id="txtDate"
                     value={txtDate}
                     onChange={(e) => { this.onChange(e, 'txtDate') }} />
-
                 </Form.Group>
               </Col>
             </Row>
@@ -198,32 +199,19 @@ class AddNews extends React.Component {
                 rows="8"
                 required
               ></textarea>
-
             </Form.Group>
-
-
-
             <Row sm="12">
               <Col sm="2">
                 <Form.Group >
-                  {/* <Form.Label className="border border-dark" style={{ backgroundColor: "#ffe6e6", padding: "10px", marginTop: "100px", cursor: "pointer" }} htmlFor="txtImage"><FontAwesomeIcon icon={faUpload} className="mr-2 fa-3x" />Tải Ảnh</Form.Label> */}
-                  {/* <Form.Control
-                    type="file"
-                    id="txtImage"
-                    name="txtImage"
-                    hidden
-                    onChange={(e) => { this.onChangeImage(e) }}
-                    required
-                  /> */}
                   <Form.Label>Image</Form.Label>
-                    <Form.Control
-                      required
-                      type="text"
-                      placeholder="Image"
-                      name="txtImage"
-                      id="txtImage"
-                      value={txtImage}
-                      onChange={(e) => { this.onChange(e, 'txtImage') }} />
+                  <Form.Control
+                    required
+                    type="text"
+                    placeholder="Image"
+                    name="txtImage"
+                    id="txtImage"
+                    value={txtImage}
+                    onChange={(e) => { this.onChange(e, 'txtImage') }} />
                 </Form.Group>
               </Col>
               <Col sm="4">
@@ -231,8 +219,8 @@ class AddNews extends React.Component {
                   onClick={() => this.openPreviewIMG()}
                 ></div>
               </Col>
-              <Col sm="2">
-                {/* <Form.Group >
+              {/* <Col sm="2"> */}
+              {/* <Form.Group >
                   <Form.Label className="border border-dark" style={{ backgroundColor: "#ffe6e6", padding: "10px", marginTop: "100px", cursor: "pointer" }} htmlFor="txtImage"><FontAwesomeIcon icon={faUpload} className="mr-2 fa-3x" />Tải Ảnh Tiêu Đề</Form.Label>
                   <Form.Control
                     type="file"
@@ -248,40 +236,21 @@ class AddNews extends React.Component {
                 <div style={{ backgroundImage: `url(${this.state.ImgPrivewSubTitle})`, height: "200px", width: "300px", align: "center", background: "center center no-repeat", backgroundSize: "contain", cursor: "pointer", margin: "30px" }}
                   onClick={() => this.openPreviewIMG()}
                 ></div> */}
-              </Col>
-
-            </Row>
-            <Col sm="12">
+              {/* </Col> */}
               <Form.Group className="mb-3" controlId="formBasicObject">
-                <Form.Label>Nhân Viên</Form.Label>
-                <Form.Select name="form-field-name"
-                  value={this.setState.id_staff}
-                  onChange={(e) => { this.onChange(e, 'id_staff') }}
-                  labelKey={'Tên'}
-                  valueKey={'Mã'}
-                  isLoading={isLoadingExternally}
-                >
-                  <option value="staff-1">Chọn</option>
-                  {staff && staff.length > 0 &&
-                    staff.map((option, index) => (
+                <Form.Label>Banner</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="Image banner"
+                  name="txtImageBanner"
+                  id="txtImageBanner"
+                  value={txtImageBanner}
+                  onChange={(e) => { this.onChange(e, 'txtImageBanner') }} />
 
-                      <option value={option.id} key={index}>{option.name}</option>
-                    ))}
-                </Form.Select>
               </Form.Group>
-            </Col>
-            <Form.Group className="mb-3" controlId="formBasicObject">
-              <Form.Label>Banner</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="Image banner"
-                name="txtImageBanner"
-                id="txtImageBanner"
-                value={txtImageBanner}
-                onChange={(e) => { this.onChange(e, 'txtImageBanner') }} />
+            </Row>
 
-            </Form.Group>
             {/* <Link to="/admin/manage/objects" > */}
             <Button type="button"
               className="btn btn-danger"
@@ -309,16 +278,12 @@ class AddNews extends React.Component {
 var mapStateToProps = (state) => {
   return {
     news: state.news,
-    staff: state.staff,
   };
 };
 var mapDispatchToProps = (dispatch, props) => {
   return {
     onAddItemNews: (news) => {
       dispatch(actions.onAddNewsResquest(news));
-    },
-    fetchStaffs: (staff) => {
-      dispatch(actions.fetchStaffsResquest(staff));
     },
     onEditItemNews: (id) => {
       dispatch(actions.onEditNewsResquest(id));

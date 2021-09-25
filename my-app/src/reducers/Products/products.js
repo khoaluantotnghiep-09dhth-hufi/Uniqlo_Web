@@ -38,8 +38,10 @@ var products = (state = initialState, action) => {
       if (index !== -1) {
         state[index] = product;
       }
-
       return [...state];
+    case types.EDIT_PRODUCT:
+      return action.product;
+
     default:
       return state;
   }
