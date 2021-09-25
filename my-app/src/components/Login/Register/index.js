@@ -51,8 +51,14 @@ class index extends React.Component {
       password: txtPassword,
       email: txtEmail,
     };
-    this.props.onAddItemCustomer(customer);
+    if(txtName === "" || txtAddress === "" || txtPhone === "" || txtEmail === "" || txtPassword === ""){
+      alert("Bạn chưa nhập thông tin")
+    }
+    else{
+      this.props.onAddItemCustomer(customer);
+    }
   };
+  
   render() {
 
     return(
