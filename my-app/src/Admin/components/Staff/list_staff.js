@@ -21,7 +21,7 @@ const fields = [
   { key: "phone", label: "SĐT" },
   { key: "address", label: "Địa Chỉ" },
 
-  { key: "postion", label: "Chức Vụ" },
+  { key: "role", label: "Chức Vụ" },
   "Hành Động",
 ];
 
@@ -88,9 +88,9 @@ class ListStaffs extends React.Component {
                       </td>
                     ),
                     STT: (item, index) => <td>{index + 1}</td>,
-                    postion: (item) => (
+                    role: (item) => (
                       <td>
-                        {item.postion === "1" ? "Quản Lý" : "Nhân Viên Bán Hàng"}
+                        {item.role === "0" ? "Quản Lý" : "Nhân Viên Bán Hàng"}
                       </td>
                     ),
                   }}

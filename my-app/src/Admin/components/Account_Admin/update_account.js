@@ -42,7 +42,7 @@ class updateOrder extends React.Component {
         this.setState({
           idItem: result.id,
 
-          txtConfirm: result.postion,
+          txtConfirm: result.role,
         });
       }
     }
@@ -67,7 +67,7 @@ class updateOrder extends React.Component {
       var staffUpdate = {
         id: idItem,
 
-        position: txtConfirm,
+        role: txtConfirm,
       };
       this.props.onUpdatePositionStaff(staffUpdate);
       history.goBack();
@@ -92,8 +92,8 @@ class updateOrder extends React.Component {
                   required
                 >
                   <option selected>---</option>
-                  <option value="1">Quản Lý</option>
-                  <option value="0">Nhân Viên Bán Hàng</option>
+                  <option value="0">Quản Lý</option>
+                  <option value="1">Nhân Viên Bán Hàng</option>
                 </select>
               </CFormGroup>
 

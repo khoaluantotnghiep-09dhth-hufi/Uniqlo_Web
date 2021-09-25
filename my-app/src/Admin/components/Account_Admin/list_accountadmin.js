@@ -21,7 +21,7 @@ const fields = [
   { key: "id", label: "Mã Nhân Viên" },
   { key: "name", label: "Tên" },
   { key: "phone", label: "SĐT" },
-  { key: "postion", label: "Vị Trí" },
+  { key: "role", label: "Vị Trí" },
   { key: "password", label: "Mật Khẩu" },
 
   "Hành Động",
@@ -74,9 +74,9 @@ class List_Customers extends React.Component {
                         </Link>
                       </td>
                     ),
-                    postion: (item) => (
+                    role: (item) => (
                       <td>
-                        {item.postion === "1" ? "Quản Lý" : "Nhân Viên Bán Hàng"}
+                        {item.role === "0" ? "Quản Lý" : "Nhân Viên Bán Hàng"}
                       </td>
                     ),
                   }}
