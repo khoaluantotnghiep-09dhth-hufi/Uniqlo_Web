@@ -54,7 +54,6 @@ class index extends React.Component {
     };
     if(txtName === "" || txtAddress === "" || txtPhone === "" || txtEmail === "" || txtPassword === ""){
       toast.error(<div>Đăng ký thất bại.<br /> Bạn cần nhập đủ thông tin!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
-
     }
     else{
       this.props.onAddItemCustomer(customer);
@@ -68,57 +67,58 @@ class index extends React.Component {
         <h5 className="text-center">Đăng Ký</h5>
         <Form >
         <Form.Group className="mb-3" controlId="formBasicObject">
-                <Form.Control
-                  required autofocus
-                  className="fas fa-user"          
-                  type="text"
-                  placeholder="&#xf007; Họ và tên..."
-                  name ="txtName"
-                  id="txtName"
-                  onChange={this.onChange} />
+          <Form.Control
+            required autofocus
+            className="fas fa-user"          
+            type="text"
+            placeholder="&#xf007; Họ và tên..."
+            name ="txtName"
+            id="txtName"
+            onChange={this.onChange} />
           </Form.Group>         
           <Form.Group className="mb-3" controlId="formBasicObject">
-                <Form.Control
-                  required autofocus
-                  className="fas fa-address-card" 
-                  type="text"
-                  placeholder="&#xf2bb; Địa chỉ..."
-                  name="txtAddress"
-                  id="txtAddress"
-                  onChange={this.onChange} />
+            <Form.Control
+              required autofocus
+              className="fas fa-address-card" 
+              type="text"
+              placeholder="&#xf2bb; Địa chỉ..."
+              name="txtAddress"
+              id="txtAddress"
+              onChange={this.onChange} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicObject">
-                <Form.Control
-                  required autofocus
-                  className="fas fa-phone-alt"
-                  type="text"
-                  placeholder="&#xf879; Số Điện Thoại"
-                  name="txtPhone"
-                  id="txtPhone"
-                  maxlength="11" 
-                  minlength="10" 
-                  pattern="^[0-9]*$" 
-                  onChange={this.onChange} />
+            <Form.Control
+              required autofocus
+              className="fas fa-phone-alt"
+              type="text"
+              placeholder="&#xf879; Số Điện Thoại"
+              name="txtPhone"
+              id="txtPhone"
+              maxlength="11" 
+              minlength="10" 
+              pattern="^[0-9]*$" 
+              onChange={this.onChange} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicObject">
-                <Form.Control
-                  required autofocus
-                  className="fas fa-envelope"
-                  type="email"
-                  placeholder="&#xf0e0; Email"
-                  name="txtEmail"
-                  id="txtEmail"
-                  onChange={this.onChange} />
+            <Form.Control
+              required autofocus
+              className="fas fa-envelope"
+              type="email"
+              placeholder="&#xf0e0; Email"
+              name="txtEmail"
+              id="txtEmail"
+              onChange={this.onChange} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicObject">
-                <Form.Control
-                  required autofocus
-                  className="fas fa-lock"
-                  type="password"
-                  placeholder="&#xf023; Mật Khẩu"
-                  name="txtPassword"
-                  id="txtPassword"
-                  onChange={this.onChange} />
+            <Form.Control
+              required autofocus
+              className="fas fa-lock"
+              type="password"
+              placeholder="&#xf023; Mật Khẩu"
+              name="txtPassword"
+              id="txtPassword"
+              pattern=".{6,}"
+              onChange={this.onChange} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Button

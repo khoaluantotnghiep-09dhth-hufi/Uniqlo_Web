@@ -32,6 +32,7 @@ const fields = [
   { key: "status", label: "Tình Trạng" },
   "Hành Động",
 ];
+
 class index extends Component {
   constructor(props) {
     super(props);
@@ -91,9 +92,10 @@ class index extends Component {
           isCheckLogin: true,
         });
         sessionStorage.setItem("user", JSON.stringify(user));
-      } else {
+      } 
+      else {
         this.setState({
-          isCheckLogin: true,
+          isCheckLogin: false,
         });
       }
     }
@@ -120,7 +122,8 @@ class index extends Component {
                 <h3>THÔNG TIN TÀI KHOẢN</h3>
                 <br></br>
                 <h6>
-                  Xin chào, <span>{sessionUser && sessionUser.length > 0 ? sessionUser.name : ''}</span>
+                  {/* Xin chào, <span>{sessionUser && sessionUser.length > 0 ? sessionUser.name : ''}</span> */}
+                  Xin chào: <span> {sessionUser && sessionUser.name}</span>
                 </h6>
               </Col>
             </Row>
@@ -204,7 +207,8 @@ class index extends Component {
             </Row>
             <Row>
               <Col>
-                <h6>Tên tài khoản: {sessionUser && sessionUser.length > 0 ? sessionUser.name : ''}</h6>
+                {/* <h6>Tên tài khoản: {sessionUser && sessionUser.length > 0 ? sessionUser.name : ''}</h6> */}
+                <h6>Tên tài khoản: <span> {sessionUser && sessionUser.name}</span></h6>
               </Col>
             </Row>
             <Row>

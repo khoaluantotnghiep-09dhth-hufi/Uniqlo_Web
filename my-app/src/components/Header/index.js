@@ -82,7 +82,7 @@ class index extends Component {
     );
     
     var isCheckAccount =
-      sessionStorage.getItem("user") !== null ? (
+      sessionStorage.getItem("client") !== null ? (
         <NavLink to="/account">
           <MDBIcon icon="user" md="4" className="sizeIcon" />
         </NavLink>
