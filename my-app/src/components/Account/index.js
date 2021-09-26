@@ -60,7 +60,7 @@ class index extends Component {
   };
   onSignOut = () => {
     var { cart } = this.props;
-    sessionStorage.clear("user");
+    sessionStorage.clear("client");
     localStorage.clear();
 
     this.props.onResetCart(cart);
@@ -103,7 +103,7 @@ class index extends Component {
   render() {
     var { bills_customer } = this.props;
     var { show, isCheckRequest } = this.state;
-    var sessionUser = JSON.parse(sessionStorage.getItem("user"));
+    var sessionUser = JSON.parse(sessionStorage.getItem("client"));
     console.log(sessionUser);
     var { isCheckSignOut } = this.state;
     if (isCheckSignOut) {
@@ -120,7 +120,7 @@ class index extends Component {
                 <h3>THÔNG TIN TÀI KHOẢN</h3>
                 <br></br>
                 <h6>
-                  {/* Xin chào, <span>{sessionUser.name}</span> */}
+                  Xin chào, <span>{sessionUser.name}</span>
                 </h6>
               </Col>
             </Row>
@@ -204,7 +204,7 @@ class index extends Component {
             </Row>
             <Row>
               <Col>
-                {/* <h6>Tên tài khoản: {sessionUser.name}</h6> */}
+                <h6>Tên tài khoản: {sessionUser.name}</h6>
               </Col>
             </Row>
             <Row>

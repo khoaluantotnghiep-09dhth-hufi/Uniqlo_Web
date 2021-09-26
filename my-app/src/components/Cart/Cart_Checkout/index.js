@@ -30,7 +30,7 @@ class index extends Component {
   };
   render() {
     const { cart } = this.props;
-    var checkLogin = sessionStorage.getItem("user");
+    var checkLogin = sessionStorage.getItem("client");
 
     return (
       <div>
