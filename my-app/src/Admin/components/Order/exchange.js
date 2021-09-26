@@ -78,35 +78,35 @@ class ListOrder extends React.Component {
                                     itemsPerPage={8}
                                     pagination
                                     scopedSlots={{
-                                        "Hành Động": (item) => (
-                                            <td>
-                                                <Link to={`/admin/system/order/${item.id}/edit`}>
-                                                    <CButton type="button" className="btn btn-primary">
-                                                        <FontAwesomeIcon
-                                                            icon={faCheck}
-                                                            className="mr-2"
-                                                            size="lg"
-                                                        />
-                                                        Xác Nhận Đơn
-                                                    </CButton>
-                                                </Link>
+                                        // "Hành Động": (item) => (
+                                        //     <td>
+                                        //         <Link to={`/admin/system/order/${item.id}/edit`}>
+                                        //             <CButton type="button" className="btn btn-primary">
+                                        //                 <FontAwesomeIcon
+                                        //                     icon={faCheck}
+                                        //                     className="mr-2"
+                                        //                     size="lg"
+                                        //                 />
+                                        //                 Xác Nhận Đơn
+                                        //             </CButton>
+                                        //         </Link>
 
-                                                <CButton
-                                                    type="button"
-                                                    className="btn btn-warning"
-                                                    onClick={() => {
-                                                        this.onDeleteExchange(item.id);
-                                                    }}
-                                                >
-                                                    <FontAwesomeIcon
-                                                        icon={faTimes}
-                                                        className="mr-2"
-                                                        size="lg"
-                                                    />
-                                                    Hủy Đơn
-                                                </CButton>
-                                            </td>
-                                        ),
+                                        //         <CButton
+                                        //             type="button"
+                                        //             className="btn btn-warning"
+                                        //             onClick={() => {
+                                        //                 this.onDeleteExchange(item.id);
+                                        //             }}
+                                        //         >
+                                        //             <FontAwesomeIcon
+                                        //                 icon={faTimes}
+                                        //                 className="mr-2"
+                                        //                 size="lg"
+                                        //             />
+                                        //             Hủy Đơn
+                                        //         </CButton>
+                                        //     </td>
+                                        // ),
                                         'STT':
                                             (item, index) => (
                                                 <td>
