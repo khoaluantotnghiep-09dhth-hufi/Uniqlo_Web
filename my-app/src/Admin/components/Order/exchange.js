@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as actions from "./../../../actions/index";
+import * as actions from "./../../../actions/exchangeActions";
 import { Alert } from "react-bootstrap";
 import Moment from "react-moment";
 
@@ -25,26 +25,24 @@ const formatter = new Intl.NumberFormat("vi-VN", {
 });
 const options = { dateStyle: "short" };
 const fields = [
-    { key: "index", label: "STT" },
-    { key: "order_date", label: "Ngày Đặt Hàng" },
-    { key: "delivery_date", label: "Ngày Giao Hàng" },
-    { key: "name_customer", label: "Tên Khách Hàng" },
-    { key: "address", label: "Địa Chỉ" },
-    { key: "phone", label: "SDT" },
-    { key: "email", label: "Email" },
-    { key: "total_quantity", label: "Tổng Số Lượng" },
-    { key: "total", label: "Tổng Tiền" },
-    { key: "note", label: "Ghi Chú" },
-    { key: "status", label: "Tình Trạng" },
+    "STT",
+    { key: "nameCustomer", label: "Tên Khách Hàng" },
+    { key: "nameProduct", label: "Tên Sản Phẩm" },
+    { key: "nameSize", label: "Kích Cỡ" },
+    { key: "nameColor", label: "Màu" },
+    { key: "quantity", label: "Số Lượng" },
+    { key: "price", label: "Giá" },
+    { key: "nameStaff", label: "Tên Nhân Viên Đổi" },
+    { key: "reason", label: "Lý Do" },
     "Hành Động",
 ];
 
 class ListOrder extends React.Component {
     componentDidMount() {
-        this.props.fetchBills();
+        this.props.fetchExchange();
     }
-    onDeleteBill = (item) => {
-        this.props.onDeleteItemBill(item);
+    onDeleteExchange = (item) => {
+        this.props.onDeleteItemExchange(item);
     };
     getBadge = (status) => {
         switch (status) {
@@ -57,14 +55,14 @@ class ListOrder extends React.Component {
         }
     };
     render() {
-        var { bill } = this.props;
+        var { exchange } = this.props;
 
-        var dataBill = bill.map((item, index) => {
+        var dataBill = exchange.map((item, index) => {
             return { ...item, index };
         });
         return (
             <>
-                <Link to="/admin/system/exchange/add">
+                <Link to="/admin/system/order/exchange/add">
                     <CButton type="button" className="btn btn-danger">
                         Thêm Mới
                     </CButton>
@@ -97,7 +95,7 @@ class ListOrder extends React.Component {
                                                     type="button"
                                                     className="btn btn-warning"
                                                     onClick={() => {
-                                                        this.onDeleteBill(item.id);
+                                                        this.onDeleteExchange(item.id);
                                                     }}
                                                 >
                                                     <FontAwesomeIcon
@@ -109,29 +107,12 @@ class ListOrder extends React.Component {
                                                 </CButton>
                                             </td>
                                         ),
-                                        status: (item) => (
-                                            <td>
-                                                <Alert variant={this.getBadge(item.status)}>
-                                                    {item.status === 0 ? "Chưa Xác Nhận" : "Đã Xác Nhận"}
-                                                </Alert>
-                                            </td>
-                                        ),
-
-                                        total: (item) => <td>{formatter.format(item.total)}</td>,
-
-                                        order_date: (item) => (
-                                            <td>
-                                                <Moment format="DD/MM/YYYY">{item.order_date}</Moment>
-                                            </td>
-                                        ),
-
-                                        delivery_date: (item) => (
-                                            <td>
-                                                <Moment format="DD/MM/YYYY">
-                                                    {item.delivery_date}
-                                                </Moment>
-                                            </td>
-                                        ),
+                                        'STT':
+                                            (item, index) => (
+                                                <td>
+                                                    {index + 1}
+                                                </td>
+                                            )
                                     }}
                                 ></CDataTable>
                             </CCardBody>
@@ -144,16 +125,16 @@ class ListOrder extends React.Component {
 }
 var mapStateToProps = (state) => {
     return {
-        bill: state.bill,
+        exchange: state.exchange,
     };
 };
 var mapDispatchToProps = (dispatch, props) => {
     return {
-        fetchBills: () => {
-            return dispatch(actions.fetchBillResquest());
+        fetchExchange: () => {
+            return dispatch(actions.fetchExchangeResquest());
         },
-        onDeleteItemBill: (id) => {
-            return dispatch(actions.onDeleteBillResquest(id));
+        onDeleteItemExchange: (id) => {
+            return dispatch(actions.onDeleteExchangeResquest(id));
         },
     };
 };

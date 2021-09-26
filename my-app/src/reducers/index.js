@@ -21,6 +21,8 @@ import orderInfo from "./OrderInfo/orderInfo";
 import import_product from "./ImportProduct/import_product";
 import productsAdmin from "./Product_Admin/product_admin";
 import importInfo from "./ImportInfo/importInfo";
+import exchange from "./Exchange/exchange_product";
+import billInfo from "./BillInfo/BillInfo";
 const myReducer = combineReducers({
   cart,
   products, // products:
@@ -44,6 +46,8 @@ const myReducer = combineReducers({
   import_product,
   productsAdmin,
   importInfo,
+  exchange,
+  billInfo,
 });
 
 export default myReducer;

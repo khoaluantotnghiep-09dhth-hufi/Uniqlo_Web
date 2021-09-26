@@ -7,6 +7,7 @@ const UpdateOrder = React.lazy(() => import('../components/Order/update_order'))
 const ConfirmedOrder = React.lazy(() => import('../components/Order/confirmedOrder'));
 const UnConfirmedOrder = React.lazy(() => import('../components/Order/unconfimredOrder'));
 const ExChange = React.lazy(() => import('../components/Order/exchange'));
+const AddExChange = React.lazy(() => import('../components/Order/add_exchange'));
 
 const ListNews = React.lazy(() => import('../components/News/list_news'));
 const AddNews = React.lazy(() => import('../components/News/add_news'));
@@ -69,6 +70,7 @@ const routes = [
     { path: '/admin/system/order/confirmed', exact: true, name: 'Đơn Hàng Đã Xác Nhận', component: ConfirmedOrder },
     { path: '/admin/system/order/unconfirmed', exact: true, name: 'Đơn Hàng Chưa Xác Nhận', component: UnConfirmedOrder },
     { path: '/admin/system/order/exchange', exact: true, name: 'Đổi Trả', component: ExChange },
+    { path: '/admin/system/order/exchange/add', exact: true, name: 'Đổi Trả', component: AddExChange },
 
     { path: '/admin/system/news', exact: true, name: 'Danh Sách Tin Tức', component: ListNews },
     { path: '/admin/system/news/add', exact: true, name: 'Thêm Tin Tức Mới', component: AddNews },
