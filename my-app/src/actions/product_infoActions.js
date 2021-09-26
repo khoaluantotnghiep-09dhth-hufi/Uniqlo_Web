@@ -29,13 +29,29 @@ export const fetchProductInfoImportResquest = (id) => {
     });
   };
 };
+
+export const fetchProductInfoExchange = (productInfo) => {
+  return {
+    type: types.FETCH_PRODCUTINFO,
+    productInfo,
+  };
+};
+export const fetchProductInfoExchangeResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`exchange-product-info/${id}`, "GET", null).then((response) => {
+      dispatch(fetchProductInfoExchange(response.data));
+    });
+  };
+};
+
+
+
 export const fetchProductInfoNoID = (productInfo) => {
   return {
     type: types.FETCH_PRODCUTINFO,
     productInfo,
   };
 };
-
 export const fetchProductInfoResquestNoID = () => {
   return (dispatch) => {
     return callApi("product-info", "GET", null).then((response) => {

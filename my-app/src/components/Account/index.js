@@ -120,7 +120,7 @@ class index extends Component {
                 <h3>THÔNG TIN TÀI KHOẢN</h3>
                 <br></br>
                 <h6>
-                  Xin chào, <span>{sessionUser.name}</span>
+                  Xin chào, <span>{sessionUser && sessionUser.length > 0 ? sessionUser.name : ''}</span>
                 </h6>
               </Col>
             </Row>
@@ -204,7 +204,7 @@ class index extends Component {
             </Row>
             <Row>
               <Col>
-                <h6>Tên tài khoản: {sessionUser.name}</h6>
+                <h6>Tên tài khoản: {sessionUser && sessionUser.length > 0 ? sessionUser.name : ''}</h6>
               </Col>
             </Row>
             <Row>
