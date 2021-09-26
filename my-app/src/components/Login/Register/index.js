@@ -22,6 +22,7 @@ class index extends React.Component {
       txtImage:"",
       txtPassword: "",
       txtEmail: "",
+      errorPhone: "",
     };
   }
   onChange = (event) => {
@@ -30,6 +31,7 @@ class index extends React.Component {
     var value = target.value;
     this.setState({
       [name]: value,
+      errorPhone: target.validationMessage,
     });
   };
   onSubmitForm = (event) => {
@@ -65,7 +67,7 @@ class index extends React.Component {
     return(
       <Col>
         <h5 className="text-center">Đăng Ký</h5>
-        <Form >
+        <Form onSubmit={this.onSubmitForm}>
         <Form.Group className="mb-3" controlId="formBasicObject">
           <Form.Control
             required autofocus
@@ -74,6 +76,7 @@ class index extends React.Component {
             placeholder="&#xf007; Họ và tên..."
             name ="txtName"
             id="txtName"
+            pattern=".{3,}"
             onChange={this.onChange} />
           </Form.Group>         
           <Form.Group className="mb-3" controlId="formBasicObject">
@@ -98,6 +101,9 @@ class index extends React.Component {
               minlength="10" 
               pattern="^[0-9]*$" 
               onChange={this.onChange} />
+            <div className="invalid-feedback d-block">
+              {this.state.errorPhone}
+            </div>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicObject">
             <Form.Control
@@ -118,6 +124,7 @@ class index extends React.Component {
               name="txtPassword"
               id="txtPassword"
               pattern=".{6,}"
+              //pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
               onChange={this.onChange} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -125,7 +132,7 @@ class index extends React.Component {
               variant="outline-secondary"
               type="submit"
               className="button--width"
-              onClick={this.onSubmitForm}
+              // onClick={this.onSubmitForm}
             >
               Đăng Ký
             </Button>
