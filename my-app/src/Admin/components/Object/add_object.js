@@ -25,22 +25,37 @@ class addObject extends React.Component {
   }
   componentDidMount() {
     var { match } = this.props;
-
-    this.props.onEditItemObject(match.params.id_object);
+    this.props.onEditItemObject(match.params.id_object_menu);
+    var { object_menu } = this.props;
+    if (match.params.id_object_menu) {
+      const result = object_menu.find((o) => o.id === match.params.id_object_menu);
+      console.log("resui",result);
+      this.setState({
+        txtName: result.name,
+      });
+    }
   }
   // componentWillReceiveProps(NextProps) {
   //   var { match } = this.props;
   //   if (NextProps && NextProps.object_menu) {
   //     var { object_menu } = NextProps;
-  //     if (match.params.id_object_menu) {
-  //       const result = object_menu.find((o) => o.id === match.params.id_object_menu);
-  //       this.setState({
-  //         idItem: result.id,
-  //         txtName: result.name,
-  //       });
-  //     }
+
+  //     console.log("state nè", object_menu)
   //   }
   // }
+  componentWillReceiveProps(NextProps) {
+    var { match } = this.props;
+    if (NextProps && NextProps.object_menu) {
+      var { object_menu } = NextProps;
+      if (match.params.id_object_menu) {
+        const result = object_menu.find((o) => o.id === match.params.id_object_menu);
+        this.setState({
+          idItem: result.id,
+          txtName: result.name,
+        });
+      }
+    }
+  }
   onChange = (event) => {
     var target = event.target;
     var name = target.name;

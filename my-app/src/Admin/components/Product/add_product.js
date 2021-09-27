@@ -43,29 +43,59 @@ class addProduct extends React.Component {
 
         this.props.onEditItemProduct(match.params.id_product);
         isLoadingExternally = true;
-
         this.setState({
             promotionArr: this.props.fetchPromotions(),
             categoryArr: this.props.fetchCategorys(),
         })
+        var { products } = this.props;
+        if (match.params.id_product) {
+            const result = products.find(
+                (o) => o.id === match.params.id_product
+            );
+            this.setState({
+                txtName: result.name,
+                txtPrice: result.price,
+                txtDescription: result.description,
+                txtImage: result.image,
+                txtQuantity: result.quantity,
+                id_promotion: result.id_promotion,
+                id_category: result.id_category,
+            });
+        }
+    }
+    componentDidUpdate(prevProps,prevState,snapshot) {
+        var { match } = this.props;
+        if (prevProps.category !== this.props.category && !match.params.id_product){
+            let arrCategory = this.props.category;
+            this.setState({
+                categoryArr : arrCategory,
+                id_category : arrCategory && arrCategory.length > 0 ? arrCategory[0].id : ''
+            })
+        }
+        if (prevProps.promotion !== this.props.promotion && !match.params.id_product){
+            let arrPromotion = this.props.promotion;
+            this.setState({
+                promotionArr : arrPromotion,
+                id_promotion : arrPromotion && arrPromotion.length > 0 ? arrPromotion[0].id : ''
+            })
+        }
     }
     componentWillReceiveProps(NextProps) {
         var { match } = this.props;
         if (NextProps && NextProps.product) {
-            var { product } = NextProps;
+            var { products } = NextProps;
             if (match.params.id_product) {
-                const result = product.find(
+                const result = products.find(
                     (o) => o.id === match.params.id_product
                 );
                 this.setState({
-                    idItem: result.id,
                     txtName: result.name,
                     txtPrice: result.price,
                     txtDescription: result.description,
                     txtImage: result.image,
                     txtQuantity: result.quantity,
-                    id_promotion: result.id_promotion.id,
-                    id_category: result.id_category.id,
+                    id_promotion: result.id_promotion,
+                    id_category: result.id_category,
                 });
             }
         }
@@ -75,11 +105,7 @@ class addProduct extends React.Component {
         coppyState[id] = e.target.value;
         this.setState({
             ...coppyState
-        }, () => {
-            console.log(this.state);
         })
-
-
     }
     onChangeImage = (e) => {
         let data = e.target.files;
@@ -144,13 +170,14 @@ class addProduct extends React.Component {
         } else {
             this.props.onAddItemProduct(product);
             history.goBack();
-            
+
         }
     };
     render() {
         var { promotion } = this.props;
         var { category } = this.props;
         let { txtName, txtPrice, txtDescription, id_category, id_promotion } = this.state;
+        console.log("state",this.state)
         return (
             <Container fluid>
                 <Link to="/admin/manage/products">
@@ -205,14 +232,13 @@ class addProduct extends React.Component {
                                     <Form.Group className="mb-3" >
                                         <Form.Label>Danh Mục</Form.Label>
                                         <Form.Select name="form-field-name"
-                                            value={this.setState.id_category}
+                                            value={id_category}
                                             onChange={(e) => { this.onChange(e, 'id_category') }}
                                             labelKey={'Tên'}
                                             valueKey={'Mã'}
                                             isLoading={isLoadingExternally}
 
                                         >
-                                            <option value="category-1">Chọn</option>
                                             {category && category.length > 0 &&
                                                 category.map((option, index) => (
 
@@ -225,14 +251,12 @@ class addProduct extends React.Component {
                                     <Form.Group className="mb-3" >
                                         <Form.Label>Khuyến Mãi</Form.Label>
                                         <Form.Select name="form-field-name"
-                                            value={this.setState.id_promotion}
+                                            value={id_promotion}
                                             onChange={(e) => { this.onChange(e, 'id_promotion') }}
                                             labelKey={'Tên'}
                                             valueKey={'Mã'}
                                             isLoading={isLoadingExternally}
-
                                         >
-                                            <option value="0">Chọn</option>
                                             {promotion && promotion.length > 0 &&
                                                 promotion.map((option, index) => (
                                                     <option value={option.id} key={index}>Mã: {option.id}, Tên: {option.name}</option>
@@ -304,6 +328,7 @@ class addProduct extends React.Component {
 }
 var mapStateToProps = (state) => {
     return {
+        products: state.products,
         category: state.category,
         promotion: state.promotion,
     };

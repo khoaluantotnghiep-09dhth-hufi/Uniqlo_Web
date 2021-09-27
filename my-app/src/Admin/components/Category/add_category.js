@@ -14,23 +14,39 @@ let isLoadingExternally = false;
 class AddCategory extends React.Component {
     constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             idItem: "",
             txtName: "",
             id_sector: "",
             sectorArr: [],
         };
-        
+
     }
     componentDidMount() {
         var { match } = this.props;
-
         this.props.onEditItemCategory(match.params.id_category);
         isLoadingExternally = true;
-
         this.setState({
             sectorArr: this.props.fetchSectors()
-        })
+        });
+        var { category } = this.props;
+        if (match.params.id_category) {
+            const result = category.find((o) => o.id === match.params.id_category);
+            this.setState({
+                txtName: result.name,
+                id_sector: result.id_sectors,
+            });
+        }
+    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        var { match } = this.props;
+        if (prevProps.category !== this.props.category && !match.params.id_category) {
+            let arrSector = this.props.category;
+            this.setState({
+                sectorArr: arrSector,
+                id_sector: arrSector && arrSector.length > 0 ? arrSector[0].id : ''
+            })
+        }
     }
     componentWillReceiveProps(NextProps) {
         var { match } = this.props;
@@ -38,10 +54,10 @@ class AddCategory extends React.Component {
             var { category } = NextProps;
             if (match.params.id_category) {
                 const result = category.find((o) => o.id === match.params.id_category);
+                console.log("result",result)
                 // this.setState({
-                //     idItem: result.id,
                 //     txtName: result.name,
-                //     id_sector: result.id_sector,
+                //     id_sector: result.id_sectors,
                 // });
             }
         }
@@ -51,8 +67,10 @@ class AddCategory extends React.Component {
         coppyState[id] = e.target.value;
         this.setState({
             ...coppyState
-        }        )
-        
+        }, () => {
+            console.log("state change", this.state)
+        })
+
     };
     checkValidate = () => {
         let check = ['txtName'];
@@ -94,6 +112,7 @@ class AddCategory extends React.Component {
     };
     render() {
         var { sector } = this.props;
+        let {txtName,id_sector} = this.state;
         return (
             <Container fluid>
                 <Row>
@@ -111,7 +130,7 @@ class AddCategory extends React.Component {
                                     type="text"
                                     placeholder="Nhập tên đối tượng cần thêm..."
                                     name="txtName"
-                                    value={this.setState.txtName}
+                                    value={txtName}
                                     onChange={(e) => { this.onChange(e, 'txtName') }} />
                                 <Form.Control.Feedback
                                     type="invalid" >
@@ -121,20 +140,18 @@ class AddCategory extends React.Component {
                             <Form.Group className="mb-3" controlId="formBasicObject">
                                 <Form.Label>Loại</Form.Label>
                                 <Form.Select name="form-field-name"
-                                    value={this.setState.id_sector}
+                                    value={id_sector}
                                     onChange={(e) => { this.onChange(e, 'id_sector') }}
                                     labelKey={'Tên'}
                                     valueKey={'Mã'}
                                     isLoading={isLoadingExternally}
-                                    options={this.setState.id_sector}
                                 >
-                                      <option value="object-1">Chọn</option>
-                                      {sector && sector.length > 0 &&
+                                    {sector && sector.length > 0 &&
                                         sector.map((option, index) => (
 
                                             <option value={option.id} key={index}>Mã: {option.id}, Tên: {option.name}</option>
                                         ))}
-       
+
                                 </Form.Select>
 
 

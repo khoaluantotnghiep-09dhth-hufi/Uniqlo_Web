@@ -27,7 +27,26 @@ class AddSector extends React.Component {
         this.setState({
             object_menu: this.props.fetchObjects()
         })
+        var { sector } = this.props;
+        if (match.params.id_sector) {
+            const result = sector.find((o) => o.id === match.params.id_sector);
+            console.log("resui", result);
+            this.setState({
+                txtName: result.name,
+                id_object: result.id_object,
+            });
+        }
 
+    }
+    componentDidUpdate(prevProps,prevState,snapshot) {
+        var { match } = this.props;
+        if (prevProps.object_menu !== this.props.object_menu && !match.params.id_sector){
+            let arrObject = this.props.object_menu;
+            this.setState({
+                object_menuArr : arrObject,
+                id_object : arrObject && arrObject.length > 0 ? arrObject[0].id : ''
+            })
+        }
     }
     componentWillReceiveProps(NextProps) {
         var { match } = this.props;
@@ -43,12 +62,13 @@ class AddSector extends React.Component {
             }
         }
     }
-
     onChange = (e, id) => {
         let coppyState = { ...this.state };
         coppyState[id] = e.target.value;
         this.setState({
             ...coppyState
+        },()=> {
+            console.log("state",this.state)
         })
 
     };
@@ -69,8 +89,6 @@ class AddSector extends React.Component {
         event.preventDefault();
         if (isValid === false) return;
         var { match } = this.props;
-
-
         var { idItem, txtName, id_object } = this.state;
         var sector = {
             id: uniqid("sector-"),
@@ -93,6 +111,7 @@ class AddSector extends React.Component {
     };
     render() {
         let { object_menu } = this.props;
+        let {txtName, id_object} = this.state;
         return (
             <Container fluid>
                 <Row>
@@ -110,7 +129,7 @@ class AddSector extends React.Component {
                                     type="text"
                                     placeholder="Nhập tên đối tượng cần thêm..."
                                     name="txtName"
-                                    value={this.setState.txtName}
+                                    value={txtName}
                                     onChange={(e) => { this.onChange(e, 'txtName') }} />
                                 <Form.Control.Feedback
                                     type="invalid" >
@@ -120,22 +139,19 @@ class AddSector extends React.Component {
                             <Form.Group className="mb-3" controlId="formBasicObject">
                                 <Form.Label>Đối Tượng</Form.Label>
                                 <Form.Select name="form-field-name"
-                                    value={this.setState.id_object}
+                                    value={id_object}
                                     onChange={(e) => { this.onChange(e, 'id_object') }}
                                     labelKey={'Tên'}
                                     valueKey={'Mã'}
                                     isLoading={isLoadingExternally}
-
                                 >
-                                    <option value="object-1">Chọn</option>
+                                    {/* <option value="object-1">Chọn</option> */}
                                     {object_menu && object_menu.length > 0 &&
                                         object_menu.map((option, index) => (
 
                                             <option value={option.id} key={index}>Mã: {option.id}, Tên: {option.name}</option>
                                         ))}
                                 </Form.Select>
-
-
                             </Form.Group>
                             {/* <Link to="/admin/manage/objects" > */}
                             <Button type="button"

@@ -13,12 +13,12 @@ import * as actions from "./../../../actions/index";
 class AddCustomer extends React.Component {
   constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       idItem: "",
-      txtName:"",
-      txtAddress:"",
-      txtPhone:"",
-      txtImage:"",
+      txtName: "",
+      txtAddress: "",
+      txtPhone: "",
+      txtImage: "",
       txtPassword: "",
       txtEmail: "",
     };
@@ -27,6 +27,18 @@ class AddCustomer extends React.Component {
     var { match } = this.props;
 
     this.props.onEditItemCustomer(match.params.id_customer);
+    var { customer } = this.props;
+    if (match.params.id_customer) {
+      const result = customer.find((o) => o.id === match.params.id_customer);
+      this.setState({
+        txtName: result.name,
+        txtAddress: result.address,
+        txtPhone: result.phone,
+        txtImage: result.image,
+        txtPassword: result.password,
+        txtEmail: result.email,
+      });
+    }
   }
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
@@ -60,7 +72,7 @@ class AddCustomer extends React.Component {
 
     event.preventDefault();
     var { history } = this.props;
-    var{
+    var {
       idItem,
       txtName,
       txtAddress,
@@ -68,8 +80,8 @@ class AddCustomer extends React.Component {
       txtImage,
       txtPassword,
       txtEmail,
-    }= this.state;
-    
+    } = this.state;
+
     var customer = {
       id: uniqid("customer-"),
       nameCustomer: txtName,
@@ -98,13 +110,13 @@ class AddCustomer extends React.Component {
     }
   };
   render() {
-
+    let { txtName, txtAddress, txtPhone, txtImage, txtPassword, txtEmail } = this.state;
     return (
       <Container fluid>
         <Row>
           <Link to="/admin/manage/customers">
             <Button type="button" className="btn btn-primary" size="sm">
-              <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg"/>Trở về
+              <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />Trở về
             </Button>
           </Link>
           <Col sm="12">
@@ -115,8 +127,9 @@ class AddCustomer extends React.Component {
                   required
                   type="text"
                   placeholder="Nhập tên..."
-                  name ="txtName"
+                  name="txtName"
                   id="txtName"
+                  value={txtName}
                   onChange={this.onChange} />
                 <Form.Control.Feedback
                   type="invalid" >
@@ -131,6 +144,7 @@ class AddCustomer extends React.Component {
                   placeholder="Nhập địa chỉ..."
                   name="txtAddress"
                   id="txtAddress"
+                  value={txtAddress}
                   onChange={this.onChange} />
 
               </Form.Group>
@@ -142,6 +156,7 @@ class AddCustomer extends React.Component {
                   placeholder="Nhập số điện thoại..."
                   name="txtPhone"
                   id="txtPhone"
+                  value={txtPhone}
                   onChange={this.onChange} />
 
               </Form.Group>
@@ -151,6 +166,7 @@ class AddCustomer extends React.Component {
                   required
                   type="file"
                   id="txtImage"
+                  value={txtImage}
                   name="txtImage"
                   onChange={this.onChange} />
 
@@ -163,6 +179,7 @@ class AddCustomer extends React.Component {
                   placeholder="Mật khẩu..."
                   name="txtPassword"
                   id="txtPassword"
+                  value={txtPassword}
                   onChange={this.onChange} />
 
               </Form.Group>
@@ -174,6 +191,7 @@ class AddCustomer extends React.Component {
                   placeholder="Gmail..."
                   name="txtEmail"
                   id="txtEmail"
+                  value={txtEmail}
                   onChange={this.onChange} />
 
               </Form.Group>

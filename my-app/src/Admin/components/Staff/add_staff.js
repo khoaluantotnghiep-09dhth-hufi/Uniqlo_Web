@@ -37,6 +37,18 @@ class addStaff extends React.Component {
     var { match } = this.props;
 
     this.props.onEditItemStaff(match.params.id_staff);
+    var { staff } = this.props;
+    if (match.params.id_staff) {
+      const result = staff.find((o) => o.id === match.params.id_staff);
+      this.setState({
+        txtNameStaff: result.name,
+        txtEmail: result.email,
+        txtPhone: result.phone,
+        txtAddress: result.address,
+        txtPassword: result.password,
+        txtChucVu: result.postion,
+      });
+    }
   }
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
@@ -108,6 +120,7 @@ console.log(result);
     }
   };
   render() {
+    let { txtNameStaff,txtEmail,txtPhone,txtAddress,txtPassword, txtChucVu,} = this.state;
     return (
       <CContainer fluid>
         <CRow>
@@ -129,6 +142,7 @@ console.log(result);
                   placeholder="Tên nhân viên..."
                   autoComplete="name"
                   onChange={this.onChange}
+                  value ={txtNameStaff}
                 />
               </CFormGroup>
               <CFormGroup>
@@ -140,6 +154,7 @@ console.log(result);
                   placeholder="Email..."
                   autoComplete="email"
                   onChange={this.onChange}
+                  value ={txtEmail}
                 />
               </CFormGroup>
               <CFormGroup>
@@ -153,6 +168,7 @@ console.log(result);
                   placeholder="Số điện thoại..."
                   autoComplete="phone"
                   onChange={this.onChange}
+                  value ={txtPhone}
                 />
               </CFormGroup>
               <CFormGroup>
@@ -164,35 +180,9 @@ console.log(result);
                   placeholder="Địa chỉ..."
                   autoComplete="address"
                   onChange={this.onChange}
+                  value ={txtAddress}
                 />
               </CFormGroup>
-              {/* <CFormGroup>
-                <CLabel htmlFor="exampleFormControlTextarea1">Mật Khẩu</CLabel>
-                <CInput
-                  type="password"
-                  id="txtPassword"
-                  name="txtPassword"
-                  placeholder="Mật khẩu..."
-                  autoComplete="password"
-                  onChange={this.onChange}
-                />
-              </CFormGroup> */}
-
-              {/* <CFormGroup>
-                <CLabel htmlFor="exampleFormControlTextarea1">Chức Vụ</CLabel>
-                <select
-                  class="form-select"
-                  aria-label="Default select example"
-                  name="txtChucVu"
-                  onChange={this.onChange}
-                  //   value={this.state.txtChucVu}
-                >
-                  <option selected>Chọn Chức Vụ</option>
-                  <option value="1">Nhân Viên</option>
-                  <option value="0">Quản Lý</option>
-                </select>
-              </CFormGroup> */}
-
               <CFormGroup>
                 <CButton color="danger" className="m-2" type="submit">
                   {" "}

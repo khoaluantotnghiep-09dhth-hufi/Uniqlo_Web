@@ -2,7 +2,7 @@ import React from "react";
 import uniqid from "uniqid";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
-
+import ConvertIMG from "../../utils/getBase64";
 import {
   CForm,
   CLabel,
@@ -36,8 +36,19 @@ class addDiscount extends React.Component {
   }
   componentDidMount() {
     var { match } = this.props;
-
     this.props.onEditItemPromotion(match.params.id_promotion);
+    var { promotion } = this.props;
+    if (match.params.id_promotion) {
+      const result = promotion.find((o) => o.id === match.params.id_promotion);
+      console.log("resui", result);
+      this.setState({
+        txtNameDiscount: result.name,
+        txtNameMota: result.description,
+        dateStart: result.date_start,
+        dateEnd: result.date_end,
+        txtImage: result.image,
+      });
+    }
   }
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
@@ -47,13 +58,12 @@ class addDiscount extends React.Component {
         const result = promotion.find(
           (o) => o.id === match.params.id_promotion
         );
-
         this.setState({
-          idItem: result.id,
           txtNameDiscount: result.name,
-          txtNameMota: result.desciption,
+          txtNameMota: result.description,
           dateStart: result.date_start,
           dateEnd: result.date_end,
+          txtImage: result.image,
         });
       }
     }
@@ -71,6 +81,8 @@ class addDiscount extends React.Component {
     let file = data[0];
 
     if (file) {
+      let base64 = ConvertIMG.getBase64(file);
+      console.log("img", base64)
       let objectURL = URL.createObjectURL(file);
       this.setState({
         ImgPrivew: objectURL,
@@ -94,7 +106,7 @@ class addDiscount extends React.Component {
       date_end: dateEnd,
       image: txtImage,
     };
-
+    console.log("promotion data", promotion)
     var promotionUpdate = {
       id: match.params.id_promotion,
       name: txtNameDiscount,
@@ -103,19 +115,16 @@ class addDiscount extends React.Component {
       date_end: dateEnd,
       image: txtImage,
     };
-    
-    if (idItem) {
-     
-     
+
+    if (match.params.id_promotion) {
       if (dateEnd >= dateStart && dateStart >= dateNow) {
         this.props.onUpdateItemPromotion(promotionUpdate);
-
         history.goBack();
       } else {
         toast.error("Ngày Bắt Đầu Phải Nhỏ Hơn Ngày Kết Thúc!");
       }
     } else {
-      
+
       if (dateEnd >= dateStart && dateStart >= dateNow) {
         this.props.onAddItemPromotion(promotion);
         history.goBack();
@@ -125,6 +134,7 @@ class addDiscount extends React.Component {
     }
   };
   render() {
+    let { txtNameDiscount, txtNameMota, dateStart, dateEnd, txtImage, } = this.state;
     return (
       <CContainer fluid>
         <CRow>
@@ -146,6 +156,7 @@ class addDiscount extends React.Component {
                   name="txtNameDiscount"
                   placeholder="Tên Khuyến Mãi..."
                   autoComplete="name"
+                  value={txtNameDiscount}
                   onChange={this.onChange}
                 />
               </CFormGroup>
@@ -161,6 +172,7 @@ class addDiscount extends React.Component {
                   name="txtNameMota"
                   placeholder="Nội Dung..."
                   rows="5"
+                  value={txtNameMota}
                   onChange={this.onChange}
                 ></textarea>
               </CFormGroup>
@@ -187,6 +199,7 @@ class addDiscount extends React.Component {
                     onChange={(e) => {
                       this.onChangeImage(e);
                     }}
+
                     required
                   />
                 </CCol>
@@ -202,6 +215,7 @@ class addDiscount extends React.Component {
                       cursor: "pointer",
                       margin: "30px",
                     }}
+                    value={txtImage}
                     onClick={() => this.openPreviewIMG()}
                   ></div>
                 </CCol>
@@ -213,6 +227,7 @@ class addDiscount extends React.Component {
                   type="date"
                   name="dateStart"
                   autoComplete="current-password"
+                  value={dateStart}
                   onChange={this.onChange}
                 />
               </CFormGroup>
@@ -222,6 +237,7 @@ class addDiscount extends React.Component {
                   required
                   type="date"
                   name="dateEnd"
+                  value={dateEnd}
                   autoComplete="current-password"
                   onChange={this.onChange}
                 />

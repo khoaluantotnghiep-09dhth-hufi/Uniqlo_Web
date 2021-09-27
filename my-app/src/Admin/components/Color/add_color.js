@@ -30,6 +30,13 @@ class addColor extends React.Component {
   componentDidMount() {
     var { match } = this.props;
     this.props.onEditItemColor(match.params.id_color);
+    var { color } = this.props;
+    if (match.params.id_color) {
+      const result = color.find((o) => o.id === match.params.id_color);
+      this.setState({
+        txtName: result.name,
+      });
+    }
   }
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
@@ -39,7 +46,6 @@ class addColor extends React.Component {
         const result = color.find(
           (o) => o.id === match.params.id_color
         );
-
         this.setState({
           idItem: result.id,
           txtName: result.name,
@@ -82,6 +88,7 @@ class addColor extends React.Component {
     }
   };
   render() {
+    let {txtName} = this.state;
     return (
       <CContainer fluid>
         <CRow>
@@ -102,6 +109,7 @@ class addColor extends React.Component {
                   autoComplete="name"
                   onChange={this.onChange}
                   required
+                  value={txtName}
                 />
               </CFormGroup>
 
