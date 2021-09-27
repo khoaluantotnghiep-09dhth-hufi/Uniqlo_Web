@@ -18,6 +18,7 @@ const AddDiscount = React.lazy(() => import('../components/Discount/add_discount
 const ListAccountAdmin = React.lazy(() => import('../components/Account_Admin/list_accountadmin'));
 const UpdateAccountAdmin = React.lazy(() => import('../components/Account_Admin/update_account'));
 const AddAccountAdmin = React.lazy(() => import('../components/Account_Admin/add_accountAdmin'));
+const AdminProfile = React.lazy(() => import('../components/Account_Admin/admin_profile'));
 
 const ListProducts = React.lazy(() => import('../components/Product/list_product'));
 const AddProduct = React.lazy(() => import('../components/Product/add_product'));
@@ -59,6 +60,7 @@ const AddSize = React.lazy(() => import('../components/Size/add_size'));
 
 const routes = [
     { path: '/admin/home', exact: true, name: 'Trang Chủ', component: ListStatistical },
+    { path: '/admin/profile', exact: true, name: 'Thông Tin Cá Nhân', component: AdminProfile },
 
     { path: '/admin/system/order/all', exact: true, name: 'Tất Cả Đơn Hàng', component: Order },
     { path: '/admin/system/order/:id_order/edit', exact: true, name: 'Xác Nhận Đơn Hàng', component: UpdateOrder },

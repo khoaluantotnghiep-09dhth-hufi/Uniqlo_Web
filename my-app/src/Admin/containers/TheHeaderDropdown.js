@@ -21,11 +21,17 @@ const TheHeaderDropdown = () => {
   let isLogOut = false;
   const history = useHistory();
   var sessionUser = JSON.parse(sessionStorage.getItem("user"));
+  function adminProfile() {
+    if (sessionStorage.length !== 0) {
+      return <Route to='/admin/manage/categories' />
+    }
+  }
   function onSignOut() {
     sessionStorage.clear();
     // if (sessionStorage.length === 0) {
     //   return <Redirect push to={{ path: "/admin" }} />;
     // }
+
     window.location.href = "/admin";
   };
   return (
@@ -55,8 +61,10 @@ const TheHeaderDropdown = () => {
         >
           <strong>Cá Nhân</strong>
         </CDropdownItem>
-        <CDropdownItem>
-          <FontAwesomeIcon icon={faUser} size="lg" className="mr-2" />Thông Tin Tài Khoản
+        <CDropdownItem onClick={adminProfile}>
+          <Link to="/admin/profile">
+            <FontAwesomeIcon icon={faUser} size="lg" className="mr-2" />Thông Tin Tài Khoản
+          </Link>
         </CDropdownItem>
         <CDropdownItem>
           <CIcon name="cil-settings" className="mfe-2" />

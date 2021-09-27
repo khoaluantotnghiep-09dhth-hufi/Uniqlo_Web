@@ -25,10 +25,10 @@ class index extends Component {
 
   onHandleSubmitLogin = (users) => (event) => {
     event.preventDefault();
-    var { txtSDT, txtPassword, items } = this.state;
+    var { txtEmail, txtPassword, items } = this.state;
     console.log("data user", users)
     for (let i = 0; i < users.length; i++) {
-      if (users[i].phone === txtSDT && users[i].password === txtPassword) {
+      if (users[i].email === txtEmail && users[i].password === txtPassword) {
         var user = {
           id_user: users[i].id,
           name: users[i].name,
@@ -36,6 +36,12 @@ class index extends Component {
           password: users[i].password,
           postion: users[i].postion,
           role: users[i].role,
+          gender: users[i].gender,
+          image: users[i].image,
+          address: users[i].address,
+          email: users[i].email,
+          place_of_birth: users[i].place_of_birth,
+          cmnn_cccc: users[i].cmnn_cccc,
         };
         this.setState({
           isCheckLogin: true,
@@ -80,10 +86,9 @@ class index extends Component {
                     placeholder="&#xf879; Số Điện Thoại"
                     ref="memberPhone"
                     onChange={this.onHandleChange}
-                    name="txtSDT"
-                    maxlength="11"
+                    name="txtEmail"
                     minlength="10"
-                    pattern="^[0-9]*$"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                     required
                     autofocus
                   />
