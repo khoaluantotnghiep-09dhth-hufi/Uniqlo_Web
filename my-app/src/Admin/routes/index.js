@@ -58,13 +58,8 @@ const ListSize = React.lazy(() => import('../components/Size/list_size'));
 const AddSize = React.lazy(() => import('../components/Size/add_size'));
 
 const routes = [
-    {
-        path: '/admin/home',
-        exact: true,
-        name: 'Trang Chủ',
-        component: Home
-    },
-    
+    { path: '/admin/home', exact: true, name: 'Trang Chủ', component: ListStatistical },
+
     { path: '/admin/system/order/all', exact: true, name: 'Tất Cả Đơn Hàng', component: Order },
     { path: '/admin/system/order/:id_order/edit', exact: true, name: 'Xác Nhận Đơn Hàng', component: UpdateOrder },
     { path: '/admin/system/order/confirmed', exact: true, name: 'Đơn Hàng Đã Xác Nhận', component: ConfirmedOrder },
@@ -81,8 +76,8 @@ const routes = [
     { path: '/admin/system/discount/:id_promotion/edit', exact: true, name: 'Thêm Khuyến Mãi Mới', component: AddDiscount },
     { path: '/admin/system/discount/add', exact: true, name: 'Thêm Khuyến Mãi Mới', component: AddDiscount },
 
-     { path: '/admin/account', exact: true, name: 'Thêm Tài Khoản Admin Mới', component: ListAccountAdmin },
-     { path: '/admin/account/:id_staff/edit', exact: true, name: 'Thêm Tài Khoản Admin Mới', component: UpdateAccountAdmin },
+    { path: '/admin/account', exact: true, name: 'Thêm Tài Khoản Admin Mới', component: ListAccountAdmin },
+    { path: '/admin/account/:id_staff/edit', exact: true, name: 'Thêm Tài Khoản Admin Mới', component: UpdateAccountAdmin },
     { path: '/admin/account/add', exact: true, name: 'Thêm Tài Khoản Admin Mới', component: AddAccountAdmin },
 
     { path: '/admin/manage/products', exact: true, name: 'Danh Sách Sản Phẩm', component: ListProducts },
@@ -94,7 +89,7 @@ const routes = [
     { path: '/admin/manage/staffs', exact: true, name: 'Danh Sách Nhân Viên', component: ListStaffs },
     { path: '/admin/manage/staff/add', exact: true, name: 'Thêm Nhân Viên Mới', component: AddStaff },
     { path: '/admin/manage/staff/:id_staff/edit', exact: true, name: 'Chỉnh Sửa Thông Tin Nhân Viên', component: AddStaff },
-    
+
     { path: '/admin/manage/customers', exact: true, name: 'Danh Sách Khách Hàng', component: ListCustomers },
     { path: '/admin/manage/customer/add', exact: true, name: 'Thêm Khách Hàng Mới', component: AddCustomer },
     { path: '/admin/manage/customer/:id_customer/edit', exact: true, name: 'Chỉnh Sửa Thông Tin Khách Hàng', component: AddCustomer },
@@ -104,7 +99,7 @@ const routes = [
     { path: '/admin/manage/order-product/:id_order_product/edit', exact: true, name: 'Sửa Đơn Đặt Hàng', component: AddOrderProduct },
     { path: '/admin/manage/order-info/:id_order', exact: true, name: 'Chi Tiết Đơn Đặt Hàng', component: OrderProductInfo },
     { path: '/admin/manage/order-info/:id_order_info/edit', exact: true, name: 'Sửa Chi Tiết Đơn Đặt Hàng', component: EditOrderProductInfo },
-   
+
     { path: '/admin/manage/import-product', exact: true, name: 'Danh Sách Nhập Hàng', component: ListImportProduct },
     { path: '/admin/manage/import-product/add', exact: true, name: 'Lập Đơn Nhập Hàng', component: AddImportProduct },
     { path: '/admin/manage/import-product/:id_import/edit', exact: true, name: 'Chỉnh Sửa Đơn Nhập Hàng', component: AddImportProduct },
@@ -121,7 +116,7 @@ const routes = [
     { path: '/admin/manage/categories', exact: true, name: 'Danh Sách Danh Mục', component: ListCategories },
     { path: '/admin/manage/category/add', exact: true, name: 'Thêm Danh Mục Mới', component: AddCategory },
     { path: '/admin/manage/category/:id_category/edit', exact: true, name: 'Sửa Danh Mục', component: AddCategory },
-    
+
 
     { path: '/admin/manage/statistical', exact: true, name: 'Thống Kê Doanh Số', component: ListStatistical },
     { path: '/admin/manage/statistical-order-import', exact: true, name: 'Thống Kê Kho', component: ListStatisticalOrderImport },

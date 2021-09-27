@@ -89,7 +89,7 @@ class AddCategory extends React.Component {
         if (isValid === false) return;
         event.preventDefault();
         var { history } = this.props;
-        var { idItem, txtName, id_sector } = this.state;
+        var { txtName, id_sector } = this.state;
 
         var category = {
             id: uniqid("category-"),
