@@ -9,7 +9,14 @@ import { connect } from "react-redux";
 import uniqid from 'uniqid';
 import { Button, Form, Col, Container, Row } from 'react-bootstrap';
 import * as actions from "./../../../actions/index";
+import Select from 'react-select';
 let isLoadingExternally = false;
+const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' },
+];
+
 class AddSector extends React.Component {
     constructor(props) {
         super(props);
@@ -18,7 +25,24 @@ class AddSector extends React.Component {
             txtName: "",
             id_object: "",
             object_menuArr: [],
+            selectedOption: null,
         };
+    }
+    handleChange = (selectedOption) => {
+        this.setState({ selectedOption });
+        console.log(`Option selected:`, selectedOption);
+    };
+    buildDataInputSelect = (inputData) =>{
+        let rs = [];
+        if(inputData && inputData.length > 0){
+            inputData.map((item,index)=>{
+                let object ={};
+                object.label = item.name;
+                object.value = item.id;
+                rs.push(object);
+            })
+        }
+        return rs;
     }
     componentDidMount() {
         var { match } = this.props;
@@ -38,13 +62,15 @@ class AddSector extends React.Component {
         }
 
     }
-    componentDidUpdate(prevProps,prevState,snapshot) {
+    componentDidUpdate(prevProps, prevState, snapshot) {
         var { match } = this.props;
-        if (prevProps.object_menu !== this.props.object_menu && !match.params.id_sector){
-            let arrObject = this.props.object_menu;
+        if (prevProps.object_menu !== this.props.object_menu) {
+            // let arrObject = this.props.object_menu;
+            let dataSelect = this.buildDataInputSelect(this.props.object_menu);
             this.setState({
-                object_menuArr : arrObject,
-                id_object : arrObject && arrObject.length > 0 ? arrObject[0].id : ''
+                // object_menuArr: arrObject,
+                // id_object: arrObject && arrObject.length > 0 ? arrObject[0].id : ''
+                object_menuArr : dataSelect
             })
         }
     }
@@ -67,8 +93,8 @@ class AddSector extends React.Component {
         coppyState[id] = e.target.value;
         this.setState({
             ...coppyState
-        },()=> {
-            console.log("state",this.state)
+        }, () => {
+            console.log("state", this.state)
         })
 
     };
@@ -89,16 +115,16 @@ class AddSector extends React.Component {
         event.preventDefault();
         if (isValid === false) return;
         var { match } = this.props;
-        var { idItem, txtName, id_object } = this.state;
+        var { idItem, txtName, id_object,selectedOption } = this.state;
         var sector = {
             id: uniqid("sector-"),
             name: txtName,
-            id_object: id_object,
+            id_object: selectedOption.value,
         };
         var sectorUpdate = {
             id: match.params.id_sector,
             name: txtName,
-            id_object: id_object,
+            id_object: selectedOption.value,
         };
 
         if (idItem) {
@@ -111,7 +137,8 @@ class AddSector extends React.Component {
     };
     render() {
         let { object_menu } = this.props;
-        let {txtName, id_object} = this.state;
+        let { txtName, id_object, selectedOption } = this.state;
+        console.log(this.state)
         return (
             <Container fluid>
                 <Row>
@@ -138,20 +165,26 @@ class AddSector extends React.Component {
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicObject">
                                 <Form.Label>Đối Tượng</Form.Label>
-                                <Form.Select name="form-field-name"
+                                {/* <Form.Select name="form-field-name"
                                     value={id_object}
                                     onChange={(e) => { this.onChange(e, 'id_object') }}
                                     labelKey={'Tên'}
                                     valueKey={'Mã'}
                                     isLoading={isLoadingExternally}
                                 >
-                                    {/* <option value="object-1">Chọn</option> */}
+
                                     {object_menu && object_menu.length > 0 &&
                                         object_menu.map((option, index) => (
 
                                             <option value={option.id} key={index}>Mã: {option.id}, Tên: {option.name}</option>
                                         ))}
-                                </Form.Select>
+                                    
+                                </Form.Select> */}
+                                <Select
+                                    value={selectedOption}
+                                    onChange={this.handleChange}
+                                    options={this.state.object_menuArr}
+                                />
                             </Form.Group>
                             {/* <Link to="/admin/manage/objects" > */}
                             <Button type="button"

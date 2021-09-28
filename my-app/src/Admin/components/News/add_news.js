@@ -67,6 +67,7 @@ class AddNews extends React.Component {
     var { news } = this.props;
     if (match.params.id_news) {
       const result = news.find((o) => o.id === match.params.id_news);
+      console.log("result nè", result);
       this.setState({
         txtTitle: result.title,
         txtDate: this.getCurrentDate(),
