@@ -17,16 +17,7 @@ import ConvertIMG from '../../utils/getBase64';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 
-import MarkdownIt from 'markdown-it';
-import MdEditor from 'react-markdown-editor-lite';
 
-import 'react-markdown-editor-lite/lib/index.css';
-
-const mdParser = new MarkdownIt(/* Markdown-it options */);
-
-function handleEditorChange({ html, text }) {
-  console.log('handleEditorChange', html, text);
-}
 let isLoadingExternally = false;
 class addProduct extends React.Component {
     constructor(props) {
@@ -114,6 +105,7 @@ class addProduct extends React.Component {
         })
     }
     onChangeImage = (e) => {
+
         let data = e.target.files;
         let file = data[0];
         if (file) {
@@ -159,6 +151,7 @@ class addProduct extends React.Component {
             id_category: id_category,
             id_promotion: id_promotion,
         };
+        console.log("data",product)
         var productUpdate = {
             idItem: match.params.id_product,
             name: txtName,
@@ -182,7 +175,6 @@ class addProduct extends React.Component {
         var { promotion } = this.props;
         var { category } = this.props;
         let { txtName, txtPrice, txtDescription, id_category, id_promotion, ImgPrivew } = this.state;
-        console.log("state", this.state)
         return (
             <Container fluid>
                 <Link to="/admin/manage/products">
@@ -290,7 +282,7 @@ class addProduct extends React.Component {
                                 <Col sm="12">
                                     <Form.Group >
                                         <Form.Label htmlFor="exampleFormControlInput1">Mô Tả</Form.Label>
-                                        {/* <textarea
+                                        <textarea
                                             className="form-control"
                                             id="txtDescription"
                                             name="txtDescription"
@@ -299,15 +291,10 @@ class addProduct extends React.Component {
                                             onChange={(e) => { this.onChange(e, 'txtDescription') }}
                                             rows="8"
                                             required
-                                        ></textarea> */}
-                                        <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} onChange={handleEditorChange} />
-                                        <Form.Control.Feedback
-                                            type="invalid" >
-                                            Vui lòng nhập tên cần thêm !
-                                        </Form.Control.Feedback>
+                                        ></textarea>
+                                       
                                     </Form.Group>
                                 </Col>
-
                             </Row>
                         </Form>
                     </Col>

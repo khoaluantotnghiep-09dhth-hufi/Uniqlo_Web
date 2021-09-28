@@ -24,10 +24,9 @@ const fields =
     ["STT",
         { key: "title", label: "Tiêu Đề" },
         { key: "date", label: "Ngày Đăng" },
-        { key: "description", label: "Nội Dung" },
+        { key: "descriptionText", label: "Nội Dung" },
         { key: "name", label: "Nhân Viên" },
         { key: "image", label: "Ảnh" },
-        { key: "image_banner", label: "Ảnh Banner" },
         "Thao Tác",
     ]
 class ListNews extends React.Component {
@@ -47,7 +46,6 @@ class ListNews extends React.Component {
         var data = news.map((item, index) => {
             return item;
         });
-        console.log("data nè",data);
         return (
             <>
                 <Link to="/admin/system/news/add">

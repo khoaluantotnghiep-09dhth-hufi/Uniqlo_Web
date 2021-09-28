@@ -22,7 +22,7 @@ class index extends Component {
             <Row className="mt-4">
               {/* <Col lg="2"></Col> */}
               <Col>
-                <Image className="Adjust_Image" src={item.image_banner} rounded />
+                <Image className="Adjust_Image" src={item.image} rounded />
               </Col>
               {/* <Col lg="2"></Col> */}
             </Row>
@@ -42,7 +42,7 @@ class index extends Component {
               <Col>
                 <p className="Adjust_Text_Body">
                   <span className="mr-4"></span>
-                  {item.description}
+                  {item.descriptionText}
                 </p>
               </Col>
             </Row>

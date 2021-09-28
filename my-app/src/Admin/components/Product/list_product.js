@@ -19,6 +19,7 @@ import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import * as actions from "./../../../actions/productAdminActions";
 import { Image } from 'react-bootstrap';
+import ConvertIMG from '../../utils/getBase64';
 
 const fields = [
     'STT',
@@ -58,7 +59,6 @@ class ListProducts extends React.Component {
     render() {
         var { products } = this.props;
         var data = products.map((item, index) => {
-
             return item;
         });
         return (
@@ -129,7 +129,7 @@ class ListProducts extends React.Component {
                                         'image':
                                             (item, index) => (
                                                 <td>
-                                                    <Image style={{width:"200px", height:"200px"}} src={item.image} thumbnail />
+                                                    <Image style={{ width: "200px", height: "200px" }} src={item.image} thumbnail />
                                                 </td>
                                             ),
                                         // "nameColor": (item) => (

@@ -12,6 +12,14 @@ import { Button, Form, Col, Container, Row } from 'react-bootstrap';
 import * as actions from "./../../../actions/index";
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
+import MarkdownIt from 'markdown-it';
+import MdEditor from 'react-markdown-editor-lite';
+
+import 'react-markdown-editor-lite/lib/index.css';
+
+const mdParser = new MarkdownIt(/* Markdown-it options */);
+
+
 const sessionUser = JSON.parse(sessionStorage.getItem("user"));
 class AddNews extends React.Component {
   constructor(props) {
@@ -19,15 +27,21 @@ class AddNews extends React.Component {
     this.state = {
       idItem: "",
       txtTitle: "",
-      txtDate: "",
-      txtDescription: "",
+      txtDate: this.getCurrentDate(),
+      txtDescriptionHTML: "",
+      txtDescriptionText: "",
       id_staff: "",
       txtImage: "",
-      txtImageBanner: "",
-      ImgPrivewIMG: "",
-      ImgPrivewSubTitle: "",
+      ImgPrivew: "",
       isOpen: false,
     };
+  }
+  handleEditorChange = ({ html, text }) => {
+
+    this.setState({
+      txtDescriptionHTML: html,
+      txtDescriptionText: text,
+    })
   }
   openPreviewIMG = () => {
     this.setState({
@@ -47,50 +61,47 @@ class AddNews extends React.Component {
 
     }
   }
-  // onChangeImageSubTitle = (e) =>{ 
-  //   let data = e.target.files;
-  //   let file = data[0];
-
-  //   if (file) {
-  //     let objectURLTitle = URL.createObjectURL(file);
-  //     this.setState({
-  //       ImgPrivewSubTitle: objectURLTitle,
-  //       txtImageBanner: objectURLTitle,
-  //     })
-
-  //   }
-  // }
   componentDidMount() {
     var { match } = this.props;
     this.props.onEditItemNews(match.params.id_news);
-  }
-  //   componentDidUpdate(prevProps,prevState,snapshot) {
-  //     if (prevProps.staff !== this.props.staff){
-  //         let arrStaff = this.props.staff;
-  //         this.setState({
-  //           staffArr : arrStaff,
-  //           id_staff : arrStaff && arrStaff.length > 0 ? arrStaff[0].id : ''
-  //         })
-  //     }
-  // }
-  componentWillReceiveProps(NextProps) {
-    var { match } = this.props;
-    if (NextProps && NextProps.news) {
-      var { news } = NextProps;
-      if (match.params.id_news) {
-        const result = news.find((o) => o.id === match.params.id_news);
-        console.log(result)
-        this.setState({
-          idItem: result.id,
-          txtTitle: result.title,
-          txtDate: result.date,
-          txtDescription: result.description,
-          id_staff: result.id_staff.id,
-          txtImage: result.image,
-          txtImageBanner: result.image_banner,
-        });
-      }
+    var { news } = this.props;
+    if (match.params.id_news) {
+      const result = news.find((o) => o.id === match.params.id_news);
+      this.setState({
+        txtTitle: result.title,
+        txtDate: this.getCurrentDate(),
+        txtDescriptionHTML: result.descriptionHTML,
+        txtDescriptionText: result.descriptionText,
+        id_staff: sessionUser.id_staff,
+        txtImage: result.image,
+      });
     }
+  }
+  // componentWillReceiveProps(NextProps) {
+  //   var { match } = this.props;
+  //   if (NextProps && NextProps.news) {
+  //     var { news } = NextProps;
+  //     if (match.params.id_news) {
+  //       const result = news.find((o) => o.id === match.params.id_news);
+  //       this.setState({
+  //         txtTitle: result.title,
+  //         txtDate: this.getCurrentDate(),
+  //         txtDescriptionHTML: result.descriptionHTML,
+  //         txtDescriptionText: result.descriptionText,
+  //         id_staff: sessionUser.id_staff,
+  //         txtImage: result.image,
+  //       });
+  //     }
+  //   }
+  // }
+  getCurrentDate(separator = '/') {
+
+    let newDate = new Date()
+    let date = newDate.getDate();
+    let month = newDate.getMonth() + 1;
+    let year = newDate.getFullYear();
+
+    return `${year}${separator}${month < 10 ? `0${month}` : `${month}`}${separator}${date}`
   }
   onChange = (e, id) => {
     let coppyState = { ...this.state };
@@ -107,36 +118,35 @@ class AddNews extends React.Component {
 
     event.preventDefault();
     var { history } = this.props;
+    console.log("state nè", this.state);
     var {
       idItem,
       txtTitle,
       txtDate,
-      txtDescription,
-      id_staff,
+      txtDescriptionHTML,
+      txtDescriptionText,
       txtImage,
-      txtImageBanner,
     } = this.state;
-
     var news = {
       id: uniqid("news-"),
       title: txtTitle,
       date: txtDate,
-      description: txtDescription,
+      descriptionHTML: txtDescriptionHTML,
+      descriptionText: txtDescriptionText,
       id_staff: sessionUser.id_user,
       image: txtImage,
-      image_banner: txtImageBanner,
     };
     var newsUpdate = {
-      idItem: match.params.id_news,
+      id: match.params.id_news,
       title: txtTitle,
       date: txtDate,
-      description: txtDescription,
+      descriptionHTML: txtDescriptionHTML,
+      descriptionText: txtDescriptionText,
       id_staff: sessionUser.id_user,
       image: txtImage,
-      image_banner: txtImageBanner,
     };
 
-    if (idItem) {
+    if (match.params.id_news) {
       this.props.onUpdateItemNews(newsUpdate);
       history.goBack();
     }
@@ -146,7 +156,7 @@ class AddNews extends React.Component {
     }
   };
   render() {
-    let { txtTitle, txtDate, txtDescription, id_staff, txtImage, txtImageBanner } = this.state;
+    let { txtTitle, txtDate, txtDescriptionHTML, txtDescriptionText, id_staff, txtImage, ImgPrivew } = this.state;
     return (
       <Container fluid>
         <Row sm="12">
@@ -157,102 +167,46 @@ class AddNews extends React.Component {
           </Link>
           <Form onSubmit={this.onSubmitForm}>
             <Row>
-              <Col sm="6">
+              <Col sm="12">
                 <Form.Group className="mb-3" controlId="formBasicObject">
                   <Form.Label>Tiêu Đề</Form.Label>
-                  <Form.Control
-                    required
-                    type="text"
-                    placeholder="Nhập tiêu đề..."
-                    name="txtTitle"
+                  <textarea
+                    className="form-control"
                     id="txtTitle"
+                    name="txtTitle"
                     value={txtTitle}
-                    onChange={(e) => { this.onChange(e, 'txtTitle') }} />
-                  <Form.Control.Feedback
-                    type="invalid" >
-                    Vui lòng nhập tên cần thêm !
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-              <Col sm="6">
-                <Form.Group className="mb-3" controlId="formBasicObject">
-                  <Form.Label>Ngày Đăng</Form.Label>
-                  <Form.Control
+                    placeholder="Tiêu đề..."
+                    onChange={(e) => { this.onChange(e, 'txtTitle') }}
+                    rows="5"
                     required
-                    type="date"
-                    placeholder="Nhập tiêu đề..."
-                    name="txtDate"
-                    id="txtDate"
-                    value={txtDate}
-                    onChange={(e) => { this.onChange(e, 'txtDate') }} />
+                  ></textarea>
                 </Form.Group>
               </Col>
             </Row>
             <Form.Group className="mb-3" controlId="formBasicObject">
               <Form.Label>Nội Dung</Form.Label>
-              <textarea
-                className="form-control"
-                id="txtDescription"
-                name="txtDescription"
-                value={txtDescription}
-                placeholder="Mô tả..."
-                onChange={(e) => { this.onChange(e, 'txtDescription') }}
-                rows="8"
-                required
-              ></textarea>
+              <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} onChange={this.handleEditorChange} />
             </Form.Group>
             <Row sm="12">
-              <Col sm="2">
+              <Col sm="2" className="d-flex justify-content-center">
                 <Form.Group >
-                  <Form.Label>Image</Form.Label>
-                  <Form.Control
-                    required
-                    type="text"
-                    placeholder="Image"
-                    name="txtImage"
-                    id="txtImage"
-                    value={txtImage}
-                    onChange={(e) => { this.onChange(e, 'txtImage') }} />
-                </Form.Group>
-              </Col>
-              <Col sm="4">
-                <div style={{ backgroundImage: `url(${this.state.ImgPrivew})`, height: "200px", width: "300px", align: "center", background: "center center no-repeat", backgroundSize: "contain", cursor: "pointer", margin: "30px" }}
-                  onClick={() => this.openPreviewIMG()}
-                ></div>
-              </Col>
-              {/* <Col sm="2"> */}
-              {/* <Form.Group >
-                  <Form.Label className="border border-dark" style={{ backgroundColor: "#ffe6e6", padding: "10px", marginTop: "100px", cursor: "pointer" }} htmlFor="txtImage"><FontAwesomeIcon icon={faUpload} className="mr-2 fa-3x" />Tải Ảnh Tiêu Đề</Form.Label>
+                  <Form.Label className="border border-dark" style={{ backgroundColor: "#ffe6e6", padding: "10px", marginTop: "100px", cursor: "pointer" }} htmlFor="txtImage"><FontAwesomeIcon icon={faUpload} className="mr-2 fa-3x" />Tải Ảnh</Form.Label>
                   <Form.Control
                     type="file"
                     id="txtImage"
-                    name="txtImageBanner"
+                    name="txtImage"
                     hidden
-                    onChange={(e) => { this.onChangeImageSubTitle(e) }}
+                    onChange={(e) => { this.onChangeImage(e) }}
                     required
                   />
                 </Form.Group>
               </Col>
-              <Col sm="4">
-                <div style={{ backgroundImage: `url(${this.state.ImgPrivewSubTitle})`, height: "200px", width: "300px", align: "center", background: "center center no-repeat", backgroundSize: "contain", cursor: "pointer", margin: "30px" }}
+              <Col sm="6" className="d-flex justify-content-center">
+                <div style={{ backgroundImage: `url(${ImgPrivew})`, height: "200px", width: "300px", align: "center", background: "center center no-repeat", backgroundSize: "contain", cursor: "pointer", margin: "30px" }}
                   onClick={() => this.openPreviewIMG()}
-                ></div> */}
-              {/* </Col> */}
-              <Form.Group className="mb-3" controlId="formBasicObject">
-                <Form.Label>Banner</Form.Label>
-                <Form.Control
-                  required
-                  type="text"
-                  placeholder="Image banner"
-                  name="txtImageBanner"
-                  id="txtImageBanner"
-                  value={txtImageBanner}
-                  onChange={(e) => { this.onChange(e, 'txtImageBanner') }} />
-
-              </Form.Group>
+                ></div>
+              </Col>
             </Row>
-
-            {/* <Link to="/admin/manage/objects" > */}
             <Button type="button"
               className="btn btn-danger"
               onClick={this.onSubmitForm}
@@ -262,7 +216,6 @@ class AddNews extends React.Component {
                 className="mr-2"
                 size="lg" />Lưu
             </Button>
-            {/* </Link> */}
           </Form>
         </Row>
         {
