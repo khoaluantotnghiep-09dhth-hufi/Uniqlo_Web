@@ -32,7 +32,7 @@ const _nav = [
   {
     _tag: 'CSidebarNavItem',
     name: 'Trang Chủ',
-    to: '/admin',
+    to: '/admin/home',
     icon: <FontAwesomeIcon icon={faStore} className="mr-2" />
 
   },

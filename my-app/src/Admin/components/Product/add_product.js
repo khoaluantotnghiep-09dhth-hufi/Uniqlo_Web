@@ -1,8 +1,4 @@
 import React from 'react';
-import {
-
-
-} from '@coreui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faPlus,
@@ -16,9 +12,21 @@ import * as actionsProduct from "./../../../actions/productAdminActions";
 import * as actionsProductInfo from "./../../../actions/product_infoActions";
 import { connect } from "react-redux";
 import uniqid from 'uniqid';
+import ConvertIMG from '../../utils/getBase64';
 //Thư viện img 
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
+
+import MarkdownIt from 'markdown-it';
+import MdEditor from 'react-markdown-editor-lite';
+
+import 'react-markdown-editor-lite/lib/index.css';
+
+const mdParser = new MarkdownIt(/* Markdown-it options */);
+
+function handleEditorChange({ html, text }) {
+  console.log('handleEditorChange', html, text);
+}
 let isLoadingExternally = false;
 class addProduct extends React.Component {
     constructor(props) {
@@ -29,7 +37,6 @@ class addProduct extends React.Component {
             txtPrice: "",
             txtDescription: "",
             txtImage: "",
-            txtQuantity: "",
             id_category: "",
             id_promotion: "",
             ImgPrivew: "",
@@ -57,26 +64,26 @@ class addProduct extends React.Component {
                 txtPrice: result.price,
                 txtDescription: result.description,
                 txtImage: result.image,
-                txtQuantity: result.quantity,
                 id_promotion: result.id_promotion,
                 id_category: result.id_category,
+                ImgPrivew: result.image,
             });
         }
     }
-    componentDidUpdate(prevProps,prevState,snapshot) {
+    componentDidUpdate(prevProps, prevState, snapshot) {
         var { match } = this.props;
-        if (prevProps.category !== this.props.category && !match.params.id_product){
+        if (prevProps.category !== this.props.category && !match.params.id_product) {
             let arrCategory = this.props.category;
             this.setState({
-                categoryArr : arrCategory,
-                id_category : arrCategory && arrCategory.length > 0 ? arrCategory[0].id : ''
+                categoryArr: arrCategory,
+                id_category: arrCategory && arrCategory.length > 0 ? arrCategory[0].id : ''
             })
         }
-        if (prevProps.promotion !== this.props.promotion && !match.params.id_product){
+        if (prevProps.promotion !== this.props.promotion && !match.params.id_product) {
             let arrPromotion = this.props.promotion;
             this.setState({
-                promotionArr : arrPromotion,
-                id_promotion : arrPromotion && arrPromotion.length > 0 ? arrPromotion[0].id : ''
+                promotionArr: arrPromotion,
+                id_promotion: arrPromotion && arrPromotion.length > 0 ? arrPromotion[0].id : ''
             })
         }
     }
@@ -93,7 +100,6 @@ class addProduct extends React.Component {
                     txtPrice: result.price,
                     txtDescription: result.description,
                     txtImage: result.image,
-                    txtQuantity: result.quantity,
                     id_promotion: result.id_promotion,
                     id_category: result.id_category,
                 });
@@ -110,7 +116,6 @@ class addProduct extends React.Component {
     onChangeImage = (e) => {
         let data = e.target.files;
         let file = data[0];
-
         if (file) {
             let objectURL = URL.createObjectURL(file);
             this.setState({
@@ -176,8 +181,8 @@ class addProduct extends React.Component {
     render() {
         var { promotion } = this.props;
         var { category } = this.props;
-        let { txtName, txtPrice, txtDescription, id_category, id_promotion } = this.state;
-        console.log("state",this.state)
+        let { txtName, txtPrice, txtDescription, id_category, id_promotion, ImgPrivew } = this.state;
+        console.log("state", this.state)
         return (
             <Container fluid>
                 <Link to="/admin/manage/products">
@@ -264,7 +269,7 @@ class addProduct extends React.Component {
                                         </Form.Select>
                                     </Form.Group>
                                 </Col>
-                                <Col sm="1">
+                                <Col sm="2" className="d-flex justify-content-center">
                                     <Form.Group >
                                         <Form.Label className="border border-dark" style={{ backgroundColor: "#ffe6e6", padding: "10px", marginTop: "100px", cursor: "pointer" }} htmlFor="txtImage"><FontAwesomeIcon icon={faUpload} className="mr-2 fa-3x" />Tải Ảnh</Form.Label>
                                         <Form.Control
@@ -277,16 +282,15 @@ class addProduct extends React.Component {
                                         />
                                     </Form.Group>
                                 </Col>
-                                <Col sm="4">
-
-                                    <div style={{ backgroundImage: `url(${this.state.ImgPrivew})`, height: "200px", width: "300px", align: "center", background: "center center no-repeat", backgroundSize: "contain", cursor: "pointer", margin: "30px" }}
+                                <Col sm="6" className="d-flex justify-content-center">
+                                    <div style={{ backgroundImage: `url(${ImgPrivew})`, height: "200px", width: "300px", align: "center", background: "center center no-repeat", backgroundSize: "contain", cursor: "pointer", margin: "30px" }}
                                         onClick={() => this.openPreviewIMG()}
                                     ></div>
                                 </Col>
-                                <Col sm="7">
+                                <Col sm="12">
                                     <Form.Group >
                                         <Form.Label htmlFor="exampleFormControlInput1">Mô Tả</Form.Label>
-                                        <textarea
+                                        {/* <textarea
                                             className="form-control"
                                             id="txtDescription"
                                             name="txtDescription"
@@ -295,7 +299,8 @@ class addProduct extends React.Component {
                                             onChange={(e) => { this.onChange(e, 'txtDescription') }}
                                             rows="8"
                                             required
-                                        ></textarea>
+                                        ></textarea> */}
+                                        <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} onChange={handleEditorChange} />
                                         <Form.Control.Feedback
                                             type="invalid" >
                                             Vui lòng nhập tên cần thêm !

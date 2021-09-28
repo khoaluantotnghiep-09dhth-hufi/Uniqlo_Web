@@ -13,6 +13,7 @@ import { faPlus, faTimes, faTools } from "@fortawesome/free-solid-svg-icons";
 import * as actions from "./../../../actions/index";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { Image } from 'react-bootstrap';
 const fields = [
   "STT",
   { key: "id", label: "Mã Nhân Viên" },
@@ -20,6 +21,7 @@ const fields = [
   { key: "email", label: "Gmail" },
   { key: "phone", label: "SĐT" },
   { key: "address", label: "Địa Chỉ" },
+  { key: "image", label: "Ảnh" },
 
   { key: "role", label: "Chức Vụ" },
   "Hành Động",
@@ -87,12 +89,18 @@ class ListStaffs extends React.Component {
                         </CButton>
                       </td>
                     ),
-                    STT: (item, index) => <td>{index + 1}</td>,
-                    role: (item) => (
+                    "STT": (item, index) => (<td>{index + 1}</td>),
+                    "role": (item) => (
                       <td>
                         {item.role === 0 ? "Quản Lý" : "Nhân Viên Bán Hàng"}
                       </td>
                     ),
+                    'image':
+                      (item, index) => (
+                        <td>
+                          <Image style={{ width: "200px", height: "200px" }} src={item.image} thumbnail />
+                        </td>
+                      ),
                   }}
                 />
               </CCardBody>

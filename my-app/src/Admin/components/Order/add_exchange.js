@@ -38,7 +38,6 @@ class AddCategory extends React.Component {
 
         this.props.onEditItemExchange(match.params.id_category);
         isLoadingExternally = true;
-
         this.setState({
             // productInfoArr: this.props.fetchProductsInfo(this.state.id_bill_info),
             billArr: this.props.fetchBillInfo()
@@ -60,20 +59,20 @@ class AddCategory extends React.Component {
             })
         }
     }
-    // componentWillReceiveProps(NextProps) {
-    //     var { match } = this.props;
-    //     if (NextProps && NextProps.category) {
-    //         var { category } = NextProps;
-    //         if (match.params.id_category) {
-    //             const result = category.find((o) => o.id === match.params.id_category);
-    //             // this.setState({
-    //             //     idItem: result.id,
-    //             //     txtName: result.name,
-    //             //     id_sector: result.id_sector,
-    //             // });
-    //         }
-    //     }
-    // }
+    componentWillReceiveProps(NextProps) {
+        var { match } = this.props;
+        if (NextProps && NextProps.exchange) {
+            var { exchange } = NextProps;
+            if (match.params.id_exchange) {
+                const result = exchange.find((o) => o.id === match.params.id_exchange);
+                // this.setState({
+                //     idItem: result.id,
+                //     txtName: result.name,
+                //     id_sector: result.id_sector,
+                // });
+            }
+        }
+    }
     onChange = (e, id) => {
         let coppyState = { ...this.state };
         coppyState[id] = e.target.value;
@@ -123,9 +122,14 @@ class AddCategory extends React.Component {
             quantity: txtQuantity,
             id_product_info :id_product_info
         };
+        var billInfo={
+            id_product_info :id_product_info,
+            quantity: txtQuantity,
+        }
         this.props.onAddItemExchange(exchange);
         this.props.onAddItemImport(importProduct);
         this.props.onAddItemImportInfo(importInfoProduct);
+        this.props.onUpdateItemBillInfo(billInfo);
         history.goBack();
     };
     render() {
@@ -280,6 +284,9 @@ var mapDispatchToProps = (dispatch, props) => {
         },
         onUpdateItemExchange: (exchange) => {
             return dispatch(actions.onUpdateExchangeResquest(exchange));
+        },
+        onUpdateItemBillInfo: (exchange) => {
+            return dispatch(actionsBill.onUpdateBillInfoResquest(exchange));
         },
     };
 };

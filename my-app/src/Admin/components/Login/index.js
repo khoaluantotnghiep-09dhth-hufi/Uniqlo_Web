@@ -4,6 +4,7 @@ import * as actions from "./../../../actions/index";
 import { connect } from "react-redux";
 import { Route, Redirect, withRouter } from "react-router-dom";
 import HomePage from "../../containers/TheLayout";
+import { toast } from 'react-toastify';
 import "./login.scss";
 class index extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class index extends Component {
       txtEmail: "",
       txtSDT: "",
       txtMatKhau: "",
+      toastLogin: "",
       isCheckLogin: false,
     };
   }
@@ -47,10 +49,12 @@ class index extends Component {
           isCheckLogin: true,
         });
         sessionStorage.setItem("user", JSON.stringify(user));
+        break;
       } else {
         this.setState({
-          isCheckLogin: true,
+          isCheckLogin: false,
         });
+        // toast.error("Sai Email hoặc Mật Khẩu vui lòng thử lại !");
       }
     }
   };
