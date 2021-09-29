@@ -33,6 +33,7 @@ class addOrderProduct extends React.Component {
     var { match } = this.props;
 
     this.props.onEditItemOrder(match.params.id_order_product);
+    
   }
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
@@ -43,11 +44,11 @@ class addOrderProduct extends React.Component {
           (o) => o.id === match.params.id_order_product
         );
 
-        this.setState({
-          idItem: result.id,
-          txtDate: result.date_order,
-          txtHouse: result.name_warehouse,
-        });
+        // this.setState({
+        //   idItem: result.id,
+        //   txtDate: result.date_order,
+        //   txtHouse: result.name_warehouse,
+        // });
       }
     }
   }

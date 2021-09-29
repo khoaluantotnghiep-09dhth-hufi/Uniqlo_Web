@@ -16,8 +16,6 @@ import ConvertIMG from '../../utils/getBase64';
 //Thư viện img 
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
-
-
 let isLoadingExternally = false;
 class addProduct extends React.Component {
     constructor(props) {
@@ -86,14 +84,14 @@ class addProduct extends React.Component {
                 const result = products.find(
                     (o) => o.id === match.params.id_product
                 );
-                this.setState({
-                    txtName: result.name,
-                    txtPrice: result.price,
-                    txtDescription: result.description,
-                    txtImage: result.image,
-                    id_promotion: result.id_promotion,
-                    id_category: result.id_category,
-                });
+                // this.setState({
+                //     txtName: result.name,
+                //     txtPrice: result.price,
+                //     txtDescription: result.description,
+                //     txtImage: result.image,
+                //     id_promotion: result.id_promotion,
+                //     id_category: result.id_category,
+                // });
             }
         }
     }
@@ -105,16 +103,17 @@ class addProduct extends React.Component {
         })
     }
     onChangeImage = (e) => {
-
         let data = e.target.files;
         let file = data[0];
         if (file) {
-            let objectURL = URL.createObjectURL(file);
-            this.setState({
-                ImgPrivew: objectURL,
-                txtImage: objectURL
-            })
-
+            ConvertIMG.getBase64(file).then(res => {
+                let objectURL = URL.createObjectURL(file);
+                console.log(res);
+                this.setState({
+                    ImgPrivew: objectURL,
+                    txtImage: res
+                })
+            });
         }
     }
     openPreviewIMG = () => {
@@ -132,7 +131,6 @@ class addProduct extends React.Component {
                 break;
             }
         }
-
         return isValid;
     }
     onSubmitForm = (event) => {
@@ -151,7 +149,6 @@ class addProduct extends React.Component {
             id_category: id_category,
             id_promotion: id_promotion,
         };
-        console.log("data",product)
         var productUpdate = {
             idItem: match.params.id_product,
             name: txtName,
@@ -292,7 +289,7 @@ class addProduct extends React.Component {
                                             rows="8"
                                             required
                                         ></textarea>
-                                       
+
                                     </Form.Group>
                                 </Col>
                             </Row>

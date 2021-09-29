@@ -24,9 +24,7 @@ var products = (state = initialState, action) => {
     //Xóa Sản Phẩm
     case types.DELETE_PRODUCT:
       index = findIndex(state, id);
-
       state.splice(index, 1);
-
       return [...state];
     //Thêm Sản Phẩm
     case types.ADD_PRODUCT:
