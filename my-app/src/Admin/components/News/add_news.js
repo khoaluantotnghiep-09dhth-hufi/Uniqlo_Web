@@ -86,15 +86,15 @@ class AddNews extends React.Component {
     if (NextProps && NextProps.news) {
       var { news } = NextProps;
       if (match.params.id_news) {
-        const result = news.find((o) => o.id === match.params.id_news);
-        this.setState({
-          txtTitle: result.title,
-          txtDate: this.getCurrentDate(),
-          txtDescriptionHTML: result.descriptionHTML,
-          txtDescriptionText: result.descriptionText,
-          id_staff: sessionUser.id_staff,
-          txtImage: result.image,
-        });
+        // const result = news.find((o) => o.id === match.params.id_news);
+        // this.setState({
+        //   txtTitle: result.title,
+        //   txtDate: this.getCurrentDate(),
+        //   txtDescriptionHTML: result.descriptionHTML,
+        //   txtDescriptionText: result.descriptionText,
+        //   id_staff: sessionUser.id_staff,
+        //   txtImage: result.image,
+        // });
       }
     }
   }
@@ -189,7 +189,11 @@ class AddNews extends React.Component {
             </Row>
             <Form.Group className="mb-3" controlId="formBasicObject">
               <Form.Label>Nội Dung</Form.Label>
-              <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} onChange={this.handleEditorChange} />
+              <MdEditor 
+              style={{ height: '500px' }} 
+              renderHTML={text => mdParser.render(text)} 
+              value={this.state.txtDescriptionText}
+              onChange={this.handleEditorChange} />
             </Form.Group>
             <Row sm="12">
               <Col sm="2" className="d-flex justify-content-center">

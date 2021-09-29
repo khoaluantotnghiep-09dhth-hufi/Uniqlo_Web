@@ -69,6 +69,11 @@ class index extends Component {
       [name]: value,
     });
   };
+  handleKeyDown = (event) => {
+    if (event.key === "Enter" || event.key === 13) {
+      this.onHandleSubmitLogin();
+    }
+  }
   render() {
     var { staff } = this.props;
     var { isCheckLogin } = this.state;
@@ -82,8 +87,8 @@ class index extends Component {
           <Row className="login-content">
             <Col >
               <h1 className="text-center">Đăng Nhập</h1>
-              <Form onSubmit={this.onHandleSubmitLogin(staff)}>
-                <Form.Group className="mb-3" controlId="formBasicPhone">
+              <Form onSubmit={this.onHandleSubmitLogin(staff)} >
+                <Form.Group className="mb-3" >
                   <Form.Control
                     className="fas fa-phone-alt login-input"
                     type="text"
@@ -97,7 +102,7 @@ class index extends Component {
                     autofocus
                   />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Group className="mb-3" >
                   <Form.Control
                     className="fas fa-lock login-input"
                     type="password"
@@ -112,11 +117,12 @@ class index extends Component {
                   />
                 </Form.Group>
 
-                <Form.Group className="mb-3 " controlId="formBasicPassword">
+                <Form.Group className="mb-3 " >
                   <Button
                     variant="outline-secondary"
                     type="submit"
                     className="btn btn-login"
+                    onKeyDown={(event) => this.handleKeyDown(event)}
                   >
                     Đăng Nhập
                   </Button>
