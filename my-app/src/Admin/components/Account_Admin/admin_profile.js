@@ -27,6 +27,7 @@ export default class AddAccountAdmin extends React.Component {
             email: sessionUser.email,
             place_of_birth: sessionUser.place_of_birth,
             cmnn_cccc: sessionUser.cmnn_cccc,
+            isOpen: false,
         }
     }
     onHandleSubmitLogin = () => {
@@ -40,8 +41,11 @@ export default class AddAccountAdmin extends React.Component {
         }, () => {
             console.log(this.state);
         })
-
-
+    }
+    openPreviewIMG = () => {
+        this.setState({
+            isOpen: true
+        })
     }
     render() {
         let { name, phone, gender, image, address, email, place_of_birth, cmnn_cccc } = this.state;
@@ -53,15 +57,13 @@ export default class AddAccountAdmin extends React.Component {
                         <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
                             <Card className="card-profile shadow">
                                 <Row className="justify-content-center">
-                                    <Col className="order-lg-2" lg="3">
+                                    <Col className="order-lg-2 d-flex justify-content-center" lg="3">
                                         <div className="card-profile-image">
-                                            <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                                                <img
-                                                    alt="..."
-                                                    className="rounded-circle"
-                                                    src="../../assets/profile-cover.jpg"
-                                                />
-                                            </a>
+                                            <img style={{ width: "200px", height: "200px" }}
+                                                alt="..."
+                                                className="rounded-circle"
+                                                src={sessionUser.image}
+                                            />
                                         </div>
                                     </Col>
                                 </Row>
@@ -94,21 +96,16 @@ export default class AddAccountAdmin extends React.Component {
                                         </h3>
                                         <div className="h5 mt-4">
                                             <i className="ni business_briefcase-24 mr-2" />
-                                            Solution Manager - Creative Tim Officer
+                                            {sessionUser.role === 0 ? "Quản Lý" : "Nhân Viên"}
                                         </div>
                                         <div>
                                             <i className="ni education_hat mr-2" />
-                                            University of Computer Science
+                                            Trình độ học vấn chưa làm
                                         </div>
                                         <hr className="my-4" />
                                         <p>
-                                            Ryan — the name taken by Melbourne-raised, Brooklyn-based
-                                            Nick Murphy — writes, performs and records all of his own
-                                            music.
+                                            Giới thiệu chưa làm
                                         </p>
-                                        <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                                            Show more
-                                        </a>
                                     </div>
                                 </CardBody>
                             </Card>
@@ -212,7 +209,7 @@ export default class AddAccountAdmin extends React.Component {
                                                             value={place_of_birth}
                                                             id="place_of_birth"
                                                             name="place_of_birth"
-                                                            placeholder="Nơi Sinh"
+                                                            placeholder="Nơi sinh..."
                                                             type="text"
                                                             onChange={(e) => { this.onChange(e, 'place_of_birth') }}
                                                         />
@@ -234,7 +231,7 @@ export default class AddAccountAdmin extends React.Component {
                                                             value={cmnn_cccc}
                                                             id="cmnn_cccc"
                                                             name="cmnn_cccc"
-                                                            placeholder="CMND"
+                                                            placeholder="CCCD/CMND..."
                                                             type="text"
                                                             onChange={(e) => { this.onChange(e, 'cmnn_cccc') }}
                                                         />

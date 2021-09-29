@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPlus,
   faArrowLeft,
+  faUpload,
 } from "@fortawesome/free-solid-svg-icons";
 import CallAPI from '../../utils/Callapi';
 import { Link } from "react-router-dom";
@@ -10,6 +11,9 @@ import { connect } from "react-redux";
 import uniqid from 'uniqid';
 import { Button, Form, Col, Container, Row } from 'react-bootstrap';
 import * as actions from "./../../../actions/index";
+import ConvertIMG from '../../utils/getBase64';
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css';
 class AddCustomer extends React.Component {
   constructor(props) {
     super(props);
@@ -21,6 +25,8 @@ class AddCustomer extends React.Component {
       txtImage: "",
       txtPassword: "",
       txtEmail: "",
+      ImgPrivew: "",
+      isOpen: false,
     };
   }
   componentDidMount() {
@@ -36,8 +42,24 @@ class AddCustomer extends React.Component {
         txtPhone: result.phone,
         txtImage: result.image,
         txtPassword: result.password,
+        ImgPrivew: result.image,
         txtEmail: result.email,
       });
+    }
+  }
+  onChangeImage = (e) => {
+    let data = e.target.files;
+    let file = data[0];
+    if (file) {
+      ConvertIMG.getBase64(file).then(res => {
+        let objectURL = URL.createObjectURL(file);
+        console.log(res);
+        this.setState({
+          ImgPrivew: objectURL,
+          txtImage: res
+        })
+      });
+
     }
   }
   componentWillReceiveProps(NextProps) {
@@ -47,15 +69,15 @@ class AddCustomer extends React.Component {
       if (match.params.id_customer) {
         const result = customer.find((o) => o.id === match.params.id_customer);
 
-        this.setState({
-          idItem: result.id,
-          txtName: result.name,
-          txtAddress: result.address,
-          txtPhone: result.phone,
-          txtImage: result.image,
-          txtPassword: result.password,
-          txtEmail: result.email,
-        });
+        // this.setState({
+        //   idItem: result.id,
+        //   txtName: result.name,
+        //   txtAddress: result.address,
+        //   txtPhone: result.phone,
+        //   txtImage: result.image,
+        //   txtPassword: result.password,
+        //   txtEmail: result.email,
+        // });
       }
     }
   }
@@ -67,6 +89,11 @@ class AddCustomer extends React.Component {
       [name]: value,
     });
   };
+  openPreviewIMG = () => {
+    this.setState({
+      isOpen: true
+    })
+  }
   onSubmitForm = (event) => {
     var { match } = this.props;
 
@@ -110,7 +137,7 @@ class AddCustomer extends React.Component {
     }
   };
   render() {
-    let { txtName, txtAddress, txtPhone, txtImage, txtPassword, txtEmail } = this.state;
+    let { txtName, txtAddress, txtPhone, txtImage, txtPassword, txtEmail, ImgPrivew } = this.state;
     return (
       <Container fluid>
         <Row>
@@ -121,7 +148,7 @@ class AddCustomer extends React.Component {
           </Link>
           <Col sm="12">
             <Form onSubmit={this.onSubmitForm}>
-              <Form.Group className="mb-3" controlId="formBasicObject">
+              <Form.Group className="mb-3" >
                 <Form.Label>Tên Khách Hàng</Form.Label>
                 <Form.Control
                   required
@@ -136,7 +163,7 @@ class AddCustomer extends React.Component {
                   Vui lòng nhập tên cần thêm !
                 </Form.Control.Feedback>
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicObject">
+              <Form.Group className="mb-3">
                 <Form.Label>Địa Chỉ</Form.Label>
                 <Form.Control
                   required
@@ -148,7 +175,7 @@ class AddCustomer extends React.Component {
                   onChange={this.onChange} />
 
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicObject">
+              <Form.Group className="mb-3">
                 <Form.Label>SĐT</Form.Label>
                 <Form.Control
                   required
@@ -160,18 +187,21 @@ class AddCustomer extends React.Component {
                   onChange={this.onChange} />
 
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicObject">
-                <Form.Label>Ảnh</Form.Label>
+              <Form.Group >
+                <Form.Label className="border border-dark" style={{ backgroundColor: "#ffe6e6", padding: "10px", marginTop: "100px", cursor: "pointer" }} htmlFor="txtImage"><FontAwesomeIcon icon={faUpload} className="mr-2 fa-3x" />Tải Ảnh</Form.Label>
                 <Form.Control
-                  required
                   type="file"
                   id="txtImage"
-                  value={txtImage}
                   name="txtImage"
-                  onChange={this.onChange} />
-
+                  hidden
+                  onChange={(e) => { this.onChangeImage(e) }}
+                  required
+                />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicObject">
+              <div style={{ backgroundImage: `url(${ImgPrivew})`, height: "200px", width: "300px", align: "center", background: "center center no-repeat", backgroundSize: "contain", cursor: "pointer", margin: "30px" }}
+                onClick={() => this.openPreviewIMG()}
+              ></div>
+              <Form.Group className="mb-3">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   required
@@ -183,7 +213,7 @@ class AddCustomer extends React.Component {
                   onChange={this.onChange} />
 
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicObject">
+              <Form.Group className="mb-3" >
                 <Form.Label>Gmail</Form.Label>
                 <Form.Control
                   required
@@ -208,6 +238,13 @@ class AddCustomer extends React.Component {
               {/* </Link> */}
             </Form>
           </Col>
+          {
+            this.state.isOpen === true &&
+            <Lightbox
+              mainSrc={this.state.ImgPrivew}
+              onCloseRequest={() => this.setState({ isOpen: false })}
+            />
+          }
         </Row>
       </Container>
     )

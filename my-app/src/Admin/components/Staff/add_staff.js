@@ -19,7 +19,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { Button, Form } from 'react-bootstrap';
-
+import ConvertIMG from '../../utils/getBase64';
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css';
 class addStaff extends React.Component {
   constructor(props) {
     super(props);
@@ -29,8 +31,6 @@ class addStaff extends React.Component {
       txtEmail: "",
       txtPhone: "",
       txtAddress: "",
-      txtPassword: "",
-      txtChucVu: "",
       ImgPrivew: "",
       isOpen: false,
     };
@@ -47,8 +47,6 @@ class addStaff extends React.Component {
         txtEmail: result.email,
         txtPhone: result.phone,
         txtAddress: result.address,
-        txtPassword: result.password,
-        txtChucVu: result.postion,
         txtImage: result.image,
         ImgPrivew: result.image,
       });
@@ -61,17 +59,17 @@ class addStaff extends React.Component {
       if (match.params.id_staff) {
         const result = staff.find((o) => o.id === match.params.id_staff);
         console.log(result);
-        this.setState({
-          idItem: result.id,
-          txtNameStaff: result.name,
-          txtEmail: result.email,
-          txtPhone: result.phone,
-          txtAddress: result.address,
-          txtPassword: result.password,
-          txtChucVu: result.postion,
-          txtImage: result.image,
-          ImgPrivew: result.image,
-        });
+        // this.setState({
+        //   idItem: result.id,
+        //   txtNameStaff: result.name,
+        //   txtEmail: result.email,
+        //   txtPhone: result.phone,
+        //   txtAddress: result.address,
+        //   txtPassword: result.password,
+        //   txtChucVu: result.postion,
+        //   txtImage: result.image,
+        //   ImgPrivew: result.image,
+        // });
       }
     }
   }
@@ -86,11 +84,14 @@ class addStaff extends React.Component {
     let data = e.target.files;
     let file = data[0];
     if (file) {
-      let objectURL = URL.createObjectURL(file);
-      this.setState({
-        ImgPrivew: objectURL,
-        txtImage: objectURL
-      })
+      ConvertIMG.getBase64(file).then(res => {
+        let objectURL = URL.createObjectURL(file);
+        console.log(res);
+        this.setState({
+          ImgPrivew: objectURL,
+          txtImage: res
+        })
+      });
 
     }
   }
@@ -105,13 +106,10 @@ class addStaff extends React.Component {
     event.preventDefault();
     var { history } = this.props;
     var {
-      idItem,
       txtNameStaff,
       txtEmail,
       txtPhone,
       txtAddress,
-      txtPassword,
-      txtChucVu,
       txtImage,
     } = this.state;
 
@@ -121,22 +119,18 @@ class addStaff extends React.Component {
       email: txtEmail,
       phone: txtPhone,
       address: txtAddress,
-      password: txtPassword,
-      position: txtChucVu,
       image: txtImage,
     };
-    console.log(staff);
+    console.log("inserted", staff);
     var staffUpdate = {
       id: match.params.id_staff,
       nameStaff: txtNameStaff,
       email: txtEmail,
       phone: txtPhone,
       address: txtAddress,
-      password: txtPassword,
-      position: txtChucVu,
       image: txtImage,
     };
-    if (idItem) {
+    if (match.params.id_staff) {
       this.props.onUpdateItemStaff(staffUpdate);
       history.goBack();
     } else {
@@ -222,7 +216,6 @@ class addStaff extends React.Component {
               <div style={{ backgroundImage: `url(${ImgPrivew})`, height: "200px", width: "300px", align: "center", background: "center center no-repeat", backgroundSize: "contain", cursor: "pointer", margin: "30px" }}
                 onClick={() => this.openPreviewIMG()}
               ></div>
-
               <CFormGroup>
                 <CButton color="danger" className="m-2" type="submit">
                   {" "}
@@ -232,6 +225,13 @@ class addStaff extends React.Component {
               </CFormGroup>
             </CForm>
           </CCol>
+          {
+            this.state.isOpen === true &&
+            <Lightbox
+              mainSrc={this.state.ImgPrivew}
+              onCloseRequest={() => this.setState({ isOpen: false })}
+            />
+          }
         </CRow>
       </CContainer>
     );

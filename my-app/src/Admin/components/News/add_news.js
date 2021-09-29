@@ -14,9 +14,8 @@ import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
-
 import 'react-markdown-editor-lite/lib/index.css';
-
+import ConvertIMG from '../../utils/getBase64';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 
@@ -53,11 +52,14 @@ class AddNews extends React.Component {
     let file = data[0];
 
     if (file) {
-      let objectURL = URL.createObjectURL(file);
-      this.setState({
-        ImgPrivew: objectURL,
-        txtImage: objectURL,
-      })
+      ConvertIMG.getBase64(file).then(res => {
+        let objectURL = URL.createObjectURL(file);
+        console.log(res);
+        this.setState({
+          ImgPrivew: objectURL,
+          txtImage: res
+        })
+      });
 
     }
   }

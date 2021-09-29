@@ -42,7 +42,7 @@ class index extends Component {
               <Col>
                 <p className="Adjust_Text_Body">
                   <span className="mr-4"></span>
-                  {item.descriptionHTML}
+                  <div dangerouslySetInnerHTML={{__html: item.descriptionHTML}} ></div>
                 </p>
               </Col>
             </Row>
