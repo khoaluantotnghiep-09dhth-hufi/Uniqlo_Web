@@ -10,6 +10,8 @@ import { connect } from "react-redux";
 import uniqid from 'uniqid';
 import { Button, Form, Col, Container, Row } from 'react-bootstrap';
 import * as actions from "./../../../actions/index";
+import { toast } from 'react-toastify';
+import Select from 'react-select';
 let isLoadingExternally = false;
 class AddCategory extends React.Component {
     constructor(props) {
@@ -19,8 +21,24 @@ class AddCategory extends React.Component {
             txtName: "",
             id_sector: "",
             sectorArr: [],
+            selectedOption: null,
         };
 
+    }
+    handleChange = (selectedOption) => {
+        this.setState({ selectedOption });
+    };
+    buildDataInputSelect = (inputData) => {
+        let rs = [];
+        if (inputData && inputData.length > 0) {
+            inputData.map((item, index) => {
+                let object = {};
+                object.label = item.name;
+                object.value = item.id;
+                rs.push(object);
+            })
+        }
+        return rs;
     }
     componentDidMount() {
         var { match } = this.props;
@@ -40,11 +58,10 @@ class AddCategory extends React.Component {
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         var { match } = this.props;
-        if (prevProps.category !== this.props.category && !match.params.id_category) {
-            let arrSector = this.props.category;
+        if (prevProps.sector !== this.props.sector) {
+            let dataSelect = this.buildDataInputSelect(this.props.sector);
             this.setState({
-                sectorArr: arrSector,
-                id_sector: arrSector && arrSector.length > 0 ? arrSector[0].id : ''
+                sectorArr: dataSelect
             })
         }
     }
@@ -54,7 +71,6 @@ class AddCategory extends React.Component {
             var { category } = NextProps;
             if (match.params.id_category) {
                 const result = category.find((o) => o.id === match.params.id_category);
-                console.log("result",result)
                 // this.setState({
                 //     txtName: result.name,
                 //     id_sector: result.id_sectors,
@@ -78,7 +94,7 @@ class AddCategory extends React.Component {
 
         if (!this.state[check[0]]) {
             isValid = false;
-            alert("Vui lòng nhập tên");
+            toast.error("Vui lòng nhập tên");
 
         }
         return isValid;
@@ -89,19 +105,19 @@ class AddCategory extends React.Component {
         if (isValid === false) return;
         event.preventDefault();
         var { history } = this.props;
-        var { txtName, id_sector } = this.state;
+        var { txtName, id_sector, selectedOption } = this.state;
 
         var category = {
             id: uniqid("category-"),
             name: txtName,
-            id_sector: id_sector,
+            id_sector: selectedOption.value,
         };
+        console.log("nè",category)
         var categoryUpdate = {
             id: match.params.id_category,
             name: txtName,
-            id_sector: id_sector,
+            id_sector: selectedOption.value,
         };
-
         if (match.params.id_category) {
             this.props.onUpdateItemCategory(categoryUpdate);
             history.goBack();
@@ -112,7 +128,8 @@ class AddCategory extends React.Component {
     };
     render() {
         var { sector } = this.props;
-        let {txtName,id_sector} = this.state;
+        let { txtName, id_sector, selectedOption } = this.state;
+        console.log(this.state)
         return (
             <Container fluid>
                 <Row>
@@ -128,7 +145,7 @@ class AddCategory extends React.Component {
                                 <Form.Control
                                     required
                                     type="text"
-                                    placeholder="Nhập tên đối tượng cần thêm..."
+                                    placeholder="Nhập tên danh mục cần thêm..."
                                     name="txtName"
                                     value={txtName}
                                     onChange={(e) => { this.onChange(e, 'txtName') }} />
@@ -137,7 +154,7 @@ class AddCategory extends React.Component {
                                     Vui lòng nhập tên cần thêm !
                                 </Form.Control.Feedback>
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="formBasicObject">
+                            {/* <Form.Group className="mb-3" controlId="formBasicObject">
                                 <Form.Label>Loại</Form.Label>
                                 <Form.Select name="form-field-name"
                                     value={id_sector}
@@ -155,8 +172,15 @@ class AddCategory extends React.Component {
                                 </Form.Select>
 
 
+                            </Form.Group> */}
+                            <Form.Group className="mb-3">
+                                <Form.Label>Loại Sản Phẩm</Form.Label>
+                                <Select
+                                    value={selectedOption}
+                                    onChange={this.handleChange}
+                                    options={this.state.sectorArr}
+                                />
                             </Form.Group>
-                            {/* <Link to="/admin/manage/objects" > */}
                             <Button type="button"
                                 className="btn btn-danger"
                                 onClick={this.onSubmitForm}

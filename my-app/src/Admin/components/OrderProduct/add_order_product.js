@@ -25,7 +25,7 @@ class addOrderProduct extends React.Component {
     super(props);
     this.state = {
       idItem: "",
-      txtDate: "",
+      txtDate: this.getCurrentDate(),
       txtHouse: "",
     }
   }
@@ -34,6 +34,15 @@ class addOrderProduct extends React.Component {
 
     this.props.onEditItemOrder(match.params.id_order_product);
     
+  }
+  getCurrentDate(separator = '/') {
+
+    let newDate = new Date()
+    let date = newDate.getDate();
+    let month = newDate.getMonth() + 1;
+    let year = newDate.getFullYear();
+
+    return `${year}${separator}${month < 10 ? `0${month}` : `${month}`}${separator}${date}`
   }
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
@@ -117,19 +126,6 @@ class addOrderProduct extends React.Component {
               <CRow sm="12">
                 <CCol sm="6">
                   <CFormGroup>
-                    <CLabel htmlFor="exampleFormControlInput1">Ngày Lập</CLabel>
-                    <CInput
-                      type="date"
-                      id="txtDate"
-                      name="txtDate"
-                      value={txtDate}
-                      onChange={(e) => { this.onChange(e, 'txtDate') }}
-                    />
-
-                  </CFormGroup>
-                </CCol>
-                <CCol sm="6">
-                  <CFormGroup>
                     <CLabel htmlFor="exampleFormControlInput2">Kho</CLabel>
                     <CInput
                       type="text"
@@ -142,7 +138,7 @@ class addOrderProduct extends React.Component {
                   </CFormGroup>
                 </CCol>
 
-                <CFormGroup className="d-flex justify-content-center">
+                <CFormGroup >
                   <CButton
                     color='danger'
                     className="m-2"

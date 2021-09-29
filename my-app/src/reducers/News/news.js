@@ -24,7 +24,7 @@ var news = (state = initialState, action) => {
       state.splice(index, 1);
       return [...state];
     case types.ADD_NEWS:
-      state.push(action.news);
+      state.push(action.new1);
       return [...state];
     case types.UPDATE_NEWS:
       index = findIndex(state, action.news.id);

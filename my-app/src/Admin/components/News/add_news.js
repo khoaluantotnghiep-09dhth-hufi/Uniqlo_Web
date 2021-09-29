@@ -77,26 +77,27 @@ class AddNews extends React.Component {
         txtDescriptionText: result.descriptionText,
         id_staff: sessionUser.id_staff,
         txtImage: result.image,
+        ImgPrivew: result.image,
       });
     }
   }
-  // componentWillReceiveProps(NextProps) {
-  //   var { match } = this.props;
-  //   if (NextProps && NextProps.news) {
-  //     var { news } = NextProps;
-  //     if (match.params.id_news) {
-  //       const result = news.find((o) => o.id === match.params.id_news);
-  //       this.setState({
-  //         txtTitle: result.title,
-  //         txtDate: this.getCurrentDate(),
-  //         txtDescriptionHTML: result.descriptionHTML,
-  //         txtDescriptionText: result.descriptionText,
-  //         id_staff: sessionUser.id_staff,
-  //         txtImage: result.image,
-  //       });
-  //     }
-  //   }
-  // }
+  componentWillReceiveProps(NextProps) {
+    var { match } = this.props;
+    if (NextProps && NextProps.news) {
+      var { news } = NextProps;
+      if (match.params.id_news) {
+        const result = news.find((o) => o.id === match.params.id_news);
+        this.setState({
+          txtTitle: result.title,
+          txtDate: this.getCurrentDate(),
+          txtDescriptionHTML: result.descriptionHTML,
+          txtDescriptionText: result.descriptionText,
+          id_staff: sessionUser.id_staff,
+          txtImage: result.image,
+        });
+      }
+    }
+  }
   getCurrentDate(separator = '/') {
 
     let newDate = new Date()

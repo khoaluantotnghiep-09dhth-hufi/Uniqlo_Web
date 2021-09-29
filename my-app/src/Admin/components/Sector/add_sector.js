@@ -10,12 +10,9 @@ import uniqid from 'uniqid';
 import { Button, Form, Col, Container, Row } from 'react-bootstrap';
 import * as actions from "./../../../actions/index";
 import Select from 'react-select';
+import { toast } from 'react-toastify';
 let isLoadingExternally = false;
-const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-];
+
 
 class AddSector extends React.Component {
     constructor(props) {
@@ -30,13 +27,12 @@ class AddSector extends React.Component {
     }
     handleChange = (selectedOption) => {
         this.setState({ selectedOption });
-        console.log(`Option selected:`, selectedOption);
     };
-    buildDataInputSelect = (inputData) =>{
+    buildDataInputSelect = (inputData) => {
         let rs = [];
-        if(inputData && inputData.length > 0){
-            inputData.map((item,index)=>{
-                let object ={};
+        if (inputData && inputData.length > 0) {
+            inputData.map((item, index) => {
+                let object = {};
                 object.label = item.name;
                 object.value = item.id;
                 rs.push(object);
@@ -54,23 +50,18 @@ class AddSector extends React.Component {
         var { sector } = this.props;
         if (match.params.id_sector) {
             const result = sector.find((o) => o.id === match.params.id_sector);
-            console.log("resui", result);
             this.setState({
                 txtName: result.name,
                 id_object: result.id_object,
             });
         }
-
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         var { match } = this.props;
         if (prevProps.object_menu !== this.props.object_menu) {
-            // let arrObject = this.props.object_menu;
             let dataSelect = this.buildDataInputSelect(this.props.object_menu);
             this.setState({
-                // object_menuArr: arrObject,
-                // id_object: arrObject && arrObject.length > 0 ? arrObject[0].id : ''
-                object_menuArr : dataSelect
+                object_menuArr: dataSelect
             })
         }
     }
@@ -104,7 +95,7 @@ class AddSector extends React.Component {
 
         if (!this.state[check[0]]) {
             isValid = false;
-            alert("Vui lòng nhập tên");
+            toast.error("Vui lòng nhập tên");
 
         }
         return isValid;
@@ -115,7 +106,7 @@ class AddSector extends React.Component {
         event.preventDefault();
         if (isValid === false) return;
         var { match } = this.props;
-        var { idItem, txtName, id_object,selectedOption } = this.state;
+        var { idItem, txtName, id_object, selectedOption } = this.state;
         var sector = {
             id: uniqid("sector-"),
             name: txtName,
@@ -149,44 +140,24 @@ class AddSector extends React.Component {
                     </Link>
                     <Col sm="12">
                         <Form onSubmit={this.onSubmitForm}>
-                            <Form.Group className="mb-3" controlId="formBasicObject">
+                            <Form.Group className="mb-3">
                                 <Form.Label>Tên Loại</Form.Label>
                                 <Form.Control
                                     required
                                     type="text"
-                                    placeholder="Nhập tên đối tượng cần thêm..."
+                                    placeholder="Nhập tên loại sản ph cần thêm..."
                                     name="txtName"
                                     value={txtName}
                                     onChange={(e) => { this.onChange(e, 'txtName') }} />
-                                <Form.Control.Feedback
-                                    type="invalid" >
-                                    Vui lòng nhập tên cần thêm !
-                                </Form.Control.Feedback>
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="formBasicObject">
+                            <Form.Group className="mb-3">
                                 <Form.Label>Đối Tượng</Form.Label>
-                                {/* <Form.Select name="form-field-name"
-                                    value={id_object}
-                                    onChange={(e) => { this.onChange(e, 'id_object') }}
-                                    labelKey={'Tên'}
-                                    valueKey={'Mã'}
-                                    isLoading={isLoadingExternally}
-                                >
-
-                                    {object_menu && object_menu.length > 0 &&
-                                        object_menu.map((option, index) => (
-
-                                            <option value={option.id} key={index}>Mã: {option.id}, Tên: {option.name}</option>
-                                        ))}
-                                    
-                                </Form.Select> */}
                                 <Select
                                     value={selectedOption}
                                     onChange={this.handleChange}
                                     options={this.state.object_menuArr}
                                 />
                             </Form.Group>
-                            {/* <Link to="/admin/manage/objects" > */}
                             <Button type="button"
                                 className="btn btn-danger"
                                 onClick={this.onSubmitForm}
@@ -196,7 +167,6 @@ class AddSector extends React.Component {
                                     className="mr-2"
                                     size="lg" />Lưu
                             </Button>
-                            {/* </Link> */}
                         </Form>
                     </Col>
                 </Row>

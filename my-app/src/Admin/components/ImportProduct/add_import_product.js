@@ -18,12 +18,21 @@ class AddImportProduct extends React.Component {
         super(props);
         this.state = {
             idItem: "",
-            txtDateImport: "",
+            txtDateImport:this.getCurrentDate(),
             id_order: "",
             txtTotalImport: "",
             orderArr: [],
         };
     }
+    getCurrentDate(separator = '/') {
+
+        let newDate = new Date()
+        let date = newDate.getDate();
+        let month = newDate.getMonth() + 1;
+        let year = newDate.getFullYear();
+    
+        return `${year}${separator}${month < 10 ? `0${month}` : `${month}`}${separator}${date}`
+      }
     componentDidMount() {
         var { match } = this.props;
 
@@ -104,21 +113,6 @@ class AddImportProduct extends React.Component {
                     </Link>
                     <Col sm="12">
                         <Form action="" method="post" onSubmit={this.onSubmitForm}>
-                            <Form.Group className="mb-3" controlId="formBasicObject">
-                                <Form.Label>Chọn ngày nhập</Form.Label>
-                                <Form.Control
-                                    required
-                                    type="date"
-                                    placeholder="Nhập tên đối tượng cần thêm..."
-                                    name="txtDateImport"
-                                    id="txtDateImport"
-                                    value={this.setState.txtDateImport}
-                                    onChange={(e) => { this.onChange(e, 'txtDateImport') }} />
-                                <Form.Control.Feedback
-                                    type="invalid" >
-                                    Vui lòng chọn ngày nhập !
-                                </Form.Control.Feedback>
-                            </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicObject">
                                 <Form.Label>Mã đặt hàng</Form.Label>
                                 <Form.Select name="form-field-name"

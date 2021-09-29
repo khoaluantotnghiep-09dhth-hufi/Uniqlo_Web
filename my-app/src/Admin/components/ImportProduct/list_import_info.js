@@ -1,5 +1,5 @@
 import React from 'react';
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import {
     CRow,
     CCol,
@@ -52,7 +52,7 @@ class addProduct extends React.Component {
             id_order_info: "",
             productArr: [],
             orderInfoArr: [],
-            quantityArr:[],
+            quantityArr: [],
         };
     }
     componentDidMount() {
@@ -70,19 +70,19 @@ class addProduct extends React.Component {
             this.props.onDeleteItemOrderInfo(item);
         }
     }
-    componentDidUpdate(prevProps,prevState,snapshot) {
-        if (prevProps.productInfo !== this.props.productInfo){
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.productInfo !== this.props.productInfo) {
             let arrProductInfo = this.props.productInfo;
             this.setState({
-                productArr : arrProductInfo,
-                id_product_info : arrProductInfo && arrProductInfo.length > 0 ? arrProductInfo[0].id : ''
+                productArr: arrProductInfo,
+                id_product_info: arrProductInfo && arrProductInfo.length > 0 ? arrProductInfo[0].id : ''
             })
         }
-        if (prevProps.orderInfo !== this.props.orderInfo){
+        if (prevProps.orderInfo !== this.props.orderInfo) {
             let arrOrderInfo = this.props.orderInfo;
             this.setState({
-                orderInfoArr : arrOrderInfo,
-                id_order_info : arrOrderInfo && arrOrderInfo.length > 0 ? arrOrderInfo[0].id : ''
+                orderInfoArr: arrOrderInfo,
+                id_order_info: arrOrderInfo && arrOrderInfo.length > 0 ? arrOrderInfo[0].id : ''
             })
         }
         // if (prevProps.orderInfo !== this.props.orderInfo){
@@ -116,8 +116,8 @@ class addProduct extends React.Component {
             ...coppyState,
             productArr: this.props.fetchProductsInfo(this.state.id_order_info),
             // txtQuantity: this.props.fetchOrderInfoQuantity(this.state.id_order_info),
-        },()=> {
-            console.log("state",this.state);
+        }, () => {
+            console.log("state", this.state);
         })
     }
 
@@ -147,7 +147,7 @@ class addProduct extends React.Component {
             id_product_info: id_product_info,
             quantity: txtQuantity,
             id_import: match.params.id_import,
-            
+
         };
         this.props.onAddItemImportInfo(ImportInfo);
         history.goBack();
@@ -436,7 +436,7 @@ class addProduct extends React.Component {
                                                 <option value="abc" key="1">Chọn</option>
                                                 {orderInfo && orderInfo.length > 0 &&
                                                     orderInfo.map((option, index) => (
-                                                        <option  value={option.id} key={index}>Tên: {option.name} | Màu: {option.nameColor} | Kích Cỡ: {option.nameSize} | Số Lượng: {option.quantity}</option>
+                                                        <option value={option.id} key={index}>Tên: {option.name} | Màu: {option.nameColor} | Kích Cỡ: {option.nameSize} | Số Lượng: {option.quantity}</option>
                                                     ))}
                                             </Form.Select>
                                         </Form.Group>
