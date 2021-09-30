@@ -22,7 +22,7 @@ import Lightbox from 'react-image-lightbox';
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import 'react-image-lightbox/style.css';
 import { toast } from 'react-toastify';
-import validator from 'validator'
+
 function FormExample() {
   const [validated, setValidated] = useState(false);
   const handleSubmit = (event) => {

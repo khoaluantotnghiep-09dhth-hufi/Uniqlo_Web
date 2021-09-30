@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import $ from "jquery";
 import { toast } from "react-toastify";
-
+import Item from "./../Category_Product/Item_Product/index";
 import {
   Container,
   Row,
@@ -44,8 +44,8 @@ class index extends Component {
     var resultFilter = null;
     result = products_category.filter((product) => product.id === id_product);
     if (result.percentSale) {
-      var cacularSale = (parseInt(result.percentSale) / 100) *result.price;
-      var newPrice=result.price-cacularSale;
+      var cacularSale = (parseInt(result.percentSale) / 100) * result.price;
+      var newPrice = result.price - cacularSale;
     }
 
     // this.setState({
@@ -57,8 +57,8 @@ class index extends Component {
     // })
     resultFilter = result.map((product, index) => {
       if (product.percentSale) {
-        var cacularSale = (parseInt(product.percentSale) / 100) *product.price;
-      var newPrice=product.price-cacularSale;
+        var cacularSale = (parseInt(product.percentSale) / 100) * product.price;
+        var newPrice = product.price - cacularSale;
       }
       var elementNewPrice = newPrice ? (
         <span
@@ -227,7 +227,7 @@ class index extends Component {
   };
 
   onAddToCart = () => {
-    var { match, products_category, color_by_size,products } = this.props;
+    var { match, products_category, color_by_size, products } = this.props;
     var id_product = match.params.id_product;
     var { txtSize, isChooseColor, quantityOfSize } = this.state;
 
@@ -238,19 +238,19 @@ class index extends Component {
       var newPrice = (parseInt(result.percentSale) / 100) * result.price;
     }
 
-    if(!isChooseColor){
+    if (!isChooseColor) {
       toast.error("Xin Chọn Màu Và Kích Cỡ", { autoClose: 2500 });
 
       return;
     }
-    console.log(products)
+    console.log(products);
     var onTakeIdProductInfo = products.find(
       (item) =>
         item.id === id_product &&
         item.nameColor === isChooseColor &&
         item.nameSize === txtSize
     );
-console.log(onTakeIdProductInfo)
+    console.log(onTakeIdProductInfo);
     var product = {
       id_product_info: onTakeIdProductInfo.id_product_info,
       id_product: match.params.id_product,
@@ -262,22 +262,36 @@ console.log(onTakeIdProductInfo)
       isChooseColor,
       quantityAllProduct: quantityOfSize,
     };
-    
+
     if (quantityOfSize > 0) {
       this.props.onAddToCart(product);
     } else {
       toast.error("Sản Phẩm Đã Hết !", { autoClose: 2500 });
     }
   };
+
+  showProductPredict = (products) => {
+    var result = null;
+    var getRandom = products
+      .sort(() => Math.random() - Math.random())
+      .slice(0, 4);
+    result = getRandom.map((product, index) => {
+      return (
+        <React.Fragment>
+          <Col lg="3" className="mt-4">
+            <Item key={product.id} product={product} />
+          </Col>
+        </React.Fragment>
+      );
+    });
+
+    return result;
+  };
+
   render() {
-    var { match, products_category, color_by_size } = this.props;
+    var { match, products_category, color_by_size, products } = this.props;
     var id_product = match.params.id_product;
-    var { txtSize, isChooseColor} = this.state;
-
-    
-
- 
-    
+    var { txtSize, isChooseColor } = this.state;
 
     return (
       <React.Fragment>
@@ -330,6 +344,18 @@ console.log(onTakeIdProductInfo)
               </Row>
             </Col>
           </Row>
+          
+          <Row>
+
+          </Row>
+          <Row>
+          <Row className=' text-center mt-5'>
+<h2 className='font-weight-normal ' style={{ textDecoration: 'underline'}}>SẢN PHẨM LIÊN QUAN</h2>
+          </Row>
+          <Row style={{boxShadow: '1px 1px 2px rgba(6,6,6)'}}>
+          {this.showProductPredict(products_category)}
+          </Row>
+         </Row>
         </Container>
       </React.Fragment>
     );
