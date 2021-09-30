@@ -75,12 +75,12 @@ class addColor extends React.Component {
 
     var size = {
       id: uniqid("size-"),
-      nameSize: txtName,
+      name: txtName,
 
     };
     var sizeUpdate = {
       id: match.params.id_size,
-      nameSize: txtName,
+      name: txtName,
     };
 
     if (idItem) {

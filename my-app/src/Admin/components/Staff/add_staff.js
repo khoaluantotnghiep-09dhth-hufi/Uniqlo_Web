@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import uniqid from "uniqid";
-
 import {
   CForm,
   CLabel,
@@ -18,10 +17,24 @@ import {
   faPlus, faArrowLeft, faUpload
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { Button, Form } from 'react-bootstrap';
 import ConvertIMG from '../../utils/getBase64';
 import Lightbox from 'react-image-lightbox';
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import 'react-image-lightbox/style.css';
+import { toast } from 'react-toastify';
+import validator from 'validator'
+function FormExample() {
+  const [validated, setValidated] = useState(false);
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
+  };
+}
 class addStaff extends React.Component {
   constructor(props) {
     super(props);
@@ -31,6 +44,7 @@ class addStaff extends React.Component {
       txtEmail: "",
       txtPhone: "",
       txtAddress: "",
+      txtImage: "",
       ImgPrivew: "",
       isOpen: false,
     };
@@ -59,17 +73,14 @@ class addStaff extends React.Component {
       if (match.params.id_staff) {
         const result = staff.find((o) => o.id === match.params.id_staff);
         console.log(result);
-        // this.setState({
-        //   idItem: result.id,
-        //   txtNameStaff: result.name,
-        //   txtEmail: result.email,
-        //   txtPhone: result.phone,
-        //   txtAddress: result.address,
-        //   txtPassword: result.password,
-        //   txtChucVu: result.postion,
-        //   txtImage: result.image,
-        //   ImgPrivew: result.image,
-        // });
+        this.setState({
+          txtNameStaff: result.name,
+          txtEmail: result.email,
+          txtPhone: result.phone,
+          txtAddress: result.address,
+          txtImage: result.image,
+          ImgPrivew: result.image,
+        });
       }
     }
   }
@@ -100,9 +111,20 @@ class addStaff extends React.Component {
       isOpen: true
     })
   }
+  checkValidate = () => {
+    let check = ['txtNameStaff', 'txtEmail', 'txtPhone', 'txtImage', 'txtAddress'];
+    let isValid = true;
+    if (!this.state[check[3]]) {
+      isValid = false;
+      toast.error("Vui lòng tải ảnh nhân viên !");
+    }
+    return isValid;
+  }
   onSubmitForm = (event) => {
+    console.log("event nè", event);
+    let isValid = this.checkValidate();
+    if (isValid === false) return;
     var { match } = this.props;
-
     event.preventDefault();
     var { history } = this.props;
     var {
@@ -115,16 +137,15 @@ class addStaff extends React.Component {
 
     var staff = {
       id: uniqid("staff-"),
-      nameStaff: txtNameStaff,
+      name: txtNameStaff,
       email: txtEmail,
       phone: txtPhone,
       address: txtAddress,
       image: txtImage,
     };
-    console.log("inserted", staff);
     var staffUpdate = {
       id: match.params.id_staff,
-      nameStaff: txtNameStaff,
+      name: txtNameStaff,
       email: txtEmail,
       phone: txtPhone,
       address: txtAddress,
@@ -141,21 +162,23 @@ class addStaff extends React.Component {
   render() {
     let { txtNameStaff, txtEmail, txtPhone, txtAddress, txtPassword, txtChucVu, txtImage, ImgPrivew } = this.state;
     return (
-      <CContainer fluid>
-        <CRow>
-          <Link to="/admin/manage/staffs">
-            <Button type="button" className="btn btn-primary" size="sm">
-              <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />Trở về
-            </Button>
-          </Link>
-          <CCol sm="12">
-            <CForm onSubmit={this.onSubmitForm}>
-              <CFormGroup>
-                <CLabel htmlFor="exampleFormControlInput1">
+      <Container fluid>
+        <Link to="/admin/manage/staffs">
+          <Button type="button" className="btn btn-primary" size="sm">
+            <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />Trở về
+          </Button>
+        </Link>
+        <Row>
+          <Col sm="12">
+            <Form onSubmit={this.onSubmitForm}>
+              <Form.Group>
+                <Form.Label htmlFor="txtNameStaff">
                   Tên Nhân Viên
-                </CLabel>
-                <CInput
+                </Form.Label>
+                <Form.Control
                   type="text"
+                  required
+                  autofocus
                   id="txtNameStaff"
                   name="txtNameStaff"
                   placeholder="Tên nhân viên..."
@@ -163,24 +186,30 @@ class addStaff extends React.Component {
                   onChange={(e) => { this.onChange(e, 'txtNameStaff') }}
                   value={txtNameStaff}
                 />
-              </CFormGroup>
-              <CFormGroup>
-                <CLabel htmlFor="exampleFormControlInput1">Email</CLabel>
-                <CInput
+                <Form.Control.Feedback type="invalid">
+                  Please choose a username.
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label htmlFor="txtEmail">Email</Form.Label>
+                <Form.Control
                   type="text"
                   id="txtEmail"
                   name="txtEmail"
                   placeholder="Email..."
                   autoComplete="email"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                  required
+                  autofocus
                   onChange={(e) => { this.onChange(e, 'txtEmail') }}
                   value={txtEmail}
                 />
-              </CFormGroup>
-              <CFormGroup>
-                <CLabel htmlFor="exampleFormControlTextarea1">
+              </Form.Group>
+              <Form.Group>
+                <Form.Label htmlFor="txtPhone">
                   Số Điện Thoại
-                </CLabel>
-                <CInput
+                </Form.Label>
+                <Form.Control
                   type="text"
                   id="txtPhone"
                   name="txtPhone"
@@ -188,11 +217,12 @@ class addStaff extends React.Component {
                   autoComplete="phone"
                   onChange={(e) => { this.onChange(e, 'txtPhone') }}
                   value={txtPhone}
+                  required
                 />
-              </CFormGroup>
-              <CFormGroup>
-                <CLabel htmlFor="exampleFormControlTextarea1">Địa Chỉ</CLabel>
-                <CInput
+              </Form.Group>
+              <Form.Group>
+                <Form.Label htmlFor="txtAddress">Địa Chỉ</Form.Label>
+                <Form.Control
                   type="text"
                   id="txtAddress"
                   name="txtAddress"
@@ -200,8 +230,9 @@ class addStaff extends React.Component {
                   autoComplete="address"
                   onChange={(e) => { this.onChange(e, 'txtAddress') }}
                   value={txtAddress}
+                  required
                 />
-              </CFormGroup>
+              </Form.Group>
               <Form.Group >
                 <Form.Label className="border border-dark" style={{ backgroundColor: "#ffe6e6", padding: "10px", marginTop: "100px", cursor: "pointer" }} htmlFor="txtImage"><FontAwesomeIcon icon={faUpload} className="mr-2 fa-3x" />Tải Ảnh</Form.Label>
                 <Form.Control
@@ -215,16 +246,19 @@ class addStaff extends React.Component {
               </Form.Group>
               <div style={{ backgroundImage: `url(${ImgPrivew})`, height: "200px", width: "300px", align: "center", background: "center center no-repeat", backgroundSize: "contain", cursor: "pointer", margin: "30px" }}
                 onClick={() => this.openPreviewIMG()}
+                required
               ></div>
-              <CFormGroup>
-                <CButton color="danger" className="m-2" type="submit">
+              <Form.Group>
+                <Button color="danger" className="m-2" type="submit"
+                // onClick={this.onSubmitForm}
+                >
                   {" "}
                   <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />
                   Lưu
-                </CButton>
-              </CFormGroup>
-            </CForm>
-          </CCol>
+                </Button>
+              </Form.Group>
+            </Form>
+          </Col>
           {
             this.state.isOpen === true &&
             <Lightbox
@@ -232,8 +266,8 @@ class addStaff extends React.Component {
               onCloseRequest={() => this.setState({ isOpen: false })}
             />
           }
-        </CRow>
-      </CContainer>
+        </Row>
+      </Container>
     );
   }
 }

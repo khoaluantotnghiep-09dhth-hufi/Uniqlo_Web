@@ -48,7 +48,7 @@ export const deleteItem = (id) => {
 };
 //Thêm sản phẩm vào giỏ hàng
 export const addToCart = (product, quantity) => {
-  toast.success("Thêm thành công !",{autoClose: 2500});
+  toast.success("Thêm thành công !", { autoClose: 2500 });
   return {
     type: types.ADD_TO_CART,
     product,
@@ -312,8 +312,14 @@ export const onAddStaffs = (staff) => {
 export const onAddStaffsResquest = (staff) => {
   return (dispatch) => {
     return callApi("staffs", "POST", staff).then((response) => {
-      toast.success("Thêm thành công !");
-      dispatch(onAddStaffs(response.data));
+      if (response === undefined) {
+        toast.error("Thêm thất bại. Emai đã tồn tại, vui lòng nhập Email khác !");
+      }
+      else {
+        toast.success("Thêm thành công !");
+        dispatch(onAddStaffs(response.data));
+      }
+
     });
   };
 };
@@ -1074,8 +1080,8 @@ export const onGetAllColorBySizeResquest = (id_product) => {
 export const onAddBillCustomerResquest = (bills_customer) => {
   return (dispatch) => {
     return callApi("bill-customer", "POST", bills_customer).then((response) => {
-     
-    
+
+
     });
   };
 };
@@ -1085,9 +1091,9 @@ export const onAddBillInfoCustomerResquest = (bills_info_customer) => {
     return callApi("bill-info-customer", "POST", bills_info_customer).then(
       (response) => {
         toast.success("Cảm Ơn Khách Hàng Đã Mua Hàng Của Chúng Tôi !");
-     
+
       }
     )
-    
+
   };
 };

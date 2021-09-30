@@ -26,17 +26,17 @@ const fields = [
   { key: "role", label: "Chức Vụ" },
   "Hành Động",
 ];
-
 class ListStaffs extends React.Component {
   componentDidMount() {
     this.props.fetchStaffs();
   }
   onDeleteStaff = (item) => {
-    this.props.onDeleteItemStaff(item);
+    if (window.confirm('Bạn có chắc muốn xóa không ?')) {
+      this.props.onDeleteItemStaff(item);
+    }
   };
   render() {
     var { staff } = this.props;
-
     var dataStaff = staff.map((item, index) => {
       return { ...item, index };
     });
@@ -72,7 +72,6 @@ class ListStaffs extends React.Component {
                             Sửa
                           </CButton>
                         </Link>
-
                         <CButton
                           type="button"
                           className="btn btn-warning"

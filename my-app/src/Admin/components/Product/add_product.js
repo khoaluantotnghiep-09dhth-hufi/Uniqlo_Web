@@ -16,6 +16,7 @@ import ConvertIMG from '../../utils/getBase64';
 //Thư viện img 
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
+import { toast } from 'react-toastify';
 let isLoadingExternally = false;
 class addProduct extends React.Component {
     constructor(props) {
@@ -122,14 +123,31 @@ class addProduct extends React.Component {
         })
     }
     checkValidate = () => {
-        let check = ['txtName', 'txtPrice', 'txtDescription', 'txtImage'];
+        let check = ['txtName', 'txtPrice', 'txtDescription', 'txtImage','id_category','id_promotion'];
         let isValid = true;
-        for (let i = 0; i <= check.length; i++) {
-            if (!this.state[check[0]]) {
-                isValid = false;
-                alert("Vui lòng nhập: " + check[i]);
-                break;
-            }
+        if (!this.state[check[0]]) {
+            isValid = false;
+            toast.error("Vui lòng nhập tên sản phẩm");
+        }
+        if (!this.state[check[1]]) {
+            isValid = false;
+            toast.error("Vui lòng nhập giá bán sản phẩm");
+        }
+        if (!this.state[check[2]]) {
+            isValid = false;
+            toast.error("Vui lòng nhập mô tả sản phẩm");
+        }
+        if (!this.state[check[3]]) {
+            isValid = false;
+            toast.error("Vui lòng tải ảnh sản phẩm");
+        }
+        if (!this.state[check[4]]) {
+            isValid = false;
+            toast.error("Vui lòng chọn danh mục sản phẩm");
+        }
+        if (!this.state[check[5]]) {
+            isValid = false;
+            toast.error("Vui lòng chọn khuyến mãi áp dụng");
         }
         return isValid;
     }

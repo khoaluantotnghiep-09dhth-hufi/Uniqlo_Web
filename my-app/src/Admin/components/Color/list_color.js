@@ -30,11 +30,12 @@ class ListColor extends React.Component {
     this.props.fetchColors();
   }
   onDeleteColor = (item) => {
-    this.props.onDeleteItemColor(item);
+    if (window.confirm('Bạn có chắc muốn xóa không ?')) {
+      this.props.onDeleteItemColor(item);
+    }
   };
   render() {
     var { color } = this.props;
-
     var dataColor = color.map((item, index) => {
       return { ...item, index };
     });

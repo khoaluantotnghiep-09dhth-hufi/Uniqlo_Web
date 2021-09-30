@@ -25,7 +25,9 @@ class ListColor extends React.Component {
     this.props.fetchSizes();
   }
   onDeleteSize = (item) => {
-    this.props.onDeleteItemSize(item);
+    if(window.confirm('Bạn có chắc muốn xóa không ?')){
+      this.props.onDeleteItemSize(item);  
+    }
   };
   render() {
     var { size } = this.props;

@@ -71,12 +71,12 @@ class addColor extends React.Component {
 
     var color = {
       id: uniqid("color-"),
-      nameColor: txtName,
+      name: txtName,
 
     };
     var colorUpdate = {
       id: match.params.id_color,
-      nameColor: txtName,
+      name: txtName,
     };
     console.log(color);
     if (idItem) {

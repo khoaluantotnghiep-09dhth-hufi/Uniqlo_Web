@@ -57,30 +57,41 @@ class addProduct extends React.Component {
         var { match } = this.props;
 
         this.props.onEditItemProductInfo(match.params.id_product_info);
-       
+
         isLoadingExternally = true;
         this.setState({
             sizeArr: this.props.fetchSizes(),
             colorArr: this.props.fetchColors(),
         })
+        var { productInfo } = this.props;
+        if (match.params.id_product_info) {
+            const result = productInfo.find(
+                (o) => o.id === match.params.id_product_info
+            );
+            console.log(result);
+            this.setState({
+                txtQuantity: result.quantity,
+                id_size: result.id_size,
+                id_color: result.id_color,
+            });
+        }
     }
-    // componentWillReceiveProps(NextProps) {
-    //     var { match } = this.props;
-    //     if (NextProps && NextProps.productInfo) {
-    //         var { productInfo } = NextProps;
-    //         if (match.params.id_product_info) {
-    //             const result = productInfo.find(
-    //                 (o) => o.id === match.params.id_product_info
-    //             );
-    //             this.setState({
-                  
-    //                 txtQuantity: result.quantity,
-    //                 id_size: result.id_size.id,
-    //                 id_color: result.id_color.id,
-    //             });
-    //         }
-    //     }
-    // }
+    componentWillReceiveProps(NextProps) {
+        var { match } = this.props;
+        if (NextProps && NextProps.productInfo) {
+            var { productInfo } = NextProps;
+            if (match.params.id_product_info) {
+                const result = productInfo.find(
+                    (o) => o.id === match.params.id_product_info
+                );
+                this.setState({
+                    txtQuantity: result.quantity,
+                    id_size: result.id_size,
+                    id_color: result.id_color,
+                });
+            }
+        }
+    }
     onChange = (e, id) => {
         let coppyState = { ...this.state };
         coppyState[id] = e.target.value;
@@ -112,34 +123,16 @@ class addProduct extends React.Component {
         event.preventDefault();
         var { match } = this.props;
         var { history } = this.props;
-        var {idItem, txtQuantity, id_size, id_color } = this.state;
+        var { idItem, txtQuantity, id_size, id_color } = this.state;
         var updatepropductinfo = {
             idItem: match.params.id_product_info,
             id_size: id_size,
             id_color: id_color,
             quantity: txtQuantity
         };
-            this.props.onUpdateItemProductInfo(updatepropductinfo);
-            history.goBack();
+        this.props.onUpdateItemProductInfo(updatepropductinfo);
+        history.push('/admin/manage/products');
     };
-    // onEditHandle = (item) => {
-
-    //     var { match } = this.props;
-    //     this.setState({
-    //         txtQuantity: item.quantity,
-    //     }, () => {
-    //         console.log("item", item);
-    //     })
-    //     var updateProductInfo = {
-    //         id: item.id,
-    //         id_product: match.params.id_product,
-    //         id_color: this.state.id_color,
-    //         id_size: this.state.id_size,
-    //     }
-    //     console.log("update",updateProductInfo)
-    //     // this.props.onUpdateItemProduct();
-
-    // }
     render() {
         var { size } = this.props;
         var { color } = this.props;
@@ -161,14 +154,13 @@ class addProduct extends React.Component {
                                     <Form.Group className="mb-3" controlId="formBasicObject">
                                         <Form.Label>Kích Cỡ</Form.Label>
                                         <Form.Select name="form-field-name"
-                                            value={this.setState.id_size}
+                                            value={this.state.id_size}
                                             onChange={(e) => { this.onChange(e, 'id_size') }}
                                             labelKey={'Tên'}
                                             valueKey={'Mã'}
                                             isLoading={isLoadingExternally}
 
                                         >
-                                            <option value="size-L">Chọn</option>
                                             {size && size.length > 0 &&
                                                 size.map((option, index) => (
                                                     <option value={option.id} key={index}>{option.name}</option>
@@ -180,13 +172,12 @@ class addProduct extends React.Component {
                                     <Form.Group className="mb-3" controlId="formBasicObject">
                                         <Form.Label>Màu</Form.Label>
                                         <Form.Select name="form-field-name"
-                                            value={this.setState.id_color}
+                                            value={this.state.id_color}
                                             onChange={(e) => { this.onChange(e, 'id_color') }}
                                             labelKey={'Tên'}
                                             valueKey={'Mã'}
                                             isLoading={isLoadingExternally}
                                         >
-                                            <option value="color-1">Chọn</option>
                                             {color && color.length > 0 &&
                                                 color.map((option, index) => (
                                                     <option value={option.id} key={index}>{option.name}</option>
@@ -227,7 +218,7 @@ class addProduct extends React.Component {
                     </Col>
 
                 </CRow>
-                
+
             </Container>
         )
     }
@@ -254,7 +245,7 @@ var mapDispatchToProps = (dispatch, props) => {
             return dispatch(actions.fetchColorResquest());
         },
         onEditItemProductInfo: (id) => {
-            return dispatch(actionsProductInfo.onDeleteProductInfoResquest(id));
+            return dispatch(actionsProductInfo.onEditProductInfoResquest(id));
         },
         onUpdateItemProductInfo: (productInfo) => {
             return dispatch(actionsProductInfo.onUpdateProductInfoResquest(productInfo));

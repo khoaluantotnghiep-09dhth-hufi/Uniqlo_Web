@@ -130,7 +130,7 @@ export const onGetProductInfo = (productInfo) => {
     productInfo,
   };
 };
-export const onEditProductResquest = (id) => {
+export const onEditProductInfoResquest = (id) => {
   return (dispatch) => {
     return callApi(`product-info2/${id}`, "GET", null).then((response) => {
       dispatch(onGetProductInfo(response.data));

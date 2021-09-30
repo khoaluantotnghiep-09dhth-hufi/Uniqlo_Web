@@ -90,12 +90,17 @@ class AddSector extends React.Component {
 
     };
     checkValidate = () => {
-        let check = ['txtName'];
+        let check = ['txtName','selectedOption'];
         let isValid = true;
 
         if (!this.state[check[0]]) {
             isValid = false;
-            toast.error("Vui lòng nhập tên");
+            toast.error("Vui lòng nhập tên !");
+
+        }
+        if (!this.state[check[1]]) {
+            isValid = false;
+            toast.error("Vui lòng chọn đối tượng !");
 
         }
         return isValid;

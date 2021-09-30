@@ -21,6 +21,7 @@ import * as actions from "./../../../actions/index";
 import * as actionsProduct from "./../../../actions/productAdminActions";
 import * as actionsProductInfo from "./../../../actions/product_infoActions";
 import { connect } from "react-redux";
+import { toast } from 'react-toastify';
 import uniqid from 'uniqid';
 const fields = [
     'STT',
@@ -55,17 +56,35 @@ class addProduct extends React.Component {
     componentDidMount() {
         var { match } = this.props;
 
-        this.props.onEditItemProduct(match.params.id_product);
+        this.props.onEditItemProductInfo(match.params.id_product);
         this.props.fetchProductInfo(match.params.id_product);
         isLoadingExternally = true;
         this.setState({
             sizeArr: this.props.fetchSizes(),
             colorArr: this.props.fetchColors(),
         })
+
     }
     onDeleteProductInfo = (item) => {
         if (window.confirm("Bạn có chắc muốn xóa không ?")) {
             this.props.onDeleteItemProductInfo(item);
+        }
+    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        var { match } = this.props;
+        if (prevProps.size !== this.props.size) {
+            let arrSize = this.props.size;
+            this.setState({
+                sizeArr: arrSize,
+                id_size: arrSize && arrSize.length > 0 ? arrSize[0].id : ''
+            })
+        }
+        if (prevProps.color !== this.props.color) {
+            let arrColor = this.props.color;
+            this.setState({
+                colorArr: arrColor,
+                id_color: arrColor && arrColor.length > 0 ? arrColor[0].id : ''
+            })
         }
     }
     // componentWillReceiveProps(NextProps) {
@@ -102,7 +121,7 @@ class addProduct extends React.Component {
         for (let i = 0; i <= check.length; i++) {
             if (!this.state[check[0]]) {
                 isValid = false;
-                alert("Vui lòng nhập: Số Lượng");
+                toast.error("Vui lòng nhập số lượng !");
                 break;
             }
         }
@@ -168,14 +187,14 @@ class addProduct extends React.Component {
                                     <Form.Group className="mb-3" controlId="formBasicObject">
                                         <Form.Label>Kích Cỡ</Form.Label>
                                         <Form.Select name="form-field-name"
-                                            value={this.setState.id_size}
+                                            value={this.state.id_size}
                                             onChange={(e) => { this.onChange(e, 'id_size') }}
                                             labelKey={'Tên'}
                                             valueKey={'Mã'}
                                             isLoading={isLoadingExternally}
 
                                         >
-                                            <option value="size-L">Chọn</option>
+
                                             {size && size.length > 0 &&
                                                 size.map((option, index) => (
                                                     <option value={option.id} key={index}>{option.name}</option>
@@ -187,13 +206,13 @@ class addProduct extends React.Component {
                                     <Form.Group className="mb-3" controlId="formBasicObject">
                                         <Form.Label>Màu</Form.Label>
                                         <Form.Select name="form-field-name"
-                                            value={this.setState.id_color}
+                                            value={this.state.id_color}
                                             onChange={(e) => { this.onChange(e, 'id_color') }}
                                             labelKey={'Tên'}
                                             valueKey={'Mã'}
                                             isLoading={isLoadingExternally}
                                         >
-                                            <option value="color-1">Chọn</option>
+
                                             {color && color.length > 0 &&
                                                 color.map((option, index) => (
                                                     <option value={option.id} key={index}>{option.name}</option>
@@ -272,7 +291,7 @@ class addProduct extends React.Component {
                                         'image':
                                             (item, index) => (
                                                 <td>
-                                                    <Image style={{width:"200px", height:"200px"}} src={item.image} thumbnail />
+                                                    <Image style={{ width: "200px", height: "200px" }} src={item.image} thumbnail />
                                                 </td>
                                             ),
                                         // "nameColor": (item) => (
@@ -317,8 +336,8 @@ var mapDispatchToProps = (dispatch, props) => {
         fetchColors: () => {
             return dispatch(actions.fetchColorResquest());
         },
-        onEditItemProduct: (id) => {
-            return dispatch(actionsProduct.onEditProductResquest(id));
+        onEditItemProductInfo: (id) => {
+            return dispatch(actionsProductInfo.onEditProductInfoResquest(id));
         },
         onDeleteItemProductInfo: (id) => {
             return dispatch(actionsProductInfo.onDeleteProductInfoResquest(id));
