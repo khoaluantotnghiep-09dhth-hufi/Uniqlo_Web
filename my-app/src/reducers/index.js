@@ -1,5 +1,7 @@
 import { combineReducers } from "redux";
 import cart from "./Carts/cart";
+import header_notifications from "./header_notifications/header_notifications";
+
 import products from "./Products/products";
 import products_category from "./Products_Category/products_category";
 import productInfo from "./ProductInfo/productInfo";
@@ -48,6 +50,7 @@ const myReducer = combineReducers({
   importInfo,
   exchange,
   billInfo,
+  header_notifications,
 });
 
 export default myReducer;

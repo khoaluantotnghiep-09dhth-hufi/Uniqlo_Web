@@ -1,6 +1,8 @@
 import React from "react";
 
 const Home = React.lazy(() => import('../components/Home/index'));
+const Notifications_Header = React.lazy(() => import('../components/Notifications_Header/listNotifications'));
+
 
 const Order = React.lazy(() => import('../components/Order/order'));
 const UpdateOrder = React.lazy(() => import('../components/Order/update_order'));
@@ -60,6 +62,8 @@ const AddSize = React.lazy(() => import('../components/Size/add_size'));
 
 const routes = [
     { path: '/admin/home', exact: true, name: 'Trang Chủ', component: ListStatistical },
+    { path: '/admin/notifications', exact: true, name: 'Thông Báo', component: Notifications_Header},
+
     { path: '/admin/profile', exact: true, name: 'Thông Tin Cá Nhân', component: AdminProfile },
 
     { path: '/admin/system/order/all', exact: true, name: 'Tất Cả Đơn Hàng', component: Order },

@@ -1,6 +1,31 @@
 import * as types from "./../constants/ActionTypes";
 import callApi from "./../Admin/utils/Callapi";
 import { toast } from "react-toastify";
+
+//Notifications Header
+export const fetchNotifications = () => {
+  return {
+    type: types.FETCH_NOTIFICATIONS_HEADER,
+    
+  };
+};
+
+
+export const fetchAddNotifications = (nameNotifications) => {
+  // console.log("Dang o Action: "+ nameNotifications);
+  return {
+    type: types.ADD_NOTIFICATIONS_HEADER,
+    nameNotifications
+  };
+};
+export const fetchResetNotifications = (nameNotifications) => {
+  return {
+    type: types.RESET_NOTIFICATIONS_HEADER,
+    nameNotifications,
+  };
+};
+
+
 //Giỏ Hàng
 export const listAll = () => {
   return {
