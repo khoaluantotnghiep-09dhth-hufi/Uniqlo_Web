@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo Chat</title>
+  </head>
+  <body>
+    <div>
+      <h1>CHAT WITH FRIEND</h1>
+    </div>
+    <div class="body">
+      <ul id="messages"></ul>
+      <form action="" id="chat-form">
+        <input type="text" id="chat-mes" />
+        <button id="send-chat">Send</button>
+      </form>
+      <span id="price"></span>
+    </div>
+  </body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+    const chatForm = document.querySelector("#chat-form");
+    const chatMes = document.querySelector("#chat-mes");
+    const name = prompt("Name:");
+    chatForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const message = chatMes.value;
+      socket.emit("on-chat", { message, name });
+      chatMes.value = "";
+    });
+
+    const messages = document.querySelector("#messages");
+    socket.on("user-chat", (message) => {
+      const chatItem = document.createElement("li");
+      chatItem.textContent = `${message.name}: ${message.message}`;
+      messages.appendChild(chatItem);
+    });
+
+    // const price = document.querySelector("#price");
+    // SOCKET.on("price-real-time", (price) => {
+    //   price.textContent = `${price} USD`;
+    // });
+  </script>
+</html>

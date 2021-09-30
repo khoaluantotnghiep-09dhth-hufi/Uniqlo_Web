@@ -1,0 +1,18 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/khoaluantotnghiep-09dhth-hufi/Uniqlo_Web.git",
+  "author": "Nguyễn Thanh Huy <54466996+YoungBirds134@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "socket.io": "^4.2.0",
+    "socket.io-client": "^4.2.0",
+    "nodemon": "^2.0.13"
+  },
+  "scripts": {
+    "start": "nodemon server.js"
+  }
+}
