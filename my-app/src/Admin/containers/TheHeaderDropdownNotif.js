@@ -28,13 +28,13 @@ class TheHeaderDropdownNotif extends Component {
     var { nameNotifications } = this.state;
 
     var count = 1;
-    
-//Admin lắng nghe khi có Khách Hàng order sản phẩm
+
+    //Admin lắng nghe khi có Khách Hàng order sản phẩm
     socket.on("customer-order-notifications", (data) => {
       const message = "Có " + data.name + " Order Nè";
       const time = data.today;
       //  var notifications=count++;
-     
+
 
       var nameNotifications = {
         message,
@@ -46,8 +46,8 @@ class TheHeaderDropdownNotif extends Component {
         time,
       };
 
-      console.log("Dang o Socket lay data: " +  newVal);
-      this.props.fetchAddNotifications( newVal);
+      console.log("Dang o Socket lay data: " + newVal);
+      this.props.fetchAddNotifications(newVal);
       // this.setState({
       //   nameNotifications: [...this.state.nameNotifications, data.name],
       //   quantityNotifications: count++,
@@ -63,31 +63,31 @@ class TheHeaderDropdownNotif extends Component {
   render() {
     var { quantityNotifications, nameNotifications } = this.state;
     var { header_notifications } = this.props;
-    console.log('Truoc khi parse: ' +header_notifications);
-    
-   
+    console.log('Truoc khi parse: ' + header_notifications);
+
+
     // Lấy 5 Thông Báo Cuối Mảng
     var renderNotification = header_notifications
-      ?header_notifications.slice(-5).map((item, index) => {
-          return (
-            <CDropdownItem>
-              <CIcon name="cil-user-follow" className="mr-2 text-success" />
-              <span>{item.message} </span>
-            </CDropdownItem>
-          );
-        })
+      ? header_notifications.slice(-5).map((item, index) => {
+        return (
+          <CDropdownItem>
+            <CIcon name="cil-user-follow" className="mr-2 text-success" />
+            <span>{item.message} </span>
+          </CDropdownItem>
+        );
+      })
       : "";
 
-    var renderMore = header_notifications &&header_notifications.length<=5 ?  (
-        <CDropdownItem className="text-center ">
-          <Link to="/admin/notifications">
-            <span className="text-center small">Xem Thêm</span>
-          </Link>
-        </CDropdownItem>
-      ) 
-     : (
-      ""
-    );
+    var renderMore = header_notifications && header_notifications.length <= 5 ? (
+      <CDropdownItem className="text-center ">
+        <Link to="/admin/notifications">
+          <span className="text-center small">Xem Thêm</span>
+        </Link>
+      </CDropdownItem>
+    )
+      : (
+        ""
+      );
 
     return (
       <CDropdown inNav className="c-header-nav-item mx-2">
