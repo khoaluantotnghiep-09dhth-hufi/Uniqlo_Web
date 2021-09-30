@@ -24,16 +24,24 @@ const getBadge = (status) => {
     default: return 'primary'
   }
 };
-
+const getBadgeGender = (status) => {
+  switch (status) {
+    case 0: return 'Nam'
+    case 1: return 'Nữ'
+    case 2: return 'Khác'
+    default: return 'Khác'
+  }
+};
 const fields = [
   "STT",
   { key: "id", label: "Mã Khách Hàng" },
   { key: "name", label: "Tên" },
   { key: "address", label: "Địa Chỉ" },
   { key: "phone", label: "SĐT" },
-  { key: "image", label: "Ảnh" },
-  { key: "password", label: "Mật Khẩu" },
   { key: "email", label: "Gmail" },
+  { key: "gender", label: "Giới Tính" },
+  { key: "image", label: "Ảnh" },
+
   "Thao Tác",
 ];
 
@@ -110,6 +118,12 @@ class ListCustomers extends React.Component {
                       (item, index) => (
                         <td>
                           <Image src={item.image} thumbnail />
+                        </td>
+                      ),
+                    'gender':
+                      (item, index) => (
+                        <td>
+                          {getBadgeGender(item.gender)}
                         </td>
                       )
                   }}

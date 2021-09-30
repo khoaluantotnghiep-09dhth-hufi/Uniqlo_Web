@@ -11,7 +11,12 @@ export const fetchImportInfo = (importInfo) => {
 export const fetchImportInfoResquest = (id) => {
   return (dispatch) => {
     return callApi(`import-info/${id}`, "GET", null).then((response) => {
-      dispatch(fetchImportInfo(response.data));
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+        dispatch(fetchImportInfo(response.data));
+      }
     });
   };
 };
@@ -25,8 +30,13 @@ export const onAddImportInfo = (importInfo) => {
 export const onAddImportInfoResquest = (importInfo) => {
   return (dispatch) => {
     return callApi("import-info", "POST", importInfo).then((response) => {
-      toast.success("Nhập hàng thành công !");
-      dispatch(onAddImportInfo(response.data));
+      if (response === undefined) {
+        toast.error("Sửa thất bại, vui lòng thử lại !");
+      }
+      else {
+        toast.success("Nhập hàng thành công !");
+        dispatch(onAddImportInfo(response.data));
+      }
     });
   };
 };
@@ -56,8 +66,13 @@ export const onUpdateOrderInfoResquest = (importInfo) => {
   return (dispatch) => {
     return callApi(`import-info/${importInfo.id}`, "PUT", importInfo).then(
       (response) => {
-        toast.success("Sửa thành công !");
-        dispatch(onUpdateImportInfo(response.data));
+        if (response === undefined) {
+          toast.error("Sửa thất bại, vui lòng thử lại !");
+        }
+        else {
+          toast.success("Sửa thành công !");
+          dispatch(onUpdateImportInfo(response.data));
+        }
       }
     );
   };

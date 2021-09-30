@@ -11,7 +11,12 @@ export const fetchOrderInfo = (orderInfo) => {
 export const fetchOrderInfoResquest = (id) => {
   return (dispatch) => {
     return callApi(`orders-info/${id}`, "GET", null).then((response) => {
-      dispatch(fetchOrderInfo(response.data));
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+        dispatch(fetchOrderInfo(response.data));
+      }
     });
   };
 };
@@ -26,7 +31,12 @@ export const fetchOrderInfoToImport = (orderInfo) => {
 export const fetchOrderInfoToImportResquest = (id) => {
   return (dispatch) => {
     return callApi(`orders-info-import/${id}`, "GET", null).then((response) => {
-      dispatch(fetchOrderInfoToImport(response.data));
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+        dispatch(fetchOrderInfoToImport(response.data));
+      }
     });
   };
 };
@@ -41,7 +51,12 @@ export const fetchOrderInfoQuantity = (orderInfo) => {
 export const fetchOrderInfoQuantityResquest = (id) => {
   return (dispatch) => {
     return callApi(`orders-info-quantity/${id}`, "GET", null).then((response) => {
-      dispatch(fetchOrderInfoQuantity(response.data));
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+        dispatch(fetchOrderInfoQuantity(response.data));
+      }
     });
   };
 };
@@ -55,7 +70,12 @@ export const fetchOrderInfoNoID = (orderInfo) => {
 export const fetchOrderInfoResquestNoID = () => {
   return (dispatch) => {
     return callApi("orders-info", "GET", null).then((response) => {
-      dispatch(fetchOrderInfo(response.data));
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+        dispatch(fetchOrderInfo(response.data));
+      }
     });
   };
 };
@@ -69,8 +89,13 @@ export const onAddOrderInfo = (orderInfo) => {
 export const onAddOrderInfoResquest = (orderInfo) => {
   return (dispatch) => {
     return callApi("orders-info", "POST", orderInfo).then((response) => {
-      toast.success("Bổ sung thành công !");
-      dispatch(onAddOrderInfo(response.data));
+      if (response === undefined) {
+        toast.error("Thêm thất bại, vui lòng thử lại !");
+      }
+      else {
+        toast.success("Bổ sung thành công !");
+        dispatch(onAddOrderInfo(response.data));
+      }
     });
   };
 };
@@ -100,8 +125,13 @@ export const onUpdateOrderInfoResquest = (orderInfo) => {
   return (dispatch) => {
     return callApi(`orders-info/${orderInfo.id}`, "PUT", orderInfo).then(
       (response) => {
-        toast.success("Sửa thành công !");
-        dispatch(onUpdateOrderInfo(response.data));
+        if (response === undefined) {
+          toast.error("Sửa thất bại, vui lòng thử lại !");
+        }
+        else {
+          toast.success("Sửa thành công !");
+          dispatch(onUpdateOrderInfo(response.data));
+        }
       }
     );
   };
@@ -116,7 +146,12 @@ export const onGetOrderInfo = (orderInfo) => {
 export const onEditOrderInfoResquest = (id) => {
   return (dispatch) => {
     return callApi(`orders-info/${id}`, "GET", null).then((response) => {
-      dispatch(onGetOrderInfo(response.data));
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+        dispatch(onGetOrderInfo(response.data));
+      }
     });
   };
 };

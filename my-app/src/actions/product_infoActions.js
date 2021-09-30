@@ -11,8 +11,12 @@ export const fetchProductInfo = (productInfo) => {
 export const fetchProductInfoResquest = (id) => {
   return (dispatch) => {
     return callApi(`product-info/${id}`, "GET", null).then((response) => {
-      console.log(response.data);
-      dispatch(fetchProductInfo(response.data));
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+        dispatch(fetchProductInfo(response.data));
+      }
     });
   };
 };
@@ -25,7 +29,12 @@ export const fetchProductInfoImport = (productInfo) => {
 export const fetchProductInfoImportResquest = (id) => {
   return (dispatch) => {
     return callApi(`product-info-order-info/${id}`, "GET", null).then((response) => {
-      dispatch(fetchProductInfoImport(response.data));
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+        dispatch(fetchProductInfoImport(response.data));
+      }
     });
   };
 };
@@ -39,7 +48,12 @@ export const fetchProductInfoExchange = (productInfo) => {
 export const fetchProductInfoExchangeResquest = (id) => {
   return (dispatch) => {
     return callApi(`exchange-product-info/${id}`, "GET", null).then((response) => {
-      dispatch(fetchProductInfoExchange(response.data));
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+        dispatch(fetchProductInfoExchange(response.data));
+      }
     });
   };
 };
@@ -55,8 +69,12 @@ export const fetchProductInfoNoID = (productInfo) => {
 export const fetchProductInfoResquestNoID = () => {
   return (dispatch) => {
     return callApi("product-info", "GET", null).then((response) => {
-      console.log(response.data);
-      dispatch(fetchProductInfoNoID(response.data));
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+        dispatch(fetchProductInfoNoID(response.data));
+      }
     });
   };
 };
@@ -70,8 +88,13 @@ export const onAddProductInfo = (productInfo) => {
 export const onAddProductInfoResquest = (productInfo) => {
   return (dispatch) => {
     return callApi("product-info", "POST", productInfo).then((response) => {
-      toast.success("Bổ sung thành công !");
-      dispatch(onAddProductInfo(response.data));
+      if (response === undefined) {
+        toast.error("Thêm thất bại, vui lòng thử lại !");
+      }
+      else {
+        toast.success("Bổ sung thành công !");
+        dispatch(onAddProductInfo(response.data));
+      }
     });
   };
 };
@@ -100,8 +123,13 @@ export const onUpdateProductInfoResquest = (productInfo) => {
   return (dispatch) => {
     return callApi(`product-info/${productInfo.idItem}`, "PUT", productInfo).then(
       (response) => {
-        toast.success("Sửa thành công !");
-        dispatch(onUpdateProductInfo(response.data));
+        if (response === undefined) {
+          toast.error("Sửa thất bại, vui lòng thử lại !");
+        }
+        else {
+          toast.success("Sửa thành công !");
+          dispatch(onUpdateProductInfo(response.data));
+        }
       }
     );
   };
@@ -116,8 +144,13 @@ export const onUpdateProductInfoImportResquest = (productInfo) => {
   return (dispatch) => {
     return callApi(`product-info-import/${productInfo.id}`, "PUT", productInfo).then(
       (response) => {
-        toast.success("Sửa thành công !");
-        dispatch(onUpdateProductInfoImport(response.data));
+        if (response === undefined) {
+          toast.error("Sửa thất bại, vui lòng thử lại !");
+        }
+        else {
+          toast.success("Sửa thành công !");
+          dispatch(onUpdateProductInfoImport(response.data));
+        }
       }
     );
   };

@@ -1,6 +1,6 @@
 import * as types from "./../constants/ActionTypes";
 import callApi from "./../Admin/utils/Callapi";
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 export const fetchExchange = (exchange) => {
   return {
     type: types.FETCH_EXCHANGE,
@@ -11,7 +11,12 @@ export const fetchExchange = (exchange) => {
 export const fetchExchangeResquest = () => {
   return (dispatch) => {
     return callApi("exchange", "GET", null).then((response) => {
-      dispatch(fetchExchange(response.data));
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+        dispatch(fetchExchange(response.data));
+      }
     });
   };
 };
@@ -26,8 +31,13 @@ export const onAddExchange = (exchange) => {
 export const onAddExchangeResquest = (exchange) => {
   return (dispatch) => {
     return callApi("exchange", "POST", exchange).then((response) => {
-      toast.success("Thêm thành công !");
-      dispatch(onAddExchange(response.data));
+      if (response === undefined) {
+        toast.error("Thêm thất bại, vui lòng thử lại !");
+      }
+      else {
+        toast.success("Thêm thành công !");
+        dispatch(onAddExchange(response.data));
+      }
     });
   };
 };
@@ -42,8 +52,13 @@ export const onUpdateExchangeResquest = (exchange) => {
   return (dispatch) => {
     return callApi(`exchange/${exchange.id}`, "PUT", exchange).then(
       (response) => {
-        toast.success("Sửa thành công !");
-        dispatch(onUpdateExchange(response.data));
+        if (response === undefined) {
+          toast.error("Sửa thất bại, vui lòng thử lại !");
+        }
+        else {
+          toast.success("Sửa thành công !");
+          dispatch(onUpdateExchange(response.data));
+        }
       }
     );
   };
@@ -59,7 +74,12 @@ export const onGetExchange = (exchange) => {
 export const onEditExchangeResquest = (id) => {
   return (dispatch) => {
     return callApi(`exchange/${id}`, "GET", null).then((response) => {
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
       dispatch(onGetExchange(response.data));
+      }
     });
   };
 };

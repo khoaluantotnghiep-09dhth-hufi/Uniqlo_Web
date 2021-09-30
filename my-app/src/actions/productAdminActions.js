@@ -1,6 +1,6 @@
 import * as types from "./../constants/ActionTypes";
 import callApi from "./../Admin/utils/Callapi";
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 export const fetchProduct = (products) => {
   return {
     type: types.FETCH_PRODUCT,
@@ -11,7 +11,12 @@ export const fetchProduct = (products) => {
 export const fetchProductResquest = () => {
   return (dispatch) => {
     return callApi("products-admin", "GET", null).then((response) => {
-      dispatch(fetchProduct(response.data));
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+        dispatch(fetchProduct(response.data));
+      }
     });
   };
 };
@@ -26,8 +31,13 @@ export const onAddProduct = (product) => {
 export const onAddProductResquest = (product) => {
   return (dispatch) => {
     return callApi("products-admin", "POST", product).then((response) => {
-      toast.success("Thêm thành công !");
-      dispatch(onAddProduct(response.data));
+      if (response === undefined) {
+        toast.error("Thêm thất bại, vui lòng thử lại !");
+      }
+      else {
+        toast.success("Thêm thành công !");
+        dispatch(onAddProduct(response.data));
+      }
     });
   };
 };
@@ -42,8 +52,13 @@ export const onUpdateProductResquest = (product) => {
   return (dispatch) => {
     return callApi(`products-admin/${product.id}`, "PUT", product).then(
       (response) => {
-        toast.success("Sửa thành công !");
-        dispatch(onUpdateProduct(response.data));
+        if (response === undefined) {
+          toast.error("Sửa thất bại, vui lòng thử lại !");
+        }
+        else {
+          toast.success("Sửa thành công !");
+          dispatch(onUpdateProduct(response.data));
+        }
       }
     );
   };
@@ -59,7 +74,12 @@ export const onGetProduct = (product) => {
 export const onEditProductResquest = (id) => {
   return (dispatch) => {
     return callApi(`products-admin/${id}`, "GET", null).then((response) => {
-      dispatch(onGetProduct(response.data));
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+        dispatch(onGetProduct(response.data));
+      }
     });
   };
 };

@@ -1,6 +1,6 @@
 import * as types from "./../constants/ActionTypes";
 import callApi from "./../Admin/utils/Callapi";
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 export const fetchImport = (import_product) => {
   return {
     type: types.FETCH_IMPORTPRODUCT,
@@ -11,7 +11,12 @@ export const fetchImport = (import_product) => {
 export const fetchImportResquest = () => {
   return (dispatch) => {
     return callApi("import-product", "GET", null).then((response) => {
-      dispatch(fetchImport(response.data));
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+        dispatch(fetchImport(response.data));
+      }
     });
   };
 };
@@ -26,8 +31,13 @@ export const onAddImport = (import_product) => {
 export const onAddImportResquest = (import_product) => {
   return (dispatch) => {
     return callApi("import-product", "POST", import_product).then((response) => {
-      toast.success("Thêm thành công !");
-      dispatch(onAddImport(response.data));
+      if (response === undefined) {
+        toast.error("Thêm thất bại, vui lòng thử lại !");
+      }
+      else {
+        toast.success("Thêm thành công !");
+        dispatch(onAddImport(response.data));
+      }
     });
   };
 };
@@ -42,8 +52,13 @@ export const onUpdateImportResquest = (import_product) => {
   return (dispatch) => {
     return callApi(`import-product/${import_product.id}`, "PUT", import_product).then(
       (response) => {
-        toast.success("Sửa thành công !");
-        dispatch(onUpdateImport(response.data));
+        if (response === undefined) {
+          toast.error("Sửa thất bại, vui lòng thử lại !");
+        }
+        else {
+          toast.success("Sửa thành công !");
+          dispatch(onUpdateImport(response.data));
+        }
       }
     );
   };
@@ -59,7 +74,12 @@ export const onGetImport = (import_product) => {
 export const onEditImportResquest = (id) => {
   return (dispatch) => {
     return callApi(`import-product/${id}`, "GET", null).then((response) => {
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
       dispatch(onGetImport(response.data));
+      }
     });
   };
 };
