@@ -78,7 +78,7 @@ class ListOrderProducts extends React.Component {
                                             (item) => (
                                                 <td>
                                                     {item.status === 1 ?
-                                                        <Link to={`/admin/manage/order-info/${item.id}`}>
+                                                        <Link to={`/admin/manage/order-info/${item.id}/${item.status}`}>
                                                             <CButton
                                                                 type="button"
                                                                 className="btn btn-danger"
@@ -105,7 +105,7 @@ class ListOrderProducts extends React.Component {
                                                         // </Link>
                                                     }
                                                     {item.status === 0 ?
-                                                        <Link to={`/admin/manage/order-info/${item.id}`}>
+                                                        <Link to={`/admin/manage/order-info/${item.id}/${item.status}`}>
                                                             <CButton
                                                                 type="button"
                                                                 className="btn btn-danger"
