@@ -3,6 +3,7 @@ import uniqid from "uniqid";
 import { connect } from "react-redux";
 import * as actions from "./../../../actions/index";
 import { Link } from "react-router-dom";
+import { toast } from 'react-toastify';
 import {
   CForm,
   CLabel,
@@ -33,7 +34,7 @@ class addOrderProduct extends React.Component {
     var { match } = this.props;
 
     this.props.onEditItemOrder(match.params.id_order_product);
-    
+
   }
   getCurrentDate(separator = '/') {
 
@@ -44,6 +45,15 @@ class addOrderProduct extends React.Component {
 
     return `${year}${separator}${month < 10 ? `0${month}` : `${month}`}${separator}${date}`
   }
+  checkValidate = () => {
+    let check = ['txtHouse'];
+    let isValid = true;
+    if (!this.state[check[0]]) {
+        isValid = false;
+        toast.error("Vui lòng nhập tên Kho");
+    }
+    return isValid;
+}
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
     if (NextProps && NextProps.order) {
@@ -53,11 +63,11 @@ class addOrderProduct extends React.Component {
           (o) => o.id === match.params.id_order_product
         );
 
-        // this.setState({
-        //   idItem: result.id,
-        //   txtDate: result.date_order,
-        //   txtHouse: result.name_warehouse,
-        // });
+        this.setState({
+          idItem: result.id,
+          txtDate: result.date_order,
+          txtHouse: result.name_warehouse,
+        });
       }
     }
   }
@@ -66,31 +76,25 @@ class addOrderProduct extends React.Component {
     coppyState[id] = e.target.value;
     this.setState({
       ...coppyState
-    }, () => {
-      console.log(this.state);
     })
-
-
   }
   onSubmitForm = (event) => {
+    let isValid = this.checkValidate();
+    if (isValid === false) return;
     var { match } = this.props;
-
     event.preventDefault();
     var { history } = this.props;
     var { idItem, txtDate, txtHouse } = this.state;
-
     var order = {
       id: uniqid("order-"),
       date_order: txtDate,
       name_warehouse: txtHouse,
-
     };
     var orderUpdate = {
       id: match.params.id_order_product,
       date_order: txtDate,
       name_warehouse: txtHouse,
     };
-
     if (match.params.id_order_product) {
       this.props.onUpdateItemOrder(orderUpdate);
       history.goBack();
@@ -137,17 +141,15 @@ class addOrderProduct extends React.Component {
                     />
                   </CFormGroup>
                 </CCol>
-
                 <CFormGroup >
                   <CButton
                     color='danger'
                     className="m-2"
                     onClick={this.onSubmitForm}
                   >  <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />
-                    Thêm
+                    Lưu
                   </CButton>
                 </CFormGroup>
-
               </CRow>
             </CForm>
           </CCol>

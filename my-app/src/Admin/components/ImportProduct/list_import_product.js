@@ -74,7 +74,7 @@ class ListImportProduct extends React.Component {
                       (item) => (
                         <td>
                           {item.status === 1 ?
-                            <Link to={`/admin/manage/import-info/${item.id}/${item.id_order}`}>
+                            <Link to={`/admin/manage/import-info/${item.id}/${item.id_order}/${item.status}`}>
                               <CButton
                                 type="button"
                                 className="btn btn-danger"
@@ -101,7 +101,7 @@ class ListImportProduct extends React.Component {
                             // </Link>
                           }
                           {item.status === 0 ?
-                            <Link to={`/admin/manage/import-info/${item.id}/${item.id_order}`}>
+                            <Link to={`/admin/manage/import-info/${item.id}/${item.id_order}/${item.status}`}>
                               <CButton
                                 type="button"
                                 className="btn btn-danger"

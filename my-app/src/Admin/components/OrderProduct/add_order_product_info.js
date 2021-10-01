@@ -64,41 +64,54 @@ class addProduct extends React.Component {
             this.props.onDeleteItemOrderInfo(item);
         }
     }
-    // componentWillReceiveProps(NextProps) {
-    //     var { match } = this.props;
-    //     if (NextProps && NextProps.productInfo) {
-    //         var { productInfo } = NextProps;
-    //         if (match.params.id_product) {
-    //             const result = productInfo.find(
-    //                 (o) => o.id === match.params.id_product
-    //             );
-    //             this.setState({
-    //                 txtQuantity: result.quantity,
-    //                 id_size: result.id_size.id,
-    //                 id_color: result.id_color.id,
-    //             });
-    //         }
-    //     }
-    // }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        var { match } = this.props;
+        if (prevProps.productInfo !== this.props.productInfo) {
+            let arrProduct = this.props.productInfo;
+            this.setState({
+                productArr: arrProduct,
+                id_product_info: arrProduct && arrProduct.length > 0 ? arrProduct[0].id : ''
+            })
+        }
+
+    }
+    componentWillReceiveProps(NextProps) {
+        var { match } = this.props;
+        if (NextProps && NextProps.productInfo) {
+            var { productInfo } = NextProps;
+            if (match.params.id_product) {
+                const result = productInfo.find(
+                    (o) => o.id === match.params.id_product
+                );
+                // this.setState({
+                //     txtQuantity: result.quantity,
+                //     id_size: result.id_size.id,
+                //     id_color: result.id_color.id,
+                // });
+            }
+        }
+    }
     onChange = (e, id) => {
         let coppyState = { ...this.state };
         coppyState[id] = e.target.value;
         this.setState({
             ...coppyState
+        }, () => {
+            console.log(this.state)
         })
     }
 
     checkValidate = () => {
-        let check = ['txtQuantity', 'txtRetal_price'];
+        let check = ['txtQuantity', 'id_product_info'];
         let isValid = true;
-        for (let i = 0; i <= check.length; i++) {
-            if (!this.state[check[0]]) {
-                isValid = false;
-                toast.error("Vui lòng nhập và chọn đủ các thông tin !");
-                break;
-            }
+        if (!this.state[check[0]]) {
+            isValid = false;
+            toast.error("Vui lòng nhập số lượng !");
         }
-
+        if (!this.state[check[1]]) {
+            isValid = false;
+            toast.error("Vui chọn sản phẩm !");
+        }
         return isValid;
     }
     onSubmitForm = (event) => {
@@ -132,12 +145,6 @@ class addProduct extends React.Component {
                 <>
                     <Container fluid>
                         <CRow>
-                            <Link to="/admin/manage/order-product">
-                                <Button type="button" className="btn btn-primary" size="sm">
-                                    <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />
-                                    Trở về
-                                </Button>
-                            </Link>
                             <Col sm="12">
                                 <Form action="" method="post" onSubmit={() => this.onSubmitForm()}>
                                     <Row sm="12">
@@ -151,7 +158,6 @@ class addProduct extends React.Component {
                                                     valueKey={'Mã'}
                                                     isLoading={isLoadingExternally}
                                                 >
-                                                    <option value="product-info-2">Chọn</option>
                                                     {productInfo && productInfo.length > 0 &&
                                                         productInfo.map((option, index) => (
                                                             <option value={option.id} key={index}>Tên: {option.name}, Kích Cỡ: {option.nameSize}, Màu: {option.nameColor}</option>
@@ -223,22 +229,6 @@ class addProduct extends React.Component {
                                                                     <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
                                                                 </CButton>
                                                             }
-                                                            {item.status === 0 ?
-                                                                <Link to="/admin/manage/product/../edit">
-                                                                    <CButton type="button" className="btn btn-primary">
-                                                                        <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
-                                                                    </CButton>
-                                                                </Link>
-                                                                : ""
-                                                            }
-
-                                                            {/* <CButton type="button" className="btn btn-warning"
-                                                        onClick={() => { this.onDeleteOrderInfo(item.id) }}
-                                                    >
-                                                        <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
-                                                    </CButton> */}
-
-
                                                         </td>
 
                                                     ),

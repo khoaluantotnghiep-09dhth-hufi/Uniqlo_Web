@@ -85,13 +85,6 @@ class addProduct extends React.Component {
                 id_order_info: arrOrderInfo && arrOrderInfo.length > 0 ? arrOrderInfo[0].id : ''
             })
         }
-        // if (prevProps.orderInfo !== this.props.orderInfo){
-        //     let arrQuantity = this.props.orderInfo;
-        //     this.setState({
-        //         quantityArr : arrQuantity,
-        //         txtQuantity : arrQuantity && arrQuantity.length > 0 ? arrQuantity[0].id : ''
-        //     })
-        // }
     }
     // componentWillReceiveProps(NextProps) {
     //     var { match } = this.props;
@@ -115,23 +108,33 @@ class addProduct extends React.Component {
         this.setState({
             ...coppyState,
             productArr: this.props.fetchProductsInfo(this.state.id_order_info),
-            // txtQuantity: this.props.fetchOrderInfoQuantity(this.state.id_order_info),
         }, () => {
             console.log("state", this.state);
         })
     }
-
+    onChangeHandle = (e) => {
+        this.setState({
+            id_order_info: e.target.value,
+            productArr: this.props.fetchProductsInfo(this.state.id_order_info),
+            id_product_info: this.state.productArr.id_product_info,
+        })
+        console.log("state nè", this.state)
+    }
     checkValidate = () => {
-        let check = ['txtQuantity'];
+        let check = ['txtQuantity', 'id_order_info', 'id_product_info'];
         let isValid = true;
-        for (let i = 0; i <= check.length; i++) {
-            if (!this.state[check[0]]) {
-                isValid = false;
-                toast.error("Vui lòng nhập và chọn đủ các thông tin !");
-                break;
-            }
+        if (!this.state[check[0]]) {
+            isValid = false;
+            toast.error("Vui lòng nhập số lượng !");
         }
-
+        if (!this.state[check[1]]) {
+            isValid = false;
+            toast.error("Vui lòng chọn chi tiết đơn đặt hàng !");
+        }
+        if (!this.state[check[2]]) {
+            isValid = false;
+            toast.error("Vui lòng chọn lại chi tiết đơn đặt hàng !");
+        }
         return isValid;
     }
     onSubmitForm = (event) => {
@@ -155,426 +158,271 @@ class addProduct extends React.Component {
     render() {
         var { productInfo } = this.props;
         var { orderInfo } = this.props;
+        var { match } = this.props;
         var { importInfo } = this.props;
         let { txtQuantity, id_product_info, id_order_info } = this.state;
         var dataImportInfo = importInfo.map((item, index) => {
             return { ...item, index };
         })
-        // if (dataOrderInfo.status === 0) {
-        //     return (
-        //         <>
-        //             <Container fluid>
-        //                 <CRow>
-        //                     <Link to="/admin/manage/order-product">
-        //                         <Button type="button" className="btn btn-primary" size="sm">
-        //                             <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />
-        //                             Trở về
-        //                         </Button>
-        //                     </Link>
-        //                     <Col sm="12">
-        //                         <Form action="" method="post" onSubmit={() => this.onSubmitForm()}>
-        //                             <Row sm="12">
-        //                                 <Col sm="8">
-        //                                     <Form.Group className="mb-3" controlId="formBasicObject">
-        //                                         <Form.Label>Sản Phẩm</Form.Label>
-        //                                         <Form.Select name="form-field-name"
-        //                                             value={id_product_info}
-        //                                             onChange={(e) => { this.onChange(e, 'id_product_info') }}
-        //                                             labelKey={'Tên'}
-        //                                             valueKey={'Mã'}
-        //                                             isLoading={isLoadingExternally}
-        //                                         >
-        //                                             <option value="product-info-2">Chọn</option>
-        //                                             {productInfo && productInfo.length > 0 &&
-        //                                                 productInfo.map((option, index) => (
-        //                                                     <option value={option.id} key={index}>Tên: {option.name}, Kích Cỡ: {option.nameSize}, Màu: {option.nameColor}</option>
-        //                                                 ))}
-        //                                         </Form.Select>
-        //                                     </Form.Group>
-        //                                 </Col>
-
-        //                                 <Col sm="2">
-        //                                     <Form.Group >
-        //                                         <Form.Label htmlFor="exampleFormControlTextarea1">Số Lượng</Form.Label>
-        //                                         <Form.Control
-        //                                             type="number"
-        //                                             id="txtQuantity"
-        //                                             name="txtQuantity"
-        //                                             placeholder="Số Lượng..."
-        //                                             value={txtQuantity}
-        //                                             onChange={(e) => { this.onChange(e, 'txtQuantity') }}
-        //                                             required
-        //                                         />
-        //                                     </Form.Group>
-        //                                 </Col>
-        //                                 <Col sm="2">
-        //                                     <Form.Group >
-        //                                         <Form.Label htmlFor="exampleFormControlTextarea1">Giá</Form.Label>
-        //                                         <Form.Control
-        //                                             type="number"
-        //                                             id="txtRetal_price"
-        //                                             name="txtRetal_price"
-        //                                             placeholder="Giá..."
-        //                                             value={txtRetal_price}
-        //                                             onChange={(e) => { this.onChange(e, 'txtRetal_price') }}
-        //                                             required
-        //                                         />
-        //                                     </Form.Group>
-        //                                 </Col>
-        //                                 <Col sm="10">
-        //                                     <Form.Group className="d-flex justify-content-center">
-        //                                         <Button type="button" className="btn btn-danger"
-        //                                             onClick={this.onSubmitForm}
-        //                                         > <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg"
-        //                                             />Lưu</Button>
-        //                                     </Form.Group>
-        //                                 </Col>
-        //                             </Row>
-        //                         </Form>
-        //                     </Col>
-
-        //                 </CRow>
-        //                 <CRow>
-        //                     <Col sm="12">
-        //                         <Link to="/admin/manage/order-product">
-        //                             <Button type="button" className="btn btn-primary" size="sm">
-        //                                 <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />
-        //                                 Trở về
-        //                             </Button>
-        //                         </Link>
-        //                     </Col>
-        //                     <CCol xs="12" lg="24">
-        //                         <CCard>
-        //                             <CCardHeader>
-        //                                 Danh Sách Chi Tiết Đặt Hàng
-        //                             </CCardHeader>
-        //                             <CCardBody>
-        //                                 <CDataTable
-        //                                     items={dataOrderInfo}
-        //                                     fields={fields}
-        //                                     itemsPerPage={8}
-        //                                     pagination
-        //                                     scopedSlots={{
-        //                                         'Thao Tác':
-        //                                             (item) => (
-        //                                                 <td>
-        //                                                     {item.status === 1 ?
-        //                                                         <Alert variant={getBadge(item.status)}>
-        //                                                             {item.status === 0 ? 'Chưa Giao' : 'Đã Giao'}
-        //                                                         </Alert>
-
-        //                                                         :
-        //                                                         <CButton type="button" className="btn btn-warning"
-        //                                                             onClick={() => { this.onDeleteOrderInfo(item.id) }}
-        //                                                         >
-        //                                                             <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
-        //                                                         </CButton>
-        //                                                     }
-        //                                                     {item.status === 0 ?
-        //                                                         <Link to="/admin/manage/product/../edit">
-        //                                                             <CButton type="button" className="btn btn-primary">
-        //                                                                 <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
-        //                                                             </CButton>
-        //                                                         </Link>
-        //                                                         : ""
-        //                                                     }
-
-        //                                                     {/* <CButton type="button" className="btn btn-warning"
-        //                                                 onClick={() => { this.onDeleteOrderInfo(item.id) }}
-        //                                             >
-        //                                                 <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
-        //                                             </CButton> */}
-
-
-        //                                                 </td>
-
-        //                                             ),
-        //                                         'STT':
-        //                                             (item, index) => (
-        //                                                 <td>
-        //                                                     {index + 1}
-        //                                                 </td>
-        //                                             ),
-        //                                         'image':
-        //                                             (item, index) => (
-        //                                                 <td>
-        //                                                     <Image src={item.image} thumbnail />
-        //                                                 </td>
-        //                                             ),
-        //                                         // "nameColor": (item) => (
-        //                                         //     <td>
-        //                                         //         <Alert variant={getBadge(item.nameColor)}>
-        //                                         //             {/* {item.status === 0 ? 'Chưa Giao' : 'Đã Giao'} */}
-        //                                         //         </Alert>
-
-
-        //                                         //     </td>
-        //                                         // ),
-        //                                     }}
-        //                                 />
-        //                             </CCardBody>
-        //                         </CCard>
-        //                     </CCol>
-        //                 </CRow>
-        //             </Container>
-        //         </>
-        //     )
-        // }
-        // else {
-        //     return (
-        //         <>
-        //             <Container fluid>
-        //                 <CRow>
-        //                     <Col sm="12">
-        //                         <Link to="/admin/manage/order-product">
-        //                             <Button type="button" className="btn btn-primary" size="sm">
-        //                                 <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />
-        //                                 Trở về
-        //                             </Button>
-        //                         </Link>
-        //                     </Col>
-        //                     <CCol xs="12" lg="24">
-        //                         <CCard>
-        //                             <CCardHeader>
-        //                                 Danh Sách Chi Tiết Đặt Hàng
-        //                             </CCardHeader>
-        //                             <CCardBody>
-        //                                 <CDataTable
-        //                                     items={dataOrderInfo}
-        //                                     fields={fields}
-        //                                     itemsPerPage={8}
-        //                                     pagination
-        //                                     scopedSlots={{
-        //                                         'Thao Tác':
-        //                                             (item) => (
-        //                                                 <td>
-        //                                                     {item.status === 1 ?
-        //                                                         <Alert variant={getBadge(item.status)}>
-        //                                                             {item.status === 0 ? 'Chưa Giao' : 'Đã Giao'}
-        //                                                         </Alert>
-
-        //                                                         :
-        //                                                         <CButton type="button" className="btn btn-warning"
-        //                                                             onClick={() => { this.onDeleteOrderInfo(item.id) }}
-        //                                                         >
-        //                                                             <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
-        //                                                         </CButton>
-        //                                                     }
-        //                                                     {item.status === 0 ?
-        //                                                         <Link to="/admin/manage/product/../edit">
-        //                                                             <CButton type="button" className="btn btn-primary">
-        //                                                                 <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
-        //                                                             </CButton>
-        //                                                         </Link>
-        //                                                         : ""
-        //                                                     }
-
-        //                                                     {/* <CButton type="button" className="btn btn-warning"
-        //                                                 onClick={() => { this.onDeleteOrderInfo(item.id) }}
-        //                                             >
-        //                                                 <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
-        //                                             </CButton> */}
-
-
-        //                                                 </td>
-
-        //                                             ),
-        //                                         'STT':
-        //                                             (item, index) => (
-        //                                                 <td>
-        //                                                     {index + 1}
-        //                                                 </td>
-        //                                             ),
-        //                                         'image':
-        //                                             (item, index) => (
-        //                                                 <td>
-        //                                                     <Image src={item.image} thumbnail />
-        //                                                 </td>
-        //                                             ),
-        //                                         // "nameColor": (item) => (
-        //                                         //     <td>
-        //                                         //         <Alert variant={getBadge(item.nameColor)}>
-        //                                         //             {/* {item.status === 0 ? 'Chưa Giao' : 'Đã Giao'} */}
-        //                                         //         </Alert>
-
-
-        //                                         //     </td>
-        //                                         // ),
-        //                                     }}
-        //                                 />
-        //                             </CCardBody>
-        //                         </CCard>
-        //                     </CCol>
-        //                 </CRow>
-        //             </Container>
-        //         </>
-        //     )
-        // }
-        return (
-            <>
-                <Container fluid>
-                    <CRow>
+        if (match.params.status === "1") {
+            return (
+                <>
+                    <Container fluid>
                         <Link to="/admin/manage/import-product">
                             <Button type="button" className="btn btn-primary" size="sm">
                                 <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />
                                 Trở về
                             </Button>
                         </Link>
-                        <Col sm="12">
-                            <Form action="" method="post" onSubmit={() => this.onSubmitForm()}>
-                                <Row sm="12">
-                                    <Col sm="10">
-                                        <Form.Group className="mb-3" controlId="formBasicObject">
-                                            <Form.Label>Chi Tiết Đơn Đặt Hàng</Form.Label>
-                                            <Form.Select name="form-field-name"
-                                                value={id_order_info}
-                                                onChange={(e) => { this.onChange(e, 'id_order_info') }}
-                                                labelKey={'Tên'}
-                                                valueKey={'Mã'}
-                                                isLoading={isLoadingExternally}
-                                            >
-                                                <option value="abc" key="1">Chọn</option>
-                                                {orderInfo && orderInfo.length > 0 &&
-                                                    orderInfo.map((option, index) => (
-                                                        <option value={option.id} key={index}>Tên: {option.name} | Màu: {option.nameColor} | Kích Cỡ: {option.nameSize} | Số Lượng: {option.quantity}</option>
-                                                    ))}
-                                            </Form.Select>
-                                        </Form.Group>
-                                    </Col>
-                                    <Col sm="2">
-                                        <Form.Group >
-                                            <Form.Label htmlFor="exampleFormControlTextarea1">Số Lượng</Form.Label>
-                                            <Form.Control
-                                                type="number"
-                                                id="txtQuantity"
-                                                name="txtQuantity"
-                                                placeholder="Số Lượng..."
-                                                value={txtQuantity}
-                                                onChange={(e) => { this.onChange(e, 'txtQuantity') }}
-                                                required
-                                            />
-                                        </Form.Group>
-                                    </Col>
-                                </Row>
-                                <Row sm="12">
-                                    <Col sm="12">
-                                        <Form.Group className="mb-3" controlId="formBasicObject">
-                                            <Form.Label>Chi Tiết Sản Phẩm</Form.Label>
-                                            <Form.Select name="form-field-name"
-                                                value={id_product_info}
-                                                onChange={(e) => { this.onChange(e, 'id_product_info') }}
-                                                labelKey={'Tên'}
-                                                valueKey={'Mã'}
-                                                isLoading={isLoadingExternally}
-                                            >
-                                                {productInfo && productInfo.length > 0 &&
-                                                    productInfo.map((option, index) => (
-                                                        <option selected={option.id} value={option.id} key={index}>Tên: {option.name} | Màu: {option.nameColor} | Kích Cỡ: {option.nameSize} | Số Lượng: {option.quantity}</option>
-                                                    ))}
-                                            </Form.Select>
-                                        </Form.Group>
-                                    </Col>
-                                </Row>
-                                <Row sm="12">
+                        <CRow>
+                            <CCol xs="12" lg="24">
+                                <CCard>
+                                    <CCardHeader>
+                                        Danh Sách Chi Tiết Nhập Hàng
+                                    </CCardHeader>
+                                    <CCardBody>
+                                        <CDataTable
+                                            items={dataImportInfo}
+                                            fields={fields}
+                                            itemsPerPage={8}
+                                            pagination
+                                            scopedSlots={{
+                                                'Thao Tác':
+                                                    (item) => (
+                                                        <td>
+                                                            {/* {item.status === 1 ?
+                                                                <Alert variant={getBadge(item.status)}>
+                                                                    {item.status === 0 ? 'Chưa Giao' : 'Đã Giao'}
+                                                                </Alert>
+    
+                                                                :
+                                                                <CButton type="button" className="btn btn-warning"
+                                                                    onClick={() => { this.onDeleteOrderInfo(item.id) }}
+                                                                >
+                                                                    <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
+                                                                </CButton>
+                                                            } */}
+                                                            {item.status === 0 ?
+                                                                <Link to={`/admin/manage/order-info/${item.id}/edit`}>
+                                                                    <CButton type="button" className="btn btn-primary">
+                                                                        <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
+                                                                    </CButton>
+                                                                </Link>
+                                                                : ""
+                                                            }
 
-                                    <Col sm="10">
-                                        <Form.Group className="d-flex justify-content-center">
-                                            <Button type="button" className="btn btn-danger"
-                                                onClick={this.onSubmitForm}
-                                            > <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg"
-                                                />Lưu
-                                            </Button>
-                                        </Form.Group>
-                                    </Col>
-                                </Row>
-                            </Form>
-                        </Col>
-                    </CRow>
-                    <CRow>
-                        {/* <Col sm="12">
-                            <Link to="/admin/manage/order-product">
+                                                            {/* <CButton type="button" className="btn btn-warning"
+                                                            onClick={() => { this.onDeleteOrderInfo(item.id) }}
+                                                        >
+                                                            <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
+                                                        </CButton> */}
+
+
+                                                        </td>
+
+                                                    ),
+                                                'STT':
+                                                    (item, index) => (
+                                                        <td>
+                                                            {index + 1}
+                                                        </td>
+                                                    ),
+                                                'image':
+                                                    (item, index) => (
+                                                        <td xs={6} md={4}>
+                                                            <Image style={{ width: "200px", height: "200px" }} src={item.image} thumbnail />
+                                                        </td>
+                                                    ),
+                                                // "nameColor": (item) => (
+                                                //     <td>
+                                                //         <Alert variant={getBadge(item.nameColor)}>
+                                                //             {/* {item.status === 0 ? 'Chưa Giao' : 'Đã Giao'} */}
+                                                //         </Alert>
+
+
+                                                //     </td>
+                                                // ),
+                                            }}
+                                        />
+                                    </CCardBody>
+                                </CCard>
+                            </CCol>
+                        </CRow>
+                    </Container >
+                </>
+            )
+        }
+        else {
+            return (
+                <>
+                    <Container fluid>
+                        <CRow>
+                            <Link to="/admin/manage/import-product">
                                 <Button type="button" className="btn btn-primary" size="sm">
                                     <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />
                                     Trở về
                                 </Button>
                             </Link>
-                        </Col> */}
-                        <CCol xs="12" lg="24">
-                            <CCard>
-                                <CCardHeader>
-                                    Danh Sách Chi Tiết Nhập Hàng
-                                </CCardHeader>
-                                <CCardBody>
-                                    <CDataTable
-                                        items={dataImportInfo}
-                                        fields={fields}
-                                        itemsPerPage={8}
-                                        pagination
-                                        scopedSlots={{
-                                            'Thao Tác':
-                                                (item) => (
-                                                    <td>
-                                                        {/* {item.status === 1 ?
-                                                            <Alert variant={getBadge(item.status)}>
-                                                                {item.status === 0 ? 'Chưa Giao' : 'Đã Giao'}
-                                                            </Alert>
+                            <Col sm="12">
+                                <Form action="" method="post" onSubmit={() => this.onSubmitForm()}>
+                                    <Row sm="12">
+                                        <Col sm="10">
+                                            <Form.Group className="mb-3" controlId="formBasicObject">
+                                                <Form.Label>Chi Tiết Đơn Đặt Hàng</Form.Label>
+                                                <Form.Select name="form-field-name"
+                                                    value={id_order_info}
+                                                    onChange={(e) => { this.onChange(e, 'id_order_info') }}
+                                                    // onChange={(e) => { this.onChangeHandle(e) }}
+                                                    labelKey={'Tên'}
+                                                    valueKey={'Mã'}
+                                                    isLoading={isLoadingExternally}
+                                                >
+                                                    <option>Chọn</option>
+                                                    {orderInfo && orderInfo.length > 0 &&
+                                                        orderInfo.map((option, index) => (
+                                                            <option value={option.id} key={index}>Tên: {option.name} | Màu: {option.nameColor} | Kích Cỡ: {option.nameSize} | Số Lượng: {option.quantity}</option>
+                                                        ))}
+                                                </Form.Select>
+                                            </Form.Group>
+                                        </Col>
+                                        <Col sm="2">
+                                            <Form.Group >
+                                                <Form.Label htmlFor="exampleFormControlTextarea1">Số Lượng</Form.Label>
+                                                <Form.Control
+                                                    type="number"
+                                                    id="txtQuantity"
+                                                    name="txtQuantity"
+                                                    placeholder="Số Lượng..."
+                                                    value={txtQuantity}
+                                                    onChange={(e) => { this.onChange(e, 'txtQuantity') }}
+                                                    required
+                                                />
+                                            </Form.Group>
+                                        </Col>
+                                    </Row>
+                                    <Row sm="12">
+                                        <Col sm="12">
+                                            <Form.Group className="mb-3" controlId="formBasicObject">
+                                                <Form.Label>Chi Tiết Sản Phẩm</Form.Label>
+                                                <Form.Select name="form-field-name"
+                                                    value={id_product_info}
+                                                    onChange={(e) => { this.onChange(e, 'id_product_info') }}
+                                                    labelKey={'Tên'}
+                                                    valueKey={'Mã'}
+                                                    hidden
+                                                    isLoading={isLoadingExternally}
+                                                >
+                                                    {productInfo && productInfo.length > 0 &&
+                                                        productInfo.map((option, index) => (
+                                                            <option selected={option.id} value={option.id} key={index}>Tên: {option.name} | Màu: {option.nameColor} | Kích Cỡ: {option.nameSize} | Số Lượng: {option.quantity}</option>
+                                                        ))}
 
-                                                            :
-                                                            <CButton type="button" className="btn btn-warning"
-                                                                onClick={() => { this.onDeleteOrderInfo(item.id) }}
-                                                            >
-                                                                <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
-                                                            </CButton>
-                                                        } */}
-                                                        {item.status === 0 ?
-                                                            <Link to={`/admin/manage/order-info/${item.id}/edit`}>
-                                                                <CButton type="button" className="btn btn-primary">
-                                                                    <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
+                                                </Form.Select>
+                                            </Form.Group>
+                                        </Col>
+                                    </Row>
+                                    <Row sm="12">
+
+                                        <Col sm="10">
+                                            <Form.Group className="d-flex justify-content-center">
+                                                <Button type="button" className="btn btn-danger"
+                                                    onClick={this.onSubmitForm}
+                                                > <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg"
+                                                    />Lưu
+                                                </Button>
+                                            </Form.Group>
+                                        </Col>
+                                    </Row>
+                                </Form>
+                            </Col>
+                        </CRow>
+                        <CRow>
+                            {/* <Col sm="12">
+                                <Link to="/admin/manage/order-product">
+                                    <Button type="button" className="btn btn-primary" size="sm">
+                                        <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />
+                                        Trở về
+                                    </Button>
+                                </Link>
+                            </Col> */}
+                            <CCol xs="12" lg="24">
+                                <CCard>
+                                    <CCardHeader>
+                                        Danh Sách Chi Tiết Nhập Hàng
+                                    </CCardHeader>
+                                    <CCardBody>
+                                        <CDataTable
+                                            items={dataImportInfo}
+                                            fields={fields}
+                                            itemsPerPage={8}
+                                            pagination
+                                            scopedSlots={{
+                                                'Thao Tác':
+                                                    (item) => (
+                                                        <td>
+                                                            {/* {item.status === 1 ?
+                                                                <Alert variant={getBadge(item.status)}>
+                                                                    {item.status === 0 ? 'Chưa Giao' : 'Đã Giao'}
+                                                                </Alert>
+    
+                                                                :
+                                                                <CButton type="button" className="btn btn-warning"
+                                                                    onClick={() => { this.onDeleteOrderInfo(item.id) }}
+                                                                >
+                                                                    <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
                                                                 </CButton>
-                                                            </Link>
-                                                            : ""
-                                                        }
+                                                            } */}
+                                                            {item.status === 0 ?
+                                                                <Link to={`/admin/manage/order-info/${item.id}/edit`}>
+                                                                    <CButton type="button" className="btn btn-primary">
+                                                                        <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
+                                                                    </CButton>
+                                                                </Link>
+                                                                : ""
+                                                            }
 
-                                                        {/* <CButton type="button" className="btn btn-warning"
-                                                        onClick={() => { this.onDeleteOrderInfo(item.id) }}
-                                                    >
-                                                        <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
-                                                    </CButton> */}
-
-
-                                                    </td>
-
-                                                ),
-                                            'STT':
-                                                (item, index) => (
-                                                    <td>
-                                                        {index + 1}
-                                                    </td>
-                                                ),
-                                            'image':
-                                                (item, index) => (
-                                                    <td xs={6} md={4}>
-                                                        <Image style={{ width: "200px", height: "200px" }} src={item.image} thumbnail />
-                                                    </td>
-                                                ),
-                                            // "nameColor": (item) => (
-                                            //     <td>
-                                            //         <Alert variant={getBadge(item.nameColor)}>
-                                            //             {/* {item.status === 0 ? 'Chưa Giao' : 'Đã Giao'} */}
-                                            //         </Alert>
+                                                            {/* <CButton type="button" className="btn btn-warning"
+                                                            onClick={() => { this.onDeleteOrderInfo(item.id) }}
+                                                        >
+                                                            <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
+                                                        </CButton> */}
 
 
-                                            //     </td>
-                                            // ),
-                                        }}
-                                    />
-                                </CCardBody>
-                            </CCard>
-                        </CCol>
-                    </CRow>
-                </Container >
-            </>
-        )
+                                                        </td>
+
+                                                    ),
+                                                'STT':
+                                                    (item, index) => (
+                                                        <td>
+                                                            {index + 1}
+                                                        </td>
+                                                    ),
+                                                'image':
+                                                    (item, index) => (
+                                                        <td xs={6} md={4}>
+                                                            <Image style={{ width: "200px", height: "200px" }} src={item.image} thumbnail />
+                                                        </td>
+                                                    ),
+                                                // "nameColor": (item) => (
+                                                //     <td>
+                                                //         <Alert variant={getBadge(item.nameColor)}>
+                                                //             {/* {item.status === 0 ? 'Chưa Giao' : 'Đã Giao'} */}
+                                                //         </Alert>
+
+
+                                                //     </td>
+                                                // ),
+                                            }}
+                                        />
+                                    </CCardBody>
+                                </CCard>
+                            </CCol>
+                        </CRow>
+                    </Container >
+                </>
+            )
+        }
+
     }
 }
 var mapStateToProps = (state) => {

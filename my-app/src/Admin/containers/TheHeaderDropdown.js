@@ -31,7 +31,6 @@ const TheHeaderDropdown = () => {
     // if (sessionStorage.length === 0) {
     //   return <Redirect push to={{ path: "/admin" }} />;
     // }
-
     window.location.href = "/admin";
   };
   return (
