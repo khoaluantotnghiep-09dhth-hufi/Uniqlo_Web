@@ -71,15 +71,14 @@ class addStaff extends React.Component {
     if (NextProps && NextProps.staff) {
       var { staff } = NextProps;
       if (match.params.id_staff) {
-        const result = staff.find((o) => o.id === match.params.id_staff);
-        console.log(result);
+        
         this.setState({
-          txtNameStaff: result.name,
-          txtEmail: result.email,
-          txtPhone: result.phone,
-          txtAddress: result.address,
-          txtImage: result.image,
-          ImgPrivew: result.image,
+          txtNameStaff: staff.name,
+          txtEmail: staff.email,
+          txtPhone: staff.phone,
+          txtAddress: staff.address,
+          txtImage: staff.image,
+          ImgPrivew: staff.image,
         });
       }
     }

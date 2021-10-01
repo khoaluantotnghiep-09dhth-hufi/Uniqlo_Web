@@ -39,10 +39,10 @@ class addObject extends React.Component {
     if (NextProps && NextProps.object_menu) {
       var { object_menu } = NextProps;
       if (match.params.id_object_menu) {
-        const result = object_menu.find((o) => o.id === match.params.id_object_menu);
+ 
         this.setState({
-          idItem: result.id,
-          txtName: result.name,
+          idItem: object_menu.id,
+          txtName: object_menu.name,
         });
       }
     }

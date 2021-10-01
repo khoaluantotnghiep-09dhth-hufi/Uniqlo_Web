@@ -64,9 +64,9 @@ class AddNews extends React.Component {
     }
   }
   componentDidMount() {
-    var { match } = this.props;
+ 
+    var { match,news } = this.props;
     this.props.onEditItemNews(match.params.id_news);
-    var { news } = this.props;
     if (match.params.id_news) {
       const result = news.find((o) => o.id === match.params.id_news);
       console.log("result nè", result);
@@ -85,16 +85,17 @@ class AddNews extends React.Component {
     var { match } = this.props;
     if (NextProps && NextProps.news) {
       var { news } = NextProps;
+      console.log(news)
       if (match.params.id_news) {
-        // const result = news.find((o) => o.id === match.params.id_news);
-        // this.setState({
-        //   txtTitle: result.title,
-        //   txtDate: this.getCurrentDate(),
-        //   txtDescriptionHTML: result.descriptionHTML,
-        //   txtDescriptionText: result.descriptionText,
-        //   id_staff: sessionUser.id_staff,
-        //   txtImage: result.image,
-        // });
+ 
+        this.setState({
+          txtTitle: news.title,
+          txtDate: this.getCurrentDate(),
+          txtDescriptionHTML: news.descriptionHTML,
+          txtDescriptionText: news.descriptionText,
+          id_staff: sessionUser.id_staff,
+          txtImage: news.image,
+        });
       }
     }
   }

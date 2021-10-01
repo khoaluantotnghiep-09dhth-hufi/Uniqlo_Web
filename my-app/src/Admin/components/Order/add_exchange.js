@@ -64,12 +64,12 @@ class AddCategory extends React.Component {
         if (NextProps && NextProps.exchange) {
             var { exchange } = NextProps;
             if (match.params.id_exchange) {
-                const result = exchange.find((o) => o.id === match.params.id_exchange);
-                // this.setState({
-                //     idItem: result.id,
-                //     txtName: result.name,
-                //     id_sector: result.id_sector,
-                // });
+                
+                this.setState({
+                    idItem: exchange.id,
+                    txtName: exchange.name,
+                    id_sector: exchange.id_sector,
+                });
             }
         }
     }

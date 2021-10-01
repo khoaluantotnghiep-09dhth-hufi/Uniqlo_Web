@@ -82,17 +82,15 @@ class addProduct extends React.Component {
         if (NextProps && NextProps.product) {
             var { products } = NextProps;
             if (match.params.id_product) {
-                const result = products.find(
-                    (o) => o.id === match.params.id_product
-                );
-                // this.setState({
-                //     txtName: result.name,
-                //     txtPrice: result.price,
-                //     txtDescription: result.description,
-                //     txtImage: result.image,
-                //     id_promotion: result.id_promotion,
-                //     id_category: result.id_category,
-                // });
+               
+                this.setState({
+                    txtName: products.name,
+                    txtPrice: products.price,
+                    txtDescription: products.description,
+                    txtImage: products.image,
+                    id_promotion: products.id_promotion,
+                    id_category: products.id_category,
+                });
             }
         }
     }

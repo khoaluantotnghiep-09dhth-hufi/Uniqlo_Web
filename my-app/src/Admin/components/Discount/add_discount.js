@@ -39,14 +39,14 @@ class addDiscount extends React.Component {
     this.props.onEditItemPromotion(match.params.id_promotion);
     var { promotion } = this.props;
     if (match.params.id_promotion) {
-      const result = promotion.find((o) => o.id === match.params.id_promotion);
-      console.log("resui", result);
+     
+     
       this.setState({
-        txtNameDiscount: result.name,
-        txtNameMota: result.description,
-        dateStart: result.date_start,
-        dateEnd: result.date_end,
-        txtImage: result.image,
+        txtNameDiscount: promotion.name,
+        txtNameMota: promotion.description,
+        dateStart: promotion.date_start,
+        dateEnd: promotion.date_end,
+        txtImage: promotion.image,
       });
     }
   }

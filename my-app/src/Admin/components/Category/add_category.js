@@ -70,11 +70,11 @@ class AddCategory extends React.Component {
         if (NextProps && NextProps.category) {
             var { category } = NextProps;
             if (match.params.id_category) {
-                const result = category.find((o) => o.id === match.params.id_category);
-                // this.setState({
-                //     txtName: result.name,
-                //     id_sector: result.id_sectors,
-                // });
+                
+                this.setState({
+                    txtName:  category.name,
+                    id_sector:  category.id_sectors,
+                });
             }
         }
     }

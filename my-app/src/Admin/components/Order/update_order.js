@@ -35,12 +35,12 @@ class updateOrder extends React.Component {
     if (NextProps && NextProps.bill) {
       var { bill } = NextProps;
       if (match.params.id_order) {
-        const result = bill.find((o) => o.id === match.params.id_order);
+  
 
         this.setState({
-          idItem: result.id,
-          txtDate: result.date,
-          txtConfirm: result.status,
+          idItem: bill.id,
+          txtDate: bill.date,
+          txtConfirm: bill.status,
         });
       }
     }

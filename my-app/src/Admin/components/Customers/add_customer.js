@@ -36,15 +36,15 @@ class AddCustomer extends React.Component {
     this.props.onEditItemCustomer(match.params.id_customer);
     var { customer } = this.props;
     if (match.params.id_customer) {
-      const result = customer.find((o) => o.id === match.params.id_customer);
+  
       this.setState({
-        txtName: result.name,
-        txtAddress: result.address,
-        txtPhone: result.phone,
-        txtImage: result.image,
-        ImgPrivew: result.image,
-        txtEmail: result.email,
-        txtGender: result.gender
+        txtName: customer.name,
+        txtAddress: customer.address,
+        txtPhone: customer.phone,
+        txtImage: customer.image,
+        ImgPrivew: customer.image,
+        txtEmail: customer.email,
+        txtGender: customer.gender
       });
     }
   }

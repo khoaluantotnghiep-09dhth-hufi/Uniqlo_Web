@@ -56,6 +56,7 @@ class ListDiscount extends React.Component {
     var { promotion } = this.props;
 
     var dataPromotion = promotion.map((item, index) => {
+      
       return { ...item, index };
     });
 
