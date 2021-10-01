@@ -40,7 +40,7 @@ class TheHeaderDropdownNotif extends Component {
       };
       // var newVal=JSON.stringify(nameNotifications)
       var newVal = {
-        message,
+       content: message,
         time,
       };
       console.log("Dang o Socket lay data: " + newVal);
@@ -55,7 +55,7 @@ class TheHeaderDropdownNotif extends Component {
       const message="Có "+ "Khách Hàng "+ data.name+" Hủy Đơn "+data.id_bill +" Lý Do "+data.reasons+" Nè";
       const time = data.today;
       var newVal = {
-        message,
+       content: message,
         time,
       };
       console.log("Dang o Socket lay data: " + newVal);
@@ -80,7 +80,7 @@ class TheHeaderDropdownNotif extends Component {
         return (
           <CDropdownItem>
             <CIcon name="cil-user-follow" className="mr-2 text-success" />
-            <span>{item.message} </span>
+            <span>{item.content} </span>
           </CDropdownItem>
         );
       })
@@ -197,6 +197,10 @@ var mapStateToProps = (state) => {
 };
 var mapDispatchToProps = (dispatch, props) => {
   return {
+    
+    onBillCancel: (bills) => {
+      dispatch(actions.onAddNotificationCancelResquest(bills));
+    },
     fetchAddNotifications: (nameNotifications) => {
       return dispatch(actions.fetchAddNotifications(nameNotifications));
     },

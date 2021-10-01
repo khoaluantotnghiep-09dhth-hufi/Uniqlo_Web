@@ -3,13 +3,30 @@ import callApi from "./../Admin/utils/Callapi";
 import { toast } from "react-toastify";
 
 //Notifications Header
-export const fetchNotifications = () => {
+export const fetchNotifications = (nameNotifications) => {
   return {
     type: types.FETCH_NOTIFICATIONS_HEADER,
-
+    nameNotifications
+  };
+};
+export const fetchNotificationsResquest = () => {
+  return (dispatch) => {
+    return callApi("notifications", "GET", null).then((response) => {
+      console.log(response.data);
+      dispatch(fetchNotifications(response.data));
+    });
   };
 };
 
+
+export const onAddNotificationCancelResquest = (bills) => {
+  return (dispatch) => {
+    return callApi("notifications", "POST", bills).then((response) => {
+
+
+    });
+  };
+};
 
 export const fetchAddNotifications = (nameNotifications) => {
   // console.log("Dang o Action: "+ nameNotifications);

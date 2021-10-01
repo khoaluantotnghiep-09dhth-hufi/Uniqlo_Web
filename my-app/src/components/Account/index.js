@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
+import Moment from "react-moment";
 
 import {
   Container,
@@ -10,8 +11,9 @@ import {
   FloatingLabel,
   Form,
 } from "react-bootstrap";
-import Moment from "react-moment";
+
 import { toast } from "react-toastify";
+import uniqid from "uniqid";
 
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
@@ -47,7 +49,7 @@ class index extends Component {
       txtHuyDon: "",
       txtPhone: "",
       txtPassword: "",
-      isCheckRequest: '',
+      isCheckRequest: "",
     };
   }
   componentDidMount() {
@@ -61,7 +63,7 @@ class index extends Component {
   handleShow = (id) => {
     this.setState({
       show: !false,
-      isCheckRequest:id 
+      isCheckRequest: id,
     });
   };
   onSignOut = () => {
@@ -83,9 +85,9 @@ class index extends Component {
   };
   onSubmitForm = (event) => {
     // eslint-disable-next-line no-return-assign, no-param-reassign
-    event.preventDefault();   // eslint-disable
-    var { txtPhone, txtPassword, txtHuyDon,isCheckRequest } = this.state;
-  console.log(isCheckRequest)
+    event.preventDefault(); // eslint-disable
+    var { txtPhone, txtPassword, txtHuyDon, isCheckRequest } = this.state;
+    console.log(isCheckRequest);
 
     // for (let i = 0; i < users.length; i++) {
     //   if (users[i].phone === txtPhone && users[i].password === txtPassword) {
@@ -109,18 +111,37 @@ class index extends Component {
 
     var name = sessionUser.name;
     var id_bill = isCheckRequest.id;
-    var reasons=txtHuyDon;
+    var reasons = txtHuyDon;
     var today = new Date();
-    socket.emit("customer-request-cancel-bill", { name,id_bill , today, reasons });
-    toast.success("Khách Hàng Đã Yêu Cầu Hủy Đơn Thành Công, WebSocket");
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
+    var bills = {
+      id: uniqid("message- "),
+      content: "Có "+ "Khách Hàng "+ name+" Hủy Đơn "+id_bill +" Lý Do "+reasons+" Nè",
+      time:  date + ' '+ time ,
+    };
    
+    if(bills){
+
+      this.props.onBillCancel(bills);
+      toast.success("Khách Hàng Đã Yêu Cầu Hủy Đơn Thành Công, WebSocket");
+    }
+    
+    socket.emit("customer-request-cancel-bill", {
+      name,
+      id_bill,
+      today,
+      reasons,
+    });
+   
+
     this.handleClose();
   };
   render() {
     var { bills_customer } = this.props;
     var { show, isCheckRequest } = this.state;
     var sessionUser = JSON.parse(sessionStorage.getItem("client"));
-   
+
     var { isCheckSignOut } = this.state;
     if (isCheckSignOut) {
       // window.location.reload();
@@ -149,7 +170,7 @@ class index extends Component {
                   itemsPerPage={5}
                   hover
                   sorter
-                  pagination              
+                  pagination
                   scopedSlots={{
                     total: (item) => <td>{formatter.format(item.total)}</td>,
                     status: (item) => (
@@ -180,7 +201,9 @@ class index extends Component {
                             variant="outline-secondary"
                             size="sm"
                             style={{ margin: 0 }}
-                            onClick={() =>{this.handleShow(item)}}
+                            onClick={() => {
+                              this.handleShow(item);
+                            }}
                           >
                             <FontAwesomeIcon
                               icon={faTimes}
@@ -190,7 +213,7 @@ class index extends Component {
                             {/* {isCheckRequest ? (
                               <small> Chờ Xác Nhận</small>
                             ) : ( */}
-                              <small> Hủy Đơn</small>
+                            <small> Hủy Đơn</small>
                             {/* )} */}
                           </Button>
                         ) : (
@@ -241,7 +264,7 @@ class index extends Component {
             <Modal.Title>Yêu Cầu Hủy Đơn Hàng</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form   onSubmit={this.onSubmitForm}>
+            <Form onSubmit={this.onSubmitForm}>
               <FloatingLabel
                 controlId="floatingTextarea"
                 label="Xin Mời Nhập Lý Do"
@@ -284,6 +307,9 @@ var mapDispatchToProps = (dispatch, props) => {
   return {
     onResetCart: (product) => {
       dispatch(actions.onRestCart(product));
+    },
+    onBillCancel: (bills) => {
+      dispatch(actions.onAddNotificationCancelResquest(bills));
     },
     fetchBillsCustomer: () => {
       dispatch(actions.fetchBillsCustomerResquest());

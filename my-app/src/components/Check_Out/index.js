@@ -195,6 +195,26 @@ class index extends Component {
       socket.emit("customer-order", { name, quantity, today });
       toast.success("Khách Hàng Đã Order Gửi Lên WebSocket");
       this.props.onResetCart();
+
+      var today = new Date();
+      var date =
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getDate();
+      var time =
+        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      var bills = {
+        id: uniqid("message- "),
+        content: "Có " + "Khách Hàng " + name + " Order Nè",
+        time: date + " " + time,
+      };
+
+      if (bills) {
+        this.props.onBillCancel(bills);
+        toast.success("Khách Hàng Đã Yêu Cầu Hủy Đơn Thành Công, WebSocket");
+      }
     }
   };
   onHandleChange = (event) => {
@@ -356,6 +376,10 @@ var mapDispatchToProps = (dispatch, props) => {
     },
     onCreateBillInfo: (bills_info_customer) => {
       dispatch(actions.onAddBillInfoCustomerResquest(bills_info_customer));
+    },
+
+    onBillCancel: (bills) => {
+      dispatch(actions.onAddNotificationCancelResquest(bills));
     },
   };
 };

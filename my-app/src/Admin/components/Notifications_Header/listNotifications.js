@@ -17,7 +17,7 @@ import { faCheck,faPlus, faTimes, faTools } from "@fortawesome/free-solid-svg-ic
 import { Link } from "react-router-dom";
 const fields = [
   "STT",
-  { key: "message", label: "Tin Nhắn" },
+  { key: "content", label: "Tin Nhắn" },
   { key: "time", label: "Thời Gian" },
   "Hành Động",
 ];
@@ -25,6 +25,7 @@ const fields = [
 class ListColor extends React.Component {
   componentDidMount() {
     //   this.props.mapDispatchToProps();
+    this.props.fetchNotifications();
   }
   onResetNotifications=(header_notifications) => {
     this.props.fetchResetNotifications(header_notifications);
@@ -102,7 +103,7 @@ var mapStateToProps = (state) => {
 var mapDispatchToProps = (dispatch, props) => {
   return {
     fetchNotifications: () => {
-      return dispatch(actions.fetchNotifications());
+      return dispatch(actions.fetchNotificationsResquest());
     },
     fetchResetNotifications:(nameNotifications)=>{
         return   dispatch(actions.fetchResetNotifications(nameNotifications));
