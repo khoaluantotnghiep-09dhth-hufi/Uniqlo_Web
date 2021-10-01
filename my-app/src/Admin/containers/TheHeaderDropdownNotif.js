@@ -34,8 +34,6 @@ class TheHeaderDropdownNotif extends Component {
       const message = "Có " + data.name + " Order Nè";
       const time = data.today;
       //  var notifications=count++;
-
-
       var nameNotifications = {
         message,
         time,
@@ -45,13 +43,23 @@ class TheHeaderDropdownNotif extends Component {
         message,
         time,
       };
-
       console.log("Dang o Socket lay data: " + newVal);
       this.props.fetchAddNotifications(newVal);
       // this.setState({
       //   nameNotifications: [...this.state.nameNotifications, data.name],
       //   quantityNotifications: count++,
       // });
+    });
+
+    socket.on("customer-request-cancel-bill-notifications",data=>{
+      const message="Có "+ "Khách Hàng "+ data.name+" Hủy Đơn "+data.id_bill +" Lý Do "+data.reasons+" Nè";
+      const time = data.today;
+      var newVal = {
+        message,
+        time,
+      };
+      console.log("Dang o Socket lay data: " + newVal);
+      this.props.fetchAddNotifications(newVal);
     });
   }
 

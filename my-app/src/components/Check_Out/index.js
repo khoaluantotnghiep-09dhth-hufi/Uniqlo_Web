@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import io from 'socket.io-client';
+import io from "socket.io-client";
 
 import {
   Container,
@@ -21,7 +21,7 @@ import * as actions from "./../../actions/index";
 import API_Address from "./../../Admin/utils/Api_Address_CheckOut";
 import { toast } from "react-toastify";
 
-const socket =io("http://localhost:3008");
+const socket = io("http://localhost:3008");
 
 class index extends Component {
   constructor(props) {
@@ -143,9 +143,7 @@ class index extends Component {
     }
     return total;
   };
-  onSubmit=e=>{
-   
-  }
+  onSubmit = (e) => {};
   onHandleSubmitForm = (e) => {
     e.preventDefault();
     var {
@@ -162,44 +160,42 @@ class index extends Component {
     var sessionCart = JSON.parse(sessionStorage.getItem("cart"));
     let dateNow = new Date().toISOString().slice(0, 10);
 
-    // var bill = {
-    //   id: uniqid("bill-customer-"),
-    //   order_date: dateNow,
-    //   total: this.showTotalAmount(sessionCart),
-    //   status: 0,
-    //   id_customer: sessionUser.id_user,
-    //   name_customer: txtHoTen,
-    //   address: txtDiaChi + " , " + txtCity + " , " + txtPhuong + " , " + txtXa,
-    //   phone: txtSDT,
-    //   email: txtEmail,
-    //   total_quantity: this.showTotalProduct(sessionCart),
-    //   note: txtGhiChu,
-    // };
+    var bill = {
+      id: uniqid("bill-customer-"),
+      order_date: dateNow,
+      total: this.showTotalAmount(sessionCart),
+      status: 0,
+      id_customer: sessionUser.id_user,
+      name_customer: txtHoTen,
+      address: txtDiaChi + " , " + txtCity + " , " + txtPhuong + " , " + txtXa,
+      phone: txtSDT,
+      email: txtEmail,
+      total_quantity: this.showTotalProduct(sessionCart),
+      note: txtGhiChu,
+    };
 
-    // var bill_info = sessionCart.map((item) => ({
-    //   id: uniqid("bill-customer-info-"),
-    //   id_bill: bill.id,
-    //   id_product_info: item.product.id_product_info,
-    //   into_money: item.product.priceSaleProduct
-    //     ? item.product.priceSaleProduct
-    //     : item.product.priceProduct,
-    //   quantity: item.quantity,
-    // }));
+    var bill_info = sessionCart.map((item) => ({
+      id: uniqid("bill-customer-info-"),
+      id_bill: bill.id,
+      id_product_info: item.product.id_product_info,
+      into_money: item.product.priceSaleProduct
+        ? item.product.priceSaleProduct
+        : item.product.priceProduct,
+      quantity: item.quantity,
+    }));
 
-    // if (bill && bill_info) {
-    //   this.props.onCreateBill(bill);
-    //   this.props.onCreateBillInfo(bill_info);
-
-    //   this.props.onResetCart();
-    // }
-//////Test Web Socket
-    var name= sessionUser.name;
-    var quantity=1;
-    var today = new Date();
-    //Khách hàng phát tín hiệu khi Order
-     socket.emit('customer-order',{name,quantity,today});
-     toast.success("Khách Hàng Đã Order Gửi Lên WebSocket")
-
+    if (bill && bill_info) {
+      this.props.onCreateBill(bill);
+      this.props.onCreateBillInfo(bill_info);
+      //////Test Web Socket
+      var name = sessionUser.name;
+      var quantity = 1;
+      var today = new Date();
+      //Khách hàng phát tín hiệu khi Order
+      socket.emit("customer-order", { name, quantity, today });
+      toast.success("Khách Hàng Đã Order Gửi Lên WebSocket");
+      this.props.onResetCart();
+    }
   };
   onHandleChange = (event) => {
     var target = event.target;
@@ -246,12 +242,10 @@ class index extends Component {
                   placeholder="Số Điện Thoại"
                   onChange={this.onHandleChange}
                   name="txtSDT"
-                
                   minlength="10"
                   pattern="^[0-9]*$"
                   required
                   autofocus
-                 
                 />
               </Form.Group>
 

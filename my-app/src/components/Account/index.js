@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import io from "socket.io-client";
+
 import {
   Container,
   Row,
@@ -9,6 +11,7 @@ import {
   Form,
 } from "react-bootstrap";
 import Moment from "react-moment";
+import { toast } from "react-toastify";
 
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
@@ -32,6 +35,7 @@ const fields = [
   { key: "status", label: "Tình Trạng" },
   "Hành Động",
 ];
+const socket = io("http://localhost:3008");
 
 class index extends Component {
   constructor(props) {
@@ -43,7 +47,7 @@ class index extends Component {
       txtHuyDon: "",
       txtPhone: "",
       txtPassword: "",
-      isCheckRequest: false,
+      isCheckRequest: '',
     };
   }
   componentDidMount() {
@@ -54,9 +58,10 @@ class index extends Component {
       show: !true,
     });
   };
-  handleShow = () => {
+  handleShow = (id) => {
     this.setState({
       show: !false,
+      isCheckRequest:id 
     });
   };
   onSignOut = () => {
@@ -76,37 +81,46 @@ class index extends Component {
       [name]: value,
     });
   };
-  onSubmitForm = (users) => (event) => {
-    var {txtPhone, txtPassword, txtHuyDon } = this.state;    
-    event.preventDefault();
+  onSubmitForm = (event) => {
+    // eslint-disable-next-line no-return-assign, no-param-reassign
+    event.preventDefault();   // eslint-disable
+    var { txtPhone, txtPassword, txtHuyDon,isCheckRequest } = this.state;
+  console.log(isCheckRequest)
 
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].phone === txtPhone && users[i].password === txtPassword) {
-        var user = {
-          id_user: users[i].id,
-          name: users[i].name,
-          phone: users[i].phone,
-          password: users[i].password,
-        };
-        this.setState({
-          isCheckLogin: true,
-        });
-        sessionStorage.setItem("user", JSON.stringify(user));
-      } 
-      else {
-        this.setState({
-          isCheckLogin: false,
-        });
-      }
-    }
-    console.log(txtHuyDon);
+    // for (let i = 0; i < users.length; i++) {
+    //   if (users[i].phone === txtPhone && users[i].password === txtPassword) {
+    //     var user = {
+    //       id_user: users[i].id,
+    //       name: users[i].name,
+    //       phone: users[i].phone,
+    //       password: users[i].password,
+    //     };
+    //     this.setState({
+    //       isCheckLogin: true,
+    //     });
+    //     sessionStorage.setItem("user", JSON.stringify(user));
+    //   } else {
+    //     this.setState({
+    //       isCheckLogin: false,
+    //     });
+    //   }
+    // }
+    var sessionUser = JSON.parse(sessionStorage.getItem("client"));
+
+    var name = sessionUser.name;
+    var id_bill = isCheckRequest.id;
+    var reasons=txtHuyDon;
+    var today = new Date();
+    socket.emit("customer-request-cancel-bill", { name,id_bill , today, reasons });
+    toast.success("Khách Hàng Đã Yêu Cầu Hủy Đơn Thành Công, WebSocket");
+   
     this.handleClose();
   };
   render() {
     var { bills_customer } = this.props;
     var { show, isCheckRequest } = this.state;
     var sessionUser = JSON.parse(sessionStorage.getItem("client"));
-    console.log(sessionUser);
+   
     var { isCheckSignOut } = this.state;
     if (isCheckSignOut) {
       // window.location.reload();
@@ -135,16 +149,7 @@ class index extends Component {
                   itemsPerPage={5}
                   hover
                   sorter
-                  pagination
-                  scopedSlots={{
-                    status: (item) => (
-                      <td>
-                        {/* <CBadge color={getBadge(item.status)}>
-                                                        {item.status}
-                                                    </CBadge> */}
-                      </td>
-                    ),
-                  }}
+                  pagination              
                   scopedSlots={{
                     total: (item) => <td>{formatter.format(item.total)}</td>,
                     status: (item) => (
@@ -175,18 +180,18 @@ class index extends Component {
                             variant="outline-secondary"
                             size="sm"
                             style={{ margin: 0 }}
-                            onClick={this.handleShow}
+                            onClick={() =>{this.handleShow(item)}}
                           >
                             <FontAwesomeIcon
                               icon={faTimes}
                               className="mr-2"
                               size="sm"
                             />
-                            {isCheckRequest ? (
+                            {/* {isCheckRequest ? (
                               <small> Chờ Xác Nhận</small>
-                            ) : (
+                            ) : ( */}
                               <small> Hủy Đơn</small>
-                            )}
+                            {/* )} */}
                           </Button>
                         ) : (
                           ""
@@ -208,7 +213,9 @@ class index extends Component {
             <Row>
               <Col>
                 {/* <h6>Tên tài khoản: {sessionUser && sessionUser.length > 0 ? sessionUser.name : ''}</h6> */}
-                <h6>Tên tài khoản: <span> {sessionUser && sessionUser.name}</span></h6>
+                <h6>
+                  Tên tài khoản: <span> {sessionUser && sessionUser.name}</span>
+                </h6>
               </Col>
             </Row>
             <Row>
@@ -234,14 +241,13 @@ class index extends Component {
             <Modal.Title>Yêu Cầu Hủy Đơn Hàng</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form onSubmit={this.onSubmitForm}>
+            <Form   onSubmit={this.onSubmitForm}>
               <FloatingLabel
                 controlId="floatingTextarea"
                 label="Xin Mời Nhập Lý Do"
                 className="mb-3"
                 required
                 name="txtHuyDon"
-              
               >
                 <Form.Control
                   as="textarea"
