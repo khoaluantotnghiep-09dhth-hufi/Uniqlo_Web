@@ -49,15 +49,13 @@ class addOrderProduct extends React.Component {
     if (NextProps && NextProps.order) {
       var { order } = NextProps;
       if (match.params.id_order_product) {
-        const result = order.find(
-          (o) => o.id === match.params.id_order_product
-        );
+       
 
-        // this.setState({
-        //   idItem: result.id,
-        //   txtDate: result.date_order,
-        //   txtHouse: result.name_warehouse,
-        // });
+        this.setState({
+          idItem: order.id,
+          txtDate: order.date_order,
+          txtHouse: order.name_warehouse,
+        });
       }
     }
   }
