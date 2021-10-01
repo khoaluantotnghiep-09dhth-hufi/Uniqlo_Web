@@ -30,8 +30,18 @@ const fields =
         "Thao Tác",
     ]
 class ListNews extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state=({
+            data: [],
+        })
+    }
     componentDidMount() {
+        var { news } = this.props;
         this.props.fetchNews();
+        this.setState({
+            data:news
+        })
 
     }
     onDeleteNews = (item) => {
@@ -43,8 +53,11 @@ class ListNews extends React.Component {
     render() {
 
         var { news } = this.props;
-        var data = news.map((item, index) => {
-            return item;
+     
+        console.log("Index: "+news);
+        
+        var dataNews = news.map((item, index) => {
+            return {...item,index};
         });
         return (
             <>
@@ -61,7 +74,7 @@ class ListNews extends React.Component {
                             </CCardHeader>
                             <CCardBody>
                                 <CDataTable
-                                    items={data}
+                                    items={dataNews}
                                     fields={fields}
                                     itemsPerPage={8}
                                     pagination

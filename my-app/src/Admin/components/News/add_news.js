@@ -85,7 +85,7 @@ class AddNews extends React.Component {
     var { match } = this.props;
     if (NextProps && NextProps.news) {
       var { news } = NextProps;
-      console.log(news)
+    
       if (match.params.id_news) {
  
         this.setState({
@@ -152,11 +152,11 @@ class AddNews extends React.Component {
     };
 
     if (match.params.id_news) {
-      this.props.onUpdateItemNews(newsUpdate);
+      // this.props.onUpdateItemNews(newsUpdate);
       history.goBack();
     }
     else {
-      this.props.onAddItemNews(news);
+      // this.props.onAddItemNews(news);
       history.goBack();
     }
   };
