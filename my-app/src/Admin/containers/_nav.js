@@ -15,6 +15,7 @@ import {
   faWarehouse,
   faPaperPlane,
   faFileImport,
+  faBell,
   faTshirt,
   faUserCog,
   faBars,
@@ -39,6 +40,13 @@ const _nav = [
   {
     _tag: 'CSidebarNavTitle',
     _children: ['Hệ Thống']
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Thông Báo',
+    to: '/admin/notifications',
+    icon: <FontAwesomeIcon icon={faBell} className="mr-2" />,
+
   },
   {
     _tag: 'CSidebarNavDropdown',
