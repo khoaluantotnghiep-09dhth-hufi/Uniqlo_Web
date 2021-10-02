@@ -34,6 +34,14 @@ class index extends React.Component {
       errorPhone: target.validationMessage,
     });
   };
+  // onClickButton = (event) =>{
+  //   event.preventDefault();
+  //     txtName === "",
+  //    txtAddress === "", 
+  //    txtPhone === "", 
+  //    txtEmail === "", 
+  //    txtPassword === "",
+  // };
   onSubmitForm = (event) => {
     event.preventDefault();
     var{
@@ -47,7 +55,7 @@ class index extends React.Component {
     
     var customer = {
       id: uniqid("customer-"),
-      nameCustomer: txtName,
+      name: txtName,
       address: txtAddress,
       phone: txtPhone,
       image: txtImage,
@@ -132,7 +140,7 @@ class index extends React.Component {
               variant="outline-secondary"
               type="submit"
               className="button--width"
-              // onClick={this.onSubmitForm}
+              onClick={this.onClickButton}
             >
               Đăng Ký
             </Button>
