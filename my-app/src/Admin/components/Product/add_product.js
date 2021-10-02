@@ -107,7 +107,6 @@ class addProduct extends React.Component {
         if (file) {
             ConvertIMG.getBase64(file).then(res => {
                 let objectURL = URL.createObjectURL(file);
-                console.log(res);
                 this.setState({
                     ImgPrivew: objectURL,
                     txtImage: res
