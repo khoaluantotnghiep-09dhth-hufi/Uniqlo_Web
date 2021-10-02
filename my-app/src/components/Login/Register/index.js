@@ -34,14 +34,13 @@ class index extends React.Component {
       errorPhone: target.validationMessage,
     });
   };
-  // onClickButton = (event) =>{
-  //   event.preventDefault();
-  //     txtName === "",
-  //    txtAddress === "", 
-  //    txtPhone === "", 
-  //    txtEmail === "", 
-  //    txtPassword === "",
-  // };
+  onField = () =>{
+    this.refs.fieldName.value="";
+    this.refs.fieldAddress.value="";
+    this.refs.fieldPhone.value="";
+    this.refs.fieldEmail.value="";
+    this.refs.fieldPass.value="";
+  };
   onSubmitForm = (event) => {
     event.preventDefault();
     var{
@@ -67,6 +66,7 @@ class index extends React.Component {
     }
     else{
       this.props.onAddItemCustomer(customer);
+      this.onField();
     }
   };
   
@@ -85,6 +85,7 @@ class index extends React.Component {
             name ="txtName"
             id="txtName"
             pattern=".{3,}"
+            ref="fieldName"
             onChange={this.onChange} />
           </Form.Group>         
           <Form.Group className="mb-3" controlId="formBasicObject">
@@ -95,6 +96,7 @@ class index extends React.Component {
               placeholder="&#xf2bb; Địa chỉ..."
               name="txtAddress"
               id="txtAddress"
+              ref="fieldAddress"
               onChange={this.onChange} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicObject">
@@ -108,6 +110,7 @@ class index extends React.Component {
               maxlength="11" 
               minlength="10" 
               pattern="^[0-9]*$" 
+              ref="fieldPhone"
               onChange={this.onChange} />
             <div className="invalid-feedback d-block">
               {this.state.errorPhone}
@@ -121,6 +124,7 @@ class index extends React.Component {
               placeholder="&#xf0e0; Email"
               name="txtEmail"
               id="txtEmail"
+              ref="fieldEmail"
               onChange={this.onChange} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicObject">
@@ -132,6 +136,7 @@ class index extends React.Component {
               name="txtPassword"
               id="txtPassword"
               pattern=".{6,}"
+              ref="fieldPass"
               //pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
               onChange={this.onChange} />
           </Form.Group>
@@ -140,7 +145,6 @@ class index extends React.Component {
               variant="outline-secondary"
               type="submit"
               className="button--width"
-              onClick={this.onClickButton}
             >
               Đăng Ký
             </Button>

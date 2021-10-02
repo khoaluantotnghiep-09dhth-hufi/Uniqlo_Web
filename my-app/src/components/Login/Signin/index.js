@@ -3,7 +3,7 @@ import { Component } from "react";
 import * as actions from "./../../../actions/index";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
-
+import { toast } from "react-toastify";
 class index extends Component {
   constructor(props) {
     super(props);
@@ -37,12 +37,14 @@ class index extends Component {
           isCheckLogin: true,
         });
         sessionStorage.setItem("client", JSON.stringify(user));
-      } else {
+      } else {       
         this.setState({
           isCheckLogin: false,
         });
+          toast.error(<div>Đăng nhập thất bại.<br /> Bạn cần nhập đúng thông tin!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
       }
     }
+    
   };
   onToggleForm = () => {
     this.props.onToggleForm();
