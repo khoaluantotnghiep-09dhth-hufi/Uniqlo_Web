@@ -82,6 +82,7 @@ class ListProducts extends React.Component {
                                     itemsPerPage={5}
                                     pagination
                                     sorter
+                                    columnFilter
                                     scopedSlots={{
                                         'Thao Tác':
                                             (item) => (
