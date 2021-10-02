@@ -33,7 +33,7 @@ class addOrderProduct extends React.Component {
     var { match } = this.props;
 
     this.props.onEditItemOrder(match.params.id_order_product);
-    
+
   }
   getCurrentDate(separator = '/') {
 
