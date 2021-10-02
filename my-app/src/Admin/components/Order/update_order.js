@@ -35,8 +35,6 @@ class updateOrder extends React.Component {
     if (NextProps && NextProps.bill) {
       var { bill } = NextProps;
       if (match.params.id_order) {
-  
-
         this.setState({
           idItem: bill.id,
           txtDate: bill.date,
@@ -67,18 +65,30 @@ class updateOrder extends React.Component {
   };
   onSubmitForm = (event) => {
     var { match, bill } = this.props;
-    
+
     event.preventDefault();
     var { history } = this.props;
     var { idItem, txtDate, txtConfirm } = this.state;
-    let dateNow = new Date().toISOString().slice(0, 10);
-
-    if (idItem && txtDate >= dateNow) {
-      var billUpdate = {
-        id: idItem,
-        delivery_date: txtDate,
-        status: txtConfirm,
-      };
+    // let dateNow = new Date().toISOString().slice(0, 10);
+    var today = new Date();
+    var date =
+      today.getMonth() + 1 + "-" + today.getDate() + "-" + today.getFullYear();
+    var sessionUser = JSON.parse(sessionStorage.getItem("user"));
+    var convertDate =
+    today.getFullYear() +
+    "-" +
+    (today.getMonth() + 1) +
+    "-" +
+    today.getDate();
+  var billUpdate = {
+    id: match.params.id_order,
+    id_staff: sessionUser.id_user,
+    delivery_date: convertDate,
+    status: txtConfirm,
+  };
+  console.log(billUpdate);
+    if (match.params.id_order && txtDate >= date) {
+     
       this.props.onUpdateItemBill(billUpdate);
       history.goBack();
     } else {
