@@ -121,6 +121,9 @@ class ListProducts extends React.Component {
                                     pagination
                                     sorter
                                     columnFilter
+                                    tableFilter
+                                    footer
+                                    itemsPerPageSelect
                                     scopedSlots={{
                                         'Thao Tác':
                                             (item) => (
