@@ -56,6 +56,7 @@ class addStaff extends React.Component {
     var { staff } = this.props;
     if (match.params.id_staff) {
       const result = staff.find((o) => o.id === match.params.id_staff);
+      console.log(result)
       this.setState({
         txtNameStaff: result.name,
         txtEmail: result.email,
@@ -71,14 +72,14 @@ class addStaff extends React.Component {
     if (NextProps && NextProps.staff) {
       var { staff } = NextProps;
       if (match.params.id_staff) {
-        
+        const result = staff.find((o) => o.id === match.params.id_staff);
         this.setState({
-          txtNameStaff: staff.name,
-          txtEmail: staff.email,
-          txtPhone: staff.phone,
-          txtAddress: staff.address,
-          txtImage: staff.image,
-          ImgPrivew: staff.image,
+          txtNameStaff: result.name,
+          txtEmail: result.email,
+          txtPhone: result.phone,
+          txtAddress: result.address,
+          txtImage: result.image,
+          ImgPrivew: result.image,
         });
       }
     }
@@ -120,7 +121,7 @@ class addStaff extends React.Component {
     return isValid;
   }
   onSubmitForm = (event) => {
-    console.log("event nè", event);
+ 
     let isValid = this.checkValidate();
     if (isValid === false) return;
     var { match } = this.props;
@@ -150,6 +151,7 @@ class addStaff extends React.Component {
       address: txtAddress,
       image: txtImage,
     };
+    console.log(staffUpdate)
     if (match.params.id_staff) {
       this.props.onUpdateItemStaff(staffUpdate);
       history.goBack();
