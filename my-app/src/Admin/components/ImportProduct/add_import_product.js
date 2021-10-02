@@ -21,6 +21,7 @@ class AddImportProduct extends React.Component {
             txtDateImport:this.getCurrentDate(),
             id_order: "",
             txtTotalImport: "",
+            status:"",
             orderArr: [],
         };
     }
@@ -53,6 +54,7 @@ class AddImportProduct extends React.Component {
                     idItem: result.id,
                     txtName: result.name,
                     id_sector: result.id_sector,
+                    status: result.status
                 });
             }
         }

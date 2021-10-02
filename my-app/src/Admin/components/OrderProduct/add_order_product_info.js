@@ -130,12 +130,6 @@ class addProduct extends React.Component {
                 <>
                     <Container fluid>
                         <CRow>
-                            <Link to="/admin/manage/order-product">
-                                <Button type="button" className="btn btn-primary" size="sm">
-                                    <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />
-                                    Trở về
-                                </Button>
-                            </Link>
                             <Col sm="12">
                                 <Form action="" method="post" onSubmit={() => this.onSubmitForm()}>
                                     <Row sm="12">

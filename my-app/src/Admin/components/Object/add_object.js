@@ -26,14 +26,7 @@ class addObject extends React.Component {
       });
     }
   }
-  // componentWillReceiveProps(NextProps) {
-  //   var { match } = this.props;
-  //   if (NextProps && NextProps.object_menu) {
-  //     var { object_menu } = NextProps;
-
-  //     console.log("state nè", object_menu)
-  //   }
-  // }
+ 
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
     if (NextProps && NextProps.object_menu) {
