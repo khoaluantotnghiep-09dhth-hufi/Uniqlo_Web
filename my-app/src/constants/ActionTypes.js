@@ -145,6 +145,7 @@ export const EDIT_NEWS = 'EDIT_NEWS ';
 //Get customer
 export const FETCH_CUSTOMER = 'FETCH_CUSTOMER';
 export const ADD_CUSTOMER = 'ADD_CUSTOMER';
+export const ADD_CUSTOMER_CLIENT = 'ADD_CUSTOMER_CLIENT';
 export const UPDATE_CUSTOMER = 'UPDATE_CUSTOMER';
 export const DELETE_CUSTOMER = 'DELETE_CUSTOMER';
 export const EDIT_CUSTOMER = 'EDIT_CUSTOMER ';

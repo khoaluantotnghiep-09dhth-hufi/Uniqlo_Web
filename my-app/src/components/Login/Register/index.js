@@ -162,7 +162,7 @@ var mapStateToProps = (state) => {
 var mapDispatchToProps = (dispatch, props) => {
   return {
     onAddItemCustomer: (customer) => {
-      dispatch(actions.onAddCustomerResquest(customer));
+      dispatch(actions.onAddCustomerClientResquest(customer));
     },
   };
 };
