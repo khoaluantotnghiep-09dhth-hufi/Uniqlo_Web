@@ -93,10 +93,10 @@ class index extends Component {
               <Form onSubmit={this.onHandleSubmitLogin(staff)} >
                 <Form.Group className="mb-3" >
                   <Form.Control
-                    className="fas fa-phone-alt login-input"
-                    type="text"
-                    placeholder="&#xf879; Số Điện Thoại"
-                    ref="memberPhone"
+                    className="fas fa-envelope"
+                    type="email"
+                    placeholder="&#xf0e0; Email"
+                    ref="memberEmail"
                     onChange={this.onHandleChange}
                     name="txtEmail"
                     minlength="10"

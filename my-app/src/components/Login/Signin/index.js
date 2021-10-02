@@ -13,8 +13,6 @@ class index extends Component {
       txtHo: "",
       txtTen: "",
       txtEmail: "",
-      txtSDT: "",
-      txtMatKhau: "",
       isCheckLogin: false,
     };
   }
@@ -24,11 +22,11 @@ class index extends Component {
 
   onHandleSubmitLogin = (users) => (event) => {
     event.preventDefault(); //Xoá dòng này sẽ tự chuyển trang chứ ko chuyển trang bằng tay
-    var { txtSDT, txtPassword, items } = this.state;
+    var { txtPhone, txtPassword, items } = this.state;
 
     console.log("data user",users)
     for (let i = 0; i < users.length; i++) {
-      if (users[i].phone === txtSDT && users[i].password === txtPassword) {
+      if (users[i].phone === txtPhone && users[i].password === txtPassword) {
         var user = {
           id_user: users[i].id,
           name: users[i].name,
@@ -41,7 +39,7 @@ class index extends Component {
         sessionStorage.setItem("client", JSON.stringify(user));
       } else {
         this.setState({
-          isCheckLogin: true,
+          isCheckLogin: false,
         });
       }
     }
@@ -81,7 +79,7 @@ class index extends Component {
               placeholder="&#xf879; Số Điện Thoại"
               ref="memberPhone"
               onChange={this.onHandleChange}
-              name="txtSDT"
+              name="txtPhone"
               maxlength="11"
               minlength="10"
               pattern="^[0-9]*$"
