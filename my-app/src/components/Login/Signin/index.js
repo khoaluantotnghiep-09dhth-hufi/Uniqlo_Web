@@ -40,11 +40,18 @@ class index extends Component {
       } else {       
         this.setState({
           isCheckLogin: false,
-        });
-          toast.error(<div>Đăng nhập thất bại.<br /> Bạn cần nhập đúng thông tin!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+        });       
       }
     }
-    
+    // if(!isCheckLogin){
+    //   toast.error(<div>Đăng nhập thất bại.<br /> Bạn cần nhập đúng thông tin!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+    // }
+  };
+  onClickButton=()=>{
+    var { isCheckLogin } = this.state;
+    if(!isCheckLogin){
+      toast.error(<div>Đăng nhập thất bại.<br /> Bạn cần nhập đúng thông tin!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+    }
   };
   onToggleForm = () => {
     this.props.onToggleForm();
@@ -109,6 +116,7 @@ class index extends Component {
               variant="outline-secondary"
               type="submit"
               className="button--width"
+              onClick = {this.onClickButton}
             >
               Đăng Nhập
             </Button>
