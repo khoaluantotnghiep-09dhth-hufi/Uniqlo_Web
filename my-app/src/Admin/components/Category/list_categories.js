@@ -19,11 +19,30 @@ import { Link } from "react-router-dom";
 
 
 import * as actions from "./../../../actions/index";
-const fields = ['STT',
-    { key: 'id', label: 'Mã Danh Mục' },
+const fields = [
+    {
+        key: 'STT',
+        label: 'STT',
+        _style: { width: '1%' },
+        sorter: false,
+        filter: false
+    },
+    {
+        key: 'id',
+        label: 'Mã',
+        _style: { width: '15%' },
+        sorter: false,
+        filter: false
+    },
     { key: 'name', label: 'Tên Danh Mục' },
     { key: 'nameSector', label: 'Loại' },
-    'Thao Tác',
+    {
+        key: 'Thao Tác',
+        label: 'Thao Tác',
+        _style: { width: '25%' },
+        sorter: false,
+        filter: false
+    },
 ]
 
 class ListCategory extends React.Component {
@@ -59,7 +78,10 @@ class ListCategory extends React.Component {
                                     fields={fields}
                                     itemsPerPage={5}
                                     sorter
+                                    columnFilter
+                                    itemsPerPageSelect
                                     pagination
+                                    footer
                                     scopedSlots={{
                                         'Thao Tác':
                                             (item) => (

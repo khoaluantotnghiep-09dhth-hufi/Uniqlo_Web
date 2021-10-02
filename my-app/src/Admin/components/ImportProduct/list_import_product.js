@@ -27,13 +27,31 @@ const getBadge = status => {
   }
 }
 const fields = [
-  'STT',
-  { key: 'id', label: 'Mã Phiếu Nhập' },
-  { key: 'id_order', label: 'Mã Phiếu Đặt' },
+  {
+    key: 'STT',
+    label: 'STT',
+    sorter: false,
+    filter: false
+  },
+  {
+    key: 'id',
+    label: 'Mã Phiếu Nhập',
+    sorter: false,
+    filter: false
+  },
+  {
+    key: 'id_order', label: 'Mã Phiếu Đặt',
+    sorter: false,
+    filter: false
+  },
   { key: 'date_import', label: 'Ngày Nhập' },
   { key: 'name_warehouse', label: 'Kho Nhập' },
-  // { key: 'status', label: 'Trạng Thái' },
-  'Thao Tác',
+  {
+    key: 'Thao Tác',
+    label: 'Thao Tác',
+    sorter: false,
+    filter: false
+  },
 ]
 
 class ListImportProduct extends React.Component {
@@ -69,6 +87,9 @@ class ListImportProduct extends React.Component {
                   fields={fields}
                   itemsPerPage={8}
                   pagination
+                  sorter
+                  columnFilter
+                  itemsPerPageSelect
                   scopedSlots={{
                     'Thao Tác':
                       (item) => (

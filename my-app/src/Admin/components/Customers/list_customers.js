@@ -33,16 +33,37 @@ const getBadgeGender = (status) => {
   }
 };
 const fields = [
-  "STT",
-  { key: "id", label: "Mã Khách Hàng" },
-  { key: "name", label: "Tên" },
-  { key: "address", label: "Địa Chỉ" },
-  { key: "phone", label: "SĐT" },
+  {
+    key: 'STT',
+    label: 'STT',
+    _style: { width: '1%' },
+    sorter: false,
+    filter: false
+  },
+  {
+    key: 'name',
+    label: 'Tên',
+    _style: { width: '15%' },
+  },
+  { key: "address", label: "Địa Chỉ", filter: false },
+  { key: "phone", label: "SĐT", _style: { width: '8%' } },
   { key: "email", label: "Gmail" },
-  { key: "gender", label: "Giới Tính" },
-  { key: "image", label: "Ảnh" },
+  {
+    key: "gender",
+    label: "Giới Tính",
+    _style: { width: '1%' },
+    sorter: false,
+    filter: false
+  },
+  { key: "image", label: "Ảnh", filter: false, sorter: false, },
 
-  "Thao Tác",
+  {
+    key: 'Thao Tác',
+    label: 'Thao Tác',
+    _style: { width: '1%' },
+    sorter: false,
+    filter: false
+  },
 ];
 
 class ListCustomers extends React.Component {
@@ -79,8 +100,10 @@ class ListCustomers extends React.Component {
                   fields={fields}
                   itemsPerPage={5}
                   sorter
+                  columnFilter
+                  itemsPerPageSelect
                   pagination
-                 
+                  footer
                   scopedSlots={{
                     "Thao Tác":
                       (item) => (

@@ -23,14 +23,36 @@ import { toast } from 'react-toastify';
 import { connect } from "react-redux";
 import uniqid from 'uniqid';
 const fields = [
-    'STT',
-    { key: 'id', label: 'Mã' },
-    { key: 'nameProduct', label: 'Tên' },
-    { key: 'nameColor', label: 'Màu' },
-    { key: 'nameSize', label: 'Kích Cỡ' },
-    { key: 'quantity', label: 'Số Lượng' },
-    { key: 'image', label: 'Ảnh' },
-    'Thao Tác',
+    {
+        key: 'STT',
+        label: 'STT',
+        _style: { width: '1%' },
+        sorter: false,
+        filter: false
+    },
+    {
+        key: 'id',
+        label: 'Mã',
+        _style: { width: '15%' },
+        sorter: false,
+        filter: false
+    },
+    {
+        key: 'nameProduct',
+        label: 'Tên',
+        _style: { width: '30%' },
+    },
+    { key: 'nameColor', label: 'Màu', _style: { width: '1%' }, },
+    { key: 'nameSize', label: 'Kích Cỡ', _style: { width: '1%' }, },
+    { key: 'quantity', label: 'Số Lượng', _style: { width: '1%' }, },
+    { key: 'image', label: 'Ảnh', filter: false, filter: false },
+    {
+        key: 'Thao Tác',
+        label: 'Thao Tác',
+        _style: { width: '1%' },
+        sorter: false,
+        filter: false
+    },
 ]
 //Thư viện img 
 let isLoadingExternally = false;
@@ -197,8 +219,11 @@ class addProduct extends React.Component {
                                         <CDataTable
                                             items={dataOrderInfo}
                                             fields={fields}
-                                            itemsPerPage={8}
+                                            itemsPerPage={5}
                                             pagination
+                                            sorter
+                                            columnFilter
+                                            itemsPerPageSelect
                                             scopedSlots={{
                                                 'Thao Tác':
                                                     (item) => (
@@ -243,7 +268,7 @@ class addProduct extends React.Component {
                                                 'image':
                                                     (item, index) => (
                                                         <td>
-                                                            <Image style={{ width: "200px", height: "200px" }} src={item.image} thumbnail />
+                                                            <Image style={{ width: "300px", height: "300px" }} src={item.image} thumbnail />
                                                         </td>
                                                     ),
                                                 // "nameColor": (item) => (
@@ -289,6 +314,9 @@ class addProduct extends React.Component {
                                             fields={fields}
                                             itemsPerPage={8}
                                             pagination
+                                            sorter
+                                            columnFilter
+                                            itemsPerPageSelect
                                             scopedSlots={{
                                                 'Thao Tác':
                                                     (item) => (

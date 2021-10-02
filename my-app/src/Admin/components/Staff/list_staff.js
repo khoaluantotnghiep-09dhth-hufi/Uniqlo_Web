@@ -15,16 +15,42 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Image } from 'react-bootstrap';
 const fields = [
-  "STT",
-  { key: "id", label: "Mã Nhân Viên" },
-  { key: "name", label: "Tên" },
-  { key: "email", label: "Gmail" },
-  { key: "phone", label: "SĐT" },
-  { key: "address", label: "Địa Chỉ" },
-  { key: "image", label: "Ảnh" },
+  {
+    key: 'STT',
+    label: 'STT',
+    _style: { width: '1%' },
+    sorter: false,
+    filter: false
+  },
+  {
+    key: 'id',
+    label: 'Mã',
+    _style: { width: '1%' },
+    sorter: false,
+    filter: false
+  },
+  {
+    key: 'name',
+    label: 'Tên',
+    _style: { width: '15%' },
+  },
+  {
+    key: "email",
+    label: "Gmail",
+    _style: { width: '15%' }
+  },
+  { key: "phone", label: "SĐT", _style: { width: '8%' } },
+  { key: "address", label: "Địa Chỉ", filter: false },
+  { key: "image", label: "Ảnh", filter: false, sorter: false, },
 
   { key: "role", label: "Chức Vụ" },
-  "Hành Động",
+  {
+    key: 'Thao Tác',
+    label: 'Thao Tác',
+    _style: { width: '1%' },
+    sorter: false,
+    filter: false
+  },
 ];
 class ListStaffs extends React.Component {
   componentDidMount() {
@@ -59,9 +85,11 @@ class ListStaffs extends React.Component {
                   fields={fields}
                   itemsPerPage={5}
                   sorter
+                  columnFilter
+                  itemsPerPageSelect
                   pagination
                   scopedSlots={{
-                    "Hành Động": (item) => (
+                    "Thao Tác": (item) => (
                       <td>
                         <Link to={`/admin/manage/staff/${item.id}/edit`}>
                           <CButton type="button" className="btn btn-primary">

@@ -26,7 +26,11 @@ var customer= (state = initialState, action) => {
       return [...state];
     //Thêm Khách Hàng
     case types.ADD_CUSTOMER:
-     
+      console.log(state)
+      state.push(customer);
+      return [...state];
+    //Thêm Khách Hàng Client
+    case types.ADD_CUSTOMER_CLIENT:
       console.log(state)
       state.push(customer);
       return [...state];

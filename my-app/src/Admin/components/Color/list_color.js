@@ -19,10 +19,26 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 const fields = [
-  "STT",
-  { key: 'id', label: 'Mã' },
+  {
+    key: 'STT',
+    label: 'STT',
+    sorter: false,
+    filter: false
+  },
+  {
+    key: 'id',
+    label: 'Mã',
+    sorter: false,
+    filter: false
+  },
   { key: 'name', label: 'Tên Màu' },
-  'Hành Động'
+  {
+    key: 'Thao Tác',
+    label: 'Thao Tác',
+    _style: { width: '25%' },
+    sorter: false,
+    filter: false
+  },
 ]
 
 class ListColor extends React.Component {
@@ -58,10 +74,11 @@ class ListColor extends React.Component {
                   fields={fields}
                   itemsPerPage={5}
                   sorter
+                  columnFilter
+                  itemsPerPageSelect
                   pagination
-                
                   scopedSlots={{
-                    'Hành Động':
+                    'Thao Tác':
                       (item) => (
                         <td>
                           <Link to={`/admin/manage/color/${item.id}/edit`}>

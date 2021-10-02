@@ -28,13 +28,30 @@ const getBadge = status => {
     }
 }
 const fields = [
-    'STT',
-    { key: 'id', label: 'Mã' },
+    {
+        key: 'STT',
+        label: 'STT',
+        _style: { width: '1%' },
+        sorter: false,
+        filter: false
+    },
+    {
+        key: 'id',
+        label: 'Mã',
+        _style: { width: '1%' },
+        sorter: false,
+        filter: false
+    },
     { key: 'date_order', label: 'Ngày Đặt' },
     { key: 'name_warehouse', label: 'Kho' },
-    { key: 'status', label: 'Trạng Thái' },
-    'Thao Tác',
-    ''
+    { key: 'status', label: 'Trạng Thái', _style: { width: '20%' }, },
+    {
+        key: 'Thao Tác',
+        label: 'Thao Tác',
+        _style: { width: '20%' },
+        sorter: false,
+        filter: false
+    },
 ]
 
 class ListOrderProducts extends React.Component {
@@ -73,6 +90,9 @@ class ListOrderProducts extends React.Component {
                                     fields={fields}
                                     itemsPerPage={8}
                                     pagination
+                                    sorter
+                                    columnFilter
+                                    itemsPerPageSelect
                                     scopedSlots={{
                                         'Thao Tác':
                                             (item) => (
