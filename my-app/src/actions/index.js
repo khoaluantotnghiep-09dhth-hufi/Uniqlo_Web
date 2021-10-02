@@ -925,15 +925,15 @@ export const onAddCustomerResquest = (customer) => {
 };
 
 //thêm khách hàng client
-export const onAddCustomerClient = (customer_client) => {
+export const onAddCustomerClient = (customer) => {
   return {
     type: types.ADD_CUSTOMER_CLIENT,
-    customer_client,
+    customer,
   };
 };
-export const onAddCustomerClientResquest = (customer_client) => {
+export const onAddCustomerClientResquest = (customer) => {
   return (dispatch) => {
-    return callApi("customers", "POST", customer_client).then((response) => {
+    return callApi("customers", "POST", customer).then((response) => {
       if (response === undefined) {
         toast.error("Thêm thất bại, vui lòng thử lại !");
       }

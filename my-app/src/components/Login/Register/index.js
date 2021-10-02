@@ -61,7 +61,7 @@ class index extends React.Component {
       password: txtPassword,
       email: txtEmail,
     };
-    if(txtName === "" || txtAddress === "" || txtPhone === "" || txtEmail === "" || txtPassword === ""){
+    if(txtName === "" && txtAddress === "" && txtPhone === "" && txtEmail === "" && txtPassword === ""){
       toast.error(<div>Đăng ký thất bại.<br /> Bạn cần nhập đủ thông tin!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
     }
     else{
