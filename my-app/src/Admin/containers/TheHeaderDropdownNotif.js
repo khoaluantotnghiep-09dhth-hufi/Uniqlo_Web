@@ -40,7 +40,7 @@ class TheHeaderDropdownNotif extends Component {
       };
       // var newVal=JSON.stringify(nameNotifications)
       var newVal = {
-       content: message,
+        content: message,
         time,
       };
       console.log("Dang o Socket lay data: " + newVal);
@@ -51,11 +51,11 @@ class TheHeaderDropdownNotif extends Component {
       // });
     });
 
-    socket.on("customer-request-cancel-bill-notifications",data=>{
-      const message="Có "+ "Khách Hàng "+ data.name+" Hủy Đơn "+data.id_bill +" Lý Do "+data.reasons+" Nè";
+    socket.on("customer-request-cancel-bill-notifications", data => {
+      const message = "Có " + "Khách Hàng " + data.name + " Hủy Đơn " + data.id_bill + " Lý Do " + data.reasons + " Nè";
       const time = data.today;
       var newVal = {
-       content: message,
+        content: message,
         time,
       };
       console.log("Dang o Socket lay data: " + newVal);
@@ -81,6 +81,7 @@ class TheHeaderDropdownNotif extends Component {
           <CDropdownItem>
             <CIcon name="cil-user-follow" className="mr-2 text-success" />
             <span>{item.content} </span>
+
           </CDropdownItem>
         );
       })
@@ -100,6 +101,7 @@ class TheHeaderDropdownNotif extends Component {
     return (
       <CDropdown inNav className="c-header-nav-item mx-2">
         <CDropdownToggle className="c-header-nav-link" caret={false}>
+          
           <CIcon name="cil-bell" className="mr-4" />
           {header_notifications ? (
             <CBadge
@@ -111,10 +113,13 @@ class TheHeaderDropdownNotif extends Component {
               <span id="number-notifications">
                 {header_notifications.length}{" "}
               </span>
+
             </CBadge>
+
           ) : (
             ""
           )}
+
         </CDropdownToggle>
         <CDropdownMenu placement="bottom-end" className="pt-0">
           <CDropdownItem header tag="div" className="text-center" color="light">
@@ -197,7 +202,7 @@ var mapStateToProps = (state) => {
 };
 var mapDispatchToProps = (dispatch, props) => {
   return {
-    
+
     onBillCancel: (bills) => {
       dispatch(actions.onAddNotificationCancelResquest(bills));
     },

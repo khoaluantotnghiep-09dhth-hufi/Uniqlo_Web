@@ -40,13 +40,25 @@ var staff = (state = initialState, action) => {
       }
 
       return [...state];
-      //Cập Nhật Vị Trí Nhân Viên
+    //Cập Nhật Vị Trí Nhân Viên
     case types.UPDATE_POSITION_BY_STAFF:
       index = findIndex(state, action.staff.id);
       if (index !== -1) {
         state[index] = staff;
       }
+      return [...state];
 
+    case types.UPDATE_STAFFPROFILE:
+      index = findIndex(state, action.staff.id);
+      if (index !== -1) {
+        state[index] = staff;
+      }
+      return [...state];
+      case types.UPDATE_STAFF_PASSWORD:
+      index = findIndex(state, action.staff.id);
+      if (index !== -1) {
+        state[index] = staff;
+      }
       return [...state];
     //Lấy Nhân Viên Để Eddit
     case types.EDIT_STAFF:

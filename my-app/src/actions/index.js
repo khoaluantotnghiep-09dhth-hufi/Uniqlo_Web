@@ -375,6 +375,46 @@ export const onUpdateStaffsResquest = (staff) => {
     });
   };
 };
+export const onUpdateStaffsProfile = (staff) => {
+  return {
+    type: types.UPDATE_STAFFPROFILE,
+    staff,
+  };
+};
+export const onUpdateStaffsProfileResquest = (staff) => {
+  return (dispatch) => {
+    return callApi(`staffs-profile/${staff.id}`, "PUT", staff).then((response) => {
+      if (response === undefined) {
+        toast.error("Cập nhật thất bại, vui lòng thử lại !");
+      }
+      else {
+        toast.success("Cập nhật thành công !");
+        dispatch(onUpdateStaffsProfile(response.data));
+      }
+    });
+  };
+};
+
+export const onUpdateStaffsPassword = (staff) => {
+  return {
+    type: types.UPDATE_STAFF_PASSWORD,
+    staff,
+  };
+};
+export const onUpdateStaffsPasswordResquest = (staff) => {
+  return (dispatch) => {
+    return callApi(`staffs-password/${staff.id}`, "PUT", staff).then((response) => {
+      if (response === undefined) {
+        toast.error("Đổi thất bại, vui lòng thử lại !");
+      }
+      else {
+        toast.success("Đổi thành công !");
+        dispatch(onUpdateStaffsPassword(response.data));
+      }
+    });
+  };
+};
+
 //Cập Nhật vị trí của staff
 export const onUpdatePositionStaffs = (staff) => {
   return {
@@ -614,7 +654,12 @@ export const fetchBills = (bill) => {
 export const fetchBillResquest = () => {
   return (dispatch) => {
     return callApi("bills", "GET", null).then((response) => {
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
       dispatch(fetchBills(response.data));
+      }
     });
   };
 };

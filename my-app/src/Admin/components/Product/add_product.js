@@ -82,7 +82,7 @@ class addProduct extends React.Component {
         if (NextProps && NextProps.product) {
             var { products } = NextProps;
             if (match.params.id_product) {
-               
+
                 this.setState({
                     txtName: products.name,
                     txtPrice: products.price,
@@ -121,7 +121,7 @@ class addProduct extends React.Component {
         })
     }
     checkValidate = () => {
-        let check = ['txtName', 'txtPrice', 'txtDescription', 'txtImage','id_category','id_promotion'];
+        let check = ['txtName', 'txtPrice', 'txtDescription', 'txtImage', 'id_category', 'id_promotion'];
         let isValid = true;
         if (!this.state[check[0]]) {
             isValid = false;

@@ -50,8 +50,9 @@ const TheHeader = () => {
 
       </CHeaderNav>
 
-      <CHeaderNav className="px-3">
+      <CHeaderNav className="px-2">
         <TheHeaderDropdownNoti />
+        <div className="mr-5"></div>
         <TheHeaderDropdown />
       </CHeaderNav>
 

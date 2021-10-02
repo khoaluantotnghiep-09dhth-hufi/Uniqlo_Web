@@ -12,9 +12,19 @@ import {
     Col,
 } from "reactstrap";
 import UserHeader from '../../containers/UserHeader';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ConvertIMG from '../../utils/getBase64';
+import Lightbox from 'react-image-lightbox';
+import * as actions from "./../../../actions/index";
+import { connect } from "react-redux";
+import {
+    faPlus,
+    faUpload,
+    faArrowLeft,
+} from "@fortawesome/free-solid-svg-icons";
 var sessionUser = JSON.parse(sessionStorage.getItem("user"));
 
-export default class AddAccountAdmin extends React.Component {
+class AddAccountAdmin extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -27,11 +37,40 @@ export default class AddAccountAdmin extends React.Component {
             email: sessionUser.email,
             place_of_birth: sessionUser.place_of_birth,
             cmnn_cccc: sessionUser.cmnn_cccc,
+            ImgPrivew: sessionUser.image,
             isOpen: false,
         }
     }
-    onHandleSubmitLogin = () => {
-
+    onHandleSubmitLogin = (e) => {
+        e.preventDefault();
+        var { history } = this.props;
+        var { name, phone, gender, image, address, email, place_of_birth, cmnn_cccc, ImgPrivew } = this.state;
+        var profile = {
+            id: sessionUser.id_user,
+            name: name,
+            phone: phone,
+            gender: gender,
+            image: image,
+            address: address,
+            place_of_birth: place_of_birth,
+            cmnn_cccc: cmnn_cccc,
+        }
+        this.props.onUpdateItemStaff(profile);
+        history.goBack();
+    }
+    onChangeImage = (e) => {
+        let data = e.target.files;
+        let file = data[0];
+        if (file) {
+            ConvertIMG.getBase64(file).then(res => {
+                let objectURL = URL.createObjectURL(file);
+                console.log(res);
+                this.setState({
+                    ImgPrivew: objectURL,
+                    image: res
+                })
+            });
+        }
     }
     onChange = (e, id) => {
         let coppyState = { ...this.state };
@@ -48,7 +87,7 @@ export default class AddAccountAdmin extends React.Component {
         })
     }
     render() {
-        let { name, phone, gender, image, address, email, place_of_birth, cmnn_cccc } = this.state;
+        let { name, phone, gender, image, address, email, place_of_birth, cmnn_cccc, ImgPrivew } = this.state;
         console.log("state load", this.state)
         return (
             <>
@@ -67,28 +106,6 @@ export default class AddAccountAdmin extends React.Component {
                                         </div>
                                     </Col>
                                 </Row>
-                                {/* <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-                                    <div className="d-flex justify-content-between">
-                                        <Button
-                                            className="mr-4"
-                                            color="info"
-                                            href="#pablo"
-                                            onClick={(e) => e.preventDefault()}
-                                            size="sm"
-                                        >
-                                            Connect
-                                        </Button>
-                                        <Button
-                                            className="float-right"
-                                            color="default"
-                                            href="#pablo"
-                                            onClick={(e) => e.preventDefault()}
-                                            size="sm"
-                                        >
-                                            Message
-                                        </Button>
-                                    </div>
-                                </CardHeader> */}
                                 <CardBody className="pt-0 pt-md-4">
                                     <div className="text-center">
                                         <h3>
@@ -121,7 +138,7 @@ export default class AddAccountAdmin extends React.Component {
                                             <Button
                                                 color="primary"
                                                 href="#pablo"
-                                                onClick={(e) => e.preventDefault()}
+                                                onClick={this.onHandleSubmitLogin}
                                                 size="sm"
                                             >
                                                 Lưu Thay Đổi
@@ -131,7 +148,6 @@ export default class AddAccountAdmin extends React.Component {
                                 </CardHeader>
                                 <CardBody>
                                     <Form>
-
                                         <div className="pl-lg-4">
                                             <Row>
                                                 <Col lg="6">
@@ -174,7 +190,6 @@ export default class AddAccountAdmin extends React.Component {
                                                     </FormGroup>
                                                 </Col>
                                             </Row>
-                                            {/* <hr className="my-4" /> */}
                                             <Row>
                                                 <Col lg="6">
                                                     <FormGroup>
@@ -188,7 +203,7 @@ export default class AddAccountAdmin extends React.Component {
                                                             type="select"
                                                             name="gender"
                                                             id="gender"
-                                                            defaultValue={gender === 1 ? "Nam" : "Nữ"}
+                                                            value={gender === 1 ? "Nam" : "Nữ"}
                                                             onChange={(e) => { this.onChange(e, 'gender') }}
                                                         >
                                                             <option value="1">Nam</option>
@@ -259,141 +274,26 @@ export default class AddAccountAdmin extends React.Component {
                                             </Row>
                                             <hr className="my-4" />
                                             <Row>
-                                                <Col lg="6">
-                                                    <FormGroup>
-                                                        <label
-                                                            className="form-control-label"
-                                                            htmlFor="cmnn_cccc"
-                                                        >
-                                                            T
-                                                        </label>
+                                                <Col sm="2" className="d-flex justify-content-center">
+                                                    <FormGroup >
+                                                        <label className="border border-dark" style={{ backgroundColor: "reds", padding: "10px", marginTop: "100px", cursor: "pointer" }} htmlFor="txtImage"><FontAwesomeIcon icon={faUpload} className="mr-2 fa-3x" />Tải Ảnh</label>
                                                         <Input
-                                                            className="form-control-alternative"
-                                                            value={cmnn_cccc}
-                                                            id="cmnn_cccc"
-                                                            name="cmnn_cccc"
-                                                            placeholder="CMND"
-                                                            type="text"
-                                                            onChange={(e) => { this.onChange(e, 'cmnn_cccc') }}
+                                                            type="file"
+                                                            id="txtImage"
+                                                            name="txtImage"
+                                                            hidden
+                                                            onChange={(e) => { this.onChangeImage(e) }}
+                                                            required
                                                         />
                                                     </FormGroup>
                                                 </Col>
-                                                <Col lg="6">
-                                                    <FormGroup>
-                                                        <label
-                                                            className="form-control-label"
-                                                            htmlFor="address"
-                                                        >
-                                                            abc
-                                                        </label>
-                                                        <Input
-                                                            className="form-control-alternative"
-                                                            value={address}
-                                                            id="address"
-                                                            name="address"
-                                                            placeholder="Địa chỉ"
-                                                            type="text"
-                                                            onChange={(e) => { this.onChange(e, 'address') }}
-                                                        />
-                                                    </FormGroup>
+                                                <Col sm="6" className="d-flex justify-content-center">
+                                                    <div style={{ backgroundImage: `url(${ImgPrivew})`, height: "200px", width: "300px", align: "center", background: "center center no-repeat", backgroundSize: "contain", cursor: "pointer", margin: "30px" }}
+                                                        onClick={() => this.openPreviewIMG()}
+                                                    ></div>
                                                 </Col>
                                             </Row>
                                         </div>
-                                        {/* <hr className="my-4" />
-                                        <h6 className="heading-small text-muted mb-4">
-                                            Contact information
-                                        </h6>
-                                        <div className="pl-lg-4">
-                                            <Row>
-                                                <Col md="12">
-                                                    <FormGroup>
-                                                        <label
-                                                            className="form-control-label"
-                                                            htmlFor="input-address"
-                                                        >
-                                                            Address
-                                                        </label>
-                                                        <Input
-                                                            className="form-control-alternative"
-                                                            defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                                                            id="input-address"
-                                                            placeholder="Home Address"
-                                                            type="text"
-                                                            onChange={this.onHandleChange}
-                                                        />
-                                                    </FormGroup>
-                                                </Col>
-                                            </Row>
-                                            <Row>
-                                                <Col lg="4">
-                                                    <FormGroup>
-                                                        <label
-                                                            className="form-control-label"
-                                                            htmlFor="input-city"
-                                                        >
-                                                            City
-                                                        </label>
-                                                        <Input
-                                                            className="form-control-alternative"
-                                                            defaultValue="New York"
-                                                            id="input-city"
-                                                            placeholder="City"
-                                                            type="text"
-                                                            onChange={this.onHandleChange}
-                                                        />
-                                                    </FormGroup>
-                                                </Col>
-                                                <Col lg="4">
-                                                    <FormGroup>
-                                                        <label
-                                                            className="form-control-label"
-                                                            htmlFor="input-country"
-                                                        >
-                                                            Country
-                                                        </label>
-                                                        <Input
-                                                            className="form-control-alternative"
-                                                            defaultValue="United States"
-                                                            id="input-country"
-                                                            placeholder="Country"
-                                                            type="text"
-                                                            onChange={this.onHandleChange}
-                                                        />
-                                                    </FormGroup>
-                                                </Col>
-                                                <Col lg="4">
-                                                    <FormGroup>
-                                                        <label
-                                                            className="form-control-label"
-                                                            htmlFor="input-country"
-                                                        >
-                                                            Postal code
-                                                        </label>
-                                                        <Input
-                                                            className="form-control-alternative"
-                                                            id="input-postal-code"
-                                                            placeholder="Postal code"
-                                                            type="number"
-                                                            onChange={this.onHandleChange}
-                                                        />
-                                                    </FormGroup>
-                                                </Col>
-                                            </Row>
-                                        </div>
-                                        <hr className="my-4" />
-                                        <h6 className="heading-small text-muted mb-4">About me</h6>
-                                        <div className="pl-lg-4">
-                                            <FormGroup>
-                                                <label>About Me</label>
-                                                <Input
-                                                    className="form-control-alternative"
-                                                    placeholder="A few words about you ..."
-                                                    rows="4"
-                                                    defaultValue="A beautiful Dashboard for Bootstrap 4. It is Free and Open Source."
-                                                    type="textarea"
-                                                />
-                                            </FormGroup>
-                                        </div> */}
                                     </Form>
                                 </CardBody>
                             </Card>
@@ -405,5 +305,18 @@ export default class AddAccountAdmin extends React.Component {
         )
     }
 }
+var mapStateToProps = (state) => {
+    return {
+        staff: state.staff,
+    };
+};
+var mapDispatchToProps = (dispatch, props) => {
+    return {
+        onUpdateItemStaff: (staff) => {
+            return dispatch(actions.onUpdateStaffsProfileResquest(staff));
+        },
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(AddAccountAdmin)
 
 

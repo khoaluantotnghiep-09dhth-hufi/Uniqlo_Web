@@ -19,6 +19,7 @@ class index extends Component {
       txtMatKhau: "",
       toastLogin: "",
       isCheckLogin: false,
+
     };
   }
   componentDidMount() {
@@ -28,7 +29,6 @@ class index extends Component {
   onHandleSubmitLogin = (users) => (event) => {
     event.preventDefault();
     var { txtEmail, txtPassword, items } = this.state;
-    console.log("data user", users)
     for (let i = 0; i < users.length; i++) {
       if (users[i].email === txtEmail && users[i].password === txtPassword) {
         var user = {
@@ -50,11 +50,12 @@ class index extends Component {
         });
         sessionStorage.setItem("user", JSON.stringify(user));
         break;
-      } else {
+      }
+      else {
+        //toast.error("Sai Email hoặc Mật Khẩu vui lòng thử lại !");
         this.setState({
           isCheckLogin: false,
         });
-        // toast.error("Sai Email hoặc Mật Khẩu vui lòng thử lại !");
       }
     }
   };
@@ -79,7 +80,9 @@ class index extends Component {
     var { isCheckLogin } = this.state;
     console.log(isCheckLogin);
     if (isCheckLogin) {
+      //toast.error("Sai Email hoặc Mật Khẩu vui lòng thử lại !");
       return <Route path="/admin" component={HomePage} />
+
     }
     return (
       <>

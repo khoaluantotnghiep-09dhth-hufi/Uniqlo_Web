@@ -14,6 +14,7 @@ import {
   faBullseye,
   faSignOutAlt,
   faUser,
+  faKey,
 } from "@fortawesome/free-solid-svg-icons";
 import Login from "../screens/Login/index";
 import { useHistory, Route, Link, Redirect } from 'react-router-dom';
@@ -33,21 +34,25 @@ const TheHeaderDropdown = () => {
     // }
     window.location.href = "/admin";
   };
+  function onChangePassword() {
+    <Route to="/admin/change-password" />
+
+  }
+
+
   return (
     <CDropdown
       inNav
       className="c-header-nav-items mx-2"
       direction="down"
     >
-      <CDropdownToggle className="c-header-nav-link" caret={false}>
+      <CDropdownToggle className="c-header-nav-link" caret={true}>
         <div className="mr-5 c-avatar">
           <CImg
-            src={'https://cdn2.iconfinder.com/data/icons/soleicons-solid-vol-2/64/admin_system_sysadmin_administrator_manager_supervisor-512.png'}
+            src={sessionUser.image}
             className="c-avatar-img"
-            alt="adminuniqlo@gmail.com"
-
           />
-          <p> {sessionUser && sessionUser.name}</p>
+          <p className="mt-3 ml-2"> {sessionUser && sessionUser.name}</p>
         </div>
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
@@ -60,24 +65,15 @@ const TheHeaderDropdown = () => {
         >
           <strong>Cá Nhân</strong>
         </CDropdownItem>
-        <CDropdownItem onClick={adminProfile}>
-          <Link to="/admin/profile">
-            <FontAwesomeIcon icon={faUser} size="lg" className="mr-2" />Thông Tin Tài Khoản
+        <CDropdownItem  >
+          <Link to="/admin/profile" style={{ color: 'black' }}>
+            <FontAwesomeIcon icon={faUser} size="lg" className="mr-2" />Thông Tin
           </Link>
         </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-settings" className="mfe-2" />
-          Settings
-        </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-credit-card" className="mfe-2" />
-          Payments
-          <CBadge color="secondary" className="mfs-auto">42</CBadge>
-        </CDropdownItem>
-        <CDropdownItem>
-          <CIcon name="cil-file" className="mfe-2" />
-          Projects
-          <CBadge color="primary" className="mfs-auto">42</CBadge>
+        <CDropdownItem onClick={onChangePassword}>
+          <Link to="/admin/change-password" style={{ color: 'black' }}>
+            <FontAwesomeIcon icon={faKey} size="lg" className="mr-2" />Đổi Mật Khẩu
+          </Link>
         </CDropdownItem>
         <CDropdownItem divider />
         <CDropdownItem onClick={onSignOut}>

@@ -21,6 +21,7 @@ const ListAccountAdmin = React.lazy(() => import('../components/Account_Admin/li
 const UpdateAccountAdmin = React.lazy(() => import('../components/Account_Admin/update_account'));
 const AddAccountAdmin = React.lazy(() => import('../components/Account_Admin/add_accountAdmin'));
 const AdminProfile = React.lazy(() => import('../components/Account_Admin/admin_profile'));
+const ChangePassword = React.lazy(() => import('../components/Account_Admin/change_password'));
 
 const ListProducts = React.lazy(() => import('../components/Product/list_product'));
 const AddProduct = React.lazy(() => import('../components/Product/add_product'));
@@ -65,6 +66,7 @@ const routes = [
     { path: '/admin/notifications', exact: true, name: 'Thông Báo', component: Notifications_Header},
 
     { path: '/admin/profile', exact: true, name: 'Thông Tin Cá Nhân', component: AdminProfile },
+    { path: '/admin/change-password', exact: true, name: 'Đổi Mật Khẩu', component: ChangePassword },
 
     { path: '/admin/system/order/all', exact: true, name: 'Tất Cả Đơn Hàng', component: Order },
     { path: '/admin/system/order/:id_order/edit', exact: true, name: 'Xác Nhận Đơn Hàng', component: UpdateOrder },
