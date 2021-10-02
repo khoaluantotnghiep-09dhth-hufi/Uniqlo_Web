@@ -96,9 +96,9 @@ class AddAccountAdmin extends React.Component {
                         <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
                             <Card className="card-profile shadow">
                                 <Row className="justify-content-center">
-                                    <Col className="order-lg-2 d-flex justify-content-center" lg="3">
-                                        <div className="card-profile-image">
-                                            <img style={{ width: "200px", height: "200px" }}
+                                    <Col className="order-lg-2 d-flex justify-content-center " lg="3">
+                                        <div className="card-profile-image ">
+                                            <img  style={{ width: "200px", height: "200px" }}
                                                 alt="..."
                                                 className="rounded-circle"
                                                 src={sessionUser.image}
