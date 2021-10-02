@@ -68,14 +68,13 @@ class addDiscount extends React.Component {
       }
     }
   }
-  onChange = (event) => {
-    var target = event.target;
-    var name = target.name;
-    var value = target.value;
+  onChange = (e, id) => {
+    let coppyState = { ...this.state };
+    coppyState[id] = e.target.value;
     this.setState({
-      [name]: value,
-    });
-  };
+      ...coppyState
+    })
+  }
   onChangeImage = (e) => {
     let data = e.target.files;
     let file = data[0];

@@ -90,9 +90,9 @@ class ListDiscount extends React.Component {
                         <Moment format="DD/MM/YYYY">{item.date_end}</Moment>
                       </td>
                     ),
-                    image: (item) => (
+                    'image': (item) => (
                       <td>
-                        <Image src={item.image} thumbnail />
+                        <Image style={{ width: "200px", height: "200px" }} src={item.image} thumbnail />
                       </td>
                     ),
                     "Thao Tác": (item) => (
@@ -123,6 +123,7 @@ class ListDiscount extends React.Component {
                         </CButton>
                       </td>
                     ),
+                    
 
                     STT: (item, index) => <td>{index + 1}</td>,
                   }}
