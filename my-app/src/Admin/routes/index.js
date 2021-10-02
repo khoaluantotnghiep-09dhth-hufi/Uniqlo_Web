@@ -1,6 +1,6 @@
 import React from "react";
 
-const Home = React.lazy(() => import('../components/Home/index'));
+const Home = React.lazy(() => import('../components/Statistical/Test'));
 const Notifications_Header = React.lazy(() => import('../components/Notifications_Header/listNotifications'));
 
 
@@ -62,8 +62,8 @@ const ListSize = React.lazy(() => import('../components/Size/list_size'));
 const AddSize = React.lazy(() => import('../components/Size/add_size'));
 
 const routes = [
-    { path: '/admin/home', exact: true, name: 'Trang Chủ', component: ListStatistical },
-    { path: '/admin/notifications', exact: true, name: 'Thông Báo', component: Notifications_Header},
+    { path: '/admin/home', exact: true, name: 'Trang Chủ', component: Home },
+    { path: '/admin/notifications', exact: true, name: 'Thông Báo', component: Notifications_Header },
 
     { path: '/admin/profile', exact: true, name: 'Thông Tin Cá Nhân', component: AdminProfile },
     { path: '/admin/change-password', exact: true, name: 'Đổi Mật Khẩu', component: ChangePassword },
