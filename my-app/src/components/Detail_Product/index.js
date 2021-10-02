@@ -226,8 +226,8 @@ class index extends Component {
     });
   };
 
-  onAddToCart = () => {
-    var { match, products_category, color_by_size, products } = this.props;
+  onAddToCart = (products) => {
+    var { match, products_category, color_by_size} = this.props;
     var id_product = match.params.id_product;
     var { txtSize, isChooseColor, quantityOfSize } = this.state;
 
@@ -335,7 +335,7 @@ class index extends Component {
                     size="lg"
                     className="Cart__Checkout-button mt-5"
                     onClick={() => {
-                      this.onAddToCart();
+                      this.onAddToCart(products);
                     }}
                   >
                     Thêm Vào Giỏ Hàng
