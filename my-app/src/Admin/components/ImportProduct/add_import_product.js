@@ -48,11 +48,11 @@ class AddImportProduct extends React.Component {
         if (NextProps && NextProps.import_product) {
             var { import_product } = NextProps;
             if (match.params.id_import) {
-            
+                const result = import_product.find((o) => o.id === match.params.id_import);
                 this.setState({
-                    idItem: import_product.id,
-                    txtName: import_product.name,
-                    id_sector: import_product.id_sector,
+                    idItem: result.id,
+                    txtName: result.name,
+                    id_sector: result.id_sector,
                 });
             }
         }

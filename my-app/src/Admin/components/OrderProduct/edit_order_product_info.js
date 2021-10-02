@@ -70,11 +70,11 @@ class addProduct extends React.Component {
         if (NextProps && NextProps.orderInfo) {
             var { orderInfo } = NextProps;
             if (match.params.id_order_info) {
-               
+                const result = orderInfo.find((o) => o.id === match.params.id_order_info);
                 this.setState({
-                    txtQuantity: orderInfo.quantity,
-                    id_size: orderInfo.id_size.id,
-                    id_color: orderInfo.id_color.id,
+                    txtQuantity: result.quantity,
+                    id_size: result.id_size,
+                    id_color: result.id_color,
                 });
             }
         }

@@ -70,11 +70,11 @@ class AddSector extends React.Component {
         if (NextProps && NextProps.sector) {
             var { sector } = NextProps;
             if (match.params.id_sector) {
-               
+                const result = sector.find((o) => o.id === match.params.id_sector);
                 this.setState({
-                    idItem: sector.id,
-                    txtName: sector.name,
-                    id_object: sector.id_object,
+                    idItem: result.id,
+                    txtName: result.name,
+                    id_object: result.id_object,
                 });
             }
         }

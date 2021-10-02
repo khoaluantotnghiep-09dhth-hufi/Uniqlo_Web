@@ -69,11 +69,11 @@ class addProduct extends React.Component {
         if (NextProps && NextProps.productInfo) {
             var { productInfo } = NextProps;
             if (match.params.id_product) {
-                
+                const result = productInfo.find((o) => o.id === match.params.id_product);
                 this.setState({
-                    txtQuantity: productInfo.quantity,
-                    id_size: productInfo.id_size.id,
-                    id_color: productInfo.id_color.id,
+                    txtQuantity: result.quantity,
+                    id_size: result.id_size,
+                    id_color: result.id_color,
                 });
             }
         }

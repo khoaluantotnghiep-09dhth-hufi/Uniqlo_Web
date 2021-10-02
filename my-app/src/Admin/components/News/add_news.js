@@ -85,16 +85,15 @@ class AddNews extends React.Component {
     var { match } = this.props;
     if (NextProps && NextProps.news) {
       var { news } = NextProps;
-    
       if (match.params.id_news) {
- 
+        const result = news.find((o) => o.id === match.params.id_news);
         this.setState({
-          txtTitle: news.title,
-          txtDate: this.getCurrentDate(),
-          txtDescriptionHTML: news.descriptionHTML,
-          txtDescriptionText: news.descriptionText,
-          id_staff: sessionUser.id_staff,
-          txtImage: news.image,
+          txtTitle: result.title,
+          txtDate: result.date,
+          txtDescriptionHTML: result.descriptionHTML,
+          txtDescriptionText: result.descriptionText,
+          id_staff: result.id_staff,
+          txtImage: result.image,
         });
       }
     }

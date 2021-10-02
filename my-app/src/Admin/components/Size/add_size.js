@@ -46,10 +46,10 @@ class addColor extends React.Component {
     if (NextProps && NextProps.size) {
       var { size } = NextProps;
       if (match.params.id_size) {
-        
+        const result = size.find((o) => o.id === match.params.id_size);
         this.setState({
-          idItem: size.id,
-          txtName: size.name,
+          idItem: result.id,
+          txtName: result.name,
         });
       }
     }
