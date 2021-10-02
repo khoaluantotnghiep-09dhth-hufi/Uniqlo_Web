@@ -32,14 +32,13 @@ class updateOrder extends React.Component {
   }
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
-    
+var id_staff=match.params.id_staff;
     if (NextProps && NextProps.staff) {
       var { staff } = NextProps;
       console.log(staff);
       if (match.params.id_staff) {
-      
         this.setState({
-          idItem: staff.id,
+          idItem:  id_staff,
 
           txtConfirm: staff.role,
         });
@@ -61,13 +60,13 @@ class updateOrder extends React.Component {
     event.preventDefault();
     var { history } = this.props;
     var { idItem, txtConfirm } = this.state;
-    console.log(idItem);
-    if (idItem) {
-      var staffUpdate = {
-        id: idItem,
+    var staffUpdate = {
+      id: idItem,
 
-        role: parseInt(txtConfirm),
-      };
+      role: parseInt(txtConfirm),
+    };
+    console.log(staffUpdate);
+    if (match.params.id_staff) {
       this.props.onUpdatePositionStaff(staffUpdate);
       history.goBack();
     } else {

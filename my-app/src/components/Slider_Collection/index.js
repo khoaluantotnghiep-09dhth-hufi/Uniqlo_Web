@@ -28,7 +28,7 @@ class index extends Component {
         return (
             <div>
                 <Container className="mt-5">	
-                    <h2 className="d-flex justify-content-start">BỘ SƯU TẬP ĐẶC BIỆT</h2>
+                    <h2 className="d-flex justify-content-start">CHƯƠNG TRÌNH KHUYẾN MÃI</h2>
                     <Row className="mt-4">
                         <Col>
                             <Carousel
