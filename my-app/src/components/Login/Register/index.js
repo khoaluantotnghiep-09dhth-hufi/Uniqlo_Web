@@ -65,7 +65,7 @@ class index extends React.Component {
       toast.error(<div>Đăng ký thất bại.<br /> Bạn cần nhập đủ thông tin!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
     }
     else{
-      this.props.onAddItemCustomer(customer);
+      this.props.onAddItemCustomerClient(customer);
       this.onField();
     }
   };
@@ -161,7 +161,7 @@ var mapStateToProps = (state) => {
 };
 var mapDispatchToProps = (dispatch, props) => {
   return {
-    onAddItemCustomer: (customer) => {
+    onAddItemCustomerClient: (customer) => {
       dispatch(actions.onAddCustomerClientResquest(customer));
     },
   };

@@ -26,6 +26,10 @@ class index extends Component {
 
     console.log("data user",users)
     for (let i = 0; i < users.length; i++) {
+      if (users[i].phone !== txtPhone && users[i].password !== txtPassword){
+        toast.error(<div>Đăng nhập thất bại.<br /> Bạn cần nhập đúng thông tin!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+        return;
+      }
       if (users[i].phone === txtPhone && users[i].password === txtPassword) {
         var user = {
           id_user: users[i].id,
@@ -43,16 +47,9 @@ class index extends Component {
         });       
       }
     }
-    // if(!isCheckLogin){
-    //   toast.error(<div>Đăng nhập thất bại.<br /> Bạn cần nhập đúng thông tin!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
-    // }
   };
-  onClickButton=()=>{
-    var { isCheckLogin } = this.state;
-    if(!isCheckLogin){
-      toast.error(<div>Đăng nhập thất bại.<br /> Bạn cần nhập đúng thông tin!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
-    }
-  };
+
+
   onToggleForm = () => {
     this.props.onToggleForm();
   };
@@ -116,7 +113,6 @@ class index extends Component {
               variant="outline-secondary"
               type="submit"
               className="button--width"
-              onClick = {this.onClickButton}
             >
               Đăng Nhập
             </Button>
