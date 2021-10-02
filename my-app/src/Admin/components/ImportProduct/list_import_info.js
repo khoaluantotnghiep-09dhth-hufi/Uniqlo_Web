@@ -25,14 +25,32 @@ import * as actionsImportInfo from "../../../actions/importInfoActions";
 import { connect } from "react-redux";
 import uniqid from 'uniqid';
 const fields = [
-    'STT',
-    { key: 'id', label: 'Mã' },
-    { key: 'name', label: 'Tên' },
-    { key: 'nameColor', label: 'Màu' },
-    { key: 'nameSize', label: 'Kích Cỡ' },
-    { key: 'quantity', label: 'Số Lượng' },
-    { key: 'image', label: 'Ảnh' },
-    'Thao Tác',
+    {
+        key: 'STT',
+        label: 'STT',
+        _style: { width: '1%' },
+        sorter: false,
+        filter: false
+    },
+    {
+        key: 'id',
+        label: 'Mã',
+        _style: { width: '1%' },
+        sorter: false,
+        filter: false
+    },
+    { key: 'name', label: 'Tên', _style: { width: '30%' }, },
+    { key: 'nameColor', label: 'Màu', _style: { width: '1%' }, },
+    { key: 'nameSize', label: 'Kích Cỡ', _style: { width: '8%' }, },
+    { key: 'quantity', label: 'Số Lượng', _style: { width: '10%' }, },
+    { key: 'image', label: 'Ảnh', filter: false, sorter: false, },
+    {
+        key: 'Thao Tác',
+        label: 'Thao Tác',
+        _style: { width: '1%' },
+        sorter: false,
+        filter: false
+    },
 ]
 //Thư viện img 
 let isLoadingExternally = false;
@@ -60,8 +78,7 @@ class addProduct extends React.Component {
         this.props.fetchImportInfo(match.params.id_import);
         isLoadingExternally = true;
         this.setState({
-            // txtQuantity: this.props.fetchOrderInfoQuantity(this.state.id_order_info),
-            // productArr: this.props.fetchProductsInfo(this.state.id_order_info),
+
             orderInfoArr: this.props.fetchOrderInfoToImport(match.params.id_order),
         })
     }
@@ -86,22 +103,6 @@ class addProduct extends React.Component {
             })
         }
     }
-    // componentWillReceiveProps(NextProps) {
-    //     var { match } = this.props;
-    //     if (NextProps && NextProps.productInfo) {
-    //         var { productInfo } = NextProps;
-    //         if (match.params.id_product) {
-    //             const result = productInfo.find(
-    //                 (o) => o.id === match.params.id_product
-    //             );
-    //             this.setState({
-    //                 txtQuantity: result.quantity,
-    //                 id_size: result.id_size.id,
-    //                 id_color: result.id_color.id,
-    //             });
-    //         }
-    //     }
-    // }
     onChange = (e, id) => {
         let coppyState = { ...this.state };
         coppyState[id] = e.target.value;
@@ -186,6 +187,9 @@ class addProduct extends React.Component {
                                             fields={fields}
                                             itemsPerPage={8}
                                             pagination
+                                            sorter
+                                            columnFilter
+                                            itemsPerPageSelect
                                             scopedSlots={{
                                                 'Thao Tác':
                                                     (item) => (
@@ -354,8 +358,11 @@ class addProduct extends React.Component {
                                         <CDataTable
                                             items={dataImportInfo}
                                             fields={fields}
-                                            itemsPerPage={8}
+                                            itemsPerPage={5}
                                             pagination
+                                            sorter
+                                            columnFilter
+                                            itemsPerPageSelect
                                             scopedSlots={{
                                                 'Thao Tác':
                                                     (item) => (

@@ -20,11 +20,30 @@ import { Link } from "react-router-dom";
 
 import * as actions from "./../../../actions/index";
 
-const fields = ['STT',
-    { key: 'id', label: 'Mã Loại' },
+const fields = [
+    {
+        key: 'STT',
+        label: 'STT',
+        _style: { width: '1%' },
+        sorter: false,
+        filter: false
+    },
+    {
+        key: 'id',
+        label: 'Mã',
+        _style: { width: '15%' },
+        sorter: false,
+        filter: false
+    },
     { key: 'name', label: 'Tên Loại' },
     { key: 'nameObject', label: 'Đối Tượng' },
-    'Thao Tác',
+    {
+        key: 'Thao Tác',
+        label: 'Thao Tác',
+        _style: { width: '25%' },
+        sorter: false,
+        filter: false
+    },
 ]
 
 class ListSector extends React.Component {
@@ -38,11 +57,11 @@ class ListSector extends React.Component {
     };
     render() {
         var { sector } = this.props;
-      
+
         var dataSector = sector.map((item, index) => {
             return { ...item, index };
         });
-      
+
         return (
             <>
                 <Link to="/admin/manage/sector/add">
@@ -62,6 +81,9 @@ class ListSector extends React.Component {
                                     fields={fields}
                                     itemsPerPage={5}
                                     sorter
+                                    columnFilter
+                                    footer
+                                    itemsPerPageSelect
                                     pagination
                                     scopedSlots={{
                                         'Thao Tác':

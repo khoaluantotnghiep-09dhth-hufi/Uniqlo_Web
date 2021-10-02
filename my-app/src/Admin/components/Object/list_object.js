@@ -15,10 +15,22 @@ import { faPlus, faTimes, faTools } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import * as actions from "./../../../actions/index";
 const fields = [
-  "STT",
+  {
+    key: 'STT',
+    label: 'STT',
+    _style: { width: '1%' },
+    sorter: false,
+    filter: false
+  },
   { key: "id", label: "Mã Đối Tượng" },
   { key: "name", label: "Tên Đối Tượng" },
-  "Thao Tác",
+  {
+    key: 'Thao Tác',
+    label: 'Thao Tác',
+    _style: { width: '25%' },
+    sorter: false,
+    filter: false
+  },
 ];
 
 class ListObject extends React.Component {
@@ -58,18 +70,21 @@ class ListObject extends React.Component {
                   items={dataObject}
                   fields={fields}
                   sorter
+                  columnFilter
+                  footer
+                  itemsPerPageSelect
                   scopedSlots={{
                     "Thao Tác": (item) => (
                       <td>
                         <Link to={`/admin/manage/object/${item.id}/edit`}>
-                        <CButton type="button" className="btn btn-primary">
-                          <FontAwesomeIcon
-                            icon={faTools}
-                            className="mr-2"
-                            size="lg"
-                          />
-                          Sửa
-                        </CButton>
+                          <CButton type="button" className="btn btn-primary">
+                            <FontAwesomeIcon
+                              icon={faTools}
+                              className="mr-2"
+                              size="lg"
+                            />
+                            Sửa
+                          </CButton>
                         </Link>
 
                         <CButton

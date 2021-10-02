@@ -17,21 +17,33 @@ import { faPlus, faTimes, faTools } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const fields = [
-  "STT",
-  { key: "id", label: "Mã Nhân Viên" },
-  { key: "name", label: "Tên" },
+  {
+    key: 'STT',
+    label: 'STT',
+    _style: { width: '1%' },
+    sorter: false,
+    filter: false
+  },
+  {
+    key: 'name',
+    label: 'Tên',
+  },
   { key: "phone", label: "SĐT" },
   { key: "role", label: "Vị Trí" },
-  { key: "password", label: "Mật Khẩu" },
-
-  "Hành Động",
+  {
+    key: 'Thao Tác',
+    label: 'Thao Tác',
+    _style: { width: '1%' },
+    sorter: false,
+    filter: false
+  },
 ];
 
 class List_Customers extends React.Component {
   componentDidMount() {
     this.props.fetchStaffs();
   }
-  
+
 
   render() {
     var { staff } = this.props;
@@ -51,17 +63,19 @@ class List_Customers extends React.Component {
                   fields={fields}
                   itemsPerPage={5}
                   sorter
+                  columnFilter
+                  itemsPerPageSelect
                   pagination
                   scopedSlots={{
-                    
+
                     "STT":
                       (item, index) => (
                         <td>
                           {index + 1}
                         </td>
                       ),
-                  
-                    "Hành Động": (item) => (
+
+                    "Thao Tác": (item) => (
                       <td>
                         <Link to={`/admin/account/${item.id}/edit`}>
                           <CButton type="button" className="btn btn-primary">

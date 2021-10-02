@@ -290,7 +290,6 @@ class addProduct extends React.Component {
                                     itemsPerPage={5}
                                     pagination
                                     sorter
-                                    tableFilter
                                     columnFilter
                                     itemsPerPageSelect
                                     scopedSlots={{
