@@ -82,7 +82,6 @@ class index extends Component {
     if (isCheckLogin) {
       //toast.error("Sai Email hoặc Mật Khẩu vui lòng thử lại !");
       return <Route path="/admin" component={HomePage} />
-
     }
     return (
       <>
