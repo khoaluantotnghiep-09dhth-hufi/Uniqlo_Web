@@ -80,7 +80,7 @@ class addColor extends React.Component {
       name: txtName,
     };
 
-    if (idItem) {
+    if (match.params.id_size) {
       this.props.onUpdateItemSize(sizeUpdate);
       history.goBack();
     } else {
