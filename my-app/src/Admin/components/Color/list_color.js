@@ -56,19 +56,10 @@ class ListColor extends React.Component {
                 <CDataTable
                   items={dataColor}
                   fields={fields}
-                  itemsPerPage={8}
+                  itemsPerPage={5}
+                  sorter
                   pagination
-                  scopedSlots={{
-                    'status':
-                      (item) => (
-                        <td>
-                          {/* <CBadge color={getBadge(item.status)}>
-                                                        {item.status}
-                                                    </CBadge> */}
-                        </td>
-                      )
-
-                  }}
+                
                   scopedSlots={{
                     'Hành Động':
                       (item) => (

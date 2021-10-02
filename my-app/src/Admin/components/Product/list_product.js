@@ -81,6 +81,7 @@ class ListProducts extends React.Component {
                                     fields={fields}
                                     itemsPerPage={5}
                                     pagination
+                                    sorter
                                     scopedSlots={{
                                         'Thao Tác':
                                             (item) => (

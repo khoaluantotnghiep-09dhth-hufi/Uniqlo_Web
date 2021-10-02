@@ -49,7 +49,8 @@ class List_Customers extends React.Component {
                 <CDataTable
                   items={dataStaff}
                   fields={fields}
-                  itemsPerPage={8}
+                  itemsPerPage={5}
+                  sorter
                   pagination
                   scopedSlots={{
                     

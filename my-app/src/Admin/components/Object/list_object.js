@@ -57,6 +57,7 @@ class ListObject extends React.Component {
                 <CDataTable
                   items={dataObject}
                   fields={fields}
+                  sorter
                   scopedSlots={{
                     "Thao Tác": (item) => (
                       <td>

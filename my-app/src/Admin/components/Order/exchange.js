@@ -75,7 +75,8 @@ class ListOrder extends React.Component {
                                 <CDataTable
                                     items={dataBill}
                                     fields={fields}
-                                    itemsPerPage={8}
+                                    itemsPerPage={5}
+                                    sorter
                                     pagination
                                     scopedSlots={{
                                         // "Hành Động": (item) => (

@@ -58,6 +58,7 @@ class ListCategory extends React.Component {
                                     items={data}
                                     fields={fields}
                                     itemsPerPage={5}
+                                    sorter
                                     pagination
                                     scopedSlots={{
                                         'Thao Tác':

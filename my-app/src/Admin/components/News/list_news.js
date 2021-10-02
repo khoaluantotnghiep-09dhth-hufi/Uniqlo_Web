@@ -76,7 +76,8 @@ class ListNews extends React.Component {
                                 <CDataTable
                                     items={dataNews}
                                     fields={fields}
-                                    itemsPerPage={8}
+                                    itemsPerPage={5}
+                                    sorter
                                     pagination
                                     scopedSlots={{
                                         "Thao Tác":

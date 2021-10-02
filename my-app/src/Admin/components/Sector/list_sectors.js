@@ -61,6 +61,7 @@ class ListSector extends React.Component {
                                     items={dataSector}
                                     fields={fields}
                                     itemsPerPage={5}
+                                    sorter
                                     pagination
                                     scopedSlots={{
                                         'Thao Tác':
