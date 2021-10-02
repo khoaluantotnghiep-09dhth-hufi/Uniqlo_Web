@@ -83,30 +83,30 @@ class index extends Component {
       [name]: value,
     });
   };
-  onSubmitForm = (users) => (event) => {
+  onSubmitForm = (event) => {
     // eslint-disable-next-line no-return-assign, no-param-reassign
     event.preventDefault(); // eslint-disable
     var { txtPhone, txtPassword, txtHuyDon, isCheckRequest } = this.state;
     console.log(isCheckRequest);
 
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].phone === txtPhone && users[i].password === txtPassword) {
-        var user = {
-          id_user: users[i].id,
-          name: users[i].name,
-          phone: users[i].phone,
-          password: users[i].password,
-        };
-        this.setState({
-          isCheckLogin: true,
-        });
-        sessionStorage.setItem("client", JSON.stringify(user));
-      } else {
-        this.setState({
-          isCheckLogin: false,
-        });
-      }
-    }
+    // for (let i = 0; i < users.length; i++) {
+    //   if (users[i].phone === txtPhone && users[i].password === txtPassword) {
+    //     var user = {
+    //       id_user: users[i].id,
+    //       name: users[i].name,
+    //       phone: users[i].phone,
+    //       password: users[i].password,
+    //     };
+    //     this.setState({
+    //       isCheckLogin: true,
+    //     });
+    //     sessionStorage.setItem("client", JSON.stringify(user));
+    //   } else {
+    //     this.setState({
+    //       isCheckLogin: false,
+    //     });
+    //   }
+    // }
     var sessionUser = JSON.parse(sessionStorage.getItem("client"));
 
     var name = sessionUser.name;
