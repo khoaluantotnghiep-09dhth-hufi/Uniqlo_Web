@@ -26,6 +26,7 @@ const formatter = new Intl.NumberFormat("vi-VN", {
 const options = { dateStyle: "short" };
 const fields = [
   { key: "index", label: "STT" },
+  { key: "id", label: "Mã HD" },
   { key: "order_date", label: "Ngày Đặt Hàng" },
   { key: "delivery_date", label: "Ngày Giao Hàng" },
   { key: "name_customer", label: "Tên Khách Hàng" },
