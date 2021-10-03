@@ -56,6 +56,7 @@ class index extends Component {
     );
 
     return (
+      
       <Container>
         <Row className="Account-padding">
           {elmForgotPass}

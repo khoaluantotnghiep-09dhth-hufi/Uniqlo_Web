@@ -39,10 +39,22 @@ class index extends Component {
       //   return;
       // }
       if (users[i].phone === txtPhone && users[i].password === txtPassword) {
+        // var user = {
+        //   id_user: users[i].id,
+        //   name: users[i].name,
+        //   phone: users[i].phone,
+        //   password: users[i].password,
+        // };
         var user = {
           id_user: users[i].id,
           name: users[i].name,
+          address: users[i].address,
           phone: users[i].phone,
+          image: users[i].image,
+          email: users[i].email,
+          gender: users[i].gender,
+          cmnn_cccc: users[i].cmnn_cccc,
+          score: users[i].score,
           password: users[i].password,
         };
         this.setState({

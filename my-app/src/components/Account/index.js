@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
 import Moment from "react-moment";
+import { Link } from "react-router-dom";
 
 import {
   Container,
@@ -158,7 +159,7 @@ class index extends Component {
                 <br></br>
                 <h6>
                   {/* Xin chào, <span>{sessionUser && sessionUser.length > 0 ? sessionUser.name : ''}</span> */}
-                  Xin chào: <span> {sessionUser && sessionUser.name}</span>
+                  Xin chào: <strong> {sessionUser && sessionUser.name}</strong>
                 </h6>
               </Col>
             </Row>
@@ -237,7 +238,7 @@ class index extends Component {
               <Col>
                 {/* <h6>Tên tài khoản: {sessionUser && sessionUser.length > 0 ? sessionUser.name : ''}</h6> */}
                 <h6>
-                  Tên tài khoản: <span> {sessionUser && sessionUser.name}</span>
+                  Tên tài khoản: <strong> {sessionUser && sessionUser.name}</strong>
                 </h6>
               </Col>
             </Row>
@@ -246,11 +247,21 @@ class index extends Component {
             </Row>
             <Row>
               <Col>
+                <Link to="/customer_profile">
+                  <Button
+                    type="submit"
+                    variant="outline-secondary"
+                    size="sm"
+                    style={{ margin: 0}}
+                  >
+                    <h6 style={{ marginBottom: 0 }}>Thay đổi thông tin</h6>
+                  </Button>
+                </Link>&nbsp;
                 <Button
                   type="submit"
                   variant="outline-secondary"
                   size="sm"
-                  style={{ margin: 0 }}
+                  style={{ margin: 0, marginTop: 5}}
                   onClick={this.onSignOut}
                 >
                   <h6 style={{ marginBottom: 0 }}>Đăng Xuất</h6>

@@ -15,6 +15,7 @@ import Return_Policy from "./../screens/Screen_ReturnPolicy/index";
 import Guide from "./../screens/Screen_Guide/index";
 import Accessibility from "./../screens/Screen_Accessibility/index";
 import Privacy_Policy from "./../screens/Screen_PrivacyPolicy/index";
+import Customer_Profile from "./../screens/Screen_CustomerProfile/index";
 
 var routes = [
   {
@@ -115,6 +116,11 @@ var routes = [
     path: "/Trẻ Sơ Sinh",
     exact: true,
     main: () => <Home />,
+  },
+  {
+    path: "/customer_profile",
+    exact: true,
+    main: ({ location }) => <Customer_Profile location={location} />,
   },
   {
     path: "",

@@ -996,6 +996,28 @@ export const onUpdateCustomersResquest = (customer) => {
   };
 };
 
+//cập nhập khách hàng client
+export const onUpdateCustomersClient = (customer) => {
+  return {
+    type: types.UPDATE_CUSTOMER_CLIENT,
+    customer,
+  };
+};
+export const onUpdateCustomersClientResquest = (customer) => {
+  return (dispatch) => {
+    return callApi(`customers/${customer.id}`, "PUT", customer).then((response) => {
+      if (response === undefined) {
+        toast.error("Sửa thất bại, vui lòng thử lại !");
+      }
+      else {
+        toast.success("Sửa thành công !");
+        dispatch(onUpdateCustomersClient(response.data));
+      }
+    }
+    );
+  };
+};
+
 //sửa tt khách hàng
 export const onGetCustomer = (customer) => {
   return {
