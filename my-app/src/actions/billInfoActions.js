@@ -16,7 +16,7 @@ export const fetchBillInfoExchangeResquest = () => {
         toast.error("Vui lòng thử lại !");
       }
       else {
-      dispatch(fetchBillInfoExchange(response.data));
+        dispatch(fetchBillInfoExchange(response.data));
       }
     });
   };
@@ -36,12 +36,31 @@ export const fetchBillTotalResquest = () => {
         toast.error("Vui lòng thử lại !");
       }
       else {
-      dispatch(fetchBillToTal(response.data));
+        dispatch(fetchBillToTal(response.data));
       }
     });
   };
 };
 
+export const fetchBillToTalQuantity = (billTotalQuantity) => {
+  return {
+    type: types.COUNT_TOTALQUANTITY,
+    billTotalQuantity,
+  }
+}
+
+export const fetchBillTotalQuantityResquest = () => {
+  return (dispatch) => {
+    return callApi("bills-total-quantity", "GET", null).then((response) => {
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+        dispatch(fetchBillToTalQuantity(response.data));
+      }
+    });
+  };
+};
 
 export const onUpdateBillInfo = (billInfo) => {
   return {
@@ -59,7 +78,7 @@ export const onUpdateBillInfoResquest = (billInfo) => {
         toast.success("Sửa thành công !");
         dispatch(onUpdateBillInfo(response.data));
       }
-      }
+    }
     );
   };
 };

@@ -31,7 +31,7 @@ const TheHeader = () => {
     dispatch({ type: 'set', sidebarShow: val })
   }
   return (
-    <CHeader withSubheader>
+    <CHeader withSubheader >
       <CToggler
         inHeader
         className="ml-md-3 d-lg-none"
@@ -56,7 +56,7 @@ const TheHeader = () => {
         <TheHeaderDropdown />
       </CHeaderNav>
 
-      <CSubheader className="px-3 justify-content-between">
+      <CSubheader className="px-1 justify-content-between">
         <CBreadcrumbRouter
           className="border-0 c-subheader-nav m-0 px-0 px-md-3"
           routes={routes}

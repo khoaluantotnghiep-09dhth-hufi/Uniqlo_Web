@@ -37,12 +37,9 @@ import ChartLineSimple from '../../charts/ChartLineSimple';
 const brandSuccess = getStyle('success') || '#4dbd74'
 const brandInfo = getStyle('info') || '#20a8d8'
 const brandDanger = getStyle('danger') || '#f86c6b'
-class test extends React.Component {
+class Home extends React.Component {
     constructor(props) {
         super(props);
-    }
-    random = (min, max) => {
-        return Math.floor(Math.random() * (max - min + 1) + min)
     }
 
     componentDidMount() {
@@ -50,12 +47,14 @@ class test extends React.Component {
         this.props.fetchStaffCount();
         this.props.fetchCustomerCount();
         this.props.fetchProductInfoCount();
+        this.props.fetchBillTotalQuantity();
     }
     render() {
         var { billTotal } = this.props;
         var { staff } = this.props;
         var { customer } = this.props;
         var { productInfo } = this.props;
+        var { billTotalQuantity } = this.props;
         var dataProductInfoCount = productInfo.map((item, index) => {
             return item.countProduct;
         })
@@ -69,18 +68,12 @@ class test extends React.Component {
             let elements = 27
             var { billTotal } = this.props;
             var dataTotal = billTotal.map((item, index) => {
-                return item.total;
+                return item.sumTotal;
             })
-            var dataDate = billTotal.map((item, index) => {
-                return item.order_date;
+            var dataTotalQuantity = billTotalQuantity.map((item, index) => {
+                return item.sumTotalQuantity;
             })
-            const data2 = []
-            const data3 = []
-            for (let i = 0; i <= elements; i++) {
-
-                data2.push(this.random(80, 100))
-                data3.push(65)
-            }
+            console.log(dataTotalQuantity)
             return [
                 {
                     label: 'Tổng tiền hóa đơn',
@@ -91,22 +84,22 @@ class test extends React.Component {
                     data: dataTotal
                 },
                 {
-                    label: 'My Second dataset',
+                    label: 'Số lượng sản phẩm',
                     backgroundColor: 'transparent',
                     borderColor: brandSuccess,
                     pointHoverBackgroundColor: brandSuccess,
                     borderWidth: 2,
-                    data: data2
+                    data: dataTotalQuantity
                 },
-                {
-                    label: 'My Third dataset',
-                    backgroundColor: 'transparent',
-                    borderColor: brandDanger,
-                    pointHoverBackgroundColor: brandDanger,
-                    borderWidth: 1,
-                    borderDash: [8, 5],
-                    data: data3
-                }
+                // {
+                //     label: 'My Third dataset',
+                //     backgroundColor: 'transparent',
+                //     borderColor: brandDanger,
+                //     pointHoverBackgroundColor: brandDanger,
+                //     borderWidth: 1,
+                //     borderDash: [8, 5],
+                //     data: data3
+                // }
             ]
         })()
         const defaultOptions = (() => {
@@ -124,9 +117,9 @@ class test extends React.Component {
                     yAxes: [{
                         ticks: {
                             beginAtZero: true,
-                            maxTicksLimit: 5,
-                            stepSize: Math.ceil(1000000 / 5),
-                            max: 1000000
+                            maxTicksLimit: 15,
+                            stepSize: Math.ceil(10000000 / 8),
+                            max: 10000000
                         },
                         gridLines: {
                             display: true
@@ -144,32 +137,6 @@ class test extends React.Component {
             }
         }
         )()
-        // const line = {
-        //     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        //     datasets: [
-        //         {
-        //             label: 'Doanh thu từng hóa đơn',
-        //             fill: false,
-        //             lineTension: 0.1,
-        //             backgroundColor: 'rgba(75,192,192,0.4)',
-        //             borderColor: 'rgba(75,192,192,1)',
-        //             borderCapStyle: 'butt',
-        //             borderDash: [],
-        //             borderDashOffset: 0.0,
-        //             borderJoinStyle: 'miter',
-        //             pointBorderColor: 'rgba(75,192,192,1)',
-        //             pointBackgroundColor: '#fff',
-        //             pointBorderWidth: 1,
-        //             pointHoverRadius: 5,
-        //             pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-        //             pointHoverBorderColor: 'rgba(220,220,220,1)',
-        //             pointHoverBorderWidth: 2,
-        //             pointRadius: 1,
-        //             pointHitRadius: 10,
-        //             data: data,
-        //         },
-        //     ],
-        // };
         var dataDate = billTotal.map((item, index) => {
             return item.order_date;
         })
@@ -246,8 +213,8 @@ class test extends React.Component {
                     <CCardBody>
                         <CRow>
                             <CCol sm="5">
-                                <h4 id="traffic" className="card-title mb-0">Traffic</h4>
-                                <div className="small text-muted">November 2017</div>
+                                <h4 id="traffic" className="card-title mb-0">Biểu Đồ Doanh Thu</h4>
+                                <br/>
                             </CCol>
                             <CCol sm="7" className="d-none d-md-block">
                                 <CButton color="primary" className="float-right">
@@ -255,12 +222,12 @@ class test extends React.Component {
                                 </CButton>
                                 <CButtonGroup className="float-right mr-3">
                                     {
-                                        ['Day', 'Month', 'Year'].map(value => (
+                                        ['Ngày', 'Tháng', 'Năm'].map(value => (
                                             <CButton
                                                 color="outline-secondary"
                                                 key={value}
                                                 className="mx-0"
-                                                active={value === 'Month'}
+                                                active={value === 'Tháng'}
                                             >
                                                 {value}
                                             </CButton>
@@ -287,12 +254,16 @@ var mapStateToProps = (state) => {
         staff: state.staff,
         customer: state.customer,
         productInfo: state.productInfo,
+        billTotalQuantity: state.billTotalQuantity,
     };
 };
 var mapDispatchToProps = (dispatch, props) => {
     return {
         fetchBillTotal: () => {
             return dispatch(actions.fetchBillTotalResquest());
+        },
+        fetchBillTotalQuantity: () => {
+            return dispatch(actions.fetchBillTotalQuantityResquest());
         },
         fetchStaffCount: () => {
             return dispatch(actionsStaff.fetchCountStaffsResquest());
@@ -305,4 +276,4 @@ var mapDispatchToProps = (dispatch, props) => {
         },
     };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(test);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

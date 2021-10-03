@@ -1,6 +1,6 @@
 import React from "react";
 
-const Home = React.lazy(() => import('../components/Statistical/Test'));
+const Home = React.lazy(() => import('../components/Statistical/Home'));
 const Notifications_Header = React.lazy(() => import('../components/Notifications_Header/listNotifications'));
 
 
