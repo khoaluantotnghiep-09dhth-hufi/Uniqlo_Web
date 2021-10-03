@@ -18,17 +18,10 @@ class index extends Component {
       .map((item, index) => {
         console.log(item);
         return (
-          <Container style={{ marginBottom: "20%", marginTop: "3%" }}>
-            <Row className="mt-4">
-              {/* <Col lg="2"></Col> */}
-              <Col>
-                <Image className="Adjust_Image" src={item.image} rounded />
-              </Col>
-              {/* <Col lg="2"></Col> */}
-            </Row>
+          <Container style={{ marginBottom: "5%", marginTop: "1%" }}>
             <Row>
               <Col>
-                <h3 className="text-left mt-4">{item.title}</h3>
+                <h2 className="text-center mt-4">{item.title}</h2>
               </Col>
             </Row>
             <Row>
@@ -39,10 +32,19 @@ class index extends Component {
               </Col>
             </Row>
             <Row className="mt-4">
+              {/* <Col lg="2"></Col> */}
+              <Col>
+                <Image className="Adjust_Image" src={item.image} rounded />
+              </Col>
+              {/* <Col lg="2"></Col> */}
+            </Row>
+            <Row className="mt-4">
               <Col>
                 <p className="Adjust_Text_Body">
                   <span className="mr-4"></span>
-                  <div dangerouslySetInnerHTML={{__html: item.descriptionHTML}} ></div>
+                  <div>
+                    <p dangerouslySetInnerHTML={{__html: item.descriptionHTML}} text-align="center" width="100%"></p>
+                  </div>
                 </p>
               </Col>
             </Row>

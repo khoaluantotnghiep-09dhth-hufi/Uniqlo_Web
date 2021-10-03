@@ -14,7 +14,7 @@ class index extends Component {
       <Container>
         <h2
           className="font-weight-normal text-center"
-          style={{ marginTop: "10%", marginBottom: "5%" }}
+          // style={{ marginTop: "10%", marginBottom: "5%" }}
         >
           Tin Tức
         </h2>

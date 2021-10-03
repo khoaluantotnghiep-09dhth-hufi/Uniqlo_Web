@@ -17,9 +17,9 @@ class index extends Component {
             <Card.Body className="text-left">
               <Card.Text className="font-weight-bold " style={{ color: "#3795C1" }}>{itemNew.date}</Card.Text>
               <Card.Title className="Adjust_Text">{itemNew.title}</Card.Title>
-              <Card.Text className="Adjust_Text">
+              {/* <Card.Text className="Adjust_Text_Detail">
                 <div dangerouslySetInnerHTML={{__html: itemNew.descriptionHTML}}></div>
-              </Card.Text>
+              </Card.Text> */}
               {/* <Button variant="primary">Go somewhere</Button> */}
             </Card.Body>
           </Card>

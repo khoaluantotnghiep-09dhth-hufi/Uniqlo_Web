@@ -5,10 +5,13 @@
     display: block;
     display: -webkit-box;
     overflow: hidden;
-
+    font-size: large;
 }
 .Adjust_Image{
     // max-width: 288px;
     // max-height:217px;
     // object-fit: cover;
+}
+.Adjust_Text_Detail{
+    font-size: small;
 }
