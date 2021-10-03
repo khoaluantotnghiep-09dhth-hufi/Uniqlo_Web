@@ -17,11 +17,11 @@ const MainChartExample = attributes => {
     const data1 = []
     const data2 = []
     const data3 = []
-    // for (let i = 0; i <= elements; i++) {
-    //   data1.push(random(50, 1000000))
-    //   data2.push(random(80, 100))
-    //   data3.push(65)
-    // }
+    for (let i = 0; i <= elements; i++) {
+      data1.push(random(50, 250))
+      data2.push(random(80, 100))
+      data3.push(65)
+    }
     console.log(data1);
     return [
       {
@@ -32,23 +32,23 @@ const MainChartExample = attributes => {
         borderWidth: 2,
         data: data1
       },
-      // {
-      //   label: 'My Second dataset',
-      //   backgroundColor: 'transparent',
-      //   borderColor: brandSuccess,
-      //   pointHoverBackgroundColor: brandSuccess,
-      //   borderWidth: 2,
-      //   data: data2
-      // },
-      // {
-      //   label: 'My Third dataset',
-      //   backgroundColor: 'transparent',
-      //   borderColor: brandDanger,
-      //   pointHoverBackgroundColor: brandDanger,
-      //   borderWidth: 1,
-      //   borderDash: [8, 5],
-      //   data: data3
-      // }
+      {
+        label: 'My Second dataset',
+        backgroundColor: 'transparent',
+        borderColor: brandSuccess,
+        pointHoverBackgroundColor: brandSuccess,
+        borderWidth: 2,
+        data: data2
+      },
+      {
+        label: 'My Third dataset',
+        backgroundColor: 'transparent',
+        borderColor: brandDanger,
+        pointHoverBackgroundColor: brandDanger,
+        borderWidth: 1,
+        borderDash: [8, 5],
+        data: data3
+      }
     ]
   })()
   const defaultOptions = (() => {
@@ -67,8 +67,8 @@ const MainChartExample = attributes => {
           ticks: {
             beginAtZero: true,
             maxTicksLimit: 5,
-            stepSize: Math.ceil(1000000 / 5),
-            max: 1000000
+            stepSize: Math.ceil(250 / 5),
+            max: 1000
           },
           gridLines: {
             display: true

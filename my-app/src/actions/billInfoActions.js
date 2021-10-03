@@ -21,6 +21,28 @@ export const fetchBillInfoExchangeResquest = () => {
     });
   };
 };
+
+export const fetchBillToTal = (billTotal) => {
+  return {
+    type: types.FETCH_BILL_TOTAL,
+    billTotal,
+  }
+}
+
+export const fetchBillTotalResquest = () => {
+  return (dispatch) => {
+    return callApi("bills-total", "GET", null).then((response) => {
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+      dispatch(fetchBillToTal(response.data));
+      }
+    });
+  };
+};
+
+
 export const onUpdateBillInfo = (billInfo) => {
   return {
     type: types.UPDATE_BILLINFO,

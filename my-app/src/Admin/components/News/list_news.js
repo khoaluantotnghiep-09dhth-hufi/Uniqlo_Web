@@ -51,14 +51,11 @@ class ListNews extends React.Component {
     };
 
     render() {
-
         var { news } = this.props;
-     
-        console.log("Index: "+news);
-        
         var dataNews = news.map((item, index) => {
             return {...item,index};
         });
+        // const propertyValues = Object.values(news);
         return (
             <>
                 <Link to="/admin/system/news/add">
