@@ -20,6 +20,22 @@ export const fetchProductInfoResquest = (id) => {
     });
   };
 };
+
+export const fetchCountProductInfo = (productInfo) => {
+  return {
+    type: types.COUNT_PRODUCTADMIN,
+    productInfo,
+  };
+};
+
+export const fetchCountProductInfoResquest = () => {
+  return (dispatch) => {
+    return callApi("product-info-count", "GET", null).then((response) => {
+      dispatch(fetchCountProductInfo(response.data));
+    });
+  };
+};
+
 export const fetchProductInfoImport = (productInfo) => {
   return {
     type: types.FETCH_PRODCUTINFO,

@@ -1,7 +1,10 @@
 import React from "react";
 import * as actions from "../../../actions/billInfoActions";
+import * as actionsStaff from "../../../actions/index";
+import * as actionsProductInfo from "../../../actions/product_infoActions";
 import { connect } from "react-redux";
 import { CChartLine } from '@coreui/react-chartjs'
+import { Link } from "react-router-dom";
 import { getStyle, hexToRgba } from '@coreui/utils'
 import {
     CBadge,
@@ -22,6 +25,14 @@ import {
     CDropdownMenu
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faBullseye,
+    faSignOutAlt,
+    faUser,
+    faKey,
+    faTshirt
+} from "@fortawesome/free-solid-svg-icons";
 import ChartLineSimple from '../../charts/ChartLineSimple';
 const brandSuccess = getStyle('success') || '#4dbd74'
 const brandInfo = getStyle('info') || '#20a8d8'
@@ -35,10 +46,25 @@ class test extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchBillTotal()
+        this.props.fetchBillTotal();
+        this.props.fetchStaffCount();
+        this.props.fetchCustomerCount();
+        this.props.fetchProductInfoCount();
     }
     render() {
         var { billTotal } = this.props;
+        var { staff } = this.props;
+        var { customer } = this.props;
+        var { productInfo } = this.props;
+        var dataProductInfoCount = productInfo.map((item, index) => {
+            return item.countProduct;
+        })
+        var dataStaffCount = staff.map((item, index) => {
+            return item.countStaff;
+        })
+        var dataCustomerCount = customer.map((item, index) => {
+            return item.countCustomer;
+        })
         const defaultDatasets = (() => {
             let elements = 27
             var { billTotal } = this.props;
@@ -149,22 +175,68 @@ class test extends React.Component {
         })
         return (
             <>
-                <CRow>
-                    <CCol sm="6" lg="3">
+                <CRow sm="12">
+                    <CCol sm="4" lg="4">
                         <CWidgetDropdown
-                            color="gradient-primary"
-                            header="9.823"
-                            text="Nhân viên trong cửa hàng"
+                            color="gradient-info"
+                            header={dataCustomerCount}
+                            text="Khách hàng trong hệ thống"
                         >
                             <CDropdown>
                                 <CDropdownToggle color="transparent">
                                     <CIcon name="cil-settings" />
                                 </CDropdownToggle>
                                 <CDropdownMenu className="pt-0" placement="bottom-end">
-                                    <CDropdownItem>Danh Sách Nhân Viên</CDropdownItem>
-                                    <CDropdownItem>Another action</CDropdownItem>
-                                    <CDropdownItem>Something else here...</CDropdownItem>
-                                    <CDropdownItem disabled>Disabled action</CDropdownItem>
+                                    <CDropdownItem>
+                                        <Link to="/admin/manage/customers" style={{ color: 'black' }}>
+                                            <FontAwesomeIcon icon={faUser} size="lg" className="mr-2" />
+                                            Danh Sách Khách Hàng
+                                        </Link>
+                                    </CDropdownItem>
+                                </CDropdownMenu>
+                            </CDropdown>
+                        </CWidgetDropdown>
+                    </CCol>
+                    <CCol sm="4" lg="4">
+                        <CWidgetDropdown
+                            color="gradient-primary"
+                            header={dataStaffCount}
+                            text="Nhân viên trong hệ thống"
+                        >
+                            <CDropdown>
+                                <CDropdownToggle color="transparent">
+                                    <CIcon name="cil-settings" />
+                                </CDropdownToggle>
+                                <CDropdownMenu className="pt-0" placement="bottom-end">
+
+                                    <CDropdownItem>
+                                        <Link to="/admin/manage/staffs" style={{ color: 'black' }}>
+                                            <FontAwesomeIcon icon={faUser} size="lg" className="mr-2" />
+                                            Danh Sách Nhân Viên
+                                        </Link>
+                                    </CDropdownItem>
+
+                                </CDropdownMenu>
+                            </CDropdown>
+                        </CWidgetDropdown>
+                    </CCol>
+                    <CCol sm="4" lg="4">
+                        <CWidgetDropdown
+                            color="gradient-danger"
+                            header={dataProductInfoCount}
+                            text="Sản phẩm trong hệ thống"
+                        >
+                            <CDropdown>
+                                <CDropdownToggle color="transparent">
+                                    <CIcon name="cil-settings" />
+                                </CDropdownToggle>
+                                <CDropdownMenu className="pt-0" placement="bottom-end">
+                                    <CDropdownItem>
+                                        <Link to="/admin/manage/products" style={{ color: 'black' }}>
+                                            <FontAwesomeIcon icon={faTshirt} size="lg" className="mr-2" />
+                                            Danh Sách Sản Phẩm
+                                        </Link>
+                                    </CDropdownItem>
                                 </CDropdownMenu>
                             </CDropdown>
                         </CWidgetDropdown>
@@ -212,12 +284,24 @@ class test extends React.Component {
 var mapStateToProps = (state) => {
     return {
         billTotal: state.billTotal,
+        staff: state.staff,
+        customer: state.customer,
+        productInfo: state.productInfo,
     };
 };
 var mapDispatchToProps = (dispatch, props) => {
     return {
         fetchBillTotal: () => {
             return dispatch(actions.fetchBillTotalResquest());
+        },
+        fetchStaffCount: () => {
+            return dispatch(actionsStaff.fetchCountStaffsResquest());
+        },
+        fetchCustomerCount: () => {
+            return dispatch(actionsStaff.fetchCountCustomerResquest());
+        },
+        fetchProductInfoCount: () => {
+            return dispatch(actionsProductInfo.fetchCountProductInfoResquest());
         },
     };
 };

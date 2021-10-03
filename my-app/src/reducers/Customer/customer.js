@@ -11,12 +11,15 @@ var findIndex = (customer, id) => {
   });
   return result;
 }
-var customer= (state = initialState, action) => {
+var customer = (state = initialState, action) => {
   var index = -1;
   var { id } = action;
   switch (action.type) {
     //Lấy Danh Sách Khách Hàng
     case types.FETCH_CUSTOMER:
+      state = action.customer;
+      return [...state];
+    case types.COUNT_CUSTOMER:
       state = action.customer;
       return [...state];
     //Xoá Khách Hàng

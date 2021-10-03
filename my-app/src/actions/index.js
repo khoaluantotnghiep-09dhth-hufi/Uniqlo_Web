@@ -310,8 +310,22 @@ export const fetchStaffs = (staff) => {
 export const fetchStaffsResquest = () => {
   return (dispatch) => {
     return callApi("staffs", "GET", null).then((response) => {
-      console.log(response.data);
       dispatch(fetchStaffs(response.data));
+    });
+  };
+};
+
+export const fetchCountStaffs = (staff) => {
+  return {
+    type: types.FETCH_STAFF,
+    staff,
+  };
+};
+
+export const fetchCountStaffsResquest = () => {
+  return (dispatch) => {
+    return callApi("staff-count", "GET", null).then((response) => {
+      dispatch(fetchCountStaffs(response.data));
     });
   };
 };
@@ -899,6 +913,21 @@ export const fetchCustomerResquest = () => {
   return (dispatch) => {
     return callApi("customers", "GET", null).then((response) => {
       dispatch(fetchCustomer(response.data));
+    });
+  };
+};
+
+export const fetchCountCustomer = (customer) => {
+  return {
+    type: types.COUNT_CUSTOMER,
+    customer,
+  };
+};
+
+export const fetchCountCustomerResquest = () => {
+  return (dispatch) => {
+    return callApi("customer-count", "GET", null).then((response) => {
+      dispatch(fetchCountCustomer(response.data));
     });
   };
 };

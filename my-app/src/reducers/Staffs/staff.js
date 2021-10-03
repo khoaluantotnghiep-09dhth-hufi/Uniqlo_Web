@@ -19,6 +19,10 @@ var staff = (state = initialState, action) => {
       state = action.staff;
 
       return [...state];
+      case types.COUNT_STAFF:
+      state = action.staff;
+
+      return [...state];
     //Xóa Nhân Viên
     case types.DELETE_STAFF:
       index = findIndex(state, id);
