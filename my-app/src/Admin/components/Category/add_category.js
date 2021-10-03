@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faPlus,
     faArrowLeft,
+    faUpload
 } from "@fortawesome/free-solid-svg-icons";
-
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import uniqid from 'uniqid';
@@ -12,6 +12,10 @@ import { Button, Form, Col, Container, Row } from 'react-bootstrap';
 import * as actions from "./../../../actions/index";
 import { toast } from 'react-toastify';
 import Select from 'react-select';
+import ConvertIMG from '../../utils/getBase64';
+//Thư viện img 
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css';
 let isLoadingExternally = false;
 class AddCategory extends React.Component {
     constructor(props) {
@@ -20,8 +24,11 @@ class AddCategory extends React.Component {
             idItem: "",
             txtName: "",
             id_sector: "",
+            ImgPrivew: "",
+            txtImage: "",
             sectorArr: [],
             selectedOption: null,
+            isOpen: false,
         };
 
     }
@@ -53,6 +60,8 @@ class AddCategory extends React.Component {
             this.setState({
                 txtName: result.name,
                 id_sector: result.id_sectors,
+                txtImage: result.image,
+                ImgPrivew: result.image,
             });
         }
     }
@@ -78,29 +87,45 @@ class AddCategory extends React.Component {
             }
         }
     }
+    onChangeImage = (e) => {
+        let data = e.target.files;
+        let file = data[0];
+        if (file) {
+            ConvertIMG.getBase64(file).then(res => {
+                let objectURL = URL.createObjectURL(file);
+                this.setState({
+                    ImgPrivew: objectURL,
+                    txtImage: res
+                })
+            });
+        }
+    }
+    openPreviewIMG = () => {
+        this.setState({
+            isOpen: true
+        })
+    }
     onChange = (e, id) => {
         let coppyState = { ...this.state };
         coppyState[id] = e.target.value;
         this.setState({
             ...coppyState
-        }, () => {
-            console.log("state change", this.state)
         })
-
     };
     checkValidate = () => {
-        let check = ['txtName','selectedOption'];
+        let check = ['txtName', 'selectedOption', 'txtImage'];
         let isValid = true;
-
         if (!this.state[check[0]]) {
             isValid = false;
             toast.error("Vui lòng nhập tên");
-
         }
         if (!this.state[check[1]]) {
             isValid = false;
             toast.error("Vui lòng chọn loại sản phẩm");
-
+        }
+        if (!this.state[check[2]]) {
+            isValid = false;
+            toast.error("Vui lòng chọn ảnh");
         }
         return isValid;
     }
@@ -110,18 +135,20 @@ class AddCategory extends React.Component {
         if (isValid === false) return;
         event.preventDefault();
         var { history } = this.props;
-        var { txtName, id_sector, selectedOption } = this.state;
+        var { txtName, id_sector, selectedOption, txtImage } = this.state;
 
         var category = {
             id: uniqid("category-"),
             name: txtName,
             id_sector: selectedOption.value,
+            image: txtImage
         };
-        console.log("nè",category)
+        console.log("nè", category)
         var categoryUpdate = {
             id: match.params.id_category,
             name: txtName,
             id_sector: selectedOption.value,
+            image: txtImage
         };
         if (match.params.id_category) {
             this.props.onUpdateItemCategory(categoryUpdate);
@@ -133,51 +160,18 @@ class AddCategory extends React.Component {
     };
     render() {
         var { sector } = this.props;
-        let { txtName, id_sector, selectedOption } = this.state;
-        console.log(this.state)
+        let { txtName, id_sector, selectedOption, txtImage, ImgPrivew } = this.state;
         return (
             <Container fluid>
-                <Row>
-                    <Link to="/admin/manage/categories">
-                        <Button type="button" className="btn btn-primary" size="sm">
-                            <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />Trở về
-                        </Button>
-                    </Link>
-                    <Col sm="12">
-                        <Form action="" method="post" onSubmit={this.onSubmitForm}>
-                            <Form.Group className="mb-3" controlId="formBasicObject">
-                                <Form.Label>Tên Đối Tượng</Form.Label>
-                                <Form.Control
-                                    required
-                                    type="text"
-                                    placeholder="Nhập tên danh mục cần thêm..."
-                                    name="txtName"
-                                    value={txtName}
-                                    onChange={(e) => { this.onChange(e, 'txtName') }} />
-                                <Form.Control.Feedback
-                                    type="invalid" >
-                                    Vui lòng nhập tên cần thêm !
-                                </Form.Control.Feedback>
-                            </Form.Group>
-                            {/* <Form.Group className="mb-3" controlId="formBasicObject">
-                                <Form.Label>Loại</Form.Label>
-                                <Form.Select name="form-field-name"
-                                    value={id_sector}
-                                    onChange={(e) => { this.onChange(e, 'id_sector') }}
-                                    labelKey={'Tên'}
-                                    valueKey={'Mã'}
-                                    isLoading={isLoadingExternally}
-                                >
-                                    {sector && sector.length > 0 &&
-                                        sector.map((option, index) => (
+                <Link to="/admin/manage/categories">
+                    <Button type="button" className="btn btn-primary" size="sm">
+                        <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />Trở về
+                    </Button>
+                </Link>
 
-                                            <option value={option.id} key={index}>Mã: {option.id}, Tên: {option.name}</option>
-                                        ))}
-
-                                </Form.Select>
-
-
-                            </Form.Group> */}
+                <Form action="" method="post" onSubmit={this.onSubmitForm}>
+                    <Row>
+                        <Col sm="6">
                             <Form.Group className="mb-3">
                                 <Form.Label>Loại Sản Phẩm</Form.Label>
                                 <Select
@@ -186,6 +180,39 @@ class AddCategory extends React.Component {
                                     options={this.state.sectorArr}
                                 />
                             </Form.Group>
+                        </Col>
+                        <Col sm="6">
+                            <Form.Group className="mb-3" controlId="formBasicObject">
+                                <Form.Label>Tên Danh Mục</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="text"
+                                    placeholder="Nhập tên danh mục cần thêm..."
+                                    name="txtName"
+                                    value={txtName}
+                                    onChange={(e) => { this.onChange(e, 'txtName') }} />
+                            </Form.Group>
+                        </Col>
+                        <Col sm="2">
+                            <Form.Group >
+                                <Form.Label className="border border-dark" style={{ backgroundColor: "#ffe6e6", padding: "10px", marginTop: "100px", cursor: "pointer" }} htmlFor="txtImage">
+                                    <FontAwesomeIcon icon={faUpload} className="mr-2 fa-3x" />Tải Ảnh</Form.Label>
+                                <Form.Control
+                                    type="file"
+                                    id="txtImage"
+                                    name="txtImage"
+                                    hidden
+                                    onChange={(e) => { this.onChangeImage(e) }}
+                                    required
+                                />
+                            </Form.Group>
+                        </Col>
+                        <Col sm="8">
+                            <div style={{ backgroundImage: `url(${ImgPrivew})`, height: "200px", width: "300px", align: "center", background: "center center no-repeat", backgroundSize: "contain", cursor: "pointer", margin: "30px" }}
+                                onClick={() => this.openPreviewIMG()}
+                            ></div>
+                        </Col>
+                        <Col sm="12">
                             <Button type="button"
                                 className="btn btn-danger"
                                 onClick={this.onSubmitForm}
@@ -195,10 +222,19 @@ class AddCategory extends React.Component {
                                     className="mr-2"
                                     size="lg" />Lưu
                             </Button>
-                            {/* </Link> */}
-                        </Form>
-                    </Col>
-                </Row>
+
+                        </Col>
+                    </Row>
+                </Form>
+
+                {
+                    this.state.isOpen === true &&
+                    <Lightbox
+                        mainSrc={this.state.ImgPrivew}
+                        onCloseRequest={() => this.setState({ isOpen: false })}
+                    />
+                }
+
             </Container >
         )
     }

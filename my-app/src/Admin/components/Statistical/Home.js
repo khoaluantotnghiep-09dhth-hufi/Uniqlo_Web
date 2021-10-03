@@ -33,7 +33,7 @@ import {
     faKey,
     faTshirt
 } from "@fortawesome/free-solid-svg-icons";
-import ChartLineSimple from '../../charts/ChartLineSimple';
+
 const brandSuccess = getStyle('success') || '#4dbd74'
 const brandInfo = getStyle('info') || '#20a8d8'
 const brandDanger = getStyle('danger') || '#f86c6b'

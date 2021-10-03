@@ -16,8 +16,7 @@ import {
     faTools,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-
-
+import { Image } from 'react-bootstrap';
 import * as actions from "./../../../actions/index";
 const fields = [
     {
@@ -36,6 +35,7 @@ const fields = [
     },
     { key: 'name', label: 'Tên Danh Mục' },
     { key: 'nameSector', label: 'Loại' },
+    { key: 'image', label: 'Ảnh' },
     {
         key: 'Thao Tác',
         label: 'Thao Tác',
@@ -107,7 +107,13 @@ class ListCategory extends React.Component {
                                                 <td>
                                                     {index + 1}
                                                 </td>
-                                            )
+                                            ),
+                                        'image':
+                                            (item, index) => (
+                                                <td>
+                                                    <Image style={{ width: "200px", height: "200px" }} src={item.image} thumbnail />
+                                                </td>
+                                            ),
                                     }}
                                 />
                             </CCardBody>
