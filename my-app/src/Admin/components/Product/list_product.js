@@ -7,6 +7,7 @@ import {
     CDataTable,
     CRow,
     CButton,
+    CBadge
 } from '@coreui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -18,13 +19,13 @@ import {
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import * as actions from "./../../../actions/productAdminActions";
-import { Image } from 'react-bootstrap';
+import { Image, Alert } from 'react-bootstrap';
 const fields = [
     {
         key: 'STT',
         label: 'STT',
         _style: { width: '1%' },
-        sorter: false,
+        sorter: true,
         filter: false
     },
     {
@@ -58,24 +59,24 @@ const fields = [
         filter: false
     },
     {
-        key: 'dislike_product',
-        label: 'Không Thích',
-        _style: { width: '1%' },
-        filter: false
-    },
-    {
         key: 'nameCategory',
         label: 'Danh Mục',
-        _style: { width: '1%' },
+        _style: { width: '0%' },
     },
     {
         key: 'namePromotion',
         label: 'Khuyến Mãi',
-        _style: { width: '1%' },
+        _style: { width: '0%' },
     },
     {
         key: 'image',
         label: 'Ảnh',
+        filter: false
+    },
+    {
+        key: 'status',
+        label: 'Trạng Thái',
+        _style: { width: '1%' },
         filter: false
     },
     {
@@ -86,6 +87,13 @@ const fields = [
         filter: false
     }
 ]
+const getBadge = (status) => {
+    switch (status) {
+        case 0: return 'success'
+        case 1: return 'warning'
+        default: return 'primary'
+    }
+}
 class ListProducts extends React.Component {
     componentDidMount() {
         this.props.fetchProducts();
@@ -121,7 +129,6 @@ class ListProducts extends React.Component {
                                     pagination
                                     sorter
                                     columnFilter
-                                    tableFilter
                                     footer
                                     itemsPerPageSelect
                                     scopedSlots={{
@@ -133,7 +140,7 @@ class ListProducts extends React.Component {
                                                             <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
                                                         </CButton>
                                                     </Link>
-                                                    <Link to={`/admin/manage/product-info/add/${item.id}`}>
+                                                    <Link to={`/admin/manage/product-info/add/${item.id}/${item.status}`}>
                                                         <CButton
                                                             type="button"
                                                             className="btn btn-danger"
@@ -167,6 +174,14 @@ class ListProducts extends React.Component {
                                             (item, index) => (
                                                 <td>
                                                     {index + 1}
+                                                </td>
+                                            ),
+                                        'status':
+                                            (item, index) => (
+                                                <td>
+                                                    <Alert variant={getBadge(item.status)}>
+                                                        {item.status === 0 ? 'Còn Kinh Doanh' : 'Ngừng Kinh Doanh'}
+                                                    </Alert>
                                                 </td>
                                             ),
                                         'image':

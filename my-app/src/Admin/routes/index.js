@@ -91,7 +91,7 @@ const routes = [
     { path: '/admin/manage/products', exact: true, name: 'Danh Sách Sản Phẩm', component: ListProducts },
     { path: '/admin/manage/product/add', exact: true, name: 'Thêm Sản Phẩm Mới', component: AddProduct },
     { path: '/admin/manage/product/:id_product/edit', exact: true, name: 'Sửa Sản Phẩm', component: AddProduct },
-    { path: '/admin/manage/product-info/add/:id_product', exact: true, name: 'Thêm Chi Tiết Sản Phẩm Mới', component: AddProductInfo },
+    { path: '/admin/manage/product-info/add/:id_product/:status', exact: true, name: 'Thêm Chi Tiết Sản Phẩm Mới', component: AddProductInfo },
     { path: '/admin/manage/product-info/:id_product_info/edit', exact: true, name: 'Sửa Chi Tiết Sản Phẩm', component: EditProductInfo },
 
     { path: '/admin/manage/staffs', exact: true, name: 'Danh Sách Nhân Viên', component: ListStaffs },

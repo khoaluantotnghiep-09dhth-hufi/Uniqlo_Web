@@ -32,6 +32,7 @@ class addProduct extends React.Component {
             ImgPrivew: "",
             promotionArr: [],
             categoryArr: [],
+            txtStatus: '',
             isOpen: false,
         };
     }
@@ -57,6 +58,7 @@ class addProduct extends React.Component {
                 id_promotion: result.id_promotion,
                 id_category: result.id_category,
                 ImgPrivew: result.image,
+                txtStatus: result.status,
             });
         }
     }
@@ -90,6 +92,7 @@ class addProduct extends React.Component {
                     txtImage: result.image,
                     id_promotion: result.id_promotion,
                     id_category: result.id_category,
+                    txtStatus: result.status,
                 });
             }
         }
@@ -99,7 +102,8 @@ class addProduct extends React.Component {
         coppyState[id] = e.target.value;
         this.setState({
             ...coppyState
-        })
+        }, () =>
+            console.log(this.state))
     }
     onChangeImage = (e) => {
         let data = e.target.files;
@@ -120,7 +124,7 @@ class addProduct extends React.Component {
         })
     }
     checkValidate = () => {
-        let check = ['txtName', 'txtPrice', 'txtDescription', 'txtImage', 'id_category', 'id_promotion'];
+        let check = ['txtName', 'txtPrice', 'txtDescription', 'txtImage', 'id_category', 'id_promotion', 'txtStatus'];
         let isValid = true;
         if (!this.state[check[0]]) {
             isValid = false;
@@ -146,6 +150,10 @@ class addProduct extends React.Component {
             isValid = false;
             toast.error("Vui lòng chọn khuyến mãi áp dụng");
         }
+        if (!this.state[check[6]]) {
+            isValid = false;
+            toast.error("Vui lòng chọn trạng thái !");
+        }
         return isValid;
     }
     onSubmitForm = (event) => {
@@ -154,7 +162,7 @@ class addProduct extends React.Component {
         event.preventDefault();
         var { match } = this.props;
         var { history } = this.props;
-        var { idItem, txtName, txtPrice, txtDescription, txtImage, id_promotion, id_category } = this.state;
+        var { idItem, txtName, txtPrice, txtDescription, txtImage, id_promotion, id_category, txtStatus } = this.state;
         var product = {
             id: uniqid("product-"),
             name: txtName,
@@ -163,6 +171,7 @@ class addProduct extends React.Component {
             image: txtImage,
             id_category: id_category,
             id_promotion: id_promotion,
+            status: txtStatus,
         };
         var productUpdate = {
             idItem: match.params.id_product,
@@ -172,6 +181,7 @@ class addProduct extends React.Component {
             image: txtImage,
             id_category: id_category,
             id_promotion: id_promotion,
+            status: txtStatus,
         };
 
         if (match.params.id_product) {
@@ -186,7 +196,7 @@ class addProduct extends React.Component {
     render() {
         var { promotion } = this.props;
         var { category } = this.props;
-        let { txtName, txtPrice, txtDescription, id_category, id_promotion, ImgPrivew } = this.state;
+        let { txtName, txtPrice, txtDescription, id_category, id_promotion, ImgPrivew, txtStatus } = this.state;
         return (
             <Container fluid>
                 <Link to="/admin/manage/products">
@@ -211,10 +221,6 @@ class addProduct extends React.Component {
                                             onChange={(e) => { this.onChange(e, 'txtName') }}
                                             required
                                         />
-                                        <Form.Control.Feedback
-                                            type="invalid" >
-                                            Vui lòng nhập tên cần thêm !
-                                        </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
                                 <Col sm="2">
@@ -230,11 +236,6 @@ class addProduct extends React.Component {
                                             onChange={(e) => { this.onChange(e, 'txtPrice') }}
                                             required
                                         />
-                                        <Form.Control.Feedback
-                                            type="invalid" >
-                                            Vui lòng nhập tên cần thêm !
-                                        </Form.Control.Feedback>
-
                                     </Form.Group>
                                 </Col>
                                 <Col sm="2">
@@ -246,7 +247,6 @@ class addProduct extends React.Component {
                                             labelKey={'Tên'}
                                             valueKey={'Mã'}
                                             isLoading={isLoadingExternally}
-
                                         >
                                             {category && category.length > 0 &&
                                                 category.map((option, index) => (
@@ -256,7 +256,7 @@ class addProduct extends React.Component {
                                         </Form.Select>
                                     </Form.Group>
                                 </Col>
-                                <Col sm="4">
+                                <Col sm="2">
                                     <Form.Group className="mb-3" >
                                         <Form.Label>Khuyến Mãi</Form.Label>
                                         <Form.Select name="form-field-name"
@@ -270,6 +270,23 @@ class addProduct extends React.Component {
                                                 promotion.map((option, index) => (
                                                     <option value={option.id} key={index}>Mã: {option.id}, Tên: {option.name}</option>
                                                 ))}
+                                        </Form.Select>
+                                    </Form.Group>
+                                </Col>
+                                <Col sm="2">
+                                    <Form.Group className="mb-3" >
+                                        <Form.Label>Trạng Thái</Form.Label>
+                                        <Form.Select name="form-field-name"
+                                            value={txtStatus}
+                                            onChange={(e) => { this.onChange(e, 'txtStatus') }}
+                                            labelKey={'Tên'}
+                                            valueKey={'Mã'}
+                                            isLoading={isLoadingExternally}
+                                        >
+                                            <option value="2">Chọn</option>
+                                            <option value="0">Còn Kinh Doanh</option>
+                                            <option value="1">Ngừng Kinh Doanh</option>
+
                                         </Form.Select>
                                     </Form.Group>
                                 </Col>
@@ -304,7 +321,6 @@ class addProduct extends React.Component {
                                             rows="8"
                                             required
                                         ></textarea>
-
                                     </Form.Group>
                                 </Col>
                             </Row>

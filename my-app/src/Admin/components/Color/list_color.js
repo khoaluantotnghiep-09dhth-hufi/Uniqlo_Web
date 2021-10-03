@@ -22,7 +22,6 @@ const fields = [
   {
     key: 'STT',
     label: 'STT',
-    sorter: false,
     filter: false
   },
   {

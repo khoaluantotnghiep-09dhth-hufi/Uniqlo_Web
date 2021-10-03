@@ -194,152 +194,206 @@ class addProduct extends React.Component {
         var dataProductInfo = productInfo.map((item, index) => {
             return item;
         })
+        var { match } = this.props;
         let { txtQuantity } = this.state;
-        return (
-            <Container fluid>
-                <Link to="/admin/manage/products">
-                    <Button type="button" className="btn btn-primary" size="sm">
-                        <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />
-                        Trở về
-                    </Button>
-                </Link>
-                <CRow>
-                    <Col sm="12">
-                        <Form action="" method="post" onSubmit={() => this.onSubmitForm()}>
-                            <Row sm="12">
-                                <Col sm="2">
-                                    <Form.Group className="mb-3" controlId="formBasicObject">
-                                        <Form.Label>Kích Cỡ</Form.Label>
-                                        <Form.Select name="form-field-name"
-                                            value={this.state.id_size}
-                                            onChange={(e) => { this.onChange(e, 'id_size') }}
-                                            labelKey={'Tên'}
-                                            valueKey={'Mã'}
-                                            isLoading={isLoadingExternally}
+        if (match.params.status === "0") {
+            return (
+                <Container fluid>
+                    <Link to="/admin/manage/products">
+                        <Button type="button" className="btn btn-primary" size="sm">
+                            <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />
+                            Trở về
+                        </Button>
+                    </Link>
+                    <CRow>
+                        <Col sm="12">
+                            <Form action="" method="post" onSubmit={() => this.onSubmitForm()}>
+                                <Row sm="12">
+                                    <Col sm="2">
+                                        <Form.Group className="mb-3" controlId="formBasicObject">
+                                            <Form.Label>Kích Cỡ</Form.Label>
+                                            <Form.Select name="form-field-name"
+                                                value={this.state.id_size}
+                                                onChange={(e) => { this.onChange(e, 'id_size') }}
+                                                labelKey={'Tên'}
+                                                valueKey={'Mã'}
+                                                isLoading={isLoadingExternally}
 
-                                        >
+                                            >
 
-                                            {size && size.length > 0 &&
-                                                size.map((option, index) => (
-                                                    <option value={option.id} key={index}>{option.name}</option>
-                                                ))}
-                                        </Form.Select>
-                                    </Form.Group>
-                                </Col>
-                                <Col sm="2">
-                                    <Form.Group className="mb-3" controlId="formBasicObject">
-                                        <Form.Label>Màu</Form.Label>
-                                        <Form.Select name="form-field-name"
-                                            value={this.state.id_color}
-                                            onChange={(e) => { this.onChange(e, 'id_color') }}
-                                            labelKey={'Tên'}
-                                            valueKey={'Mã'}
-                                            isLoading={isLoadingExternally}
-                                        >
+                                                {size && size.length > 0 &&
+                                                    size.map((option, index) => (
+                                                        <option value={option.id} key={index}>{option.name}</option>
+                                                    ))}
+                                            </Form.Select>
+                                        </Form.Group>
+                                    </Col>
+                                    <Col sm="2">
+                                        <Form.Group className="mb-3" controlId="formBasicObject">
+                                            <Form.Label>Màu</Form.Label>
+                                            <Form.Select name="form-field-name"
+                                                value={this.state.id_color}
+                                                onChange={(e) => { this.onChange(e, 'id_color') }}
+                                                labelKey={'Tên'}
+                                                valueKey={'Mã'}
+                                                isLoading={isLoadingExternally}
+                                            >
 
-                                            {color && color.length > 0 &&
-                                                color.map((option, index) => (
-                                                    <option value={option.id} key={index}>{option.name}</option>
-                                                ))}
-                                        </Form.Select>
-                                    </Form.Group>
-                                </Col>
-                                <Col sm="4">
-                                    <Form.Group >
-                                        <Form.Label htmlFor="exampleFormControlTextarea1">Số Lượng</Form.Label>
-                                        <Form.Control
-                                            type="number"
-                                            id="txtQuantity"
-                                            name="txtQuantity"
-                                            placeholder="Số Lượng..."
-                                            value={txtQuantity}
-                                            onChange={(e) => { this.onChange(e, 'txtQuantity') }}
-                                            required
-                                        />
-                                        <Form.Control.Feedback
-                                            type="invalid" >
-                                            Vui lòng nhập tên cần thêm !
-                                        </Form.Control.Feedback>
+                                                {color && color.length > 0 &&
+                                                    color.map((option, index) => (
+                                                        <option value={option.id} key={index}>{option.name}</option>
+                                                    ))}
+                                            </Form.Select>
+                                        </Form.Group>
+                                    </Col>
+                                    <Col sm="4">
+                                        <Form.Group >
+                                            <Form.Label htmlFor="exampleFormControlTextarea1">Số Lượng</Form.Label>
+                                            <Form.Control
+                                                type="number"
+                                                id="txtQuantity"
+                                                name="txtQuantity"
+                                                placeholder="Số Lượng..."
+                                                value={txtQuantity}
+                                                onChange={(e) => { this.onChange(e, 'txtQuantity') }}
+                                                required
+                                            />
+                                            <Form.Control.Feedback
+                                                type="invalid" >
+                                                Vui lòng nhập tên cần thêm !
+                                            </Form.Control.Feedback>
 
-                                    </Form.Group>
-                                </Col>
-                                <Col sm="10">
-                                    <Form.Group className="d-flex justify-content-center">
+                                        </Form.Group>
+                                    </Col>
+                                    <Col sm="10">
+                                        <Form.Group className="d-flex justify-content-center">
 
-                                        <Button type="button" className="btn btn-danger"
-                                            onClick={this.onSubmitForm}
-                                        > <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg"
-                                            />Lưu</Button>
-                                    </Form.Group>
-                                </Col>
-                            </Row>
-                        </Form>
-                    </Col>
+                                            <Button type="button" className="btn btn-danger"
+                                                onClick={this.onSubmitForm}
+                                            > <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg"
+                                                />Lưu</Button>
+                                        </Form.Group>
+                                    </Col>
+                                </Row>
+                            </Form>
+                        </Col>
 
-                </CRow>
-                <CRow>
-                    <CCol xs="12" lg="24">
-                        <CCard>
-                            <CCardHeader>
-                                Danh Sách Chi Tiết Sản Phẩm
-                            </CCardHeader>
-                            <CCardBody>
-                                <CDataTable
-                                    items={dataProductInfo}
-                                    fields={fields}
-                                    itemsPerPage={5}
-                                    pagination
-                                    sorter
-                                    columnFilter
-                                    itemsPerPageSelect
-                                    scopedSlots={{
-                                        'Thao Tác':
-                                            (item) => (
-                                                <td>
-                                                    <Link to={`/admin/manage/product-info/${item.id}/edit`}>
-                                                        <CButton type="button" className="btn btn-primary"
+                    </CRow>
+                    <CRow>
+                        <CCol xs="12" lg="24">
+                            <CCard>
+                                <CCardHeader>
+                                    Danh Sách Chi Tiết Sản Phẩm
+                                </CCardHeader>
+                                <CCardBody>
+                                    <CDataTable
+                                        items={dataProductInfo}
+                                        fields={fields}
+                                        itemsPerPage={5}
+                                        pagination
+                                        sorter
+                                        columnFilter
+                                        itemsPerPageSelect
+                                        scopedSlots={{
+                                            'Thao Tác':
+                                                (item) => (
+                                                    <td>
+                                                        <Link to={`/admin/manage/product-info/${item.id}/edit`}>
+                                                            <CButton type="button" className="btn btn-primary"
+                                                            >
+                                                                <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
+                                                            </CButton>
+                                                        </Link>
+                                                        <CButton type="button" className="btn btn-warning"
+                                                            onClick={() => { this.onDeleteProductInfo(item.id) }}
                                                         >
-                                                            <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
+                                                            <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
                                                         </CButton>
-                                                    </Link>
-                                                    <CButton type="button" className="btn btn-warning"
-                                                        onClick={() => { this.onDeleteProductInfo(item.id) }}
-                                                    >
-                                                        <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
-                                                    </CButton>
-                                                </td>
-                                            ),
-                                        'STT':
-                                            (item, index) => (
-                                                <td>
-                                                    {index + 1}
-                                                </td>
-                                            ),
-                                        'image':
-                                            (item, index) => (
-                                                <td>
-                                                    <Image style={{ width: "300px", height: "300px" }} src={item.image} thumbnail />
-                                                </td>
-                                            ),
-                                        // "nameColor": (item) => (
-                                        //     <td>
-                                        //         <Alert variant={getBadge(item.nameColor)}>
-                                        //             {/* {item.status === 0 ? 'Chưa Giao' : 'Đã Giao'} */}
-                                        //         </Alert>
-
-
-                                        //     </td>
-                                        // ),
-                                    }}
-                                />
-                            </CCardBody>
-                        </CCard>
-                    </CCol>
-
-
-                </CRow>
-            </Container>
-        )
+                                                    </td>
+                                                ),
+                                            'STT':
+                                                (item, index) => (
+                                                    <td>
+                                                        {index + 1}
+                                                    </td>
+                                                ),
+                                            'image':
+                                                (item, index) => (
+                                                    <td>
+                                                        <Image style={{ width: "300px", height: "300px" }} src={item.image} thumbnail />
+                                                    </td>
+                                                ),
+                                        }}
+                                    />
+                                </CCardBody>
+                            </CCard>
+                        </CCol>
+                    </CRow>
+                </Container>
+            )
+        }
+        else {
+            return (
+                <Container fluid>
+                    <Link to="/admin/manage/products">
+                        <Button type="button" className="btn btn-primary" size="sm">
+                            <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />
+                            Trở về
+                        </Button>
+                    </Link>
+                    <CRow>
+                        <CCol xs="12" lg="24">
+                            <CCard>
+                                <CCardHeader>
+                                    Danh Sách Chi Tiết Sản Phẩm
+                                </CCardHeader>
+                                <CCardBody>
+                                    <CDataTable
+                                        items={dataProductInfo}
+                                        fields={fields}
+                                        itemsPerPage={5}
+                                        pagination
+                                        sorter
+                                        columnFilter
+                                        itemsPerPageSelect
+                                        scopedSlots={{
+                                            'Thao Tác':
+                                                (item) => (
+                                                    <td>
+                                                        <Link to={`/admin/manage/product-info/${item.id}/edit`}>
+                                                            <CButton type="button" className="btn btn-primary"
+                                                            >
+                                                                <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
+                                                            </CButton>
+                                                        </Link>
+                                                        <CButton type="button" className="btn btn-warning"
+                                                            onClick={() => { this.onDeleteProductInfo(item.id) }}
+                                                        >
+                                                            <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
+                                                        </CButton>
+                                                    </td>
+                                                ),
+                                            'STT':
+                                                (item, index) => (
+                                                    <td>
+                                                        {index + 1}
+                                                    </td>
+                                                ),
+                                            'image':
+                                                (item, index) => (
+                                                    <td>
+                                                        <Image style={{ width: "300px", height: "300px" }} src={item.image} thumbnail />
+                                                    </td>
+                                                ),
+                                        }}
+                                    />
+                                </CCardBody>
+                            </CCard>
+                        </CCol>
+                    </CRow>
+                </Container>
+            )
+        }
     }
 }
 var mapStateToProps = (state) => {
