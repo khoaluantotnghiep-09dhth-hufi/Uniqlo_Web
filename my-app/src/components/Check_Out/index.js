@@ -41,6 +41,7 @@ class index extends Component {
       wards: [],
       id_city: 1,
       id_district: 1,
+      isCheckOrder: false,
     };
   }
   componentDidMount() {
@@ -227,7 +228,14 @@ class index extends Component {
       if (bills) {
         this.props.onBillCancel(bills);
         toast.success("Khách Hàng Đã Yêu Cầu Hủy Đơn Thành Công, WebSocket");
-      }
+      } 
+      this.setState({
+        isCheckOrder: true,
+      });
+    }else {       
+      this.setState({
+        isCheckOrder: false,
+      });       
     }
   };
   onHandleChange = (event) => {
@@ -240,7 +248,17 @@ class index extends Component {
   };
   render() {
     var { cities, display, districts, wards, txtEmail, txtHoTen, txtSDT, txtDiaChi } = this.state;
-
+    var { isCheckOrder } = this.state;
+    console.log(isCheckOrder);
+    if (isCheckOrder) {
+      return (
+        <Redirect
+          to={{
+            pathname: "/account",
+          }}
+        />
+      );
+    }
     return (
       <Container style={{ paddingTop: "5%", paddingBottom: "5%" }}>
         <Row>
