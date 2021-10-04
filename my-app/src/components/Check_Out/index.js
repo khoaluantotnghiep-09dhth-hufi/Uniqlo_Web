@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
-
+import emailjs from 'emailjs-com';
 import {
   Container,
   Row,
@@ -144,7 +144,7 @@ class index extends Component {
     }
     return total;
   };
-  onSubmit = (e) => {};
+  onSubmit = (e) => {  };
   onHandleSubmitForm = (e) => {
     e.preventDefault();
     var {
@@ -232,6 +232,7 @@ class index extends Component {
       this.setState({
         isCheckOrder: true,
       });
+      this.sendEmail(e);
     }else {       
       this.setState({
         isCheckOrder: false,
@@ -246,12 +247,25 @@ class index extends Component {
       [name]: value,
     });
   };
+
+sendEmail =(e) => {
+    e.preventDefault();
+    emailjs.sendForm('gmail', 'gmail_template', e.target, 'user_Kb6t170ZY6RBAoo92zlwi')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+    e.target.reset();
+  }
   render() {
     var { cities, display, districts, wards, txtEmail, txtHoTen, txtSDT, txtDiaChi } = this.state;
     var { isCheckOrder } = this.state;
+    
     console.log(isCheckOrder);
     if (isCheckOrder) {
       return (
+        this.onSubmit(),
         <Redirect
           to={{
             pathname: "/account",
