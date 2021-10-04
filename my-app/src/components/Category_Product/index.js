@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Dropdown } from "react-bootstrap";
-import Silder_Collection from "./../Slider_Collection/index";
+
 import Slider from "../../components/Slider/index";
 
 import { connect } from "react-redux";
@@ -153,29 +153,7 @@ class index extends Component {
     var result = null;
 
     var id_Category = match.params.name_category;
-    // axios
-    // .get(`http://127.0.0.1:8000/products-category/${id_Category}`)
-    // .then(res => {
-    //   const data= res.data;
-    //  console.log(data)
-    //   const slice = data.slice(
-    //     this.state.offset,
-    //     this.state.offset + this.state.perPage
-    //   );
-    //   result = slice.map((product) => (
-    //     <React.Fragment>
-    //       <Col lg="3" className="mt-4">
-    //         <Item key={product.id} product={product} />
-    //       </Col>
-    //     </React.Fragment>
-    //   ));
-    // this.setState({
-    //   pageCount: Math.ceil(data.length / this.state.perPage),
-
-    //  result
-    // });
-    // })
-
+    
     var data = products_category.filter(
       (product) => product.nameCategory === id_Category
     );
