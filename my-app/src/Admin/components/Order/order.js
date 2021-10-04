@@ -25,19 +25,74 @@ const formatter = new Intl.NumberFormat("vi-VN", {
 });
 const options = { dateStyle: "short" };
 const fields = [
-  { key: "index", label: "STT" },
-  { key: "id", label: "Mã HD" },
-  { key: "order_date", label: "Ngày Đặt Hàng" },
-  { key: "delivery_date", label: "Ngày Giao Hàng" },
-  { key: "name_customer", label: "Tên Khách Hàng" },
-  { key: "address", label: "Địa Chỉ" },
-  { key: "phone", label: "SDT" },
-  { key: "email", label: "Email" },
-  { key: "total_quantity", label: "Tổng Số Lượng" },
-  { key: "total", label: "Tổng Tiền" },
-  { key: "note", label: "Ghi Chú" },
-  { key: "status", label: "Tình Trạng" },
-  "Hành Động",
+  {
+    key: "index",
+    label: "STT",
+    _style: { width: '1%' },
+    sorter: false,
+    filter: false
+
+  },
+  {
+    key: "id",
+    label: "Mã HD",
+    _style: { width: '1%' },
+    sorter: false,
+    filter: false
+
+  },
+  {
+    key: "order_date",
+    label: "Ngày Đặt Hàng"
+
+  },
+  {
+    key: "delivery_date",
+    label: "Ngày Giao Hàng"
+  },
+  {
+    key: "name_customer",
+    label: "Tên Khách Hàng"
+  },
+  {
+    key: "address",
+    label: "Địa Chỉ"
+  },
+  {
+    key: "phone",
+    label: "SDT"
+  },
+  {
+    key: "email",
+    label: "Email"
+  },
+  {
+    key: "total_quantity",
+    label: "Tổng Số Lượng",
+    _style: { width: '1%' },
+  },
+  {
+    key: "total",
+    label: "Tổng Tiền"
+  },
+  {
+    key: "note",
+    label: "Ghi Chú"
+  },
+  {
+    key: "status",
+    label: "Tình Trạng",
+    _style: { width: '1%' },
+    filter: false
+
+  },
+  {
+    key: "Hành Động",
+    label: "Hành Động",
+    _style: { width: '1%' },
+    filter: false
+
+  },
 ];
 
 class ListOrder extends React.Component {
@@ -85,31 +140,34 @@ class ListOrder extends React.Component {
                   scopedSlots={{
                     "Hành Động": (item) => (
                       <td>
-                        <Link to={`/admin/system/order/${item.id}/edit`}>
-                          <CButton type="button" className="btn btn-primary">
+                        {item.status === 0 ?
+                          <Link to={`/admin/system/order/${item.id}/edit`}>
+                            <CButton type="button" className="btn btn-primary">
+                              <FontAwesomeIcon
+                                icon={faCheck}
+                                className="mr-2"
+                                size="lg"
+                              />
+                              Xác Nhận Đơn
+                            </CButton>
+                          </Link>
+                          : ''}
+                        {item.status === 0 ?
+                          <CButton
+                            type="button"
+                            className="btn btn-warning"
+                            onClick={() => {
+                              this.onDeleteBill(item.id);
+                            }}
+                          >
                             <FontAwesomeIcon
-                              icon={faCheck}
+                              icon={faTimes}
                               className="mr-2"
                               size="lg"
                             />
-                            Xác Nhận Đơn
+                            Hủy Đơn
                           </CButton>
-                        </Link>
-
-                        <CButton
-                          type="button"
-                          className="btn btn-warning"
-                          onClick={() => {
-                            this.onDeleteBill(item.id);
-                          }}
-                        >
-                          <FontAwesomeIcon
-                            icon={faTimes}
-                            className="mr-2"
-                            size="lg"
-                          />
-                          Hủy Đơn
-                        </CButton>
+                          : ''}
                       </td>
                     ),
                     status: (item) => (

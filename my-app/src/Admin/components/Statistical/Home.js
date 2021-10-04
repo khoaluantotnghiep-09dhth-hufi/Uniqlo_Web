@@ -13,12 +13,8 @@ import {
     CButtonGroup,
     CCard,
     CCardBody,
-    CCardFooter,
-    CCardHeader,
     CCol,
-    CProgress,
     CRow,
-    CCallout,
     CWidgetDropdown,
     CDropdown,
     CDropdownToggle,
@@ -31,7 +27,7 @@ import {
     faBullseye,
     faSignOutAlt,
     faUser,
-    faKey,
+    faListUl,
     faTshirt
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -160,7 +156,7 @@ class Home extends React.Component {
                                 <CDropdownMenu className="pt-0" placement="bottom-end">
                                     <CDropdownItem>
                                         <Link to="/admin/system/order/all" style={{ color: 'black' }}>
-                                            <FontAwesomeIcon icon={faUser} size="lg" className="mr-2" />
+                                            <FontAwesomeIcon icon={faListUl} size="lg" className="mr-2" />
                                             Danh Sách Đơn Hàng
                                         </Link>
                                     </CDropdownItem>

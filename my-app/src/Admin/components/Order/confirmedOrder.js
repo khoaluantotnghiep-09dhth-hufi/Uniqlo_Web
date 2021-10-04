@@ -17,19 +17,18 @@ import {
 } from "@coreui/react";
 
 const fields = [
-  
-  { key: "index", label:"STT" },
-        { key: "order_date", label: "Ngày Đặt Hàng" },
-        { key: "delivery_date", label: "Ngày Giao Hàng" },
-        { key: "name_customer", label: "Tên Khách Hàng" },
-        { key: "address", label: "Địa Chỉ" },
-        { key: "phone", label: "SDT" },
-        { key: "email", label: "Email" },
-        { key: "total_quantity", label: "Tổng Số Lượng" },
-        { key: "total", label: "Tổng Tiền" },
-        { key: "note", label: "Ghi Chú" },
-        { key: "status", label: "Tình Trạng" },
-  "Hành Động",
+
+  { key: "index", label: "STT" },
+  { key: "order_date", label: "Ngày Đặt Hàng" },
+  { key: "delivery_date", label: "Ngày Giao Hàng" },
+  { key: "name_customer", label: "Tên Khách Hàng" },
+  { key: "address", label: "Địa Chỉ" },
+  { key: "phone", label: "SDT" },
+  { key: "email", label: "Email" },
+  { key: "total_quantity", label: "Tổng Số Lượng" },
+  { key: "total", label: "Tổng Tiền" },
+  { key: "note", label: "Ghi Chú" },
+  { key: "status", label: "Tình Trạng" },
 ];
 
 
@@ -76,26 +75,8 @@ class OrderConfirmed extends React.Component {
                     status: (item) => (
                       <td>
                         <Alert variant={this.getBadge(item.status)}>
-                        {  item.status===0?'Chưa Xác Nhận':'Đã Xác Nhận'}
+                          {item.status === 0 ? 'Chưa Xác Nhận' : 'Đã Xác Nhận'}
                         </Alert>
-                      </td>
-                    ),
-                    "Hành Động": (item) => (
-                      <td>
-                        <CButton
-                          type="button"
-                          className="btn btn-warning"
-                          onClick={() => {
-                            this.onDeleteBill(item.id);
-                          }}
-                        >
-                          <FontAwesomeIcon
-                            icon={faTimes}
-                            className="mr-2"
-                            size="lg"
-                          />
-                          Xóa
-                        </CButton>
                       </td>
                     ),
                     order_date: (item) => (
