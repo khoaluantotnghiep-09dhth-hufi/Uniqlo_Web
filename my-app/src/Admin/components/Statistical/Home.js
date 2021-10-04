@@ -61,7 +61,6 @@ class Home extends React.Component {
         var dataBillStatusEqual0 = bill.map((item, index) => {
             return item.countStatus;
         })
-        console.log(dataBillStatusEqual0)
         var dataProductInfoCount = productInfo.map((item, index) => {
             return item.countProduct;
         })
