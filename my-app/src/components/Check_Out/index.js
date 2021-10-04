@@ -22,15 +22,15 @@ import API_Address from "./../../Admin/utils/Api_Address_CheckOut";
 import { toast } from "react-toastify";
 
 const socket = io("http://localhost:3008");
-
+var sessionUser = JSON.parse(sessionStorage.getItem("client"));
 class index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      txtEmail: "",
-      txtHoTen: "",
-      txtSDT: "",
-      txtDiaChi: "",
+      txtEmail: sessionUser.email,
+      txtHoTen: sessionUser.name,
+      txtSDT: sessionUser.phone,
+      txtDiaChi: sessionUser.address,
       txtCity: "",
       txtPhuong: "",
       txtXa: "",
@@ -184,6 +184,19 @@ class index extends Component {
       quantity: item.quantity,
     }));
 
+    if(this.refs.fieldCity.value === "Tỉnh, Thành Phố"){
+      toast.error(<div>Đặt hàng thất bại.<br />Vui lòng chọn Tỉnh, Thành Phố!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+      return;
+    }
+    if(this.refs.fieldDistrict.value === "Quận, Huyện"){
+      toast.error(<div>Đặt hàng thất bại.<br />Vui lòng chọn Quận, Huyện!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+      return;
+    }
+    if(this.refs.fieldWards.value === "Phường, Xã"){
+      toast.error(<div>Đặt hàng thất bại.<br />Vui lòng chọn Phường, Xã!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+      return;
+    }
+
     if (bill && bill_info) {
       this.props.onCreateBill(bill);
       this.props.onCreateBillInfo(bill_info);
@@ -226,7 +239,7 @@ class index extends Component {
     });
   };
   render() {
-    var { cities, display, districts, wards } = this.state;
+    var { cities, display, districts, wards, txtEmail, txtHoTen, txtSDT, txtDiaChi } = this.state;
 
     return (
       <Container style={{ paddingTop: "5%", paddingBottom: "5%" }}>
@@ -240,6 +253,7 @@ class index extends Component {
                   placeholder="Email"
                   onChange={this.onHandleChange}
                   name="txtEmail"
+                  value={txtEmail}
                   required
                   autofocus
                 />
@@ -251,6 +265,7 @@ class index extends Component {
                   placeholder="Họ và Tên"
                   onChange={this.onHandleChange}
                   name="txtHoTen"
+                  value={txtHoTen}
                   autofocus
                   required
                 />
@@ -264,6 +279,7 @@ class index extends Component {
                   name="txtSDT"
                   minlength="10"
                   pattern="^[0-9]*$"
+                  value={txtSDT}
                   required
                   autofocus
                 />
@@ -275,6 +291,7 @@ class index extends Component {
                   placeholder="Địa Chỉ"
                   onChange={this.onHandleChange}
                   name="txtDiaChi"
+                  value={txtDiaChi}
                   required
                   autofocus
                 />
@@ -285,6 +302,7 @@ class index extends Component {
                   defaultValue={display}
                   onChange={this.handleChangeDistricts}
                   name="txtCity"
+                  ref="fieldCity"
                 >
                   <option>Tỉnh, Thành Phố</option>
                   {cities.map((city, index) => {
@@ -301,13 +319,13 @@ class index extends Component {
                 </Form.Select>
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Select onChange={this.handleChangeWards} name="txtPhuong">
+                <Form.Select onChange={this.handleChangeWards} name="txtPhuong" ref="fieldDistrict">
                   <option>Quận, Huyện</option>
                   {this.showListDistrict(districts)}
                 </Form.Select>
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Select name="txtXa" onChange={this.onHandleChange}>
+                <Form.Select name="txtXa" onChange={this.onHandleChange} ref="fieldWards" >
                   <option>Phường, Xã</option>
                   {this.showListWards(wards)}
                 </Form.Select>
