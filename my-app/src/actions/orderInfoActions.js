@@ -20,6 +20,27 @@ export const fetchOrderInfoResquest = (id) => {
     });
   };
 };
+
+export const fetchOrderInfoCountQuantity = (orderInfo) => {
+  return {
+    type: types.COUNT_QUANTITYORDERINFO,
+    orderInfo,
+  };
+};
+
+export const fetchOrderInfoCountQuantityResquest = () => {
+  return (dispatch) => {
+    return callApi("order-info-count", "GET", null).then((response) => {
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+        dispatch(fetchOrderInfoCountQuantity(response.data));
+      }
+    });
+  };
+};
+
 // to import
 export const fetchOrderInfoToImport = (orderInfo) => {
   return {

@@ -17,7 +17,9 @@ var bill = (state = initialState, action) => {
     //Lấy Tất cả Danh Sách Bill
     case types.FETCH_BILL:
       state = action.bill;
-
+      return [...state];
+    case types.COUNT_STATUS_BILL_EQUAL0:
+      state = action.bill;
       return [...state];
     //Xóa Bill
     case types.DELETE_BILL:

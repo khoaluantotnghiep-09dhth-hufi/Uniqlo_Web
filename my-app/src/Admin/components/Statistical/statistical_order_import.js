@@ -1,213 +1,298 @@
-import React from 'react'
+import React from "react";
+import * as actionsProductInfo from "../../../actions/product_infoActions";
+import { connect } from "react-redux";
+import * as actions from "../../../actions/billInfoActions";
+import * as actionsIndex from "../../../actions/index";
+import * as actionsImport from "../../../actions/importActions";
+import * as actionsOrderInfo from "../../../actions/orderInfoActions";
+import * as actionsImportInfo from "../../../actions/importInfoActions";
 
-import { CChart } from '@coreui/react-chartjs';
+import { CChartLine } from '@coreui/react-chartjs'
+import { Link } from "react-router-dom";
+import { getStyle, hexToRgba } from '@coreui/utils'
+import {
+  CBadge,
+  CButton,
+  CButtonGroup,
+  CCard,
+  CCardBody,
+  CCardFooter,
+  CCardHeader,
+  CCol,
+  CProgress,
+  CRow,
+  CCallout,
+  CWidgetDropdown,
+  CDropdown,
+  CDropdownToggle,
+  CDropdownItem,
+  CDropdownMenu
+} from '@coreui/react'
+import CIcon from '@coreui/icons-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faBullseye,
+  faSignOutAlt,
+  faUser,
+  faKey,
+  faTshirt
+} from "@fortawesome/free-solid-svg-icons";
 
-class ListStatisticalOrderImport extends React.Component {
+const brandSuccess = getStyle('success') || '#4dbd74'
+const brandInfo = getStyle('info') || '#20a8d8'
+const brandDanger = getStyle('danger') || '#f86c6b'
+class Home extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    this.props.fetchOrderSumDate();
+    this.props.fetchProductInfoCount();
+    this.props.fetchBillTotalQuantity();
+    this.props.fetchOrderInfoCount();
+    this.props.fetchImportInfoCount();
+    this.props.fetchImportSumDate();
+ 
+  }
   render() {
-    const line = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
+    var { order } = this.props;
+    var { orderInfo } = this.props;
+    var { productInfo } = this.props;
+    var { billTotalQuantity } = this.props;
+    var { importInfo } = this.props;
+   
+    var { import_product } = this.props;
+   
+    var dataSumImportQuantity = import_product.map((item, index) => {
+      return item.sumQuantity;
+    })
+    var dataSumImportDate = import_product.map((item, index) => {
+      return item.date_import;
+    })
+
+
+    var dataProductInfoCount = productInfo.map((item, index) => {
+      return item.countProduct;
+    })
+    var dataSumDateOrder = order.map((item, index) => {
+      return item.sumQuantity;
+    })
+    var dataSumDateDate = order.map((item, index) => {
+      return item.date_order;
+    })
+    var dataOrderInfoCount = orderInfo.map((item, index) => {
+      return item.countOrderInfo;
+    })
+    var dataImportInfoCount = importInfo.map((item, index) => {
+      return item.countImportInfo;
+    })
+    const defaultDatasets = (() => {
+      var dataTotalQuantity = billTotalQuantity.map((item, index) => {
+        return item.sumTotalQuantity;
+      })
+      return [
         {
-          label: 'My First dataset',
-          fill: false,
-          lineTension: 0.1,
-          backgroundColor: 'rgba(75,192,192,0.4)',
-          borderColor: 'rgba(75,192,192,1)',
-          borderCapStyle: 'butt',
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: 'miter',
-          pointBorderColor: 'rgba(75,192,192,1)',
-          pointBackgroundColor: '#fff',
-          pointBorderWidth: 1,
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-          pointHoverBorderColor: 'rgba(220,220,220,1)',
-          pointHoverBorderWidth: 2,
-          pointRadius: 1,
-          pointHitRadius: 10,
-          data: [65, 59, 80, 81, 56, 55, 40],
-        },
-      ],
-    };
-  
-    const bar = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-        {
-          label: 'My First dataset',
-          backgroundColor: 'rgba(255,99,132,0.2)',
-          borderColor: 'rgba(255,99,132,1)',
-          borderWidth: 1,
-          hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-          hoverBorderColor: 'rgba(255,99,132,1)',
-          data: [65, 59, 80, 81, 56, 55, 40],
-        },
-      ],
-    };
-  
-    const doughnut = {
-    labels: [
-      'Red',
-      'Green',
-      'Yellow',
-    ],
-    datasets: [
-      {
-        data: [300, 50, 100],
-        backgroundColor: [
-          '#FF6384',
-          '#36A2EB',
-          '#FFCE56',
-        ],
-        hoverBackgroundColor: [
-          '#FF6384',
-          '#36A2EB',
-          '#FFCE56',
-        ],
-      }],
-    };
-  
-    const radar = {
-      labels: ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'],
-      datasets: [
-        {
-          label: 'My First dataset',
-          backgroundColor: 'rgba(179,181,198,0.2)',
-          borderColor: 'rgba(179,181,198,1)',
-          pointBackgroundColor: 'rgba(179,181,198,1)',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgba(179,181,198,1)',
-          data: [65, 59, 90, 81, 56, 55, 40],
+          label: 'Số lượng sản phẩm đặt',
+          backgroundColor: hexToRgba(brandInfo, 10),
+          borderColor: brandInfo,
+          pointHoverBackgroundColor: brandInfo,
+          borderWidth: 2,
+          data: dataSumDateOrder
         },
         {
-          label: 'My Second dataset',
-          backgroundColor: 'rgba(255,99,132,0.2)',
-          borderColor: 'rgba(255,99,132,1)',
-          pointBackgroundColor: 'rgba(255,99,132,1)',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgba(255,99,132,1)',
-          data: [28, 48, 40, 19, 96, 27, 100],
+          label: 'Số lượng sản phẩm nhập',
+          backgroundColor: 'transparent',
+          borderColor: brandSuccess,
+          pointHoverBackgroundColor: brandSuccess,
+          borderWidth: 2,
+          data: dataSumImportQuantity
         },
-      ],
-    };
-  
-    const pie = {
-      labels: [
-        'Red',
-        'Green',
-        'Yellow',
-      ],
-      datasets: [
-        {
-          data: [300, 50, 100],
-          backgroundColor: [
-            '#FF6384',
-            '#36A2EB',
-            '#FFCE56',
-          ],
-          hoverBackgroundColor: [
-            '#FF6384',
-            '#36A2EB',
-            '#FFCE56',
-          ],
-        }],
-    };
-  
-    const polar = {
-      datasets: [
-        {
-          data: [
-            11,
-            16,
-            7,
-            3,
-            14,
-          ],
-          backgroundColor: [
-            '#FF6384',
-            '#4BC0C0',
-            '#FFCE56',
-            '#E7E9ED',
-            '#36A2EB',
-          ],
-          label: 'My dataset' // for legend
-        }],
-      labels: [
-        'Red',
-        'Green',
-        'Yellow',
-        'Grey',
-        'Blue',
-      ],
-    };
-  
-    const options = {
-      // tooltips: {
-      //   enabled: false,
-      //   custom: customTooltips
-      // },
-      maintainAspectRatio: false
+        // {
+        //     label: 'My Third dataset',
+        //     backgroundColor: 'transparent',
+        //     borderColor: brandDanger,
+        //     pointHoverBackgroundColor: brandDanger,
+        //     borderWidth: 1,
+        //     borderDash: [8, 5],
+        //     data: data3
+        // }
+      ]
+    })()
+    const defaultOptions = (() => {
+      return {
+        maintainAspectRatio: false,
+        legend: {
+          display: false
+        },
+        scales: {
+          xAxes: [{
+            gridLines: {
+              drawOnChartArea: false
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              maxTicksLimit: 15,
+              stepSize: Math.ceil(100 / 50),
+              max: 100
+            },
+            gridLines: {
+              display: true
+            }
+          }]
+        },
+        elements: {
+          point: {
+            radius: 0,
+            hitRadius: 10,
+            hoverRadius: 4,
+            hoverBorderWidth: 3
+          }
+        }
+      }
     }
-  
+    )()
     return (
-      <div className="row">
-        <div className="col-md-6">
-          <h4>Line</h4>
-          <div className="chart-wrapper">
-            <CChart type="line" datasets={line.datasets} options={options} />
-          </div>
-          <hr />
-        </div>
-        <div className="col-md-6">
-          <h4>Bar</h4>
-          <div className="chart-wrapper">
-            <CChart type="bar" datasets={bar.datasets} options={options} labels="months"/>
-          </div>
-          <hr />
-        </div>
-        <div className="col-md-6">
-        <h4>Doughnut</h4>
-          <div className="chart-wrapper">
-            <CChart type="doughnut" datasets={doughnut.datasets} labels={doughnut.labels}/>
-          </div>
-          <hr />
-        </div>
-        <div className="col-md-6">
-          <h4>Radar</h4>
-          <div className="chart-wrapper">
-            <CChart type="radar" datasets={radar.datasets} labels={radar.labels}/>
-          </div>
-          <hr />
-        </div>
-        <div className="col-md-6">
-          <h4>Pie</h4>
-          <div className="chart-wrapper">
-            <CChart type="pie" datasets={pie.datasets} labels={pie.labels} />
-          </div>
-          <hr />
-        </div>
-        <div className="col-md-6">
-          <h4>Polar</h4>
-          <div className="chart-wrapper">
-            <CChart
-              type="polarArea"
-              datasets={polar.datasets}
-              options={{
-                maintainAspectRatio: true,
-                tooltips: {
-                  enabled: true
-                }
-              }}
-              labels={polar.labels}
+      <>
+        <CRow sm="12">
+          <CCol sm="4" lg="4">
+            <CWidgetDropdown
+              color="gradient-info"
+              header={dataOrderInfoCount}
+              text="Sản phẩm đã đặt"
+            >
+              <CDropdown>
+                <CDropdownToggle color="transparent">
+                  <CIcon name="cil-settings" />
+                </CDropdownToggle>
+                <CDropdownMenu className="pt-0" placement="bottom-end">
+                  <CDropdownItem>
+                    <Link to="/admin/manage/order-product" style={{ color: 'black' }}>
+                      <FontAwesomeIcon icon={faUser} size="lg" className="mr-2" />
+                      Danh Sách Đơn Đặt Hàng
+                    </Link>
+                  </CDropdownItem>
+                </CDropdownMenu>
+              </CDropdown>
+            </CWidgetDropdown>
+          </CCol>
+          <CCol sm="4" lg="4">
+            <CWidgetDropdown
+              color="gradient-primary"
+              header={dataImportInfoCount}
+              text="Sản phẩm đã nhập"
+            >
+              <CDropdown>
+                <CDropdownToggle color="transparent">
+                  <CIcon name="cil-settings" />
+                </CDropdownToggle>
+                <CDropdownMenu className="pt-0" placement="bottom-end">
+                  <CDropdownItem>
+                    <Link to="/admin/manage/import-product" style={{ color: 'black' }}>
+                      <FontAwesomeIcon icon={faUser} size="lg" className="mr-2" />
+                      Danh Sách Đơn Nhập Hàng
+                    </Link>
+                  </CDropdownItem>
+
+                </CDropdownMenu>
+              </CDropdown>
+            </CWidgetDropdown>
+          </CCol>
+          <CCol sm="4" lg="4">
+            <CWidgetDropdown
+              color="gradient-danger"
+              header={dataProductInfoCount}
+              text="Sản phẩm trong hệ thống"
+            >
+              <CDropdown>
+                <CDropdownToggle color="transparent">
+                  <CIcon name="cil-settings" />
+                </CDropdownToggle>
+                <CDropdownMenu className="pt-0" placement="bottom-end">
+                  <CDropdownItem>
+                    <Link to="/admin/manage/products" style={{ color: 'black' }}>
+                      <FontAwesomeIcon icon={faTshirt} size="lg" className="mr-2" />
+                      Danh Sách Sản Phẩm
+                    </Link>
+                  </CDropdownItem>
+                </CDropdownMenu>
+              </CDropdown>
+            </CWidgetDropdown>
+          </CCol>
+        </CRow>
+        <CCard>
+          <CCardBody>
+            <CRow>
+              <CCol sm="5">
+                <h4 id="traffic" className="card-title mb-0">Biểu Đồ Đặt/Nhập Sản Phẩm</h4>
+                <br />
+              </CCol>
+              <CCol sm="7" className="d-none d-md-block">
+                <CButton color="primary" className="float-right">
+                  <CIcon name="cil-cloud-download" />
+                </CButton>
+                <CButtonGroup className="float-right mr-3">
+                  {
+                    ['Ngày', 'Tháng', 'Năm'].map(value => (
+                      <CButton
+                        color="outline-secondary"
+                        key={value}
+                        className="mx-0"
+                        active={value === 'Tháng'}
+                      >
+                        {value}
+                      </CButton>
+                    ))
+                  }
+                </CButtonGroup>
+              </CCol>
+            </CRow>
+            <CChartLine
+              style={{ width: "100%", height: "500px" }}
+              datasets={defaultDatasets}
+              options={defaultOptions}
+              labels={dataSumDateDate,dataSumImportDate}
             />
-          </div>
-          <hr />
-        </div>
-      </div>
-    );
+          </CCardBody>
+        </CCard>
+      </>
+    )
   }
 }
-export default (ListStatisticalOrderImport);
+var mapStateToProps = (state) => {
+  return {
+    productInfo: state.productInfo,
+    billTotalQuantity: state.billTotalQuantity,
+    orderInfo: state.orderInfo,
+    importInfo: state.importInfo,
+    order: state.order,
+    import_product: state.import_product,
+   
+  };
+};
+var mapDispatchToProps = (dispatch, props) => {
+  return {
+    fetchOrderSumDate: () => {
+      return dispatch(actionsIndex.fetchOrderSumDateResquest());
+    },
+
+    fetchImportSumDate: () => {
+      return dispatch(actionsImport.fetchImportSumDateResquest());
+    },
+    fetchBillTotalQuantity: () => {
+      return dispatch(actions.fetchBillTotalQuantityResquest());
+    },
+    fetchOrderInfoCount: () => {
+      return dispatch(actionsOrderInfo.fetchOrderInfoCountQuantityResquest());
+    },
+    fetchImportInfoCount: () => {
+      return dispatch(actionsImportInfo.fetchImportInfoCountResquest());
+    },
+    fetchProductInfoCount: () => {
+      return dispatch(actionsProductInfo.fetchCountProductInfoResquest());
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

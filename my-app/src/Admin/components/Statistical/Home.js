@@ -3,6 +3,7 @@ import * as actions from "../../../actions/billInfoActions";
 import * as actionsStaff from "../../../actions/index";
 import * as actionsProductInfo from "../../../actions/product_infoActions";
 import { connect } from "react-redux";
+import * as actionsBillInfo from "../../../actions/billInfoActions";
 import { CChartLine } from '@coreui/react-chartjs'
 import { Link } from "react-router-dom";
 import { getStyle, hexToRgba } from '@coreui/utils'
@@ -48,6 +49,7 @@ class Home extends React.Component {
         this.props.fetchCustomerCount();
         this.props.fetchProductInfoCount();
         this.props.fetchBillTotalQuantity();
+        this.props.fetchBillStatusEqual0();
     }
     render() {
         var { billTotal } = this.props;
@@ -55,6 +57,11 @@ class Home extends React.Component {
         var { customer } = this.props;
         var { productInfo } = this.props;
         var { billTotalQuantity } = this.props;
+        var { bill } = this.props;
+        var dataBillStatusEqual0 = bill.map((item, index) => {
+            return item.countStatus;
+        })
+        console.log(dataBillStatusEqual0)
         var dataProductInfoCount = productInfo.map((item, index) => {
             return item.countProduct;
         })
@@ -65,7 +72,6 @@ class Home extends React.Component {
             return item.countCustomer;
         })
         const defaultDatasets = (() => {
-            let elements = 27
             var { billTotal } = this.props;
             var dataTotal = billTotal.map((item, index) => {
                 return item.sumTotal;
@@ -73,7 +79,6 @@ class Home extends React.Component {
             var dataTotalQuantity = billTotalQuantity.map((item, index) => {
                 return item.sumTotalQuantity;
             })
-            console.log(dataTotalQuantity)
             return [
                 {
                     label: 'Tổng tiền hóa đơn',
@@ -143,7 +148,28 @@ class Home extends React.Component {
         return (
             <>
                 <CRow sm="12">
-                    <CCol sm="4" lg="4">
+                    <CCol sm="3" lg="3">
+                        <CWidgetDropdown
+                            color="gradient-warning"
+                            header={dataBillStatusEqual0}
+                            text="Đơn Hàng Chờ Xác Nhận"
+                        >
+                            <CDropdown>
+                                <CDropdownToggle color="transparent">
+                                    <CIcon name="cil-settings" />
+                                </CDropdownToggle>
+                                <CDropdownMenu className="pt-0" placement="bottom-end">
+                                    <CDropdownItem>
+                                        <Link to="/admin/system/order/all" style={{ color: 'black' }}>
+                                            <FontAwesomeIcon icon={faUser} size="lg" className="mr-2" />
+                                            Danh Sách Đơn Hàng
+                                        </Link>
+                                    </CDropdownItem>
+                                </CDropdownMenu>
+                            </CDropdown>
+                        </CWidgetDropdown>
+                    </CCol>
+                    <CCol sm="3" lg="3">
                         <CWidgetDropdown
                             color="gradient-info"
                             header={dataCustomerCount}
@@ -164,7 +190,7 @@ class Home extends React.Component {
                             </CDropdown>
                         </CWidgetDropdown>
                     </CCol>
-                    <CCol sm="4" lg="4">
+                    <CCol sm="3" lg="3">
                         <CWidgetDropdown
                             color="gradient-primary"
                             header={dataStaffCount}
@@ -187,7 +213,7 @@ class Home extends React.Component {
                             </CDropdown>
                         </CWidgetDropdown>
                     </CCol>
-                    <CCol sm="4" lg="4">
+                    <CCol sm="3" lg="3">
                         <CWidgetDropdown
                             color="gradient-danger"
                             header={dataProductInfoCount}
@@ -214,7 +240,7 @@ class Home extends React.Component {
                         <CRow>
                             <CCol sm="5">
                                 <h4 id="traffic" className="card-title mb-0">Biểu Đồ Doanh Thu</h4>
-                                <br/>
+                                <br />
                             </CCol>
                             <CCol sm="7" className="d-none d-md-block">
                                 <CButton color="primary" className="float-right">
@@ -255,12 +281,16 @@ var mapStateToProps = (state) => {
         customer: state.customer,
         productInfo: state.productInfo,
         billTotalQuantity: state.billTotalQuantity,
+        bill: state.bill,
     };
 };
 var mapDispatchToProps = (dispatch, props) => {
     return {
         fetchBillTotal: () => {
             return dispatch(actions.fetchBillTotalResquest());
+        },
+        fetchBillStatusEqual0: () => {
+            return dispatch(actionsStaff.fetchBillStatusEqual0Resquest());
         },
         fetchBillTotalQuantity: () => {
             return dispatch(actions.fetchBillTotalQuantityResquest());

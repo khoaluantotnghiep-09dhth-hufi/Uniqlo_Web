@@ -16,6 +16,9 @@ var orderInfo = (state = initialState, action) => {
     case types.FETCH_ORDERINFO:
       state = action.orderInfo;
       return [...state];
+    case types.COUNT_QUANTITYORDERINFO:
+      state = action.orderInfo;
+      return [...state];
     case types.ADD_ORDERINFO:
       state.push(action.orderInfo);
       return [...state];

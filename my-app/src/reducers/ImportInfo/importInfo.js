@@ -16,6 +16,9 @@ var importInfo = (state = initialState, action) => {
     case types.FETCH_IMPORTINFO:
       state = action.importInfo;
       return [...state];
+    case types.COUNT_QUANTITYIMPORTINFO:
+      state = action.importInfo;
+      return [...state];
     case types.ADD_IMPORTINFO:
       state.push(action.importInfo);
       return [...state];

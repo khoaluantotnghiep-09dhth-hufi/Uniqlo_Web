@@ -27,6 +27,7 @@ import exchange from "./Exchange/exchange_product";
 import billInfo from "./BillInfo/BillInfo";
 import billTotal from "./Statical/statical_shop";
 import billTotalQuantity from "./Statical/quantityBill";
+
 const myReducer = combineReducers({
   cart,
   products, // products:
@@ -55,6 +56,7 @@ const myReducer = combineReducers({
   header_notifications,
   billTotal,
   billTotalQuantity,
+
 });
 
 export default myReducer;

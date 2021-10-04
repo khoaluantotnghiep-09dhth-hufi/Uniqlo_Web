@@ -1071,6 +1071,41 @@ export const fetchOrderResquest = () => {
   };
 };
 
+export const fetchBillStatusEqual0 = (bill) => {
+  return {
+    type: types.COUNT_STATUS_BILL_EQUAL0,
+    bill,
+  }
+}
+
+export const fetchBillStatusEqual0Resquest = () => {
+  return (dispatch) => {
+    return callApi("count-status-bill", "GET", null).then((response) => {
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+        dispatch(fetchBillStatusEqual0(response.data));
+      }
+    });
+  };
+};
+
+export const fetchOrderSumDate = (order) => {
+  return {
+    type: types.FETCH_ORDER,
+    order,
+  };
+};
+
+export const fetchOrderSumDateResquest = () => {
+  return (dispatch) => {
+    return callApi("order-sum-date", "GET", null).then((response) => {
+      dispatch(fetchOrderSumDate(response.data));
+    });
+  };
+};
+
 export const fetchOrderImport = (order) => {
   return {
     type: types.FETCH_ORDER,

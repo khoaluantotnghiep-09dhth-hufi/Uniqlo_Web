@@ -16,6 +16,9 @@ var import_product = (state = initialState, action) => {
     case types.FETCH_IMPORTPRODUCT:
       state = action.import_product;
       return [...state];
+    case types.COUNT_QUANTITY_IMPORT_DATE:
+      state = action.import_product;
+      return [...state];
     case types.ADD_IMPORTPRODUCT:
       state.push(action.import_product);
       return [...state];

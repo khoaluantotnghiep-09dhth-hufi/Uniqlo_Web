@@ -21,6 +21,26 @@ export const fetchImportResquest = () => {
   };
 };
 
+export const fetchImportSumDate = (import_product) => {
+  return {
+    type: types.FETCH_IMPORTPRODUCT,
+    import_product,
+  }
+}
+
+export const fetchImportSumDateResquest = () => {
+  return (dispatch) => {
+    return callApi("import-sum-date", "GET", null).then((response) => {
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+        dispatch(fetchImportSumDate(response.data));
+      }
+    });
+  };
+};
+
 export const onAddImport = (import_product) => {
   return {
     type: types.ADD_IMPORTPRODUCT,
@@ -78,7 +98,7 @@ export const onEditImportResquest = (id) => {
         toast.error("Vui lòng thử lại !");
       }
       else {
-      dispatch(onGetImport(response.data));
+        dispatch(onGetImport(response.data));
       }
     });
   };

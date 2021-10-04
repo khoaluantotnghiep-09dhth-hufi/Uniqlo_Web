@@ -16,6 +16,9 @@ var order = (state = initialState, action) => {
     case types.FETCH_ORDER:
       state = action.order;
       return [...state];
+    case types.COUNT_QUANTITY_ORDER_DATE:
+      state = action.order;
+      return [...state];
     case types.ADD_ORDER:
       state.push(action.order);
       return [...state];

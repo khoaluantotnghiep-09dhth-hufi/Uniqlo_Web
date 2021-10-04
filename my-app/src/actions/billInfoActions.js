@@ -22,6 +22,8 @@ export const fetchBillInfoExchangeResquest = () => {
   };
 };
 
+
+
 export const fetchBillToTal = (billTotal) => {
   return {
     type: types.FETCH_BILL_TOTAL,

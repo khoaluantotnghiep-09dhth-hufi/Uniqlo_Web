@@ -20,6 +20,28 @@ export const fetchImportInfoResquest = (id) => {
     });
   };
 };
+
+
+export const fetchImportInfoCount = (importInfo) => {
+  return {
+    type: types.COUNT_QUANTITYIMPORTINFO,
+    importInfo,
+  };
+};
+
+export const fetchImportInfoCountResquest = () => {
+  return (dispatch) => {
+    return callApi("import-info-count", "GET", null).then((response) => {
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+        dispatch(fetchImportInfoCount(response.data));
+      }
+    });
+  };
+};
+
 export const onAddImportInfo = (importInfo) => {
   return {
     type: types.ADD_IMPORTINFO,
