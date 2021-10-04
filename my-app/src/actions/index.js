@@ -962,7 +962,7 @@ export const onAddCustomerClient = (customer) => {
 };
 export const onAddCustomerClientResquest = (customer) => {
   return (dispatch) => {
-    return callApi("customers", "POST", customer).then((response) => {
+    return callApi("customers_client", "POST", customer).then((response) => {
       if (response === undefined) {
         toast.error("Thêm thất bại, vui lòng thử lại !");
       }
@@ -1005,7 +1005,7 @@ export const onUpdateCustomersClient = (customer) => {
 };
 export const onUpdateCustomersClientResquest = (customer) => {
   return (dispatch) => {
-    return callApi(`customers/${customer.id}`, "PUT", customer).then((response) => {
+    return callApi(`customers_client/${customer.id}`, "PUT", customer).then((response) => {
       if (response === undefined) {
         toast.error("Sửa thất bại, vui lòng thử lại !");
       }
