@@ -96,7 +96,7 @@ class index extends React.Component {
                                 <Row className="justify-content-center">
                                     <Col className="order-lg-2 d-flex justify-content-center " lg="3">
                                         <div className="card-profile-image ">
-                                            <img  style={{ width: "200px", height: "200px" }}
+                                            <img  style={{ width: "200px", height: "200px", marginTop:"15px"}}
                                                 alt="..."
                                                 className="rounded-circle"
                                                 src={sessionUser.image}
