@@ -4,8 +4,8 @@ import Item from "./../Category_Product/Item_Product/index";
 import { connect } from "react-redux";
 import * as actions from "./../../actions/index";
 
-import ListImage from "./Slider_Image/index";
-import "./Slider.scss";
+
+
 class index extends Component {
   constructor(props) {
     super(props);

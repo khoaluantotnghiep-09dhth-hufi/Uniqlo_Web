@@ -7,6 +7,8 @@ import * as actions from "./../../actions/productActions";
 
 import Banner from "../../components/Banner/index";
 import Slider from "../../components/Slider/index";
+import Slider_Product from "../../components/Slider_Product/index";
+
 import Slider_UT from "../../components/Slider_UT/index";
 
 class test extends Component {
@@ -127,7 +129,7 @@ class test extends Component {
     var data = category.sort(() => Math.random() - Math.random()).slice(0, 4);
     var data1 = category.sort(() => Math.random() - Math.random()).slice(0, 4);
     var data2 = category.sort(() => Math.random() - Math.random()).slice(0, 4);
-    var data3 = category.sort(() => Math.random() - Math.random()).slice(0, 4);
+    var dataProduct = products.sort(() => Math.random() - Math.random()).slice(0, 2);
     var dataRandomMen = data.map((item, index) => {
       return {
         id: index,
@@ -152,7 +154,7 @@ class test extends Component {
       <div className="App">
         <Banner />
         <Slider chooseSize="mr-2" name="NAM" arrayList={dataRandomMen} />
-
+        <Slider chooseSize="mr-2" name="Sản Phẩm Hot" arrayList={dataProduct} />
         <Slider chooseSize="mr-2" name="NỮ" arrayList={dataRandomWomen} />
         <Slider chooseSize="mr-2" name="TRẺ EM" arrayList={dataRandomBaby} />
         <Image src="https://www.uniqlo.com/vn/top/img/topic/20210715_1636_gl5593.jpg" />
