@@ -36,6 +36,21 @@ export const fetchCountProductInfoResquest = () => {
   };
 };
 
+export const fetchCountProductStatusInfo = (countproduct) => {
+  return {
+    type: types.COUNT_STATUS_PRODUCT_EQUAL1,
+    countproduct,
+  };
+};
+
+export const fetchCountProductInfoStatusResquest = () => {
+  return (dispatch) => {
+    return callApi("count-status-product", "GET", null).then((response) => {
+      dispatch(fetchCountProductStatusInfo(response.data));
+    });
+  };
+};
+
 export const fetchProductInfoImport = (productInfo) => {
   return {
     type: types.FETCH_PRODCUTINFO,

@@ -19,6 +19,7 @@ var productInfo = (state = initialState, action) => {
     case types.COUNT_PRODUCTADMIN:
       state = action.productInfo;
       return [...state];
+    
     case types.ADD_PRODUCTINFO:
       state.push(action.productInfo);
       return [...state];

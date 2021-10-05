@@ -17,7 +17,6 @@ var productsAdmin = (state = initialState, action) => {
     //Lấy tất cả danh sách Sản Phẩm
     case types.FETCH_PRODUCTADMIN:
       state = action.productsAdmin;
-
       return [...state];
     case types.LIST_ALL:
       return [...state];
