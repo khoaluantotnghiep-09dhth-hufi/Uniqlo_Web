@@ -36,7 +36,7 @@ class addProduct extends React.Component {
             isOpen: false,
         };
     }
-    componentDidMount() {
+     componentDidMount() {
         var { match } = this.props;
 
         this.props.onEditItemProduct(match.params.id_product);
@@ -157,8 +157,8 @@ class addProduct extends React.Component {
         return isValid;
     }
     onSubmitForm = (event) => {
-        let isValid = this.checkValidate();
-        if (isValid === false) return;
+        // let isValid = this.checkValidate();
+        // if (isValid === false) return;
         event.preventDefault();
         var { match } = this.props;
         var { history } = this.props;

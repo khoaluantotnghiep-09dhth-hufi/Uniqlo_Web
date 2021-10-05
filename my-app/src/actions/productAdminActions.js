@@ -11,13 +11,19 @@ export const fetchProduct = (products) => {
 export const fetchProductResquest = () => {
   return (dispatch) => {
     return callApi("products-admin", "GET", null).then((response) => {
-      if (response === undefined) {
-        toast.error("Vui lòng thử lại !");
-      }
-      else {
+      try {
         dispatch(fetchProduct(response.data));
+      } catch (error) {
+        toast.error("Lỗi server");
       }
+
     });
+    // try {
+    //   let res = await callApi("products-admin", "GET", null);
+    //   dispatch(fetchProduct(res.data));
+    // } catch (error) {
+    //   toast.error("Lỗi server");
+    // }
   };
 };
 
@@ -31,14 +37,20 @@ export const onAddProduct = (product) => {
 export const onAddProductResquest = (product) => {
   return (dispatch) => {
     return callApi("products-admin", "POST", product).then((response) => {
-      if (response === undefined) {
-        toast.error("Thêm thất bại, vui lòng thử lại !");
-      }
-      else {
+      if (response !== undefined) {
         toast.success("Thêm thành công !");
         dispatch(onAddProduct(response.data));
       }
+      else {
+        toast.error("Thêm thất bại !");
+      }
     });
+    // try {
+    //   let res = await callApi("products-admin", "POST", product);
+    //   dispatch(onAddProduct(res.data));
+    // } catch (error) {
+    //   toast.error("Thêm thất bại")
+    // }
   };
 };
 //Cập nhật sản phẩm

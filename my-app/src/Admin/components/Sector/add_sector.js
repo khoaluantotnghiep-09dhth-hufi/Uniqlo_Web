@@ -40,7 +40,7 @@ class AddSector extends React.Component {
         }
         return rs;
     }
-    componentDidMount() {
+     componentDidMount() {
         var { match } = this.props;
         isLoadingExternally = true;
         this.props.onEditItemSector(match.params.id_sector);
@@ -90,7 +90,7 @@ class AddSector extends React.Component {
 
     };
     checkValidate = () => {
-        let check = ['txtName','selectedOption'];
+        let check = ['txtName', 'selectedOption'];
         let isValid = true;
 
         if (!this.state[check[0]]) {

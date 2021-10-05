@@ -29,7 +29,7 @@ class addOrderProduct extends React.Component {
       txtHouse: "",
     }
   }
-  componentDidMount() {
+   componentDidMount() {
     var { match } = this.props;
 
     this.props.onEditItemOrder(match.params.id_order_product);

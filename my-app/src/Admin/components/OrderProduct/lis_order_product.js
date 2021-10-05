@@ -56,7 +56,7 @@ const fields = [
 
 class ListOrderProducts extends React.Component {
 
-    componentDidMount() {
+     componentDidMount() {
         this.props.fetchOrders();
     }
     onDeleteOrder = (item) => {
@@ -118,11 +118,6 @@ class ListOrderProducts extends React.Component {
                                                                 <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
                                                             </CButton>
                                                         </Link>
-                                                        // <Link to={`/admin/manage/order-product/${item.id}/edit`}>
-                                                        //     <CButton type="button" className="btn btn-warning">
-                                                        //         <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Xóa
-                                                        //     </CButton>
-                                                        // </Link>
                                                     }
                                                     {item.status === 0 ?
                                                         <Link to={`/admin/manage/order-info/${item.id}/${item.status}`}>
@@ -138,6 +133,16 @@ class ListOrderProducts extends React.Component {
                                                                 Xem Chi Tiết Đơn và Đặt Hàng
                                                             </CButton>
                                                         </Link>
+                                                        : ""
+                                                    }
+                                                    {item.status === 0 ?
+                                                        <CButton type="button" className="btn btn-warning"
+                                                            onClick={() => {
+                                                                this.onDeleteOrder(item.id);
+                                                            }}
+                                                        >
+                                                            <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
+                                                        </CButton>
                                                         : ""
                                                     }
                                                 </td>
@@ -158,30 +163,12 @@ class ListOrderProducts extends React.Component {
 
                                             </td>
                                         ),
-                                        '': (item) => (
-                                            <td>
-                                                {item.status === 0 ?
-                                                    <CButton type="button" className="btn btn-warning"
-                                                        onClick={() => {
-                                                            this.onDeleteOrder(item.id);
-                                                        }}
-                                                    >
-                                                        <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Xóa
-                                                    </CButton>
-                                                    : ""
-                                                }
-                                            </td>
-                                        ),
                                     }}
                                 />
                             </CCardBody>
                         </CCard>
                     </CCol>
-
-
                 </CRow>
-
-
             </>
         )
     }

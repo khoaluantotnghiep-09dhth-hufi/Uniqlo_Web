@@ -672,7 +672,7 @@ export const fetchBillResquest = () => {
         toast.error("Vui lòng thử lại !");
       }
       else {
-      dispatch(fetchBills(response.data));
+        dispatch(fetchBills(response.data));
       }
     });
   };
@@ -1064,10 +1064,21 @@ export const fetchOrder = (order) => {
 };
 
 export const fetchOrderResquest = () => {
-  return (dispatch) => {
+  return async (dispatch) => {
     return callApi("orders", "GET", null).then((response) => {
-      dispatch(fetchOrder(response.data));
+      try {
+        dispatch(fetchOrder(response.data));
+      } catch (error) {
+        toast.error("Lỗi server");
+      }
+      // dispatch(fetchOrder(response.data));
     });
+    // try {
+    //   let res = await callApi("orders", "GET", null);
+    //   dispatch(fetchOrder(res.data));
+    // } catch (error) {
+    //   toast.error("Lỗi server");
+    // }
   };
 };
 
@@ -1150,7 +1161,7 @@ export const onAddOrder = (order) => {
 };
 
 export const onAddOrderResquest = (order) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     return callApi("orders", "POST", order).then((response) => {
       if (response === undefined) {
         toast.error("Thêm thất bại, vui lòng thử lại !");
@@ -1160,6 +1171,12 @@ export const onAddOrderResquest = (order) => {
         dispatch(onAddOrder(response.data));
       }
     });
+    // try {
+    //   let res = await callApi("orders", "POST", order);
+    //   dispatch(onAddOrder(res.data));
+    // } catch (error) {
+    //   toast.error("Lỗi server");
+    // }
   };
 };
 //Cập Color
@@ -1242,6 +1259,13 @@ export const onAddSectorResquest = (sector) => {
         dispatch(onAddSector(response.data));
       }
     });
+    // try {
+    //   let res = await callApi("sectors", "POST", sector);
+    //   dispatch(onAddSector(res.data));
+    //   toast.success("Thêm thành công !")
+    // } catch (error) {
+    //   toast.error("Thêm thất bại, vui lòng thử lại !")
+    // }
   };
 };
 
@@ -1391,7 +1415,7 @@ export const onUpdateObjectsResquest = (object_menu) => {
         toast.success("Sửa thành công !");
         dispatch(onUpdateObjects(response.data));
       }
-      }
+    }
     );
   };
 };
@@ -1405,14 +1429,14 @@ export const onGetAllColorBySize = (color_by_size) => {
 };
 export const onGetAllColorBySizeResquest = (id_product) => {
   return (dispatch) => {
-    return callApi(`product-sizes/${id_product}`, "GET", null).then( (response) => {
+    return callApi(`product-sizes/${id_product}`, "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
       }
       else {
         dispatch(onGetAllColorBySize(response.data));
       }
-      }
+    }
     );
   };
 };

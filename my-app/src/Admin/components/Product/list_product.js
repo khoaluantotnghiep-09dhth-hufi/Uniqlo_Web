@@ -95,7 +95,7 @@ const getBadge = (status) => {
     }
 }
 class ListProducts extends React.Component {
-    componentDidMount() {
+     componentDidMount() {
         this.props.fetchProducts();
     }
     onDeleteProduct = (id) => {

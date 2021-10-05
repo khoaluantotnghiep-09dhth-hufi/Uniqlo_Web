@@ -47,7 +47,7 @@ const fields = [
 ]
 
 class ListSector extends React.Component {
-    componentDidMount() {
+     componentDidMount() {
         this.props.fetchSectors();
     }
     onDeleteSector = (id) => {

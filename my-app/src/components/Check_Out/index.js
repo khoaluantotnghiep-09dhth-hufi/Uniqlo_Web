@@ -144,7 +144,7 @@ class index extends Component {
     }
     return total;
   };
-  onSubmit = (e) => {  };
+  onSubmit = (e) => { };
   onHandleSubmitForm = (e) => {
     e.preventDefault();
     var {
@@ -185,16 +185,16 @@ class index extends Component {
       quantity: item.quantity,
     }));
 
-    if(this.refs.fieldCity.value === "Tỉnh, Thành Phố"){
-      toast.error(<div>Đặt hàng thất bại.<br />Vui lòng chọn Tỉnh, Thành Phố!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+    if (this.refs.fieldCity.value === "Tỉnh, Thành Phố") {
+      toast.error(<div>Đặt hàng thất bại.<br />Vui lòng chọn Tỉnh, Thành Phố!</div>, { autoClose: 2500 }, { position: toast.POSITION.UPPER_RIGHT });
       return;
     }
-    if(this.refs.fieldDistrict.value === "Quận, Huyện"){
-      toast.error(<div>Đặt hàng thất bại.<br />Vui lòng chọn Quận, Huyện!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+    if (this.refs.fieldDistrict.value === "Quận, Huyện") {
+      toast.error(<div>Đặt hàng thất bại.<br />Vui lòng chọn Quận, Huyện!</div>, { autoClose: 2500 }, { position: toast.POSITION.UPPER_RIGHT });
       return;
     }
-    if(this.refs.fieldWards.value === "Phường, Xã"){
-      toast.error(<div>Đặt hàng thất bại.<br />Vui lòng chọn Phường, Xã!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+    if (this.refs.fieldWards.value === "Phường, Xã") {
+      toast.error(<div>Đặt hàng thất bại.<br />Vui lòng chọn Phường, Xã!</div>, { autoClose: 2500 }, { position: toast.POSITION.UPPER_RIGHT });
       return;
     }
 
@@ -228,15 +228,15 @@ class index extends Component {
       if (bills) {
         this.props.onBillCancel(bills);
         toast.success("Khách Hàng Đã Yêu Cầu Hủy Đơn Thành Công, WebSocket");
-      } 
+      }
       this.setState({
         isCheckOrder: true,
       });
       this.sendEmail(e);
-    }else {       
+    } else {
       this.setState({
         isCheckOrder: false,
-      });       
+      });
     }
   };
   onHandleChange = (event) => {
@@ -248,20 +248,20 @@ class index extends Component {
     });
   };
 
-sendEmail =(e) => {
+  sendEmail = (e) => {
     e.preventDefault();
     emailjs.sendForm('gmail', 'gmail_template', e.target, 'user_Kb6t170ZY6RBAoo92zlwi')
       .then((result) => {
-          console.log(result.text);
+        console.log(result.text);
       }, (error) => {
-          console.log(error.text);
+        console.log(error.text);
       });
     e.target.reset();
   }
   render() {
     var { cities, display, districts, wards, txtEmail, txtHoTen, txtSDT, txtDiaChi } = this.state;
     var { isCheckOrder } = this.state;
-    
+
     console.log(isCheckOrder);
     if (isCheckOrder) {
       return (
