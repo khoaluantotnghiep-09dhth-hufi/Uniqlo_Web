@@ -28,6 +28,7 @@ import {
   faChartLine,
   faPalette,
   faDraftingCompass,
+  faImage
 } from "@fortawesome/free-solid-svg-icons";
 var sessionUser = JSON.parse(sessionStorage.getItem("user"));
 
@@ -95,6 +96,13 @@ const _navStaff = [
   {
     _tag: 'CSidebarNavTitle',
     _children: ['Quản Lý']
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Quản Lý Banner',
+    to: '/admin/manage/banner',
+    icon: <FontAwesomeIcon icon={faImage} className="mr-2" />,
+
   },
   {
     _tag: 'CSidebarNavItem',

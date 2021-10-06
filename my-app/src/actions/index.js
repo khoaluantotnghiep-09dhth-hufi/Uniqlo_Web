@@ -1465,3 +1465,103 @@ export const onAddBillInfoCustomerResquest = (bills_info_customer) => {
 
   };
 };
+
+
+//Lấy tất cả danh sách Banner
+
+export const fetchBanners = (banner) => {
+  return {
+    type: types.FETCH_BANNER,
+    banner,
+  };
+};
+
+export const fetchBannersResquest = () => {
+  return (dispatch) => {
+    return callApi("banners", "GET", null).then((response) => {
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+        dispatch(fetchBanners(response.data));
+      }
+    });
+  };
+};
+//Them
+export const onAddBanner = (banner) => {
+  return {
+    type: types.ADD_BANNER,
+    banner,
+  };
+};
+export const onAddBannerResquest = (banner) => {
+  return (dispatch) => {
+    return callApi("banners", "POST", banner).then((response) => {
+      console.log(response)
+      if (response === undefined) {
+        toast.error("Thêm thất bại, vui lòng thử lại !");
+      }
+      else {
+        toast.success("Thêm thành công !");
+        dispatch(onAddBanner(response.data));
+      }
+    });
+  };
+};
+//xóa banner
+export const onDeleteBanner = (id) => {
+  return {
+    type: types.DELETE_BANNER,
+    id,
+  };
+};
+
+export const onDeleteBannerResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`banners/${id}`, "DELETE", null).then((response) => {
+      toast.success("Xóa thành công !");
+      dispatch(onDeleteBanner(id));
+    });
+  };
+};
+//sửa banner
+export const onGetBanner = (banner) => {
+  return {
+    type: types.EDIT_BANNER,
+   banner,
+  };
+};
+export const onEditBannerResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`banners/${id}`, "GET", null).then((response) => {
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+        dispatch(onGetBanner(response.data));
+      }
+    });
+  };
+};
+//cập nhật banner
+export const onUpdateBanner = (banner) => {
+  return {
+    type: types.UPDATE_BANNER,
+    banner,
+  };
+};
+export const onUpdateBannerResquest = (banner) => {
+  return (dispatch) => {
+    return callApi(`banners/${banner.id}`, "PUT", banner).then((response) => {
+      if (response === undefined) {
+        toast.error("Sửa thất bại, vui lòng thử lại !");
+      }
+      else {
+        toast.success("Sửa thành công !");
+        dispatch(onUpdateBanner(response.data));
+      }
+    }
+    );
+  };
+};

@@ -2,6 +2,9 @@ import React from "react";
 
 const Home = React.lazy(() => import('../components/Statistical/Home'));
 const Notifications_Header = React.lazy(() => import('../components/Notifications_Header/listNotifications'));
+const ListBanner=React.lazy(() => import('../components/Banner/listBanner'));
+const AddBanner=React.lazy(() => import('../components/Banner/addBanner'));
+
 
 
 const Order = React.lazy(() => import('../components/Order/order'));
@@ -136,6 +139,10 @@ const routes = [
     { path: '/admin/manage/size', exact: true, name: 'Danh Sách Kích Cỡ', component: ListSize },
     { path: '/admin/manage/size/add', exact: true, name: 'Thêm Kích Cỡ Mới', component: AddSize },
     { path: '/admin/manage/size/:id_size/edit', exact: true, name: 'Thêm Kích Cỡ Mới', component: AddSize },
+
+    { path: '/admin/manage/banner', exact: true, name: 'Danh Sách Banner', component: ListBanner },
+    { path: '/admin/manage/banner/add', exact: true, name: 'Thêm Banner Mới', component: AddBanner },
+    { path: '/admin/manage/banner/:id_banner/edit', exact: true, name: 'Sửa Banner ', component: AddBanner },
 ]
 
 export default routes

@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import cart from "./Carts/cart";
 import header_notifications from "./header_notifications/header_notifications";
+import banner from "./Banner/banner";
 
 import products from "./Products/products";
 import products_category from "./Products_Category/products_category";
@@ -58,6 +59,7 @@ const myReducer = combineReducers({
   billTotal,
   billTotalQuantity,
   countStatusProduct,
+  banner
 });
 
 export default myReducer;
