@@ -129,7 +129,8 @@ class test extends Component {
     var data = category.sort(() => Math.random() - Math.random()).slice(0, 4);
     var data1 = category.sort(() => Math.random() - Math.random()).slice(0, 4);
     var data2 = category.sort(() => Math.random() - Math.random()).slice(0, 4);
-    var dataProduct = products.sort(() => Math.random() - Math.random()).slice(0, 2);
+    var dataProduct = products.slice(0, 4);
+    console.log("SP: "+dataProduct)
     var dataRandomMen = data.map((item, index) => {
       return {
         id: index,
@@ -154,7 +155,7 @@ class test extends Component {
       <div className="App">
         <Banner />
         <Slider chooseSize="mr-2" name="NAM" arrayList={dataRandomMen} />
-        <Slider chooseSize="mr-2" name="Sản Phẩm Hot" arrayList={dataProduct} />
+        <Slider chooseSize="mr-2" name="Sản Phẩm Hot" arrayList={products} />
         <Slider chooseSize="mr-2" name="NỮ" arrayList={dataRandomWomen} />
         <Slider chooseSize="mr-2" name="TRẺ EM" arrayList={dataRandomBaby} />
         <Image src="https://www.uniqlo.com/vn/top/img/topic/20210715_1636_gl5593.jpg" />
