@@ -55,8 +55,8 @@ class addBanner extends React.Component {
       if (match.params.id_banner) {
         const result = banner.find((o) => o.id === match.params.id_banner);
         this.setState({
-          txtImage: banner.image,
-          txtActive: banner.is_active,
+          txtImage: result.image,
+          txtActive: result.is_active,
         });
       }
     }
@@ -117,7 +117,8 @@ class addBanner extends React.Component {
 
       is_active: parseInt(txtActive),
     };
-    console.log(banner);
+    
+    
     if (match.params.id_banner) {
       this.props.onUpdateItemBanner(bannerUpdate);
       history.goBack();

@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 export const fetchNotifications = (nameNotifications) => {
   return {
     type: types.FETCH_NOTIFICATIONS_HEADER,
-    nameNotifications
+    nameNotifications,
   };
 };
 export const fetchNotificationsResquest = () => {
@@ -18,13 +18,9 @@ export const fetchNotificationsResquest = () => {
   };
 };
 
-
 export const onAddNotificationCancelResquest = (bills) => {
   return (dispatch) => {
-    return callApi("notifications", "POST", bills).then((response) => {
-
-
-    });
+    return callApi("notifications", "POST", bills).then((response) => {});
   };
 };
 
@@ -32,7 +28,7 @@ export const fetchAddNotifications = (nameNotifications) => {
   // console.log("Dang o Action: "+ nameNotifications);
   return {
     type: types.ADD_NOTIFICATIONS_HEADER,
-    nameNotifications
+    nameNotifications,
   };
 };
 export const fetchResetNotifications = (nameNotifications) => {
@@ -41,7 +37,6 @@ export const fetchResetNotifications = (nameNotifications) => {
     nameNotifications,
   };
 };
-
 
 //Giỏ Hàng
 export const listAll = () => {
@@ -249,8 +244,7 @@ export const onAddPromotionResquest = (promotion) => {
     return callApi("promotions", "POST", promotion).then((response) => {
       if (response === undefined) {
         toast.error("Thêm thất bại, vui lòng thử lại !");
-      }
-      else {
+      } else {
         toast.success("Thêm thành công !");
         dispatch(onAddPromotion(response.data));
       }
@@ -266,15 +260,15 @@ export const onUpdatePromotion = (promotion) => {
 };
 export const onUpdatePromotionResquest = (promotion) => {
   return (dispatch) => {
-    return callApi(`promotions/${promotion.id}`, "PUT", promotion).then((response) => {
-      if (response === undefined) {
-        toast.error("Sửa thất bại, vui lòng thử lại !");
+    return callApi(`promotions/${promotion.id}`, "PUT", promotion).then(
+      (response) => {
+        if (response === undefined) {
+          toast.error("Sửa thất bại, vui lòng thử lại !");
+        } else {
+          toast.success("Sửa thành công !");
+          dispatch(onUpdatePromotion(response.data));
+        }
       }
-      else {
-        toast.success("Sửa thành công !");
-        dispatch(onUpdatePromotion(response.data));
-      }
-    }
     );
   };
 };
@@ -291,8 +285,7 @@ export const onEditPromotionResquest = (id) => {
     return callApi(`promotions/${id}`, "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
-      }
-      else {
+      } else {
         dispatch(onGetPromotion(response.data));
       }
     });
@@ -341,7 +334,6 @@ export const onDeleteStaffs = (id) => {
 export const onDeleteStaffsResquest = (id) => {
   return (dispatch) => {
     return callApi(`staffs/${id}`, "DELETE", null).then((response) => {
-
       toast.success("Xóa thành công !");
       dispatch(onDeleteStaffs(id));
     });
@@ -359,13 +351,13 @@ export const onAddStaffsResquest = (staff) => {
   return (dispatch) => {
     return callApi("staffs", "POST", staff).then((response) => {
       if (response === undefined) {
-        toast.error("Thêm thất bại. Emai đã tồn tại, vui lòng nhập Email khác !");
-      }
-      else {
+        toast.error(
+          "Thêm thất bại. Emai đã tồn tại, vui lòng nhập Email khác !"
+        );
+      } else {
         toast.success("Thêm thành công !");
         dispatch(onAddStaffs(response.data));
       }
-
     });
   };
 };
@@ -381,8 +373,7 @@ export const onUpdateStaffsResquest = (staff) => {
     return callApi(`staffs/${staff.id}`, "PUT", staff).then((response) => {
       if (response === undefined) {
         toast.error("Sửa thất bại, vui lòng thử lại !");
-      }
-      else {
+      } else {
         toast.success("Sửa thành công !");
         dispatch(onUpdateStaffs(response.data));
       }
@@ -397,15 +388,16 @@ export const onUpdateStaffsProfile = (staff) => {
 };
 export const onUpdateStaffsProfileResquest = (staff) => {
   return (dispatch) => {
-    return callApi(`staffs-profile/${staff.id}`, "PUT", staff).then((response) => {
-      if (response === undefined) {
-        toast.error("Cập nhật thất bại, vui lòng thử lại !");
+    return callApi(`staffs-profile/${staff.id}`, "PUT", staff).then(
+      (response) => {
+        if (response === undefined) {
+          toast.error("Cập nhật thất bại, vui lòng thử lại !");
+        } else {
+          toast.success("Cập nhật thành công !");
+          dispatch(onUpdateStaffsProfile(response.data));
+        }
       }
-      else {
-        toast.success("Cập nhật thành công !");
-        dispatch(onUpdateStaffsProfile(response.data));
-      }
-    });
+    );
   };
 };
 
@@ -417,15 +409,16 @@ export const onUpdateStaffsPassword = (staff) => {
 };
 export const onUpdateStaffsPasswordResquest = (staff) => {
   return (dispatch) => {
-    return callApi(`staffs-password/${staff.id}`, "PUT", staff).then((response) => {
-      if (response === undefined) {
-        toast.error("Đổi thất bại, vui lòng thử lại !");
+    return callApi(`staffs-password/${staff.id}`, "PUT", staff).then(
+      (response) => {
+        if (response === undefined) {
+          toast.error("Đổi thất bại, vui lòng thử lại !");
+        } else {
+          toast.success("Đổi thành công !");
+          dispatch(onUpdateStaffsPassword(response.data));
+        }
       }
-      else {
-        toast.success("Đổi thành công !");
-        dispatch(onUpdateStaffsPassword(response.data));
-      }
-    });
+    );
   };
 };
 
@@ -438,15 +431,16 @@ export const onUpdatePositionStaffs = (staff) => {
 };
 export const onUpdatePositionStaffsResquest = (staff) => {
   return (dispatch) => {
-    return callApi(`staff-account/${staff.id}`, "PUT", staff).then((response) => {
-      if (response === undefined) {
-        toast.error("Sửa thất bại, vui lòng thử lại !");
+    return callApi(`staff-account/${staff.id}`, "PUT", staff).then(
+      (response) => {
+        if (response === undefined) {
+          toast.error("Sửa thất bại, vui lòng thử lại !");
+        } else {
+          toast.success("Sửa thành công !");
+          dispatch(onUpdatePositionStaffs(response.data));
+        }
       }
-      else {
-        toast.success("Sửa thành công !");
-        dispatch(onUpdatePositionStaffs(response.data));
-      }
-    });
+    );
   };
 };
 //Sửa Staff
@@ -461,8 +455,7 @@ export const onEditStaffsResquest = (id) => {
     return callApi(`staffs/${id}`, "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
-      }
-      else {
+      } else {
         dispatch(onGetStaffs(response.data));
       }
     });
@@ -514,8 +507,7 @@ export const onAddColorResquest = (color) => {
     return callApi("color", "POST", color).then((response) => {
       if (response === undefined) {
         toast.error("Thêm thất bại, vui lòng thử lại !");
-      }
-      else {
+      } else {
         toast.success("Thêm thành công !");
         dispatch(onAddColor(response.data));
       }
@@ -534,8 +526,7 @@ export const onUpdateColorResquest = (color) => {
     return callApi(`color/${color.id}`, "PUT", color).then((response) => {
       if (response === undefined) {
         toast.error("Sửa thất bại, vui lòng thử lại !");
-      }
-      else {
+      } else {
         toast.success("Sửa thành công !");
         dispatch(onUpdateColor(response.data));
       }
@@ -555,8 +546,7 @@ export const onEditColorResquest = (id) => {
     return callApi(`color/${id}`, "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
-      }
-      else {
+      } else {
         dispatch(onGetColor(response.data));
       }
     });
@@ -608,8 +598,7 @@ export const onAddSizeResquest = (size) => {
     return callApi("size", "POST", size).then((response) => {
       if (response === undefined) {
         toast.error("Thêm thất bại, vui lòng thử lại !");
-      }
-      else {
+      } else {
         toast.success("Thêm thành công !");
         dispatch(onAddSize(response.data));
       }
@@ -628,8 +617,7 @@ export const onUpdateSizeResquest = (size) => {
     return callApi(`size/${size.id}`, "PUT", size).then((response) => {
       if (response === undefined) {
         toast.error("Sửa thất bại, vui lòng thử lại !");
-      }
-      else {
+      } else {
         toast.success("Sửa thành công !");
         dispatch(onUpdateSize(response.data));
       }
@@ -649,8 +637,7 @@ export const onEditSizeResquest = (id) => {
     return callApi(`size/${id}`, "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
-      }
-      else {
+      } else {
         dispatch(onGetSize(response.data));
       }
     });
@@ -670,8 +657,7 @@ export const fetchBillResquest = () => {
     return callApi("bills", "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
-      }
-      else {
+      } else {
         dispatch(fetchBills(response.data));
       }
     });
@@ -707,8 +693,7 @@ export const onUpdateBillResquest = (bill) => {
     return callApi(`bills/${bill.id}`, "PUT", bill).then((response) => {
       if (response === undefined) {
         toast.error("Sửa thất bại, vui lòng thử lại !");
-      }
-      else {
+      } else {
         toast.success("Sửa thành công !");
         dispatch(onUpdateBill(response.data));
       }
@@ -728,8 +713,7 @@ export const onEditBillResquest = (id) => {
     return callApi(`bills/${id}`, "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
-      }
-      else {
+      } else {
         dispatch(onGetBill(response.data));
       }
     });
@@ -763,8 +747,7 @@ export const onAddNewsResquest = (news) => {
     return callApi("news", "POST", news).then((response) => {
       if (response === undefined) {
         toast.error("Thêm thất bại, vui lòng thử lại !");
-      }
-      else {
+      } else {
         toast.success("Thêm thành công !");
         dispatch(onAddNews(response.data));
       }
@@ -783,8 +766,7 @@ export const onUpdateNewsResquest = (news) => {
     return callApi(`news/${news.id}`, "PUT", news).then((response) => {
       if (response === undefined) {
         toast.error("Sửa thất bại, vui lòng thử lại !");
-      }
-      else {
+      } else {
         toast.success("Sửa thành công !");
         dispatch(onUpdateNews(response.data));
       }
@@ -818,8 +800,7 @@ export const onEditNewsResquest = (id) => {
     return callApi(`news/${id}`, "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
-      }
-      else {
+      } else {
         dispatch(onGetNews(response.data));
       }
     });
@@ -839,8 +820,7 @@ export const onAddCategoryResquest = (category) => {
     return callApi("categories", "POST", category).then((response) => {
       if (response === undefined) {
         toast.error("Thêm thất bại, vui lòng thử lại !");
-      }
-      else {
+      } else {
         toast.success("Thêm thành công !");
         dispatch(onAddCategory(response.data));
       }
@@ -856,15 +836,15 @@ export const onUpdateCategory = (category) => {
 };
 export const onUpdateCategoryResquest = (category) => {
   return (dispatch) => {
-    return callApi(`categories/${category.id}`, "PUT", category).then((response) => {
-      if (response === undefined) {
-        toast.error("Sửa thất bại, vui lòng thử lại !");
+    return callApi(`categories/${category.id}`, "PUT", category).then(
+      (response) => {
+        if (response === undefined) {
+          toast.error("Sửa thất bại, vui lòng thử lại !");
+        } else {
+          toast.success("Sửa thành công !");
+          dispatch(onUpdateCategory(response.data));
+        }
       }
-      else {
-        toast.success("Sửa thành công !");
-        dispatch(onUpdateCategory(response.data));
-      }
-    }
     );
   };
 };
@@ -894,8 +874,7 @@ export const onEditCategoryResquest = (id) => {
     return callApi(`categories/${id}`, "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
-      }
-      else {
+      } else {
         dispatch(onGetCategory(response.data));
       }
     });
@@ -944,8 +923,7 @@ export const onAddCustomerResquest = (customer) => {
     return callApi("customers", "POST", customer).then((response) => {
       if (response === undefined) {
         toast.error("Thêm thất bại, vui lòng thử lại !");
-      }
-      else {
+      } else {
         toast.success("Thêm thành công !");
         dispatch(onAddCustomer(response.data));
       }
@@ -965,8 +943,7 @@ export const onAddCustomerClientResquest = (customer) => {
     return callApi("customers_client", "POST", customer).then((response) => {
       if (response === undefined) {
         toast.error("Thêm thất bại, vui lòng thử lại !");
-      }
-      else {
+      } else {
         toast.success("Thêm thành công !");
         dispatch(onAddCustomerClient(response.data));
       }
@@ -983,15 +960,15 @@ export const onUpdateCustomers = (customer) => {
 };
 export const onUpdateCustomersResquest = (customer) => {
   return (dispatch) => {
-    return callApi(`customers/${customer.id}`, "PUT", customer).then((response) => {
-      if (response === undefined) {
-        toast.error("Sửa thất bại, vui lòng thử lại !");
+    return callApi(`customers/${customer.id}`, "PUT", customer).then(
+      (response) => {
+        if (response === undefined) {
+          toast.error("Sửa thất bại, vui lòng thử lại !");
+        } else {
+          toast.success("Sửa thành công !");
+          dispatch(onUpdateCustomers(response.data));
+        }
       }
-      else {
-        toast.success("Sửa thành công !");
-        dispatch(onUpdateCustomers(response.data));
-      }
-    }
     );
   };
 };
@@ -1005,15 +982,15 @@ export const onUpdateCustomersClient = (customer) => {
 };
 export const onUpdateCustomersClientResquest = (customer) => {
   return (dispatch) => {
-    return callApi(`customers_client/${customer.id}`, "PUT", customer).then((response) => {
-      if (response === undefined) {
-        toast.error("Sửa thất bại, vui lòng thử lại !");
+    return callApi(`customers_client/${customer.id}`, "PUT", customer).then(
+      (response) => {
+        if (response === undefined) {
+          toast.error("Sửa thất bại, vui lòng thử lại !");
+        } else {
+          toast.success("Sửa thành công !");
+          dispatch(onUpdateCustomersClient(response.data));
+        }
       }
-      else {
-        toast.success("Sửa thành công !");
-        dispatch(onUpdateCustomersClient(response.data));
-      }
-    }
     );
   };
 };
@@ -1030,8 +1007,7 @@ export const onEditCustomerResquest = (id) => {
     return callApi(`customers/${id}`, "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
-      }
-      else {
+      } else {
         dispatch(onGetCustomer(response.data));
       }
     });
@@ -1086,16 +1062,15 @@ export const fetchBillStatusEqual0 = (bill) => {
   return {
     type: types.COUNT_STATUS_BILL_EQUAL0,
     bill,
-  }
-}
+  };
+};
 
 export const fetchBillStatusEqual0Resquest = () => {
   return (dispatch) => {
     return callApi("count-status-bill", "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
-      }
-      else {
+      } else {
         dispatch(fetchBillStatusEqual0(response.data));
       }
     });
@@ -1129,8 +1104,7 @@ export const fetchOrderImportResquest = () => {
     return callApi("orders-import", "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
-      }
-      else {
+      } else {
         dispatch(fetchOrderImport(response.data));
       }
     });
@@ -1165,8 +1139,7 @@ export const onAddOrderResquest = (order) => {
     return callApi("orders", "POST", order).then((response) => {
       if (response === undefined) {
         toast.error("Thêm thất bại, vui lòng thử lại !");
-      }
-      else {
+      } else {
         toast.success("Thêm thành công !");
         dispatch(onAddOrder(response.data));
       }
@@ -1191,8 +1164,7 @@ export const onUpdateOrderResquest = (order) => {
     return callApi(`orders/${order.id}`, "PUT", order).then((response) => {
       if (response === undefined) {
         toast.error("Sửa thất bại, vui lòng thử lại !");
-      }
-      else {
+      } else {
         toast.success("Sửa thành công !");
         dispatch(onUpdateOrder(response.data));
       }
@@ -1212,8 +1184,7 @@ export const onEditOrderResquest = (id) => {
     return callApi(`orders/${id}`, "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
-      }
-      else {
+      } else {
         dispatch(onGetOrder(response.data));
       }
     });
@@ -1233,8 +1204,7 @@ export const fetchOrderInfoResquest = (id) => {
     return callApi(`orders-info/${id}`, "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
-      }
-      else {
+      } else {
         dispatch(fetchOrderInfo(response.data));
       }
     });
@@ -1253,8 +1223,7 @@ export const onAddSectorResquest = (sector) => {
     return callApi("sectors", "POST", sector).then((response) => {
       if (response === undefined) {
         toast.error("Thêm thất bại, vui lòng thử lại !");
-      }
-      else {
+      } else {
         toast.success("Thêm thành công !");
         dispatch(onAddSector(response.data));
       }
@@ -1280,8 +1249,7 @@ export const onUpdateSectorResquest = (sector) => {
     return callApi(`sectors/${sector.id}`, "PUT", sector).then((response) => {
       if (response === undefined) {
         toast.error("Sửa thất bại, vui lòng thử lại !");
-      }
-      else {
+      } else {
         toast.success("Sửa thành công !");
         dispatch(onUpdateSector(response.data));
       }
@@ -1314,8 +1282,7 @@ export const onEditSectorResquest = (id) => {
     return callApi(`sectors/${id}`, "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
-      }
-      else {
+      } else {
         dispatch(onGetSector(response.data));
       }
     });
@@ -1336,8 +1303,7 @@ export const fetchObjectsResquest = () => {
     return callApi("objects", "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
-      }
-      else {
+      } else {
         dispatch(fetchObjects(response.data));
       }
     });
@@ -1355,8 +1321,7 @@ export const onAddObjectsResquest = (object_menu) => {
     return callApi("objects", "POST", object_menu).then((response) => {
       if (response === undefined) {
         toast.error("Thêm thất bại, vui lòng thử lại !");
-      }
-      else {
+      } else {
         toast.success("Thêm thành công !");
         dispatch(onAddObjects(response.data));
       }
@@ -1391,8 +1356,7 @@ export const onEditObjectsResquest = (id) => {
     return callApi(`objects/${id}`, "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
-      }
-      else {
+      } else {
         dispatch(onGetObjects(response.data));
       }
     });
@@ -1407,15 +1371,15 @@ export const onUpdateObjects = (object_menu) => {
 };
 export const onUpdateObjectsResquest = (object_menu) => {
   return (dispatch) => {
-    return callApi(`objects/${object_menu.id}`, "PUT", object_menu).then((response) => {
-      if (response === undefined) {
-        toast.error("Sửa thất bại, vui lòng thử lại !");
+    return callApi(`objects/${object_menu.id}`, "PUT", object_menu).then(
+      (response) => {
+        if (response === undefined) {
+          toast.error("Sửa thất bại, vui lòng thử lại !");
+        } else {
+          toast.success("Sửa thành công !");
+          dispatch(onUpdateObjects(response.data));
+        }
       }
-      else {
-        toast.success("Sửa thành công !");
-        dispatch(onUpdateObjects(response.data));
-      }
-    }
     );
   };
 };
@@ -1429,28 +1393,25 @@ export const onGetAllColorBySize = (color_by_size) => {
 };
 export const onGetAllColorBySizeResquest = (id_product) => {
   return (dispatch) => {
-    return callApi(`product-sizes/${id_product}`, "GET", null).then((response) => {
-      if (response === undefined) {
-        toast.error("Vui lòng thử lại !");
+    return callApi(`product-sizes/${id_product}`, "GET", null).then(
+      (response) => {
+        if (response === undefined) {
+          toast.error("Vui lòng thử lại !");
+        } else {
+          dispatch(onGetAllColorBySize(response.data));
+        }
       }
-      else {
-        dispatch(onGetAllColorBySize(response.data));
-      }
-    }
     );
   };
 };
-
-
 
 // Khách Hàng Order sản phẩm
 
 export const onAddBillCustomerResquest = (bills_customer) => {
   return (dispatch) => {
-    return callApi("bill-customer", "POST", bills_customer).then((response) => {
-
-
-    });
+    return callApi("bill-customer", "POST", bills_customer).then(
+      (response) => {}
+    );
   };
 };
 
@@ -1459,13 +1420,10 @@ export const onAddBillInfoCustomerResquest = (bills_info_customer) => {
     return callApi("bill-info-customer", "POST", bills_info_customer).then(
       (response) => {
         toast.success("Cảm Ơn Khách Hàng Đã Mua Hàng Của Chúng Tôi !");
-
       }
-    )
-
+    );
   };
 };
-
 
 //Lấy tất cả danh sách Banner
 
@@ -1481,8 +1439,7 @@ export const fetchBannersResquest = () => {
     return callApi("banners", "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
-      }
-      else {
+      } else {
         dispatch(fetchBanners(response.data));
       }
     });
@@ -1498,11 +1455,10 @@ export const onAddBanner = (banner) => {
 export const onAddBannerResquest = (banner) => {
   return (dispatch) => {
     return callApi("banners", "POST", banner).then((response) => {
-      console.log(response)
+      console.log(response);
       if (response === undefined) {
         toast.error("Thêm thất bại, vui lòng thử lại !");
-      }
-      else {
+      } else {
         toast.success("Thêm thành công !");
         dispatch(onAddBanner(response.data));
       }
@@ -1520,8 +1476,12 @@ export const onDeleteBanner = (id) => {
 export const onDeleteBannerResquest = (id) => {
   return (dispatch) => {
     return callApi(`banners/${id}`, "DELETE", null).then((response) => {
-      toast.success("Xóa thành công !");
-      dispatch(onDeleteBanner(id));
+      if (response === undefined) {
+        toast.error("Xóa thất bại, vui lòng thử lại !");
+      } else {
+        toast.success("Xóa thành công !");
+        dispatch(onDeleteBanner(id));
+      }
     });
   };
 };
@@ -1529,7 +1489,7 @@ export const onDeleteBannerResquest = (id) => {
 export const onGetBanner = (banner) => {
   return {
     type: types.EDIT_BANNER,
-   banner,
+    banner,
   };
 };
 export const onEditBannerResquest = (id) => {
@@ -1537,8 +1497,7 @@ export const onEditBannerResquest = (id) => {
     return callApi(`banners/${id}`, "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
-      }
-      else {
+      } else {
         dispatch(onGetBanner(response.data));
       }
     });
@@ -1556,12 +1515,10 @@ export const onUpdateBannerResquest = (banner) => {
     return callApi(`banners/${banner.id}`, "PUT", banner).then((response) => {
       if (response === undefined) {
         toast.error("Sửa thất bại, vui lòng thử lại !");
-      }
-      else {
+      } else {
         toast.success("Sửa thành công !");
         dispatch(onUpdateBanner(response.data));
       }
-    }
-    );
+    });
   };
 };
