@@ -3,7 +3,8 @@ import { Image } from "react-bootstrap";
 import "./App.scss";
 
 import { connect } from "react-redux";
-import * as actions from "./../../actions/productActions";
+import * as actionsProduct from "./../../actions/productActions";
+import * as actions from "./../../actions/index";
 
 import Banner from "../../components/Banner/index";
 import Slider from "../../components/Slider/index";
@@ -17,6 +18,7 @@ class test extends Component {
   componentDidMount() {
     //  this.showListProduct();
     this.props.onGetAllProduct();
+    this.props.fetchBanners();
   }
   render() {
     // var ListimagesLifeWear = [
@@ -125,7 +127,7 @@ class test extends Component {
     //       status: true
     //     },
     //   ]
-    var { category, products } = this.props;
+    var { category, products,banner } = this.props;
     var data = category.sort(() => Math.random() - Math.random()).slice(0, 4);
     var data1 = category.sort(() => Math.random() - Math.random()).slice(0, 4);
     var data2 = category.sort(() => Math.random() - Math.random()).slice(0, 4);
@@ -150,10 +152,10 @@ class test extends Component {
       };
     });
 
-    console.log(products)
+    console.log(banner)
     return (
       <div className="App">
-        <Banner />
+        <Banner arrayList={banner}/>
         <Slider chooseSize="mr-2" name="NAM" arrayList={dataRandomMen} />
         <Slider chooseSize="mr-2" name="Sản Phẩm Hot" arrayList={products} />
         <Slider chooseSize="mr-2" name="NỮ" arrayList={dataRandomWomen} />
@@ -174,6 +176,7 @@ var mapStateToProps = (state) => {
     sector: state.sector,
     category: state.category,
     products: state.products,
+    banner: state.banner,
 
 
   };
@@ -181,7 +184,9 @@ var mapStateToProps = (state) => {
 var mapDispatchToProps = (dispatch, props) => {
   return {
     onGetAllProduct: () => {
-      dispatch(actions.fetchProductResquest());
+      dispatch(actionsProduct.fetchProductResquest());
+    }, fetchBanners: () => {
+      return dispatch(actions.fetchBannersResquest());
     },
   };
 };
