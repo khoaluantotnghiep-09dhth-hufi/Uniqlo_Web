@@ -247,7 +247,7 @@ class index extends Component {
             </Row>
             <Row>
               <Col>
-                <Link to="/account/customer_profile">
+                <Link to="/account/customer-profile">
                   <Button
                     type="submit"
                     variant="outline-secondary"
@@ -255,6 +255,17 @@ class index extends Component {
                     style={{ margin: 0}}
                   >
                     <h6 style={{ marginBottom: 0 }}>Thay đổi thông tin</h6>
+                  </Button>
+                </Link>&nbsp;
+                <Link to="/account/member-benifits">
+                  <Button
+                  className="mt-2"
+                    type="submit"
+                    variant="outline-secondary"
+                    size="sm"
+                    style={{ margin: 0}}
+                  >
+                    <h6 style={{ marginBottom: 0 }}>Quyền Lợi Thành Viên</h6>
                   </Button>
                 </Link>&nbsp;
                 <Button

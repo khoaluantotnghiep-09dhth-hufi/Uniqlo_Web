@@ -16,6 +16,7 @@ import Guide from "./../screens/Screen_Guide/index";
 import Accessibility from "./../screens/Screen_Accessibility/index";
 import Privacy_Policy from "./../screens/Screen_PrivacyPolicy/index";
 import Customer_Profile from "./../screens/Screen_CustomerProfile/index";
+import Member_Benifits from "../screens/Screen_MemberBenifits/index";
 
 var routes = [
   {
@@ -118,9 +119,14 @@ var routes = [
     main: () => <Home />,
   },
   {
-    path: "/account/customer_profile",
+    path: "/account/customer-profile",
     exact: true,
     main: ({ location }) => <Customer_Profile location={location} />,
+  },
+  {
+    path: "/account/member-benifits",
+    exact: true,
+    main: ({ location,match }) => <Member_Benifits location={location} match={match} />,
   },
   {
     path: "",
