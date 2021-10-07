@@ -118,7 +118,7 @@ var routes = [
     main: () => <Home />,
   },
   {
-    path: "/customer_profile",
+    path: "/account/customer_profile",
     exact: true,
     main: ({ location }) => <Customer_Profile location={location} />,
   },

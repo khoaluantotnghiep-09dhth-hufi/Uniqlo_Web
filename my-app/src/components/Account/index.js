@@ -247,7 +247,7 @@ class index extends Component {
             </Row>
             <Row>
               <Col>
-                <Link to="/customer_profile">
+                <Link to="/account/customer_profile">
                   <Button
                     type="submit"
                     variant="outline-secondary"
