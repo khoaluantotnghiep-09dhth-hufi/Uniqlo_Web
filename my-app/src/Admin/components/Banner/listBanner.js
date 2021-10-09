@@ -15,7 +15,7 @@ import {
   CButton,
 } from "@coreui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck,faPlus, faTimes, faTools } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faPlus, faTimes, faTools } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 const fields = [
   "STT",
@@ -25,104 +25,103 @@ const fields = [
 ];
 
 class ListBanner extends React.Component {
-    componentDidMount() {
-      this.props.fetchBanners();
+  componentDidMount() {
+    this.props.fetchBanners();
+  }
+  onDeleteBanner = (item) => {
+    if (window.confirm('Bạn có chắc muốn xóa không ?')) {
+      this.props.onDeleteItemBanner(item);
     }
-    onDeleteBanner = (item) => {
-      if(window.confirm('Bạn có chắc muốn xóa không ?')){
-        this.props.onDeleteItemBanner(item);  
-      }
-    };
-    render() {
-      var { banner} = this.props;
-  
-      var dataBanner = banner.map((item, index) => {
-        return { ...item, index };
-      });
-      return (
-        <>
-          <Link to="/admin/manage/banner/add">
-            <CButton type="button" className="btn btn-danger">
-              <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />
-              Thêm Mới
-            </CButton>
-          </Link>
-          <CRow>
-            <CCol xs="12" lg="24">
-              <CCard>
-                <CCardHeader>Danh Sách Banner</CCardHeader>
-                <CCardBody>
-                  <CDataTable
-                    items={dataBanner}
-                    fields={fields}
-                    itemsPerPage={5}
-                    sorter
-                    columnFilter
-                    itemsPerPageSelect
-                    pagination
-                    scopedSlots={{
-                      "Hành Động": (item) => (
-                        <td>
-                          <Link to={`/admin/manage/banner/${item.id}/edit`}>
-                            <CButton type="button" className="btn btn-primary">
-                              <FontAwesomeIcon
-                                icon={faTools}
-                                className="mr-2"
-                                size="lg"
-                              />
-                              Sửa
-                            </CButton>
-                          </Link>
-  
-                          <CButton type="button" className="btn btn-warning"
-                            onClick={() => { this.onDeleteBanner(item.id) }}
-                          >
+  };
+  render() {
+    var { banner } = this.props;
+
+    var dataBanner = banner.map((item, index) => {
+      return { ...item, index };
+    });
+    return (
+      <>
+        <Link to="/admin/manage/banner/add">
+          <CButton type="button" className="btn btn-danger">
+            <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />
+            Thêm Mới
+          </CButton>
+        </Link>
+        <CRow>
+          <CCol xs="12" lg="24">
+            <CCard>
+              <CCardHeader>Danh Sách Banner</CCardHeader>
+              <CCardBody>
+                <CDataTable
+                  items={dataBanner}
+                  fields={fields}
+                  itemsPerPage={5}
+                  sorter
+                  columnFilter
+                  itemsPerPageSelect
+                  pagination
+                  scopedSlots={{
+                    "Hành Động": (item) => (
+                      <td>
+                        <Link to={`/admin/manage/banner/${item.id}/edit`}>
+                          <CButton type="button" className="btn btn-primary">
                             <FontAwesomeIcon
-                              icon={faTimes}
+                              icon={faTools}
                               className="mr-2"
                               size="lg"
                             />
-                            Xóa
+                            Sửa
                           </CButton>
-  
+                        </Link>
+
+                        <CButton type="button" className="btn btn-warning"
+                          onClick={() => { this.onDeleteBanner(item.id) }}
+                        >
+                          <FontAwesomeIcon
+                            icon={faTimes}
+                            className="mr-2"
+                            size="lg"
+                          />
+                          Xóa
+                        </CButton>
+
+                      </td>
+                    ),
+                    "STT":
+                      (item, index) => (
+                        <td>
+                          {index + 1}
                         </td>
                       ),
-                      "STT":
-                        (item, index) => (
-                          <td>
-                            {index + 1}
-                          </td>
-                        ),
                     'image':
                       (item, index) => (
                         <td>
-                          <Image src={item.image} thumbnail />
+                          <Image src={item.image} style={{ width: "200px", height: "200px" }} />
                         </td>
                       ),
-                    }}
-                  />
-                </CCardBody>
-              </CCard>
-            </CCol>
-          </CRow>
-        </>
-      );
-    }
+                  }}
+                />
+              </CCardBody>
+            </CCard>
+          </CCol>
+        </CRow>
+      </>
+    );
   }
-  var mapStateToProps = (state) => {
-    return {
-    banner: state.banner,   
-    };
+}
+var mapStateToProps = (state) => {
+  return {
+    banner: state.banner,
   };
-  var mapDispatchToProps = (dispatch, props) => {
-    return {
-      fetchBanners: () => {
-        return dispatch(actions.fetchBannersResquest());
-      },
-      onDeleteItemBanner: (id) => {
-        return dispatch(actions.onDeleteBannerResquest(id));
-      },
-    };
+};
+var mapDispatchToProps = (dispatch, props) => {
+  return {
+    fetchBanners: () => {
+      return dispatch(actions.fetchBannersResquest());
+    },
+    onDeleteItemBanner: (id) => {
+      return dispatch(actions.onDeleteBannerResquest(id));
+    },
   };
-  export default connect(mapStateToProps, mapDispatchToProps)(ListBanner );
-  
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ListBanner);

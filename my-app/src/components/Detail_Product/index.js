@@ -189,11 +189,10 @@ class index extends Component {
                   style={{ margin: "0" }}
                   variant="outline-secondary"
                   size="sm"
-                  className={`mt-1 ${
-                    isChooseColor === item.nameColor
+                  className={`mt-1 ${isChooseColor === item.nameColor
                       ? "active Adjust__Color-Choose"
                       : ""
-                  }`}
+                    }`}
                   onClick={() => {
                     this.onClickChooseColor(
                       this,
@@ -227,7 +226,7 @@ class index extends Component {
   };
 
   onAddToCart = (products) => {
-    var { match, products_category, color_by_size} = this.props;
+    var { match, products_category, color_by_size } = this.props;
     var id_product = match.params.id_product;
     var { txtSize, isChooseColor, quantityOfSize } = this.state;
 
@@ -344,18 +343,18 @@ class index extends Component {
               </Row>
             </Col>
           </Row>
-          
+
           <Row>
 
           </Row>
           <Row>
-          <Row className=' text-center mt-5'>
-<h2 className='font-weight-normal ' style={{ textDecoration: 'underline'}}>SẢN PHẨM LIÊN QUAN</h2>
+            <Row className=' text-center mt-5'>
+              <h2 className='font-weight-normal ' style={{ textDecoration: 'underline' }}>SẢN PHẨM LIÊN QUAN</h2>
+            </Row>
+            <Row style={{ boxShadow: '1px 1px 2px rgba(6,6,6)' }}>
+              {this.showProductPredict(products_category)}
+            </Row>
           </Row>
-          <Row style={{boxShadow: '1px 1px 2px rgba(6,6,6)'}}>
-          {this.showProductPredict(products_category)}
-          </Row>
-         </Row>
         </Container>
       </React.Fragment>
     );
