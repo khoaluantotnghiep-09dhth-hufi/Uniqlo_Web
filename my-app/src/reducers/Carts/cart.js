@@ -70,7 +70,6 @@ var cart = (state = initialState, action) => {
           quantity,
         });
       }
-
       sessionStorage.setItem("cart", JSON.stringify(state));
       return [...state];
     //Xóa sản phẩm vào giỏ hàng
