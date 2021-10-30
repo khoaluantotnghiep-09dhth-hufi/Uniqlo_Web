@@ -30,7 +30,15 @@ class index extends Component {
               </Nav>
             </Col>
             <Col xs="1" sm="1" md="1" lg="1" className="img-tran">
-              <a id="imgFooter" href="#top"><Image src="https://www.uniqlo.com/vn/explorer/img/btn_footer_pagetop.gif" alt="" width="21" height="21" className="pagetop"/></a>        
+              <a id="imgFooter" href="#top">
+              <Image
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/UNIQLO_logo.svg/120px-UNIQLO_logo.svg.png"
+                rounded
+                width="21rem"
+                height="21rem"
+                className="pagetop"
+              />
+              </a>        
             </Col>
           </Row>
           <p className="mt-4">Tên doanh nghiệp: Công ty TNHH UNIQLO Việt Nam<br></br>

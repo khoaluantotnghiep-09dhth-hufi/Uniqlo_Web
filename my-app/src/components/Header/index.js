@@ -84,12 +84,12 @@ class index extends Component {
     var isCheckAccount =
       sessionStorage.getItem("client") !== null ? (
         <NavLink to="/account">
-          <MDBIcon icon="user" md="4" className="sizeIcon" />
+          <MDBIcon icon="user" className="sizeIcon" id="sizeIconUser" />
         </NavLink>
         
       ) : (
         <NavLink to="/login">
-          <MDBIcon icon="user" md="4" className="sizeIcon" />
+          <MDBIcon icon="user" className="sizeIcon" id="sizeIconUser" />
         </NavLink>
       );
 
@@ -99,54 +99,44 @@ class index extends Component {
           <Col lg={1}>
             <NavLink to="/">
               <Image
-                src="https://www.uniqlo.com/vn/explorer/img/logo_uq_01.gif"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/UNIQLO_logo.svg/120px-UNIQLO_logo.svg.png"
                 rounded
+                width="60rem"
+                height="60rem"
               />
             </NavLink>{" "}
           </Col>
 
-          <Col lg={6}>
+          <Col sm={6} md={6} lg={6} xl={6} >
             <Header_Center />
           </Col>
-
-          <Col lg={5}>
-            <Row>
-              <Col lg={9}>
-                <InputGroup>
-                  <MDBInput
-                    hint="Tìm Kiếm"
-                    type="text"
-                    containerClass="mt-0"
-                    maxlength="100"
-                    name="input_Search"
-                    onChange={this.onHandleChange}
-                   
-                    
-                  />{" "}
-                  {showLinkSearch}
-                </InputGroup>
-              </Col>
-              <Col lg={1}>
-                {isCheckAccount}
-                {/* <NavLink to="/login">
-                  <MDBIcon icon="user" md="4" className="sizeIcon" onClick={this.onHandleSubmit}/>
-                </NavLink>{" "} */}
-              </Col>
-              <Col lg={1}>
-                {" "}
-                <NavLink to="/cart">
-                  {" "}
-                  <MDBIcon
-                    icon="shopping-cart"
-                    md="4"
-                    className="sizeIcon icon"
-                    style={{ fontSize: "22px" }}
-                  >
-                    {this.showTotalQuantityCart(cart)}
-                  </MDBIcon>
-                </NavLink>
-              </Col>
-            </Row>
+          <Col sm={3} md={3} lg={3} xl={3} >
+            <InputGroup>
+              <MDBInput
+                hint="Tìm Kiếm"
+                type="text"
+                containerClass="mt-0"
+                maxlength="100"
+                name="input_Search"
+                onChange={this.onHandleChange}
+              />
+              {showLinkSearch}
+            </InputGroup>               
+          </Col>
+          <Col sm={1} md={1} lg={1} xl={1}>
+            {isCheckAccount}
+          </Col>
+          <Col sm={1} md={1} lg={1} xl={1} >
+            <NavLink to="/cart">
+              <MDBIcon
+                icon="shopping-cart"
+                md="4"
+                className="sizeIcon icon"
+                style={{ fontSize: "22px" }}
+              >
+                {this.showTotalQuantityCart(cart)}
+              </MDBIcon>
+            </NavLink>
           </Col>
         </Row>
       </Container>
