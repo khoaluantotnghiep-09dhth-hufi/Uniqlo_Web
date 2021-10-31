@@ -2,11 +2,12 @@
     transform: translateY(-5px);
 }
 .footer-main{
-    margin-top:36px
+    margin-top:36px;  
 }
 .footer{
     background-color: black;
     padding-top: 10px;
+    height: 60px;
 }
 .font-nav{
 color: white!important;
@@ -16,4 +17,8 @@ font-weight: 100;
 #imgFooter{
     position: absolute;
     margin-left: 50px;
+}
+
+.pagetop{
+    margin-top: -10px;
 }

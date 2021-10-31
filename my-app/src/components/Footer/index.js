@@ -14,11 +14,16 @@ class index extends Component {
   render() {
 
     return (
-      <header  className="footer-main">
+      <header className="footer-main">
         <Container>
           <Row className="footer">
 
-            <Col xl={1} className="img-tran"> <Image src="https://www.uniqlo.com/vn/explorer/img/logo_uq_01.gif" rounded /></Col>
+            <Col xl={1} className="img-tran"> <Image
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/UNIQLO_logo.svg/120px-UNIQLO_logo.svg.png"
+                rounded
+                width="50rem"
+                height="50rem"
+              /></Col>
 
             <Col  xs="10" sm="10" md="10" lg="10">
               <Nav className="justify-content-around ">
@@ -32,12 +37,12 @@ class index extends Component {
             <Col xs="1" sm="1" md="1" lg="1" className="img-tran">
               <a id="imgFooter" href="#top">
               <Image
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/UNIQLO_logo.svg/120px-UNIQLO_logo.svg.png"
+                src="https://freepngimg.com/thumb/web_design/24723-7-up-arrow-clipart.png"
                 rounded
-                width="21rem"
-                height="21rem"
+                width="40rem"
+                height="40rem"
                 className="pagetop"
-              />
+              />             
               </a>        
             </Col>
           </Row>

@@ -167,7 +167,8 @@ class addProduct extends React.Component {
             quantity: txtQuantity
         };
         this.props.onAddItemProductInfo(propductinfo);
-        history.goBack();
+        //Không quay lại khi add thông tin sản phẩm
+        //history.goBack();
     };
     // onEditHandle = (item) => {
 
