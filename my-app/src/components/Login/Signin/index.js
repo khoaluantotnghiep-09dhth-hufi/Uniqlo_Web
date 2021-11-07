@@ -31,14 +31,14 @@ class index extends Component {
       //   return;
       // }
       if (users[i].phone !== txtPhone){
-        toast.error(<div>Đăng nhập thất bại.<br />Tài khoản không tồn tại!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
-        return;
+        //toast.error(<div>Đăng nhập thất bại.<br />Tài khoản không tồn tại!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+       
       }
-      if (users[i].phone === txtPhone && users[i].password !== txtPassword){
-        toast.error(<div>Đăng nhập thất bại.<br />Mật khẩu không chính xác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
-        return;
+     else if (users[i].phone === txtPhone && users[i].password !== txtPassword){
+        //toast.error(<div>Đăng nhập thất bại.<br />Mật khẩu không chính xác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+        
       }  
-      if (users[i].phone === txtPhone && users[i].password === txtPassword) {
+      else if (users[i].phone === txtPhone && users[i].password === txtPassword) {
         // var user = {
         //   id_user: users[i].id,
         //   name: users[i].name,
