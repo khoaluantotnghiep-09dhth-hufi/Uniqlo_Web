@@ -1,3 +1,4 @@
+
 .login-background {
   background: rgb(34, 193, 195);
   background: linear-gradient(
@@ -6,21 +7,39 @@
     rgba(253, 187, 45, 1) 100%
   );
   font-family: "work sans";
-  
+ 
 }
 .login-container {
-  width: 500px;
+
   border-radius: 10px;
-  background-color:white;
   position: absolute;
   margin: auto;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
-  height: 350px;
+
   .login-input {
     margin: 3px;
+  };
+  background-image: url("../../assets//w_uni_pnt_4.jpg");
+  background-repeat: no-repeat, repeat;
+  .login-container2 {
+    width: 500px;
+    border-radius: 10px;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 350px;
+    .login-input {
+      margin: 3px;
+    };
+  
+  
+    
   }
   
 }
@@ -30,8 +49,8 @@
 .btn-login {
     background: linear-gradient(
       135deg,
-      rgb(233, 36, 36) 0%,
-      rgb(206, 77, 105) 100%
+      rgb(185, 83, 23) 0%,
+      rgb(224, 17, 62) 100%
     );
     border-radius: 15px;
     width: 97%;
@@ -40,4 +59,21 @@
     outline:none;
     border: none;
     margin-left: 10px;
+    font-size:  18;
+  }
+  .btn-Pass {
+    background: linear-gradient(
+      135deg,
+      rgb(27, 143, 133) 0%,
+      rgb(31, 199, 211) 100%
+    );
+    border-radius: 15px;
+    width: 97%;
+    // margin: 10px;
+    padding-bottom: 5;
+    height: 50px;
+    outline:none;
+    border: none;
+    margin-left: 10px;
+    font-size:  18;
   }

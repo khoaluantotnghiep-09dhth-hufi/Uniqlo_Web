@@ -7,6 +7,25 @@ export const fetchProduct = (products) => {
     products,
   };
 };
+export const fetchProductTop10 = (products) => {
+  return {
+    type: types.FETCH_PRODUCT,
+    products,
+  };
+};
+
+export const fetchProductTop10Resquest = () => {
+  return (dispatch) => {
+    return callApi("products-top10", "GET", null).then((response) => {
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      }
+      else {
+      dispatch(fetchProductTop10(response.data));
+      }
+    });
+  };
+};
 
 export const fetchProductResquest = () => {
   return (dispatch) => {

@@ -6,8 +6,8 @@ class index extends Component {
     constructor(props) {
         super(props);
         this.onShowSlider = this.onShowSlider.bind(this);
-      }
-    onShowSlider (){
+    }
+    onShowSlider() {
         console.log(this.props.name + '' + this.props.arrayList.join(' '));
     }
     // onShowSlider = () => {
@@ -26,8 +26,9 @@ class index extends Component {
             <div>
                 <Container className="mt-5">
                     <h2 className="d-flex justify-content-start" onClick={this.onShowSlider}>{this.props.name}</h2>
-                    <Row className="mt-4 ">
-                        <Col className="lg-3 " > {elementImages}
+                    <Row className="mt-4">
+                        <Col className="xl-10" md-4>
+                            {elementImages}
                         </Col>
 
                     </Row>

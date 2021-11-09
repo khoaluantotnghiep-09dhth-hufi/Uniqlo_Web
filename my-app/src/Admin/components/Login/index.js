@@ -6,6 +6,7 @@ import { Route, Redirect, withRouter } from "react-router-dom";
 import HomePage from "../../containers/TheLayout";
 import { toast } from 'react-toastify';
 import "./login.scss";
+
 class index extends Component {
   constructor(props) {
     super(props);
@@ -85,78 +86,70 @@ class index extends Component {
     }
     return (
       <>
-        <div fluid="sm" className="login-container login-background">
-          <Row className="login-content">
-            <Col >
-              <h1 className="text-center">Đăng Nhập</h1>
-              <Form onSubmit={this.onHandleSubmitLogin(staff)} >
-                <Form.Group className="mb-3" >
-                  <Form.Control
-                    className="fas fa-envelope"
-                    type="email"
-                    placeholder="&#xf0e0; Email"
-                    ref="memberEmail"
-                    onChange={this.onHandleChange}
-                    name="txtEmail"
-                    minlength="10"
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                    required
-                    autofocus
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" >
-                  <Form.Control
-                    className="fas fa-lock login-input"
-                    type="password"
-                    placeholder="&#xf023; Mật Khẩu"
-                    ref="memberPassword"
-                    onChange={this.onHandleChange}
-                    name="txtPassword"
-                    minlength="1"
-                    maxlength="25"
-                    required
-                    autofocus
-                  />
-                </Form.Group>
+        <div fluid="sm" className="login-background login-container">
+          <div className=" login-container2 ">
 
-                <Form.Group className="mb-3 " >
-                  <Button
-                    variant="outline-secondary"
-                    type="submit"
-                    className="btn btn-login"
-                    onKeyDown={(event) => this.handleKeyDown(event)}
-                  >
-                    Đăng Nhập
-                  </Button>
-                </Form.Group>
-                {/* <Form.Group
-                  className="mb-3 text-center"
-                  controlId="formBasicPassword"
-                >
-                  <a
-                    href="#"
-                    style={{ color: "#666", borderBottom: "1px solid #ccc" }}
-                    onClick={this.props.onToggleForm}
-                  >
-                    Quên Mật Khẩu?
-                  </a>
-                </Form.Group> */}
-              </Form>
-            </Col>
-          </Row>
 
+            <Row className="login-content">
+              <Col >
+                <h1 className="text-center text-danger">Đăng Nhập</h1>
+                <Form onSubmit={this.onHandleSubmitLogin(staff)} >
+                  <Form.Group className="mb-3" >
+                    <Form.Control
+                      className="fas fa-envelope"
+                      type="email"
+                      placeholder="&#xf0e0; Email"
+                      ref="memberEmail"
+                      onChange={this.onHandleChange}
+                      name="txtEmail"
+                      minlength="10"
+                      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                      required
+                      autofocus
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3" >
+                    <Form.Control
+                      className="fas fa-lock login-input"
+                      type="password"
+                      placeholder="&#xf023; Mật Khẩu"
+                      ref="memberPassword"
+                      onChange={this.onHandleChange}
+                      name="txtPassword"
+                      minlength="1"
+                      maxlength="25"
+                      required
+                      autofocus
+                    />
+                  </Form.Group>
+
+                  <Form.Group className="mb-3 text-center" >
+                    <Button
+                      variant="outline-secondary"
+                      type="submit"
+                      className="btn btn-login"
+                      onKeyDown={(event) => this.handleKeyDown(event)}
+                    >
+                      Đăng Nhập
+                    </Button>
+                  </Form.Group>
+                  <Form.Group
+                    className="mb-3 text-center"
+                    controlId="formBasicPassword"
+                  >
+                    <Button className="btn btn-Pass"
+                      href="#"
+                      onClick={this.props.onToggleForm}
+                    >
+                      Quên Mật Khẩu?
+                    </Button>
+                  </Form.Group>
+                </Form>
+              </Col>
+            </Row>
+          </div>
         </div>
-        {/* <div>
-          <Form.Group className="mb-3 " controlId="formBasicPassword">
-            <Button
-              variant="outline-secondary"
-              type="submit"
-              className="btn btn-login"
-            >
-              Đăng Nhập
-            </Button>
-          </Form.Group>
-        </div> */}
+
       </>
     );
   }

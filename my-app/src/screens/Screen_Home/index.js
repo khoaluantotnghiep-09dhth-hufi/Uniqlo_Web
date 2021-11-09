@@ -127,12 +127,12 @@ class test extends Component {
     //       status: true
     //     },
     //   ]
-    var { category, products,banner } = this.props;
+    var { category, products, banner } = this.props;
     var data = category.sort(() => Math.random() - Math.random()).slice(0, 4);
     var data1 = category.sort(() => Math.random() - Math.random()).slice(0, 4);
     var data2 = category.sort(() => Math.random() - Math.random()).slice(0, 4);
     var dataProduct = products.slice(0, 4);
-    console.log("SP: "+dataProduct)
+    console.log("SP: " + dataProduct)
     var dataRandomMen = data.map((item, index) => {
       return {
         id: index,
@@ -155,12 +155,12 @@ class test extends Component {
     console.log(banner)
     return (
       <div className="App">
-        <Banner arrayList={banner}/>
-        <Slider chooseSize="mr-2" name="NAM" arrayList={dataRandomMen} />
-        <Slider chooseSize="mr-2" name="Sản Phẩm Hot" arrayList={products} />
-        <Slider chooseSize="mr-2" name="NỮ" arrayList={dataRandomWomen} />
-        <Slider chooseSize="mr-2" name="TRẺ EM" arrayList={dataRandomBaby} />
-        <Image src="https://www.uniqlo.com/vn/top/img/topic/20210715_1636_gl5593.jpg" />
+        <Banner arrayList={banner} />
+        <Slider chooseSize="mr-2 pt-4 px-2" name="NAM" arrayList={dataRandomMen} />
+        <Slider chooseSize="mr-2 pt-4 px-2" name="SẢN PHẨM HOT" arrayList={products} />
+        <Slider chooseSize="mr-2 pt-4 px-2" name="NỮ" arrayList={dataRandomWomen} />
+        <Slider chooseSize="mr-2 pt-4 px-2" name="TRẺ EM" arrayList={dataRandomBaby} />
+        {/* <Image src="https://www.uniqlo.com/vn/top/img/topic/20210715_1636_gl5593.jpg" /> */}
         <Slider
           className="slider--repair"
           chooseSize="maxmax"
