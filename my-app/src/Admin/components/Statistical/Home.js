@@ -28,9 +28,10 @@ import {
     faSignOutAlt,
     faUser,
     faListUl,
-    faTshirt
+    faTshirt,
+    faFileCsv
 } from "@fortawesome/free-solid-svg-icons";
-
+import { CSVLink } from 'react-csv'
 const brandSuccess = getStyle('success') || '#4dbd74'
 const brandInfo = getStyle('info') || '#20a8d8'
 const brandDanger = getStyle('danger') || '#f86c6b'
@@ -48,18 +49,16 @@ class Home extends React.Component {
         this.props.fetchBillStatusEqual0();
         // this.props.fetchProductInfoCountStatus();
     }
+    exportExcel() {
+
+    }
     render() {
         var { billTotal } = this.props;
         var { staff } = this.props;
         var { customer } = this.props;
         var { billTotalQuantity } = this.props;
         var { productInfo } = this.props;
-        // var { countStatusProduct } = this.props;
         var { bill } = this.props;
-        // var dataProductStatusEqual1 = countStatusProduct.map((item, index) => {
-        //     return item.countProduct;
-        // })
-        // console.log(countStatusProduct)
         var dataBillStatusEqual0 = bill.map((item, index) => {
             return item.countStatus;
         })
@@ -235,27 +234,6 @@ class Home extends React.Component {
                             </CDropdown>
                         </CWidgetDropdown>
                     </CCol>
-                    {/* <CCol sm="3" lg="3">
-                        <CWidgetDropdown
-                            color="gradient-danger"
-                            header={dataProductStatusEqual1}
-                            text="Sản phẩm đã ngừng kinh doanh"
-                        >
-                            <CDropdown>
-                                <CDropdownToggle color="transparent">
-                                    <CIcon name="cil-settings" />
-                                </CDropdownToggle>
-                                <CDropdownMenu className="pt-0" placement="bottom-end">
-                                    <CDropdownItem>
-                                        <Link to="/admin/manage/products" style={{ color: 'black' }}>
-                                            <FontAwesomeIcon icon={faTshirt} size="lg" className="mr-2" />
-                                            Danh Sách Sản Phẩm
-                                        </Link>
-                                    </CDropdownItem>
-                                </CDropdownMenu>
-                            </CDropdown>
-                        </CWidgetDropdown>
-                    </CCol> */}
                 </CRow>
                 <CCard>
                     <CCardBody>
@@ -265,10 +243,12 @@ class Home extends React.Component {
                                 <br />
                             </CCol>
                             <CCol sm="7" className="d-none d-md-block">
-                                <CButton color="primary" className="float-right">
-                                    <CIcon name="cil-cloud-download" />
-                                </CButton>
-                                <CButtonGroup className="float-right mr-3">
+                                {/* <CButton color="green" className="float-right" onChange={this.exportExcel}>
+                                <CSVLink data={dataProductInfoCount}>Xuất Excel</CSVLink>
+                                      <FontAwesomeIcon icon={faFileCsv} size="lg" className="mr-2" />
+                                </CButton> */}
+
+                                {/* <CButtonGroup className="float-right mr-3">
                                     {
                                         ['Ngày', 'Tháng', 'Năm'].map(value => (
                                             <CButton
@@ -281,7 +261,7 @@ class Home extends React.Component {
                                             </CButton>
                                         ))
                                     }
-                                </CButtonGroup>
+                                </CButtonGroup> */}
                             </CCol>
                         </CRow>
                         <CChartLine
@@ -327,7 +307,7 @@ var mapDispatchToProps = (dispatch, props) => {
         fetchProductInfoCount: () => {
             return dispatch(actionsProductInfo.fetchCountProductInfoResquest());
         },
-        // fetchProductInfoCountStatus: () => {
+        // fetchBill: () => {
         //     return dispatch(actionsProductInfo.fetchCountProductInfoStatusResquest());
         // },
     };
