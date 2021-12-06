@@ -15,11 +15,19 @@ import {
     faPlus,
     faTimes,
     faTools,
+    faFileExcel
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import * as actions from "./../../../actions/index";
 import { Image } from 'react-bootstrap';
-
+import { CSVLink } from "react-csv";
+const headers = [
+    { label: "Mã", key: "id" },
+    { key: "title", label: "Tiêu Đề" },
+    { key: "date", label: "Ngày Đăng" },
+    { key: "descriptionText", label: "Nội Dung" },
+    { key: "name", label: "Nhân Viên Đăng" },
+];
 const fields =
     ["STT",
         { key: "title", label: "Tiêu Đề" },
@@ -32,7 +40,7 @@ const fields =
 class ListNews extends React.Component {
     constructor(props) {
         super(props);
-        this.state=({
+        this.state = ({
             data: [],
         })
     }
@@ -40,7 +48,7 @@ class ListNews extends React.Component {
         var { news } = this.props;
         this.props.fetchNews();
         this.setState({
-            data:news
+            data: news
         })
 
     }
@@ -53,7 +61,7 @@ class ListNews extends React.Component {
     render() {
         var { news } = this.props;
         var dataNews = news.map((item, index) => {
-            return {...item,index};
+            return { ...item, index };
         });
         // const propertyValues = Object.values(news);
         return (
@@ -63,6 +71,12 @@ class ListNews extends React.Component {
                         <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />Thêm Mới
                     </CButton>
                 </Link>
+                <CSVLink
+                    className="btn btn-success"
+                    data={dataNews} headers={headers}>
+                    <FontAwesomeIcon icon={faFileExcel} className="mr-2" size="lg" />
+                    Xuất Excel
+                </CSVLink>
                 <CRow>
                     <CCol xs="12" lg="24">
                         <CCard>

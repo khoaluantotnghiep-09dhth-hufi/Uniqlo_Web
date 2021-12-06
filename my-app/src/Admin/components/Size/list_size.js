@@ -11,21 +11,26 @@ import {
   CButton,
 } from "@coreui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faTimes, faTools } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faTimes, faTools, faFileExcel } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { CSVLink } from "react-csv";
+const headers = [
+  { label: "Mã", key: "id" },
+  { label: "Tên Kích Cỡ", key: "name" },
+];
 const fields = [
   {
     key: 'STT',
     label: 'STT',
     sorter: false,
     filter: false
-},
-{
+  },
+  {
     key: 'id',
     label: 'Mã',
     sorter: false,
     filter: false
-},
+  },
   { key: 'name', label: 'Tên Kich Cỡ' },
   {
     key: 'Thao Tác',
@@ -33,7 +38,7 @@ const fields = [
     _style: { width: '25%' },
     sorter: false,
     filter: false
-},
+  },
 ];
 
 class ListColor extends React.Component {
@@ -41,8 +46,8 @@ class ListColor extends React.Component {
     this.props.fetchSizes();
   }
   onDeleteSize = (item) => {
-    if(window.confirm('Bạn có chắc muốn xóa không ?')){
-      this.props.onDeleteItemSize(item);  
+    if (window.confirm('Bạn có chắc muốn xóa không ?')) {
+      this.props.onDeleteItemSize(item);
     }
   };
   render() {
@@ -59,6 +64,12 @@ class ListColor extends React.Component {
             Thêm Mới
           </CButton>
         </Link>
+        <CSVLink
+          className="btn btn-success"
+          data={dataSize} headers={headers}>
+          <FontAwesomeIcon icon={faFileExcel} className="mr-2" size="lg" />
+          Xuất Excel
+        </CSVLink>
         <CRow>
           <CCol xs="12" lg="24">
             <CCard>

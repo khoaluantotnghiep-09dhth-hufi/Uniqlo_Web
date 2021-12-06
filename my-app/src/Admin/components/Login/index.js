@@ -6,7 +6,7 @@ import { Route, Redirect, withRouter } from "react-router-dom";
 import HomePage from "../../containers/TheLayout";
 import { toast } from 'react-toastify';
 import "./login.scss";
-
+import forgotPW from '../Login/forgotPassword';
 class index extends Component {
   constructor(props) {
     super(props);
@@ -63,6 +63,9 @@ class index extends Component {
   onToggleForm = () => {
     this.props.onToggleForm();
   };
+  forgotPassword = () => {
+    <Route to="/admin/forgotpasword" />
+  }
   onHandleChange = (event) => {
     var target = event.target;
     var name = target.name;
@@ -139,7 +142,7 @@ class index extends Component {
                   >
                     <Button className="btn btn-Pass"
                       href="#"
-                      onClick={this.props.onToggleForm}
+                      onClick={this.forgotPassword}
                     >
                       Quên Mật Khẩu?
                     </Button>

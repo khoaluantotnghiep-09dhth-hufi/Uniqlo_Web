@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "./../../../actions/index";
 import { Alert } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faTimes, faFileExcel } from "@fortawesome/free-solid-svg-icons";
 import Moment from "react-moment";
 
 import {
@@ -15,7 +15,20 @@ import {
   CDataTable,
   CRow,
 } from "@coreui/react";
-
+import { CSVLink } from "react-csv";
+const headers = [
+  { label: "Mã", key: "id" },
+  { key: "order_date", label: "Ngày Đặt Hàng" },
+  { key: "delivery_date", label: "Ngày Giao Hàng" },
+  { key: "name_customer", label: "Tên Khách Hàng" },
+  { key: "address", label: "Địa Chỉ" },
+  { key: "phone", label: "SDT" },
+  { key: "email", label: "Email" },
+  { key: "total_quantity", label: "Tổng Số Lượng" },
+  { key: "total", label: "Tổng Tiền" },
+  { key: "note", label: "Ghi Chú" },
+  { key: "status", label: "Tình Trạng" },
+];
 const fields = [
 
   { key: "index", label: "STT" },
@@ -60,6 +73,12 @@ class OrderConfirmed extends React.Component {
       });
     return (
       <>
+        <CSVLink
+          className="btn btn-success"
+          data={dataBill} headers={headers}>
+          <FontAwesomeIcon icon={faFileExcel} className="mr-2" size="lg" />
+          Xuất Excel
+        </CSVLink>
         <CRow>
           <CCol xs="12" lg="24">
             <CCard>

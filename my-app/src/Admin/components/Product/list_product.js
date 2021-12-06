@@ -15,11 +15,13 @@ import {
     faTimes,
     faTools,
     faInfo,
+    faFileExcel
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import * as actions from "./../../../actions/productAdminActions";
 import { Image, Alert } from 'react-bootstrap';
+import { CSVLink } from "react-csv";
 const fields = [
     {
         key: 'STT',
@@ -94,8 +96,16 @@ const getBadge = (status) => {
         default: return 'primary'
     }
 }
+const headers = [
+    { label: "Mã", key: "id" },
+    { label: "Danh Mục", key: "nameCategory" },
+    { label: "Tên Sản Phẩm", key: "name" },
+    { label: "Giá", key: "price" },
+    { label: "Trạng Thái", key: "status" },
+
+];
 class ListProducts extends React.Component {
-     componentDidMount() {
+    componentDidMount() {
         this.props.fetchProducts();
     }
     onDeleteProduct = (id) => {
@@ -115,6 +125,12 @@ class ListProducts extends React.Component {
                         <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />Thêm Mới
                     </CButton>
                 </Link>
+                <CSVLink
+                    className="btn btn-success"
+                    data={data} headers={headers}>
+                    <FontAwesomeIcon icon={faFileExcel} className="mr-2" size="lg" />
+                    Xuất Excel
+                </CSVLink>
                 <CRow>
                     <CCol xs="12" lg="24">
                         <CCard>
@@ -167,6 +183,8 @@ class ListProducts extends React.Component {
                                                         />
                                                         Xóa
                                                     </CButton>
+
+
                                                 </td>
 
                                             ),

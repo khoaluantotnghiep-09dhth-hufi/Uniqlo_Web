@@ -210,7 +210,33 @@ const _nav = [
 
   },
 
-
+  {
+    _tag: 'CNavGroup',
+    name: 'Pages',
+    // icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
+    items: [
+      {
+        _tag: 'CNavItem',
+        name: 'Login',
+        to: '/admin',
+      },
+      {
+        _tag: 'CNavItem',
+        name: 'Register',
+        to: '/admin/forgot-password',
+      },
+      {
+        _tag: 'CNavItem',
+        name: 'Error 404',
+        to: '/404',
+      },
+      {
+        _tag: 'CNavItem',
+        name: 'Error 500',
+        to: '/500',
+      },
+    ],
+  },
 ]
 
 export default _nav

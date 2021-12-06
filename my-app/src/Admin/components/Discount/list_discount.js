@@ -15,8 +15,16 @@ import {
   CImage,
 } from "@coreui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faTimes, faTools } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faTimes, faTools, faFileExcel } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { CSVLink } from "react-csv";
+const headers = [
+  { label: "Mã", key: "id" },
+  { label: "Tên Khuyến Mãi", key: "name" },
+  { key: "description", label: "Phần Trăm Khuyến Mãi" },
+  { key: "date_start", label: "Ngày Bắt Đầu" },
+  { key: "date_end", label: "Ngày Kết Thúc" },
+];
 const getBadge = (status) => {
   switch (status) {
     case "Active":
@@ -56,7 +64,7 @@ class ListDiscount extends React.Component {
     var { promotion } = this.props;
 
     var dataPromotion = promotion.map((item, index) => {
-      
+
       return { ...item, index };
     });
 
@@ -69,6 +77,12 @@ class ListDiscount extends React.Component {
             Thêm Mới
           </CButton>
         </Link>
+        <CSVLink
+          className="btn btn-success"
+          data={dataPromotion} headers={headers}>
+          <FontAwesomeIcon icon={faFileExcel} className="mr-2" size="lg" />
+          Xuất Excel
+        </CSVLink>
         <CRow>
           <CCol xs="12" lg="24">
             <CCard>
@@ -123,7 +137,7 @@ class ListDiscount extends React.Component {
                         </CButton>
                       </td>
                     ),
-                    
+
 
                     STT: (item, index) => <td>{index + 1}</td>,
                   }}

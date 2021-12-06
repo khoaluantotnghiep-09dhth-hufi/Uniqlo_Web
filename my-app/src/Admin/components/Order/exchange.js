@@ -15,9 +15,20 @@ import {
 } from "@coreui/react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faTimes, faFileExcel } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-
+import { CSVLink } from "react-csv";
+const headers = [
+    { label: "Mã", key: "id" },
+    { key: "nameCustomer", label: "Tên Khách Hàng", },
+    { key: "nameProduct", label: "Tên Sản Phẩm" },
+    { key: "nameSize", label: "Kích Cỡ" },
+    { key: "nameColor", label: "Màu" },
+    { key: "quantity", label: "Số Lượng" },
+    { key: "price", label: "Giá" },
+    { key: "nameStaff", label: "Tên Nhân Viên Đổi" },
+    { key: "reason", label: "Lý Do" },
+];
 const formatter = new Intl.NumberFormat("vi-VN", {
     style: "currency",
     currency: "VND",
@@ -26,11 +37,11 @@ const formatter = new Intl.NumberFormat("vi-VN", {
 const options = { dateStyle: "short" };
 const fields = [
     { key: "STT", label: "STT", _style: { width: '1%' }, },
-    { key: "nameCustomer", label: "Tên Khách Hàng",},
+    { key: "nameCustomer", label: "Tên Khách Hàng", },
     { key: "nameProduct", label: "Tên Sản Phẩm" },
-    { key: "nameSize", label: "Kích Cỡ",  _style: { width: '1%' }, },
-    { key: "nameColor", label: "Màu", _style: { width: '1%' },  },
-    { key: "quantity", label: "Số Lượng", _style: { width: '1%' },  },
+    { key: "nameSize", label: "Kích Cỡ", _style: { width: '1%' }, },
+    { key: "nameColor", label: "Màu", _style: { width: '1%' }, },
+    { key: "quantity", label: "Số Lượng", _style: { width: '1%' }, },
     { key: "price", label: "Giá" },
     { key: "nameStaff", label: "Tên Nhân Viên Đổi" },
     { key: "reason", label: "Lý Do" },
@@ -67,6 +78,12 @@ class ListOrder extends React.Component {
                         Thêm Mới
                     </CButton>
                 </Link>
+                <CSVLink
+                    className="btn btn-success"
+                    data={dataBill} headers={headers}>
+                    <FontAwesomeIcon icon={faFileExcel} className="mr-2" size="lg" />
+                    Xuất Excel
+                </CSVLink>
                 <CRow>
                     <CCol xs="12" lg="24">
                         <CCard>

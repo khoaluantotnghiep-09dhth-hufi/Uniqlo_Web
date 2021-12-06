@@ -9,11 +9,20 @@ import {
   CButton,
 } from "@coreui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faTimes, faTools } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faTimes, faTools, faFileExcel } from "@fortawesome/free-solid-svg-icons";
 import * as actions from "./../../../actions/index";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Image } from 'react-bootstrap';
+import { CSVLink } from "react-csv";
+const headers = [
+  { label: "Mã", key: "id" },
+  { label: "Tên Nhân Viên", key: "name" },
+  { label: "Email", key: "email" },
+  { label: "Số Điện Thoại", key: "phone" },
+  { label: "Địa Chỉ", key: "address" },
+  { label: "Chức Vụ", key: "role" },
+];
 const fields = [
   {
     key: 'STT',
@@ -75,6 +84,12 @@ class ListStaffs extends React.Component {
             Thêm Mới
           </CButton>
         </Link>
+        <CSVLink
+          className="btn btn-success"
+          data={dataStaff} headers={headers}>
+          <FontAwesomeIcon icon={faFileExcel} className="mr-2" size="lg" />
+          Xuất Excel
+        </CSVLink>
         <CRow>
           <CCol xs="12" lg="24">
             <CCard>

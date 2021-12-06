@@ -10,14 +10,21 @@ import {
   CDataTable,
   CRow,
   CButton,
+
 } from '@coreui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPlus,
   faTimes,
   faTools,
+  faFileExcel
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { CSVLink } from "react-csv";
+const headers = [
+  { label: "Mã", key: "id" },
+  { label: "Tên Màu", key: "name" },
+];
 const fields = [
   {
     key: 'STT',
@@ -61,6 +68,12 @@ class ListColor extends React.Component {
             <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />Thêm Mới
           </CButton>
         </Link>
+        <CSVLink
+          className="btn btn-success"
+          data={dataColor} headers={headers}>
+          <FontAwesomeIcon icon={faFileExcel} className="mr-2" size="lg" />
+          Xuất Excel
+        </CSVLink>
         <CRow>
           <CCol xs="12" lg="24">
             <CCard>

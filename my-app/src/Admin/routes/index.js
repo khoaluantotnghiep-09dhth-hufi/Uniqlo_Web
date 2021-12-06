@@ -2,8 +2,8 @@ import React from "react";
 
 const Home = React.lazy(() => import('../components/Statistical/Home'));
 const Notifications_Header = React.lazy(() => import('../components/Notifications_Header/listNotifications'));
-const ListBanner=React.lazy(() => import('../components/Banner/listBanner'));
-const AddBanner=React.lazy(() => import('../components/Banner/addBanner'));
+const ListBanner = React.lazy(() => import('../components/Banner/listBanner'));
+const AddBanner = React.lazy(() => import('../components/Banner/addBanner'));
 
 
 
@@ -25,7 +25,7 @@ const UpdateAccountAdmin = React.lazy(() => import('../components/Account_Admin/
 const AddAccountAdmin = React.lazy(() => import('../components/Account_Admin/add_accountAdmin'));
 const AdminProfile = React.lazy(() => import('../components/Account_Admin/admin_profile'));
 const ChangePassword = React.lazy(() => import('../components/Account_Admin/change_password'));
-
+const ForgotPassword = React.lazy(() => import('../components/Login/forgotPassword'));
 const ListProducts = React.lazy(() => import('../components/Product/list_product'));
 const AddProduct = React.lazy(() => import('../components/Product/add_product'));
 const AddProductInfo = React.lazy(() => import('../components/Product/add_prodcut_info'));
@@ -70,6 +70,7 @@ const routes = [
 
     { path: '/admin/profile', exact: true, name: 'Thông Tin Cá Nhân', component: AdminProfile },
     { path: '/admin/change-password', exact: true, name: 'Đổi Mật Khẩu', component: ChangePassword },
+    { path: '/admin/forgot-password', exact: true, name: 'Quên Mật Khẩu', component: ForgotPassword },
 
     { path: '/admin/system/order/all', exact: true, name: 'Tất Cả Đơn Hàng', component: Order },
     { path: '/admin/system/order/:id_order/edit', exact: true, name: 'Xác Nhận Đơn Hàng', component: UpdateOrder },

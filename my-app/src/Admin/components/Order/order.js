@@ -15,9 +15,21 @@ import {
 } from "@coreui/react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faTimes, faFileExcel } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-
+import { CSVLink } from "react-csv";
+const headers = [
+  { label: "Mã", key: "id" },
+  { key: "name_customer", label: "Khách Hàng" },
+  { key: "order_date", label: "Ngày Đặt" },
+  { key: "delivery_date", label: "Ngày Giao" },
+  { key: "address", label: "Địa Chỉ" },
+  { key: "phone", label: "Số Điện Thoại" },
+  { key: "email", label: "Email" },
+  { key: "total_quantity", label: "Tổng Số Lượng" },
+  { key: "total", label: "Tổng Tiền" },
+  { key: "status", label: "Trạng Thái" },
+];
 const formatter = new Intl.NumberFormat("vi-VN", {
   style: "currency",
   currency: "VND",
@@ -125,6 +137,12 @@ class ListOrder extends React.Component {
                         Thêm Mới
                     </CButton>
                 </Link> */}
+        <CSVLink
+          className="btn btn-success"
+          data={dataBill} headers={headers}>
+          <FontAwesomeIcon icon={faFileExcel} className="mr-2" size="lg" />
+          Xuất Excel
+        </CSVLink>
         <CRow>
           <CCol xs="12" lg="24">
             <CCard>

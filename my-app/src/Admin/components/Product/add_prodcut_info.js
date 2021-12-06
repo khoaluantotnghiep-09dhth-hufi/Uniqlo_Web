@@ -14,6 +14,7 @@ import {
     faTimes,
     faArrowLeft,
     faTools,
+    faFileExcel
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { Button, Form, Col, Container, Row, Image } from 'react-bootstrap';
@@ -23,6 +24,7 @@ import * as actionsProductInfo from "./../../../actions/product_infoActions";
 import { connect } from "react-redux";
 import { toast } from 'react-toastify';
 import uniqid from 'uniqid';
+import { CSVLink } from "react-csv";
 const fields = [
     {
         key: 'STT',
@@ -68,6 +70,13 @@ const getBadge = status => {
         default: return 'primary'
     }
 }
+const headers = [
+    { label: "Mã", key: "id" },
+    { label: "Tên Sản Phẩm", key: "name" },
+    { label: "Số Lượng", key: "quantity" },
+    { label: "Kích Cỡ", key: "nameSize" },
+    { label: "Màu", key: "nameColor" },
+];
 class addProduct extends React.Component {
     constructor(props) {
         super(props);
@@ -206,6 +215,7 @@ class addProduct extends React.Component {
                             Trở về
                         </Button>
                     </Link>
+
                     <CRow>
                         <Col sm="12">
                             <Form action="" method="post" onSubmit={() => this.onSubmitForm()}>
@@ -266,7 +276,7 @@ class addProduct extends React.Component {
 
                                         </Form.Group>
                                     </Col>
-                                    <Col sm="10">
+                                    <Col sm="12">
                                         <Form.Group className="d-flex justify-content-center">
 
                                             <Button type="button" className="btn btn-danger"
@@ -274,12 +284,19 @@ class addProduct extends React.Component {
                                             > <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg"
                                                 />Lưu</Button>
                                         </Form.Group>
+                                        <CSVLink
+                                            className="btn btn-success float-right"
+                                            data={dataProductInfo} headers={headers}>
+                                            <FontAwesomeIcon icon={faFileExcel} className="mr-2" size="lg" />
+                                            Xuất Excel
+                                        </CSVLink>
                                     </Col>
                                 </Row>
                             </Form>
                         </Col>
 
                     </CRow>
+
                     <CRow>
                         <CCol xs="12" lg="24">
                             <CCard>

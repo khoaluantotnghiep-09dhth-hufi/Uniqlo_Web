@@ -244,8 +244,8 @@ class Home extends React.Component {
                             </CCol>
                             <CCol sm="7" className="d-none d-md-block">
                                 {/* <CButton color="green" className="float-right" onChange={this.exportExcel}>
-                                <CSVLink data={dataProductInfoCount}>Xuất Excel</CSVLink>
-                                      <FontAwesomeIcon icon={faFileCsv} size="lg" className="mr-2" />
+                                    <CSVLink data={dataProductInfoCount}>Xuất Excel</CSVLink>
+                                    <FontAwesomeIcon icon={faFileCsv} size="lg" className="mr-2" />
                                 </CButton> */}
 
                                 {/* <CButtonGroup className="float-right mr-3">
