@@ -1,6 +1,6 @@
 import * as types from "./../constants/ActionTypes";
 import callApi from "./../Admin/utils/Callapi";
-import {  toast } from 'react-toastify';
+import { toast } from "react-toastify";
 export const fetchProduct = (products) => {
   return {
     type: types.FETCH_PRODUCT,
@@ -19,9 +19,8 @@ export const fetchProductTop10Resquest = () => {
     return callApi("products-top10", "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
-      }
-      else {
-      dispatch(fetchProductTop10(response.data));
+      } else {
+        dispatch(fetchProductTop10(response.data));
       }
     });
   };
@@ -32,9 +31,8 @@ export const fetchProductResquest = () => {
     return callApi("products", "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
-      }
-      else {
-      dispatch(fetchProduct(response.data));
+      } else {
+        dispatch(fetchProduct(response.data));
       }
     });
   };
@@ -52,10 +50,9 @@ export const onAddProductResquest = (product) => {
     return callApi("products", "POST", product).then((response) => {
       if (response === undefined) {
         toast.error("Thêm thất bại, vui lòng thử lại !");
-      }
-      else {
-      toast.success("Thêm thành công !");
-      dispatch(onAddProduct(response.data));
+      } else {
+        toast.success("Thêm thành công !");
+        dispatch(onAddProduct(response.data));
       }
     });
   };
@@ -73,10 +70,9 @@ export const onUpdateProductResquest = (product) => {
       (response) => {
         if (response === undefined) {
           toast.error("Sửa thất bại, vui lòng thử lại !");
-        }
-        else {
-        toast.success("Sửa thành công !");
-        dispatch(onUpdateProduct(response.data));
+        } else {
+          toast.success("Sửa thành công !");
+          dispatch(onUpdateProduct(response.data));
         }
       }
     );
@@ -95,9 +91,8 @@ export const onEditProductResquest = (id) => {
     return callApi(`products/${id}`, "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
-      }
-      else {
-      dispatch(onGetProduct(response.data));
+      } else {
+        dispatch(onGetProduct(response.data));
       }
     });
   };

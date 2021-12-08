@@ -6,7 +6,7 @@ class index extends Component {
 
 
         return (
-            <Image className={this.props.size} src={this.props.image} rounded width="49%" />
+            <Image className={this.props.size} src={this.props.image} rounded width="23%" />
         );
     }
 }

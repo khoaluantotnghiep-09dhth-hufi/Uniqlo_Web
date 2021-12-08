@@ -26,8 +26,8 @@ class index extends Component {
             <div>
                 <Container className="mt-5">
                     <h2 className="d-flex justify-content-start" onClick={this.onShowSlider}>{this.props.name}</h2>
-                    <Row className="mt-4">
-                        <Col className="xl-10" md-4>
+                    <Row className="mt-3">
+                        <Col className="xl-3" md-3>
                             {elementImages}
                         </Col>
 

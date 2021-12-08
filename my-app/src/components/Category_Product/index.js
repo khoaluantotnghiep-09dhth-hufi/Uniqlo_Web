@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Container, Row, Col, Dropdown } from "react-bootstrap";
 
 import Slider from "../../components/Slider/index";
+import Spinner from "react-bootstrap/Spinner";
 
 import { connect } from "react-redux";
 import "./Category_Product.scss";
@@ -24,12 +25,19 @@ class index extends Component {
       perPage: 4,
       currentPage: 0,
       txtFilter: 0,
+      isLoading: true,
     };
     this.handlePageClick = this.handlePageClick.bind(this);
   }
   componentDidMount() {
     //  this.showListProduct();
-    this.props.onGetAllProduct();
+    try{
+      setTimeout( this.props.onGetAllProduct(),1000);
+     
+      this.setState({ isLoading:false });
+    } catch (e) {
+      this.setState({ isLoading: false });
+    }
   }
 
   handlePageClick = (e) => {
@@ -54,7 +62,7 @@ class index extends Component {
 
   render() {
     var { location, history, products_category } = this.props;
-    var { txtFilter } = this.state;
+    var { txtFilter,isLoading } = this.state;
     console.log(txtFilter);
     var ListimagesNewStyle = [
       {
@@ -86,11 +94,10 @@ class index extends Component {
         status: true,
       },
     ];
+    if(isLoading){return  <div style={{display:"flex",alignContent:"center",justifyContent:"center"}}><Spinner  animation="grow" variant="danger" /></div>;}
     return (
       <Container className="mt-4">
-        <Row>
-          <Slider chooseSize="mr-2" arrayList={ListimagesNewStyle} />
-        </Row>
+        
         <Row className="Filter__Wrap">
           <Col>
             <Dropdown onSelect={this.onSelectChange}>
