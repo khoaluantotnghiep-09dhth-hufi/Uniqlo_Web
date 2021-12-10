@@ -80,7 +80,7 @@ class index extends Component {
                   {" "}
                   <Card.Text className=" Adjust_NewPrice" >
                     {" "}
-                    {elementNewPrice}
+                    { elementNewPrice}
                   </Card.Text>
                 </Col>
               </Row>

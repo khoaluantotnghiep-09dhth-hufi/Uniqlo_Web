@@ -38,18 +38,13 @@ const fields =
         "Thao Tác",
     ]
 class ListNews extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = ({
-            data: [],
-        })
-    }
+    
     componentDidMount() {
-        var { news } = this.props;
+        // var { news } = this.props;
         this.props.fetchNews();
-        this.setState({
-            data: news
-        })
+        // this.setState({
+        //     data: news
+        // })
 
     }
     onDeleteNews = (item) => {
@@ -60,17 +55,21 @@ class ListNews extends React.Component {
 
     render() {
         var { news } = this.props;
+        console.log("News :"+ news)
+        // debugger
+        // Sai Duong Dan Route
         var dataNews = news.map((item, index) => {
             return { ...item, index };
+
         });
         // const propertyValues = Object.values(news);
         return (
             <>
-                <Link to="/admin/system/news/add">
+                {/* <Link to="/admin/manage/news/add">
                     <CButton type="button" className="btn btn-danger">
                         <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />Thêm Mới
                     </CButton>
-                </Link>
+                </Link> */}
                 <CSVLink
                     className="btn btn-success"
                     data={dataNews} headers={headers}>
@@ -94,7 +93,7 @@ class ListNews extends React.Component {
                                         "Thao Tác":
                                             (item) => (
                                                 <td>
-                                                    <Link to={`/admin/system/news/${item.id}/edit`}>
+                                                    <Link to={`/admin/manage/news/${item.id}/edit`}>
                                                         <CButton type="button" className="btn btn-primary">
                                                             <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
                                                         </CButton>

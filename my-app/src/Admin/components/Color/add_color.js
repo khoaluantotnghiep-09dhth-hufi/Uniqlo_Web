@@ -79,7 +79,7 @@ class addColor extends React.Component {
       name: txtName,
     };
     console.log(color);
-    if (idItem) {
+    if (match.params.id_color) {
       this.props.onUpdateItemColor(colorUpdate);
       history.goBack();
     } else {

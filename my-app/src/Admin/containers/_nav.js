@@ -86,7 +86,7 @@ const _nav = [
   {
     _tag: 'CSidebarNavItem',
     name: 'Tin Tức',
-    to: '/admin/system/news',
+    to: '/admin/manage/news',
     icon: <FontAwesomeIcon icon={faNewspaper} className="mr-2" />,
 
   },

@@ -18,18 +18,23 @@ var news = (state = initialState, action) => {
   switch (action.type) {
     //Lấy Tất cả Danh Sách Danh Mục
     case types.FETCH_NEWS:
-      state = action.news;
       debugger
+      state = news;
+    
       return [...state];
     case types.DELETE_NEWS:
       index = findIndex(state, id);
       state.splice(index, 1);
       return [...state];
     case types.ADD_NEWS:
-
-      console.log("ADD NEW ACTION: " + JSON.stringify(action.news));
-      state.push(action.news);
-
+      debugger
+      console.log(state)
+      if(state){
+        state.push(news);
+      }
+     else{
+       console.log("State Dang Rong")
+     }
       return [...state];
     case types.UPDATE_NEWS:
       debugger

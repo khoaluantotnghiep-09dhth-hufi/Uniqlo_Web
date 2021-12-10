@@ -730,9 +730,16 @@ export const fetchNews = (news) => {
 
 export const fetchNewsResquest = () => {
   return (dispatch) => {
-    return callApi("news", "GET", null).then((response) => {
-      dispatch(fetchNews(response.data));
-    });
+  
+
+      return callApi("news", "GET", null).then((response) => {
+        if (response === undefined) {
+          toast.error("Vui lòng thử lại !");
+        } else {
+          dispatch(fetchNews(response.data));
+        }
+      });
+   
   };
 };
 
@@ -743,12 +750,16 @@ export const onAddNews = (news) => {
   };
 };
 export const onAddNewsResquest = (news) => {
+  
   return (dispatch) => {
     return callApi("news", "POST", news).then((response) => {
       if (response === undefined) {
         toast.error("Thêm thất bại, vui lòng thử lại !");
       } else {
+       
         toast.success("Thêm thành công !");
+        console.log("Thêm thành công ! "  +JSON.stringify(response.data));
+
         dispatch(onAddNews(response.data));
       }
     });
@@ -762,6 +773,7 @@ export const onUpdateNews = (news) => {
   };
 };
 export const onUpdateNewsResquest = (news) => {
+  // debugger
   return (dispatch) => {
     return callApi(`news/${news.id}`, "PUT", news).then((response) => {
       if (response === undefined) {

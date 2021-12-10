@@ -14,7 +14,7 @@ import color from "./Colors/color";
 import color_by_size from "./Color_By_Size/color_by_size";
 import bill from "./Bills/bill";
 import size from "./Sizes/size";
-import news from "./News/news";
+import news from "./News/new";
 import customer from "./Customer/customer";
 import category from "./Categories/category";
 import promotion from "./Promotions/promotion";

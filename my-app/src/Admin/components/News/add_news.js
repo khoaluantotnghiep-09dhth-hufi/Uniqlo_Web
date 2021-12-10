@@ -86,14 +86,14 @@ class AddNews extends React.Component {
     if (NextProps && NextProps.news) {
       var { news } = NextProps;
       if (match.params.id_news) {
-        const result = news.find((o) => o.id === match.params.id_news);
+        // const result = news.find((o) => o.id === match.params.id_news);
         this.setState({
-          txtTitle: result.title,
-          txtDate: result.date,
-          txtDescriptionHTML: result.descriptionHTML,
-          txtDescriptionText: result.descriptionText,
-          id_staff: result.id_staff,
-          txtImage: result.image,
+          txtTitle: news.title,
+          txtDate: news.date,
+          txtDescriptionHTML: news.descriptionHTML,
+          txtDescriptionText: news.descriptionText,
+          id_staff: news.id_staff,
+          txtImage: news.image,
         });
       }
     }
@@ -119,6 +119,7 @@ class AddNews extends React.Component {
   };
   onSubmitForm = (event) => {
     var { match } = this.props;
+   
 
     event.preventDefault();
     var { history } = this.props;
@@ -151,11 +152,12 @@ class AddNews extends React.Component {
     };
 
     if (match.params.id_news) {
-      // this.props.onUpdateItemNews(newsUpdate);
+      this.props.onUpdateItemNews(newsUpdate);
       history.goBack();
     }
     else {
-      // this.props.onAddItemNews(news);
+      this.props.onAddItemNews(news);
+     
       history.goBack();
     }
   };
@@ -240,7 +242,7 @@ class AddNews extends React.Component {
 var mapStateToProps = (state) => {
   return {
     news: state.news,
-  };
+};
 };
 var mapDispatchToProps = (dispatch, props) => {
   return {
