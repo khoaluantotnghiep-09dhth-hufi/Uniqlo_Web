@@ -4,6 +4,7 @@ import * as actions from "./../../../actions/index";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
 import { toast } from "react-toastify";
+import Forgot_Password from "../Forgot_Pass/index";
 class index extends Component {
   constructor(props) {
     super(props);
@@ -14,6 +15,8 @@ class index extends Component {
       txtTen: "",
       txtEmail: "",
       isCheckLogin: false,
+      isForgotPass: false,
+      txtForgotButton: "Quên mật khẩu ?",
     };
   }
   componentDidMount() {
@@ -69,7 +72,12 @@ class index extends Component {
     }
   };
 
-
+  onToggleFormForgotPass = () => {
+    this.setState({
+      isForgotPass: !this.state.isForgotPass,  
+      txtForgotButton: this.state.txtForgotButton == "Quên mật khẩu ?"?"Huỷ !" : "Quên mật khẩu ?",
+    });
+  };
   onToggleForm = () => {
     this.props.onToggleForm();
   };
@@ -82,8 +90,16 @@ class index extends Component {
     });
   };
   render() {
+    
     var { users } = this.props;
     var { isCheckLogin } = this.state;
+    var {  isForgotPass } = this.state;
+    var { txtForgotButton } = this.state;
+    var elmForgotPass = isForgotPass ? (
+      <Forgot_Password onCloseForm={this.onCloseForm} />
+    ) : (
+      ""
+    );
     console.log(isCheckLogin);
     if (isCheckLogin) {
       return (
@@ -141,13 +157,27 @@ class index extends Component {
             className="mb-3 text-center"
             controlId="formBasicPassword"
           >
-            <a
+            {/* <a
               href="#"
               style={{ color: "#666", borderBottom: "1px solid #ccc" }}
               onClick={this.props.onToggleForm}
             >
               Quên Mật Khẩu?
-            </a>
+            </a> */}
+            {/* <Forgot_Password
+            className="col-sm-6 col-xs-12"
+            onSubmit={this.onToggleFormForgotPass}
+          /> */}
+          {elmForgotPass}
+          <Form.Group
+            className="mb-3 text-center"
+            controlId="formBasicPassword">
+              <a
+                style={{ color: "#666", borderBottom: "1px solid #ccc" }}
+                onClick={this.onToggleFormForgotPass}>
+                {txtForgotButton}
+              </a>
+          </Form.Group>
           </Form.Group>
         </Form>
       </Col>

@@ -3,8 +3,7 @@ import { Component } from "react"
 class index extends Component{
     render(){
         return(
-          <Col>
-            <h5 className="text-center">Đăng Nhập</h5>
+          <Col>           
             <Form>
             <div class="acctitle"><i class="fa fa-refresh"></i> Quên mật khẩu</div>
               <Form.Group className="mb-3" controlId="formBasicPhone">
@@ -34,12 +33,12 @@ class index extends Component{
                 className="mb-3 text-center"
                 controlId="formBasicPassword"
               >
-                <a
+                {/* <a
                   href="#"
                   style={{ color: "#666", borderBottom: "1px solid #ccc" }}
                 >
                   Huỷ
-                </a>
+                </a> */}
               </Form.Group>
             </Form>
           </Col>
