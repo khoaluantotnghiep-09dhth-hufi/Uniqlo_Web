@@ -6,6 +6,9 @@ import bannerEdit from "./Banner/bannerEdit";
 
 
 import products from "./Products/products";
+import productsEdit from "./Products/productsEdit";
+
+
 import products_category from "./Products_Category/products_category";
 import productInfo from "./ProductInfo/productInfo";
 
@@ -58,7 +61,8 @@ import countStatusProduct from "./Statical/countStatusProduct";
 
 const myReducer = combineReducers({
   cart,
-  products, // products:
+  products, 
+  productsEdit,// products:
   object_menu,
   object_menuEdit,
   sector,
