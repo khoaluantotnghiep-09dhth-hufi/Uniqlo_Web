@@ -8,7 +8,10 @@ import bannerEdit from "./Banner/bannerEdit";
 import products from "./Products/products";
 import products_category from "./Products_Category/products_category";
 import productInfo from "./ProductInfo/productInfo";
+
 import object_menu from "./Objects/object";
+import object_menuEdit from "./Objects/objectEdit";
+
 import sector from "./Sectors/sector";
 import sectorEdit from "./Sectors/sectorEdit";
 
@@ -21,6 +24,8 @@ import colorEdit from "./Colors/colorEdit";
 
 import color_by_size from "./Color_By_Size/color_by_size";
 import bill from "./Bills/bill";
+import billEdit from "./Bills/billEdit";
+
 import size from "./Sizes/size";
 import sizeEdit from "./Sizes/sizeEdit";
 
@@ -30,7 +35,12 @@ import newsEdit from "./News/newsEdit";
 import post from "./Post/post";
 import postEdit from "./Post/postEdit";
 import customer from "./Customer/customer";
+import customerEdit from "./Customer/customerEdit";
+
 import category from "./Categories/category";
+import categoryEdit from "./Categories/categoryEdit";
+
+
 import promotion from "./Promotions/promotion";
 import promotionEdit from "./Promotions/promotionEdit";
 
@@ -50,9 +60,11 @@ const myReducer = combineReducers({
   cart,
   products, // products:
   object_menu,
+  object_menuEdit,
   sector,
   sectorEdit,
   category,
+  categoryEdit,
   color,
   colorEdit,
   size,
@@ -64,9 +76,11 @@ const myReducer = combineReducers({
   staff,
   staffEdit,
   bill,
+  billEdit,
   news,
   newsEdit,
   customer,
+  customerEdit,
   order,
   products_category,
   orderInfo,
