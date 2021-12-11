@@ -40,9 +40,7 @@ var banner = (state = initialState, action) => {
       }
 
       return [...state];
-    //Lấy banner Để Eddit
-    case types.EDIT_BANNER:
-      return action.banner;
+   
     default:
       return state;
   }

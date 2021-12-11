@@ -1498,10 +1498,10 @@ export const onDeleteBannerResquest = (id) => {
   };
 };
 //sửa banner
-export const onGetBanner = (banner) => {
+export const onGetBanner = (bannerEdit) => {
   return {
     type: types.EDIT_BANNER,
-    banner,
+    bannerEdit,
   };
 };
 export const onEditBannerResquest = (id) => {

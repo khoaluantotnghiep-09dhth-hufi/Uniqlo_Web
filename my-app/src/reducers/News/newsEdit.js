@@ -2,15 +2,7 @@ import * as types from "../../constants/ActionTypes";
 
 var initialState = {};
 
-var findIndex = (news, id) => {
-  var rs = -1;
-  news.forEach((item, index) => {
-    if (item.id === id) {
-      rs = index;
-    }
-  });
-  return rs;
-}
+
 var newsEdit = (state = initialState, action) => {
 
   var index = -1;
