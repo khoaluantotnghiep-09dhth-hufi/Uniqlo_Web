@@ -177,7 +177,7 @@ class index extends Component {
       ));
     } else if (idFilter === 2) {
       var dataFilter = data.filter(
-        (product) => product.price <= 500000 && product.price <= 900000
+        (product) =>  product.price >= 500000 && product.price <= 900000
       );
       result = dataFilter.map((product) => (
         <React.Fragment>
