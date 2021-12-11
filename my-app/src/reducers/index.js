@@ -18,6 +18,8 @@ import colorEdit from "./Colors/colorEdit";
 import color_by_size from "./Color_By_Size/color_by_size";
 import bill from "./Bills/bill";
 import size from "./Sizes/size";
+import sizeEdit from "./Sizes/sizeEdit";
+
 import news from "./News/news";
 import newsEdit from "./News/newsEdit";
 
@@ -47,6 +49,7 @@ const myReducer = combineReducers({
   color,
   colorEdit,
   size,
+  sizeEdit ,
   users, // users
   bills_customer,
   promotion,

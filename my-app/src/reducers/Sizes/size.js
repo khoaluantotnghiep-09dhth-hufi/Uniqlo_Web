@@ -40,9 +40,7 @@ var size = (state = initialState, action) => {
       }
 
       return [...state];
-    //Lấy Size Để Eddit
-    case types.EDIT_SIZE:
-      return action.size;
+    
     default:
       return state;
   }
