@@ -41,9 +41,7 @@ var color = (state = initialState, action) => {
       }
 
       return [...state];
-    //Lấy Mau Để Eddit
-    case types.EDIT_COLOR:
-      return action.color;
+   
     default:
       return state;
   }

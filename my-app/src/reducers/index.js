@@ -13,6 +13,8 @@ import sector from "./Sectors/sector";
 import users from "./Users/users";
 import staff from "./Staffs/staff";
 import color from "./Colors/color";
+import colorEdit from "./Colors/colorEdit";
+
 import color_by_size from "./Color_By_Size/color_by_size";
 import bill from "./Bills/bill";
 import size from "./Sizes/size";
@@ -43,6 +45,7 @@ const myReducer = combineReducers({
   sector,
   category,
   color,
+  colorEdit,
   size,
   users, // users
   bills_customer,
