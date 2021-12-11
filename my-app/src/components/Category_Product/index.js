@@ -64,36 +64,7 @@ class index extends Component {
     var { location, history, products_category } = this.props;
     var { txtFilter,isLoading } = this.state;
     console.log(txtFilter);
-    var ListimagesNewStyle = [
-      {
-        id: 1,
-
-        image:
-          "https://www.uniqlo.com/vn/top/img/topic/20210812_1130_gl8340.jpg",
-        status: true,
-      },
-      {
-        id: 2,
-
-        image:
-          "https://www.uniqlo.com/vn/top/img/topic/20210812_1130_gl5261.jpg",
-        status: true,
-      },
-      {
-        id: 3,
-
-        image:
-          "https://www.uniqlo.com/vn/top/img/topic/20210812_1130_gl0393.jpg",
-        status: true,
-      },
-      {
-        id: 4,
-
-        image:
-          "https://www.uniqlo.com/vn/top/img/topic/20210812_1130_gl2679.jpg",
-        status: true,
-      },
-    ];
+   
     if(isLoading){return  <div style={{display:"flex",alignContent:"center",justifyContent:"center"}}><Spinner  animation="grow" variant="danger" /></div>;}
     return (
       <Container className="mt-4">

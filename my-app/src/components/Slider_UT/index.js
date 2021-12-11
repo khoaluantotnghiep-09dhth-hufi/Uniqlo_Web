@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Container, Col, Image } from 'react-bootstrap';
+import ListImage from './Slider_Image/index'
+import Item from "./../Category_Product/Item_Product/index";
 
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -23,14 +25,23 @@ const responsive = {
 
 
 class index extends Component {
-
+   
     render() {
+        var{name}=this.props;
+        const ListImages = this.props.arrayList;
+        const elementImages = ListImages.map((product) => (
+            <React.Fragment>
+              <Col lg="10" className="mt-4">
+                <Item key={product.id} product={product} />
+              </Col>
+            </React.Fragment>
+          ));
         return (
-            <div>
+            <>
                 <Container className="mt-5">
-                    <h2 className="d-flex justify-content-start">UT</h2>
+                    <h2 className="d-flex justify-content-start">{name}</h2>
                     <Row className="mt-4">
-                        <Col>
+                     
                             <Carousel
                                 swipeable={false}
                                 draggable={false}
@@ -49,20 +60,12 @@ class index extends Component {
                                 dotListClass="custom-dot-list-style"
                                 itemClass="carousel-item-padding-40-px"
                             >
-                                <div><Image src="https://www.uniqlo.com/vn/top/img/topic/20210812_1130_gl1388.jpg" rounded /></div>
-                                <div><Image src="https://www.uniqlo.com/vn/top/img/topic/20210715_1624_gl4450.jpg" rounded /></div>
-                                <div><Image src="https://www.uniqlo.com/vn/top/img/topic/20210812_1130_gl9838.jpg" rounded /></div>
-                                <div><Image src="https://www.uniqlo.com/vn/top/img/topic/20210729_1015_gl1067.jpg" rounded /></div>
-                                <div><Image src="https://www.uniqlo.com/vn/top/img/topic/20210715_1624_gl6835.jpg" rounded /></div>
-                                <div><Image src="https://www.uniqlo.com/vn/top/img/topic/20210722_1032_gl7690.jpg" rounded /></div>
-                                <div><Image src="https://www.uniqlo.com/vn/top/img/topic/20210715_1624_gl2294.jpg" rounded /></div>
-                                <div><Image src="https://www.uniqlo.com/vn/top/img/topic/20210715_1624_gl6061.jpg" rounded /></div>
-                                <div><Image src="https://www.uniqlo.com/vn/top/img/topic/20210715_1624_gl2294.jpg" rounded /></div>
+                                {elementImages}
                             </Carousel>;
-                        </Col>
+                     
                     </Row>
                 </Container>
-            </div>
+            </>
         );
     }
 }

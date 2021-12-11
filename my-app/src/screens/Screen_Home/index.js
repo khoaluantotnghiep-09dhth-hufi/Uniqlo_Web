@@ -7,7 +7,7 @@ import * as actionsProduct from "./../../actions/productActions";
 import * as actions from "./../../actions/index";
 import Spinner from 'react-bootstrap/Spinner'
 import Banner from "../../components/Banner/index";
-import Slider from "../../components/Slider/index";
+import Slider from "../../components/Slider_UT/index";
 import Slider_Product from "../../components/Slider_Product/index";
 import Call_API from "./../../Admin/utils/Callapi";
 

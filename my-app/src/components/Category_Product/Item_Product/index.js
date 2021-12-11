@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import "./Item_Product.scss";
 class index extends Component {
   render() {
+
     var { product } = this.props;
     // product.desciption==='' &&
     const formatter = new Intl.NumberFormat("vi-VN", {
@@ -11,6 +12,7 @@ class index extends Component {
       currency: "VND",
       minimumFractionDigits: 0,
     });
+    console.log("Element Sale: "+ product.percentSale)
     var elementSale =
       product.percentSale === "0" ? (
         ""
