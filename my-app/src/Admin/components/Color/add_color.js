@@ -47,8 +47,8 @@ class addColor extends React.Component {
           (o) => o.id === match.params.id_color
         );
         this.setState({
-          idItem: color.id,
-          txtName: color.name,
+          idItem: result.id,
+          txtName: result.name,
         });
       }
     }
