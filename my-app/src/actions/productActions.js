@@ -26,9 +26,9 @@ export const fetchProductTop10Resquest = () => {
   };
 };
 
-export const fetchProductResquest = () => {
+export const fetchProductResquest = (id) => {
   return (dispatch) => {
-    return callApi("products", "GET", null).then((response) => {
+    return callApi(`products/${id}`, "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
       } else {

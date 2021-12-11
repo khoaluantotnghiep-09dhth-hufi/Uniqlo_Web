@@ -29,7 +29,7 @@ class index extends Component {
     var { match } = this.props;
     var id_product = match.params.id_product;
 
-    this.props.onGetAllProduct();
+    this.props.onGetAllProduct(id_product);
     this.props.onGetAllSizeByProduct(id_product);
   }
 
@@ -159,6 +159,7 @@ class index extends Component {
     });
   };
   ShowSize = (color_by_size, txtSize, isChooseColor) => {
+
     var result = null;
     var resultFilter = null;
 
@@ -226,10 +227,11 @@ class index extends Component {
   };
 
   onAddToCart = (products) => {
+    debugger
     var { match, products_category, color_by_size } = this.props;
     var id_product = match.params.id_product;
     var { txtSize, isChooseColor, quantityOfSize } = this.state;
-debugger
+
     var result = null;
 
     result = products_category.find((product) => product.id === id_product);
@@ -369,8 +371,8 @@ var mapStateToProps = (state) => {
 };
 var mapDispatchToProps = (dispatch, props) => {
   return {
-    onGetAllProduct: () => {
-      dispatch(actions.fetchProductResquest());
+    onGetAllProduct: (id) => {
+      dispatch(actions.fetchProductResquest(id));
     },
     onGetAllSizeByProduct: (id_product) => {
       dispatch(actions_of_index.onGetAllColorBySizeResquest(id_product));
