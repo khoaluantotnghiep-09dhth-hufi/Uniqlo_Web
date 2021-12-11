@@ -1,10 +1,23 @@
 const express = require("express");
 const app = express();
+var cors = require('cors')
+const bodyParser = require('body-parser')
+
 const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 // const delay = require("delay");
 const io = new Server(server);
+app.use(cors({
+  'allowedHeaders': ['sessionId', 'Content-Type'],
+  'exposedHeaders': ['sessionId'],
+  'origin': '*',
+  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  'preflightContinue': false
+}));
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+
 
 app.get("/", function (req, res) {
   res.sendFile(__dirname + "/index.html");
@@ -32,6 +45,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(3008, () => {
-  console.log("listening on 3008");
+server.listen(8080, () => {
+  console.log("listening on 8080");
 });
