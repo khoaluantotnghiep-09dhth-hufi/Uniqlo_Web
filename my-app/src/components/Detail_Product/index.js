@@ -229,7 +229,7 @@ class index extends Component {
     var { match, products_category, color_by_size } = this.props;
     var id_product = match.params.id_product;
     var { txtSize, isChooseColor, quantityOfSize } = this.state;
-
+debugger
     var result = null;
 
     result = products_category.find((product) => product.id === id_product);
@@ -245,7 +245,7 @@ class index extends Component {
     console.log(products);
     var onTakeIdProductInfo = products.find(
       (item) =>
-        item.id === id_product &&
+    
         item.nameColor === isChooseColor &&
         item.nameSize === txtSize
     );

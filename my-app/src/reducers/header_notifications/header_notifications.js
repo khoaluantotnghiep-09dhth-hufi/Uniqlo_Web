@@ -25,15 +25,27 @@ var header_notifications = (state = initialState, action) => {
       return [...state];
     //Xóa Size
     case types.DELETE_NOTIFICATIONS_HEADER:
-      index = findIndex(state, id);
+      index = findIndex(state, action.nameNotifications);
 
-      state.splice(index, 1);
-
+      if (index !== -1) {
+        state.splice(index, 1);
+      }
+      sessionStorage.setItem("notifications", JSON.stringify(state));
       return [...state];
+
+    
     //Thêm Size
     case types.ADD_NOTIFICATIONS_HEADER:
-        // console.log('Dang o ADD reducer: '+action.nameNotifications);
-      state.push(action.nameNotifications);
+      // console.log('Dang o ADD reducer: '+action.nameNotifications);
+      var newItem = {
+
+        title: action.nameNotifications,
+
+      };
+
+      state.push(newItem);
+      sessionStorage.setItem("notifictions", JSON.stringify(state));
+      // state.push(action.nameNotifications);
 
       return [...state];
     case types.RESET_NOTIFICATIONS_HEADER:
