@@ -2,7 +2,7 @@ import * as types from "./../../constants/ActionTypes";
 
 var initialState = [];
 
-var size = (state = initialState, action) => {
+var sizeEdit = (state = initialState, action) => {
 
   switch (action.type) {
    
@@ -14,4 +14,4 @@ var size = (state = initialState, action) => {
   }
 };
 
-export default size;
+export default sizeEdit;
