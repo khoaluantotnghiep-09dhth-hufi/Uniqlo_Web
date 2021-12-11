@@ -65,14 +65,14 @@ class ListNews extends React.Component {
         // const propertyValues = Object.values(news);
         return (
             <>
-                {/* <Link to="/admin/manage/news/add">
+                <Link to="/admin/manage/news/add">
                     <CButton type="button" className="btn btn-danger">
                         <FontAwesomeIcon icon={faPlus} className="mr-2" size="lg" />Thêm Mới
                     </CButton>
-                </Link> */}
+                </Link>
                 <CSVLink
                     className="btn btn-success"
-                    data={dataNews} headers={headers}>
+                    data={news} headers={headers}>
                     <FontAwesomeIcon icon={faFileExcel} className="mr-2" size="lg" />
                     Xuất Excel
                 </CSVLink>
@@ -84,7 +84,7 @@ class ListNews extends React.Component {
                             </CCardHeader>
                             <CCardBody>
                                 <CDataTable
-                                    items={dataNews}
+                                    items={news}
                                     fields={fields}
                                     itemsPerPage={5}
                                     sorter

@@ -90,6 +90,14 @@ const _nav = [
     icon: <FontAwesomeIcon icon={faNewspaper} className="mr-2" />,
 
   },
+  // ,
+  // {
+  //   _tag: 'CSidebarNavItem',
+  //   name: 'POST',
+  //   to: '/admin/manage/post',
+  //   icon: <FontAwesomeIcon icon={faNewspaper} className="mr-2" />,
+
+  // },
   {
     _tag: 'CSidebarNavItem',
     name: 'Khuyến Mãi',

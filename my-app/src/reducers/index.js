@@ -14,7 +14,11 @@ import color from "./Colors/color";
 import color_by_size from "./Color_By_Size/color_by_size";
 import bill from "./Bills/bill";
 import size from "./Sizes/size";
-import news from "./News/new";
+import news from "./News/news";
+import newsEdit from "./News/newsEdit";
+
+import post from "./Post/post";
+import postEdit from "./Post/postEdit";
 import customer from "./Customer/customer";
 import category from "./Categories/category";
 import promotion from "./Promotions/promotion";
@@ -44,6 +48,7 @@ const myReducer = combineReducers({
   staff,
   bill,
   news,
+  newsEdit,
   customer,
   order,
   products_category,
@@ -59,7 +64,9 @@ const myReducer = combineReducers({
   billTotal,
   billTotalQuantity,
   countStatusProduct,
-  banner
+  banner,
+  post,
+  postEdit,
 });
 
 export default myReducer;

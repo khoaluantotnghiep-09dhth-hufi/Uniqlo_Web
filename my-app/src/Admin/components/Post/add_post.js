@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import uniqid from 'uniqid';
 import { Button, Form, Col, Container, Row } from 'react-bootstrap';
-import * as actions from "./../../../actions/index";
+import * as actions from "./../../../actions/postAction";
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import MarkdownIt from 'markdown-it';
@@ -20,20 +20,46 @@ const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 
 const sessionUser = JSON.parse(sessionStorage.getItem("user"));
-class AddNews extends React.Component {
+class addPost extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      idItem: "",
-      txtTitle: "",
-      txtDate: this.getCurrentDate(),
-      txtDescriptionHTML: "",
-      txtDescriptionText: "",
-      id_staff: "",
-      txtImage: "",
-      ImgPrivew: "",
-      isOpen: false,
-    };
+        idItem: "",
+        txtTitle: "",
+        txtDate: this.getCurrentDate(),
+        txtDescriptionHTML: "",
+        txtDescriptionText: "",
+        id_staff: "",
+        txtImage: "",
+        ImgPrivew: "",
+        isOpen: false,
+      };
+  }
+  componentDidMount() {
+    var { match} = this.props;
+    if(match){
+var id=match.params.id_post;
+        this.props.onEditItemPost(id);
+    }
+   
+    
+  }
+  componentWillReceiveProps(NextProps) {
+    var { match } = this.props;
+    if (NextProps && NextProps.postEdit) {
+      var { postEdit } = NextProps;
+     
+        // const result = news.find((o) => o.id === match.params.id_news);
+        this.setState({
+          txtTitle: postEdit.title,
+          txtDate: postEdit.date,
+          txtDescriptionHTML: postEdit.descriptionHTML,
+          txtDescriptionText: postEdit.descriptionText,
+          id_staff: postEdit.id_staff,
+          txtImage: postEdit.image,
+        });
+      
+    }
   }
   handleEditorChange = ({ html, text }) => {
 
@@ -61,41 +87,6 @@ class AddNews extends React.Component {
         })
       });
 
-    }
-  }
-  componentDidMount() {
- 
-    var { match,news } = this.props;
-    this.props.onEditItemNews(match.params.id_news);
-    if (match.params.id_news) {
-      const result = news.find((o) => o.id === match.params.id_news);
-      console.log("result nè", result);
-      this.setState({
-        txtTitle: result.title,
-        txtDate: this.getCurrentDate(),
-        txtDescriptionHTML: result.descriptionHTML,
-        txtDescriptionText: result.descriptionText,
-        id_staff: sessionUser.id_staff,
-        txtImage: result.image,
-        ImgPrivew: result.image,
-      });
-    }
-  }
-  componentWillReceiveProps(NextProps) {
-    var { match } = this.props;
-    if (NextProps && NextProps.news) {
-      var { news } = NextProps;
-      if (match.params.id_news) {
-        const result = news.find((o) => o.id === match.params.id_news);
-        this.setState({
-          txtTitle: result.title,
-          txtDate: result.date,
-          txtDescriptionHTML: result.descriptionHTML,
-          txtDescriptionText: result.descriptionText,
-          id_staff: result.id_staff,
-          txtImage: result.image,
-        });
-      }
     }
   }
   getCurrentDate(separator = '/') {
@@ -132,7 +123,7 @@ class AddNews extends React.Component {
       txtDescriptionText,
       txtImage,
     } = this.state;
-    var news = {
+    var post = {
       id: uniqid("news-"),
       title: txtTitle,
       date: txtDate,
@@ -142,24 +133,26 @@ class AddNews extends React.Component {
       image: txtImage,
     };
     var newsUpdate = {
-      id: match.params.id_news,
-      title: txtTitle,
-      date: txtDate,
-      descriptionHTML: txtDescriptionHTML,
-      descriptionText: txtDescriptionText,
-      id_staff: sessionUser.id_user,
-      image: txtImage,
-    };
-
-    if (match.params.id_news) {
-      this.props.onUpdateItemNews(newsUpdate);
-      history.goBack();
-    }
-    else {
-      this.props.onAddItemNews(news);
+        id: match.params.id_news,
+        title: txtTitle,
+        date: txtDate,
+        descriptionHTML: txtDescriptionHTML,
+        descriptionText: txtDescriptionText,
+        id_staff: sessionUser.id_user,
+        image: txtImage,
+      };
+      if (match.params.id_post) {
+        this.props.onUpdateItemPost(newsUpdate);
+        history.goBack();
+      }
+      else {
+        this.props.onAddItemPost(post);
+       
+        history.goBack();
+      }
+   
      
-      history.goBack();
-    }
+    
   };
   render() {
     let { txtTitle, txtDate, txtDescriptionHTML, txtDescriptionText, id_staff, txtImage, ImgPrivew } = this.state;
@@ -241,20 +234,22 @@ class AddNews extends React.Component {
 }
 var mapStateToProps = (state) => {
   return {
-        news: state.news,
-    };
+    post: state.post,
+    postEdit:state.postEdit,
+  };
 };
 var mapDispatchToProps = (dispatch, props) => {
   return {
-    onAddItemNews: (news) => {
-      dispatch(actions.onAddNewsResquest(news));
+    onAddItemPost: (post) => {
+      dispatch(actions.onAddPostResquest(post));
     },
-    onEditItemNews: (id) => {
-      dispatch(actions.onEditNewsResquest(id));
+    onEditItemPost: (id) => {
+      dispatch(actions.onEditPostResquest(id));
     },
-    onUpdateItemNews: (news) => {
-      dispatch(actions.onUpdateNewsResquest(news));
+    onUpdateItemPost: (post) => {
+      dispatch(actions.onUpdatePostResquest(post));
     },
+   
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(AddNews)
+export default connect(mapStateToProps, mapDispatchToProps)(addPost)

@@ -801,10 +801,10 @@ export const onDeleteNewsResquest = (id) => {
   };
 };
 
-export const onGetNews = (news) => {
+export const onGetNews = (newsEdit) => {
   return {
     type: types.EDIT_NEWS,
-    news,
+    newsEdit,
   };
 };
 export const onEditNewsResquest = (id) => {

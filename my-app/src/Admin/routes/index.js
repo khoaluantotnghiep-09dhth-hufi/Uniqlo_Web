@@ -14,7 +14,7 @@ const UnConfirmedOrder = React.lazy(() => import('../components/Order/unconfimre
 const ExChange = React.lazy(() => import('../components/Order/exchange'));
 const AddExChange = React.lazy(() => import('../components/Order/add_exchange'));
 
-const ListNewsTest = React.lazy(() => import('../components/News_Test/list_news'));
+const ListNews = React.lazy(() => import('../components/News/list_news'));
 const AddNews = React.lazy(() => import('../components/News/add_news'));
 
 const ListDiscount = React.lazy(() => import('../components/Discount/list_discount'));
@@ -64,6 +64,9 @@ const AddColor = React.lazy(() => import('../components/Color/add_color'));
 const ListSize = React.lazy(() => import('../components/Size/list_size'));
 const AddSize = React.lazy(() => import('../components/Size/add_size'));
 
+const ListPost = React.lazy(() => import('../components/Post/list_post'));
+const AddPost = React.lazy(() => import('../components/Post/add_post'));
+
 const routes = [
     { path: '/admin/home', exact: true, name: 'Trang Chủ', component: Home },
     { path: '/admin/notifications', exact: true, name: 'Thông Báo', component: Notifications_Header },
@@ -79,9 +82,13 @@ const routes = [
     { path: '/admin/system/order/exchange', exact: true, name: 'Đổi Trả', component: ExChange },
     { path: '/admin/system/order/exchange/add', exact: true, name: 'Đổi Trả', component: AddExChange },
 
-    { path: '/admin/manage/news', exact: true, name: 'Danh Sách Tin Tức', component: ListNewsTest },
+    { path: '/admin/manage/news', exact: true, name: 'Danh Sách Tin Tức', component: ListNews },
     { path: '/admin/manage/news/add', exact: true, name: 'Thêm Tin Tức Mới', component: AddNews },
     { path: '/admin/manage/news/:id_news/edit', exact: true, name: 'Chỉnh Sửa Tin Tức', component: AddNews },
+
+    { path: '/admin/manage/post', exact: true, name: 'Danh Sách Tin Tức', component: ListPost },
+    { path: '/admin/manage/post/add', exact: true, name: 'Thêm Tin Tức Mới', component: AddPost },
+    { path: '/admin/manage/post/:id_post/edit', exact: true, name: 'Chỉnh Sửa Tin Tức', component: AddPost },
 
     { path: '/admin/system/discount', exact: true, name: 'Danh Sách Khuyến Mãi', component: ListDiscount },
 

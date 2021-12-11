@@ -159,6 +159,13 @@ export const UPDATE_NEWS = 'UPDATE_NEWS';
 export const DELETE_NEWS = 'DELETE_NEWS';
 export const EDIT_NEWS = 'EDIT_NEWS ';
 
+//Get post
+export const FETCH_POST = 'FETCH_POST';
+export const ADD_POST = 'ADD_POST';
+export const UPDATE_POST = 'UPDATE_POST';
+export const DELETE_POST = 'DELETE_POST';
+export const EDIT_POST = 'EDIT_POST ';
+
 //Get customer
 export const FETCH_CUSTOMER = 'FETCH_CUSTOMER';
 export const ADD_CUSTOMER = 'ADD_CUSTOMER';

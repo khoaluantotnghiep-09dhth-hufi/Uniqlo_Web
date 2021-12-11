@@ -39,8 +39,7 @@ var news = (state = initialState, action) => {
       }
       console.log("UPDATE DATE :"+ index);
       return [...state];
-    case types.EDIT_NEWS:
-      return action.news;
+    
     default:
       return state;
   }

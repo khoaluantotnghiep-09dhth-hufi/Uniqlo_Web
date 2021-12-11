@@ -93,6 +93,14 @@ const _navStaff = [
     icon: <FontAwesomeIcon icon={faNewspaper} className="mr-2" />,
 
   },
+  // ,
+  // {
+  //   _tag: 'CSidebarNavItem',
+  //   name: 'POST',
+  //   to: '/admin/manage/post',
+  //   icon: <FontAwesomeIcon icon={faNewspaper} className="mr-2" />,
+
+  // },
   {
     _tag: 'CSidebarNavTitle',
     _children: ['Quản Lý']
