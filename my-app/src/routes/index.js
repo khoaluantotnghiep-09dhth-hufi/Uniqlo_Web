@@ -17,6 +17,7 @@ import Accessibility from "./../screens/Screen_Accessibility/index";
 import Privacy_Policy from "./../screens/Screen_PrivacyPolicy/index";
 import Customer_Profile from "./../screens/Screen_CustomerProfile/index";
 import Member_Benifits from "../screens/Screen_MemberBenifits/index";
+import Forgot_Password from "../screens/Screen_ForgotPassword/index";
 
 var routes = [
   {
@@ -127,6 +128,11 @@ var routes = [
     path: "/account/member-benifits",
     exact: true,
     main: ({ location,match }) => <Member_Benifits location={location} match={match} />,
+  },
+  {
+    path: "/forgot_password",
+    exact: true,
+    main: () => <Forgot_Password />,
   },
   {
     path: "",

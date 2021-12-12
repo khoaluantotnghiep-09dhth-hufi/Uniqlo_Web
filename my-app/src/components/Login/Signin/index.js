@@ -174,8 +174,10 @@ class index extends Component {
             controlId="formBasicPassword">
               <a
                 style={{ color: "#666", borderBottom: "1px solid #ccc" }}
-                onClick={this.onToggleFormForgotPass}>
+                //onClick={this.onToggleFormForgotPass}
+                href="/forgot_password">
                 {txtForgotButton}
+                
               </a>
           </Form.Group>
           </Form.Group>
