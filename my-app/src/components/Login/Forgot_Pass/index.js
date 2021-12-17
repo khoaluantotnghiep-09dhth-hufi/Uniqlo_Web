@@ -61,7 +61,7 @@ class index extends Component{
           console.log("SMS not sent")
         });
   }
-  onSubmitOTP = (users) => (e) =>{
+  onSubmitOTP = (e) =>{
     e.preventDefault()
     const code = this.state.otp
     console.log(code)
@@ -76,6 +76,7 @@ class index extends Component{
     }).catch((error) => {
       // User couldn't sign in (bad verification code?)
       // ...
+      toast.error(<div>Xác minh thất bại!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
     });
   }
     render(){
@@ -114,7 +115,7 @@ class index extends Component{
               >
               </Form.Group>
             </Form>
-            <Form onSubmit={this.onSubmitOTP(users)}>
+            <Form onSubmit={this.onSubmitOTP}>
               <Form.Group className="mb-3" >
                 <Form.Control
                   className="fas fa-phone-alt"
