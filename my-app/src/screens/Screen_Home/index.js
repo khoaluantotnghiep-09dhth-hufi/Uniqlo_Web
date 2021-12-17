@@ -21,6 +21,8 @@ constructor(props) {
     isLoading: true, 
     topMen:[],
     topWomen:[],
+    topChild:[],
+    topBaby:[],
   }
 }
 
@@ -39,6 +41,16 @@ constructor(props) {
           topWomen:response.data,
         })
       })
+      Call_API("products-top4-child","GET",null).then((response)=>{
+        this.setState({
+          topChild:response.data,
+        })
+      })
+      Call_API("products-top4-baby","GET",null).then((response)=>{
+        this.setState({
+          topBaby:response.data,
+        })
+      })
       this.setState({isLoading:false});
 
     }catch(e){
@@ -48,23 +60,14 @@ constructor(props) {
   }
   render() {
     
-    var { category, products, banner } = this.props;
-    var{isLoading,topMen, topWomen}=this.state;
-    var data = category.slice(0, 4);
-    console.log("Top Men Product: "+topMen);
-    var data1 = category.slice(0, 4);
-    var data2 = category.slice(0, 4);
+    var {  banner } = this.props;
+    var{isLoading,topMen, topWomen,topBaby,topChild} = this.state;
     
 
     // var data2 = category.sort(() => Math.random() - Math.random()).slice(0, 4);
     
     
-    var dataRandomBaby = data2.map((item, index) => {
-      return {
-        id: index,
-        image: item.image,
-      };
-    });
+    
 
     console.log(banner)
 if(isLoading){return   <Spinner animation="grow" variant="danger" /> }
@@ -73,15 +76,15 @@ if(isLoading){return   <Spinner animation="grow" variant="danger" /> }
         <Banner arrayList={banner} />
         <Slider chooseSize="mr-2 pt-4 px-2" name="NAM" arrayList={topMen} />
         <Slider chooseSize="mr-2 pt-4 px-2" name="SẢN PHẨM HOT" arrayList={ topWomen} />
-        <Slider chooseSize="mr-2 pt-4 px-2" name="NỮ" arrayList={data2} />
-        <Slider chooseSize="mr-2 pt-4 px-2" name="TRẺ EM" arrayList={dataRandomBaby} />
+        <Slider chooseSize="mr-2 pt-4 px-2" name="TRẺ SƠ SINH" arrayList={topBaby} />
+        <Slider chooseSize="mr-2 pt-4 px-2" name="TRẺ EM" arrayList={topChild} />
         {/* <Image src="https://www.uniqlo.com/vn/top/img/topic/20210715_1636_gl5593.jpg" /> */}
-        <Slider
+        {/* <Slider
           className="slider--repair"
           chooseSize="maxmax"
           name="TRẺ SƠ SINH"
           arrayList={dataRandomBaby}
-        />
+        /> */}
       </div>
     );
   }

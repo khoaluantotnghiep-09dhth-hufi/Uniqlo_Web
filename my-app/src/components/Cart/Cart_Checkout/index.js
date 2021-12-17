@@ -36,17 +36,17 @@ class index extends Component {
       <div>
         <Row className="Cart_CheckOut--border ">
           <Col style={{ paddingLeft: "0" }}>
-            <h6 className="d-flex justify-content-start">Order Summary</h6>
+            <h6 className="d-flex justify-content-start">Tổng Sản Phẩm</h6>
           </Col>
           <Col>
             <h6 className="d-flex justify-content-end">
-              {this.showTotalProduct(cart)} cart
+              {this.showTotalProduct(cart)} sản phẩm
             </h6>
           </Col>
         </Row>
         <Row className="Cart_CheckOut--border mt-2">
           <Col style={{ paddingLeft: "0" }}>
-            <h6 className="d-flex justify-content-start">Order Total</h6>
+            <h6 className="d-flex justify-content-start">Tổng Tiền</h6>
           </Col>
           <Col>
             <h6 className="d-flex justify-content-end">
