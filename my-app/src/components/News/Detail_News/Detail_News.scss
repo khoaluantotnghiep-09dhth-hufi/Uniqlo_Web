@@ -20,3 +20,11 @@
 .text-center{
     font-weight: bold;
 }
+img[alt="Image"] {
+    display:flex;
+    justify-content: center;
+   object-fit:contain;
+   width:500px;
+   height:500px;
+
+ }

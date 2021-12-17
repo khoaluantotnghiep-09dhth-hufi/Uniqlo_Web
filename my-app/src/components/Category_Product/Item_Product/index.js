@@ -14,7 +14,7 @@ class index extends Component {
     });
     console.log("Element Sale: "+ product.percentSale)
     var elementSale =
-      product.percentSale === "0" ? (
+      product.percentSale === 0 ? (
         ""
       ) : (
         <span

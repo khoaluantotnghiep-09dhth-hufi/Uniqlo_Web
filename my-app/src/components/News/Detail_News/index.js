@@ -33,9 +33,9 @@ class index extends Component {
             </Row>
             <Row className="mt-4">
               {/* <Col lg="2"></Col> */}
-              <Col>
+              {/* <Col>
                 <Image className="Adjust_Image" src={item.image} rounded />
-              </Col>
+              </Col> */}
               {/* <Col lg="2"></Col> */}
             </Row>
             <Row className="mt-4">
@@ -43,7 +43,7 @@ class index extends Component {
                 <p className="Adjust_Text_Body">
                   <span className="mr-4"></span>
                   <div>
-                    <p dangerouslySetInnerHTML={{__html: item.descriptionHTML}} text-align="center" width="100%"></p>
+                    <p dangerouslySetInnerHTML={{__html: item.descriptionHTML}} text-align="center" ></p>
                   </div>
                 </p>
               </Col>
