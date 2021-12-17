@@ -75,7 +75,7 @@ if(isLoading){return   <Spinner animation="grow" variant="danger" /> }
       <div className="App">
         <Banner arrayList={banner} />
         <Slider chooseSize="mr-2 pt-4 px-2" name="NAM" arrayList={topMen} />
-        <Slider chooseSize="mr-2 pt-4 px-2" name="SẢN PHẨM HOT" arrayList={ topWomen} />
+        <Slider chooseSize="mr-2 pt-4 px-2" name="NỮ" arrayList={ topWomen} />
         <Slider chooseSize="mr-2 pt-4 px-2" name="TRẺ SƠ SINH" arrayList={topBaby} />
         <Slider chooseSize="mr-2 pt-4 px-2" name="TRẺ EM" arrayList={topChild} />
         {/* <Image src="https://www.uniqlo.com/vn/top/img/topic/20210715_1636_gl5593.jpg" /> */}
