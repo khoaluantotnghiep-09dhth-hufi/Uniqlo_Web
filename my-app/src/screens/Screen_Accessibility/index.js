@@ -4,11 +4,12 @@ import Accessibility from "../../components/Accessibility/index"
 
 class index extends Component {
     render() {
+        var{location} = this.props;
         return (
             <div >
            
              
-                <Accessibility/>
+                <Accessibility location={location}/>
             
             </div>
         );

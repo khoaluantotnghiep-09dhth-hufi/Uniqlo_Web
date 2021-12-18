@@ -4,11 +4,12 @@ import Guide from "../../components/Guide/index"
 
 class index extends Component {
     render() {
+        var{location} = this.props;
         return (
             <div >
            
              
-                <Guide/>
+                <Guide location={location}/>
             
             </div>
         );

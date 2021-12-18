@@ -53,22 +53,22 @@ var routes = [
   {
     path: "/return_policy",
     exact: true,
-    main: () => <Return_Policy />,
+    main: ({ location }) => <Return_Policy location={location}/>,
   },
   {
     path: "/guide",
     exact: true,
-    main: () => <Guide />,
+    main: ({ location }) => <Guide location={location}/>,
   },
   {
     path: "/accessibility",
     exact: true,
-    main: () => <Accessibility />,
+    main: ({ location }) => <Accessibility location={location}/>,
   },
   {
     path: "/privacy_policy",
     exact: true,
-    main: () => <Privacy_Policy />,
+    main: ({ location }) => <Privacy_Policy location={location}/>,
   },
   {
     path: "/product/:name_object/:name_sectors/:name_category",
