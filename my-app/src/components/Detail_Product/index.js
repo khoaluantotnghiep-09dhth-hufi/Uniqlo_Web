@@ -341,7 +341,7 @@ class index extends Component {
               <Form.Group
                 className="mb-3 text-center mt-2"
                 controlId="formSize">
-                  <NavLink to={`/product/${id_product.id_product}/size`}> Bảng kích cỡ</NavLink>
+                  <NavLink to={`/product/${match.params.id_product}/size`}> Bảng kích cỡ</NavLink>
               </Form.Group>
               <h5 style={{ marginTop: "11px" }}>
                 --------------------------------------------------------
