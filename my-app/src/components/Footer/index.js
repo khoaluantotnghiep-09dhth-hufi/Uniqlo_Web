@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Image, Nav } from 'react-bootstrap';
-
+import { NavLink } from "react-router-dom";
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
@@ -26,12 +26,12 @@ class index extends Component {
               /></Col>
 
             <Col  xs="10" sm="10" md="10" lg="10">
-              <Nav className="justify-content-around ">
-                <Nav.Link className="font-nav" href="/contact" >Liên hệ chúng tôi</Nav.Link>                   
-                <Nav.Link className="font-nav" href="/return_policy" >Chính sách đổi trả</Nav.Link>               
-                <Nav.Link className="font-nav" href="/guide" >Điều khoản sử dụng</Nav.Link>
-                <Nav.Link className="font-nav" href="/accessibility" >Khả năng truy cập</Nav.Link>               
-                 <Nav.Link className="font-nav" href="/privacy_policy">Chính sách bảo mật</Nav.Link>
+              <Nav className="justify-content-around mt-2">
+                <NavLink className="font-nav" to="/contact" >Liên hệ chúng tôi</NavLink>                   
+                <NavLink className="font-nav" to="/return_policy" >Chính sách đổi trả</NavLink>               
+                <NavLink className="font-nav" to="/guide" >Điều khoản sử dụng</NavLink>
+                <NavLink className="font-nav" to="/accessibility" >Khả năng truy cập</NavLink>               
+                <NavLink className="font-nav" to="/privacy_policy">Chính sách bảo mật</NavLink>
               </Nav>
             </Col>
             <Col xs="1" sm="1" md="1" lg="1" className="img-tran">

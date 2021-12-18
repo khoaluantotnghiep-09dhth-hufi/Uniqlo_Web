@@ -18,7 +18,7 @@ import Privacy_Policy from "./../screens/Screen_PrivacyPolicy/index";
 import Customer_Profile from "./../screens/Screen_CustomerProfile/index";
 import Member_Benifits from "../screens/Screen_MemberBenifits/index";
 import Forgot_Password from "../screens/Screen_ForgotPassword/index";
-
+import Size from "../screens/Screen_Size/index";
 var routes = [
   {
     path: "/",
@@ -53,22 +53,22 @@ var routes = [
   {
     path: "/return_policy",
     exact: true,
-    main: () => <Return_Policy />,
+    main: ({ location }) => <Return_Policy location={location}/>,
   },
   {
     path: "/guide",
     exact: true,
-    main: () => <Guide />,
+    main: ({ location }) => <Guide location={location}/>,
   },
   {
     path: "/accessibility",
     exact: true,
-    main: () => <Accessibility />,
+    main: ({ location }) => <Accessibility location={location}/>,
   },
   {
     path: "/privacy_policy",
     exact: true,
-    main: () => <Privacy_Policy />,
+    main: ({ location }) => <Privacy_Policy location={location}/>,
   },
   {
     path: "/product/:name_object/:name_sectors/:name_category",
@@ -133,6 +133,11 @@ var routes = [
     path: "/forgot_password",
     exact: true,
     main: () => <Forgot_Password />,
+  },
+  {
+    path: "/product/:id_product/size",
+    exact: true,
+    main: (match) => <Size match={match}/>,
   },
   {
     path: "",

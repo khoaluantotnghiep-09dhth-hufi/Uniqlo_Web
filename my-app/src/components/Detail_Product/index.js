@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import {Nav } from 'react-bootstrap';
 import $ from "jquery";
 import { toast } from "react-toastify";
 import Item from "./../Category_Product/Item_Product/index";
@@ -16,6 +17,8 @@ import { connect } from "react-redux";
 import * as actions from "./../../actions/productActions";
 import * as actions_of_index from "./../../actions/index";
 import "./Detail_Product.scss";
+import Size from "../Size/index";
+import Modal from 'react-bootstrap/Modal'
 class index extends Component {
   constructor(props) {
     super(props);
@@ -23,6 +26,7 @@ class index extends Component {
       txtSize: "",
       quantityOfSize: 0,
       isChooseColor: "",
+      isTogglFromSize: false,
     };
   }
   componentDidMount() {
@@ -270,7 +274,11 @@ class index extends Component {
       toast.error("Sản Phẩm Đã Hết !", { autoClose: 2500 });
     }
   };
-
+  onToggleFormSize = () => {
+    this.setState({
+      isTogglFromSize: !this.state.isTogglFromSize,        
+    });
+  };
   showProductPredict = (products) => {
     var result = null;
     var getRandom = products
@@ -293,7 +301,12 @@ class index extends Component {
     var { match, products_category, color_by_size, products } = this.props;
     var id_product = match.params.id_product;
     var { txtSize, isChooseColor } = this.state;
-
+    var {  isTogglFromSize } = this.state;
+    var elmSize = isTogglFromSize ? (
+      <Size onCloseForm={this.onCloseForm} />
+    ) : (
+      ""
+    );
     return (
       <React.Fragment>
         <Container style={{ marginTop: "5%", marginBottom: "15%" }}>
@@ -304,7 +317,6 @@ class index extends Component {
                 Màu:
               </p>
               <Row>{this.ShowSize(color_by_size, txtSize, isChooseColor)}</Row>
-
               <p className="font-weight-bold mt-5">Kích Cỡ:</p>
               <Row>
                 <Col>
@@ -324,6 +336,13 @@ class index extends Component {
                   </Form.Select>
                 </Col>
               </Row>
+              {elmSize}
+              
+              <Form.Group
+                className="mb-3 text-center mt-2"
+                controlId="formSize">
+                  <NavLink to={`/product/${match.params.id_product}/size`}> Bảng kích cỡ</NavLink>
+              </Form.Group>
               <h5 style={{ marginTop: "11px" }}>
                 --------------------------------------------------------
               </h5>

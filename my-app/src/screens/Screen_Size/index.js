@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 
-import Guide from "../../components/Guide/index"
-
+import Size from "../../components/Size/index"
 class index extends Component {
     render() {
-        var{location} = this.props;
+        var{match} = this.props;
         return (
             <div >
-           
-             
-                <Guide location={location}/>
-            
+                <Size match={match}/>     
             </div>
         );
     }
