@@ -5,6 +5,10 @@ import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
 import { toast } from "react-toastify";
 import Forgot_Password from "../Forgot_Pass/index";
+import {
+  
+  NavLink
+} from "react-router-dom";
 class index extends Component {
   constructor(props) {
     super(props);
@@ -172,13 +176,13 @@ class index extends Component {
           <Form.Group
             className="mb-3 text-center"
             controlId="formBasicPassword">
-              <a
+              <NavLink
                 style={{ color: "#666", borderBottom: "1px solid #ccc" }}
                 //onClick={this.onToggleFormForgotPass}
-                href="/forgot_password">
+                to="/forgot_password">
                 {txtForgotButton}
                 
-              </a>
+              </NavLink>
           </Form.Group>
           </Form.Group>
         </Form>
