@@ -61,7 +61,7 @@ class index extends Component {
                                 itemClass="carousel-item-padding-40-px"
                             >
                                 {elementImages}
-                            </Carousel>;
+                            </Carousel>
                      
                     </Row>
                 </Container>
