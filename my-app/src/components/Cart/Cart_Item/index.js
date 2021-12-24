@@ -48,7 +48,7 @@ class index extends Component {
   };
   render() {
     var { item } = this.props;
-
+console.log("Item " + JSON.stringify(item));
     const { quantity } = this.state;
 
     const formatter = new Intl.NumberFormat("vi-Vn", {
@@ -68,7 +68,7 @@ class index extends Component {
               <h6 className="font-weight-normal">{item.nameProduct}</h6>
               <div>
                 <h6>Màu sắc: {item.product.isChooseColor}</h6>
-                <h6>Kích cỡ: {item.product.txtSize}</h6>
+                <h6>Kích cỡ: {item.product.sizeProduct}</h6>
 
                 <h6>
                   Giá:{" "}
