@@ -13,7 +13,7 @@ import {
   CProgress,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-const socket = io("http://localhost:8080");
+const socket = io("http://localhost:9001");
 
 class TheHeaderDropdownNotif extends Component {
   constructor(props) {

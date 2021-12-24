@@ -21,7 +21,7 @@ import * as actions from "./../../actions/index";
 import API_Address from "./../../Admin/utils/Api_Address_CheckOut";
 import { toast } from "react-toastify";
 
-const socket = io("http://localhost:8080");
+const socket = io("http://localhost:9001");
 var sessionUser = JSON.parse(sessionStorage.getItem("client"));
 class index extends Component {
   constructor(props) {

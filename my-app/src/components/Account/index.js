@@ -39,7 +39,7 @@ const fields = [
   { key: "status", label: "Tình Trạng" },
   "Hành Động",
 ];
-const socket = io("http://localhost:3008");
+const socket = io("http://localhost:9001");
 
 class index extends Component {
   constructor(props) {
