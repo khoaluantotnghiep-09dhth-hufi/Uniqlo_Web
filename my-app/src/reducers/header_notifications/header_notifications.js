@@ -21,7 +21,7 @@ var header_notifications = (state = initialState, action) => {
   switch (action.type) {
     //Lấy Tất cả Danh Sách Size
     case types.FETCH_NOTIFICATIONS_HEADER:
-      state = action.nameNotifications;
+      // state = action.nameNotifications;
       return [...state];
     //Xóa Size
     case types.DELETE_NOTIFICATIONS_HEADER:
@@ -30,7 +30,7 @@ var header_notifications = (state = initialState, action) => {
       if (index !== -1) {
         state.splice(index, 1);
       }
-      sessionStorage.setItem("notifications", JSON.stringify(state));
+   
       return [...state];
 
     
@@ -43,10 +43,10 @@ var header_notifications = (state = initialState, action) => {
 
       };
 
-      state.push(newItem);
-      sessionStorage.setItem("notifictions", JSON.stringify(state));
+      state.push(action.nameNotifications);
+   
       // state.push(action.nameNotifications);
-
+console.log('Added '+state)
       return [...state];
     case types.RESET_NOTIFICATIONS_HEADER:
       console.log(state);

@@ -25,10 +25,13 @@ const fields = [
 class ListColor extends React.Component {
   componentDidMount() {
     //   this.props.mapDispatchToProps();
-    this.props.fetchNotifications();
+    // this.props.fetchNotifications();
   }
   onResetNotifications=(header_notifications) => {
     this.props.fetchResetNotifications(header_notifications);
+  }
+  onDeleteNotification=(id)=>{
+this.props.fetchDeleteNotifications(id);
   }
   render() {
     var { header_notifications } = this.props;
@@ -73,7 +76,7 @@ class ListColor extends React.Component {
                     "Hành Động": (item) => (
                       <td>
                         <CButton type="button" className="btn btn-warning"
-                        //  onClick={() => { this.onDeleteSize(item.id) }}
+                         onClick={() => { this.onDeleteNotification(item.id) }}
                         >
                           <FontAwesomeIcon
                             icon={faTimes}
@@ -102,8 +105,8 @@ var mapStateToProps = (state) => {
 };
 var mapDispatchToProps = (dispatch, props) => {
   return {
-    fetchNotifications: () => {
-      return dispatch(actions.fetchNotificationsResquest());
+    fetchDeleteNotifications: (id) => {
+      return dispatch(actions.fetchDeleteNotifications(id));
     },
     fetchResetNotifications:(nameNotifications)=>{
         return   dispatch(actions.fetchResetNotifications(nameNotifications));

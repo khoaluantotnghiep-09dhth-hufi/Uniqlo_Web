@@ -20,7 +20,10 @@ export const fetchNotificationsResquest = () => {
 
 export const onAddNotificationCancelResquest = (bills) => {
   return (dispatch) => {
-    return callApi("notifications", "POST", bills).then((response) => {});
+    return callApi("notifications", "POST", bills).then((response) => {
+       console.log("Dang o Action: "+ JSON.stringify(response.data));
+      // dispatch(fetchAddNotifications(response.data));
+    });
   };
 };
 
@@ -29,6 +32,13 @@ export const fetchAddNotifications = (nameNotifications) => {
   return {
     type: types.ADD_NOTIFICATIONS_HEADER,
     nameNotifications,
+  };
+};
+export const fetchDeleteNotifications = (id) => {
+  // console.log("Dang o Action: "+ nameNotifications);
+  return {
+    type: types.DELETE_NOTIFICATIONS_HEADER,
+    id,
   };
 };
 export const fetchResetNotifications = (nameNotifications) => {

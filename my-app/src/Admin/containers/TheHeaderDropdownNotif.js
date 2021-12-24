@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import io from "socket.io-client";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import callApi from "./../utils/Callapi";
 
 import * as actions from "./../../actions/index";
 import {
@@ -13,7 +14,7 @@ import {
   CProgress,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-const socket = io("http://localhost:9001");
+const socket = io("http://localhost:3008");
 
 class TheHeaderDropdownNotif extends Component {
   constructor(props) {
@@ -40,10 +41,11 @@ class TheHeaderDropdownNotif extends Component {
       };
       // var newVal=JSON.stringify(nameNotifications)
       var newVal = {
+        id:data.id,
         content: message,
-        time,
+        time:time,
       };
-      console.log("Dang o Socket lay data: " + newVal);
+   
       this.props.fetchAddNotifications(newVal);
       // this.setState({
       //   nameNotifications: [...this.state.nameNotifications, data.name],
@@ -52,14 +54,17 @@ class TheHeaderDropdownNotif extends Component {
     });
 
     socket.on("customer-request-cancel-bill-notifications", data => {
+      console.log("Dang o Socket lay data: " + JSON.stringify(data));
       const message = "Có " + "Khách Hàng " + data.name + " Hủy Đơn " + data.id_bill + " Lý Do " + data.reasons + " Nè";
       const time = data.today;
       var newVal = {
+        id:data.id,
         content: message,
-        time,
+        time:time,
       };
       console.log("Dang o Socket lay data: " + newVal);
       this.props.fetchAddNotifications(newVal);
+      callApi("notifications", "POST", newVal);
     });
   }
 
