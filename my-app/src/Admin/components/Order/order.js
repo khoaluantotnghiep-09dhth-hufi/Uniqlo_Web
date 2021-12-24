@@ -165,13 +165,9 @@ class ListOrder extends React.Component {
                       <td>
                         {item.status === 0 ?
                           <Link to={`/admin/system/order/${item.id}/edit`}>
-                            <CButton type="button" className="btn btn-primary">
-                              <FontAwesomeIcon
-                                icon={faCheck}
-                                className="mr-2"
-                                size="lg"
-                              />
-                              Xác Nhận Đơn
+                            <CButton type="button" className="btn btn-primary" size="sm">
+                              
+                              Xác Nhận 
                             </CButton>
                           </Link>
                           : ''}
@@ -182,20 +178,26 @@ class ListOrder extends React.Component {
                             onClick={() => {
                               this.onDeleteBill(item.id);
                             }}
+                            size="sm"
                           >
-                            <FontAwesomeIcon
-                              icon={faTimes}
-                              className="mr-2"
-                              size="lg"
-                            />
-                            Hủy Đơn
+                            
+                            Hủy 
                           </CButton>
                           : ''}
+                          {<Link to={`/admin/system/order/${item.id}/detail`}>
+                            <CButton type="button" className="btn btn-primary" size="sm">
+                              
+                             Chi Tiết
+                            </CButton>
+                          </Link>}
                       </td>
                     ),
                     status: (item) => (
                       <td>
-                        <Alert variant={this.getBadge(item.status)}>
+                        <Alert variant={this.getBadge(item.status)} 
+                          
+                        
+                        >
                           {item.status === 0 ? "Chưa Xác Nhận" : "Đã Xác Nhận"}
                         </Alert>
                       </td>

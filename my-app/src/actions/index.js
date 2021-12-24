@@ -663,6 +663,18 @@ export const fetchBillResquest = () => {
     });
   };
 };
+// Fetch Bill Detail by id hàng
+// export const fetchDetailBillResquest = (id_bill) => {
+//   return (dispatch) => {
+//     return callApi(`bills-detail/${id_bill}`, "GET", null).then((response) => {
+//       if (response === undefined) {
+//         toast.error("Vui lòng thử lại !");
+//       } else {
+//         dispatch(fetchBills(response.data));
+//       }
+//     });
+//   };
+// };
 
 //Xóa  Bill
 export const onDeleteBill = (id) => {
