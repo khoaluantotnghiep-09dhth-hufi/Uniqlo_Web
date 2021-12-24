@@ -1069,7 +1069,13 @@ export const fetchOrderResquest = () => {
     // }
   };
 };
-
+//Rest Order
+export const onRestOrder = (order) => {
+  return {
+    type: types.RESET_ORDER,
+    order,
+  };
+};
 export const fetchBillStatusEqual0 = (bill) => {
   return {
     type: types.COUNT_STATUS_BILL_EQUAL0,

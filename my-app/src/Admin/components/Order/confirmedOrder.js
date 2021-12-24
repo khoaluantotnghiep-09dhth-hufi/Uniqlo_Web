@@ -5,6 +5,7 @@ import { Alert } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTimes, faFileExcel } from "@fortawesome/free-solid-svg-icons";
 import Moment from "react-moment";
+import { Link } from "react-router-dom";
 
 import {
   CButton,
@@ -27,7 +28,15 @@ const headers = [
   { key: "total_quantity", label: "Tổng Số Lượng" },
   { key: "total", label: "Tổng Tiền" },
   { key: "note", label: "Ghi Chú" },
-  { key: "status", label: "Tình Trạng" },
+  { key: "status", label: "Tình Trạng" }
+  ,
+  {
+    key: "Hành Động",
+    label: "Hành Động",
+    _style: { width: '1%' },
+    filter: false
+
+  },
 ];
 const fields = [
 
@@ -42,6 +51,13 @@ const fields = [
   { key: "total", label: "Tổng Tiền" },
   { key: "note", label: "Ghi Chú" },
   { key: "status", label: "Tình Trạng" },
+  {
+    key: "Hành Động",
+    label: "Hành Động",
+    _style: { width: '1%' },
+    filter: false
+
+  },
 ];
 
 
@@ -109,6 +125,21 @@ class OrderConfirmed extends React.Component {
                         <Moment format="DD/MM/YYYY">
                           {item.delivery_date}
                         </Moment>
+                      </td>
+                    ),"Hành Động": (item) => (
+                      <td>
+                        {
+                          <Link to={`/admin/system/order/${item.id}/edit`}>
+                            <CButton type="button" className="btn btn-primary">
+                              <FontAwesomeIcon
+                                icon={faCheck}
+                                className="mr-2"
+                                size="lg"
+                              />
+                             Cập Nhật
+                            </CButton>
+                          </Link>
+                         }
                       </td>
                     ),
                   }}

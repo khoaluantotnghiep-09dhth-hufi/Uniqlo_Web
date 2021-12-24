@@ -111,6 +111,11 @@ class ListOrder extends React.Component {
   componentDidMount() {
     this.props.fetchBills();
   }
+  componentWillUnmount() {
+    var { bill } = this.props;
+
+    this.props.onResetOrder(bill);
+  }
   onDeleteBill = (item) => {
     this.props.onDeleteItemBill(item);
   };
@@ -234,6 +239,9 @@ var mapDispatchToProps = (dispatch, props) => {
     onDeleteItemBill: (id) => {
       return dispatch(actions.onDeleteBillResquest(id));
     },
+    onResetOrder: (order) => {
+      return dispatch(actions.onRestOrder(order));
+    }
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ListOrder);

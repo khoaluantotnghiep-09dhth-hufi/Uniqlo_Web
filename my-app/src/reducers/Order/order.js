@@ -9,6 +9,11 @@ var findIndex = (order, id) => {
   });
   return result;
 };
+var resetOrder = (order) => {
+  while (order.length) {
+    order.pop();
+  }
+};
 var order = (state = initialState, action) => {
   var index = -1;
   var { id } = action;
@@ -26,6 +31,9 @@ var order = (state = initialState, action) => {
       index = findIndex(state, id);
       state.splice(index, 1);
       return [...state];
+      case types.RESET_ORDER:
+        resetOrder(state);
+        return [...state];
     default:
       return state;
   }
