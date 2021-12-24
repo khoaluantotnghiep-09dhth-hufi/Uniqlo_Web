@@ -192,9 +192,9 @@ export const fetchBillsCustomer = (bills_customer) => {
   };
 };
 
-export const fetchBillsCustomerResquest = () => {
+export const fetchBillsCustomerResquest = (id_customer) => {
   return (dispatch) => {
-    return callApi("bill-customer", "GET", null).then((response) => {
+    return callApi(`bill-customer/${id_customer}`, "GET", null).then((response) => {
       dispatch(fetchBillsCustomer(response.data));
     });
   };

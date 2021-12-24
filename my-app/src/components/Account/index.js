@@ -54,7 +54,8 @@ class index extends Component {
     };
   }
   componentDidMount() {
-    this.props.fetchBillsCustomer();
+    var sessionUser = JSON.parse(sessionStorage.getItem("client"));
+    this.props.fetchBillsCustomer(sessionUser.id_user);
   }
   handleClose = () => {
     this.setState({
@@ -333,8 +334,8 @@ var mapDispatchToProps = (dispatch, props) => {
     onBillCancel: (bills) => {
       dispatch(actions.onAddNotificationCancelResquest(bills));
     },
-    fetchBillsCustomer: () => {
-      dispatch(actions.fetchBillsCustomerResquest());
+    fetchBillsCustomer: (id_customer) => {
+      dispatch(actions.fetchBillsCustomerResquest(id_customer));
     },
   };
 };
