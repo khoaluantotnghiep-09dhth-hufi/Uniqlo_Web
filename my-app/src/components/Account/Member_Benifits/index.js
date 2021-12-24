@@ -22,8 +22,8 @@ class index extends Component {
   <Row>
               <Col>
                 {" "}
-                <h3>QUYỀN LỢI THÀNH VIÊN UNIQLO</h3>
-                {/* <Image src="https://st3.depositphotos.com/2497303/31685/v/950/depositphotos_316852660-stock-illustration-favorable-collaboration-mutual-benefit-vector.jpg" thumbnail/> */}
+                
+                <Image src="https://www.nopcommerce.com/images/thumbs/0005720_coming-soon-page_550.jpeg" />
               </Col>
               <Col>
                

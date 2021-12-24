@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import io from "socket.io-client";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
+import {  MDBIcon } from "mdbreact";
 
 import {
   Container,
@@ -161,6 +162,10 @@ class index extends Component {
                 <h6>
                   {/* Xin chào, <span>{sessionUser && sessionUser.length > 0 ? sessionUser.name : ''}</span> */}
                   Xin chào: <strong> {sessionUser && sessionUser.name}</strong>
+                </h6>
+                <h6>
+                  {/* Xin chào, <span>{sessionUser && sessionUser.length > 0 ? sessionUser.name : ''}</span> */}
+                  Điểm tích luỹ: <strong> {sessionUser.score} <MDBIcon fab icon="viacoin" /></strong>
                 </h6>
               </Col>
             </Row>
