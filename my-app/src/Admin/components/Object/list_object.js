@@ -22,7 +22,7 @@ const fields = [
     sorter: false,
     filter: false
   },
-  { key: "id", label: "Mã Đối Tượng" },
+ 
   { key: "name", label: "Tên Đối Tượng" },
   {
     key: 'Thao Tác',

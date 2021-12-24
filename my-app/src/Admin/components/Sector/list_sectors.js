@@ -28,13 +28,7 @@ const fields = [
         sorter: false,
         filter: false
     },
-    {
-        key: 'id',
-        label: 'Mã',
-        _style: { width: '15%' },
-        sorter: false,
-        filter: false
-    },
+    
     { key: 'name', label: 'Tên Loại' },
     { key: 'nameObject', label: 'Đối Tượng' },
     {

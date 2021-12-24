@@ -26,13 +26,6 @@ const fields = [
         sorter: false,
         filter: false
     },
-    {
-        key: 'id',
-        label: 'Mã',
-        _style: { width: '15%' },
-        sorter: false,
-        filter: false
-    },
     { key: 'name', label: 'Tên Danh Mục' },
     { key: 'nameSector', label: 'Loại' },
     { key: 'image', label: 'Ảnh' },
