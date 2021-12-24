@@ -31,12 +31,7 @@ const fields = [
     label: 'STT',
     filter: false
   },
-  {
-    key: 'id',
-    label: 'Mã',
-    sorter: false,
-    filter: false
-  },
+  
   { key: 'name', label: 'Tên Màu' },
   {
     key: 'Thao Tác',

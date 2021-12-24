@@ -20,6 +20,8 @@ import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import * as actions from "./../../../actions/index";
 import { Alert } from 'react-bootstrap'
+import Moment from "react-moment";
+
 const getBadge = status => {
     switch (status) {
         case 1: return 'success'
@@ -162,6 +164,13 @@ class ListOrderProducts extends React.Component {
 
 
                                             </td>
+                                        ),
+                                        'date_order':(item)=>(
+                                            <td>
+                                                    <Moment format="DD/MM/YYYY">
+                                                        {item.date_order}
+                                                    </Moment>
+                                                </td>
                                         ),
                                     }}
                                 />

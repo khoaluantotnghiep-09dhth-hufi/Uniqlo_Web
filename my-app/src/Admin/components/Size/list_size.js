@@ -25,12 +25,6 @@ const fields = [
     sorter: false,
     filter: false
   },
-  {
-    key: 'id',
-    label: 'Mã',
-    sorter: false,
-    filter: false
-  },
   { key: 'name', label: 'Tên Kich Cỡ' },
   {
     key: 'Thao Tác',

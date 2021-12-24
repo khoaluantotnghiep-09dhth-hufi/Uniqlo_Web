@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+
+
 import {
     CCard,
     CCardBody,
@@ -21,6 +23,7 @@ import { Link } from "react-router-dom";
 import * as actions from "./../../../actions/index";
 import { Image } from 'react-bootstrap';
 import { CSVLink } from "react-csv";
+import Moment from "react-moment";
 const headers = [
     { label: "Mã", key: "id" },
     { key: "title", label: "Tiêu Đề" },
@@ -38,7 +41,7 @@ const fields =
         "Thao Tác",
     ]
 class ListNews extends React.Component {
-    
+
     componentDidMount() {
         // var { news } = this.props;
         this.props.fetchNews();
@@ -55,7 +58,7 @@ class ListNews extends React.Component {
 
     render() {
         var { news } = this.props;
-        console.log("News :"+ news)
+        console.log("News :" + news)
         // debugger
         // Sai Duong Dan Route
         var dataNews = news.map((item, index) => {
@@ -123,6 +126,12 @@ class ListNews extends React.Component {
                                             (item, index) => (
                                                 <td>
                                                     <Image src={item.image_banner} thumbnail />
+                                                </td>
+                                            ), "date": (item) => (
+                                                <td>
+                                                    <Moment format="DD/MM/YYYY">
+                                                        {item.date}
+                                                    </Moment>
                                                 </td>
                                             ),
                                         // "description":
