@@ -17,7 +17,11 @@ class index extends Component {
   handleChange = (product, quantity, quantityAllProduct) => (event) => {
     var value = parseInt(event.target.value);
     // parseInt(event.target.value).replace(/\D/g, "");
-    if (value > quantityAllProduct || value < 1) {
+    if(value < 1)
+    {
+      toast.error("Số Lượng Phải Lớn hơn 0!", { autoClose: 2500 });
+    }
+    else if (value > quantityAllProduct) {
       toast.error("Không Đủ Số Lượng Để Mua !", { autoClose: 2500 });
 
       this.setState({
