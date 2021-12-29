@@ -732,7 +732,7 @@ export const onGetBill = (bill) => {
 };
 export const onEditBillResquest = (id) => {
   return (dispatch) => {
-    return callApi(`bills/${id}`, "GET", null).then((response) => {
+    return callApi(`bills-confirm/${id}`, "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
       } else {

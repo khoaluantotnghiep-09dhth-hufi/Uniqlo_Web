@@ -2,6 +2,7 @@ import React from "react";
 import uniqid from "uniqid";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
+import Moment from "react-moment";
 
 import * as actions from "./../../../actions/index";
 import {
@@ -22,22 +23,36 @@ class updateOrder extends React.Component {
     this.state = {
       idItem: "",
       txtDate: "",
+      txtDateOrder: "",
       txtConfirm: "",
     };
   }
   componentDidMount() {
-    var { match } = this.props;
+    var { match, bill } = this.props;
 
     this.props.onEditItemBill(match.params.id_order);
+    console.log("Bill Edit gvyg: " + JSON.stringify(bill));
+    if (match.params.id_order) {
+      const result = bill.find((o) => o.id === match.params.id_order);
+      this.setState({
+        idItem: result.id,
+        txtDate: result.delivery_date,
+        txtDateOrder: result.order_date,
+        txtConfirm: result.status,
+      });
+    }
+
   }
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
     if (NextProps && NextProps.bill) {
       var { bill } = NextProps;
+      console.log("Bill Edit: " + JSON.stringify(bill));
       if (match.params.id_order) {
         this.setState({
           idItem: bill.id,
-          txtDate: bill.date,
+          txtDate: bill.delivery_date,
+          txtDateOrder: bill.order_date,
           txtConfirm: bill.status,
         });
       }
@@ -75,20 +90,20 @@ class updateOrder extends React.Component {
       today.getMonth() + 1 + "-" + today.getDate() + "-" + today.getFullYear();
     var sessionUser = JSON.parse(sessionStorage.getItem("user"));
     var convertDate =
-    today.getFullYear() +
-    "-" +
-    (today.getMonth() + 1) +
-    "-" +
-    today.getDate();
-  var billUpdate = {
-    id: match.params.id_order,
-    id_staff: sessionUser.id_user,
-    delivery_date: convertDate,
-    status: txtConfirm,
-  };
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getDate();
+    var billUpdate = {
+      id: match.params.id_order,
+      id_staff: sessionUser.id_user,
+      delivery_date: convertDate,
+      status: txtConfirm,
+    };
 
     if (match.params.id_order && txtDate >= date) {
-     
+
       this.props.onUpdateItemBill(billUpdate);
       history.goBack();
     } else {
@@ -96,18 +111,40 @@ class updateOrder extends React.Component {
     }
   };
   render() {
+    var { txtDate, txtDateOrder, txtConfirm } = this.state;
+    var formatDate=<Moment format="DD/MM/YYYY">{txtDateOrder}
+                                                    
+    </Moment>
     return (
       <CContainer fluid>
         <CRow>
           <CCol sm="12">
             <CForm action="" method="post" onSubmit={this.onSubmitForm}>
+
+              <CFormGroup>
+                <CLabel htmlFor="nf-password">Ngày Đặt Hàng</CLabel>
+                <CInput
+                id="txtDateOrder"
+                  type="date"
+                  name="txtDateOrder"
+                  value={txtDateOrder}
+                  disabled
+                  autoComplete="current-password"
+
+
+                />
+              </CFormGroup>
+
               <CFormGroup>
                 <CLabel htmlFor="nf-password">Ngày Giao</CLabel>
                 <CInput
+                id="txtDate"
                   type="date"
                   name="txtDate"
                   autoComplete="current-password"
                   onChange={this.onChange}
+                  value={txtDate}
+
                   required
                 />
               </CFormGroup>
@@ -115,9 +152,12 @@ class updateOrder extends React.Component {
               <CFormGroup>
                 <CLabel htmlFor="nf-password">Trạng Thái</CLabel>
                 <select
+                id="txtConfirm"
                   class="form-select"
                   aria-label="Default select example"
                   name="txtConfirm"
+                  value={txtConfirm}
+
                   // value={this.state.txtConfirm}
                   onChange={this.onChange}
                   required
