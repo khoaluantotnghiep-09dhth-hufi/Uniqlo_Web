@@ -80,7 +80,7 @@ class AddCategory extends React.Component {
             ...coppyState,
             productInfoArr: this.props.fetchProductsInfo(this.state.id_bill_info),
         }, () => {
-            console.log(this.state)
+
         })
 
     };
@@ -138,7 +138,7 @@ class AddCategory extends React.Component {
         var data = productInfo.map((item, index) => {
             return item;
         })
-        console.log("data", data);
+
         let { txtReason, txtDateImport, txtQuantity, id_product_info } = this.state;
         return (
             <Container fluid>

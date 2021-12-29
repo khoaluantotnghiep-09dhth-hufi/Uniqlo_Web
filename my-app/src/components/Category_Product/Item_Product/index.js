@@ -12,7 +12,7 @@ class index extends Component {
       currency: "VND",
       minimumFractionDigits: 0,
     });
-    console.log("Element Sale: "+ product.percentSale)
+   
     var elementSale =
       product.percentSale === "0" ? (
         ""

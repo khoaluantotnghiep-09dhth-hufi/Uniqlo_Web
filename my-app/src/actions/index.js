@@ -12,7 +12,7 @@ export const fetchNotifications = (nameNotifications) => {
 export const fetchNotificationsResquest = () => {
   return (dispatch) => {
     return callApi("notifications", "GET", null).then((response) => {
-      console.log(response.data);
+     
       dispatch(fetchNotifications(response.data));
     });
   };
@@ -21,7 +21,7 @@ export const fetchNotificationsResquest = () => {
 export const onAddNotificationCancelResquest = (bills) => {
   return (dispatch) => {
     return callApi("notifications", "POST", bills).then((response) => {
-       console.log("Dang o Action: "+ JSON.stringify(response.data));
+       
       // dispatch(fetchAddNotifications(response.data));
     });
   };
@@ -780,7 +780,7 @@ export const onAddNewsResquest = (news) => {
       } else {
        
         toast.success("Thêm thành công !");
-        console.log("Thêm thành công ! "  +JSON.stringify(response.data));
+
 
         dispatch(onAddNews(response.data));
       }
@@ -1495,7 +1495,7 @@ export const onAddBanner = (banner) => {
 export const onAddBannerResquest = (banner) => {
   return (dispatch) => {
     return callApi("banners", "POST", banner).then((response) => {
-      console.log(response);
+     
       if (response === undefined) {
         toast.error("Thêm thất bại, vui lòng thử lại !");
       } else {

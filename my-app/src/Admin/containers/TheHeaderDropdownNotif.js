@@ -54,7 +54,7 @@ class TheHeaderDropdownNotif extends Component {
     });
 
     socket.on("customer-request-cancel-bill-notifications", data => {
-      console.log("Dang o Socket lay data: " + JSON.stringify(data));
+
       const message = "Có " + "Khách Hàng " + data.name + " Hủy Đơn " + data.id_bill + " Lý Do " + data.reasons + " Nè";
       const time = data.today;
       var newVal = {
@@ -62,7 +62,7 @@ class TheHeaderDropdownNotif extends Component {
         content: message,
         time:time,
       };
-      console.log("Dang o Socket lay data: " + newVal);
+
       this.props.fetchAddNotifications(newVal);
       callApi("notifications", "POST", newVal);
     });

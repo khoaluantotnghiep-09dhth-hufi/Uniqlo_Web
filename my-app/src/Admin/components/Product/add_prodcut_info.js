@@ -142,7 +142,7 @@ class addProduct extends React.Component {
         this.setState({
             ...coppyState
         }, () => {
-            console.log(this.state);
+
         })
 
 
@@ -179,24 +179,7 @@ class addProduct extends React.Component {
         //Không quay lại khi add thông tin sản phẩm
         //history.goBack();
     };
-    // onEditHandle = (item) => {
-
-    //     var { match } = this.props;
-    //     this.setState({
-    //         txtQuantity: item.quantity,
-    //     }, () => {
-    //         console.log("item", item);
-    //     })
-    //     var updateProductInfo = {
-    //         id: item.id,
-    //         id_product: match.params.id_product,
-    //         id_color: this.state.id_color,
-    //         id_size: this.state.id_size,
-    //     }
-    //     console.log("update",updateProductInfo)
-    //     // this.props.onUpdateItemProduct();
-
-    // }
+    
     render() {
         var { size } = this.props;
         var { color } = this.props;

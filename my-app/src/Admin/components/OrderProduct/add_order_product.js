@@ -64,7 +64,7 @@ class addOrderProduct extends React.Component {
     this.setState({
       ...coppyState
     }, () => {
-      console.log(this.state);
+
     })
 
 

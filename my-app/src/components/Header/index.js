@@ -18,6 +18,7 @@ class index extends Component {
       quantity: "",
       txtPhone: "",
       txtPassword: "",
+      isCheckLogin: false,
     };
   }
   onClick() {
@@ -73,8 +74,9 @@ class index extends Component {
   render() {
     var { cart } = this.props;
     var { input_Search } = this.state;
-    
    
+    var user = sessionStorage.getItem('client');
+   console.log("Check User Login: " + user );
     var showLinkSearch = (
       <NavLink to={`/search/${input_Search}`}>
         <MDBIcon icon="search" className="sizeIcon" onClick={this.handleOnSearch} />

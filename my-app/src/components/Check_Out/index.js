@@ -252,9 +252,9 @@ class index extends Component {
     e.preventDefault();
     emailjs.sendForm('gmail', 'gmail_template', e.target, 'user_Kb6t170ZY6RBAoo92zlwi')
       .then((result) => {
-        console.log(result.text);
+
       }, (error) => {
-        console.log(error.text);
+
       });
     e.target.reset();
   }
@@ -262,7 +262,7 @@ class index extends Component {
     var { cities, display, districts, wards, txtEmail, txtHoTen, txtSDT, txtDiaChi } = this.state;
     var { isCheckOrder } = this.state;
 
-    console.log(isCheckOrder);
+
     if (isCheckOrder) {
       return (
         this.onSubmit(),

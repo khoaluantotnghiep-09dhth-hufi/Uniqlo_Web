@@ -49,7 +49,7 @@ var header_notifications = (state = initialState, action) => {
 console.log('Added '+state)
       return [...state];
     case types.RESET_NOTIFICATIONS_HEADER:
-      console.log(state);
+
       resetNotifications(state);
       return [...state];
     default:

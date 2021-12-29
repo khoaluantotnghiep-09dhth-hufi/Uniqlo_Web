@@ -64,7 +64,7 @@ class index extends React.Component {
         if (file) {
             ConvertIMG.getBase64(file).then(res => {
                 let objectURL = URL.createObjectURL(file);
-                console.log(res);
+
                 this.setState({
                     ImgPrivew: objectURL,
                     image: res
@@ -78,7 +78,7 @@ class index extends React.Component {
         this.setState({
             ...coppyState
         }, () => {
-            console.log(this.state);
+
         })
     }
     openPreviewIMG = () => {
@@ -88,7 +88,7 @@ class index extends React.Component {
     }
     render() {
         let { name, address, phone, image, email, gender, cmnn_cccc, score, ImgPrivew } = this.state;
-        console.log("state load", this.state)
+
         return (
         <>
           <Container>

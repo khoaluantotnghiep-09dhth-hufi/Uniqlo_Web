@@ -51,7 +51,7 @@ class addBanner extends React.Component {
     var { match } = this.props;
     if (NextProps && NextProps.color) {
       var { banner } = NextProps;
-      console.log(banner);
+    
       if (match.params.id_banner) {
         const result = banner.find((o) => o.id === match.params.id_banner);
         this.setState({
@@ -67,7 +67,7 @@ class addBanner extends React.Component {
     if (file) {
       ConvertIMG.getBase64(file).then((res) => {
         let objectURL = URL.createObjectURL(file);
-        console.log(res);
+
         this.setState({
           ImgPrivew: objectURL,
           txtImage: res,

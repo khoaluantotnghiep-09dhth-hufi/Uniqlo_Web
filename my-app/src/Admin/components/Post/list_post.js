@@ -50,7 +50,7 @@ class ListPost extends React.Component {
   };
   render() {
     var { post } = this.props;
-    console.log("POST "+ JSON.stringify(post))
+
     var dataPost = post.map((item, index) => {
       return { ...item, index };
     });

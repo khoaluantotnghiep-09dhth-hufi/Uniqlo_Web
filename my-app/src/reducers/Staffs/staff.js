@@ -32,7 +32,7 @@ var staff = (state = initialState, action) => {
       return [...state];
     //Thêm Nhân Viên
     case types.ADD_STAFF:
-      console.log(action.staff)
+
       state.push(action.staff);
 
       return [...state];

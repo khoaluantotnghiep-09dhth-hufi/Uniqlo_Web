@@ -81,7 +81,7 @@ class addDiscount extends React.Component {
 
     if (file) {
       let base64 = ConvertIMG.getBase64(file);
-      console.log("img", base64)
+
       let objectURL = URL.createObjectURL(file);
       this.setState({
         ImgPrivew: objectURL,
@@ -105,7 +105,7 @@ class addDiscount extends React.Component {
       date_end: dateEnd,
       image: txtImage,
     };
-    console.log("promotion data", promotion)
+
     var promotionUpdate = {
       id: match.params.id_promotion,
       name: txtNameDiscount,

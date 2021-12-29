@@ -63,7 +63,7 @@ class index extends Component {
   render() {
     var { location, history, products_category } = this.props;
     var { txtFilter,isLoading } = this.state;
-    console.log(txtFilter);
+
    
     if(isLoading){return  <div style={{display:"flex",alignContent:"center",justifyContent:"center"}}><Spinner  animation="grow" variant="danger" /></div>;}
     return (

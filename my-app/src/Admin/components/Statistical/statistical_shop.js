@@ -72,7 +72,7 @@ class Home extends React.Component {
       var dataTotalQuantity = billTotalQuantity.map((item, index) => {
         return item.sumTotalQuantity;
       })
-      console.log(dataTotalQuantity)
+
       return [
         {
           label: 'Tổng tiền hóa đơn',

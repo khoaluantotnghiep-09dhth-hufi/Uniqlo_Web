@@ -44,7 +44,7 @@ class ListObject extends React.Component {
     }
   };
   handleEdit = (item) => {
-    console.log("lấy đt", item);
+
   }
   render() {
     var { object_menu } = this.props;

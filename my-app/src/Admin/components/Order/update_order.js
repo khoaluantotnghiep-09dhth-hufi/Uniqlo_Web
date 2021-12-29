@@ -86,7 +86,7 @@ class updateOrder extends React.Component {
     delivery_date: convertDate,
     status: txtConfirm,
   };
-  console.log(billUpdate);
+
     if (match.params.id_order && txtDate >= date) {
      
       this.props.onUpdateItemBill(billUpdate);

@@ -96,7 +96,7 @@ class addProduct extends React.Component {
         this.setState({
             ...coppyState
         }, () => {
-            console.log(this.state);
+
         })
 
 

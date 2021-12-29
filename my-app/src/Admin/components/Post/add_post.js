@@ -80,7 +80,7 @@ var id=match.params.id_post;
     if (file) {
       ConvertIMG.getBase64(file).then(res => {
         let objectURL = URL.createObjectURL(file);
-        console.log(res);
+
         this.setState({
           ImgPrivew: objectURL,
           txtImage: res
@@ -104,7 +104,7 @@ var id=match.params.id_post;
     this.setState({
       ...coppyState
     }, () => {
-      console.log(this.state)
+
     })
 
   };
@@ -114,7 +114,7 @@ var id=match.params.id_post;
 
     event.preventDefault();
     var { history } = this.props;
-    console.log("state nè", this.state);
+
     var {
       idItem,
       txtTitle,

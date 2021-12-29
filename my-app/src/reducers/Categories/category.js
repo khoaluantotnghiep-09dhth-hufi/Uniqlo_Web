@@ -24,7 +24,7 @@ var category = (state = initialState, action) => {
       state.splice(index, 1);
       return [...state];
     case types.ADD_CATEGORY:
-      console.log(action.category);
+
       state.push(action.category);
       return [...state];
     case types.UPDATE_CATEGORY:
