@@ -22,15 +22,15 @@ import API_Address from "./../../Admin/utils/Api_Address_CheckOut";
 import { toast } from "react-toastify";
 
 const socket = io("http://localhost:3008");
-var sessionUser = JSON.parse(sessionStorage.getItem("client"));
+ const  sessionUser =  JSON.parse(sessionStorage.getItem("client"));
 class index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      txtEmail: sessionUser.email,
-      txtHoTen: sessionUser.name,
-      txtSDT: sessionUser.phone,
-      txtDiaChi: sessionUser.address,
+      txtEmail: "",
+      txtHoTen: "",
+      txtSDT: "",
+      txtDiaChi: "",
       txtCity: "",
       txtPhuong: "",
       txtXa: "",
@@ -44,7 +44,7 @@ class index extends Component {
       isCheckOrder: false,
     };
   }
-  componentDidMount() {
+async componentDidMount() {
     API_Address("api/p", "GET", null).then((response) => {
       this.setState({
         cities: response.data,
@@ -62,6 +62,12 @@ class index extends Component {
         wards: response.data,
       });
     });
+   await this.setState({
+      txtEmail: sessionUser.email,
+      txtHoTen: sessionUser.name,
+      txtSDT: sessionUser.phone,
+      txtDiaChi: sessionUser.address,
+    })
   }
 
   showListCities = (cities) => {

@@ -90,8 +90,8 @@ class index extends Component {
         </Row>
 
         <Row>
-          {checkLogin ? (
-            <NavLink to="/checkout">
+          {checkLogin==null ? (
+            <NavLink to="/login">
               <Button
                 variant="danger"
                 type="button"
@@ -102,7 +102,7 @@ class index extends Component {
               </Button>
             </NavLink>
           ) : (
-            <NavLink to="/login">
+            <NavLink to="/checkout">
               <Button
                 variant="danger"
                 type="button"

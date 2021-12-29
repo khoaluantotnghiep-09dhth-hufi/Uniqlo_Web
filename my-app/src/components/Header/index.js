@@ -75,7 +75,8 @@ class index extends Component {
     var { cart } = this.props;
     var { input_Search } = this.state;
    
-    const user = sessionStorage.getItem('client');
+    var checkCart = sessionStorage.getItem("cart");
+
    
     var showLinkSearch = (
       <NavLink to={`/search/${input_Search}`}>
@@ -129,7 +130,7 @@ class index extends Component {
             {isCheckAccount}
           </Col>
           <Col sm={1} md={1} lg={1} xl={1} >
-           {user===null?<NavLink to="/cart-empty">
+           {checkCart ===null?<NavLink to="/cart-empty">
            <MDBIcon
                 icon="shopping-cart"
                 md="4"
