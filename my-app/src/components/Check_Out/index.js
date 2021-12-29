@@ -214,7 +214,9 @@ async componentDidMount() {
       //Khách hàng phát tín hiệu khi Order
       socket.emit("customer-order", { name, quantity, today });
       toast.success("Khách Hàng Đã Order Gửi Lên WebSocket");
-      this.props.onResetCart();
+      console.log("On reset Cart: " + sessionCart)
+      this.props.onResetCart(sessionCart);
+      sessionStorage.removeItem('cart');
 
       var today = new Date();
       var date =

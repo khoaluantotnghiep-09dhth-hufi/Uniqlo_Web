@@ -23,6 +23,7 @@ var findProductCart = (cart, product) => {
   return index;
 };
 var resetCart = (product) => {
+
   while (product.length) {
     product.pop();
   }
