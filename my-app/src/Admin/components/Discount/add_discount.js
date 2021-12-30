@@ -210,7 +210,7 @@ class addDiscount extends React.Component {
                       this.onChangeImage(e);
                     }}
 
-                    required
+                 
                   />
                 </CCol>
                 <CCol sm="4">

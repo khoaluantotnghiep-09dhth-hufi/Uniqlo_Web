@@ -207,7 +207,7 @@ class AddNews extends React.Component {
                     name="txtImage"
                     hidden
                     onChange={(e) => { this.onChangeImage(e) }}
-                    required
+                  
                   />
                 </Form.Group>
               </Col>

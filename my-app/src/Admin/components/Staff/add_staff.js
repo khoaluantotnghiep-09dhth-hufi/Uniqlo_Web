@@ -242,7 +242,7 @@ class addStaff extends React.Component {
                   name="txtImage"
                   hidden
                   onChange={(e) => { this.onChangeImage(e) }}
-                  required
+                
                 />
               </Form.Group>
               <div style={{ backgroundImage: `url(${ImgPrivew})`, height: "200px", width: "300px", align: "center", background: "center center no-repeat", backgroundSize: "contain", cursor: "pointer", margin: "30px" }}
