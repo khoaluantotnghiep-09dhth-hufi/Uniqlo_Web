@@ -4,6 +4,8 @@ import * as actions from "./../../../actions/index";
 import Moment from "react-moment";
 import { Image } from 'react-bootstrap';
 import ConvertIMG from '../../utils/getBase64';
+import { Alert } from "react-bootstrap";
+
 
 import {
   CCard,
@@ -31,6 +33,16 @@ class ListBanner extends React.Component {
   onDeleteBanner = (item) => {
     if (window.confirm('Bạn có chắc muốn xóa không ?')) {
       this.props.onDeleteItemBanner(item);
+    }
+  };
+  getBadge = (status) => {
+    switch (status) {
+      case '1':
+        return "danger";
+      case '0':
+        return "success";
+      default:
+        return "primary";
     }
   };
   render() {
@@ -92,7 +104,18 @@ class ListBanner extends React.Component {
                         <td>
                           {index + 1}
                         </td>
-                      ),
+                      )
+                      ,
+                      is_active: (item) => (
+                      <td>
+                        <Alert variant={this.getBadge(item.status)} 
+                          
+                        
+                        >
+                          {item.is_active === 0 ? "Đang Hoạt Động " : "Tạm Ngưng"}
+                        </Alert>
+                      </td>
+                    ),
                     'image':
                       (item, index) => (
                         <td>
