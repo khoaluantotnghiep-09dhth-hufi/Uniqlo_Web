@@ -97,14 +97,14 @@ class updateOrder extends React.Component {
       delivery_date: convertDate,
       status: txtConfirm,
     };
-    console.log("Date Parse: " + txtDate +"/n" + dateNow + "")
 
-    if (txtDate >= dateNow) {
 
-      // this.props.onUpdateItemBill(billUpdate);
-      // history.goBack();
+    if (txtDate >= dateNow ||txtDate === dateNow ) {
+
+      this.props.onUpdateItemBill(billUpdate);
+      history.goBack();
     } else {
-      toast.error("Ngày Giao Phải Lớn Hơn Ngày Hiện Tại !");
+      toast.error("Ngày Giao Phải Lớn Hơn Hoặc Bằng Ngày Hiện Tại !");
     }
   };
   render() {

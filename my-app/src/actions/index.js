@@ -275,7 +275,7 @@ export const onUpdatePromotionResquest = (promotion) => {
         if (response === undefined) {
           toast.error("Sửa thất bại, vui lòng thử lại !");
         } else {
-          toast.success("Sửa thành công !");
+          toast.success("Cập Nhật Thành Công!");
           dispatch(onUpdatePromotion(response.data));
         }
       }
@@ -384,7 +384,7 @@ export const onUpdateStaffsResquest = (staff) => {
       if (response === undefined) {
         toast.error("Sửa thất bại, vui lòng thử lại !");
       } else {
-        toast.success("Sửa thành công !");
+        toast.success("Cập Nhật Thành Công!");
         dispatch(onUpdateStaffs(response.data));
       }
     });
@@ -446,7 +446,7 @@ export const onUpdatePositionStaffsResquest = (staff) => {
         if (response === undefined) {
           toast.error("Sửa thất bại, vui lòng thử lại !");
         } else {
-          toast.success("Sửa thành công !");
+          toast.success("Cập Nhật Thành Công!");
           dispatch(onUpdatePositionStaffs(response.data));
         }
       }
@@ -537,7 +537,7 @@ export const onUpdateColorResquest = (color) => {
       if (response === undefined) {
         toast.error("Sửa thất bại, vui lòng thử lại !");
       } else {
-        toast.success("Sửa thành công !");
+        toast.success("Cập Nhật Thành Công!");
         dispatch(onUpdateColor(response.data));
       }
     });
@@ -628,7 +628,7 @@ export const onUpdateSizeResquest = (size) => {
       if (response === undefined) {
         toast.error("Sửa thất bại, vui lòng thử lại !");
       } else {
-        toast.success("Sửa thành công !");
+        toast.success("Cập Nhật Thành Công!");
         dispatch(onUpdateSize(response.data));
       }
     });
@@ -716,7 +716,7 @@ export const onUpdateBillResquest = (bill) => {
       if (response === undefined) {
         toast.error("Sửa thất bại, vui lòng thử lại !");
       } else {
-        toast.success("Sửa thành công !");
+        toast.success("Cập Nhật Thành Công !");
         dispatch(onUpdateBill(response.data));
       }
     });
@@ -801,7 +801,7 @@ export const onUpdateNewsResquest = (news) => {
       if (response === undefined) {
         toast.error("Sửa thất bại, vui lòng thử lại !");
       } else {
-        toast.success("Sửa thành công !");
+        toast.success("Cập Nhật Thành Công!");
         dispatch(onUpdateNews(response.data));
       }
     });
@@ -875,7 +875,7 @@ export const onUpdateCategoryResquest = (category) => {
         if (response === undefined) {
           toast.error("Sửa thất bại, vui lòng thử lại !");
         } else {
-          toast.success("Sửa thành công !");
+          toast.success("Cập Nhật Thành Công!");
           dispatch(onUpdateCategory(response.data));
         }
       }
@@ -999,7 +999,7 @@ export const onUpdateCustomersResquest = (customer) => {
         if (response === undefined) {
           toast.error("Sửa thất bại, vui lòng thử lại !");
         } else {
-          toast.success("Sửa thành công !");
+          toast.success("Cập Nhật Thành Công!");
           dispatch(onUpdateCustomers(response.data));
         }
       }
@@ -1021,7 +1021,7 @@ export const onUpdateCustomersClientResquest = (customer) => {
         if (response === undefined) {
           toast.error("Sửa thất bại, vui lòng thử lại !");
         } else {
-          toast.success("Sửa thành công !");
+          toast.success("Cập Nhật Thành Công!");
           dispatch(onUpdateCustomersClient(response.data));
         }
       }
@@ -1205,7 +1205,7 @@ export const onUpdateOrderResquest = (order) => {
       if (response === undefined) {
         toast.error("Sửa thất bại, vui lòng thử lại !");
       } else {
-        toast.success("Sửa thành công !");
+        toast.success("Cập Nhật Thành Công!");
         dispatch(onUpdateOrder(response.data));
       }
     });
@@ -1290,7 +1290,7 @@ export const onUpdateSectorResquest = (sector) => {
       if (response === undefined) {
         toast.error("Sửa thất bại, vui lòng thử lại !");
       } else {
-        toast.success("Sửa thành công !");
+        toast.success("Cập Nhật Thành Công!");
         dispatch(onUpdateSector(response.data));
       }
     });
@@ -1416,7 +1416,7 @@ export const onUpdateObjectsResquest = (object_menu) => {
         if (response === undefined) {
           toast.error("Sửa thất bại, vui lòng thử lại !");
         } else {
-          toast.success("Sửa thành công !");
+          toast.success("Cập Nhật Thành Công!");
           dispatch(onUpdateObjects(response.data));
         }
       }
@@ -1556,7 +1556,7 @@ export const onUpdateBannerResquest = (banner) => {
       if (response === undefined) {
         toast.error("Sửa thất bại, vui lòng thử lại !");
       } else {
-        toast.success("Sửa thành công !");
+        toast.success("Cập Nhật Thành Công!");
         dispatch(onUpdateBanner(response.data));
       }
     });
