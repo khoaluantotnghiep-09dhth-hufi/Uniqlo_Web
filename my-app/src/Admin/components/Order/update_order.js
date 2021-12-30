@@ -3,7 +3,8 @@ import uniqid from "uniqid";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import Moment from "react-moment";
-
+import moment from 'moment';
+import { compareAsc, format } from 'date-fns'
 import * as actions from "./../../../actions/index";
 import {
   CForm,
@@ -31,7 +32,7 @@ class updateOrder extends React.Component {
     var { match, bill } = this.props;
 
     this.props.onEditItemBill(match.params.id_order);
-    console.log("Bill Edit gvyg: " + JSON.stringify(bill));
+
     if (match.params.id_order) {
       const result = bill.find((o) => o.id === match.params.id_order);
       this.setState({
@@ -44,19 +45,19 @@ class updateOrder extends React.Component {
 
   }
   componentWillReceiveProps(NextProps) {
-    var { match } = this.props;
-    if (NextProps && NextProps.bill) {
-      var { bill } = NextProps;
-      console.log("Bill Edit: " + JSON.stringify(bill));
-      if (match.params.id_order) {
-        this.setState({
-          idItem: bill.id,
-          txtDate: bill.delivery_date,
-          txtDateOrder: bill.order_date,
-          txtConfirm: bill.status,
-        });
-      }
-    }
+    // var { match } = this.props;
+    // if (NextProps && NextProps.bill) {
+    //   var { bill } = NextProps;
+
+    //   if (match.params.id_order) {
+    //     this.setState({
+    //       idItem: bill.id,
+    //       txtDate: bill.delivery_date,
+    //       txtDateOrder: bill.order_date,
+    //       txtConfirm: bill.status,
+    //     });
+    //   }
+    // }
   }
   onChange = (event) => {
     var target = event.target;
@@ -78,43 +79,40 @@ class updateOrder extends React.Component {
     }
     return isCheckForm;
   };
-  onSubmitForm = (event) => {
+  onSubmitForm= (event) => {
     var { match, bill } = this.props;
 
     event.preventDefault();
     var { history } = this.props;
     var { idItem, txtDate, txtConfirm } = this.state;
     // let dateNow = new Date().toISOString().slice(0, 10);
-    var today = new Date();
-    var date =
-      today.getMonth() + 1 + "-" + today.getDate() + "-" + today.getFullYear();
+    
+    
     var sessionUser = JSON.parse(sessionStorage.getItem("user"));
-    var convertDate =
-      today.getFullYear() +
-      "-" +
-      (today.getMonth() + 1) +
-      "-" +
-      today.getDate();
+    var convertDate =moment(txtDate).format('YYYY-MM-DD');
+     var dateNow= moment().format('YYYY-MM-DD');;
     var billUpdate = {
       id: match.params.id_order,
       id_staff: sessionUser.id_user,
       delivery_date: convertDate,
       status: txtConfirm,
     };
+    console.log("Date Parse: " + txtDate +"/n" + dateNow + "")
 
-    if (match.params.id_order && txtDate >= date) {
+    if (txtDate >= dateNow) {
 
-      this.props.onUpdateItemBill(billUpdate);
-      history.goBack();
+      // this.props.onUpdateItemBill(billUpdate);
+      // history.goBack();
     } else {
       toast.error("Ngày Giao Phải Lớn Hơn Ngày Hiện Tại !");
     }
   };
   render() {
     var { txtDate, txtDateOrder, txtConfirm } = this.state;
-    var formatDate=<Moment format="DD/MM/YYYY">{txtDateOrder}
-                                                    
-    </Moment>
+    
+    var formatDate = moment(txtDateOrder).format('DD-MM-YYYY');
+
+
     return (
       <CContainer fluid>
         <CRow>
@@ -124,12 +122,12 @@ class updateOrder extends React.Component {
               <CFormGroup>
                 <CLabel htmlFor="nf-password">Ngày Đặt Hàng</CLabel>
                 <CInput
-                id="txtDateOrder"
+                  id="txtDateOrder"
                   type="date"
                   name="txtDateOrder"
                   value={txtDateOrder}
                   disabled
-                  autoComplete="current-password"
+
 
 
                 />
@@ -138,13 +136,13 @@ class updateOrder extends React.Component {
               <CFormGroup>
                 <CLabel htmlFor="nf-password">Ngày Giao</CLabel>
                 <CInput
-                id="txtDate"
+                  id="txtDate"
+                  min={formatDate}
                   type="date"
                   name="txtDate"
-                  autoComplete="current-password"
+
                   onChange={this.onChange}
                   value={txtDate}
-
                   required
                 />
               </CFormGroup>
@@ -152,7 +150,7 @@ class updateOrder extends React.Component {
               <CFormGroup>
                 <CLabel htmlFor="nf-password">Trạng Thái</CLabel>
                 <select
-                id="txtConfirm"
+                  id="txtConfirm"
                   class="form-select"
                   aria-label="Default select example"
                   name="txtConfirm"
