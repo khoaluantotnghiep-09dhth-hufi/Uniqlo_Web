@@ -18,6 +18,7 @@ class index extends Component {
       quantity: "",
       txtPhone: "",
       txtPassword: "",
+      isCheckLogin: false,
     };
   }
   onClick() {
@@ -73,7 +74,9 @@ class index extends Component {
   render() {
     var { cart } = this.props;
     var { input_Search } = this.state;
-    
+   
+    var checkCart = sessionStorage.getItem("cart");
+
    
     var showLinkSearch = (
       <NavLink to={`/search/${input_Search}`}>
@@ -127,7 +130,17 @@ class index extends Component {
             {isCheckAccount}
           </Col>
           <Col sm={1} md={1} lg={1} xl={1} >
-            <NavLink to="/cart">
+           {checkCart ===null?<NavLink to="/cart-empty">
+           <MDBIcon
+                icon="shopping-cart"
+                md="4"
+                className="sizeIcon icon"
+                style={{ fontSize: "22px" }}
+              >
+                {this.showTotalQuantityCart(cart)}
+              </MDBIcon>
+           </NavLink>:
+           <NavLink to="/cart">
               <MDBIcon
                 icon="shopping-cart"
                 md="4"
@@ -137,6 +150,7 @@ class index extends Component {
                 {this.showTotalQuantityCart(cart)}
               </MDBIcon>
             </NavLink>
+           } 
           </Col>
         </Row>
       </Container>

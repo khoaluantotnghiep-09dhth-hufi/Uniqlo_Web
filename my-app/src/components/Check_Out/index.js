@@ -22,15 +22,15 @@ import API_Address from "./../../Admin/utils/Api_Address_CheckOut";
 import { toast } from "react-toastify";
 
 const socket = io("http://localhost:3008");
-var sessionUser = JSON.parse(sessionStorage.getItem("client"));
+ const  sessionUser =  JSON.parse(sessionStorage.getItem("client"));
 class index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      txtEmail: sessionUser.email,
-      txtHoTen: sessionUser.name,
-      txtSDT: sessionUser.phone,
-      txtDiaChi: sessionUser.address,
+      txtEmail: "",
+      txtHoTen: "",
+      txtSDT: "",
+      txtDiaChi: "",
       txtCity: "",
       txtPhuong: "",
       txtXa: "",
@@ -44,7 +44,7 @@ class index extends Component {
       isCheckOrder: false,
     };
   }
-  componentDidMount() {
+async componentDidMount() {
     API_Address("api/p", "GET", null).then((response) => {
       this.setState({
         cities: response.data,
@@ -62,6 +62,12 @@ class index extends Component {
         wards: response.data,
       });
     });
+   await this.setState({
+      txtEmail: sessionUser.email,
+      txtHoTen: sessionUser.name,
+      txtSDT: sessionUser.phone,
+      txtDiaChi: sessionUser.address,
+    })
   }
 
   showListCities = (cities) => {
@@ -208,7 +214,9 @@ class index extends Component {
       //Khách hàng phát tín hiệu khi Order
       socket.emit("customer-order", { name, quantity, today });
       toast.success("Khách Hàng Đã Order Gửi Lên WebSocket");
-      this.props.onResetCart();
+      console.log("On reset Cart: " + sessionCart)
+      this.props.onResetCart(sessionCart);
+      sessionStorage.removeItem('cart');
 
       var today = new Date();
       var date =
@@ -252,9 +260,9 @@ class index extends Component {
     e.preventDefault();
     emailjs.sendForm('gmail', 'gmail_template', e.target, 'user_Kb6t170ZY6RBAoo92zlwi')
       .then((result) => {
-        console.log(result.text);
+
       }, (error) => {
-        console.log(error.text);
+
       });
     e.target.reset();
   }
@@ -262,7 +270,7 @@ class index extends Component {
     var { cities, display, districts, wards, txtEmail, txtHoTen, txtSDT, txtDiaChi } = this.state;
     var { isCheckOrder } = this.state;
 
-    console.log(isCheckOrder);
+
     if (isCheckOrder) {
       return (
         this.onSubmit(),

@@ -82,7 +82,7 @@ class index extends Component {
   render() {
     var { staff } = this.props;
     var { isCheckLogin } = this.state;
-    console.log(isCheckLogin);
+
     if (isCheckLogin) {
       //toast.error("Sai Email hoặc Mật Khẩu vui lòng thử lại !");
       return <Route path="/admin" component={HomePage} />

@@ -56,7 +56,7 @@ class addStaff extends React.Component {
     var { staff } = this.props;
     if (match.params.id_staff) {
       const result = staff.find((o) => o.id === match.params.id_staff);
-      console.log(result)
+
       this.setState({
         txtNameStaff: result.name,
         txtEmail: result.email,
@@ -97,7 +97,7 @@ class addStaff extends React.Component {
     if (file) {
       ConvertIMG.getBase64(file).then(res => {
         let objectURL = URL.createObjectURL(file);
-        console.log(res);
+
         this.setState({
           ImgPrivew: objectURL,
           txtImage: res
@@ -151,7 +151,7 @@ class addStaff extends React.Component {
       address: txtAddress,
       image: txtImage,
     };
-    console.log(staffUpdate)
+
     if (match.params.id_staff) {
       this.props.onUpdateItemStaff(staffUpdate);
       history.goBack();
@@ -242,7 +242,7 @@ class addStaff extends React.Component {
                   name="txtImage"
                   hidden
                   onChange={(e) => { this.onChangeImage(e) }}
-                  required
+                
                 />
               </Form.Group>
               <div style={{ backgroundImage: `url(${ImgPrivew})`, height: "200px", width: "300px", align: "center", background: "center center no-repeat", backgroundSize: "contain", cursor: "pointer", margin: "30px" }}

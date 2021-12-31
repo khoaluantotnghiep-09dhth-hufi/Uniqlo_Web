@@ -143,7 +143,7 @@ class AddCategory extends React.Component {
             id_sector: selectedOption.value,
             image: txtImage
         };
-        console.log("nè", category)
+
         var categoryUpdate = {
             id: match.params.id_category,
             name: txtName,

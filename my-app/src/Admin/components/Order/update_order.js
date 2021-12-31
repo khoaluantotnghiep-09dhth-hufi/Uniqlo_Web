@@ -2,7 +2,9 @@ import React from "react";
 import uniqid from "uniqid";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
-
+import Moment from "react-moment";
+import moment from 'moment';
+import { compareAsc, format } from 'date-fns'
 import * as actions from "./../../../actions/index";
 import {
   CForm,
@@ -22,26 +24,40 @@ class updateOrder extends React.Component {
     this.state = {
       idItem: "",
       txtDate: "",
+      txtDateOrder: "",
       txtConfirm: "",
     };
   }
   componentDidMount() {
-    var { match } = this.props;
+    var { match, bill } = this.props;
 
     this.props.onEditItemBill(match.params.id_order);
+
+    if (match.params.id_order) {
+      const result = bill.find((o) => o.id === match.params.id_order);
+      this.setState({
+        idItem: result.id,
+        txtDate: result.delivery_date,
+        txtDateOrder: result.order_date,
+        txtConfirm: result.status,
+      });
+    }
+
   }
   componentWillReceiveProps(NextProps) {
-    var { match } = this.props;
-    if (NextProps && NextProps.bill) {
-      var { bill } = NextProps;
-      if (match.params.id_order) {
-        this.setState({
-          idItem: bill.id,
-          txtDate: bill.date,
-          txtConfirm: bill.status,
-        });
-      }
-    }
+    // var { match } = this.props;
+    // if (NextProps && NextProps.bill) {
+    //   var { bill } = NextProps;
+
+    //   if (match.params.id_order) {
+    //     this.setState({
+    //       idItem: bill.id,
+    //       txtDate: bill.delivery_date,
+    //       txtDateOrder: bill.order_date,
+    //       txtConfirm: bill.status,
+    //     });
+    //   }
+    // }
   }
   onChange = (event) => {
     var target = event.target;
@@ -63,51 +79,70 @@ class updateOrder extends React.Component {
     }
     return isCheckForm;
   };
-  onSubmitForm = (event) => {
+  onSubmitForm= (event) => {
     var { match, bill } = this.props;
 
     event.preventDefault();
     var { history } = this.props;
     var { idItem, txtDate, txtConfirm } = this.state;
     // let dateNow = new Date().toISOString().slice(0, 10);
-    var today = new Date();
-    var date =
-      today.getMonth() + 1 + "-" + today.getDate() + "-" + today.getFullYear();
+    
+    
     var sessionUser = JSON.parse(sessionStorage.getItem("user"));
-    var convertDate =
-    today.getFullYear() +
-    "-" +
-    (today.getMonth() + 1) +
-    "-" +
-    today.getDate();
-  var billUpdate = {
-    id: match.params.id_order,
-    id_staff: sessionUser.id_user,
-    delivery_date: convertDate,
-    status: txtConfirm,
-  };
-  console.log(billUpdate);
-    if (match.params.id_order && txtDate >= date) {
-     
+    var convertDate =moment(txtDate).format('YYYY-MM-DD');
+     var dateNow= moment().format('YYYY-MM-DD');;
+    var billUpdate = {
+      id: match.params.id_order,
+      id_staff: sessionUser.id_user,
+      delivery_date: convertDate,
+      status: txtConfirm,
+    };
+
+
+    if (txtDate >= dateNow ||txtDate === dateNow ) {
+
       this.props.onUpdateItemBill(billUpdate);
       history.goBack();
     } else {
-      toast.error("Ngày Giao Phải Lớn Hơn Ngày Hiện Tại !");
+      toast.error("Ngày Giao Phải Lớn Hơn Hoặc Bằng Ngày Hiện Tại !");
     }
   };
   render() {
+    var { txtDate, txtDateOrder, txtConfirm } = this.state;
+    
+    var formatDate = moment(txtDateOrder).format('DD-MM-YYYY');
+
+
     return (
       <CContainer fluid>
         <CRow>
           <CCol sm="12">
             <CForm action="" method="post" onSubmit={this.onSubmitForm}>
+
+              <CFormGroup>
+                <CLabel htmlFor="nf-password">Ngày Đặt Hàng</CLabel>
+                <CInput
+                  id="txtDateOrder"
+                  type="date"
+                  name="txtDateOrder"
+                  value={txtDateOrder}
+                  disabled
+
+
+
+                />
+              </CFormGroup>
+
               <CFormGroup>
                 <CLabel htmlFor="nf-password">Ngày Giao</CLabel>
                 <CInput
+                  id="txtDate"
+                  min={formatDate}
                   type="date"
                   name="txtDate"
-                  autoComplete="current-password"
+
                   onChange={this.onChange}
+                  value={txtDate}
                   required
                 />
               </CFormGroup>
@@ -115,9 +150,12 @@ class updateOrder extends React.Component {
               <CFormGroup>
                 <CLabel htmlFor="nf-password">Trạng Thái</CLabel>
                 <select
+                  id="txtConfirm"
                   class="form-select"
                   aria-label="Default select example"
                   name="txtConfirm"
+                  value={txtConfirm}
+
                   // value={this.state.txtConfirm}
                   onChange={this.onChange}
                   required

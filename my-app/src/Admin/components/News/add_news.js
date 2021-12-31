@@ -54,7 +54,7 @@ class AddNews extends React.Component {
     if (file) {
       ConvertIMG.getBase64(file).then(res => {
         let objectURL = URL.createObjectURL(file);
-        console.log(res);
+
         this.setState({
           ImgPrivew: objectURL,
           txtImage: res
@@ -69,7 +69,7 @@ class AddNews extends React.Component {
     this.props.onEditItemNews(match.params.id_news);
     if (match.params.id_news) {
       const result = news.find((o) => o.id === match.params.id_news);
-      console.log("result nè", result);
+
       this.setState({
         txtTitle: result.title,
         txtDate: this.getCurrentDate(),
@@ -113,7 +113,7 @@ class AddNews extends React.Component {
     this.setState({
       ...coppyState
     }, () => {
-      console.log(this.state)
+
     })
 
   };
@@ -123,7 +123,7 @@ class AddNews extends React.Component {
 
     event.preventDefault();
     var { history } = this.props;
-    console.log("state nè", this.state);
+
     var {
       idItem,
       txtTitle,
@@ -207,7 +207,7 @@ class AddNews extends React.Component {
                     name="txtImage"
                     hidden
                     onChange={(e) => { this.onChangeImage(e) }}
-                    required
+                  
                   />
                 </Form.Group>
               </Col>

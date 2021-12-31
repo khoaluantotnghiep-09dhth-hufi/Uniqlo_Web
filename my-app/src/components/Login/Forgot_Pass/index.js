@@ -32,7 +32,7 @@ class index extends Component {
       'callback': (response) => {
         // reCAPTCHA solved, allow signInWithPhoneNumber.
         this.onSignInSubmit();
-        console.log("Recaptca varified")
+
       },
       'expired-callback': () => {
         // Response expired. Ask user to solve reCAPTCHA again.

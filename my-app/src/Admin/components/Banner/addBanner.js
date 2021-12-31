@@ -49,9 +49,9 @@ class addBanner extends React.Component {
   }
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
-    if (NextProps && NextProps.color) {
+    if (NextProps && NextProps.banner) {
       var { banner } = NextProps;
-      console.log(banner);
+    
       if (match.params.id_banner) {
         const result = banner.find((o) => o.id === match.params.id_banner);
         this.setState({
@@ -67,7 +67,7 @@ class addBanner extends React.Component {
     if (file) {
       ConvertIMG.getBase64(file).then((res) => {
         let objectURL = URL.createObjectURL(file);
-        console.log(res);
+
         this.setState({
           ImgPrivew: objectURL,
           txtImage: res,
@@ -117,9 +117,11 @@ class addBanner extends React.Component {
 
       is_active: parseInt(txtActive),
     };
-    
+    console.log("Banner Update :"+bannerUpdate)
     
     if (match.params.id_banner) {
+    console.log("Banner Update :"+bannerUpdate)
+
       this.props.onUpdateItemBanner(bannerUpdate);
       history.goBack();
     } else {
@@ -128,7 +130,7 @@ class addBanner extends React.Component {
     }
   };
   render() {
-    let { txtName, ImgPrivew } = this.state;
+    let { txtName, ImgPrivew, txtImage } = this.state;
     return (
       <CContainer fluid>
         <CRow>
@@ -164,11 +166,12 @@ class addBanner extends React.Component {
                         type="file"
                         id="txtImage"
                         name="txtImage"
+                     
                         hidden
                         onChange={(e) => {
                           this.onChangeImage(e);
                         }}
-                        required
+                      
                       />
                     </Form.Group>
                   </Col>

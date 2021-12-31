@@ -69,7 +69,7 @@ constructor(props) {
     
     
 
-    console.log(banner)
+  
 if(isLoading){return   <Spinner animation="grow" variant="danger" /> }
     return (
       <div className="App">

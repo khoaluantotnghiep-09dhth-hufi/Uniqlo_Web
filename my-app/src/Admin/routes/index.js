@@ -65,8 +65,6 @@ const AddColor = React.lazy(() => import('../components/Color/add_color'));
 const ListSize = React.lazy(() => import('../components/Size/list_size'));
 const AddSize = React.lazy(() => import('../components/Size/add_size'));
 
-const ListPost = React.lazy(() => import('../components/Post/list_post'));
-const AddPost = React.lazy(() => import('../components/Post/add_post'));
 
 const routes = [
     { path: '/admin/home', exact: true, name: 'Trang Chủ', component: Home },
@@ -89,9 +87,7 @@ const routes = [
     { path: '/admin/manage/news/add', exact: true, name: 'Thêm Tin Tức Mới', component: AddNews },
     { path: '/admin/manage/news/:id_news/edit', exact: true, name: 'Chỉnh Sửa Tin Tức', component: AddNews },
 
-    { path: '/admin/manage/post', exact: true, name: 'Danh Sách Tin Tức', component: ListPost },
-    { path: '/admin/manage/post/add', exact: true, name: 'Thêm Tin Tức Mới', component: AddPost },
-    { path: '/admin/manage/post/:id_post/edit', exact: true, name: 'Chỉnh Sửa Tin Tức', component: AddPost },
+    
 
     { path: '/admin/system/discount', exact: true, name: 'Danh Sách Khuyến Mãi', component: ListDiscount },
 

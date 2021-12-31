@@ -80,12 +80,12 @@ class AddAccountAdmin extends React.Component {
         this.setState({
             ...coppyState
         }, () => {
-            console.log(this.state);
+
         })
     }
     render() {
         let { name, passwordold, passwordnew, cofirmpasswordnew } = this.state;
-        console.log("state load", this.state)
+
         return (
             <>
                 <Container fluid>

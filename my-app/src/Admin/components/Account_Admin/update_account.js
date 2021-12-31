@@ -67,7 +67,7 @@ class updateOrder extends React.Component {
 
       role: parseInt(txtConfirm),
     };
-    console.log(staffUpdate);
+
     if (match.params.id_staff) {
       this.props.onUpdatePositionStaff(staffUpdate);
       history.goBack();

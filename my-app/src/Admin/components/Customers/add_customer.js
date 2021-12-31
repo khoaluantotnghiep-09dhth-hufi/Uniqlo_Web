@@ -54,7 +54,7 @@ class AddCustomer extends React.Component {
     if (file) {
       ConvertIMG.getBase64(file).then(res => {
         let objectURL = URL.createObjectURL(file);
-        console.log(res);
+
         this.setState({
           ImgPrivew: objectURL,
           txtImage: res
@@ -247,7 +247,7 @@ class AddCustomer extends React.Component {
                   name="txtImage"
                   hidden
                   onChange={(e) => { this.onChangeImage(e) }}
-                  required
+          
                 />
               </Form.Group>
             </Col>

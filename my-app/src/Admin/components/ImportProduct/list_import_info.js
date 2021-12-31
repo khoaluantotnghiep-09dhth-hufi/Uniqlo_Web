@@ -110,7 +110,7 @@ class addProduct extends React.Component {
             ...coppyState,
             productArr: this.props.fetchProductsInfo(this.state.id_order_info),
         }, () => {
-            console.log("state", this.state);
+
         })
     }
     onChangeHandle = (e) => {
@@ -119,7 +119,7 @@ class addProduct extends React.Component {
             productArr: this.props.fetchProductsInfo(this.state.id_order_info),
             id_product_info: this.state.productArr.id_product_info,
         })
-        console.log("state nè", this.state)
+
     }
     checkValidate = () => {
         let check = ['txtQuantity', 'id_order_info', 'id_product_info'];

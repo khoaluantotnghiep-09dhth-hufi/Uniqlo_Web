@@ -27,7 +27,7 @@ var news = (state = initialState, action) => {
       return [...state];
     case types.ADD_NEWS:
 
-      console.log("ADD NEW ACTION: " + JSON.stringify(action.news));
+
       state.push(action.news);
 
       return [...state];
@@ -37,7 +37,7 @@ var news = (state = initialState, action) => {
       if (index !== -1) {
         state[index] = news;
       }
-      console.log("UPDATE DATE :"+ index);
+
       return [...state];
     
     default:
