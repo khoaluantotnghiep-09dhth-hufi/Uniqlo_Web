@@ -90,15 +90,6 @@ class Home extends React.Component {
           borderWidth: 2,
           data: dataTotalQuantity
         },
-        // {
-        //     label: 'My Third dataset',
-        //     backgroundColor: 'transparent',
-        //     borderColor: brandDanger,
-        //     pointHoverBackgroundColor: brandDanger,
-        //     borderWidth: 1,
-        //     borderDash: [8, 5],
-        //     data: data3
-        // }
       ]
     })()
     const defaultOptions = (() => {
@@ -147,25 +138,6 @@ class Home extends React.Component {
               <CCol sm="5">
                 <h4 id="traffic" className="card-title mb-0">Biểu Đồ Doanh Thu</h4>
                 <br />
-              </CCol>
-              <CCol sm="7" className="d-none d-md-block">
-                <CButton color="primary" className="float-right">
-                  <CIcon name="cil-cloud-download" />
-                </CButton>
-                <CButtonGroup className="float-right mr-3">
-                  {
-                    ['Ngày', 'Tháng', 'Năm'].map(value => (
-                      <CButton
-                        color="outline-secondary"
-                        key={value}
-                        className="mx-0"
-                        active={value === 'Tháng'}
-                      >
-                        {value}
-                      </CButton>
-                    ))
-                  }
-                </CButtonGroup>
               </CCol>
             </CRow>
             <CChartLine

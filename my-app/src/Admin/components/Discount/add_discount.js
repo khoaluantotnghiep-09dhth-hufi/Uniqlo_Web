@@ -105,7 +105,6 @@ class addDiscount extends React.Component {
       date_end: dateEnd,
       image: txtImage,
     };
-    console.log("promotion data", promotion)
     var promotionUpdate = {
       id: match.params.id_promotion,
       name: txtNameDiscount,
