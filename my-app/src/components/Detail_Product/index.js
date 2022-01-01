@@ -255,7 +255,7 @@ class index extends Component {
         item.nameColor === isChooseColor &&
         item.nameSize === txtSize
     );
-
+console.log(JSON.stringify(onTakeIdProductInfo));
     var product = {
       id_product_info: onTakeIdProductInfo.id_product_info,
       id_product: match.params.id_product,
