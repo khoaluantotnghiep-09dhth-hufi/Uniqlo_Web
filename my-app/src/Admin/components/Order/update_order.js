@@ -81,13 +81,9 @@ class updateOrder extends React.Component {
   };
   onSubmitForm= (event) => {
     var { match, bill } = this.props;
-
     event.preventDefault();
     var { history } = this.props;
     var { idItem, txtDate, txtConfirm } = this.state;
-    // let dateNow = new Date().toISOString().slice(0, 10);
-    
-    
     var sessionUser = JSON.parse(sessionStorage.getItem("user"));
     var convertDate =moment(txtDate).format('YYYY-MM-DD');
      var dateNow= moment().format('YYYY-MM-DD');;
@@ -97,8 +93,6 @@ class updateOrder extends React.Component {
       delivery_date: convertDate,
       status: txtConfirm,
     };
-
-
     if (txtDate >= dateNow ||txtDate === dateNow ) {
 
       this.props.onUpdateItemBill(billUpdate);
@@ -109,10 +103,7 @@ class updateOrder extends React.Component {
   };
   render() {
     var { txtDate, txtDateOrder, txtConfirm } = this.state;
-    
     var formatDate = moment(txtDateOrder).format('DD-MM-YYYY');
-
-
     return (
       <CContainer fluid>
         <CRow>
@@ -127,9 +118,6 @@ class updateOrder extends React.Component {
                   name="txtDateOrder"
                   value={txtDateOrder}
                   disabled
-
-
-
                 />
               </CFormGroup>
 
@@ -140,7 +128,6 @@ class updateOrder extends React.Component {
                   min={formatDate}
                   type="date"
                   name="txtDate"
-
                   onChange={this.onChange}
                   value={txtDate}
                   required
@@ -155,8 +142,6 @@ class updateOrder extends React.Component {
                   aria-label="Default select example"
                   name="txtConfirm"
                   value={txtConfirm}
-
-                  // value={this.state.txtConfirm}
                   onChange={this.onChange}
                   required
                 >
@@ -165,7 +150,6 @@ class updateOrder extends React.Component {
                   <option value="0">Chưa Xác Nhận</option>
                 </select>
               </CFormGroup>
-
               <CFormGroup>
                 <CButton type="submit" color="danger" className="m-2">
                   {" "}

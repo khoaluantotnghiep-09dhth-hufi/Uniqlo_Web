@@ -64,7 +64,7 @@ class AddCategory extends React.Component {
         if (NextProps && NextProps.exchange) {
             var { exchange } = NextProps;
             if (match.params.id_exchange) {
-                
+
                 this.setState({
                     idItem: exchange.id,
                     txtName: exchange.name,
@@ -104,13 +104,13 @@ class AddCategory extends React.Component {
         if (isValid === false) return;
         event.preventDefault();
         var { history } = this.props;
-        var { id_bill_info, txtReason, txtDateImport, txtQuantity,id_product_info } = this.state;
+        var { id_bill_info, txtReason, txtDateImport, txtQuantity, id_product_info } = this.state;
 
         var exchange = {
             id: uniqid("exchange-"),
             id_bill_info: id_bill_info,
-            id_staff_change: sessionUser.id_user,
             reason: txtReason,
+            id_staff_change: sessionUser.id_user,
         };
         var importProduct = {
             id: uniqid("import-change-"),
@@ -120,10 +120,10 @@ class AddCategory extends React.Component {
             id: uniqid("import-change-"),
             id_import: importProduct.id,
             quantity: txtQuantity,
-            id_product_info :id_product_info
+            id_product_info: id_product_info
         };
-        var billInfo={
-            id_product_info :id_product_info,
+        var billInfo = {
+            id_product_info: id_product_info,
             quantity: txtQuantity,
         }
         this.props.onAddItemExchange(exchange);

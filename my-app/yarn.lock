@@ -5285,6 +5285,11 @@
     "whatwg-mimetype" "^2.3.0"
     "whatwg-url" "^8.0.0"
 
+"date-fns@^2.28.0":
+  "integrity" "sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw=="
+  "resolved" "https://registry.npmjs.org/date-fns/-/date-fns-2.28.0.tgz"
+  "version" "2.28.0"
+
 "debounce@^1.1.0":
   "integrity" "sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug=="
   "resolved" "https://registry.npmjs.org/debounce/-/debounce-1.2.1.tgz"
@@ -6518,6 +6523,13 @@
   dependencies:
     "websocket-driver" ">=0.5.1"
 
+"faye-websocket@>=0.6.0":
+  "integrity" "sha1-SCpQWw3wrmJrlphm0710DNuWLoM="
+  "resolved" "https://registry.npmjs.org/faye-websocket/-/faye-websocket-0.9.3.tgz"
+  "version" "0.9.3"
+  dependencies:
+    "websocket-driver" ">=0.5.1"
+
 "fb-watchman@^2.0.0":
   "integrity" "sha512-DkPJKQeY6kKwmuMretBhr7G6Vodr7bFwDYTXIkfG1gjvNpaxBTQV3PbXg6bR1c1UP4jPOX0jHUbbHANL9vRjVg=="
   "resolved" "https://registry.npmjs.org/fb-watchman/-/fb-watchman-2.0.1.tgz"
@@ -6649,6 +6661,27 @@
   dependencies:
     "locate-path" "^5.0.0"
     "path-exists" "^4.0.0"
+
+"firebase-auth@^0.1.2":
+  "integrity" "sha1-3mL/RW9kknX8Q3flfn5Xvx3GU+Q="
+  "resolved" "https://registry.npmjs.org/firebase-auth/-/firebase-auth-0.1.2.tgz"
+  "version" "0.1.2"
+  dependencies:
+    "firebase" "^2.3.0"
+    "firebase-token-generator" "^2.0.0"
+    "q" "^1.4.1"
+
+"firebase-token-generator@^2.0.0":
+  "integrity" "sha1-l2fXWewTq9yZuhFf1eqZ2Lk9EgY="
+  "resolved" "https://registry.npmjs.org/firebase-token-generator/-/firebase-token-generator-2.0.0.tgz"
+  "version" "2.0.0"
+
+"firebase@^2.3.0":
+  "integrity" "sha1-ThEZ7AOWylYdinrL/xYw/qxsCjE="
+  "resolved" "https://registry.npmjs.org/firebase/-/firebase-2.4.2.tgz"
+  "version" "2.4.2"
+  dependencies:
+    "faye-websocket" ">=0.6.0"
 
 "firebase@^9.6.1":
   "integrity" "sha512-d4wbkVMRiSREa1jfFx2z/Kq3KueEKfNWApvdrEAxvzDRN4eiFLeZSZM/MOxj7TR01e/hANnw2lrYKMUpg21ukg=="
@@ -9525,7 +9558,7 @@
   dependencies:
     "express" "^4.13.4"
 
-"moment@^2.10.2", "moment@^2.22.2", "moment@^2.29.0":
+"moment@^2.10.2", "moment@^2.22.2", "moment@^2.29.0", "moment@^2.29.1":
   "integrity" "sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ=="
   "resolved" "https://registry.npmjs.org/moment/-/moment-2.29.1.tgz"
   "version" "2.29.1"
@@ -11358,7 +11391,7 @@
   dependencies:
     "escape-goat" "^2.0.0"
 
-"q@^1.1.2":
+"q@^1.1.2", "q@^1.4.1":
   "integrity" "sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc="
   "resolved" "https://registry.npmjs.org/q/-/q-1.5.1.tgz"
   "version" "1.5.1"

@@ -64,6 +64,7 @@ export const onUpdateExchangeResquest = (exchange) => {
   };
 };
 
+
 //Sửa sản phẩm
 export const onGetExchange = (exchange) => {
   return {
@@ -78,7 +79,7 @@ export const onEditExchangeResquest = (id) => {
         toast.error("Vui lòng thử lại !");
       }
       else {
-      dispatch(onGetExchange(response.data));
+        dispatch(onGetExchange(response.data));
       }
     });
   };
