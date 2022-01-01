@@ -123,8 +123,10 @@ class Home extends React.Component {
                         ticks: {
                             beginAtZero: true,
                             maxTicksLimit: 15,
-                            stepSize: Math.ceil(10000000 / 8),
-                            max: 10000000
+                            //stepSize: Math.ceil(10000000 / 8),
+                            //max: 10000000
+                            stepSize: Math.ceil(99999999 / 8),
+                            max: 99999999
                         },
                         gridLines: {
                             display: true
