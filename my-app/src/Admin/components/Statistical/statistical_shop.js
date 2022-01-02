@@ -6,23 +6,18 @@ import { connect } from "react-redux";
 import { CChartLine } from '@coreui/react-chartjs'
 import { Link } from "react-router-dom";
 import { getStyle, hexToRgba } from '@coreui/utils'
+import { compareAsc, format } from 'date-fns'
+import moment from 'moment';
+
 import {
-  CBadge,
-  CButton,
-  CButtonGroup,
+  
   CCard,
   CCardBody,
-  CCardFooter,
-  CCardHeader,
+  
   CCol,
-  CProgress,
+  
   CRow,
-  CCallout,
-  CWidgetDropdown,
-  CDropdown,
-  CDropdownToggle,
-  CDropdownItem,
-  CDropdownMenu
+  
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -36,6 +31,11 @@ import {
 const brandSuccess = getStyle('success') || '#4dbd74'
 const brandInfo = getStyle('info') || '#20a8d8'
 const brandDanger = getStyle('danger') || '#f86c6b'
+const formatter = new Intl.NumberFormat("vi-VN", {
+  style: "currency",
+  currency: "VND",
+  minimumFractionDigits: 0,
+});
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -67,7 +67,7 @@ class Home extends React.Component {
       let elements = 27
       var { billTotal } = this.props;
       var dataTotal = billTotal.map((item, index) => {
-        return item.sumTotal;
+        return formatter(item.sumTotal);
       })
       var dataTotalQuantity = billTotalQuantity.map((item, index) => {
         return item.sumTotalQuantity;
@@ -80,7 +80,7 @@ class Home extends React.Component {
           borderColor: brandInfo,
           pointHoverBackgroundColor: brandInfo,
           borderWidth: 2,
-          data: dataTotal
+          data:formatter(dataTotal) 
         },
         {
           label: 'Số lượng sản phẩm',
@@ -110,8 +110,8 @@ class Home extends React.Component {
               maxTicksLimit: 15,
               // stepSize: Math.ceil(10000000 / 8),
               // max: 10000000
-              stepSize: Math.ceil(99999999 / 8),
-                            max: 99999999
+              stepSize:formatter(Math.ceil(99999999 / 10)) ,
+                            max: formatter(99999999)
             },
             gridLines: {
               display: true
@@ -130,7 +130,7 @@ class Home extends React.Component {
     }
     )()
     var dataDate = billTotal.map((item, index) => {
-      return item.order_date;
+      return moment(item.order_date).format('DD-MM-YYYY')
     })
     return (
       <>
