@@ -11,7 +11,7 @@ class index extends Component{
               <div className="titCompany clearfix">
                 <h3 className="tit">CHÍNH SÁCH BẢO VỆ THÔNG TIN CÁ NHÂN</h3>
               </div>
-              <h2 className="tittype02"><img src="https://www.uniqlo.com/vn/img/txt_company_privacypolicy.gif" alt="Chính sách quyền riêng tư của UNIQLO" className="tit"/><a href="#top"><img src="https://freepngimg.com/thumb/web_design/24723-7-up-arrow-clipart.png" alt="" width="40rem" height="40rem" className="pagetop"/></a></h2><br/>
+              <h2 className="tittype02"><p className="tit">Chính sách quyền riêng tư của Uniqlo</p><a href="#top"><img src="https://freepngimg.com/thumb/web_design/24723-7-up-arrow-clipart.png" alt="" width="40rem" height="40rem" className="pagetop"/></a></h2><br/>
               <div className="boxCompanyBasic">
                 <strong>1. Giới thiệu</strong>
                 <p className="txt">Chính sách xử lý và bảo vệ thông tin cá nhân của khách hàng này ("<strong>Chính Sách</strong>”) giải thích phương thức Công ty TNHH UNIQLO Việt Nam (“<strong>Công Ty</strong>” hoặc “<strong>Chúng Tôi</strong>”) thu thập, xử lý, sử dụng, bảo vệ và chia sẻ thông tin cá nhân khi quý khách hàng (“<strong>Khách Hàng</strong>” hoặc “<strong>Bạn</strong>”) sử dụng website có tên miền <a href="https://www.uniqlo.com/vn/">https://www.uniqlo.com/vn/</a> (“<strong>Website</strong>”), để mua sắm hoặc chia sẻ thông tin cá nhân của Bạn với Chúng Tôi. Chúng Tôi trân trọng quyền riêng tư của khách hàng và đánh giá cao sự tin tưởng của Bạn rằng Chúng Tôi sẽ tôn trọng quyền riêng tư của Bạn một cách cẩn trọng và đúng đắn.</p>

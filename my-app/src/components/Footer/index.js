@@ -53,7 +53,7 @@ class index extends Component {
           Email: customerservices@uniqlo.vn<br></br>
           Giờ Làm Việc: 8:00 – 17:00 (Thứ Hai – Thứ Sáu, không bao gồm ngày lễ)
           </p>
-          <Image className="d-flex justify-content-start" src="https://www.uniqlo.com/vn/explorer/img/logoSaleNoti.png" rounded />
+          <Image className="d-flex justify-content-start" src="https://im.uniqlo.com/global-cms/spa/resfb28ee615b9469a533e195812bd0de44fr.png" rounded />
         </Container>
       </header>
     );

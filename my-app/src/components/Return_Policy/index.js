@@ -11,7 +11,7 @@ class index extends Component{
                 <div className="titCompany clearfix">
                     <h3 className="tit">CHÍNH SÁCH ĐỔI TRẢ</h3>
                 </div>
-                <h2 className="tittype02"><img src="https://www.uniqlo.com/vn/img/200318_txt_company_returnpolicy.gif" alt="CHÍNH SÁCH ĐỔI TRẢ SẢN PHẨM (EXCHANGE &amp; RETURN POLICY)" className="tit"/><a href="#top"><img src="https://freepngimg.com/thumb/web_design/24723-7-up-arrow-clipart.png" alt="" width="40rem" height="40rem" className="pagetop"/></a></h2><br/>
+                <h2 className="tittype02"><p className="tit">CHÍNH SÁCH ĐỔI TRẢ SẢN PHẨM (EXCHANGE &amp; RETURN POLICY)</p><a href="#top"><img src="https://freepngimg.com/thumb/web_design/24723-7-up-arrow-clipart.png" alt="" width="40rem" height="40rem" className="pagetop"/></a></h2><br/>
                 <div className="boxCompanyBasic txt">
                   <ol>
                     <li><strong>Sản phẩm không có lỗi do sản xuất chỉ có thể được đổi nếu:</strong>

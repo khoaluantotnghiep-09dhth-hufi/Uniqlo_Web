@@ -19,7 +19,7 @@ class index extends Component{
                     <a href="mailto:customerservices@uniqlo.vn">customerservices@uniqlo.vn</a><br/>
                     <p>Giờ Làm Việc: 8:00 – 17:00 (Thứ Hai – Thứ Sáu, không bao gồm ngày lễ)</p>
                     <strong><p>UNIQLO CHÍNH THỨC TRIỂN KHAI DỊCH VỤ ĐẶT HÀNG SỐ LƯỢNG LỚN</p></strong>
-                    <img src="https://www.uniqlo.com/vn/img/img_company_customer02.jpg" alt="UNIQLO CHÍNH THỨC TRIỂN KHAI DỊCH VỤ ĐẶT HÀNG SỐ LƯỢNG LỚN"/><br/>
+                    {/* <img src="https://www.uniqlo.com/vn/img/img_company_customer02.jpg" alt="UNIQLO CHÍNH THỨC TRIỂN KHAI DỊCH VỤ ĐẶT HÀNG SỐ LƯỢNG LỚN"/><br/> */}
                     <strong>Giao hàng miễn phí và ưu đãi đặc biệt</strong> khi đặt hàng số lượng lớn (Vui lòng liên hệ chúng tôi để biết thêm chi tiết)<br/>
                     <br/>
                     <strong>Cách thức đặt hàng chỉ 2 bước đơn giản:</strong><br/>
