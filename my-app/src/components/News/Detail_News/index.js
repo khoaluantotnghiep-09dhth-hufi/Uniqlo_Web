@@ -4,6 +4,8 @@ import * as actions from "./../../../actions/index";
 import "./Detail_News.scss";
 import { connect } from "react-redux";
 import { Card, Button, Image } from "react-bootstrap";
+import Moment from "react-moment";
+
 
 class index extends Component {
   componentDidMount() {
@@ -27,7 +29,9 @@ class index extends Component {
             <Row>
               <Col>
                 <p className="font-weight-bold " style={{ color: "#3795C1" }}>
-                  {item.date}
+                  { <Moment format="DD/MM/YYYY">
+                                                        {item.date}
+                                                    </Moment>}
                 </p>
               </Col>
             </Row>

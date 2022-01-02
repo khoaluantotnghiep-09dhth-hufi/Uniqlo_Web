@@ -33,7 +33,9 @@ class index extends Component {
     //  this.showListProduct();
     
        this.props.onGetAllProduct();
-     
+     this.setState({
+       isLoading: false,
+     })
     
   }
 

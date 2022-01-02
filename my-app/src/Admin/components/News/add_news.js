@@ -192,7 +192,7 @@ class AddNews extends React.Component {
             <Form.Group className="mb-3" controlId="formBasicObject">
               <Form.Label>Nội Dung</Form.Label>
               <MdEditor 
-              style={{ height: '500px' }} 
+              style={{ height: '1000px' }} 
               renderHTML={text => mdParser.render(text)} 
               value={this.state.txtDescriptionText}
               onChange={this.handleEditorChange} />
