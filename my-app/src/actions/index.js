@@ -972,15 +972,18 @@ export const onAddCustomerClient = (customer) => {
     customer,
   };
 };
-export const onAddCustomerClientResquest = (customer) => {
+export  const onAddCustomerClientResquest = (customer) => {
   return (dispatch) => {
     return callApi("customers_client", "POST", customer).then((response) => {
+   
       if (response === undefined) {
         toast.error("Thêm thất bại, vui lòng thử lại !");
       } else {
         toast.success("Thêm thành công !");
+       
         dispatch(onAddCustomerClient(response.data));
       }
+      
     });
   };
 };

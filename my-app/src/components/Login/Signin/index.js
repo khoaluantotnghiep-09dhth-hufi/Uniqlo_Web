@@ -1,84 +1,78 @@
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Col, Form, Button } from "react-bootstrap";
 import { Component } from "react";
-import * as actions from "./../../../actions/index";
-import { connect } from "react-redux";
-import { Redirect, withRouter } from "react-router-dom";
+
+import { Redirect } from "react-router-dom";
 import { toast } from "react-toastify";
+import callApi from "./../../../Admin/utils/Callapi";
+
 import Forgot_Password from "../Forgot_Pass/index";
-import {
-  
-  NavLink
-} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 class index extends Component {
   constructor(props) {
     super(props);
     this.state = {
       txtPhone: "",
       txtPassword: "",
-      txtHo: "",
-      txtTen: "",
-      txtEmail: "",
+
       isCheckLogin: false,
       isForgotPass: false,
       txtForgotButton: "Quên mật khẩu ?",
     };
   }
-  componentDidMount() {
-    this.props.onFetchUsers();
-  }
 
-  onHandleSubmitLogin = (users) => (event) => {
-    event.preventDefault(); //Xoá dòng này sẽ tự chuyển trang chứ ko chuyển trang bằng tay
-    var { txtPhone, txtPassword, items } = this.state;
+  onHandleSubmitLogin = (event) => {
+    event.preventDefault();
+    var { txtPhone, txtPassword } = this.state;
+    var userPost = {
+      phone: txtPhone,
+      password: txtPassword,
+    };
+    console.log("data user", txtPhone + txtPassword);
 
-    console.log("data user",users)
-    for (let i = 0; i < users.length; i++) {
-      // if (users[i].phone !== txtPhone || users[i].password !== txtPassword){
-      //   toast.error(<div>Đăng nhập thất bại.<br /> Bạn cần nhập đúng thông tin!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
-      //   return;
-      // }     
-      // if (users[i].phone !== txtPhone){
-      //   toast.error(<div>Đăng nhập thất bại.<br />Tài khoản không tồn tại!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
-      //   break; 
-      // }
-      if (users[i].phone === txtPhone && users[i].password !== txtPassword){
-        toast.error(<div>Đăng nhập thất bại.<br />Mật khẩu không chính xác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
-        break; 
-      }  
-      if (users[i].phone === txtPhone && users[i].password === txtPassword) {
+    callApi("login-web", "POST", userPost).then((response) => {
+      console.log("User take: " + JSON.stringify(response.data));
+      if (response.data.length === 0) {
+        toast.error(
+          <div>
+            Đăng nhập thất bại.
+            <br /> Bạn cần nhập đúng thông tin!
+          </div>,
+          { autoClose: 2500 },
+          { position: toast.POSITION.UPPER_RIGHT }
+        );
+      } else {
+        toast.success(
+          <div>Đăng nhập thành công!</div>,
+          { autoClose: 2500 },
+          { position: toast.POSITION.UPPER_RIGHT }
+        );
         var user = {
-          id_user: users[i].id,
-          name: users[i].name,
-          address: users[i].address,
-          phone: users[i].phone,
-          image: users[i].image,
-          email: users[i].email,
-          gender: users[i].gender,
-          cmnn_cccc: users[i].cmnn_cccc,
-          score: users[i].score,
-          password: users[i].password,
+          id_user: response.data.id,
+          name: response.data.name,
+          address: response.data.address,
+          phone: response.data.phone,
+          image: response.data.image,
+          email: response.data.email,
+          gender: response.data.gender,
+          cmnn_cccc: response.data.cmnn_cccc,
+          score: response.data.score,
+          password: response.data.password,
         };
+        sessionStorage.setItem("client", JSON.stringify(user));
         this.setState({
           isCheckLogin: true,
         });
-        sessionStorage.setItem("client", JSON.stringify(user));
-        toast.success(<div>Đăng nhập thành công!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
-        console.log("true nè")
-      } 
-      else {       
-        this.setState({
-          isCheckLogin: false,
-        }); 
-        console.log("false nè")  
-        //toast.error(<div>Đăng nhập thất bại.<br /> Bạn cần nhập đúng thông tin!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
       }
-    }
+    });
   };
 
   onToggleFormForgotPass = () => {
     this.setState({
-      isForgotPass: !this.state.isForgotPass,  
-      txtForgotButton: this.state.txtForgotButton == "Quên mật khẩu ?"?"Huỷ !" : "Quên mật khẩu ?",
+      isForgotPass: !this.state.isForgotPass,
+      txtForgotButton:
+        this.state.txtForgotButton == "Quên mật khẩu ?"
+          ? "Huỷ !"
+          : "Quên mật khẩu ?",
     });
   };
   onToggleForm = () => {
@@ -93,10 +87,8 @@ class index extends Component {
     });
   };
   render() {
-    
-    var { users } = this.props;
     var { isCheckLogin } = this.state;
-    var {  isForgotPass } = this.state;
+    var { isForgotPass } = this.state;
     var { txtForgotButton } = this.state;
     var elmForgotPass = isForgotPass ? (
       <Forgot_Password onCloseForm={this.onCloseForm} />
@@ -116,9 +108,10 @@ class index extends Component {
     return (
       <Col>
         <h5 className="text-center">Đăng Nhập</h5>
-        <Form onSubmit={this.onHandleSubmitLogin(users)}>
+        <Form onSubmit={this.onHandleSubmitLogin}>
           <Form.Group className="mb-3" controlId="formBasicPhone">
             <Form.Control
+              id="txtPhone"
               className="fas fa-phone-alt"
               type="text"
               placeholder="&#xf879; Số Điện Thoại"
@@ -140,6 +133,7 @@ class index extends Component {
               ref="memberPassword"
               onChange={this.onHandleChange}
               name="txtPassword"
+              id="txtPassword"
               minlength="1"
               maxlength="25"
               required
@@ -160,47 +154,23 @@ class index extends Component {
             className="mb-3 text-center"
             controlId="formBasicPassword"
           >
-            {/* <a
-              href="#"
-              style={{ color: "#666", borderBottom: "1px solid #ccc" }}
-              onClick={this.props.onToggleForm}
+            {elmForgotPass}
+            <Form.Group
+              className="mb-3 text-center"
+              controlId="formBasicPassword"
             >
-              Quên Mật Khẩu?
-            </a> */}
-            {/* <Forgot_Password
-            className="col-sm-6 col-xs-12"
-            onSubmit={this.onToggleFormForgotPass}
-          /> */}
-          {elmForgotPass}
-          <Form.Group
-            className="mb-3 text-center"
-            controlId="formBasicPassword">
               <NavLink
                 style={{ color: "#666", borderBottom: "1px solid #ccc" }}
-                //onClick={this.onToggleFormForgotPass}
-                to="/forgot_password">
+                to="/forgot_password"
+              >
                 {txtForgotButton}
-                
               </NavLink>
-          </Form.Group>
+            </Form.Group>
           </Form.Group>
         </Form>
       </Col>
     );
   }
 }
-var mapStateToProps = (state) => {
-  return {
-    users: state.users,
-    cart: state.cart,
-  };
-};
-var mapDispatchToProps = (dispatch, props) => {
-  return {
-    onFetchUsers: () => {
-      return dispatch(actions.fetchUserRequest());
-    },
-  };
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(index);
+export default index;

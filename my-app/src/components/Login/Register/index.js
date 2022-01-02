@@ -25,6 +25,7 @@ class index extends React.Component {
       errorPhone: "",
     };
   }
+  
   onChange = (event) => {
     var target = event.target;
     var name = target.name;
@@ -179,6 +180,9 @@ var mapDispatchToProps = (dispatch, props) => {
   return {
     onAddItemCustomerClient: (customer) => {
       dispatch(actions.onAddCustomerClientResquest(customer));
+    },
+    onFetchUsers: () => {
+      return dispatch(actions.fetchUserRequest());
     },
   };
 };
