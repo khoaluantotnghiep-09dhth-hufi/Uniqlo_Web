@@ -18,6 +18,8 @@ class index extends Component {
     
     var { match } = this.props;
     var keySearch = match.params.input_Search;
+    this.props.onGetAllProduct();
+
     try {
      CallApi(`web-search/${keySearch}`, "GET", null).then(
         (response) => {
@@ -97,7 +99,9 @@ var mapDispatchToProps = (dispatch, props) => {
     onAddToCart: (product) => {
       dispatch(actions.addToCart(product, 1));
     },
-   
+    onGetAllProduct: () => {
+      dispatch(actions.fetchProductResquest());
+    },
   };
 };
 

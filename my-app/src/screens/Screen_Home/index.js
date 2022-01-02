@@ -28,6 +28,8 @@ constructor(props) {
 
   componentDidMount() {
     //  this.showListProduct();
+    this.props.onGetAllProduct();
+
     try{
      
       this.props.fetchBanners();
@@ -105,6 +107,9 @@ var mapDispatchToProps = (dispatch, props) => {
       dispatch(actionsProduct.fetchProductResquest());
     }, fetchBanners: () => {
       return dispatch(actions.fetchBannersResquest());
+    },
+    onGetAllProduct: () => {
+      dispatch(actions.fetchProductResquest());
     },
   };
 };

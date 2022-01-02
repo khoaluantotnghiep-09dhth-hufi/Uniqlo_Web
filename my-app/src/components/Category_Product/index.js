@@ -31,13 +31,10 @@ class index extends Component {
   }
   componentDidMount() {
     //  this.showListProduct();
-    try{
-      setTimeout( this.props.onGetAllProduct(),1000);
+    
+       this.props.onGetAllProduct();
      
-      this.setState({ isLoading:false });
-    } catch (e) {
-      this.setState({ isLoading: false });
-    }
+    
   }
 
   handlePageClick = (e) => {
