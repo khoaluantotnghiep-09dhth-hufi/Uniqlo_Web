@@ -19,9 +19,9 @@ class index extends Component {
     var { match } = this.props;
     var keySearch = match.params.input_Search;
     try {
-     CallApi("web-search", "POST", keySearch).then(
+     CallApi(`web-search/${keySearch}`, "GET", null).then(
         (response) => {
-          console.log("Products now: " +response.data);
+          console.log("Products now: " + JSON.stringify(response));
           this.setState({
             productsSearch: response.data,
             isLoading: true,

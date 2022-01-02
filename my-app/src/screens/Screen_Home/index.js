@@ -29,7 +29,7 @@ constructor(props) {
   componentDidMount() {
     //  this.showListProduct();
     try{
-      this.props.onGetAllProduct();
+     
       this.props.fetchBanners();
       Call_API("products-top4-men","GET",null).then((response)=>{
         this.setState({
