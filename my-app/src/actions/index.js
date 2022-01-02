@@ -12,7 +12,7 @@ export const fetchNotifications = (nameNotifications) => {
 export const fetchNotificationsResquest = () => {
   return (dispatch) => {
     return callApi("notifications", "GET", null).then((response) => {
-     
+
       dispatch(fetchNotifications(response.data));
     });
   };
@@ -21,7 +21,7 @@ export const fetchNotificationsResquest = () => {
 export const onAddNotificationCancelResquest = (bills) => {
   return (dispatch) => {
     return callApi("notifications", "POST", bills).then((response) => {
-       
+
       // dispatch(fetchAddNotifications(response.data));
     });
   };
@@ -752,16 +752,16 @@ export const fetchNews = (news) => {
 
 export const fetchNewsResquest = () => {
   return (dispatch) => {
-  
 
-      return callApi("news", "GET", null).then((response) => {
-        if (response === undefined) {
-          toast.error("Vui lòng thử lại !");
-        } else {
-          dispatch(fetchNews(response.data));
-        }
-      });
-   
+
+    return callApi("news", "GET", null).then((response) => {
+      if (response === undefined) {
+        toast.error("Vui lòng thử lại !");
+      } else {
+        dispatch(fetchNews(response.data));
+      }
+    });
+
   };
 };
 
@@ -772,13 +772,13 @@ export const onAddNews = (news) => {
   };
 };
 export const onAddNewsResquest = (news) => {
-  
+
   return (dispatch) => {
     return callApi("news", "POST", news).then((response) => {
       if (response === undefined) {
         toast.error("Thêm thất bại, vui lòng thử lại !");
       } else {
-       
+
         toast.success("Thêm thành công !");
 
 
@@ -1450,7 +1450,7 @@ export const onGetAllColorBySizeResquest = (id_product) => {
 export const onAddBillCustomerResquest = (bills_customer) => {
   return (dispatch) => {
     return callApi("bill-customer", "POST", bills_customer).then(
-      (response) => {}
+      (response) => { }
     );
   };
 };
@@ -1495,7 +1495,7 @@ export const onAddBanner = (banner) => {
 export const onAddBannerResquest = (banner) => {
   return (dispatch) => {
     return callApi("banners", "POST", banner).then((response) => {
-     
+
       if (response === undefined) {
         toast.error("Thêm thất bại, vui lòng thử lại !");
       } else {

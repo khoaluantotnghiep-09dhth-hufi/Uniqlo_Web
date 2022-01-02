@@ -22,6 +22,7 @@ import { connect } from "react-redux";
 import * as actions from "./../../../actions/productAdminActions";
 import { Image, Alert } from 'react-bootstrap';
 import { CSVLink } from "react-csv";
+import ReactLoading from 'react-loading';
 const fields = [
     {
         key: 'STT',
@@ -106,6 +107,7 @@ const headers = [
 ];
 class ListProducts extends React.Component {
     componentDidMount() {
+
         this.props.fetchProducts();
     }
     onDeleteProduct = (id) => {
@@ -213,11 +215,7 @@ class ListProducts extends React.Component {
                             </CCardBody>
                         </CCard>
                     </CCol>
-
-
                 </CRow>
-
-
             </>
         )
     }
