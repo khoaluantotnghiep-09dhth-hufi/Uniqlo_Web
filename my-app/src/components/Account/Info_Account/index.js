@@ -102,6 +102,7 @@ class index extends React.Component {
                                     alt="..."
                                     className="rounded-circle"
                                     src={sessionUser.image}
+                                    required
                                 />
                             </div>
                         </Col>

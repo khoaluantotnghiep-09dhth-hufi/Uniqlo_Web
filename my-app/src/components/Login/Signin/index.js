@@ -36,22 +36,16 @@ class index extends Component {
       // if (users[i].phone !== txtPhone || users[i].password !== txtPassword){
       //   toast.error(<div>Đăng nhập thất bại.<br /> Bạn cần nhập đúng thông tin!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
       //   return;
+      // }     
+      // if (users[i].phone !== txtPhone){
+      //   toast.error(<div>Đăng nhập thất bại.<br />Tài khoản không tồn tại!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+      //   break; 
       // }
-      if (users[i].phone !== txtPhone){
-        //toast.error(<div>Đăng nhập thất bại.<br />Tài khoản không tồn tại!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
-       
-      }
-     else if (users[i].phone === txtPhone && users[i].password !== txtPassword){
-        //toast.error(<div>Đăng nhập thất bại.<br />Mật khẩu không chính xác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
-        
-      }  
-      else if (users[i].phone === txtPhone && users[i].password === txtPassword) {
-        // var user = {
-        //   id_user: users[i].id,
-        //   name: users[i].name,
-        //   phone: users[i].phone,
-        //   password: users[i].password,
-        // };
+      // if (users[i].phone === txtPhone && users[i].password !== txtPassword){
+      //   toast.error(<div>Đăng nhập thất bại.<br />Mật khẩu không chính xác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+      //   break; 
+      // }  
+      if (users[i].phone === txtPhone && users[i].password === txtPassword) {
         var user = {
           id_user: users[i].id,
           name: users[i].name,
@@ -68,11 +62,17 @@ class index extends Component {
           isCheckLogin: true,
         });
         sessionStorage.setItem("client", JSON.stringify(user));
-      } else {       
+        toast.success(<div>Đăng nhập thành công!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+        console.log("true nè")
+      } 
+      else {       
         this.setState({
           isCheckLogin: false,
-        });       
+        }); 
+        console.log("false nè")  
+        //toast.error(<div>Đăng nhập thất bại.<br /> Bạn cần nhập đúng thông tin!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
       }
+      
     }
   };
 
