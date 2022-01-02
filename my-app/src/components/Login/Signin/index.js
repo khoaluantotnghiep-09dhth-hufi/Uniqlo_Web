@@ -27,10 +27,24 @@ class index extends Component {
       phone: txtPhone,
       password: txtPassword,
     };
-    console.log("data user", txtPhone + txtPassword);
 
     callApi("login-web", "POST", userPost).then((response) => {
-      console.log("User take: " + JSON.stringify(response.data));
+      var users = response.data;
+      for (let i = 0; i < users.length; i++) {
+        var userAccount = {
+          id_user: users[i].id,
+          name: users[i].name,
+          address: users[i].address,
+          phone: users[i].phone,
+          image: users[i].image,
+          email: users[i].email,
+          gender: users[i].gender,
+          cmnn_cccc: users[i].cmnn_cccc,
+          score: users[i].score,
+          password: users[i].password,
+        };
+      }
+
       if (response.data.length === 0) {
         toast.error(
           <div>
@@ -46,19 +60,8 @@ class index extends Component {
           { autoClose: 2500 },
           { position: toast.POSITION.UPPER_RIGHT }
         );
-        var user = {
-          id_user: response.data.id,
-          name: response.data.name,
-          address: response.data.address,
-          phone: response.data.phone,
-          image: response.data.image,
-          email: response.data.email,
-          gender: response.data.gender,
-          cmnn_cccc: response.data.cmnn_cccc,
-          score: response.data.score,
-          password: response.data.password,
-        };
-        sessionStorage.setItem("client", JSON.stringify(user));
+
+        sessionStorage.setItem("client", JSON.stringify(userAccount));
         this.setState({
           isCheckLogin: true,
         });
