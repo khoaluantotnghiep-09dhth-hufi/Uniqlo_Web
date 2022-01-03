@@ -96,20 +96,20 @@ class ListOrder extends React.Component {
                                     sorter
                                     pagination
                                     scopedSlots={{
-                                        "Thao Tác": (item) => (
-                                            <td>
-                                                {/* <Link to={`/admin/system/order/${item.id}/edit`}> */}
-                                                <CButton type="button" className="btn btn-danger">
-                                                    <FontAwesomeIcon
-                                                        icon={faCheck}
-                                                        className="mr-2"
-                                                        size="lg"
-                                                    />
-                                                    Xem Chi Tiết
-                                                </CButton>
-                                                {/* </Link> */}
-                                            </td>
-                                        ),
+                                        // "Thao Tác": (item) => (
+                                        //     <td>
+                                        //         {/* <Link to={`/admin/system/order/${item.id}/edit`}> */}
+                                        //         <CButton type="button" className="btn btn-danger">
+                                        //             <FontAwesomeIcon
+                                        //                 icon={faCheck}
+                                        //                 className="mr-2"
+                                        //                 size="lg"
+                                        //             />
+                                        //             Xem Chi Tiết
+                                        //         </CButton>
+                                        //         {/* </Link> */}
+                                        //     </td>
+                                        // ),
                                         'STT':
                                             (item, index) => (
                                                 <td>

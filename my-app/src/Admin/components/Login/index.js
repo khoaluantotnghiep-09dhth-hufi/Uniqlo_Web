@@ -99,7 +99,7 @@ class index extends Component {
                 <Form onSubmit={this.onHandleSubmitLogin(staff)} >
                   <Form.Group className="mb-3" >
                     <Form.Control
-                      className="fas fa-envelope"
+                      className="fas fa-envelope login-input"
                       type="email"
                       placeholder="&#xf0e0; Email"
                       ref="memberEmail"
@@ -140,12 +140,6 @@ class index extends Component {
                     className="mb-3 text-center"
                     controlId="formBasicPassword"
                   >
-                    <Button className="btn btn-Pass"
-                      href="#"
-                      onClick={this.forgotPassword}
-                    >
-                      Quên Mật Khẩu?
-                    </Button>
                   </Form.Group>
                 </Form>
               </Col>
