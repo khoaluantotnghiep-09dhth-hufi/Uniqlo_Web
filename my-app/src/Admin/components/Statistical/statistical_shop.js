@@ -31,7 +31,7 @@ import {
 const brandSuccess = getStyle('success') || '#4dbd74'
 const brandInfo = getStyle('info') || '#20a8d8'
 const brandDanger = getStyle('danger') || '#f86c6b'
-const formatter = new Intl.NumberFormat("vi-VN", {
+const Formater = new Intl.NumberFormat("vi-VN", {
   style: "currency",
   currency: "VND",
   minimumFractionDigits: 0,
@@ -67,7 +67,7 @@ class Home extends React.Component {
       let elements = 27
       var { billTotal } = this.props;
       var dataTotal = billTotal.map((item, index) => {
-        return formatter(item.sumTotal);
+        return Formater(item.sumTotal);
       })
       var dataTotalQuantity = billTotalQuantity.map((item, index) => {
         return item.sumTotalQuantity;
@@ -80,7 +80,7 @@ class Home extends React.Component {
           borderColor: brandInfo,
           pointHoverBackgroundColor: brandInfo,
           borderWidth: 2,
-          data:formatter(dataTotal) 
+          data:Formater(dataTotal) 
         },
         {
           label: 'Số lượng sản phẩm',
@@ -91,7 +91,7 @@ class Home extends React.Component {
           data: dataTotalQuantity
         },
       ]
-    })()
+    });
     const defaultOptions = (() => {
       return {
         maintainAspectRatio: false,
@@ -110,8 +110,8 @@ class Home extends React.Component {
               maxTicksLimit: 15,
               // stepSize: Math.ceil(10000000 / 8),
               // max: 10000000
-              stepSize:formatter(Math.ceil(99999999 / 10)) ,
-                            max: formatter(99999999)
+              stepSize:Formater(Math.ceil(99999999 / 10)) ,
+                            max: Formater(99999999)
             },
             gridLines: {
               display: true
@@ -128,7 +128,7 @@ class Home extends React.Component {
         }
       }
     }
-    )()
+    );
     var dataDate = billTotal.map((item, index) => {
       return moment(item.order_date).format('DD-MM-YYYY')
     })
