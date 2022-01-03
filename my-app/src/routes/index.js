@@ -129,7 +129,7 @@ var routes = [
   {
     path: "/account/customer-profile",
     exact: true,
-    main: ({ location }) => <Customer_Profile location={location} />,
+    main: ({  match, location,history }) => <Customer_Profile match={match} location={location} history={history} />,
   },
   {
     path: "/account/member-benifits",
