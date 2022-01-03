@@ -234,25 +234,6 @@ class Home extends React.Component {
                 <h4 id="traffic" className="card-title mb-0">Biểu Đồ Đặt/Nhập Sản Phẩm</h4>
                 <br />
               </CCol>
-              <CCol sm="7" className="d-none d-md-block">
-                <CButton color="primary" className="float-right">
-                  <CIcon name="cil-cloud-download" />
-                </CButton>
-                <CButtonGroup className="float-right mr-3">
-                  {
-                    ['Ngày', 'Tháng', 'Năm'].map(value => (
-                      <CButton
-                        color="outline-secondary"
-                        key={value}
-                        className="mx-0"
-                        active={value === 'Tháng'}
-                      >
-                        {value}
-                      </CButton>
-                    ))
-                  }
-                </CButtonGroup>
-              </CCol>
             </CRow>
             <CChartLine
               style={{ width: "100%", height: "500px" }}

@@ -49,7 +49,7 @@ const TheHeaderDropdown = () => {
       <CDropdownToggle className="c-header-nav-link" caret={true}>
         <div className="mr-5 c-avatar">
           <CImg
-            src={sessionUser.image}
+            src={sessionUser && sessionUser.image}
             className="c-avatar-img"
           />
           <p className="mt-3 ml-2"> {sessionUser && sessionUser.name}</p>

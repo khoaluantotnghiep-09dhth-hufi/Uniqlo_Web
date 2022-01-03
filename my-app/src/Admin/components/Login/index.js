@@ -6,6 +6,7 @@ import { Route, Redirect, withRouter } from "react-router-dom";
 import HomePage from "../../containers/TheLayout";
 import { toast } from 'react-toastify';
 import "./login.scss";
+import callApi from "./../../../Admin/utils/Callapi";
 import forgotPW from '../Login/forgotPassword';
 class index extends Component {
   constructor(props) {
@@ -29,36 +30,51 @@ class index extends Component {
 
   onHandleSubmitLogin = (users) => (event) => {
     event.preventDefault();
-    var { txtEmail, txtPassword, items } = this.state;
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].email === txtEmail && users[i].password === txtPassword) {
-        var user = {
+    var { txtEmail, txtPassword } = this.state;
+    var account = {
+      txtEmail: txtEmail,
+      txtPassword: txtPassword
+
+    }
+    callApi("login-admin", "POST", account).then((response) => {
+      var users = response.data;
+      for (let i = 0; i < users.length; i++) {
+        var userAccountAdmin = {
           id_user: users[i].id,
           name: users[i].name,
-          phone: users[i].phone,
-          password: users[i].password,
-          postion: users[i].postion,
-          role: users[i].role,
           gender: users[i].gender,
+          phone: users[i].phone,
           image: users[i].image,
-          address: users[i].address,
           email: users[i].email,
+          gender: users[i].gender,
           place_of_birth: users[i].place_of_birth,
-          cmnn_cccc: users[i].cmnn_cccc,
+          role: users[i].role,
+          password: users[i].password,
         };
+      }
+
+      if (response.data.length === 0) {
+        toast.error(
+          <div>
+            Đăng nhập thất bại.
+            <br /> Bạn cần nhập đúng thông tin!
+          </div>,
+          { autoClose: 2500 },
+          { position: toast.POSITION.UPPER_RIGHT }
+        );
+      } else {
+        toast.success(
+          <div>Đăng nhập thành công!</div>,
+          { autoClose: 2500 },
+          { position: toast.POSITION.UPPER_RIGHT }
+        );
+
+        sessionStorage.setItem("adminlogin", JSON.stringify(userAccountAdmin));
         this.setState({
           isCheckLogin: true,
         });
-        sessionStorage.setItem("user", JSON.stringify(user));
-        break;
       }
-      else {
-        //toast.error("Sai Email hoặc Mật Khẩu vui lòng thử lại !");
-        this.setState({
-          isCheckLogin: false,
-        });
-      }
-    }
+    });
   };
   onToggleForm = () => {
     this.props.onToggleForm();
@@ -97,9 +113,9 @@ class index extends Component {
               <Col >
                 <h1 className="text-center text-danger">Đăng Nhập</h1>
                 <Form onSubmit={this.onHandleSubmitLogin(staff)} >
-                  <Form.Group className="mb-3" >
+                  <Form.Group className="mb-3 text-center" >
                     <Form.Control
-                      className="fas fa-envelope"
+                      className="fas fa-envelope login-input"
                       type="email"
                       placeholder="&#xf0e0; Email"
                       ref="memberEmail"
@@ -111,7 +127,7 @@ class index extends Component {
                       autofocus
                     />
                   </Form.Group>
-                  <Form.Group className="mb-3" >
+                  <Form.Group className="mb-3 text-center" >
                     <Form.Control
                       className="fas fa-lock login-input"
                       type="password"
@@ -140,12 +156,12 @@ class index extends Component {
                     className="mb-3 text-center"
                     controlId="formBasicPassword"
                   >
-                    <Button className="btn btn-Pass"
+                    {/* <Button className="btn btn-Pass"
                       href="#"
                       onClick={this.forgotPassword}
                     >
                       Quên Mật Khẩu?
-                    </Button>
+                    </Button> */}
                   </Form.Group>
                 </Form>
               </Col>

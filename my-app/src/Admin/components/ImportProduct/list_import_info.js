@@ -191,40 +191,6 @@ class addProduct extends React.Component {
                                             columnFilter
                                             itemsPerPageSelect
                                             scopedSlots={{
-                                                'Thao Tác':
-                                                    (item) => (
-                                                        <td>
-                                                            {/* {item.status === 1 ?
-                                                                <Alert variant={getBadge(item.status)}>
-                                                                    {item.status === 0 ? 'Chưa Giao' : 'Đã Giao'}
-                                                                </Alert>
-    
-                                                                :
-                                                                <CButton type="button" className="btn btn-warning"
-                                                                    onClick={() => { this.onDeleteOrderInfo(item.id) }}
-                                                                >
-                                                                    <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
-                                                                </CButton>
-                                                            } */}
-                                                            {item.status === 0 ?
-                                                                <Link to={`/admin/manage/order-info/${item.id}/edit`}>
-                                                                    <CButton type="button" className="btn btn-primary">
-                                                                        <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
-                                                                    </CButton>
-                                                                </Link>
-                                                                : ""
-                                                            }
-
-                                                            {/* <CButton type="button" className="btn btn-warning"
-                                                            onClick={() => { this.onDeleteOrderInfo(item.id) }}
-                                                        >
-                                                            <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
-                                                        </CButton> */}
-
-
-                                                        </td>
-
-                                                    ),
                                                 'STT':
                                                     (item, index) => (
                                                         <td>
