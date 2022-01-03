@@ -977,9 +977,9 @@ export  const onAddCustomerClientResquest = (customer) => {
     return callApi("customers_client", "POST", customer).then((response) => {
    
       if (response === undefined) {
-        toast.error("Thêm thất bại, vui lòng thử lại !");
+        toast.error("Đăng ký thất bại, vui lòng thử lại !");
       } else {
-        toast.success("Thêm thành công !");
+        toast.success("Đăng ký thành công !");
        
         dispatch(onAddCustomerClient(response.data));
       }

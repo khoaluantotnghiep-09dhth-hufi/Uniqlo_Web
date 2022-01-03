@@ -6,12 +6,15 @@ import { connect } from "react-redux";
 import "./Forgot_Pass.scss"
 import * as actions from "./../../../actions/index";
 import { getAuth, RecaptchaVerifier } from "firebase/auth";
+import callApi from "./../../../Admin/utils/Callapi";
 const auth = getAuth();
+var sessionUser = JSON.parse(sessionStorage.getItem("client"));
 class index extends Component {
   constructor(props) {
     super(props);
     this.state = {
       mobile: "",
+      passwordnew:"",
       otp: "",
       isCheckLogin: false,
       isDisplayFormAuthen: false,
@@ -68,16 +71,21 @@ class index extends Component {
     });
   }
   onSubmitOTP = (e) => {
-    e.preventDefault()
+    e.preventDefault()      
     const code = this.state.otp
     console.log(code)
-    var { mobile } = this.state;
-
+    var { mobile, passwordnew } = this.state;
+    var userPost = {
+      id: sessionUser.id_user,
+      phone: mobile,
+      password: passwordnew,
+    };
     window.confirmationResult.confirm(code).then((result) => {
       // User signed in successfully.
       const user = result.user;
       console.log(JSON.stringify(user))
       toast.success(<div>Xác minh thành công!</div>, { autoClose: 2500 }, { position: toast.POSITION.UPPER_RIGHT });
+      this.props.onUpdateItemCustomerClient(userPost);
       // ...
     }).catch((error) => {
       // User couldn't sign in (bad verification code?)
@@ -141,6 +149,18 @@ class index extends Component {
                   pattern="^[0-9]*$"
                   required autofocus
                 />
+                <Form.Control
+                  className="fas fa-phone-alt"
+                  type="password"
+                  placeholder="&#xf879; Mật khẩu mới"
+                  ref="memberPasswordNew"
+                  //onChange={this.handleChange}
+                  name="passwordnew"
+                  maxlength="20"
+                  minlength="6"
+                  //pattern="^[0-9]*$"
+                  required autofocus
+                />
               </Form.Group>
               <Form.Group className="mb-3 " >
                 <Button
@@ -174,11 +194,15 @@ class index extends Component {
 }
 var mapStateToProps = (state) => {
   return {
+    customer: state.customer,
     users: state.users,
   };
 };
 var mapDispatchToProps = (dispatch, props) => {
   return {
+    onUpdateItemCustomerClient: (customer) => {
+      dispatch(actions.onUpdateCustomersClientResquest(customer));
+    },
     onFetchUsers: () => {
       return dispatch(actions.fetchUserRequest());
     },
