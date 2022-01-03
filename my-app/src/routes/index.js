@@ -19,6 +19,8 @@ import Accessibility from "./../screens/Screen_Accessibility/index";
 import Privacy_Policy from "./../screens/Screen_PrivacyPolicy/index";
 import Customer_Profile from "./../screens/Screen_CustomerProfile/index";
 import Member_Benifits from "../screens/Screen_MemberBenifits/index";
+import Detail_Bill from "../screens/Screen_DetailBill/index";
+
 import Forgot_Password from "../screens/Screen_ForgotPassword/index";
 import Size from "../screens/Screen_Size/index";
 var routes = [
@@ -135,6 +137,11 @@ var routes = [
     path: "/account/member-benifits",
     exact: true,
     main: ({ location,match }) => <Member_Benifits location={location} match={match} />,
+  },
+  {
+    path: "/account/customer-detail-bill/:id_bill",
+    exact: true,
+    main: ({  match, location,history }) => <Detail_Bill match={match} location={location} history={history} />,
   },
   {
     path: "/forgot_password",

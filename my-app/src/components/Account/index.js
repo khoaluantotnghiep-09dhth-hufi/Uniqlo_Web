@@ -3,7 +3,7 @@ import io from "socket.io-client";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import {  MDBIcon } from "mdbreact";
-
+import Call_API from "./../../Admin/utils/Callapi";
 import {
   Container,
   Row,
@@ -52,11 +52,18 @@ class index extends Component {
       txtPhone: "",
       txtPassword: "",
       isCheckRequest: "",
+      dataBill:[],
     };
   }
   componentDidMount() {
     var sessionUser = JSON.parse(sessionStorage.getItem("client"));
     this.props.fetchBillsCustomer(sessionUser.id_user);
+
+    Call_API(`bill-customer/${sessionUser.id_user}`, "GET", null).then((response) => {
+      this.setState({
+        dataBill: response.data,
+      })
+    })
   }
   handleClose = () => {
     this.setState({
@@ -142,7 +149,7 @@ class index extends Component {
   };
   render() {
     var { bills_customer, users } = this.props;
-    var { show, isCheckRequest } = this.state;
+    var { show, isCheckRequest,dataBill } = this.state;
     var sessionUser = JSON.parse(sessionStorage.getItem("client"));
 
     var { isCheckSignOut } = this.state;
@@ -172,7 +179,7 @@ class index extends Component {
             <Row>
               <Col>
                 <CDataTable
-                  items={bills_customer}
+                  items={dataBill}
                   fields={fields}
                   itemsPerPage={5}
                   hover
@@ -225,7 +232,18 @@ class index extends Component {
                           </Button>
                         ) : (
                           ""
-                        )}
+                        )}<Link to={`/account/customer-detail-bill/${item.id}`}>
+                        <Button className="mt-2"
+                            type="button"
+                            variant="outline-secondary"
+                            size="sm"
+                            style={{ margin: 0 }}
+                            
+                          >
+                           
+                            <small> Chi Tiết</small>
+                          
+                          </Button></Link>
                       </td>
                     ),
                     STT: (item, index) => <td>{index + 1}</td>,
