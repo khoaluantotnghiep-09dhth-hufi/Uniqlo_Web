@@ -3,6 +3,7 @@ import uniqid from "uniqid";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import ConvertIMG from "../../utils/getBase64";
+import moment from 'moment';
 import {
   CForm,
   CLabel,
@@ -68,13 +69,14 @@ class addDiscount extends React.Component {
       }
     }
   }
-  onChange = (e, id) => {
-    let coppyState = { ...this.state };
-    coppyState[id] = e.target.value;
+  onChange = (event) => {
+    var target = event.target;
+    var name = target.name;
+    var value = target.value;
     this.setState({
-      ...coppyState
-    })
-  }
+      [name]: value,
+    });
+  };
   onChangeImage = (e) => {
     let data = e.target.files;
     let file = data[0];
@@ -115,7 +117,7 @@ class addDiscount extends React.Component {
     };
 
     if (match.params.id_promotion) {
-      if (dateEnd >= dateStart && dateStart >= dateNow) {
+      if (dateEnd >= dateStart) {
         this.props.onUpdateItemPromotion(promotionUpdate);
         history.goBack();
       } else {
@@ -123,10 +125,10 @@ class addDiscount extends React.Component {
       }
     } else {
 
-      if (dateEnd >= dateStart && dateStart >= dateNow) {
+      if (dateEnd >= dateStart) {
         this.props.onAddItemPromotion(promotion);
         history.goBack();
-      } else {
+      } else  {
         toast.error("Ngày Bắt Đầu Phải Nhỏ Hơn Ngày Kết Thúc!");
       }
     }
@@ -164,15 +166,16 @@ class addDiscount extends React.Component {
                   Phần Trăm Khuyến Mãi
                 </CLabel>
 
-                <textarea
+                <input
+                  type="number"
                   required
                   className="form-control"
                   name="txtNameMota"
-                  placeholder="Nội Dung..."
+                  placeholder="10,25,50...(%)"
                   rows="5"
                   value={txtNameMota}
                   onChange={this.onChange}
-                ></textarea>
+                ></input>
               </CFormGroup>
               <CFormGroup>
                 <CCol sm="8">
@@ -198,7 +201,7 @@ class addDiscount extends React.Component {
                       this.onChangeImage(e);
                     }}
 
-                    required
+                   
                   />
                 </CCol>
                 <CCol sm="4">
@@ -226,7 +229,7 @@ class addDiscount extends React.Component {
                   name="dateStart"
                   autoComplete="current-password"
                   value={dateStart}
-                  onChange={this.onChange}
+                  onChange={e => this.setState({ dateStart: e.target.value })}
                 />
               </CFormGroup>
               <CFormGroup>
@@ -236,8 +239,9 @@ class addDiscount extends React.Component {
                   type="date"
                   name="dateEnd"
                   value={dateEnd}
-                  autoComplete="current-password"
-                  onChange={this.onChange}
+              
+                  min={moment(dateStart).format("YYYY-MM-DD")}
+                  onChange={e => this.setState({ dateEnd: e.target.value })}
                 />
               </CFormGroup>
               <CFormGroup>
