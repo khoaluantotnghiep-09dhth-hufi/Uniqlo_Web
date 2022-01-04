@@ -184,19 +184,16 @@ class ListOrder extends React.Component {
                             Hủy 
                           </CButton>
                           : ''}
-                          {<Link to={`/admin/system/order/${item.id}/detail`}>
+                          <Link to={`/admin/system/order/${item.id}/detail`}>
                             <CButton type="button" className="btn btn-primary" size="sm">
-                              
                              Chi Tiết
                             </CButton>
-                          </Link>}
+                          </Link>
                       </td>
                     ),
                     status: (item) => (
                       <td>
                         <Alert variant={this.getBadge(item.status)} 
-                          
-                        
                         >
                           {item.status === 0 ? "Chưa Xác Nhận" : "Đã Xác Nhận"}
                         </Alert>
