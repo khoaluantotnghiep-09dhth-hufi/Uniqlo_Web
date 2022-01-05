@@ -73,7 +73,7 @@ class ExchangeRequest extends React.Component {
     var { bill } = this.props;
 
     var dataBill = bill
-      .filter((bill) => bill.status === 5)
+      .filter((bill) => bill.status === 5 || bill.status === 6)
       .map((item, index) => {
         return { ...item, index };
       });
@@ -106,7 +106,7 @@ class ExchangeRequest extends React.Component {
                     ),
                     "Hành Động": (item) => (
                       <td>
-                        <Link to={`/admin/system/order/${item.id}/detail`}>
+                        {/* <Link to={`/admin/system/order/${item.id}/detail`}>
                           <CButton type="button" className="btn btn-info">
                             Chi Tiết
                           </CButton>
@@ -120,7 +120,7 @@ class ExchangeRequest extends React.Component {
                             />
                             Cập Nhật
                           </CButton>
-                        </Link>
+                        </Link> */}
                       </td>
                     ),
                     order_date: (item) => (
