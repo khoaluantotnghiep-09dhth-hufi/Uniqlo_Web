@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as actions from "./../../../actions/index";
+import * as actions from "../../../actions/index";
 import { Alert } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTimes, faFileExcel } from "@fortawesome/free-solid-svg-icons";
@@ -52,7 +52,7 @@ const fields = [
 
 
 
-class OrderUnConfirmedOrder extends React.Component {
+class ExchangeRequest extends React.Component {
   componentDidMount() {
     this.props.fetchBills();
   }
@@ -73,7 +73,7 @@ class OrderUnConfirmedOrder extends React.Component {
     var { bill } = this.props;
 
     var dataBill = bill
-      .filter((bill) => bill.status === 0)
+      .filter((bill) => bill.status === 5)
       .map((item, index) => {
         return { ...item, index };
       });
@@ -88,7 +88,7 @@ class OrderUnConfirmedOrder extends React.Component {
         <CRow>
           <CCol xs="12" lg="24">
             <CCard>
-              <CCardHeader>Danh Sách Đơn Hàng Chưa Xác Nhận</CCardHeader>
+              <CCardHeader>Danh Sách Đơn Hàng Yêu Cầu Đổi/Trả</CCardHeader>
               <CCardBody>
                 <CDataTable
                   items={dataBill}
@@ -100,42 +100,42 @@ class OrderUnConfirmedOrder extends React.Component {
                     status: (item) => (
                       <td>
                         <Alert variant={this.getBadge(item.status)}>
-                          {item.status === 0 ? 'Chưa Xác Nhận' : 'Đã Xác Nhận'}
+                          {item.status === 0 ? 'Chưa Xác Nhận' : 'Đang Yêu Cầu Đổi'}
                         </Alert>
                       </td>
                     ),
-                    "Hành Động": (item) => (
-                      <td>
-                        {item.status === 0 ?
-                          <Link to={`/admin/system/order/${item.id}/edit`}>
-                            <CButton type="button" className="btn btn-primary">
-                              <FontAwesomeIcon
-                                icon={faCheck}
-                                className="mr-2"
-                                size="lg"
-                              />
-                              Xác Nhận Đơn
-                            </CButton>
-                          </Link>
-                          : ''}
-                        {item.status === 0 ?
-                          <CButton
-                            type="button"
-                            className="btn btn-warning"
-                            onClick={() => {
-                              this.onDeleteBill(item.id);
-                            }}
-                          >
-                            <FontAwesomeIcon
-                              icon={faTimes}
-                              className="mr-2"
-                              size="lg"
-                            />
-                            Hủy Đơn
-                          </CButton>
-                          : ''}
-                      </td>
-                    ),
+                    // "Hành Động": (item) => (
+                    //   <td>
+                    //     {item.status === 0 ?
+                    //       <Link to={`/admin/system/order/${item.id}/edit`}>
+                    //         <CButton type="button" className="btn btn-primary">
+                    //           <FontAwesomeIcon
+                    //             icon={faCheck}
+                    //             className="mr-2"
+                    //             size="lg"
+                    //           />
+                    //           Xác Nhận Đơn
+                    //         </CButton>
+                    //       </Link>
+                    //       : ''}
+                    //     {item.status === 0 ?
+                    //       <CButton
+                    //         type="button"
+                    //         className="btn btn-warning"
+                    //         onClick={() => {
+                    //           this.onDeleteBill(item.id);
+                    //         }}
+                    //       >
+                    //         <FontAwesomeIcon
+                    //           icon={faTimes}
+                    //           className="mr-2"
+                    //           size="lg"
+                    //         />
+                    //         Hủy Đơn
+                    //       </CButton>
+                    //       : ''}
+                    //   </td>
+                    // ),
                     order_date: (item) => (
                       <td>
                         <Moment format="DD/MM/YYYY">{item.order_date}</Moment>
@@ -177,4 +177,4 @@ var mapDispatchToProps = (dispatch, props) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(OrderUnConfirmedOrder);
+)(ExchangeRequest);

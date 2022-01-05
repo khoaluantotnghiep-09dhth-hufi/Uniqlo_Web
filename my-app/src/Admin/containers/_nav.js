@@ -28,7 +28,11 @@ import {
   faChartLine,
   faPalette,
   faDraftingCompass,
-  faImage
+  faImage,
+  faTruck,
+  faPeopleCarry,
+  faSyncAlt,
+  faBusinessTime
 } from "@fortawesome/free-solid-svg-icons";
 const _nav = [
   {
@@ -63,15 +67,39 @@ const _nav = [
       },
       {
         _tag: 'CSidebarNavItem',
+        name: 'Chờ Xác Nhận',
+        to: '/admin/system/order/unconfirmed',
+        icon: <FontAwesomeIcon icon={faExclamationCircle} className="mr-2" />,
+      },
+      {
+        _tag: 'CSidebarNavItem',
         name: 'Đã Xác Nhận',
         to: '/admin/system/order/confirmed',
         icon: <FontAwesomeIcon icon={faCheck} className="mr-2" />,
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Chưa Xác Nhận',
-        to: '/admin/system/order/unconfirmed',
-        icon: <FontAwesomeIcon icon={faExclamationCircle} className="mr-2" />,
+        name: 'Chờ Lấy Hàng',
+        to: '/admin/system/order/wait-take',
+        icon: <FontAwesomeIcon icon={faBusinessTime} className="mr-2" />,
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Đang Giao',
+        to: '/admin/system/order/delivering',
+        icon: <FontAwesomeIcon icon={faTruck} className="mr-2" />,
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Đã Giao',
+        to: '/admin/system/order/delivered',
+        icon: <FontAwesomeIcon icon={faPeopleCarry} className="mr-2" />,
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Yêu Cầu Đổi',
+        to: '/admin/system/order/exchange-request',
+        icon: <FontAwesomeIcon icon={faSyncAlt} className="mr-2" />,
       },
       {
         _tag: 'CSidebarNavItem',

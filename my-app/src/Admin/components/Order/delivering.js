@@ -1,12 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as actions from "./../../../actions/index";
+import * as actions from "../../../actions/index";
 import { Alert } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTimes, faFileExcel } from "@fortawesome/free-solid-svg-icons";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
-
 import {
   CButton,
   CCard,
@@ -17,6 +16,11 @@ import {
   CRow,
 } from "@coreui/react";
 import { CSVLink } from "react-csv";
+const formatter = new Intl.NumberFormat("vi-VN", {
+  style: "currency",
+  currency: "VND",
+  minimumFractionDigits: 0,
+});
 const headers = [
   { label: "Mã", key: "id" },
   { key: "order_date", label: "Ngày Đặt Hàng" },
@@ -28,15 +32,7 @@ const headers = [
   { key: "total_quantity", label: "Tổng Số Lượng" },
   { key: "total", label: "Tổng Tiền" },
   { key: "note", label: "Ghi Chú" },
-  { key: "status", label: "Tình Trạng" }
-  ,
-  {
-    key: "Hành Động",
-    label: "Hành Động",
-    _style: { width: '1%' },
-    filter: false
-
-  },
+  { key: "status", label: "Tình Trạng" },
 ];
 const fields = [
 
@@ -51,18 +47,12 @@ const fields = [
   { key: "total", label: "Tổng Tiền" },
   { key: "note", label: "Ghi Chú" },
   { key: "status", label: "Tình Trạng" },
-  {
-    key: "Hành Động",
-    label: "Hành Động",
-    _style: { width: '1%' },
-    filter: false
-
-  },
+  "Hành Động",
 ];
 
 
 
-class OrderConfirmed extends React.Component {
+class Delivering extends React.Component {
   componentDidMount() {
     this.props.fetchBills();
   }
@@ -83,10 +73,11 @@ class OrderConfirmed extends React.Component {
     var { bill } = this.props;
 
     var dataBill = bill
-      .filter((bill) => bill.status === 1)
+      .filter((bill) => bill.status === 3)
       .map((item, index) => {
         return { ...item, index };
       });
+    console.log(dataBill)
     return (
       <>
         <CSVLink
@@ -98,7 +89,7 @@ class OrderConfirmed extends React.Component {
         <CRow>
           <CCol xs="12" lg="24">
             <CCard>
-              <CCardHeader>Danh Sách Đơn Hàng Đã Xác Nhận</CCardHeader>
+              <CCardHeader>Danh Sách Đơn Hàng Đang Giao</CCardHeader>
               <CCardBody>
                 <CDataTable
                   items={dataBill}
@@ -110,36 +101,53 @@ class OrderConfirmed extends React.Component {
                     status: (item) => (
                       <td>
                         <Alert variant={this.getBadge(item.status)}>
-                          {item.status === 0 ? 'Chưa Xác Nhận' : 'Đã Xác Nhận'}
+                          {item.status === 0 ? 'Chưa Xác Nhận' : 'Đang Giao'}
                         </Alert>
                       </td>
                     ),
+                    // "Hành Động": (item) => (
+                    //   <td>
+                    //     {item.status === 0 ?
+                    //       <Link to={`/admin/system/order/${item.id}/edit`}>
+                    //         <CButton type="button" className="btn btn-primary">
+                    //           <FontAwesomeIcon
+                    //             icon={faCheck}
+                    //             className="mr-2"
+                    //             size="lg"
+                    //           />
+                    //           Xác Nhận Đơn
+                    //         </CButton>
+                    //       </Link>
+                    //       : ''}
+                    //     {item.status === 0 ?
+                    //       <CButton
+                    //         type="button"
+                    //         className="btn btn-warning"
+                    //         onClick={() => {
+                    //           this.onDeleteBill(item.id);
+                    //         }}
+                    //       >
+                    //         <FontAwesomeIcon
+                    //           icon={faTimes}
+                    //           className="mr-2"
+                    //           size="lg"
+                    //         />
+                    //         Hủy Đơn
+                    //       </CButton>
+                    //       : ''}
+                    //   </td>
+                    // ),
                     order_date: (item) => (
                       <td>
                         <Moment format="DD/MM/YYYY">{item.order_date}</Moment>
                       </td>
                     ),
-
+                    total: (item) => <td>{formatter.format(item.total)}</td>,
                     delivery_date: (item) => (
                       <td>
                         <Moment format="DD/MM/YYYY">
                           {item.delivery_date}
                         </Moment>
-                      </td>
-                    ), "Hành Động": (item) => (
-                      <td>
-                        {
-                          <Link to={`/admin/system/order/${item.id}/edit`}>
-                            <CButton type="button" className="btn btn-primary">
-                              <FontAwesomeIcon
-                                icon={faCheck}
-                                className="mr-2"
-                                size="lg"
-                              />
-                              Cập Nhật
-                            </CButton>
-                          </Link>
-                        }
                       </td>
                     ),
                   }}
@@ -150,6 +158,7 @@ class OrderConfirmed extends React.Component {
         </CRow>
       </>
     );
+
   }
 }
 var mapStateToProps = (state) => {
@@ -167,4 +176,7 @@ var mapDispatchToProps = (dispatch, props) => {
     },
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(OrderConfirmed);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Delivering);

@@ -673,6 +673,7 @@ export const fetchBillResquest = () => {
     });
   };
 };
+
 // Fetch Bill Detail by id hàng
 // export const fetchDetailBillResquest = (id_bill) => {
 //   return (dispatch) => {
@@ -972,18 +973,18 @@ export const onAddCustomerClient = (customer) => {
     customer,
   };
 };
-export  const onAddCustomerClientResquest = (customer) => {
+export const onAddCustomerClientResquest = (customer) => {
   return (dispatch) => {
     return callApi("customers_client", "POST", customer).then((response) => {
-   
+
       if (response === undefined) {
         toast.error("Đăng ký thất bại, vui lòng thử lại !");
       } else {
         toast.success("Đăng ký thành công !");
-       
+
         dispatch(onAddCustomerClient(response.data));
       }
-      
+
     });
   };
 };

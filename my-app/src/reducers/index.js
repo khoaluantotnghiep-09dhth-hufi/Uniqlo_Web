@@ -61,7 +61,7 @@ import countStatusProduct from "./Statical/countStatusProduct";
 
 const myReducer = combineReducers({
   cart,
-  products, 
+  products,
   productsEdit,// products:
   object_menu,
   object_menuEdit,
@@ -72,7 +72,7 @@ const myReducer = combineReducers({
   color,
   colorEdit,
   size,
-  sizeEdit ,
+  sizeEdit,
   users, // users
   bills_customer,
   promotion,
@@ -103,6 +103,7 @@ const myReducer = combineReducers({
   bannerEdit,
   post,
   postEdit,
+
 });
 
 export default myReducer;

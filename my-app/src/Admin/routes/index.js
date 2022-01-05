@@ -11,7 +11,11 @@ const Order = React.lazy(() => import('../components/Order/order'));
 const DetailOrder = React.lazy(() => import('../components/Order/detailOrder'));
 const UpdateOrder = React.lazy(() => import('../components/Order/update_order'));
 const ConfirmedOrder = React.lazy(() => import('../components/Order/confirmedOrder'));
-const UnConfirmedOrder = React.lazy(() => import('../components/Order/unconfimredOrder'));
+const UnConfirmedOrder = React.lazy(() => import('../components/Order/waitconfimredOrder'));
+const WaitTake = React.lazy(() => import('../components/Order/waitTake'));
+const Delivering = React.lazy(() => import('../components/Order/delivering'));
+const Delivered = React.lazy(() => import('../components/Order/delivered'));
+const ExchangeRequest = React.lazy(() => import('../components/Order/exchangeRequest'));
 const ExChange = React.lazy(() => import('../components/Order/exchange'));
 const AddExChange = React.lazy(() => import('../components/Order/add_exchange'));
 
@@ -65,7 +69,6 @@ const AddColor = React.lazy(() => import('../components/Color/add_color'));
 const ListSize = React.lazy(() => import('../components/Size/list_size'));
 const AddSize = React.lazy(() => import('../components/Size/add_size'));
 
-
 const routes = [
     { path: '/admin/home', exact: true, name: 'Trang Chủ', component: Home },
     { path: '/admin/notifications', exact: true, name: 'Thông Báo', component: Notifications_Header },
@@ -80,6 +83,10 @@ const routes = [
 
     { path: '/admin/system/order/confirmed', exact: true, name: 'Đơn Hàng Đã Xác Nhận', component: ConfirmedOrder },
     { path: '/admin/system/order/unconfirmed', exact: true, name: 'Đơn Hàng Chưa Xác Nhận', component: UnConfirmedOrder },
+    { path: '/admin/system/order/wait-take', exact: true, name: 'Chờ Láy Hàng', component: WaitTake },
+    { path: '/admin/system/order/delivering', exact: true, name: 'Đang Giao', component: Delivering },
+    { path: '/admin/system/order/delivered', exact: true, name: 'Đã Giao', component: Delivered },
+    { path: '/admin/system/order/exchange-request', exact: true, name: 'Yêu Cầu Đổi', component: ExchangeRequest },
     { path: '/admin/system/order/exchange', exact: true, name: 'Đổi Trả', component: ExChange },
     { path: '/admin/system/order/exchange/add', exact: true, name: 'Đổi Trả', component: AddExChange },
 
@@ -87,7 +94,7 @@ const routes = [
     { path: '/admin/manage/news/add', exact: true, name: 'Thêm Tin Tức Mới', component: AddNews },
     { path: '/admin/manage/news/:id_news/edit', exact: true, name: 'Chỉnh Sửa Tin Tức', component: AddNews },
 
-    
+
 
     { path: '/admin/system/discount', exact: true, name: 'Danh Sách Khuyến Mãi', component: ListDiscount },
 
