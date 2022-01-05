@@ -121,10 +121,20 @@ class ListOrder extends React.Component {
   };
   getBadge = (status) => {
     switch (status) {
-      case 1:
-        return "success";
       case 0:
         return "danger";
+      case 1:
+        return "success";
+      case 2:
+        return "secondary";
+      case 3:
+        return "info";
+      case 4:
+        return "white";
+      case 5:
+        return "warning";
+      case 6:
+        return "warning";
       default:
         return "primary";
     }
@@ -163,14 +173,24 @@ class ListOrder extends React.Component {
                   scopedSlots={{
                     "Hành Động": (item) => (
                       <td>
-                        {item.status === 0 ?
-                          <Link to={`/admin/system/order/${item.id}/edit`}>
-                            <CButton type="button" className="btn btn-primary" size="sm">
-                              
-                              Xác Nhận 
+                        <Link to={`/admin/system/order/${item.id}/detail`}>
+                          <CButton type="button" className="btn btn-info">
+                            Chi Tiết
+                          </CButton>
+                        </Link>
+                        {item.status === 4 ? '' :
+                          <Link to={`/admin/system/order/${item.id}/${item.status}/edit`}>
+                            <CButton type="button" className="btn btn-primary">
+                              <FontAwesomeIcon
+                                icon={faCheck}
+                                className="mr-2"
+                                size="lg"
+                              />
+                              Cập Nhật
                             </CButton>
                           </Link>
-                          : ''}
+                        }
+
                         {item.status === 0 ?
                           <CButton
                             type="button"
@@ -178,24 +198,32 @@ class ListOrder extends React.Component {
                             onClick={() => {
                               this.onDeleteBill(item.id);
                             }}
-                            size="sm"
                           >
-                            
-                            Hủy 
+                            <FontAwesomeIcon
+                              icon={faTimes}
+                              className="mr-2"
+                              size="lg"
+                            />
+                            Hủy Đơn
                           </CButton>
                           : ''}
-                          <Link to={`/admin/system/order/${item.id}/detail`}>
-                            <CButton type="button" className="btn btn-primary" size="sm">
-                             Chi Tiết
-                            </CButton>
-                          </Link>
                       </td>
                     ),
                     status: (item) => (
                       <td>
-                        <Alert variant={this.getBadge(item.status)} 
+                        <Alert variant={this.getBadge(item.status)}
                         >
-                          {item.status === 0 ? "Chưa Xác Nhận" : "Đã Xác Nhận"}
+                          {
+                            item.status === 0 ? "Chưa Xác Nhận" :
+                              item.status === 1 ? "Đã Xác Nhận" :
+                                item.status === 2 ? "Chờ Lấy Hàng" :
+                                  item.status === 3 ? "Chờ Giao" :
+                                    item.status === 4 ? "Đã Giao" :
+                                      item.status === 5 ? "Yêu Cầu Đổi/Trả" :
+                                        item.status === 6 ? "Đã Hủy" :
+                                          'Trạng Thái Không Tồn Tại'
+                          }
+
                         </Alert>
                       </td>
                     ),

@@ -105,38 +105,25 @@ class Delivering extends React.Component {
                         </Alert>
                       </td>
                     ),
-                    // "Hành Động": (item) => (
-                    //   <td>
-                    //     {item.status === 0 ?
-                    //       <Link to={`/admin/system/order/${item.id}/edit`}>
-                    //         <CButton type="button" className="btn btn-primary">
-                    //           <FontAwesomeIcon
-                    //             icon={faCheck}
-                    //             className="mr-2"
-                    //             size="lg"
-                    //           />
-                    //           Xác Nhận Đơn
-                    //         </CButton>
-                    //       </Link>
-                    //       : ''}
-                    //     {item.status === 0 ?
-                    //       <CButton
-                    //         type="button"
-                    //         className="btn btn-warning"
-                    //         onClick={() => {
-                    //           this.onDeleteBill(item.id);
-                    //         }}
-                    //       >
-                    //         <FontAwesomeIcon
-                    //           icon={faTimes}
-                    //           className="mr-2"
-                    //           size="lg"
-                    //         />
-                    //         Hủy Đơn
-                    //       </CButton>
-                    //       : ''}
-                    //   </td>
-                    // ),
+                    "Hành Động": (item) => (
+                      <td>
+                        <Link to={`/admin/system/order/${item.id}/detail`}>
+                          <CButton type="button" className="btn btn-info">
+                            Chi Tiết
+                          </CButton>
+                        </Link>
+                        <Link to={`/admin/system/order/${item.id}/${item.status}/edit`}>
+                          <CButton type="button" className="btn btn-primary">
+                            <FontAwesomeIcon
+                              icon={faCheck}
+                              className="mr-2"
+                              size="lg"
+                            />
+                            Cập Nhật
+                          </CButton>
+                        </Link>
+                      </td>
+                    ),
                     order_date: (item) => (
                       <td>
                         <Moment format="DD/MM/YYYY">{item.order_date}</Moment>

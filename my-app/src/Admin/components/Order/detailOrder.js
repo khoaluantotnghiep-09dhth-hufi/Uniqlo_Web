@@ -3,7 +3,11 @@ import { connect } from "react-redux";
 import * as actions from "../../../actions/index";
 import { Alert } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faTimes, faFileExcel } from "@fortawesome/free-solid-svg-icons";
+import { faTimes, faFileExcel } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlus,
+  faArrowLeft
+} from "@fortawesome/free-solid-svg-icons";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import Call_API from "./../../utils/Callapi";
@@ -23,7 +27,7 @@ const headers = [
   { key: "index", label: "STT" },
   { key: "order_date", label: "Ngày Đặt Hàng" },
   { key: "delivery_date", label: "Ngày Giao Hàng" },
-  { key: "name", label: "Tên  Phẩm" },
+  { key: "name", label: "Tên Sản Phẩm" },
   { key: "image", label: "Hình Ảnh" },
   { key: "nameColor", label: "Màu" },
   { key: "nameSize", label: "Kích Cỡ" },
@@ -42,7 +46,7 @@ const fields = [
   { key: "index", label: "STT" },
   { key: "order_date", label: "Ngày Đặt Hàng" },
   { key: "delivery_date", label: "Ngày Giao Hàng" },
-  { key: "name", label: "Tên  Phẩm" },
+  { key: "name", label: "Tên Sản Phẩm" },
   { key: "image", label: "Hình Ảnh" },
   { key: "nameColor", label: "Màu" },
   { key: "nameSize", label: "Kích Cỡ" },
@@ -81,14 +85,22 @@ class detailOrder extends React.Component {
 
     return (
       <>
-        <CSVLink
-          className="btn btn-success"
-          data={data} headers={headers}>
-          <FontAwesomeIcon icon={faFileExcel} className="mr-2" size="lg" />
-          Xuất Excel
-        </CSVLink>
+
+
         <CRow>
+          <Link to="/admin/system/order/all">
+            <CButton type="button" className="btn btn-primary" size="sm">
+              <FontAwesomeIcon icon={faArrowLeft} className="mr-2" size="lg" />Trở về
+            </CButton>
+          </Link>
+
           <CCol xs="12" lg="24">
+            <CSVLink
+              className="btn btn-success"
+              data={data} headers={headers}>
+              <FontAwesomeIcon icon={faFileExcel} className="mr-2" size="lg" />
+              Xuất Excel
+            </CSVLink>
             <CCard>
               <CCardHeader>Chi Tiết Đơn Hàng</CCardHeader>
               <CCardBody>
@@ -115,15 +127,15 @@ class detailOrder extends React.Component {
                     "image":
                       (item, index) => (
                         <td>
-                          <Image  src={item.image} thumbnail />
+                          <Image src={item.image} thumbnail />
                         </td>
                       ),
-                      "priceProduct":(item, index) => (
-                        <td>{formatter.format(item.priceProduct)}</td>
-                      ),
-                    "into_money":(item, index) => (
-                        <td>{formatter.format(item.into_money)}</td>
-                      ),
+                    "priceProduct": (item, index) => (
+                      <td>{formatter.format(item.priceProduct)}</td>
+                    ),
+                    "into_money": (item, index) => (
+                      <td>{formatter.format(item.into_money)}</td>
+                    ),
                   }}
                 />
               </CCardBody>

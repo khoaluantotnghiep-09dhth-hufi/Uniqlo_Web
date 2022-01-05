@@ -15,7 +15,6 @@ const UnConfirmedOrder = React.lazy(() => import('../components/Order/waitconfim
 const WaitTake = React.lazy(() => import('../components/Order/waitTake'));
 const Delivering = React.lazy(() => import('../components/Order/delivering'));
 const Delivered = React.lazy(() => import('../components/Order/delivered'));
-const ExchangeRequest = React.lazy(() => import('../components/Order/exchangeRequest'));
 const ExChange = React.lazy(() => import('../components/Order/exchange'));
 const AddExChange = React.lazy(() => import('../components/Order/add_exchange'));
 
@@ -78,7 +77,7 @@ const routes = [
     { path: '/admin/forgot-password', exact: true, name: 'Quên Mật Khẩu', component: ForgotPassword },
 
     { path: '/admin/system/order/all', exact: true, name: 'Tất Cả Đơn Hàng', component: Order },
-    { path: '/admin/system/order/:id_order/edit', exact: true, name: 'Xác Nhận Đơn Hàng', component: UpdateOrder },
+    { path: '/admin/system/order/:id_order/:status/edit', exact: true, name: 'Xác Nhận Đơn Hàng', component: UpdateOrder },
     { path: '/admin/system/order/:id_order/detail', exact: true, name: 'Chi Tiết Đơn Hàng', component: DetailOrder },
 
     { path: '/admin/system/order/confirmed', exact: true, name: 'Đơn Hàng Đã Xác Nhận', component: ConfirmedOrder },
@@ -86,7 +85,6 @@ const routes = [
     { path: '/admin/system/order/wait-take', exact: true, name: 'Chờ Láy Hàng', component: WaitTake },
     { path: '/admin/system/order/delivering', exact: true, name: 'Đang Giao', component: Delivering },
     { path: '/admin/system/order/delivered', exact: true, name: 'Đã Giao', component: Delivered },
-    { path: '/admin/system/order/exchange-request', exact: true, name: 'Yêu Cầu Đổi', component: ExchangeRequest },
     { path: '/admin/system/order/exchange', exact: true, name: 'Đổi Trả', component: ExChange },
     { path: '/admin/system/order/exchange/add', exact: true, name: 'Đổi Trả', component: AddExChange },
 

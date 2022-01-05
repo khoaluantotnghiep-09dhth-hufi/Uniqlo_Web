@@ -79,21 +79,25 @@ class updateOrder extends React.Component {
     }
     return isCheckForm;
   };
-  onSubmitForm= (event) => {
+  onSubmitForm = (event) => {
     var { match, bill } = this.props;
     event.preventDefault();
     var { history } = this.props;
     var { idItem, txtDate, txtConfirm } = this.state;
     var sessionUser = JSON.parse(sessionStorage.getItem("user"));
-    var convertDate =moment(txtDate).format('YYYY-MM-DD');
-     var dateNow= moment().format('YYYY-MM-DD');;
+    var convertDate = moment(txtDate).format('YYYY-MM-DD');
+    var dateNow = moment().format('YYYY-MM-DD');;
+    if (txtConfirm && txtConfirm === undefined) {
+      toast.error("Vui lòng chọn trạng thái !");
+    }
     var billUpdate = {
       id: match.params.id_order,
       id_staff: sessionUser.id_user,
       delivery_date: convertDate,
       status: txtConfirm,
     };
-    if (txtDate >= dateNow ||txtDate === dateNow ) {
+    console.log(billUpdate)
+    if (txtDate >= dateNow || txtDate === dateNow) {
 
       this.props.onUpdateItemBill(billUpdate);
       history.goBack();
@@ -102,6 +106,7 @@ class updateOrder extends React.Component {
     }
   };
   render() {
+    var { match } = this.props;
     var { txtDate, txtDateOrder, txtConfirm } = this.state;
     var formatDate = moment(txtDateOrder).format('DD-MM-YYYY');
     return (
@@ -109,7 +114,6 @@ class updateOrder extends React.Component {
         <CRow>
           <CCol sm="12">
             <CForm action="" method="post" onSubmit={this.onSubmitForm}>
-
               <CFormGroup>
                 <CLabel htmlFor="nf-password">Ngày Đặt Hàng</CLabel>
                 <CInput
@@ -120,7 +124,6 @@ class updateOrder extends React.Component {
                   disabled
                 />
               </CFormGroup>
-
               <CFormGroup>
                 <CLabel htmlFor="nf-password">Ngày Giao</CLabel>
                 <CInput
@@ -145,9 +148,43 @@ class updateOrder extends React.Component {
                   onChange={this.onChange}
                   required
                 >
-                  <option selected>---</option>
-                  <option value="1">Đã Xác Nhận</option>
-                  <option value="0">Chưa Xác Nhận</option>
+                  <option selected>Vui lòng chọn...</option>
+                  {
+                    match.params.status === '0' ?
+                      <>
+                        <option value="1">Xác Nhận</option>
+                        <option value="2">Chờ Lấy Hàng</option>
+                        <option value="3">Đang Giao</option>
+                        <option value="4">Đã Giao</option>
+                      </>
+                      :
+                      match.params.status === '1' ?
+                        <>
+                          <option value="2">Chờ Lấy Hàng</option>
+                          <option value="3">Đang Giao</option>
+                          <option value="4">Đã Giao</option>
+                        </>
+                        :
+
+                        match.params.status === '2' ?
+                          <>
+                            <option value="3">Đang Giao</option>
+                            <option value="4">Đã Giao</option>
+                          </>
+                          :
+                          match.params.status === '3' ?
+                            <>
+                              <option value="4">Đã Giao</option>
+                            </>
+                            :
+                            match.params.status === '4' ?
+                              ''
+                              :
+                              ''
+                  }
+
+
+
                 </select>
               </CFormGroup>
               <CFormGroup>

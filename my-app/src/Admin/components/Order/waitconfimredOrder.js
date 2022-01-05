@@ -106,8 +106,13 @@ class WaitConfirmedOrder extends React.Component {
                     ),
                     "Hành Động": (item) => (
                       <td>
+                        <Link to={`/admin/system/order/${item.id}/detail`}>
+                          <CButton type="button" className="btn btn-info">
+                            Chi Tiết
+                          </CButton>
+                        </Link>
                         {item.status === 0 ?
-                          <Link to={`/admin/system/order/${item.id}/edit`}>
+                        <Link to={`/admin/system/order/${item.id}/${item.status}/edit`}>
                             <CButton type="button" className="btn btn-primary">
                               <FontAwesomeIcon
                                 icon={faCheck}

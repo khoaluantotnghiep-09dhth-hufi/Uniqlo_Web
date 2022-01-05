@@ -128,18 +128,22 @@ class OrderConfirmed extends React.Component {
                       </td>
                     ), "Hành Động": (item) => (
                       <td>
-                        {
-                          <Link to={`/admin/system/order/${item.id}/edit`}>
-                            <CButton type="button" className="btn btn-primary">
-                              <FontAwesomeIcon
-                                icon={faCheck}
-                                className="mr-2"
-                                size="lg"
-                              />
-                              Cập Nhật
-                            </CButton>
-                          </Link>
-                        }
+                        <Link to={`/admin/system/order/${item.id}/detail`}>
+                          <CButton type="button" className="btn btn-info">
+                            Chi Tiết
+                          </CButton>
+                        </Link>
+                        <Link to={`/admin/system/order/${item.id}/${item.status}/edit`}>
+                          <CButton type="button" className="btn btn-primary">
+                            <FontAwesomeIcon
+                              icon={faCheck}
+                              className="mr-2"
+                              size="lg"
+                            />
+                            Cập Nhật
+                          </CButton>
+                        </Link>
+
                       </td>
                     ),
                   }}

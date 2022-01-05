@@ -31,7 +31,6 @@ import {
   faImage,
   faTruck,
   faPeopleCarry,
-  faSyncAlt,
   faBusinessTime
 } from "@fortawesome/free-solid-svg-icons";
 const _nav = [
@@ -94,12 +93,6 @@ const _nav = [
         name: 'Đã Giao',
         to: '/admin/system/order/delivered',
         icon: <FontAwesomeIcon icon={faPeopleCarry} className="mr-2" />,
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Yêu Cầu Đổi',
-        to: '/admin/system/order/exchange-request',
-        icon: <FontAwesomeIcon icon={faSyncAlt} className="mr-2" />,
       },
       {
         _tag: 'CSidebarNavItem',
