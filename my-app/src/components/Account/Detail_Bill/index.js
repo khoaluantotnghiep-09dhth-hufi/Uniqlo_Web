@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import io from "socket.io-client";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
-import {  MDBIcon } from "mdbreact";
+import { MDBIcon } from "mdbreact";
 import Call_API from "./../../../Admin/utils/Callapi";
 
 import {
@@ -10,7 +10,7 @@ import {
   Row,
   Col,
   Button,
-  
+
 } from "react-bootstrap";
 import { Image } from 'react-bootstrap';
 
@@ -55,7 +55,7 @@ const fields = [
   { key: "priceProduct", label: "Giá Sản Phẩm" },
 
   { key: "into_money", label: "Tổng Tiền" },
-
+  { label: "Thao Tác" },
 ];
 
 
@@ -71,7 +71,7 @@ class index extends Component {
       txtPhone: "",
       txtPassword: "",
       isCheckRequest: "",
-      dataBill:[],
+      dataBill: [],
     };
   }
   componentDidMount() {
@@ -83,7 +83,7 @@ class index extends Component {
       })
     })
   }
-  
+
   onSignOut = () => {
     var { cart } = this.props;
     sessionStorage.clear("client");
@@ -101,10 +101,10 @@ class index extends Component {
       [name]: value,
     });
   };
- 
+
   render() {
-    var { bills_customer, users,history } = this.props;
-    var { show, isCheckRequest,dataBill } = this.state;
+    var { bills_customer, users, history } = this.props;
+    var { show, isCheckRequest, dataBill } = this.state;
     var sessionUser = JSON.parse(sessionStorage.getItem("client"));
     var data = dataBill.map((item, index) => {
       return { ...item, index };
@@ -133,75 +133,95 @@ class index extends Component {
                 </h6>
               </Col>
               <Col>
-                
+
                 <Button
                   type="submit"
                   variant="outline-secondary"
                   size="sm"
-                  style={{ margin: 0}}
-                  onClick={()=>{
+                  style={{ margin: 0 }}
+                  onClick={() => {
                     history.goBack();
                   }}
                 >
                   <h6 style={{ marginBottom: 0 }}>TRở Về</h6>
                 </Button>&nbsp;
-              
-              &nbsp;
-             
-            </Col>
+
+                &nbsp;
+
+              </Col>
             </Row>
-           
+
           </Col>
           <Col>
-           
-            
+
+
             <Row>
               <Col></Col>
             </Row>
             <Row>
-             
+
             </Row>
           </Col>
         </Row>
         <Row>
-              <Col>
-                <CDataTable
-                  items={data}
-                  fields={fields}
-                  itemsPerPage={5}
-                  hover
-                  sorter
-                  pagination
-                  scopedSlots={{
-                    order_date: (item) => (
-                      <td>
-                        <Moment format="DD/MM/YYYY">{item.order_date}</Moment>
-                      </td>
-                    ),
+          <Col>
+            <CDataTable
+              items={data}
+              fields={fields}
+              itemsPerPage={5}
+              hover
+              sorter
+              pagination
+              scopedSlots={{
 
-                    delivery_date: (item) => (
-                      <td>
-                        <Moment format="DD/MM/YYYY">
-                          {item.delivery_date}
-                        </Moment>
-                      </td>
-                    ),
-                    "image":
-                      (item, index) => (
-                        <td>
-                          <Image  src={item.image} thumbnail />
-                        </td>
-                      ),
-                      "priceProduct":(item, index) => (
-                        <td>{formatter.format(item.priceProduct)}</td>
-                      ),
-                    "into_money":(item, index) => (
-                        <td>{formatter.format(item.into_money)}</td>
-                      ),
-                  }}
-                />
-              </Col>
-            </Row>
+                order_date: (item) => (
+                  <td>
+                    <Moment format="DD/MM/YYYY">{item.order_date}</Moment>
+                  </td>
+                ),
+
+                delivery_date: (item) => (
+                  <td>
+                    <Moment format="DD/MM/YYYY">
+                      {item.delivery_date}
+                    </Moment>
+                  </td>
+                ),
+                "Thao Tác": (item) => (
+                  <td>
+                    {item.status === 4 ?
+                      <Link to={`/account/customer-detail-bill/${item.id}`}>
+                        <Button className="mt-2"
+                          type="button"
+                          variant="outline-secondary"
+                          size="sm"
+                          style={{ margin: 0 }}
+                        >
+                          <small>Yêu Cầu Đổi/Trả</small>
+                        </Button>
+                      </Link>
+                      :
+                      ''
+                    }
+                  </td>
+
+                ),
+                "image":
+                  (item, index) => (
+                    <td>
+                      <Image src={item.image} thumbnail />
+                    </td>
+                  ),
+                "priceProduct": (item, index) => (
+                  <td>{formatter.format(item.priceProduct)}</td>
+                ),
+                "into_money": (item, index) => (
+                  <td>{formatter.format(item.into_money)}</td>
+                ),
+              }}
+            />
+          </Col>
+        </Row>
       </Container>
     );
   }

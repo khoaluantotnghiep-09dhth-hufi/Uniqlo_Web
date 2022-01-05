@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import io from "socket.io-client";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
-import {  MDBIcon } from "mdbreact";
+import { MDBIcon } from "mdbreact";
 import Call_API from "./../../Admin/utils/Callapi";
 import {
   Container,
@@ -52,7 +52,7 @@ class index extends Component {
       txtPhone: "",
       txtPassword: "",
       isCheckRequest: "",
-      dataBill:[],
+      dataBill: [],
     };
   }
   componentDidMount() {
@@ -123,33 +123,33 @@ class index extends Component {
     var id_bill = isCheckRequest.id;
     var reasons = txtHuyDon;
     var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    var time = today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     var bills = {
       id: uniqid("message- "),
-      content: "Có "+ "Khách Hàng "+ name+" Hủy Đơn "+id_bill +" Lý Do "+reasons+" Nè",
-      time:  date + ' '+ time ,
+      content: "Có " + "Khách Hàng " + name + " Hủy Đơn " + id_bill + " Lý Do " + reasons + " Nè",
+      time: date + ' ' + time,
     };
-   
-    if(bills){
+
+    if (bills) {
 
       this.props.onBillCancel(bills);
       toast.success("Khách Hàng Đã Yêu Cầu Hủy Đơn Thành Công, WebSocket");
     }
-    
+
     socket.emit("customer-request-cancel-bill", {
       name,
       id_bill,
       today,
       reasons,
     });
-   
+
 
     this.handleClose();
   };
   render() {
     var { bills_customer, users } = this.props;
-    var { show, isCheckRequest,dataBill } = this.state;
+    var { show, isCheckRequest, dataBill } = this.state;
     var sessionUser = JSON.parse(sessionStorage.getItem("client"));
 
     var { isCheckSignOut } = this.state;
@@ -233,17 +233,15 @@ class index extends Component {
                         ) : (
                           ""
                         )}<Link to={`/account/customer-detail-bill/${item.id}`}>
-                        <Button className="mt-2"
+                          <Button className="mt-2"
                             type="button"
                             variant="outline-secondary"
                             size="sm"
                             style={{ margin: 0 }}
-                            
                           >
-                           
                             <small> Chi Tiết</small>
-                          
-                          </Button></Link>
+                          </Button>
+                        </Link>
                       </td>
                     ),
                     STT: (item, index) => <td>{index + 1}</td>,
@@ -276,18 +274,18 @@ class index extends Component {
                     type="submit"
                     variant="outline-secondary"
                     size="sm"
-                    style={{ margin: 0}}
+                    style={{ margin: 0 }}
                   >
                     <h6 style={{ marginBottom: 0 }}>Thay đổi thông tin</h6>
                   </Button>
                 </Link>&nbsp;
                 <Link to="/account/member-benifits">
                   <Button
-                  className="mt-2"
+                    className="mt-2"
                     type="submit"
                     variant="outline-secondary"
                     size="sm"
-                    style={{ margin: 0}}
+                    style={{ margin: 0 }}
                   >
                     <h6 style={{ marginBottom: 0 }}>Quyền Lợi Thành Viên</h6>
                   </Button>
@@ -296,7 +294,7 @@ class index extends Component {
                   type="submit"
                   variant="outline-secondary"
                   size="sm"
-                  style={{ margin: 0, marginTop: 5}}
+                  style={{ margin: 0, marginTop: 5 }}
                   onClick={this.onSignOut}
                 >
                   <h6 style={{ marginBottom: 0 }}>Đăng Xuất</h6>
