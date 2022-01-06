@@ -188,7 +188,10 @@ class index extends Component {
                   scopedSlots={{
                     total: (item) => <td>{formatter.format(item.total)}</td>,
                     status: (item) => (
-                      <td>{item.status === 0 ? "Chưa Giao" : "Đã Giao"}</td>
+                      <td>{item.status === 0 ? "Chờ xác nhận" 
+                      : item.status === 1 ? "Đã xác nhận" 
+                      : item.status === 2 ? "Chờ giao hàng" 
+                      : item.status === 3 ? "Đang giao hàng" : "Đã giao hàng"}</td>
                     ),
                     order_date: (item) => (
                       <td>
