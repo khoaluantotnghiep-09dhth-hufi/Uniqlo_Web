@@ -47,11 +47,13 @@ class index extends Component {
     this.state = {
       isCheckSignOut: false,
       show: false,
+      showReturn: false,
       setShow: false,
       txtHuyDon: "",
       txtPhone: "",
       txtPassword: "",
       isCheckRequest: "",
+      isCheckRequestReturn: "",
       dataBill: [],
     };
   }
@@ -68,12 +70,19 @@ class index extends Component {
   handleClose = () => {
     this.setState({
       show: !true,
+      showReturn: !true,
     });
   };
   handleShow = (id) => {
     this.setState({
       show: !false,
       isCheckRequest: id,
+    });
+  };
+  handleReturnShow = (id) => {
+    this.setState({
+      showReturn: !false,
+      isCheckRequestReturn: id,
     });
   };
   onSignOut = () => {
@@ -130,7 +139,7 @@ class index extends Component {
       content: "Có " + "Khách Hàng " + name + " Hủy Đơn " + id_bill + " Lý Do " + reasons + " Nè",
       time: date + ' ' + time,
     };
-
+    
     if (bills) {
 
       this.props.onBillCancel(bills);
@@ -147,9 +156,39 @@ class index extends Component {
 
     this.handleClose();
   };
+  onSubmitFormReturn = (event) => {
+    event.preventDefault();
+    var { txtPhone, txtPassword, txtHuyDon, isCheckRequestReturn } = this.state;
+    console.log(isCheckRequestReturn);
+    var sessionUser = JSON.parse(sessionStorage.getItem("client"));
+
+    var name = sessionUser.name;
+    var id_billReturn = isCheckRequestReturn.id;
+    var reasons = txtHuyDon;
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    var billReturn = {
+      id: uniqid("message- "),
+      content: "Có " + "Khách Hàng " + name + " Yêu cầu trả hàng " + id_billReturn + " Lý Do " + reasons + " Nè",
+      time: date + ' ' + time,
+    };
+    if (billReturn) {
+
+      this.props.onBillCancel(billReturn);
+      toast.success("Khách Hàng Đã Yêu Cầu Trả Hàng Thành Công, WebSocket");
+    }
+    socket.emit("customer-request-cancel-bill", {
+      name,
+      id_billReturn,
+      today,
+      reasons,
+    });
+    this.handleClose();
+  };
   render() {
     var { bills_customer, users } = this.props;
-    var { show, isCheckRequest, dataBill } = this.state;
+    var { show, showReturn, isCheckRequest, dataBill, isCheckRequestReturn } = this.state;
     var sessionUser = JSON.parse(sessionStorage.getItem("client"));
 
     var { isCheckSignOut } = this.state;
@@ -228,11 +267,11 @@ class index extends Component {
                               size="sm"
                             />
                             
-                            {/* {isCheckRequest ? (
+                            {isCheckRequest ? (
                               <small> Chờ Xác Nhận</small>
-                            ) : (  */}
+                            ) : ( 
                             <small> Hủy Đơn</small>
-                            {/* )} */}
+                            )}
                           </Button>
                         ) : (
                           ""
@@ -244,7 +283,7 @@ class index extends Component {
                             size="sm"
                             style={{ margin: 0 }}
                             onClick={() => {
-                              this.handleShow(item);
+                              this.handleReturnShow(item);
                             }}
                           >
                             <FontAwesomeIcon
@@ -253,7 +292,7 @@ class index extends Component {
                               size="sm"
                             />
                             
-                            {isCheckRequest ? (
+                            {isCheckRequestReturn ? (
                               <small> Chờ Xác Nhận</small>
                             ) : ( 
                             <small> Yêu cầu trả hàng</small>
@@ -339,6 +378,40 @@ class index extends Component {
           </Modal.Header>
           <Modal.Body>
             <Form onSubmit={this.onSubmitForm}>
+              <FloatingLabel
+                controlId="floatingTextarea"
+                label="Xin Mời Nhập Lý Do"
+                className="mb-3"
+                required
+                name="txtHuyDon"
+              >
+                <Form.Control
+                  as="textarea"
+                  name="txtHuyDon"
+                  placeholder="Leave a comment here"
+                  maxlenght="100"
+                  required
+                  autofocus
+                  onChange={this.onChange}
+                />
+              </FloatingLabel>
+              <Button type="submit" variant="outline-secondary">
+                Gửi Yêu Cầu
+              </Button>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="outline-secondary" onClick={this.handleClose}>
+              Đóng
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        <Modal show={showReturn} onHide={this.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Yêu Cầu Trả Hàng</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form onSubmit={this.onSubmitFormReturn}>
               <FloatingLabel
                 controlId="floatingTextarea"
                 label="Xin Mời Nhập Lý Do"
