@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
-import emailjs from 'emailjs-com';
+import emailjs from "emailjs-com";
+import Call_API from "./../../Admin/utils/Callapi";
+
 import {
   Container,
   Row,
@@ -22,7 +24,7 @@ import API_Address from "./../../Admin/utils/Api_Address_CheckOut";
 import { toast } from "react-toastify";
 
 const socket = io("http://localhost:3008");
- const  sessionUser =  JSON.parse(sessionStorage.getItem("client"));
+const sessionUser = JSON.parse(sessionStorage.getItem("client"));
 class index extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +46,23 @@ class index extends Component {
       isCheckOrder: false,
     };
   }
-async componentDidMount() {
+  async componentDidMount() {
+    var sessionUser = JSON.parse(sessionStorage.getItem("client"));
+
+    Call_API(`customers/${sessionUser.id_user}`, "GET", null).then(
+      (response) => {
+        var data = response.data[0];
+        console.log(data);
+        this.setState({
+          txtHoTen: data.name,
+          txtDiaChi: data.address,
+          txtSDT: data.phone,
+
+          txtEmail: data.email,
+        });
+      }
+    );
+
     API_Address("api/p", "GET", null).then((response) => {
       this.setState({
         cities: response.data,
@@ -62,12 +80,12 @@ async componentDidMount() {
         wards: response.data,
       });
     });
-   await this.setState({
+    await this.setState({
       txtEmail: sessionUser.email,
       txtHoTen: sessionUser.name,
       txtSDT: sessionUser.phone,
       txtDiaChi: sessionUser.address,
-    })
+    });
   }
 
   showListCities = (cities) => {
@@ -150,7 +168,7 @@ async componentDidMount() {
     }
     return total;
   };
-  onSubmit = (e) => { };
+  onSubmit = (e) => {};
   onHandleSubmitForm = (e) => {
     e.preventDefault();
     var {
@@ -192,15 +210,39 @@ async componentDidMount() {
     }));
 
     if (this.refs.fieldCity.value === "Tỉnh, Thành Phố") {
-      toast.error(<div>Đặt hàng thất bại.<br />Vui lòng chọn Tỉnh, Thành Phố!</div>, { autoClose: 2500 }, { position: toast.POSITION.UPPER_RIGHT });
+      toast.error(
+        <div>
+          Đặt hàng thất bại.
+          <br />
+          Vui lòng chọn Tỉnh, Thành Phố!
+        </div>,
+        { autoClose: 2500 },
+        { position: toast.POSITION.UPPER_RIGHT }
+      );
       return;
     }
     if (this.refs.fieldDistrict.value === "Quận, Huyện") {
-      toast.error(<div>Đặt hàng thất bại.<br />Vui lòng chọn Quận, Huyện!</div>, { autoClose: 2500 }, { position: toast.POSITION.UPPER_RIGHT });
+      toast.error(
+        <div>
+          Đặt hàng thất bại.
+          <br />
+          Vui lòng chọn Quận, Huyện!
+        </div>,
+        { autoClose: 2500 },
+        { position: toast.POSITION.UPPER_RIGHT }
+      );
       return;
     }
     if (this.refs.fieldWards.value === "Phường, Xã") {
-      toast.error(<div>Đặt hàng thất bại.<br />Vui lòng chọn Phường, Xã!</div>, { autoClose: 2500 }, { position: toast.POSITION.UPPER_RIGHT });
+      toast.error(
+        <div>
+          Đặt hàng thất bại.
+          <br />
+          Vui lòng chọn Phường, Xã!
+        </div>,
+        { autoClose: 2500 },
+        { position: toast.POSITION.UPPER_RIGHT }
+      );
       return;
     }
 
@@ -214,9 +256,9 @@ async componentDidMount() {
       //Khách hàng phát tín hiệu khi Order
       socket.emit("customer-order", { name, quantity, today });
       toast.success("Khách Hàng Đã Order Gửi Lên WebSocket");
-      console.log("On reset Cart: " +JSON.stringify(bill_info))
+      console.log("On reset Cart: " + JSON.stringify(bill_info));
       this.props.onResetCart(sessionCart);
-      sessionStorage.removeItem('cart');
+      sessionStorage.removeItem("cart");
 
       var today = new Date();
       var date =
@@ -258,27 +300,42 @@ async componentDidMount() {
 
   sendEmail = (e) => {
     e.preventDefault();
-    emailjs.sendForm('gmail', 'gmail_template', e.target, 'user_Kb6t170ZY6RBAoo92zlwi')
-      .then((result) => {
-
-      }, (error) => {
-
-      });
+    emailjs
+      .sendForm(
+        "gmail",
+        "gmail_template",
+        e.target,
+        "user_Kb6t170ZY6RBAoo92zlwi"
+      )
+      .then(
+        (result) => {},
+        (error) => {}
+      );
     e.target.reset();
-  }
+  };
   render() {
-    var { cities, display, districts, wards, txtEmail, txtHoTen, txtSDT, txtDiaChi } = this.state;
+    var {
+      cities,
+      display,
+      districts,
+      wards,
+      txtEmail,
+      txtHoTen,
+      txtSDT,
+      txtDiaChi,
+    } = this.state;
     var { isCheckOrder } = this.state;
-
 
     if (isCheckOrder) {
       return (
         this.onSubmit(),
-        <Redirect
-          to={{
-            pathname: "/account",
-          }}
-        />
+        (
+          <Redirect
+            to={{
+              pathname: "/account",
+            }}
+          />
+        )
       );
     }
     return (
@@ -359,13 +416,21 @@ async componentDidMount() {
                 </Form.Select>
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Select onChange={this.handleChangeWards} name="txtPhuong" ref="fieldDistrict">
+                <Form.Select
+                  onChange={this.handleChangeWards}
+                  name="txtPhuong"
+                  ref="fieldDistrict"
+                >
                   <option>Quận, Huyện</option>
                   {this.showListDistrict(districts)}
                 </Form.Select>
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Select name="txtXa" onChange={this.onHandleChange} ref="fieldWards" >
+                <Form.Select
+                  name="txtXa"
+                  onChange={this.onHandleChange}
+                  ref="fieldWards"
+                >
                   <option>Phường, Xã</option>
                   {this.showListWards(wards)}
                 </Form.Select>

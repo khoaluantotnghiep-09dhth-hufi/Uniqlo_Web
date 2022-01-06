@@ -11,7 +11,9 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { Image } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
+import Call_API from "./../../../Admin/utils/Callapi";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ConvertIMG from "../../../Admin/utils/getBase64";
@@ -28,19 +30,42 @@ class index extends React.Component {
     super(props);
     this.state = {
       isClickEdit: false,
-      name: sessionUser.name,
-      address: sessionUser.address,
-      phone: sessionUser.phone,
-      image: sessionUser.image,
-      email: sessionUser.email,
-      gender: sessionUser.gender,
+      id: "",
+      name: "",
+      address: "",
+      phone: "",
+      image: "",
+      email: "",
+      gender: "",
       //cmnn_cccc: sessionUser.cmnn_cccc,
-      password: sessionUser.password,
-      score: sessionUser.score,
-      ImgPrivew: sessionUser.image,
+      password: "",
+      score: "",
+      ImgPrivew: "",
       isOpen: false,
       redirect: false,
+      errorPhone: "",
     };
+  }
+  async componentDidMount() {
+    var sessionUser = JSON.parse(sessionStorage.getItem("client"));
+
+    Call_API(`customers/${sessionUser.id_user}`, "GET", null).then(
+      (response) => {
+        var data = response.data[0];
+        console.log(data);
+        this.setState({
+          id: data.id,
+          name: data.name,
+          address: data.address,
+          phone: data.phone,
+          image: data.image,
+          email: data.email,
+          gender: data.gender,
+          password: data.password,
+          score: data.score,
+        });
+      }
+    );
   }
   onHandleSubmitLogin = (e) => {
     e.preventDefault();
@@ -56,9 +81,10 @@ class index extends React.Component {
       score,
       password,
       ImgPrivew,
+      id,
     } = this.state;
     var profile = {
-      id: sessionUser.id_user,
+      id: id,
       name: name,
       address: address,
       phone: phone,
@@ -70,6 +96,7 @@ class index extends React.Component {
       //score: score,
     };
     this.props.onUpdateItemCustomer(profile);
+    
     sessionStorage.removeItem("client");
     this.setState({
       redirect: true,
@@ -89,15 +116,30 @@ class index extends React.Component {
       });
     }
   };
-  onChange = (e, id) => {
-    let coppyState = { ...this.state };
-    coppyState[id] = e.target.value;
-    this.setState(
-      {
-        ...coppyState,
-      },
-      () => {}
-    );
+  // onChange = (e, id) => {
+  //   let coppyState = { ...this.state };
+  //   coppyState[id] = e.target.value;
+  //   this.setState(
+  //     {
+  //       ...coppyState,
+  //     },
+  //     () => {}
+  //   );
+  // };
+  onField = () => {
+    this.refs.fieldName.value = "";
+    this.refs.fieldAddress.value = "";
+    this.refs.fieldPhone.value = "";
+    this.refs.fieldEmail.value = "";
+    this.refs.fieldPass.value = "";
+  };
+  onChange = (event) => {
+    var target = event.target;
+    var name = target.name;
+    var value = target.value;
+    this.setState({
+      [name]: value,
+    });
   };
   openPreviewIMG = () => {
     this.setState({
@@ -106,6 +148,7 @@ class index extends React.Component {
   };
   render() {
     let {
+      password,
       name,
       address,
       phone,
@@ -132,17 +175,7 @@ class index extends React.Component {
                     lg="3"
                   >
                     <div className="card-profile-image ">
-                      <img
-                        style={{
-                          width: "200px",
-                          height: "200px",
-                          marginTop: "15px",
-                        }}
-                        alt="..."
-                        className="rounded-circle"
-                        src={sessionUser.image}
-                        required
-                      />
+                      <Image src={image} thumbnail />
                     </div>
                   </Col>
                 </Row>
@@ -192,14 +225,12 @@ class index extends React.Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              value={name}
+                              value={this.state.name}
                               id="name"
                               name="name"
                               placeholder="Tên"
                               type="text"
-                              onChange={(e) => {
-                                this.onChange(e, "name");
-                              }}
+                              onChange={this.onChange}
                             />
                           </FormGroup>
                         </Col>
@@ -212,15 +243,23 @@ class index extends React.Component {
                               Số Điện Thoại
                             </label>
                             <Input
+                              required
+                              autofocus
+                              type="text"
+                              placeholder=" Số Điện Thoại"
+                              name="txtPhone"
+                              id="txtPhone"
+                              maxlength="11"
+                              minlength="10"
+                              pattern="^[0-9]*$"
+                              ref="fieldPhone"
                               className="form-control-alternative"
-                              id="phone"
-                              name="phone"
-                              type="number"
                               value={phone}
-                              onChange={(e) => {
-                                this.onChange(e, "phone");
-                              }}
+                              onChange={this.onChange}
                             />
+                            <div className="invalid-feedback d-block">
+              {this.state.errorPhone}
+            </div>
                           </FormGroup>
                         </Col>
                       </Row>
@@ -238,9 +277,7 @@ class index extends React.Component {
                               name="gender"
                               id="gender"
                               value={gender === 1 ? "Nam" : "Nữ"}
-                              onChange={(e) => {
-                                this.onChange(e, "gender");
-                              }}
+                              onChange={this.onChange}
                             >
                               <option value="1">Nam</option>
                               <option value="0">Nữ</option>
@@ -257,38 +294,43 @@ class index extends React.Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              value={email}
-                              id="email"
-                              name="email"
-                              placeholder="Email..."
+                              required
+                              autofocus
                               type="email"
-                              onChange={(e) => {
-                                this.onChange(e, "email");
-                              }}
+                              placeholder=" Email"
+                              name="txtEmail"
+                              id="txtEmail"
+                              ref="fieldEmail"
+                              onChange={this.onChange}
                             />
                           </FormGroup>
                         </Col>
                       </Row>
                       <Row>
-                        {/* <Col lg="6">
-                                        <FormGroup>
-                                            <label
-                                                className="form-control-label"
-                                                htmlFor="cmnn_cccc"
-                                            >
-                                                CMND
-                                            </label>
-                                            <Input
-                                                className="form-control-alternative"
-                                                value={cmnn_cccc}
-                                                id="cmnn_cccc"
-                                                name="cmnn_cccc"
-                                                placeholder="CCCD/CMND..."
-                                                type="text"
-                                                onChange={(e) => { this.onChange(e, 'cmnn_cccc') }}
-                                            />
-                                        </FormGroup>
-                                    </Col> */}
+                        <Col lg="6">
+                          <FormGroup>
+                            <label
+                              className="form-control-label"
+                              htmlFor="cmnn_cccc"
+                            >
+                              Mật Khẩu
+                            </label>
+                            <Input
+                              required
+                              autofocus
+                              type="password"
+                              name="txtPassword"
+                              id="txtPassword"
+                              pattern=".{6,}"
+                              ref="fieldPass"
+                              className="form-control-alternative"
+                              value={password}
+                              placeholder="Mật Khẩu"
+                              onChange={this.onChange}
+                            />
+                          </FormGroup>
+                        </Col>
+
                         <Col lg="6">
                           <FormGroup>
                             <label
@@ -304,9 +346,7 @@ class index extends React.Component {
                               name="address"
                               placeholder="Địa chỉ"
                               type="text"
-                              onChange={(e) => {
-                                this.onChange(e, "address");
-                              }}
+                              onChange={this.onChange}
                             />
                           </FormGroup>
                         </Col>
