@@ -26,7 +26,7 @@ import { CSVLink } from "react-csv";
 const headers = [
   { key: "index", label: "STT" },
   { key: "order_date", label: "Ngày Đặt Hàng" },
-  { key: "delivery_date", label: "Ngày Giao Hàng" },
+ 
   { key: "name", label: "Tên Sản Phẩm" },
   { key: "image", label: "Hình Ảnh" },
   { key: "nameColor", label: "Màu" },
@@ -45,7 +45,7 @@ const fields = [
 
   { key: "index", label: "STT" },
   { key: "order_date", label: "Ngày Đặt Hàng" },
-  { key: "delivery_date", label: "Ngày Giao Hàng" },
+  
   { key: "name", label: "Tên Sản Phẩm" },
   { key: "image", label: "Hình Ảnh" },
   { key: "nameColor", label: "Màu" },
@@ -114,14 +114,6 @@ class detailOrder extends React.Component {
                     order_date: (item) => (
                       <td>
                         <Moment format="DD/MM/YYYY">{item.order_date}</Moment>
-                      </td>
-                    ),
-
-                    delivery_date: (item) => (
-                      <td>
-                        <Moment format="DD/MM/YYYY">
-                          {item.delivery_date}
-                        </Moment>
                       </td>
                     ),
                     "image":
