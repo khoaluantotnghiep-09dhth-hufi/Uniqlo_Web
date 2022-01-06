@@ -227,15 +227,42 @@ class index extends Component {
                               className="mr-2"
                               size="sm"
                             />
+                            
                             {/* {isCheckRequest ? (
                               <small> Chờ Xác Nhận</small>
-                            ) : ( */}
+                            ) : (  */}
                             <small> Hủy Đơn</small>
                             {/* )} */}
                           </Button>
                         ) : (
                           ""
-                        )}<Link to={`/account/customer-detail-bill/${item.id}`}>
+                        )}
+                        {item.status === 4 ? (
+                          <Button
+                            type="button"
+                            variant="outline-secondary"
+                            size="sm"
+                            style={{ margin: 0 }}
+                            onClick={() => {
+                              this.handleShow(item);
+                            }}
+                          >
+                            <FontAwesomeIcon
+                              icon={faTimes}
+                              className="mr-2"
+                              size="sm"
+                            />
+                            
+                            {isCheckRequest ? (
+                              <small> Chờ Xác Nhận</small>
+                            ) : ( 
+                            <small> Yêu cầu trả hàng</small>
+                            )}
+                          </Button>
+                        ) : (
+                          ""
+                        )}
+                        <Link to={`/account/customer-detail-bill/${item.id}`}>
                           <Button className="mt-2"
                             type="button"
                             variant="outline-secondary"
