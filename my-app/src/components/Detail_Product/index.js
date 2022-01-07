@@ -370,7 +370,7 @@ console.log(JSON.stringify(onTakeIdProductInfo));
           </Row>
           <Row>
             <Row className=' text-center mt-5'>
-              <h2 className='font-weight-normal ' style={{ textDecoration: 'underline' }}>SẢN PHẨM LIÊN QUAN</h2>
+              <h2 className='font-weight-normal ' style={{ textDecoration: 'underline' }}>BẠN CÓ THỂ THÍCH?</h2>
             </Row>
             <Row style={{ boxShadow: '1px 1px 2px rgba(6,6,6)' }}>
               {this.showProductPredict(products_category)}
