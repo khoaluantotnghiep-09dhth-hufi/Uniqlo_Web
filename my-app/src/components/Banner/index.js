@@ -4,7 +4,7 @@ class index extends Component {
     render() {
         var listBanner = this.props.arrayList;
         var elements = listBanner.map((item, index) => {
-            return <Carousel.Item interval={2000}>
+            return <Carousel.Item interval={5000}>
                 <img
                     className="d-block w-100"
                     src={item.image}

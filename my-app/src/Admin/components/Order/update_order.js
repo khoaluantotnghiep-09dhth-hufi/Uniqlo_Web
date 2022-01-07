@@ -35,11 +35,12 @@ class updateOrder extends React.Component {
   componentDidMount() {
     var { match, bill } = this.props;
 
-    this.props.onEditItemBill(match.params.id_order);
+    
 
-    if (match.params.id_order) {
-      var data= bill[0];
-      const result = bill.find((o) => o.id === match.params.id_order);
+    
+    Call_API(`bills-confirm/${match.params.id_order}`, "GET", null)
+    .then((response) => {
+      var data = response.data[0];
       this.setState({
         idItem: data.id,
         txtDate: data.delivery_date,
@@ -48,7 +49,9 @@ class updateOrder extends React.Component {
         totalMoney: data.total,
         id_customer: data.id_customer,
       });
-    }
+    })
+    .catch((error) => console.log(error));
+
   }
   componentWillReceiveProps(NextProps) {
     // var { match } = this.props;
