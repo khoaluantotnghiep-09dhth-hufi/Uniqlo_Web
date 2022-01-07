@@ -111,8 +111,8 @@ class updateOrder extends React.Component {
         Call_API(`customer-score/${id_customer}`, "PUT", objectScore).then(res=>  toast.success("Đã Tích Điểm")).catch(error=> toast.error("Tích Điểm Thất Bại, Yêu Cầu Kiểm Tra Hệ Thống"))
         
       }
-      // this.props.onUpdateItemBill(billUpdate);
-      // history.goBack();
+      this.props.onUpdateItemBill(billUpdate);
+      history.goBack();
     } else {
       toast.error("Ngày Giao Phải Lớn Hơn Hoặc Bằng Ngày Hiện Tại !");
     }
