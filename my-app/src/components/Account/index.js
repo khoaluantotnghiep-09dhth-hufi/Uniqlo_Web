@@ -178,7 +178,7 @@ class index extends Component {
       this.props.onBillCancel(billReturn);
       toast.success("Khách Hàng Đã Yêu Cầu Trả Hàng Thành Công, WebSocket");
     }
-    socket.emit("customer-request-cancel-bill", {
+    socket.emit("customer-request-return-bill", {
       name,
       id_billReturn,
       today,
