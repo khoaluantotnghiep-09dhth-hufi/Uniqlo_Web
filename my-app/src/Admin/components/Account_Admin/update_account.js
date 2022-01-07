@@ -2,6 +2,7 @@ import React from "react";
 import uniqid from "uniqid";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
+import { Redirect } from "react-router-dom";
 
 import * as actions from "../../../actions/index";
 import {
@@ -21,7 +22,7 @@ class updateOrder extends React.Component {
     super(props);
     this.state = {
       idItem: "",
-
+      redirect: false,
       txtConfirm: "",
     };
   }
@@ -33,7 +34,6 @@ class updateOrder extends React.Component {
   componentWillReceiveProps(NextProps) {
     var { match } = this.props;
     var id_staff = match.params.id_staff;
-  
 
     if (NextProps && NextProps.staff) {
       var { staff } = NextProps;
@@ -70,12 +70,13 @@ class updateOrder extends React.Component {
 
     if (match.params.id_staff) {
       this.props.onUpdatePositionStaff(staffUpdate);
-      history.goBack();
     } else {
       toast.error("Mời Bạn Nhập Dữ Liệu!");
     }
+    
   };
   render() {
+
     return (
       <CContainer fluid>
         <CRow>

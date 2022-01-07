@@ -24,7 +24,11 @@ import { Image, Alert } from 'react-bootstrap';
 import { CSVLink } from "react-csv";
 import ReactLoading from 'react-loading';
 import Call_API from "./../../utils/Callapi";
-
+const formatter = new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+    minimumFractionDigits: 0,
+  });
 const fields = [
     {
         key: 'STT',
@@ -48,12 +52,6 @@ const fields = [
         label: 'Mô Tả',
         _style: { width: '11%' },
         sorter: false,
-        filter: false
-    },
-    {
-        key: 'like_product',
-        label: 'Lượt Thích',
-        _style: { width: '1%' },
         filter: false
     },
     {
@@ -228,6 +226,12 @@ class ListProducts extends React.Component {
                                             (item, index) => (
                                                 <td>
                                                     <Image style={{ width: "200px", height: "200px" }} src={item.image} thumbnail />
+                                                </td>
+                                            ),
+                                            'price':
+                                            (item, index) => (
+                                                <td>
+                                                   <td>{formatter.format(item.price)}</td>
                                                 </td>
                                             ),
                                     }}
