@@ -3,9 +3,11 @@ import uniqid from "uniqid";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import Moment from "react-moment";
-import moment from 'moment';
-import { compareAsc, format } from 'date-fns'
+import moment from "moment";
+import { compareAsc, format } from "date-fns";
 import * as actions from "./../../../actions/index";
+import Call_API from "./../../utils/Callapi";
+
 import {
   CForm,
   CLabel,
@@ -26,6 +28,8 @@ class updateOrder extends React.Component {
       txtDate: "",
       txtDateOrder: "",
       txtConfirm: "",
+      totalMoney:0,
+      id_customer:""
     };
   }
   componentDidMount() {
@@ -34,21 +38,22 @@ class updateOrder extends React.Component {
     this.props.onEditItemBill(match.params.id_order);
 
     if (match.params.id_order) {
+      var data= bill[0];
       const result = bill.find((o) => o.id === match.params.id_order);
       this.setState({
-        idItem: result.id,
-        txtDate: result.delivery_date,
-        txtDateOrder: result.order_date,
-        txtConfirm: result.status,
+        idItem: data.id,
+        txtDate: data.delivery_date,
+        txtDateOrder: data.order_date,
+        txtConfirm: data.status,
+        totalMoney: data.total,
+        id_customer: data.id_customer,
       });
     }
-
   }
   componentWillReceiveProps(NextProps) {
     // var { match } = this.props;
     // if (NextProps && NextProps.bill) {
     //   var { bill } = NextProps;
-
     //   if (match.params.id_order) {
     //     this.setState({
     //       idItem: bill.id,
@@ -80,13 +85,13 @@ class updateOrder extends React.Component {
     return isCheckForm;
   };
   onSubmitForm = (event) => {
-    var { match, bill } = this.props;
+    var { match } = this.props;
     event.preventDefault();
     var { history } = this.props;
-    var { idItem, txtDate, txtConfirm } = this.state;
+    var { idItem, txtDate, txtConfirm,totalMoney,id_customer } = this.state;
     var sessionUser = JSON.parse(sessionStorage.getItem("user"));
-    var convertDate = moment(txtDate).format('YYYY-MM-DD');
-    var dateNow = moment().format('YYYY-MM-DD');;
+    var convertDate = moment(txtDate).format("YYYY-MM-DD");
+    var dateNow = moment().format("YYYY-MM-DD");
     if (txtConfirm && txtConfirm === undefined) {
       toast.error("Vui lòng chọn trạng thái !");
     }
@@ -96,11 +101,18 @@ class updateOrder extends React.Component {
       delivery_date: convertDate,
       status: txtConfirm,
     };
-    console.log(billUpdate)
+    console.log(billUpdate);
     if (txtDate >= dateNow || txtDate === dateNow) {
-
-      this.props.onUpdateItemBill(billUpdate);
-      history.goBack();
+      if (match.params.status === "3") {
+      console.log("Id cis "+id_customer)
+       var scoreCustomer= Math.ceil(totalMoney/10000);
+       var objectScore={score:scoreCustomer,}
+        console.log("Money Bill "+ scoreCustomer );
+        Call_API(`customer-score/${id_customer}`, "PUT", objectScore).then(res=>  toast.success("Đã Tích Điểm")).catch(error=> toast.error("Tích Điểm Thất Bại, Yêu Cầu Kiểm Tra Hệ Thống"))
+        
+      }
+      // this.props.onUpdateItemBill(billUpdate);
+      // history.goBack();
     } else {
       toast.error("Ngày Giao Phải Lớn Hơn Hoặc Bằng Ngày Hiện Tại !");
     }
@@ -108,7 +120,7 @@ class updateOrder extends React.Component {
   render() {
     var { match } = this.props;
     var { txtDate, txtDateOrder, txtConfirm } = this.state;
-    var formatDate = moment(txtDateOrder).format('DD-MM-YYYY');
+    var formatDate = moment(txtDateOrder).format("DD-MM-YYYY");
     return (
       <CContainer fluid>
         <CRow>
@@ -149,42 +161,33 @@ class updateOrder extends React.Component {
                   required
                 >
                   <option selected>Vui lòng chọn...</option>
-                  {
-                    match.params.status === '0' ?
-                      <>
-                        <option value="1">Xác Nhận</option>
-                        <option value="2">Chờ Lấy Hàng</option>
-                        <option value="3">Đang Giao</option>
-                        <option value="4">Đã Giao</option>
-                      </>
-                      :
-                      match.params.status === '1' ?
-                        <>
-                          <option value="2">Chờ Lấy Hàng</option>
-                          <option value="3">Đang Giao</option>
-                          <option value="4">Đã Giao</option>
-                        </>
-                        :
-
-                        match.params.status === '2' ?
-                          <>
-                            <option value="3">Đang Giao</option>
-                            <option value="4">Đã Giao</option>
-                          </>
-                          :
-                          match.params.status === '3' ?
-                            <>
-                              <option value="4">Đã Giao</option>
-                            </>
-                            :
-                            match.params.status === '4' ?
-                              ''
-                              :
-                              ''
-                  }
-
-
-
+                  {match.params.status === "0" ? (
+                    <>
+                      <option value="1">Xác Nhận</option>
+                      <option value="2">Chờ Lấy Hàng</option>
+                      <option value="3">Đang Giao</option>
+                      <option value="4">Đã Giao</option>
+                    </>
+                  ) : match.params.status === "1" ? (
+                    <>
+                      <option value="2">Chờ Lấy Hàng</option>
+                      <option value="3">Đang Giao</option>
+                      <option value="4">Đã Giao</option>
+                    </>
+                  ) : match.params.status === "2" ? (
+                    <>
+                      <option value="3">Đang Giao</option>
+                      <option value="4">Đã Giao</option>
+                    </>
+                  ) : match.params.status === "3" ? (
+                    <>
+                      <option value="4">Đã Giao</option>
+                    </>
+                  ) : match.params.status === "4" ? (
+                    ""
+                  ) : (
+                    ""
+                  )}
                 </select>
               </CFormGroup>
               <CFormGroup>
