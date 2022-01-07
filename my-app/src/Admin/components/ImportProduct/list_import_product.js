@@ -9,6 +9,8 @@ import {
   CButton,
 } from '@coreui/react';
 import { connect } from "react-redux";
+import Call_API from "./../../utils/Callapi";
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPlus,
@@ -55,8 +57,23 @@ const fields = [
 ]
 
 class ListImportProduct extends React.Component {
-  componentDidMount() {
-    this.props.fetchImport();
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+      isLoading: false,
+    };
+  }
+  async componentDidMount() {
+    Call_API("import-product", "GET", null)
+      .then((response) => {
+       
+        this.setState({
+          data: response.data,
+          isLoading: false,
+        });
+      })
+      .catch((error) => console.log(error));
   }
   onDeleteImportProduct = (id) => {
     if (window.confirm("Bạn chắc chắn muốn xóa ?")) {
@@ -64,8 +81,8 @@ class ListImportProduct extends React.Component {
     }
   };
   render() {
-    var { import_product } = this.props;
-    var data = import_product.map((item, index) => {
+    var { data } = this.state;
+    var data = data.map((item, index) => {
       return { ...item, index };
     });
     return (
