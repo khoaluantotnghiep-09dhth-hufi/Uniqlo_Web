@@ -34,13 +34,6 @@ const fields = [
         filter: false
     },
     {
-        key: 'id',
-        label: 'Mã',
-        _style: { width: '1%' },
-        sorter: false,
-        filter: false
-    },
-    {
         key: 'name',
         label: 'Tên',
         _style: { width: '15%' },
@@ -71,7 +64,7 @@ const getBadge = status => {
     }
 }
 const headers = [
-    { label: "Mã", key: "id" },
+ 
     { label: "Tên Sản Phẩm", key: "name" },
     { label: "Số Lượng", key: "quantity" },
     { label: "Kích Cỡ", key: "nameSize" },

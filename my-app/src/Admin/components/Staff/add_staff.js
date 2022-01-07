@@ -10,6 +10,8 @@ import {
   CFormGroup,
   CButton,
 } from "@coreui/react";
+import Call_API from "./../../utils/Callapi";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as actions from "./../../../actions/index";
 import { connect } from "react-redux";
@@ -52,38 +54,41 @@ class addStaff extends React.Component {
   componentDidMount() {
     var { match } = this.props;
 
-    this.props.onEditItemStaff(match.params.id_staff);
-    var { staff } = this.props;
-    if (match.params.id_staff) {
-      const result = staff.find((o) => o.id === match.params.id_staff);
 
-      this.setState({
-        txtNameStaff: result.name,
-        txtEmail: result.email,
-        txtPhone: result.phone,
-        txtAddress: result.address,
-        txtImage: result.image,
-        ImgPrivew: result.image,
-      });
-    }
-  }
-  componentWillReceiveProps(NextProps) {
-    var { match } = this.props;
-    if (NextProps && NextProps.staff) {
-      var { staff } = NextProps;
-      if (match.params.id_staff) {
-        const result = staff.find((o) => o.id === match.params.id_staff);
+ 
+    
+
+    Call_API(`staffs/${match.params.id_staff}`, "GET", null)
+      .then((response) => {
+        var data = response.data[0];
         this.setState({
-          txtNameStaff: result.name,
-          txtEmail: result.email,
-          txtPhone: result.phone,
-          txtAddress: result.address,
-          txtImage: result.image,
-          ImgPrivew: result.image,
+          txtNameStaff: data.name,
+          txtEmail: data.email,
+          txtPhone: data.phone,
+          txtAddress: data.address,
+          txtImage: data.image,
+          ImgPrivew: data.image,
         });
-      }
-    }
+      })
+      .catch((error) => console.log(error));
   }
+  // componentWillReceiveProps(NextProps) {
+  //   var { match } = this.props;
+  //   if (NextProps && NextProps.staff) {
+  //     var { staff } = NextProps;
+  //     if (match.params.id_staff) {
+  //       const result = staff.find((o) => o.id === match.params.id_staff);
+  //       this.setState({
+  //         txtNameStaff: result.name,
+  //         txtEmail: result.email,
+  //         txtPhone: result.phone,
+  //         txtAddress: result.address,
+  //         txtImage: result.image,
+  //         ImgPrivew: result.image,
+  //       });
+  //     }
+  //   }
+  // }
   onChange = (e, id) => {
     let coppyState = { ...this.state };
     coppyState[id] = e.target.value;

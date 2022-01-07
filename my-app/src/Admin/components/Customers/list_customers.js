@@ -1,4 +1,6 @@
 import React from 'react'
+import Call_API from "./../../utils/Callapi";
+
 import {
   CBadge,
   CCard,
@@ -76,8 +78,23 @@ const fields = [
 ];
 
 class ListCustomers extends React.Component {
-  componentDidMount() {
-    this.props.fetchCustomers();
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+      isLoading: false,
+    };
+  }
+  async componentDidMount() {
+    Call_API("customers", "GET", null)
+      .then((response) => {
+       
+        this.setState({
+          data: response.data,
+          isLoading: false,
+        });
+      })
+      .catch((error) => console.log(error));
   }
   onDeleteCustomer = (item) => {
     if (confirm("Bạn chắc chắn muốn xóa ?")) {  //eslint-disable-line
@@ -85,8 +102,8 @@ class ListCustomers extends React.Component {
     }
   };
   render() {
-    var { customer } = this.props;
-    var dataCustomer = customer.map((item, index) => {
+    var { data } = this.state;
+    var dataCustomer = data.map((item, index) => {
       return { ...item, index };
     });
     return (

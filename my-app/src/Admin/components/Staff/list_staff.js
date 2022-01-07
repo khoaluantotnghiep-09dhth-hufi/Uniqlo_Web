@@ -8,6 +8,8 @@ import {
   CRow,
   CButton,
 } from "@coreui/react";
+import Call_API from "./../../utils/Callapi";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTimes, faTools, faFileExcel } from "@fortawesome/free-solid-svg-icons";
 import * as actions from "./../../../actions/index";
@@ -16,7 +18,7 @@ import { Link } from "react-router-dom";
 import { Image } from 'react-bootstrap';
 import { CSVLink } from "react-csv";
 const headers = [
-  { label: "Mã", key: "id" },
+  
   { label: "Tên Nhân Viên", key: "name" },
   { label: "Email", key: "email" },
   { label: "Số Điện Thoại", key: "phone" },
@@ -27,13 +29,6 @@ const fields = [
   {
     key: 'STT',
     label: 'STT',
-    _style: { width: '1%' },
-    sorter: false,
-    filter: false
-  },
-  {
-    key: 'id',
-    label: 'Mã',
     _style: { width: '1%' },
     sorter: false,
     filter: false
@@ -62,8 +57,23 @@ const fields = [
   },
 ];
 class ListStaffs extends React.Component {
-  componentDidMount() {
-    this.props.fetchStaffs();
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+      isLoading: false,
+    };
+  }
+  async componentDidMount() {
+    Call_API("staffs", "GET", null)
+      .then((response) => {
+       
+        this.setState({
+          data: response.data,
+          isLoading: false,
+        });
+      })
+      .catch((error) => console.log(error));
   }
   onDeleteStaff = (item) => {
     if (window.confirm('Bạn có chắc muốn xóa không ?')) {
@@ -71,8 +81,8 @@ class ListStaffs extends React.Component {
     }
   };
   render() {
-    var { staff } = this.props;
-    var dataStaff = staff.map((item, index) => {
+    var { data } = this.state;
+    var dataStaff = data.map((item, index) => {
       return { ...item, index };
     });
     return (
