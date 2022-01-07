@@ -23,6 +23,8 @@ import * as actions from "./../../../actions/productAdminActions";
 import { Image, Alert } from 'react-bootstrap';
 import { CSVLink } from "react-csv";
 import ReactLoading from 'react-loading';
+import Call_API from "./../../utils/Callapi";
+
 const fields = [
     {
         key: 'STT',
@@ -106,21 +108,46 @@ const headers = [
 
 ];
 class ListProducts extends React.Component {
-    componentDidMount() {
-
-        this.props.fetchProducts();
-    }
+    constructor(props) {
+        super(props);
+        this.state = {
+          data: [],
+          isLoading: true,
+        };
+      }
+      async componentDidMount() {
+        Call_API("products-admin", "GET", null)
+          .then((response) => {
+           
+            this.setState({
+              data: response.data,
+              isLoading: false,
+            });
+          })
+          .catch((error) => console.log(error));
+      }
     onDeleteProduct = (id) => {
         if (window.confirm("Bạn có chắc muốn xóa không ?")) {
             this.props.onDeleteItemProduct(id);
         }
     };
     render() {
-        var { products } = this.props;
-        var data = products.map((item, index) => {
+        var { data,isLoading } = this.state;
+        var data = data.map((item, index) => {
             return item;
         });
-        return (
+        return isLoading ? (
+            <div className="adjust_Loading">
+              <button class="btn btn-danger" type="button" disabled>
+                <span
+                  class="spinner-grow spinner-grow-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Loading...
+              </button>
+            </div>
+          ) : (
             <>
                 <Link to="/admin/manage/product/add">
                     <CButton type="button" className="btn btn-danger">
