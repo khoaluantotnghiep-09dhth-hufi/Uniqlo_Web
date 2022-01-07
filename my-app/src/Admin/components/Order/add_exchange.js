@@ -162,10 +162,11 @@ class AddCategory extends React.Component {
                                 >
                                     <option value="order-1">Chọn</option>
                                     {billInfo && billInfo.length > 0 &&
-                                        billInfo.map((option, index) => (
+                                        billInfo
+                                            .map((option, index) => (
 
-                                            <option value={option.id} key={index}>Tên khách hàng: {option.name} | Tên sản phẩm: {option.nameProduct} | Số lượng: {option.quantity} | Giá: {option.into_money}</option>
-                                        ))}
+                                                <option value={option.id} key={index}>Tên khách hàng: {option.name} | Tên sản phẩm: {option.nameProduct} | Số lượng: {option.quantity} | Giá: {option.into_money}</option>
+                                            ))}
                                 </Form.Select>
                             </Form.Group>
                         </Row>
