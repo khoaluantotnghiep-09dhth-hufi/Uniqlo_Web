@@ -43,6 +43,13 @@ io.on("connection", (socket) => {
 
   });
 
+//Socket lắng nghe khách hàng yêu cầu trả hàng
+socket.on("customer-request-return-bill", (data) => {
+  console.log("Server lấy được yêu cầu trả hàng: " + JSON.stringify(data));
+  io.emit("customer-request-return-bill-notifications",data);
+
+});
+
   //Server Lắng Nghe khi ngắt kết nối
   socket.on("disconnect", () => {
     console.log(socket.id + "Đã Ngắt Kết Nối");
