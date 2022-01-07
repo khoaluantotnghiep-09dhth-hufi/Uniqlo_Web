@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "./../../../actions/index";
 import { Alert } from "react-bootstrap";
 import Moment from "react-moment";
+import Call_API from "./../../utils/Callapi";
 
 import {
   CCard,
@@ -15,7 +16,11 @@ import {
 } from "@coreui/react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faTimes, faFileExcel } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faTimes,
+  faFileExcel,
+} from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { CSVLink } from "react-csv";
 const headers = [
@@ -40,82 +45,92 @@ const fields = [
   {
     key: "index",
     label: "STT",
-    _style: { width: '1%' },
+    _style: { width: "1%" },
     sorter: false,
-    filter: false
-
+    filter: false,
   },
   {
     key: "id",
     label: "Mã HD",
-    _style: { width: '1%' },
+    _style: { width: "1%" },
     sorter: false,
-    filter: false
-
+    filter: false,
   },
   {
     key: "order_date",
-    label: "Ngày Đặt Hàng"
-
+    label: "Ngày Đặt Hàng",
   },
   {
     key: "delivery_date",
-    label: "Ngày Giao Hàng"
+    label: "Ngày Giao Hàng",
   },
   {
     key: "name_customer",
-    label: "Tên Khách Hàng"
+    label: "Tên Khách Hàng",
   },
   {
     key: "address",
-    label: "Địa Chỉ"
+    label: "Địa Chỉ",
   },
   {
     key: "phone",
-    label: "SDT"
+    label: "SDT",
   },
   {
     key: "email",
-    label: "Email"
+    label: "Email",
   },
   {
     key: "total_quantity",
     label: "Tổng Số Lượng",
-    _style: { width: '1%' },
+    _style: { width: "1%" },
   },
   {
     key: "total",
-    label: "Tổng Tiền"
+    label: "Tổng Tiền",
   },
   {
     key: "note",
-    label: "Ghi Chú"
+    label: "Ghi Chú",
   },
   {
     key: "status",
     label: "Tình Trạng",
-    _style: { width: '1%' },
-    filter: false
-
+    _style: { width: "1%" },
+    filter: false,
   },
   {
     key: "Hành Động",
     label: "Hành Động",
-    _style: { width: '1%' },
-    filter: false
-
+    _style: { width: "1%" },
+    filter: true,
   },
 ];
 
 class ListOrder extends React.Component {
-  componentDidMount() {
-    this.props.fetchBills();
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataBills: [],
+      isLoading: false,
+    };
   }
-  componentWillUnmount() {
-    var { bill } = this.props;
+  async componentDidMount() {
+    Call_API("bills", "GET", null)
+      .then((response) => {
+        console.log(response.data);
+        this.setState({
+          dataBills: response.data,
+          isLoading: false,
+        });
+      })
+      .catch((error) => console.log(error));
+  }
+  // componentWillUnmount() {
+  //   var { bill } = this.props;
 
-    this.props.onResetOrder(bill);
-  }
+  //   this.props.onResetOrder(bill);
+  // }
   onDeleteBill = (item) => {
     this.props.onDeleteItemBill(item);
   };
@@ -140,21 +155,35 @@ class ListOrder extends React.Component {
     }
   };
   render() {
-    var { bill } = this.props;
-
-    var dataBill = bill.map((item, index) => {
-      return { ...item, index };
+    var { dataBills, isLoading } = this.state;
+    // if (dataBills === undefined) {
+    //   var dataBill = [];
+    // } else {
+      
+    // }
+    var dataBill = dataBills.map((item, index) => {
+   
+      return { ...item, index};
     });
-    return (
+    return isLoading ? (
+      <div className="adjust_Loading">
+        <button class="btn btn-danger" type="button" disabled>
+          <span
+            class="spinner-grow spinner-grow-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          Loading...
+        </button>
+      </div>
+    ) : (
       <>
         {/* <Link to="/admin/system/news/add">
-                    <CButton type="button" className="btn btn-danger">
-                        Thêm Mới
-                    </CButton>
-                </Link> */}
-        <CSVLink
-          className="btn btn-success"
-          data={dataBill} headers={headers}>
+                  <CButton type="button" className="btn btn-danger">
+                      Thêm Mới
+                  </CButton>
+              </Link> */}
+        <CSVLink className="btn btn-success" data={dataBill} headers={headers}>
           <FontAwesomeIcon icon={faFileExcel} className="mr-2" size="lg" />
           Xuất Excel
         </CSVLink>
@@ -178,8 +207,12 @@ class ListOrder extends React.Component {
                             Chi Tiết
                           </CButton>
                         </Link>
-                        {item.status === 4 ? '' :
-                          <Link to={`/admin/system/order/${item.id}/${item.status}/edit`}>
+                        {item.status === 4 ? (
+                          ""
+                        ) : (
+                          <Link
+                            to={`/admin/system/order/${item.id}/${item.status}/edit`}
+                          >
                             <CButton type="button" className="btn btn-primary">
                               <FontAwesomeIcon
                                 icon={faCheck}
@@ -189,9 +222,9 @@ class ListOrder extends React.Component {
                               Cập Nhật
                             </CButton>
                           </Link>
-                        }
+                        )}
 
-                        {item.status === 0 ?
+                        {item.status === 0 ? (
                           <CButton
                             type="button"
                             className="btn btn-warning"
@@ -206,24 +239,29 @@ class ListOrder extends React.Component {
                             />
                             Hủy Đơn
                           </CButton>
-                          : ''}
+                        ) : (
+                          ""
+                        )}
                       </td>
                     ),
                     status: (item) => (
                       <td>
-                        <Alert variant={this.getBadge(item.status)}
-                        >
-                          {
-                            item.status === 0 ? "Chưa Xác Nhận" :
-                              item.status === 1 ? "Đã Xác Nhận" :
-                                item.status === 2 ? "Chờ Lấy Hàng" :
-                                  item.status === 3 ? "Chờ Giao" :
-                                    item.status === 4 ? "Đã Giao" :
-                                      item.status === 5 ? "Yêu Cầu Đổi/Trả" :
-                                        item.status === 6 ? "Đã Hủy" :
-                                          'Trạng Thái Không Tồn Tại'
-                          }
-
+                        <Alert variant={this.getBadge(item.status)}>
+                          {item.status === 0
+                            ? "Chưa Xác Nhận"
+                            : item.status === 1
+                            ? "Đã Xác Nhận"
+                            : item.status === 2
+                            ? "Chờ Lấy Hàng"
+                            : item.status === 3
+                            ? "Chờ Giao"
+                            : item.status === 4
+                            ? "Đã Giao"
+                            : item.status === 5
+                            ? "Yêu Cầu Đổi/Trả"
+                            : item.status === 6
+                            ? "Đã Hủy"
+                            : "Trạng Thái Không Tồn Tại"}
                         </Alert>
                       </td>
                     ),
@@ -260,15 +298,13 @@ var mapStateToProps = (state) => {
 };
 var mapDispatchToProps = (dispatch, props) => {
   return {
-    fetchBills: () => {
-      return dispatch(actions.fetchBillResquest());
-    },
+    
     onDeleteItemBill: (id) => {
       return dispatch(actions.onDeleteBillResquest(id));
     },
     onResetOrder: (order) => {
       return dispatch(actions.onRestOrder(order));
-    }
+    },
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ListOrder);

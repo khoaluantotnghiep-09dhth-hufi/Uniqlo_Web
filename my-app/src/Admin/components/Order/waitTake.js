@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTimes, faFileExcel } from "@fortawesome/free-solid-svg-icons";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
+import Call_API from "./../../utils/Callapi";
+
 import {
   CButton,
   CCard,
@@ -53,8 +55,23 @@ const fields = [
 
 
 class WaitTake extends React.Component {
-  componentDidMount() {
-    this.props.fetchBills();
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataBills: [],
+      isLoading: false,
+    };
+  }
+  async componentDidMount() {
+    Call_API("bills", "GET", null)
+      .then((response) => {
+        console.log(response.data);
+        this.setState({
+          dataBills: response.data,
+          isLoading: false,
+        });
+      })
+      .catch((error) => console.log(error));
   }
   onDeleteBill = (item) => {
     this.props.onDeleteItemBill(item);
@@ -70,14 +87,26 @@ class WaitTake extends React.Component {
     }
   };
   render() {
-    var { bill } = this.props;
+    var { dataBills, isLoading } = this.state;
 
-    var dataBill = bill
+
+    var dataBill = dataBills
       .filter((bill) => bill.status === 2)
       .map((item, index) => {
         return { ...item, index };
       });
-    return (
+    return isLoading ? (
+      <div className="adjust_Loading">
+        <button class="btn btn-danger" type="button" disabled>
+          <span
+            class="spinner-grow spinner-grow-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          Loading...
+        </button>
+      </div>
+    ) :(
       <>
         <CSVLink
           className="btn btn-success"
