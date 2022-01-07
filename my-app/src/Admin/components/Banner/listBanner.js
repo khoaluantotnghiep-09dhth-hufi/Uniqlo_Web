@@ -5,6 +5,7 @@ import Moment from "react-moment";
 import { Image } from 'react-bootstrap';
 import ConvertIMG from '../../utils/getBase64';
 import { Alert } from "react-bootstrap";
+import Call_API from "./../../utils/Callapi";
 
 
 import {
@@ -27,8 +28,23 @@ const fields = [
 ];
 
 class ListBanner extends React.Component {
-  componentDidMount() {
-    this.props.fetchBanners();
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+      isLoading: false,
+    };
+  }
+  async componentDidMount() {
+    Call_API("banners", "GET", null)
+      .then((response) => {
+       
+        this.setState({
+          data: response.data,
+          isLoading: false,
+        });
+      })
+      .catch((error) => console.log(error));
   }
   onDeleteBanner = (item) => {
     if (window.confirm('Bạn có chắc muốn xóa không ?')) {
@@ -46,9 +62,9 @@ class ListBanner extends React.Component {
     }
   };
   render() {
-    var { banner } = this.props;
+    var { data } = this.state;
 
-    var dataBanner = banner.map((item, index) => {
+    var dataBanner = data.map((item, index) => {
       return { ...item, index };
     });
     return (
