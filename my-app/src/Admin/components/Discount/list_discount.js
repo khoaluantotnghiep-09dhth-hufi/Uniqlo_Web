@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import * as actions from "./../../../actions/index";
 import Moment from "react-moment";
 import { Image, Alert } from 'react-bootstrap';
+import Call_API from "./../../utils/Callapi";
+
 import {
   CBadge,
   CCard,
@@ -52,8 +54,23 @@ const fields = [
 ];
 
 class ListDiscount extends React.Component {
-  componentDidMount() {
-    this.props.fetchPromotions();
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+      isLoading: false,
+    };
+  }
+  async componentDidMount() {
+    Call_API("promotions", "GET", null)
+      .then((response) => {
+       
+        this.setState({
+          data: response.data,
+          isLoading: false,
+        });
+      })
+      .catch((error) => console.log(error));
   }
   onDeletePromotion = (item) => {
     if (window.confirm("Bạn có chắc muốn xóa không ?")) {
@@ -61,9 +78,9 @@ class ListDiscount extends React.Component {
     }
   };
   render() {
-    var { promotion } = this.props;
+    var { data } = this.state;
 
-    var dataPromotion = promotion.map((item, index) => {
+    var dataPromotion = data.map((item, index) => {
 
       return { ...item, index };
     });

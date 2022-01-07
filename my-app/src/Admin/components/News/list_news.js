@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import Call_API from "./../../utils/Callapi";
 
 import {
     CCard,
@@ -41,15 +42,24 @@ const fields =
         "Thao Tác",
     ]
 class ListNews extends React.Component {
-
-    componentDidMount() {
-        // var { news } = this.props;
-        this.props.fetchNews();
-        // this.setState({
-        //     data: news
-        // })
-
-    }
+    constructor(props) {
+        super(props);
+        this.state = {
+          data: [],
+          isLoading: false,
+        };
+      }
+      async componentDidMount() {
+        Call_API("news", "GET", null)
+          .then((response) => {
+           
+            this.setState({
+              data: response.data,
+              isLoading: false,
+            });
+          })
+          .catch((error) => console.log(error));
+      }
     onDeleteNews = (item) => {
         if (window.confirm("Bạn có chắc muốn xóa không ?")) {
             this.props.onDeleteItemNews(item);
@@ -57,11 +67,12 @@ class ListNews extends React.Component {
     };
 
     render() {
-        var { news } = this.props;
-        console.log("News :" + news)
+    var { data } = this.state;
+      
+    
         // debugger
         // Sai Duong Dan Route
-        var dataNews = news.map((item, index) => {
+        var dataNews = data.map((item, index) => {
             return { ...item, index };
 
         });
@@ -75,7 +86,7 @@ class ListNews extends React.Component {
                 </Link>
                 <CSVLink
                     className="btn btn-success"
-                    data={news} headers={headers}>
+                    data={dataNews} headers={headers}>
                     <FontAwesomeIcon icon={faFileExcel} className="mr-2" size="lg" />
                     Xuất Excel
                 </CSVLink>
@@ -87,7 +98,7 @@ class ListNews extends React.Component {
                             </CCardHeader>
                             <CCardBody>
                                 <CDataTable
-                                    items={news}
+                                    items={dataNews}
                                     fields={fields}
                                     itemsPerPage={5}
                                     sorter
