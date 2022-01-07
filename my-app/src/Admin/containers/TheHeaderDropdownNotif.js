@@ -66,6 +66,20 @@ class TheHeaderDropdownNotif extends Component {
       this.props.fetchAddNotifications(newVal);
       callApi("notifications", "POST", newVal);
     });
+
+    socket.on("customer-request-return-bill-notifications", data => {
+
+      const message = "Có " + "Khách Hàng " + data.name + " Trả hàng " + data.id_bill + " Lý Do " + data.reasons + " Nè";
+      const time = data.today;
+      var newVal = {
+        id:data.id,
+        content: message,
+        time:time,
+      };
+
+      this.props.fetchAddNotifications(newVal);
+      callApi("notifications", "POST", newVal);
+    });
   }
 
   onClickNotice = () => {
