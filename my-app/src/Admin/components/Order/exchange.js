@@ -13,6 +13,7 @@ import {
     CRow,
     CButton,
 } from "@coreui/react";
+import Call_API from "./../../utils/Callapi";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTimes, faFileExcel } from "@fortawesome/free-solid-svg-icons";
@@ -49,9 +50,24 @@ const fields = [
 ];
 
 class ListOrder extends React.Component {
-    componentDidMount() {
-        this.props.fetchExchange();
-    }
+    constructor(props) {
+        super(props);
+        this.state = {
+          dataBills: [],
+          isLoading: false,
+        };
+      }
+      async componentDidMount() {
+        Call_API("exchange", "GET", null)
+          .then((response) => {
+            console.log(response.data);
+            this.setState({
+              dataBills: response.data,
+              isLoading: false,
+            });
+          })
+          .catch((error) => console.log(error));
+      }
     onDeleteExchange = (item) => {
         this.props.onDeleteItemExchange(item);
     };
@@ -66,9 +82,10 @@ class ListOrder extends React.Component {
         }
     };
     render() {
-        var { exchange } = this.props;
+        var { dataBills, isLoading } = this.state;
 
-        var dataBill = exchange.map((item, index) => {
+
+        var dataBill = dataBills.map((item, index) => {
             return { ...item, index };
         });
         return (
