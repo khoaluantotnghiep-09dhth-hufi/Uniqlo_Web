@@ -53,7 +53,7 @@ class index extends Component {
         break;
       }
       else {
-        //toast.error("Sai Email hoặc Mật Khẩu vui lòng thử lại !");
+        toast.error("Sai Email hoặc Mật Khẩu vui lòng thử lại !");
         this.setState({
           isCheckLogin: false,
         });

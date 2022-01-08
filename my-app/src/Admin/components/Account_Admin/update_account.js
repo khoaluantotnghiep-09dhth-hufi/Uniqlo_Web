@@ -3,6 +3,7 @@ import uniqid from "uniqid";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { Redirect } from "react-router-dom";
+import Call_API from "./../../utils/Callapi";
 
 import * as actions from "../../../actions/index";
 import {
@@ -28,25 +29,36 @@ class updateOrder extends React.Component {
   }
   componentDidMount() {
     var { match } = this.props;
-
-    this.props.onEditItemStaff(match.params.id_staff);
-  }
-  componentWillReceiveProps(NextProps) {
-    var { match } = this.props;
     var id_staff = match.params.id_staff;
-
-    if (NextProps && NextProps.staff) {
-      var { staff } = NextProps;
-      const result = staff.find((o) => o.id === match.params.id_staff);
-      if (match.params.id_staff) {
+    this.props.onEditItemStaff(match.params.id_staff);
+    Call_API(`staffs/${id_staff}`, "GET", null)
+      .then((response) => {
+        var data = response.data[0];
         this.setState({
           idItem: id_staff,
 
-          txtConfirm: result.role,
+          txtConfirm: data.role,
         });
-      }
-    }
+      })
+      .catch((error) => console.log(error));
   }
+  // componentWillReceiveProps(NextProps) {
+  //   var { match } = this.props;
+  //   var id_staff = match.params.id_staff;
+
+  //   if (NextProps && NextProps.staff) {
+  //     var { staff } = NextProps;
+  //     const result = staff.find((o) => o.id === match.params.id_staff);
+  //     debugger;
+  //     if (match.params.id_staff) {
+  //       this.setState({
+  //         idItem: id_staff,
+
+  //         txtConfirm: result.role,
+  //       });
+  //     }
+  //   }
+  // }
   onChange = (event) => {
     var target = event.target;
     var name = target.name;
@@ -70,6 +82,7 @@ class updateOrder extends React.Component {
 
     if (match.params.id_staff) {
       this.props.onUpdatePositionStaff(staffUpdate);
+      history.goBack();
     } else {
       toast.error("Mời Bạn Nhập Dữ Liệu!");
     }

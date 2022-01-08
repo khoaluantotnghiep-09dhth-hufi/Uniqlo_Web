@@ -21,7 +21,7 @@ import { faPlus, faTimes, faTools, faFileExcel } from "@fortawesome/free-solid-s
 import { Link } from "react-router-dom";
 import { CSVLink } from "react-csv";
 const headers = [
-  { label: "Mã", key: "id" },
+ 
   { label: "Tên Khuyến Mãi", key: "name" },
   { key: "description", label: "Phần Trăm Khuyến Mãi" },
   { key: "date_start", label: "Ngày Bắt Đầu" },
@@ -44,7 +44,7 @@ const getBadge = (status) => {
 const options = { dateStyle: "short" };
 const fields = [
   "STT",
-  { key: "id", label: "Mã" },
+  
   { key: "name", label: "Tên Khuyến Mãi" },
   { key: "description", label: "Phần Trăm Khuyến Mãi" },
   { key: "image", label: "Hình Ảnh Chương Trình" },

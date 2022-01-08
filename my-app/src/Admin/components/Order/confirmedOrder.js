@@ -17,6 +17,11 @@ import {
   CRow,
 } from "@coreui/react";
 import { CSVLink } from "react-csv";
+const formatter = new Intl.NumberFormat("vi-VN", {
+  style: "currency",
+  currency: "VND",
+  minimumFractionDigits: 0,
+});
 const headers = [
   { label: "Mã", key: "id" },
   { key: "order_date", label: "Ngày Đặt Hàng" },
@@ -144,7 +149,7 @@ class OrderConfirmed extends React.Component {
                       <td>
                         <Moment format="DD/MM/YYYY">{item.order_date}</Moment>
                       </td>
-                    ),
+                    ),total: (item) => <td>{formatter.format(item.total)}</td>,
 
                     delivery_date: (item) => (
                       <td>

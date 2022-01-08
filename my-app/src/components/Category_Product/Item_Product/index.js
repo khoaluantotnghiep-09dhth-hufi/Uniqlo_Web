@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 import "./Item_Product.scss";
 class index extends Component {
   render() {
-
     var { product } = this.props;
     // product.desciption==='' &&
     const formatter = new Intl.NumberFormat("vi-VN", {
@@ -12,7 +11,7 @@ class index extends Component {
       currency: "VND",
       minimumFractionDigits: 0,
     });
-   
+
     var elementSale =
       product.percentSale === "0" ? (
         ""
@@ -26,16 +25,13 @@ class index extends Component {
         </span>
       );
 
-    if (product.percentSale) {
+    if (product.percentSale>0) {
       var cacularSale = (parseInt(product.percentSale) / 100) * product.price;
-      var newPrice=product.price-cacularSale;
+      var newPrice = product.price - cacularSale;
     }
 
     var elementNewPrice = newPrice ? (
-      <span
-        style={{ color: "red" }}
-        className="font-weight-bold "
-      >
+      <span style={{ color: "red" }} className="font-weight-bold ">
         {" "}
         {formatter.format(newPrice)}{" "}
       </span>
@@ -80,9 +76,9 @@ class index extends Component {
               <Row>
                 <Col>
                   {" "}
-                  <Card.Text className=" Adjust_NewPrice" >
+                  <Card.Text className=" Adjust_NewPrice">
                     {" "}
-                    { elementNewPrice}
+                    {elementNewPrice}
                   </Card.Text>
                 </Col>
               </Row>

@@ -66,6 +66,7 @@ class addStaff extends React.Component {
           txtEmail: data.email,
           txtPhone: data.phone,
           txtAddress: data.address,
+          txtPassword: data.password,
           txtImage: data.image,
           ImgPrivew: data.image,
         });
@@ -117,7 +118,7 @@ class addStaff extends React.Component {
     })
   }
   checkValidate = () => {
-    let check = ['txtNameStaff', 'txtEmail', 'txtPhone', 'txtImage', 'txtAddress'];
+    let check = ['txtNameStaff', 'txtEmail', 'txtPhone', 'txtImage', 'txtAddress','txtPassword'];
     let isValid = true;
     if (!this.state[check[3]]) {
       isValid = false;
@@ -138,6 +139,7 @@ class addStaff extends React.Component {
       txtPhone,
       txtAddress,
       txtImage,
+      txtPassword
     } = this.state;
 
     var staff = {
@@ -146,6 +148,7 @@ class addStaff extends React.Component {
       email: txtEmail,
       phone: txtPhone,
       address: txtAddress,
+      password: txtPassword,
       image: txtImage,
     };
     var staffUpdate = {
@@ -154,6 +157,8 @@ class addStaff extends React.Component {
       email: txtEmail,
       phone: txtPhone,
       address: txtAddress,
+      password: txtPassword,
+
       image: txtImage,
     };
 
@@ -237,6 +242,19 @@ class addStaff extends React.Component {
                   onChange={(e) => { this.onChange(e, 'txtAddress') }}
                   value={txtAddress}
                   required
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label htmlFor="txtPassword">Mật Khẩu</Form.Label>
+                <Form.Control
+                  type="password"
+                  id="txtPassword"
+                  name="txtPassword"
+                  placeholder="Mật khẩu..."
+                  autoComplete="address"
+                  onChange={(e) => { this.onChange(e, 'txtPassword') }}
+                  value={txtPassword}
+                 
                 />
               </Form.Group>
               <Form.Group >
