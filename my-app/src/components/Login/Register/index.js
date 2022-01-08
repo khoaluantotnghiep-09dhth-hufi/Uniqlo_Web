@@ -20,6 +20,7 @@ class index extends React.Component {
       txtPassword: "",
       txtEmail: "",
       errorPhone: "",
+      redirect: false,
     };
   }
 componentDidMount(){
@@ -113,6 +114,7 @@ componentDidMount(){
   };
 
   render() {
+  
     return (
       <Col>
         <h5 className="text-center">Đăng Ký</h5>

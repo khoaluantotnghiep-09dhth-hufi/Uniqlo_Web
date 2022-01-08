@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import firebase from "../../../firebase";
 import { toast } from "react-toastify";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+
 import "./Forgot_Pass.scss";
 import * as actions from "./../../../actions/index";
 import { getAuth, RecaptchaVerifier } from "firebase/auth";
@@ -19,6 +21,7 @@ class index extends Component {
       otp: "",
       isCheckLogin: false,
       isDisplayFormAuthen: false,
+      redirect: false,
     };
   }
   componentDidMount() {
@@ -102,19 +105,22 @@ class index extends Component {
       phone: mobile,
       password: passwordnew,
     };
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].phone !== mobile) {
-        toast.error(
-          <div>
-            Số điện thoại không tồn tại.
-            <br /> Bạn cần nhập đúng số điện thoại!
-          </div>,
-          { autoClose: 2500 },
-          { position: toast.POSITION.UPPER_RIGHT }
-        );
-        return;
-      }     
-    }
+
+//Bỏ dòng này để cho goi API 
+
+    // for (let i = 0; i < users.length; i++) {
+    //   if (users[i].phone !== mobile) {
+    //     toast.error(
+    //       <div>
+    //         Số điện thoại không tồn tại.
+    //         <br /> Bạn cần nhập đúng số điện thoại!
+    //       </div>,
+    //       { autoClose: 2500 },
+    //       { position: toast.POSITION.UPPER_RIGHT }
+    //     );
+    //     return;
+    //   }     
+    // }
     window.confirmationResult
       .confirm(code)
       .then((result) => {
@@ -128,7 +134,9 @@ class index extends Component {
         );
         // this.props.onUpdateItemCustomerClient(userPost);
         var id = takeIdUserToUpdate.id;
-        callApi(`customers_client/${id}`, "PUT", userPost);
+        callApi(`customers_client/${id}`, "PUT", userPost).then(res=>{
+          this.setState({redirect:true});
+        });
 
         // ...
       })
@@ -144,7 +152,10 @@ class index extends Component {
   };
   render() {
     var { users } = this.props;
-    var { isDisplayFormAuthen } = this.state;
+    var { isDisplayFormAuthen,redirect } = this.state;
+    if (redirect) {
+      return <Redirect to="/login" />;
+    }
     var confirmAuthen =
       isDisplayFormAuthen === false ? (
         ""
