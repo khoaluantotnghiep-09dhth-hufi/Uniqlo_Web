@@ -123,7 +123,7 @@ class ListDiscount extends React.Component {
                     ),
                     'image': (item) => (
                       <td>
-                        <Image style={{ width: "200px", height: "200px" }} src={item.image} thumbnail />
+                        <Image style={{ width: "200px", height: "200px" }} src={item.image}  />
                       </td>
                     ),
                     "Thao Tác": (item) => (
