@@ -204,9 +204,9 @@ class index extends Component {
                   autofocus
                 />
                 <Form.Control
-                  className="mt-5"
+                  className="fas fa-key-alt mt-5"
                   type="password"
-                  placeholder="&#xf879; Mật khẩu mới"
+                  placeholder="&#xf084; Mật khẩu mới"
                   ref="memberPasswordNew"
                   onChange={this.handleChange}
                   name="passwordnew"
