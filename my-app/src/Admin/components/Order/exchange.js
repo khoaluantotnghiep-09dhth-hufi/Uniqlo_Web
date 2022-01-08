@@ -132,7 +132,7 @@ class ListOrder extends React.Component {
                                                 <td>
                                                     {index + 1}
                                                 </td>
-                                            )
+                                            ), price: (item) => <td>{formatter.format(item.price)}</td>,
                                     }}
                                 ></CDataTable>
                             </CCardBody>
