@@ -102,7 +102,7 @@ class index extends Component {
     <Form onSubmit={this.onSubmitOTP}>
       <Form.Group className="mb-3" >
         <Form.Control
-          className="fas fa-phone-alt"
+          className="fas fa-phone-alt mt-5"
           type="number"
           placeholder="&#xf879; Enter OTP"
           ref="memberOTP"
@@ -136,9 +136,9 @@ class index extends Component {
             <Form onSubmit={this.onSignInSubmit}>
               {/* <div class="acctitle"><i class="fa fa-refresh"></i> Quên mật khẩu</div> */}
               <div id="sign-in-button"></div>
-              <Form.Group className="mb-3" >
+              <Form.Group className="mb-5"  >
                 <Form.Control
-                  className="fas fa-phone-alt"
+                  className="fas fa-phone-alt mt-5"
                   type="number"
                   placeholder="&#xf879; Số Điện Thoại"
                   ref="memberPhone"
@@ -150,7 +150,7 @@ class index extends Component {
                   required autofocus
                 />
                 <Form.Control
-                  className="fas fa-phone-alt"
+                  className="mt-5"
                   type="password"
                   placeholder="&#xf879; Mật khẩu mới"
                   ref="memberPasswordNew"
@@ -162,7 +162,7 @@ class index extends Component {
                   required autofocus
                 />
               </Form.Group>
-              <Form.Group className="mb-3 " >
+              <Form.Group className="mb-3 mt-5" >
                 <Button
                   variant="outline-secondary"
                   type="submit"
