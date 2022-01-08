@@ -22,7 +22,9 @@ class index extends React.Component {
       errorPhone: "",
     };
   }
-
+componentDidMount(){
+  this.props.onFetchUsers();
+}
   onChange = (event) => {
     var target = event.target;
     var name = target.name;
