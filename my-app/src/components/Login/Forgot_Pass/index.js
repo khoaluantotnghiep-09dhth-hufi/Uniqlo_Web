@@ -76,7 +76,7 @@ class index extends Component {
     console.log(code)
     var { mobile, passwordnew } = this.state;
     var userPost = {
-      id: sessionUser.id_user,
+      // id: sessionUser.id_user,
       phone: mobile,
       password: passwordnew,
     };
