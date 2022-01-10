@@ -215,7 +215,7 @@ class index extends Component {
                   autofocus
                 />
                 <Form.Control
-                  className="fas fa-key-alt mt-5"
+                  className="fas fa-key-alt mt-3"
                   type="password"
                   placeholder="&#xf084; Mật khẩu mới"
                   ref="memberPasswordNew"
@@ -228,7 +228,7 @@ class index extends Component {
                   autofocus
                 />
               </Form.Group>
-              <Form.Group className="mb-3 mt-5">
+              <Form.Group className="mb-3">
                 <Button
                   variant="outline-secondary"
                   type="submit"
