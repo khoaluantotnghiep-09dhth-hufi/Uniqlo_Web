@@ -34,7 +34,7 @@ var color = (state = initialState, action) => {
       return [...state];
     //Cập Nhật Mau
     case types.UPDATE_COLOR:
-      debugger
+      
       index = findIndex(state, action.color.id);
       if (index !== -1) {
         state[index] = color;

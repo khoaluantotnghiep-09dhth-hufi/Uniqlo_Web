@@ -29,6 +29,7 @@
     "jquery": "^3.6.0",
     "json-server": "^0.16.3",
     "markdown-it": "^12.2.0",
+    "md5": "^2.3.0",
     "mdbreact": "^5.1.0",
     "module_name": "^1.0.0",
     "moment": "^2.29.1",

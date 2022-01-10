@@ -796,7 +796,7 @@ export const onUpdateNews = (news) => {
   };
 };
 export const onUpdateNewsResquest = (news) => {
-  // debugger
+  
   return (dispatch) => {
     return callApi(`news/${news.id}`, "PUT", news).then((response) => {
       if (response === undefined) {

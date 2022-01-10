@@ -18,7 +18,7 @@ import { connect } from "react-redux";
 import {
     faUpload,
 } from "@fortawesome/free-solid-svg-icons";
-var sessionUser = JSON.parse(sessionStorage.getItem("user"));
+var sessionUser = JSON.parse(sessionStorage.getItem("admin"));
 
 class AddAccountAdmin extends React.Component {
     constructor(props) {

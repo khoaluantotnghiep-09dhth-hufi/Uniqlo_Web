@@ -21,8 +21,8 @@ import {
     faUpload,
     faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
-var sessionUser = JSON.parse(sessionStorage.getItem("user"));
-
+var sessionUser = JSON.parse(sessionStorage.getItem("admin"));
+var md5 = require("md5"); 
 class AddAccountAdmin extends React.Component {
     constructor(props) {
         super(props);
@@ -33,6 +33,9 @@ class AddAccountAdmin extends React.Component {
             passwordnew: '',
             cofirmpasswordnew: '',
         }
+    }
+    componentDidMount(){
+
     }
     checkValidate = () => {
         let check = ['passwordold', 'passwordnew', 'cofirmpasswordnew'];
@@ -58,7 +61,7 @@ class AddAccountAdmin extends React.Component {
         e.preventDefault();
         var { history } = this.props;
         var { name, passwordold, passwordnew, cofirmpasswordnew } = this.state;
-        if (sessionUser.password !== passwordold) {
+        if (sessionUser.password !== md5(passwordold)) {
             toast.error("Mật khẩu cũ sai, vui lòng thử lại !")
         }
         else if (passwordnew !== cofirmpasswordnew) {

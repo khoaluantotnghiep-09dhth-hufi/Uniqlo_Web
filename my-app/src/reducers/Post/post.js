@@ -18,7 +18,7 @@ var post = (state = initialState, action) => {
     case types.FETCH_POST:
 
       state = action.post;
-debugger
+
       return [...state];
     //Xóa Mau
     case types.DELETE_POST:
@@ -35,7 +35,7 @@ debugger
       return [...state];
     //Cập Nhật Mau
     case types.UPDATE_POST:
-      debugger
+      
       index = findIndex(state, action.post.id);
       if (index !== -1) {
         state[index] = action.post;

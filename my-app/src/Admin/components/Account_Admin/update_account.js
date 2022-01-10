@@ -49,7 +49,7 @@ class updateOrder extends React.Component {
   //   if (NextProps && NextProps.staff) {
   //     var { staff } = NextProps;
   //     const result = staff.find((o) => o.id === match.params.id_staff);
-  //     debugger;
+  
   //     if (match.params.id_staff) {
   //       this.setState({
   //         idItem: id_staff,

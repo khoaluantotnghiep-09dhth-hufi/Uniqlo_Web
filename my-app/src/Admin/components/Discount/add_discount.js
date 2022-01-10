@@ -47,7 +47,7 @@ class addDiscount extends React.Component {
         txtNameMota: promotion.description,
         dateStart: promotion.date_start,
         dateEnd: promotion.date_end,
-        txtImage: promotion.image,
+        txtImage: null,
       });
     }
   }
@@ -64,7 +64,7 @@ class addDiscount extends React.Component {
           txtNameMota: result.description,
           dateStart: result.date_start,
           dateEnd: result.date_end,
-          txtImage: result.image,
+          txtImage: null,
         });
       }
     }
@@ -105,7 +105,7 @@ class addDiscount extends React.Component {
       description: txtNameMota,
       date_start: dateStart,
       date_end: dateEnd,
-      image: txtImage,
+      image: null,
     };
     var promotionUpdate = {
       id: match.params.id_promotion,
@@ -113,7 +113,7 @@ class addDiscount extends React.Component {
       description: txtNameMota,
       date_start: dateStart,
       date_end: dateEnd,
-      image: txtImage,
+      image: null,
     };
 
     if (match.params.id_promotion) {
@@ -177,7 +177,7 @@ class addDiscount extends React.Component {
                   onChange={this.onChange}
                 ></input>
               </CFormGroup>
-              <CFormGroup>
+              {/* <CFormGroup>
                 <CCol sm="8">
                   <CLabel
                     className="border border-dark"
@@ -220,7 +220,7 @@ class addDiscount extends React.Component {
                     onClick={() => this.openPreviewIMG()}
                   ></div>
                 </CCol>
-              </CFormGroup>
+              </CFormGroup> */}
               <CFormGroup>
                 <CLabel htmlFor="nf-password">Ngày Bắt Đầu</CLabel>
                 <CInput

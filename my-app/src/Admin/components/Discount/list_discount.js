@@ -47,7 +47,7 @@ const fields = [
   
   { key: "name", label: "Tên Khuyến Mãi" },
   { key: "description", label: "Phần Trăm Khuyến Mãi" },
-  { key: "image", label: "Hình Ảnh Chương Trình" },
+  // { key: "image", label: "Hình Ảnh Chương Trình" },
   { key: "date_start", label: "Ngày Bắt Đầu" },
   { key: "date_end", label: "Ngày Kết Thúc" },
   "Thao Tác",
@@ -119,13 +119,13 @@ class ListDiscount extends React.Component {
                     date_end: (item) => (
                       <td>
                         <Moment format="DD/MM/YYYY">{item.date_end}</Moment>
-                      </td>
-                    ),
-                    'image': (item) => (
-                      <td>
-                        <Image style={{ width: "200px", height: "200px" }} src={item.image}  />
-                      </td>
-                    ),
+                      </td>),
+                    // ),
+                    // 'image': (item) => (
+                    //   <td>
+                    //     <Image style={{ width: "200px", height: "200px" }} src={item.image}  />
+                    //   </td>
+                    // ),
                     "Thao Tác": (item) => (
                       <td>
                         <Link to={`/admin/system/discount/${item.id}/edit`}>

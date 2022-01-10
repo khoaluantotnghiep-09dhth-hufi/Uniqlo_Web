@@ -37,22 +37,22 @@ class index extends Component {
     };
 
     callApi("login-admin", "POST", userPost).then((response) => {
-      var users = response.data;
-      for (let i = 0; i < users.length; i++) {
+      var users = response.data[0];
+      
         var userAccountAdmin = {
-          id_user: users[i].id,
-          name: users[i].name,
-          phone: users[i].phone,
-          image: users[i].image,
-          email: users[i].email,
-          gender: users[i].gender,
-          cmnn_cccc: users[i].cmnn_cccc,
-          password: users[i].password,
-          place_of_birth: users[i].place_of_birth,
-          address: users[i].address,
-          role: users[i].role,
+          id_user: users.id,
+          name: users.name,
+          phone: users.phone,
+          image: users.image,
+          email: users.email,
+          gender: users.gender,
+          cmnn_cccc: users.cmnn_cccc,
+          password: users.password,
+          place_of_birth: users.place_of_birth,
+          address: users.address,
+          role: users.role,
         };
-      }
+      
       if (response.data.length === 0) {
         toast.error(
           <div>

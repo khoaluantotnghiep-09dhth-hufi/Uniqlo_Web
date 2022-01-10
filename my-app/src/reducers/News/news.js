@@ -19,7 +19,7 @@ var news = (state = initialState, action) => {
     //Lấy Tất cả Danh Sách Danh Mục
     case types.FETCH_NEWS:
       state = action.news;
-      debugger
+      
       return [...state];
     case types.DELETE_NEWS:
       index = findIndex(state, id);
@@ -32,7 +32,7 @@ var news = (state = initialState, action) => {
 
       return [...state];
     case types.UPDATE_NEWS:
-      debugger
+      
       index = findIndex(state,action.news.id);
       if (index !== -1) {
         state[index] = news;
