@@ -7,6 +7,7 @@ import HomePage from "../../containers/TheLayout";
 import { toast } from 'react-toastify';
 import "./login.scss";
 import forgotPW from '../Login/forgotPassword';
+import callApi from "./../../../Admin/utils/Callapi";
 class index extends Component {
   constructor(props) {
     super(props);
@@ -27,38 +28,54 @@ class index extends Component {
     this.props.onFetchUsers();
   }
 
-  onHandleSubmitLogin = (users) => (event) => {
+  onHandleSubmitLogin = (event) => {
     event.preventDefault();
-    var { txtEmail, txtPassword, items } = this.state;
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].email === txtEmail && users[i].password === txtPassword) {
-        var user = {
+    var { txtEmail, txtPassword } = this.state;
+    var userPost = {
+      phone: txtEmail,
+      password: txtPassword,
+    };
+
+    callApi("login-admin", "POST", userPost).then((response) => {
+      var users = response.data;
+      for (let i = 0; i < users.length; i++) {
+        var userAccountAdmin = {
           id_user: users[i].id,
           name: users[i].name,
           phone: users[i].phone,
-          password: users[i].password,
-          postion: users[i].postion,
-          role: users[i].role,
-          gender: users[i].gender,
           image: users[i].image,
-          address: users[i].address,
           email: users[i].email,
-          place_of_birth: users[i].place_of_birth,
+          gender: users[i].gender,
           cmnn_cccc: users[i].cmnn_cccc,
+          password: users[i].password,
+          place_of_birth: users[i].place_of_birth,
+          address: users[i].address,
+          role: users[i].role,
         };
+      }
+      if (response.data.length === 0) {
+        toast.error(
+          <div>
+            Đăng nhập thất bại.
+            <br /> Bạn cần nhập đúng thông tin!
+          </div>,
+          { autoClose: 2500 },
+          { position: toast.POSITION.UPPER_RIGHT }
+        );
+      } else {
+
+        toast.success(
+          <div>Đăng nhập thành công!</div>,
+          { autoClose: 2500 },
+          { position: toast.POSITION.UPPER_RIGHT }
+        );
+        sessionStorage.setItem("admin", JSON.stringify(userAccountAdmin));
         this.setState({
           isCheckLogin: true,
         });
-        sessionStorage.setItem("user", JSON.stringify(user));
-        break;
+
       }
-      else {
-        toast.error("Sai Email hoặc Mật Khẩu vui lòng thử lại !");
-        this.setState({
-          isCheckLogin: false,
-        });
-      }
-    }
+    });
   };
   onToggleForm = () => {
     this.props.onToggleForm();
@@ -96,7 +113,7 @@ class index extends Component {
             <Row className="login-content">
               <Col >
                 <h1 className="text-center text-danger">Đăng Nhập</h1>
-                <Form onSubmit={this.onHandleSubmitLogin(staff)} >
+                <Form onSubmit={this.onHandleSubmitLogin} >
                   <Form.Group className="mb-3" >
                     <Form.Control
                       className="fas fa-envelope login-input"

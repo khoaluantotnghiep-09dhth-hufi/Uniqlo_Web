@@ -3,7 +3,6 @@ import * as actions from "./../../actions/index";
 import { connect } from "react-redux";
 import Category_Product_Container from "../../components/Category_Product/index";
 import Banner from "../../components/Banner/index";
-import Call_API from "./../../Admin/utils/Callapi";
 
 class index extends Component {
   constructor(props) {

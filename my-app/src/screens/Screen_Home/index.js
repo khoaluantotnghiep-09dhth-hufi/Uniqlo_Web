@@ -1,17 +1,11 @@
 import React, { Component } from "react";
-import { Image } from "react-bootstrap";
 import "./App.scss";
-
 import { connect } from "react-redux";
 import * as actionsProduct from "./../../actions/productActions";
 import * as actions from "./../../actions/index";
-import Spinner from "react-bootstrap/Spinner";
 import Banner from "../../components/Banner/index";
 import Slider from "../../components/Slider_UT/index";
-import Slider_Product from "../../components/Slider_Product/index";
 import Call_API from "./../../Admin/utils/Callapi";
-
-import Slider_UT from "../../components/Slider_UT/index";
 
 class test extends Component {
   constructor(props) {
@@ -188,9 +182,6 @@ var mapDispatchToProps = (dispatch, props) => {
     },
     fetchBanners: () => {
       return dispatch(actions.fetchBannersResquest());
-    },
-    onGetAllProduct: () => {
-      dispatch(actions.fetchProductResquest());
     },
   };
 };

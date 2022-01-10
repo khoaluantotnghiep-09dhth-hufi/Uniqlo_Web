@@ -1,17 +1,10 @@
 
 import React from 'react'
 import {
-    CButton,
     CCol,
     CContainer,
-    CInput,
-    CInputGroup,
-    CInputGroupPrepend,
-    CInputGroupAppend,
-    CInputGroupText,
     CRow
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
 
 const index = () => {
     return (

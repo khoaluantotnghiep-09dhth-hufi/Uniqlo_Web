@@ -21,7 +21,7 @@ import { useHistory, Route, Link, Redirect } from 'react-router-dom';
 const TheHeaderDropdown = () => {
   let isLogOut = false;
   const history = useHistory();
-  var sessionUser = JSON.parse(sessionStorage.getItem("user"));
+  var sessionUser = JSON.parse(sessionStorage.getItem("admin"));
   function adminProfile() {
     if (sessionStorage.length !== 0) {
       return <Route to='/admin/manage/categories' />

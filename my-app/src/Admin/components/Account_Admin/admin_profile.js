@@ -11,16 +11,12 @@ import {
     Row,
     Col,
 } from "reactstrap";
-import UserHeader from '../../containers/UserHeader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ConvertIMG from '../../utils/getBase64';
-import Lightbox from 'react-image-lightbox';
 import * as actions from "./../../../actions/index";
 import { connect } from "react-redux";
 import {
-    faPlus,
     faUpload,
-    faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
 var sessionUser = JSON.parse(sessionStorage.getItem("user"));
 

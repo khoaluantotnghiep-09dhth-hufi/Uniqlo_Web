@@ -18,11 +18,12 @@ import navigationStaff from './_navStaff';
 const TheSidebar = () => {
   const dispatch = useDispatch()
   const show = useSelector(state => state.sidebarShow)
-  var sessionUser = JSON.parse(sessionStorage.getItem("user"));
+  var sessionUser = JSON.parse(sessionStorage.getItem("admin"));
+  console.log('ses test', sessionUser)
   return (
     <CSidebar
       show={show}
-      onShowChange={(val) => dispatch({type: 'set', sidebarShow: val })}
+      onShowChange={(val) => dispatch({ type: 'set', sidebarShow: val })}
     >
       <CSidebarBrand className="d-md-down-none " to="/admin/home">
         <img src={logo} className="c-sidebar-brand-full mr-2" height={35} />
@@ -40,7 +41,7 @@ const TheSidebar = () => {
           }}
         />
       </CSidebarNav>
-      <CSidebarMinimizer className="c-d-md-down-none"/>
+      <CSidebarMinimizer className="c-d-md-down-none" />
     </CSidebar>
   )
 }
