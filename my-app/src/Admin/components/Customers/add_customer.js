@@ -136,7 +136,7 @@ class AddCustomer extends React.Component {
       gender: txtGender,
     };
     var customerUpdate = {
-      idItem: match.params.id_customer,
+      id: match.params.id_customer,
       name: txtName,
       address: txtAddress,
       phone: txtPhone,

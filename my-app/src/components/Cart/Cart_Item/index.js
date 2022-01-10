@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 
 import { Container, Row, Col, Image, Form } from "react-bootstrap";
 import "./Cart_Item.scss";
+import * as actions from "./../../../actions/index";
 
 class index extends Component {
   constructor(props) {
@@ -140,17 +141,17 @@ console.log("Item " + JSON.stringify(item));
   }
 }
 
-// var mapStateToProps = (state) => {
-//   return {
-//     cart: state.cart,
-//   };
-// };
-// var mapDispatchToProps = (dispatch, props) => {
-//   return {
-//     onDeleteInItem: (id) => {
-//       dispatch(actions.deleteItem(id));
-//     },
-//   };
-// };
+var mapStateToProps = (state) => {
+  return {
+    cart: state.cart,
+  };
+};
+var mapDispatchToProps = (dispatch, props) => {
+  return {
+    onDeleteInItem: (id) => {
+      dispatch(actions.deleteItem(id));
+    },
+  };
+};
 
 export default index;
