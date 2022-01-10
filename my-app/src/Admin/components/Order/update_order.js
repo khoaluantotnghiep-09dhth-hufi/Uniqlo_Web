@@ -92,7 +92,7 @@ class updateOrder extends React.Component {
     event.preventDefault();
     var { history } = this.props;
     var { idItem, txtDate, txtConfirm,totalMoney,id_customer } = this.state;
-    var sessionUser = JSON.parse(sessionStorage.getItem("user"));
+    var sessionUser = JSON.parse(sessionStorage.getItem("admin"));
     var convertDate = moment(txtDate).format("YYYY-MM-DD");
     var dateNow = moment().format("YYYY-MM-DD");
     if (txtConfirm && txtConfirm === undefined) {
@@ -104,13 +104,13 @@ class updateOrder extends React.Component {
       delivery_date: convertDate,
       status: txtConfirm,
     };
-    console.log(billUpdate);
+  
     if (txtDate >= dateNow || txtDate === dateNow) {
-      if (match.params.status === "3") {
-      console.log("Id cis "+id_customer)
+      if (txtConfirm && txtConfirm !== undefined && txtConfirm === "4") {
+    
        var scoreCustomer= Math.ceil(totalMoney/10000);
        var objectScore={score:scoreCustomer,}
-        console.log("Money Bill "+ scoreCustomer );
+       
         Call_API(`customer-score/${id_customer}`, "PUT", objectScore).then(res=>  toast.success("Đã Tích Điểm")).catch(error=> toast.error("Tích Điểm Thất Bại, Yêu Cầu Kiểm Tra Hệ Thống"))
         
       }

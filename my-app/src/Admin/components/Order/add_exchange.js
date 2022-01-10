@@ -16,7 +16,7 @@ import * as actionsImport from "./../../../actions/importActions";
 import * as actionsImportInfo from "./../../../actions/importInfoActions";
 import { toast } from 'react-toastify';
 let isLoadingExternally = false;
-var sessionUser = JSON.parse(sessionStorage.getItem("user"));
+var sessionUser = JSON.parse(sessionStorage.getItem("admin"));
 class AddCategory extends React.Component {
     constructor(props) {
         super(props);
