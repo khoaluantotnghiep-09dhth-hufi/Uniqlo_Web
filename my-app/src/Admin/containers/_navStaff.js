@@ -24,7 +24,6 @@ import {
   faSyncAlt,
   faBusinessTime
 } from "@fortawesome/free-solid-svg-icons";
-var sessionUser = JSON.parse(sessionStorage.getItem("userAccountAdmin"));
 
 const _navStaff = [
 
