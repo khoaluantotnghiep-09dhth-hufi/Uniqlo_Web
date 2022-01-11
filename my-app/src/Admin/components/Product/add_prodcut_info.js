@@ -64,7 +64,7 @@ const getBadge = status => {
     }
 }
 const headers = [
- 
+
     { label: "Tên Sản Phẩm", key: "name" },
     { label: "Số Lượng", key: "quantity" },
     { label: "Kích Cỡ", key: "nameSize" },
@@ -158,21 +158,27 @@ class addProduct extends React.Component {
         let isValid = this.checkValidate();
         if (isValid === false) return;
         event.preventDefault();
-        var { match } = this.props;
-        var { history } = this.props;
-        var { txtQuantity, id_size, id_color } = this.state;
-        var propductinfo = {
-            id: uniqid("product-info-"),
-            id_product: match.params.id_product,
-            id_size: id_size,
-            id_color: id_color,
-            quantity: txtQuantity
-        };
-        this.props.onAddItemProductInfo(propductinfo);
-        //Không quay lại khi add thông tin sản phẩm
-        //history.goBack();
+        if (this.state.txtQuantity !== 0 && this.state.txtQuantity > '0') {
+            var { match } = this.props;
+            var { history } = this.props;
+            var { txtQuantity, id_size, id_color } = this.state;
+            var propductinfo = {
+                id: uniqid("product-info-"),
+                id_product: match.params.id_product,
+                id_size: id_size,
+                id_color: id_color,
+                quantity: txtQuantity
+            };
+            this.props.onAddItemProductInfo(propductinfo);
+            //Không quay lại khi add thông tin sản phẩm
+            history.goBack();
+        }
+        else {
+            toast.error("Số lượng phải lớn hơn 0");
+        }
+
     };
-    
+
     render() {
         var { size } = this.props;
         var { color } = this.props;
