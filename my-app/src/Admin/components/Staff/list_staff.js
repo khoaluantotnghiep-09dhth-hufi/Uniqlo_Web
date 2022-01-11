@@ -65,15 +65,16 @@ class ListStaffs extends React.Component {
     };
   }
   async componentDidMount() {
-    Call_API("staffs", "GET", null)
-      .then((response) => {
+    this.props.fetchStaffs();
+    // Call_API("staffs", "GET", null)
+    //   .then((response) => {
        
-        this.setState({
-          data: response.data,
-          isLoading: false,
-        });
-      })
-      .catch((error) => console.log(error));
+    //     this.setState({
+    //       data: response.data,
+    //       isLoading: false,
+    //     });
+    //   })
+    //   .catch((error) => console.log(error));
   }
   onDeleteStaff = (item) => {
     if (window.confirm('Bạn có chắc muốn xóa không ?')) {
@@ -82,7 +83,8 @@ class ListStaffs extends React.Component {
   };
   render() {
     var { data } = this.state;
-    var dataStaff = data.map((item, index) => {
+    var{staff}=this.props;
+    var dataStaff = staff.map((item, index) => {
       return { ...item, index };
     });
     return (

@@ -163,7 +163,9 @@ class addStaff extends React.Component {
     };
 
     if (match.params.id_staff) {
-      this.props.onUpdateItemStaff(staffUpdate);
+      // this.props.onUpdateItemStaff(staffUpdate);
+      Call_API(`staffs/${match.params.id_staff}`, "PUT", staffUpdate)
+      
       history.goBack();
     } else {
       this.props.onAddItemStaff(staff);
