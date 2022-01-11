@@ -110,24 +110,14 @@ class updateOrder extends React.Component {
 
     if (txtDate >= dateNow || txtDate === dateNow) {
       if (txtConfirm && txtConfirm !== undefined && txtConfirm === "4") {
-<<<<<<< Updated upstream
-    
-       var scoreCustomer= Math.ceil(totalMoney/10000);
-       var objectScore={score:scoreCustomer,}
-       
-      //   Call_API(`customer-score/${id_customer}`, "PUT", objectScore).then(res=>  toast.success("Đã Tích Điểm")).catch(error=> toast.error("Tích Điểm Thất Bại, Yêu Cầu Kiểm Tra Hệ Thống"))
-        
-      // }
-      // this.props.onUpdateItemBill(billUpdate);
-      // history.goBack();
-=======
+
 
         var scoreCustomer = Math.ceil(totalMoney / 10000);
         var objectScore = { score: scoreCustomer, }
 
         Call_API(`customer-score/${id_customer}`, "PUT", objectScore).then(res => toast.success("Đã Tích Điểm")).catch(error => toast.error("Tích Điểm Thất Bại, Yêu Cầu Kiểm Tra Hệ Thống"))
 
->>>>>>> Stashed changes
+        history.goBack();
       }
     } else {
       toast.error("Ngày Giao Phải Lớn Hơn Hoặc Bằng Ngày Hiện Tại !");
