@@ -1519,7 +1519,8 @@ export const onDeleteBanner = (id) => {
 
 export const onDeleteBannerResquest = (id) => {
   return (dispatch) => {
-    return callApi(`banners/${id}`, "DELETE", null).then((response) => {
+    var dataObject={id}
+    return callApi(`delete-banner`, "post", dataObject).then((response) => {
       if (response === undefined) {
         toast.error("Xóa thất bại, vui lòng thử lại !");
       } else {

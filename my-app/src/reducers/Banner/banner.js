@@ -21,7 +21,8 @@ var banner = (state = initialState, action) => {
       return [...state];
     //Xóa banner
     case types.DELETE_BANNER:
-      index = findIndex(state, banner.id);
+     
+      index = findIndex(state, id);
 
       state.splice(index, 1);
 

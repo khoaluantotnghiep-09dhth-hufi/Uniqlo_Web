@@ -2,11 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import * as actions from "./../../../actions/index";
 import Moment from "react-moment";
-import { Image } from 'react-bootstrap';
-import ConvertIMG from '../../utils/getBase64';
+import { Image } from "react-bootstrap";
+import ConvertIMG from "../../utils/getBase64";
 import { Alert } from "react-bootstrap";
 import Call_API from "./../../utils/Callapi";
-
 
 import {
   CCard,
@@ -18,7 +17,12 @@ import {
   CButton,
 } from "@coreui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faPlus, faTimes, faTools } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faPlus,
+  faTimes,
+  faTools,
+} from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 const fields = [
   "STT",
@@ -36,26 +40,19 @@ class ListBanner extends React.Component {
     };
   }
   async componentDidMount() {
-    Call_API("banners", "GET", null)
-      .then((response) => {
-       
-        this.setState({
-          data: response.data,
-          isLoading: false,
-        });
-      })
-      .catch((error) => console.log(error));
+    this.props.fetchBanners();
   }
   onDeleteBanner = (item) => {
-    if (window.confirm('Bạn có chắc muốn xóa không ?')) {
+    if (window.confirm("Bạn có chắc muốn xóa không ?")) {
+      
       this.props.onDeleteItemBanner(item);
     }
   };
   getBadge = (status) => {
     switch (status) {
-      case '1':
+      case "1":
         return "danger";
-      case '0':
+      case "0":
         return "success";
       default:
         return "primary";
@@ -63,8 +60,9 @@ class ListBanner extends React.Component {
   };
   render() {
     var { data } = this.state;
+    var { banner } = this.props;
 
-    var dataBanner = data.map((item, index) => {
+    var dataBanner = banner.map((item, index) => {
       return { ...item, index };
     });
     return (
@@ -102,8 +100,12 @@ class ListBanner extends React.Component {
                           </CButton>
                         </Link>
 
-                        <CButton type="button" className="btn btn-warning"
-                          onClick={() => { this.onDeleteBanner(item.id) }}
+                        <CButton
+                          type="button"
+                          className="btn btn-warning"
+                          onClick={() => {
+                            this.onDeleteBanner(item.id);
+                          }}
                         >
                           <FontAwesomeIcon
                             icon={faTimes}
@@ -112,32 +114,26 @@ class ListBanner extends React.Component {
                           />
                           Xóa
                         </CButton>
-
                       </td>
                     ),
-                    "STT":
-                      (item, index) => (
-                        <td>
-                          {index + 1}
-                        </td>
-                      )
-                      ,
-                      is_active: (item) => (
+                    STT: (item, index) => <td>{index + 1}</td>,
+                    is_active: (item) => (
                       <td>
-                        <Alert variant={this.getBadge(item.status)} 
-                          
-                        
-                        >
-                          {item.is_active === 0 ? "Đang Hoạt Động " : "Tạm Ngưng"}
+                        <Alert variant={this.getBadge(item.status)}>
+                          {item.is_active === 0
+                            ? "Đang Hoạt Động "
+                            : "Tạm Ngưng"}
                         </Alert>
                       </td>
                     ),
-                    'image':
-                      (item, index) => (
-                        <td>
-                          <Image src={item.image} style={{ width: "200px", height: "200px" }} />
-                        </td>
-                      ),
+                    image: (item, index) => (
+                      <td>
+                        <Image
+                          src={item.image}
+                          style={{ width: "200px", height: "200px" }}
+                        />
+                      </td>
+                    ),
                   }}
                 />
               </CCardBody>
