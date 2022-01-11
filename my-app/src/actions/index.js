@@ -1062,7 +1062,8 @@ export const onDeleteCustomer = (id) => {
 
 export const onDeleteCustomerResquest = (id) => {
   return (dispatch) => {
-    return callApi(`customers/${id}`, "DELETE", null).then((response) => {
+    var dataObject={id}
+    return callApi(`delete-customers`, "post", dataObject).then((response) => {
       toast.success("Xóa thành công !");
       dispatch(onDeleteCustomer(id));
     });

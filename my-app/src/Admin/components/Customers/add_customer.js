@@ -27,6 +27,7 @@ class AddCustomer extends React.Component {
       txtEmail: "",
       txtGender: "",
       ImgPrivew: "",
+      txtPassword:"",
       isOpen: false,
     };
   }
@@ -123,7 +124,8 @@ class AddCustomer extends React.Component {
       txtPhone,
       txtImage,
       txtEmail,
-      txtGender
+      txtGender,
+      txtPassword
     } = this.state;
 
     var customer = {
@@ -134,6 +136,7 @@ class AddCustomer extends React.Component {
       image: txtImage,
       email: txtEmail,
       gender: txtGender,
+      password: txtPassword,
     };
     var customerUpdate = {
       id: match.params.id_customer,
@@ -142,7 +145,8 @@ class AddCustomer extends React.Component {
       phone: txtPhone,
       image: txtImage,
       email: txtEmail,
-      gender: txtGender
+      gender: txtGender,
+      password: txtPassword,
     };
 
     if (match.params.id_customer) {
@@ -150,6 +154,10 @@ class AddCustomer extends React.Component {
       history.goBack();
     } else {
       this.props.onAddItemCustomer(customer);
+
+    //  console.log(customer);
+    //   CallAPI("customers", "POST", customer)
+       
       history.goBack();
     }
   };
@@ -257,6 +265,25 @@ class AddCustomer extends React.Component {
               ></div>
             </Col>
           </Row>
+
+
+          <Row sm="12">
+            <Col sm="8">
+              <Form.Group className="mb-3">
+                <Form.Label>Mật Khẩu</Form.Label>
+                <Form.Control
+                  required
+                  type="password"
+                  placeholder="Mật khẩu..."
+                  name="txtPassword"
+                  id="txtPassword"
+               
+                  onChange={(e) => { this.onChange(e, 'txtPassword') }} />
+              </Form.Group>
+            </Col>
+            
+          </Row>
+
           <Row>
             <Form.Group className="d-flex justify-content-center">
               <Button type="button"
