@@ -123,7 +123,9 @@ class Home extends React.Component {
                     xAxes: [{
                         gridLines: {
                             drawOnChartArea: false
-                        }
+                        },
+                        
+                        
                     }],
                     yAxes: [{
                         ticks: {
@@ -131,8 +133,17 @@ class Home extends React.Component {
                             maxTicksLimit: 15,
                             //stepSize: Math.ceil(10000000 / 8),
                             //max: 10000000
-                            stepSize: Math.ceil(99999999 / 8),
-                            max: 99999999
+                            stepSize: Math.ceil(90000000 / 9),
+                            max: 90000000,
+                            userCallback: function(value, index, values) {
+                                // Convert the number to a string and splite the string every 3 charaters from the end
+                                value = value.toString();
+                                value = value.split(/(?=(?:...)*$)/);
+                    
+                                // Convert the array to a string and format the output
+                                value = value.join('.');
+                                return  value + ' ₫';
+                            }
                         },
                         gridLines: {
                             display: true
