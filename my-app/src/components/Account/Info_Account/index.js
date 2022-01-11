@@ -1,4 +1,6 @@
 import React from "react";
+import { toast } from "react-toastify";
+
 import {
   Button,
   Card,
@@ -61,7 +63,7 @@ class index extends React.Component {
           image: data.image,
           email: data.email,
           gender: data.gender,
-          password: data.password,
+         
           score: data.score,
         });
       }
@@ -83,6 +85,10 @@ class index extends React.Component {
       ImgPrivew,
       id,
     } = this.state;
+    if (password ===null||password==="") {
+      toast.error("Bạn Cần Nhập Đủ Thông Tin!");
+
+    }else{
     var profile = {
       id: id,
       name: name,
@@ -95,12 +101,14 @@ class index extends React.Component {
       //cmnn_cccc: cmnn_cccc,
       //score: score,
     };
+   
     this.props.onUpdateItemCustomer(profile);
     
     sessionStorage.removeItem("client");
     this.setState({
       redirect: true,
     });
+    }
   };
   onChangeImage = (e) => {
     let data = e.target.files;
@@ -247,8 +255,8 @@ class index extends React.Component {
                               autofocus
                               type="text"
                               placeholder=" Số Điện Thoại"
-                              name="txtPhone"
-                              id="txtPhone"
+                              name="phone"
+                              id="phone"
                               maxlength="11"
                               minlength="10"
                               pattern="^[0-9]*$"
@@ -298,8 +306,9 @@ class index extends React.Component {
                               autofocus
                               type="email"
                               placeholder=" Email"
-                              name="txtEmail"
-                              id="txtEmail"
+                              value={email}
+                              name="email"
+                              id="email"
                               ref="fieldEmail"
                               onChange={this.onChange}
                             />
@@ -319,8 +328,8 @@ class index extends React.Component {
                               required
                               autofocus
                               type="password"
-                              name="txtPassword"
-                              id="txtPassword"
+                              name="password"
+                              id="password"
                               pattern=".{6,}"
                               ref="fieldPass"
                               className="form-control-alternative"
@@ -363,7 +372,7 @@ class index extends React.Component {
                                 marginTop: "100px",
                                 cursor: "pointer",
                               }}
-                              htmlFor="txtImage"
+                              htmlFor="image"
                             >
                               <FontAwesomeIcon
                                 icon={faUpload}
@@ -373,8 +382,8 @@ class index extends React.Component {
                             </label>
                             <Input
                               type="file"
-                              id="txtImage"
-                              name="txtImage"
+                              id="image"
+                              name="image"
                               hidden
                               onChange={(e) => {
                                 this.onChangeImage(e);

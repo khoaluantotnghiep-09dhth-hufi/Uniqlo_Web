@@ -164,6 +164,9 @@ class index extends Component {
 
     var name = sessionUser.name;
     var id_billReturn = isCheckRequestReturn.id;
+    var dataObject={
+      id:id_billReturn,
+    }
     var reasons = txtHuyDon;
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -176,6 +179,7 @@ class index extends Component {
     if (billReturn) {
 
       this.props.onBillCancel(billReturn);
+       Call_API('bills-exchange-update', "put", dataObject)
       toast.success("Khách Hàng Đã Yêu Cầu Trả Hàng Thành Công, WebSocket");
     }
     socket.emit("customer-request-return-bill", {

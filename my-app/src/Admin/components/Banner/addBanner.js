@@ -40,7 +40,7 @@ class addBanner extends React.Component {
     this.props.onEditItemBanner(match.params.id_banner);
     var { banner } = this.props;
     if (match.params.id_banner) {
-      const result = banner.find((o) => o.id === match.params.id_banner);
+      const result = banner[0];
       this.setState({
         txtImage: result.image,
         txtActive: result.is_active,

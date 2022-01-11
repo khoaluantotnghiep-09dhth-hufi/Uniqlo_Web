@@ -5,7 +5,7 @@ import "react-pro-sidebar/dist/css/styles.css";
 import Login from "./screens/Login/index";
 import Home from "./containers/TheContent";
 
-const sessionUser = JSON.parse(sessionStorage.getItem("user"));
+const sessionUser = JSON.parse(sessionStorage.getItem("admin"));
 class index extends Component {
   render() {
     return (

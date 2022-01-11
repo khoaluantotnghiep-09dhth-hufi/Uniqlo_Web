@@ -19,7 +19,7 @@ import ConvertIMG from '../../utils/getBase64';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 
-const sessionUser = JSON.parse(sessionStorage.getItem("user"));
+const sessionUser = JSON.parse(sessionStorage.getItem("admin"));
 class AddNews extends React.Component {
   constructor(props) {
     super(props);
