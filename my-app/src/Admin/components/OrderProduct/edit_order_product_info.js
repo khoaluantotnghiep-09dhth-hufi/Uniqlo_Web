@@ -54,6 +54,7 @@ class addProduct extends React.Component {
     }
     componentDidMount() {
         var { match } = this.props;
+        console.log(match.params.id_order_info);
         this.props.onEditItemOrderInfo(match.params.id_order_info);
         isLoadingExternally = true;
         this.setState({
@@ -104,16 +105,22 @@ class addProduct extends React.Component {
         let isValid = this.checkValidate();
         if (isValid === false) return;
         event.preventDefault();
-        var { match } = this.props;
-        var { history } = this.props;
-        var { txtQuantity, id_product_info, txtRetal_price } = this.state;
-        var orderInfo = {
-            id: match.params.id_order_info,
-            id_product_info: id_product_info,
-            quantity: txtQuantity,
-        };
-        this.props.onUpdateItemOrderInfo(orderInfo);
-        history.goBack();
+        if (this.state.txtQuantity !== 0 && this.state.txtQuantity > '0') {
+            var { match } = this.props;
+            var { history } = this.props;
+            var { txtQuantity, id_product_info, txtRetal_price } = this.state;
+            var orderInfo = {
+                id: match.params.id_order_info,
+                id_product_info: id_product_info,
+                quantity: txtQuantity,
+            };
+            this.props.onUpdateItemOrderInfo(orderInfo);
+            history.goBack();
+        }
+        else {
+            toast.error("Số lượng phải lớn hơn 0");
+        }
+
     };
     render() {
         var { productInfo } = this.props;
@@ -164,7 +171,7 @@ class addProduct extends React.Component {
                                                 required
                                             />
                                         </Form.Group>
-                                    </Col>  
+                                    </Col>
                                     <Col sm="10">
                                         <Form.Group className="d-flex justify-content-center">
                                             <Button type="button" className="btn btn-danger"

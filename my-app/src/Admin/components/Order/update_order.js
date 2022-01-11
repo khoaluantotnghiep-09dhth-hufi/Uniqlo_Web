@@ -7,7 +7,7 @@ import moment from "moment";
 import { compareAsc, format } from "date-fns";
 import * as actions from "./../../../actions/index";
 import Call_API from "./../../utils/Callapi";
-
+import { Link } from "react-router-dom";
 import {
   CForm,
   CLabel,
@@ -19,7 +19,10 @@ import {
   CButton,
 } from "@coreui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlus,
+  faArrowLeft,
+} from "@fortawesome/free-solid-svg-icons";
 class updateOrder extends React.Component {
   constructor(props) {
     super(props);
@@ -28,29 +31,29 @@ class updateOrder extends React.Component {
       txtDate: "",
       txtDateOrder: "",
       txtConfirm: "",
-      totalMoney:0,
-      id_customer:""
+      totalMoney: 0,
+      id_customer: ""
     };
   }
   componentDidMount() {
     var { match, bill } = this.props;
 
-    
 
-    
+
+
     Call_API(`bills-confirm/${match.params.id_order}`, "GET", null)
-    .then((response) => {
-      var data = response.data[0];
-      this.setState({
-        idItem: data.id,
-        txtDate: data.delivery_date,
-        txtDateOrder: data.order_date,
-        txtConfirm: data.status,
-        totalMoney: data.total,
-        id_customer: data.id_customer,
-      });
-    })
-    .catch((error) => console.log(error));
+      .then((response) => {
+        var data = response.data[0];
+        this.setState({
+          idItem: data.id,
+          txtDate: data.delivery_date,
+          txtDateOrder: data.order_date,
+          txtConfirm: data.status,
+          totalMoney: data.total,
+          id_customer: data.id_customer,
+        });
+      })
+      .catch((error) => console.log(error));
 
   }
   componentWillReceiveProps(NextProps) {
@@ -91,7 +94,7 @@ class updateOrder extends React.Component {
     var { match } = this.props;
     event.preventDefault();
     var { history } = this.props;
-    var { idItem, txtDate, txtConfirm,totalMoney,id_customer } = this.state;
+    var { idItem, txtDate, txtConfirm, totalMoney, id_customer } = this.state;
     var sessionUser = JSON.parse(sessionStorage.getItem("admin"));
     var convertDate = moment(txtDate).format("YYYY-MM-DD");
     var dateNow = moment().format("YYYY-MM-DD");
@@ -104,9 +107,10 @@ class updateOrder extends React.Component {
       delivery_date: convertDate,
       status: txtConfirm,
     };
-  
+
     if (txtDate >= dateNow || txtDate === dateNow) {
       if (txtConfirm && txtConfirm !== undefined && txtConfirm === "4") {
+<<<<<<< Updated upstream
     
        var scoreCustomer= Math.ceil(totalMoney/10000);
        var objectScore={score:scoreCustomer,}
@@ -116,6 +120,14 @@ class updateOrder extends React.Component {
       // }
       // this.props.onUpdateItemBill(billUpdate);
       // history.goBack();
+=======
+
+        var scoreCustomer = Math.ceil(totalMoney / 10000);
+        var objectScore = { score: scoreCustomer, }
+
+        Call_API(`customer-score/${id_customer}`, "PUT", objectScore).then(res => toast.success("Đã Tích Điểm")).catch(error => toast.error("Tích Điểm Thất Bại, Yêu Cầu Kiểm Tra Hệ Thống"))
+
+>>>>>>> Stashed changes
       }
     } else {
       toast.error("Ngày Giao Phải Lớn Hơn Hoặc Bằng Ngày Hiện Tại !");
@@ -127,6 +139,11 @@ class updateOrder extends React.Component {
     var formatDate = moment(txtDateOrder).format("DD-MM-YYYY");
     return (
       <CContainer fluid>
+        <Link to="/admin/system/order/delivered">
+          <CButton type="button" className="btn btn-primary" size="sm">
+            <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />Trở về
+          </CButton>
+        </Link>
         <CRow>
           <CCol sm="12">
             <CForm action="" method="post" onSubmit={this.onSubmitForm}>
@@ -188,10 +205,17 @@ class updateOrder extends React.Component {
                       <option value="4">Đã Giao</option>
                     </>
                   ) : match.params.status === "4" ? (
-                    ""
-                  ) : (
-                    ""
-                  )}
+                    <>
+                      <option value="5">Yêu Cầu Đổi/Trả</option>
+                    </>
+                  ) : match.params.status === "5" ? (
+                    <>
+                      <option value="6">Xác Nhận Đổi</option>
+                      <option value="7">Từ Chối Đổi</option>
+                    </>
+                  ) : 
+                  ("")
+                  }
                 </select>
               </CFormGroup>
               <CFormGroup>

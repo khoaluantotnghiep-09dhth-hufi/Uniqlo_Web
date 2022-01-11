@@ -103,34 +103,40 @@ class AddCategory extends React.Component {
         var { match } = this.props;
         if (isValid === false) return;
         event.preventDefault();
-        var { history } = this.props;
-        var { id_bill_info, txtReason, txtDateImport, txtQuantity, id_product_info } = this.state;
+        if (this.state.txtQuantity !== 0 && this.state.txtQuantity > '0') {
+            var { history } = this.props;
+            var { id_bill_info, txtReason, txtDateImport, txtQuantity, id_product_info } = this.state;
 
-        var exchange = {
-            id: uniqid("exchange-"),
-            id_bill_info: id_bill_info,
-            reason: txtReason,
-            id_staff_change: sessionUser.id_user,
-        };
-        var importProduct = {
-            id: uniqid("import-change-"),
-            date_import: txtDateImport,
-        };
-        var importInfoProduct = {
-            id: uniqid("import-change-"),
-            id_import: importProduct.id,
-            quantity: txtQuantity,
-            id_product_info: id_product_info
-        };
-        var billInfo = {
-            id_product_info: id_product_info,
-            quantity: txtQuantity,
+            var exchange = {
+                id: uniqid("exchange-"),
+                id_bill_info: id_bill_info,
+                reason: txtReason,
+                id_staff_change: sessionUser.id_user,
+            };
+            var importProduct = {
+                id: uniqid("import-change-"),
+                date_import: txtDateImport,
+            };
+            var importInfoProduct = {
+                id: uniqid("import-change-"),
+                id_import: importProduct.id,
+                quantity: txtQuantity,
+                id_product_info: id_product_info
+            };
+            var billInfo = {
+                id_product_info: id_product_info,
+                quantity: txtQuantity,
+            }
+            this.props.onAddItemExchange(exchange);
+            this.props.onAddItemImport(importProduct);
+            this.props.onAddItemImportInfo(importInfoProduct);
+            this.props.onUpdateItemBillInfo(billInfo);
+            history.goBack();
         }
-        this.props.onAddItemExchange(exchange);
-        this.props.onAddItemImport(importProduct);
-        this.props.onAddItemImportInfo(importInfoProduct);
-        this.props.onUpdateItemBillInfo(billInfo);
-        history.goBack();
+        else {
+            toast.error("Số lượng phải lớn hơn 0");
+        }
+
     };
     render() {
         var { billInfo } = this.props;

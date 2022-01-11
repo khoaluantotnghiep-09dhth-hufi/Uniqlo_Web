@@ -106,7 +106,7 @@ class Delivered extends React.Component {
           Loading...
         </button>
       </div>
-    ) :(
+    ) : (
       <>
         <CSVLink
           className="btn btn-success"
@@ -136,8 +136,18 @@ class Delivered extends React.Component {
                     "Hành Động": (item) => (
                       <td>
                         <Link to={`/admin/system/order/${item.id}/detail`}>
-                        <CButton type="button" className="btn btn-info">
+                          <CButton type="button" className="btn btn-info">
                             Chi Tiết
+                          </CButton>
+                        </Link>
+                        <Link to={`/admin/system/order/${item.id}/${item.status}/edit`}>
+                          <CButton type="button" className="btn btn-primary">
+                            <FontAwesomeIcon
+                              icon={faCheck}
+                              className="mr-2"
+                              size="lg"
+                            />
+                            Cập Nhật
                           </CButton>
                         </Link>
                       </td>

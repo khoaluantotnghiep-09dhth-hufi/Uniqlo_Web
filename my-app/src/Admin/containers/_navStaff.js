@@ -128,13 +128,13 @@ const _navStaff = [
     icon: <FontAwesomeIcon icon={faImage} className="mr-2" />,
 
   },
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Thống Kê Doanh Số',
-    to: '/admin/manage/statistical',
-    icon: <FontAwesomeIcon icon={faChartLine} className="mr-2" />,
+  // {
+  //   _tag: 'CSidebarNavItem',
+  //   name: 'Thống Kê Doanh Số',
+  //   to: '/admin/manage/statistical',
+  //   icon: <FontAwesomeIcon icon={faChartLine} className="mr-2" />,
 
-  },
+  // },
   {
     _tag: 'CSidebarNavDropdown',
     name: 'Nhập/Xuất Kho',

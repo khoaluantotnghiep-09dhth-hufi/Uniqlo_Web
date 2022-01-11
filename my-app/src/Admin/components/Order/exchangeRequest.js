@@ -69,6 +69,11 @@ class ExchangeRequest extends React.Component {
         return "primary";
     }
   };
+  onDeleteProduct = (id) => {
+    if (window.confirm("Bạn có chắc muốn xóa không ?")) {
+      this.props.onDeleteItemProduct(id);
+    }
+  };
   render() {
     var { bill } = this.props;
 
@@ -106,12 +111,7 @@ class ExchangeRequest extends React.Component {
                     ),
                     "Hành Động": (item) => (
                       <td>
-                        {/* <Link to={`/admin/system/order/${item.id}/detail`}>
-                          <CButton type="button" className="btn btn-info">
-                            Chi Tiết
-                          </CButton>
-                        </Link>
-                        <Link to={`/admin/system/order/${item.id}/edit`}>
+                        <Link to={`/admin/system/order/${item.id}/${item.status}/edit`}>
                           <CButton type="button" className="btn btn-primary">
                             <FontAwesomeIcon
                               icon={faCheck}
@@ -120,7 +120,7 @@ class ExchangeRequest extends React.Component {
                             />
                             Cập Nhật
                           </CButton>
-                        </Link> */}
+                        </Link>
                       </td>
                     ),
                     order_date: (item) => (

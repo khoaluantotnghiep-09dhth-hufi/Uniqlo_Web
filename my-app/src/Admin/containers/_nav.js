@@ -137,13 +137,13 @@ const _nav = [
     _tag: 'CSidebarNavTitle',
     _children: ['Quản Lý']
   },
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Thống Kê Doanh Số',
-    to: '/admin/manage/statistical',
-    icon: <FontAwesomeIcon icon={faChartLine} className="mr-2" />,
+  // {
+  //   _tag: 'CSidebarNavItem',
+  //   name: 'Thống Kê Doanh Số',
+  //   to: '/admin/manage/statistical',
+  //   icon: <FontAwesomeIcon icon={faChartLine} className="mr-2" />,
 
-  },
+  // },
   {
     _tag: 'CSidebarNavItem',
     name: 'Quản Lý Banner',

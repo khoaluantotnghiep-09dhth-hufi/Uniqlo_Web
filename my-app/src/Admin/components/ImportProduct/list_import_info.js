@@ -142,19 +142,25 @@ class addProduct extends React.Component {
         let isValid = this.checkValidate();
         if (isValid === false) return;
         event.preventDefault();
-        var { match } = this.props;
-        var { history } = this.props;
-        var { txtQuantity, id_product_info, id_order_info } = this.state;
-        var ImportInfo = {
-            id: uniqid("import-info-"),
-            id_order_info: id_order_info,
-            id_product_info: id_product_info,
-            quantity: txtQuantity,
-            id_import: match.params.id_import,
+        if (this.state.txtQuantity !== 0 && this.state.txtQuantity > '0') {
+            var { match } = this.props;
+            var { history } = this.props;
+            var { txtQuantity, id_product_info, id_order_info } = this.state;
+            var ImportInfo = {
+                id: uniqid("import-info-"),
+                id_order_info: id_order_info,
+                id_product_info: id_product_info,
+                quantity: txtQuantity,
+                id_import: match.params.id_import,
 
-        };
-        this.props.onAddItemImportInfo(ImportInfo);
-        history.goBack();
+            };
+            this.props.onAddItemImportInfo(ImportInfo);
+            history.goBack();
+        }
+        else {
+            toast.error("Số lượng phải lớn hơn 0");
+        }
+
     };
     render() {
         var { productInfo } = this.props;

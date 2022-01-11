@@ -106,6 +106,8 @@ class addProduct extends React.Component {
         this.setState({
             ...coppyState
         })
+
+
     }
 
     checkValidate = () => {
@@ -125,17 +127,22 @@ class addProduct extends React.Component {
         let isValid = this.checkValidate();
         if (isValid === false) return;
         event.preventDefault();
-        var { match } = this.props;
-        var { history } = this.props;
-        var { txtQuantity, id_product_info, txtRetal_price } = this.state;
-        var orderInfo = {
-            id: uniqid("order-info-"),
-            id_order: match.params.id_order,
-            id_product_info: id_product_info,
-            quantity: txtQuantity,
-        };
-        this.props.onAddItemOrderInfo(orderInfo);
-        history.goBack();
+        if (this.state.txtQuantity !== 0 && this.state.txtQuantity > '0') {
+            var { match } = this.props;
+            var { history } = this.props;
+            var { txtQuantity, id_product_info, txtRetal_price } = this.state;
+            var orderInfo = {
+                id: uniqid("order-info-"),
+                id_order: match.params.id_order,
+                id_product_info: id_product_info,
+                quantity: txtQuantity,
+            };
+            this.props.onAddItemOrderInfo(orderInfo);
+            history.goBack();
+        }
+        else {
+            toast.error("Số lượng phải lớn hơn 0");
+        }
     };
     render() {
         var { productInfo } = this.props;
@@ -241,21 +248,13 @@ class addProduct extends React.Component {
                                                                 </CButton>
                                                             }
                                                             {item.status === 0 ?
-                                                                <Link to="/admin/manage/product/../edit">
+                                                                <Link to={`/admin/manage/order-info-edit/${item.id}/edit`}>
                                                                     <CButton type="button" className="btn btn-primary">
                                                                         <FontAwesomeIcon icon={faTools} className="mr-2" size="lg" />Sửa
                                                                     </CButton>
                                                                 </Link>
                                                                 : ""
                                                             }
-
-                                                            {/* <CButton type="button" className="btn btn-warning"
-                                                        onClick={() => { this.onDeleteOrderInfo(item.id) }}
-                                                    >
-                                                        <FontAwesomeIcon icon={faTimes} className="mr-2" size="lg" />Xóa
-                                                    </CButton> */}
-
-
                                                         </td>
 
                                                     ),
@@ -271,15 +270,6 @@ class addProduct extends React.Component {
                                                             <Image style={{ width: "300px", height: "300px" }} src={item.image} thumbnail />
                                                         </td>
                                                     ),
-                                                // "nameColor": (item) => (
-                                                //     <td>
-                                                //         <Alert variant={getBadge(item.nameColor)}>
-                                                //             {/* {item.status === 0 ? 'Chưa Giao' : 'Đã Giao'} */}
-                                                //         </Alert>
-
-
-                                                //     </td>
-                                                // ),
                                             }}
                                         />
                                     </CCardBody>
