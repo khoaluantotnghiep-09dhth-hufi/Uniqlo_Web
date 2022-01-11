@@ -46,7 +46,7 @@ const fields = [
 
   { key: "index", label: "STT" },
   { key: "order_date", label: "Ngày Đặt Hàng" },
-  { key: "delivery_date", label: "Ngày Giao Hàng" },
+
   { key: "name", label: "Tên Sản Phẩm" },
   { key: "image", label: "Hình Ảnh" },
   { key: "nameColor", label: "Màu" },
@@ -54,8 +54,8 @@ const fields = [
   { key: "quantity", label: "Tổng Số Lượng" },
   { key: "priceProduct", label: "Giá Sản Phẩm" },
 
-  { key: "into_money", label: "Tổng Tiền" },
-  { label: "Thao Tác" },
+  
+
 ];
 
 

@@ -5,7 +5,9 @@ import * as actions from "./../../../actions/index";
 import ConvertIMG from "../../utils/getBase64";
 import { Button, Form, Col, Container, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
-import moment from 'moment';
+import moment from "moment";
+import Call_API from "./../../utils/Callapi";
+
 import {
   CForm,
   CLabel,
@@ -37,30 +39,38 @@ class addBanner extends React.Component {
   }
   componentDidMount() {
     var { match } = this.props;
-    this.props.onEditItemBanner(match.params.id_banner);
-    var { banner } = this.props;
+  
+    var dataObject = {
+      id: match.params.id_banner,
+    };
     if (match.params.id_banner) {
-      const result = banner[0];
-      this.setState({
-        txtImage: result.image,
-        txtActive: result.is_active,
-      });
+      Call_API(`get-update-banner`, "post", dataObject)
+        .then((response) => {
+          var data = response.data[0];
+          console.log(data);
+          this.setState({
+            txtImage: data.image,
+            txtActive: data.is_active,
+            ImgPrivew:data.image
+          });
+        })
+        .catch((error) => console.log(error));
     }
   }
-  componentWillReceiveProps(NextProps) {
-    var { match } = this.props;
-    if (NextProps && NextProps.banner) {
-      var { banner } = NextProps;
-    
-      if (match.params.id_banner) {
-        const result = banner.find((o) => o.id === match.params.id_banner);
-        this.setState({
-          txtImage: result.image,
-          txtActive: result.is_active,
-        });
-      }
-    }
-  }
+  // componentWillReceiveProps(NextProps) {
+  //   var { match } = this.props;
+  //   if (NextProps && NextProps.banner) {
+  //     var { banner } = NextProps;
+
+  //     if (match.params.id_banner) {
+
+  //       this.setState({
+  //         txtImage: banner.image,
+  //         txtActive: banner.is_active,
+  //       });
+  //     }
+  //   }
+  // }
   onChangeImage = (e) => {
     let data = e.target.files;
     let file = data[0];
@@ -75,13 +85,22 @@ class addBanner extends React.Component {
       });
     }
   };
-  onChange = (e, id) => {
-    let coppyState = { ...this.state };
-    coppyState[id] = e.target.value;
+
+  onChange = (event) => {
+    var target = event.target;
+    var name = target.name;
+    var value = target.value;
     this.setState({
-      ...coppyState,
+      [name]: value,
     });
   };
+  // onChange = (e, id) => {
+  //   let coppyState = { ...this.state };
+  //   coppyState[id] = e.target.value;
+  //   this.setState({
+  //     ...coppyState,
+  //   });
+  // };
   openPreviewIMG = () => {
     this.setState({
       isOpen: true,
@@ -117,10 +136,10 @@ class addBanner extends React.Component {
 
       is_active: parseInt(txtActive),
     };
-    console.log("Banner Update :"+bannerUpdate)
-    
+    console.log("Banner Update :" + bannerUpdate);
+
     if (match.params.id_banner) {
-    console.log("Banner Update :"+bannerUpdate)
+      console.log("Banner Update :" + bannerUpdate);
 
       this.props.onUpdateItemBanner(bannerUpdate);
       history.goBack();
@@ -130,7 +149,7 @@ class addBanner extends React.Component {
     }
   };
   render() {
-    let { txtName, ImgPrivew, txtImage } = this.state;
+    let { txtName, ImgPrivew, txtImage,txtActive } = this.state;
     return (
       <CContainer fluid>
         <CRow>
@@ -166,12 +185,11 @@ class addBanner extends React.Component {
                         type="file"
                         id="txtImage"
                         name="txtImage"
-                     
+                  
                         hidden
                         onChange={(e) => {
                           this.onChangeImage(e);
                         }}
-                      
                       />
                     </Form.Group>
                   </Col>
@@ -198,7 +216,7 @@ class addBanner extends React.Component {
                     class="form-select"
                     aria-label="Default select example"
                     name="txtActive"
-                    // value={this.state.txtConfirm}
+                    value={txtActive}
                     onChange={(e) => {
                       this.onChange(e, "txtActive");
                     }}

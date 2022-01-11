@@ -255,7 +255,7 @@ class index extends Component {
       var today = new Date();
       //Khách hàng phát tín hiệu khi Order
       socket.emit("customer-order", { name, quantity, today });
-      toast.success("Khách Hàng Đã Order Gửi Lên WebSocket");
+     
       console.log("On reset Cart: " + JSON.stringify(bill_info));
       this.props.onResetCart(sessionCart);
       sessionStorage.removeItem("cart");
@@ -277,7 +277,7 @@ class index extends Component {
 
       if (bills) {
         this.props.onBillCancel(bills);
-        toast.success("Khách Hàng Đã Yêu Cầu Hủy Đơn Thành Công, WebSocket");
+     
       }
       this.setState({
         isCheckOrder: true,
