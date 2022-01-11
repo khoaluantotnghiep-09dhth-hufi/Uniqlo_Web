@@ -62,15 +62,16 @@ class ListDiscount extends React.Component {
     };
   }
   async componentDidMount() {
-    Call_API("promotions", "GET", null)
-      .then((response) => {
+    this.props.fetchPromotions();
+    // Call_API("promotions", "GET", null)
+    //   .then((response) => {
        
-        this.setState({
-          data: response.data,
-          isLoading: false,
-        });
-      })
-      .catch((error) => console.log(error));
+    //     this.setState({
+    //       data: response.data,
+    //       isLoading: false,
+    //     });
+    //   })
+    //   .catch((error) => console.log(error));
   }
   onDeletePromotion = (item) => {
     if (window.confirm("Bạn có chắc muốn xóa không ?")) {
@@ -79,8 +80,10 @@ class ListDiscount extends React.Component {
   };
   render() {
     var { data } = this.state;
+    var { promotion } = this.props;
 
-    var dataPromotion = data.map((item, index) => {
+
+    var dataPromotion = promotion.map((item, index) => {
 
       return { ...item, index };
     });

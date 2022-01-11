@@ -119,6 +119,8 @@ class updateOrder extends React.Component {
 
         history.goBack();
       }
+          this.props.onUpdateItemBill(billUpdate);
+          history.goBack();
     } else {
       toast.error("Ngày Giao Phải Lớn Hơn Hoặc Bằng Ngày Hiện Tại !");
     }
