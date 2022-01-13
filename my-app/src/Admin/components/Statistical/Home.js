@@ -124,6 +124,16 @@ class Home extends React.Component {
                         gridLines: {
                             drawOnChartArea: false
                         },
+                        display: true,
+            type: 'time',
+            time: {
+       
+              unit: 'day',
+             
+              displayFormats: {
+                'day': 'DD/MM/YYYY'
+              }
+            }
                         
                         
                     }],
