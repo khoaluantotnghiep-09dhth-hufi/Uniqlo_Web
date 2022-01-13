@@ -113,15 +113,7 @@ class Home extends React.Component {
           borderWidth: 2,
           data: dataSumImportQuantity
         },
-        // {
-        //     label: 'My Third dataset',
-        //     backgroundColor: 'transparent',
-        //     borderColor: brandDanger,
-        //     pointHoverBackgroundColor: brandDanger,
-        //     borderWidth: 1,
-        //     borderDash: [8, 5],
-        //     data: data3
-        // }
+       
       ]
     })()
     const defaultOptions = (() => {
@@ -134,7 +126,17 @@ class Home extends React.Component {
           xAxes: [{
             gridLines: {
               drawOnChartArea: false
-            }
+            } ,
+            display: true,
+            type: "time",
+            time: {
+             
+              unit: "day",
+              unitStepSize: 1,
+              displayFormats: {
+                day: "DD/MM/YYYY",
+              },
+            },
           }],
           yAxes: [{
             ticks: {
@@ -155,7 +157,12 @@ class Home extends React.Component {
             hoverRadius: 4,
             hoverBorderWidth: 3
           }
-        }
+        }, tooltips: {
+           
+          callbacks: {
+             title: function() {}
+          }
+      }
       }
     }
     )()
