@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom";
 import {Nav } from 'react-bootstrap';
 import $ from "jquery";
 import { toast } from "react-toastify";
+import Call_API from "./../../Admin/utils/Callapi";
+
 import Item from "./../Category_Product/Item_Product/index";
 import {
   Container,
@@ -27,6 +29,7 @@ class index extends Component {
       quantityOfSize: 0,
       isChooseColor: "",
       isTogglFromSize: false,
+      products:{}
     };
   }
   componentDidMount() {
@@ -34,6 +37,10 @@ class index extends Component {
     var id_product = match.params.id_product;
 
     this.props.onGetAllProduct(id_product);
+    Call_API(`products/${id_product}`, "GET", null).then((response) => {
+      this.setState({products:response.data});
+    });
+  
     this.props.onGetAllSizeByProduct(id_product);
   }
 
@@ -298,9 +305,9 @@ console.log(JSON.stringify(onTakeIdProductInfo));
   };
 
   render() {
-    var { match, products_category, color_by_size, products } = this.props;
+    var { match, products_category, color_by_size} = this.props;
     var id_product = match.params.id_product;
-    var { txtSize, isChooseColor } = this.state;
+    var { txtSize, isChooseColor, products  } = this.state;
     var {  isTogglFromSize } = this.state;
     var elmSize = isTogglFromSize ? (
       <Size onCloseForm={this.onCloseForm} />
