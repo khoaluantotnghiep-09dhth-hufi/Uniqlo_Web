@@ -1,23 +1,17 @@
-import React from 'react';
 import {
-    Button,
-    Card,
-    CardHeader,
-    CardBody,
-    FormGroup,
-    Form,
-    Input,
-    Container,
-    Row,
-    Col,
-} from "reactstrap";
+    faUpload
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ConvertIMG from '../../utils/getBase64';
-import * as actions from "./../../../actions/index";
+import React from 'react';
 import { connect } from "react-redux";
 import {
-    faUpload,
-} from "@fortawesome/free-solid-svg-icons";
+    Button,
+    Card, CardBody, CardHeader, Col, Container, Form, FormGroup, Input, Row
+} from "reactstrap";
+import ConvertIMG from '../../utils/getBase64';
+import * as actions from "./../../../actions/index";
+import Call_API from "./../../utils/Callapi";
+
 var sessionUser = JSON.parse(sessionStorage.getItem("admin"));
 
 class AddAccountAdmin extends React.Component {
@@ -36,6 +30,24 @@ class AddAccountAdmin extends React.Component {
             ImgPrivew: sessionUser.image,
             isOpen: false,
         }
+    }
+
+    componentDidMount() {
+        Call_API(`staffs/${sessionUser.id_user}`, "GET", null)
+        .then((response) => {
+          var data = response.data[0];
+          this.setState({
+            name: data.name,
+            phone: data.phone,
+            gender: data.gender,
+            image: data.image,
+            address: data.address,
+            email: data.email,
+            place_of_birth: data.place_of_birth,
+            cmnn_cccc: data.cmnn_cccc,
+            ImgPrivew: data.image,
+          });
+        })
     }
     onHandleSubmitLogin = (e) => {
         e.preventDefault();
