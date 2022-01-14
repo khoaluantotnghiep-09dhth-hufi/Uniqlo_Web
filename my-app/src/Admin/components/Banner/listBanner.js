@@ -1,29 +1,23 @@
-import React from "react";
-import { connect } from "react-redux";
-import * as actions from "./../../../actions/index";
-import Moment from "react-moment";
-import { Image } from "react-bootstrap";
-import ConvertIMG from "../../utils/getBase64";
-import { Alert } from "react-bootstrap";
-import Call_API from "./../../utils/Callapi";
-
 import {
-  CCard,
+  CButton, CCard,
   CCardBody,
   CCardHeader,
   CCol,
   CDataTable,
-  CRow,
-  CButton,
+  CRow
 } from "@coreui/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCheck,
   faPlus,
   faTimes,
-  faTools,
+  faTools
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import { Alert, Image } from "react-bootstrap";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import * as actions from "./../../../actions/index";
+
 const fields = [
   "STT",
   { key: "image", label: "Hình Ảnh" },
@@ -53,9 +47,9 @@ class ListBanner extends React.Component {
       case "1":
         return "danger";
       case "0":
-        return "success";
-      default:
         return "primary";
+      default:
+        return "success";
     }
   };
   render() {
@@ -119,7 +113,7 @@ class ListBanner extends React.Component {
                     STT: (item, index) => <td>{index + 1}</td>,
                     is_active: (item) => (
                       <td>
-                        <Alert variant={this.getBadge(item.status)}>
+                        <Alert variant={this.getBadge(item.is_active)}>
                           {item.is_active === 0
                             ? "Đang Hoạt Động "
                             : "Tạm Ngưng"}
