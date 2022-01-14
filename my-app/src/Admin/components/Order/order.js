@@ -54,15 +54,17 @@ const fields = [
     label: "Mã HD",
     _style: { width: "1%" },
     sorter: false,
-    filter: false,
+    filter: true,
   },
   {
     key: "order_date",
     label: "Ngày Đặt Hàng",
+    filter: false,
   },
   {
     key: "delivery_date",
     label: "Ngày Giao Hàng",
+    filter: false,
   },
   {
     key: "name_customer",
@@ -71,6 +73,7 @@ const fields = [
   {
     key: "address",
     label: "Địa Chỉ",
+    filter: false,
   },
   {
     key: "phone",
@@ -84,6 +87,7 @@ const fields = [
     key: "total_quantity",
     label: "Tổng Số Lượng",
     _style: { width: "1%" },
+    
   },
   {
     key: "total",
@@ -92,6 +96,7 @@ const fields = [
   {
     key: "note",
     label: "Ghi Chú",
+    filter: false,
   },
   {
     key: "status",
@@ -103,7 +108,8 @@ const fields = [
     key: "Hành Động",
     label: "Hành Động",
     _style: { width: "1%" },
-    filter: true,
+    filter: false,
+    sort: false,
   },
 ];
 
