@@ -28,7 +28,7 @@ var color = (state = initialState, action) => {
       return [...state];
     //Thêm Mau
     case types.ADD_COLOR:
-      console.log(action.color);
+
       state.push(action.color);
 
       return [...state];

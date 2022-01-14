@@ -1,14 +1,14 @@
-import { Col, Form, Button, Container, Row } from "react-bootstrap";
+import { getAuth, RecaptchaVerifier } from "firebase/auth";
 import React, { Component } from "react";
-import firebase from "../../../firebase";
-import { toast } from "react-toastify";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-
-import "./Forgot_Pass.scss";
+import { toast } from "react-toastify";
+import firebase from "../../../firebase";
 import * as actions from "./../../../actions/index";
-import { getAuth, RecaptchaVerifier } from "firebase/auth";
 import callApi from "./../../../Admin/utils/Callapi";
+import "./Forgot_Pass.scss";
+
 const auth = getAuth();
 
 var sessionUser = JSON.parse(sessionStorage.getItem("client"));
@@ -61,7 +61,7 @@ class index extends Component {
     e.preventDefault();
     this.configureCaptcha();
     const phoneNumber = "+84" + this.state.mobile;
-    console.log(phoneNumber);
+
     const appVerifier = window.recaptchaVerifier;
     firebase
       .auth()
@@ -75,7 +75,7 @@ class index extends Component {
           { autoClose: 2500 },
           { position: toast.POSITION.UPPER_RIGHT }
         );
-        console.log("OTP has been sent");
+
         // ...
       })
       .catch((error) => {
@@ -86,7 +86,7 @@ class index extends Component {
           { autoClose: 2500 },
           { position: toast.POSITION.UPPER_RIGHT }
         );
-        console.log("SMS not sent");
+
       });
     this.setState({
       isDisplayFormAuthen: true,
@@ -95,38 +95,24 @@ class index extends Component {
   onSubmitOTP = (e) => {
     e.preventDefault();
     const code = this.state.otp;
-    console.log(code);
+
     var{users}=this.props;
     var { mobile, passwordnew } = this.state;
     var takeIdUserToUpdate=users.find(user => user.phone===mobile);
-    console.log(JSON.stringify(takeIdUserToUpdate));
+
     var userPost = {
      
       phone: mobile,
       password: passwordnew,
     };
 
-//Bỏ dòng này để cho goi API 
 
-    // for (let i = 0; i < users.length; i++) {
-    //   if (users[i].phone !== mobile) {
-    //     toast.error(
-    //       <div>
-    //         Số điện thoại không tồn tại.
-    //         <br /> Bạn cần nhập đúng số điện thoại!
-    //       </div>,
-    //       { autoClose: 2500 },
-    //       { position: toast.POSITION.UPPER_RIGHT }
-    //     );
-    //     return;
-    //   }     
-    // }
     window.confirmationResult
       .confirm(code)
       .then((result) => {
         // User signed in successfully.
         const user = result.user;
-        console.log(JSON.stringify(user));
+
         toast.success(
           <div>Xác minh thành công!</div>,
           { autoClose: 2500 },
@@ -151,7 +137,7 @@ class index extends Component {
       });
   };
   render() {
-    var { users } = this.props;
+
     var { isDisplayFormAuthen,redirect } = this.state;
     if (redirect) {
       return <Redirect to="/login" />;
@@ -234,6 +220,7 @@ class index extends Component {
                   type="submit"
                   className="button--width"
                 >
+                
                   Gửi
                 </Button>
               </Form.Group>

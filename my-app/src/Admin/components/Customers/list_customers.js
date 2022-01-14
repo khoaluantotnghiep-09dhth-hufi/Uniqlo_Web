@@ -87,15 +87,7 @@ class ListCustomers extends React.Component {
   }
   async componentDidMount() {
     this.props.fetchCustomers();
-    // Call_API("customers", "GET", null)
-    //   .then((response) => {
-       
-    //     this.setState({
-    //       data: response.data,
-    //       isLoading: false,
-    //     });
-    //   })
-    //   .catch((error) => console.log(error));
+    
   }
   onDeleteCustomer = (item) => {
     if (confirm("Bạn chắc chắn muốn xóa ?")) {  //eslint-disable-line

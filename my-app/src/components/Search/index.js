@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import Item from "./../../components/Category_Product/Item_Product/index";
+import { Col, Container, Row } from "react-bootstrap";
 import { connect } from "react-redux";
-import * as actions_of_index from "./../../actions/productActions";
-import CallApi from "./../../Admin/utils/Callapi";
 import * as actions from "./../../actions/index";
+import CallApi from "./../../Admin/utils/Callapi";
+import Item from "./../../components/Category_Product/Item_Product/index";
 import "./Search.scss";
 class index extends Component {
   constructor(props) {
@@ -23,7 +22,7 @@ class index extends Component {
     try {
      CallApi(`web-search/${keySearch}`, "GET", null).then(
         (response) => {
-          console.log("Products now: " + JSON.stringify(response));
+
           this.setState({
             productsSearch: response.data,
             isLoading: true,

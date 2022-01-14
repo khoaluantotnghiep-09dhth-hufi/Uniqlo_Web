@@ -1,27 +1,18 @@
-import React, { Component } from "react";
-import io from "socket.io-client";
 import emailjs from "emailjs-com";
-import Call_API from "./../../Admin/utils/Callapi";
-
+import React, { Component } from "react";
 import {
-  Container,
-  Row,
-  Col,
-  Button,
-  Form,
-  FloatingLabel,
-  Alert,
-  InputGroup,
-  FormControl,
+  Alert, Button, Col, Container, FloatingLabel, Form, Row
 } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
-import uniqid from "uniqid";
-
-import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { toast } from "react-toastify";
+import io from "socket.io-client";
+import uniqid from "uniqid";
 import * as actions from "./../../actions/index";
 import API_Address from "./../../Admin/utils/Api_Address_CheckOut";
-import { toast } from "react-toastify";
+import Call_API from "./../../Admin/utils/Callapi";
+
+
 
 const socket = io("http://localhost:3008");
 const sessionUser = JSON.parse(sessionStorage.getItem("client"));
@@ -52,7 +43,7 @@ class index extends Component {
     Call_API(`customers/${sessionUser.id_user}`, "GET", null).then(
       (response) => {
         var data = response.data[0];
-        console.log(data);
+      
         this.setState({
           txtHoTen: data.name,
           txtDiaChi: data.address,
@@ -256,7 +247,7 @@ class index extends Component {
       //Khách hàng phát tín hiệu khi Order
       socket.emit("customer-order", { name, quantity, today });
      
-      console.log("On reset Cart: " + JSON.stringify(bill_info));
+
       this.props.onResetCart(sessionCart);
       sessionStorage.removeItem("cart");
 

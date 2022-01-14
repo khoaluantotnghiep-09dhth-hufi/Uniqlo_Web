@@ -58,7 +58,7 @@ class ListNews extends React.Component {
 
     render() {
         var { news } = this.props;
-        console.log("News :" + news)
+
         
         // Sai Duong Dan Route
         var dataNews = news.map((item, index) => {

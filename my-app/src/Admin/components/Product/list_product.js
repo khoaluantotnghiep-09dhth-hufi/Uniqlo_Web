@@ -115,7 +115,7 @@ class ListProducts extends React.Component {
               isLoading: false,
             });
           })
-          .catch((error) => console.log(error));
+         
       }
     onDeleteProduct = (id) => {
         if (window.confirm("Bạn có chắc muốn xóa không ?")) {

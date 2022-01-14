@@ -61,7 +61,7 @@ class addProduct extends React.Component {
           txtStatus: data.status,
         });
       })
-      .catch((error) => console.log(error));
+     
 
     // if (match.params.id_product) {
     //     const result = products.find(
@@ -129,7 +129,7 @@ class addProduct extends React.Component {
       {
         ...coppyState,
       },
-      () => console.log(this.state)
+  
     );
   };
   onChangeImage = (e) => {

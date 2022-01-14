@@ -73,7 +73,7 @@ class ListImportProduct extends React.Component {
           isLoading: false,
         });
       })
-      .catch((error) => console.log(error));
+
   }
   onDeleteImportProduct = (id) => {
     if (window.confirm("Bạn chắc chắn muốn xóa ?")) {

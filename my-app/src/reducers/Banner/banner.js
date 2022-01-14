@@ -29,7 +29,7 @@ var banner = (state = initialState, action) => {
       return [...state];
     //Thêm banner
     case types.ADD_BANNER:
-      console.log(action.banner);
+
       state.push(action.banner);
 
       return [...state];

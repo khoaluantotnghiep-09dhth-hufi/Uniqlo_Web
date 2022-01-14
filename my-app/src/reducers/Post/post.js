@@ -29,7 +29,7 @@ var post = (state = initialState, action) => {
       return [...state];
     //Thêm Mau
     case types.ADD_POST:
-      console.log(action.post);
+
       state.push(action.post);
 
       return [...state];

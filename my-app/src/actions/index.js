@@ -28,14 +28,14 @@ export const onAddNotificationCancelResquest = (bills) => {
 };
 
 export const fetchAddNotifications = (nameNotifications) => {
-  // console.log("Dang o Action: "+ nameNotifications);
+  
   return {
     type: types.ADD_NOTIFICATIONS_HEADER,
     nameNotifications,
   };
 };
 export const fetchDeleteNotifications = (id) => {
-  // console.log("Dang o Action: "+ nameNotifications);
+
   return {
     type: types.DELETE_NOTIFICATIONS_HEADER,
     id,

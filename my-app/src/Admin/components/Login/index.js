@@ -38,7 +38,7 @@ class index extends Component {
 
     callApi("login-admin", "POST", userPost).then((response) => {
       var users = response.data;
-      console.log(users)
+
       for (let i = 0; i < users.length; i++) {
         var userAccountAdmin = {
           id_user: users[i].id,

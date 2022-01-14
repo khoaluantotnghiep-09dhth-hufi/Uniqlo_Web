@@ -47,14 +47,14 @@ class addBanner extends React.Component {
       Call_API(`get-update-banner`, "post", dataObject)
         .then((response) => {
           var data = response.data[0];
-          console.log(data);
+
           this.setState({
             txtImage: data.image,
             txtActive: data.is_active,
             ImgPrivew:data.image
           });
         })
-        .catch((error) => console.log(error));
+
     }
   }
   // componentWillReceiveProps(NextProps) {
@@ -136,10 +136,10 @@ class addBanner extends React.Component {
 
       is_active: parseInt(txtActive),
     };
-    console.log("Banner Update :" + bannerUpdate);
+
 
     if (match.params.id_banner) {
-      console.log("Banner Update :" + bannerUpdate);
+
 
       this.props.onUpdateItemBanner(bannerUpdate);
       history.goBack();

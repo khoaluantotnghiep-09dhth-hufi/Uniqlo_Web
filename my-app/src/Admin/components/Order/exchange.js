@@ -60,13 +60,13 @@ class ListOrder extends React.Component {
       async componentDidMount() {
         Call_API("exchange", "GET", null)
           .then((response) => {
-            console.log(response.data);
+            
             this.setState({
               dataBills: response.data,
               isLoading: false,
             });
           })
-          .catch((error) => console.log(error));
+         
       }
     onDeleteExchange = (item) => {
         this.props.onDeleteItemExchange(item);

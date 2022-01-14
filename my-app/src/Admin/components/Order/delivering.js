@@ -65,13 +65,13 @@ class Delivering extends React.Component {
   async componentDidMount() {
     Call_API("bills", "GET", null)
       .then((response) => {
-        console.log(response.data);
+
         this.setState({
           dataBills: response.data,
           isLoading: false,
         });
       })
-      .catch((error) => console.log(error));
+
   }
   onDeleteBill = (item) => {
     this.props.onDeleteItemBill(item);
@@ -95,7 +95,7 @@ class Delivering extends React.Component {
       .map((item, index) => {
         return { ...item, index };
       });
-    console.log(dataBill)
+
     return isLoading ? (
       <div className="adjust_Loading">
         <button class="btn btn-danger" type="button" disabled>

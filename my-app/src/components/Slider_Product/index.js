@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Row, Container, Col } from "react-bootstrap";
-import Item from "./../Category_Product/Item_Product/index";
+import { Col, Container, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import * as actions from "./../../actions/index";
+import Item from "./../Category_Product/Item_Product/index";
 
 
 
@@ -12,18 +12,15 @@ class index extends Component {
     this.onShowSlider = this.onShowSlider.bind(this);
   }
   componentDidMount() {
-    //  this.showListProduct();
+
     this.props.onGetAllProduct();
   }
   onShowSlider() {
-    console.log(this.props.name + "" + this.props.arrayList.join(" "));
+
   }
-  // onShowSlider = () => {
-  //     // alter(this.props.name +' '+ 'abc');
-  //     console.log(this.props.name + '' + this.props.arrayList.join(' '));
-  // }
+ 
   render() {
-    var { products } = this.props;
+
     const data = this.props.arrayList;
     return (
       <div>

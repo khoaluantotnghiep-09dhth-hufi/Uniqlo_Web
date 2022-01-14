@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
+import Moment from "react-moment";
+import { connect } from "react-redux";
 import * as actions from "./../../../actions/index";
 import "./Detail_News.scss";
-import { connect } from "react-redux";
-import { Card, Button, Image } from "react-bootstrap";
-import Moment from "react-moment";
 
 
 class index extends Component {
@@ -13,12 +12,12 @@ class index extends Component {
   }
   showDetailNews = (news, id_news) => {
     var result = null;
-    console.log(id_news);
-    // console.log(news)
+
+
     result = news
       .filter((item) => item.id === id_news)
       .map((item, index) => {
-        console.log(item);
+
         return (
           <Container style={{ marginBottom: "5%", marginTop: "1%" }}>
             <Row>
@@ -60,7 +59,7 @@ class index extends Component {
   render() {
     var { news, match } = this.props;
     var id_news = match.params.id_news;
-    console.log(id_news);
+
     return (
       <React.Fragment>{this.showDetailNews(news, id_news)}</React.Fragment>
     );

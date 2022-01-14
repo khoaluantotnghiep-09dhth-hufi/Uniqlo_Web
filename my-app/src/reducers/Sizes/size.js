@@ -28,7 +28,7 @@ var size = (state = initialState, action) => {
       return [...state];
     //Thêm Size
     case types.ADD_SIZE:
-      console.log(action.size);
+
       state.push(action.size);
 
       return [...state];

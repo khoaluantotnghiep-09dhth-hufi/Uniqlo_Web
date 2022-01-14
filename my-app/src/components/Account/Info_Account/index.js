@@ -54,7 +54,7 @@ class index extends React.Component {
     Call_API(`customers/${sessionUser.id_user}`, "GET", null).then(
       (response) => {
         var data = response.data[0];
-        console.log(data);
+      
         this.setState({
           id: data.id,
           name: data.name,

@@ -71,7 +71,7 @@ class addStaff extends React.Component {
           ImgPrivew: data.image,
         });
       })
-      .catch((error) => console.log(error));
+     
   }
   // componentWillReceiveProps(NextProps) {
   //   var { match } = this.props;

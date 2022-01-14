@@ -1,29 +1,23 @@
-import React, { Component } from "react";
-import io from "socket.io-client";
-import Moment from "react-moment";
-import { Link } from "react-router-dom";
-import { MDBIcon } from "mdbreact";
-import Call_API from "./../../Admin/utils/Callapi";
-import {
-  Container,
-  Row,
-  Col,
-  Button,
-  Modal,
-  FloatingLabel,
-  Form,
-} from "react-bootstrap";
-
-import { toast } from "react-toastify";
-import uniqid from "uniqid";
-
-import { Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import * as actions from "./../../actions/index";
+import { CDataTable } from "@coreui/react";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { MDBIcon } from "mdbreact";
+import React, { Component } from "react";
+import {
+  Button, Col, Container, FloatingLabel,
+  Form, Modal, Row
+} from "react-bootstrap";
+import Moment from "react-moment";
+import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+import { toast } from "react-toastify";
+import io from "socket.io-client";
+import uniqid from "uniqid";
+import * as actions from "./../../actions/index";
+import Call_API from "./../../Admin/utils/Callapi";
 
-import { faPlus, faTimes, faTools } from "@fortawesome/free-solid-svg-icons";
-import { CButton, CDataTable } from "@coreui/react";
+
+
 const formatter = new Intl.NumberFormat("vi-VN", {
   style: "currency",
   currency: "VND",
@@ -105,27 +99,10 @@ class index extends Component {
   onSubmitForm = (event) => {
     // eslint-disable-next-line no-return-assign, no-param-reassign
     event.preventDefault(); // eslint-disable
-    var { txtPhone, txtPassword, txtHuyDon, isCheckRequest } = this.state;
-    console.log(isCheckRequest);
+    var { txtHuyDon, isCheckRequest } = this.state;
 
-    // for (let i = 0; i < users.length; i++) {
-    //   if (users[i].phone === txtPhone && users[i].password === txtPassword) {
-    //     var user = {
-    //       id_user: users[i].id,
-    //       name: users[i].name,
-    //       phone: users[i].phone,
-    //       password: users[i].password,
-    //     };
-    //     this.setState({
-    //       isCheckLogin: true,
-    //     });
-    //     sessionStorage.setItem("client", JSON.stringify(user));
-    //   } else {
-    //     this.setState({
-    //       isCheckLogin: false,
-    //     });
-    //   }
-    // }
+
+   
     var sessionUser = JSON.parse(sessionStorage.getItem("client"));
 
     var name = sessionUser.name;
@@ -158,8 +135,8 @@ class index extends Component {
   };
   onSubmitFormReturn = (event) => {
     event.preventDefault();
-    var { txtPhone, txtPassword, txtHuyDon, isCheckRequestReturn } = this.state;
-    console.log(isCheckRequestReturn);
+    var {  txtHuyDon, isCheckRequestReturn } = this.state;
+  
     var sessionUser = JSON.parse(sessionStorage.getItem("client"));
 
     var name = sessionUser.name;

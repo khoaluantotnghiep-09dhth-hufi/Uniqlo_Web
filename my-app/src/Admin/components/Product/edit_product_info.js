@@ -68,7 +68,7 @@ class addProduct extends React.Component {
             const result = productInfo.find(
                 (o) => o.id === match.params.id_product_info
             );
-            console.log("result nè", result);
+
             this.setState({
                 txtQuantity: result.quantity,
                 id_size: result.id_size,
@@ -134,9 +134,9 @@ class addProduct extends React.Component {
     render() {
         var { size } = this.props;
         var { color } = this.props;
-        var { productInfo } = this.props;
+
         let { txtQuantity } = this.state;
-        console.log(this.state);
+
         return (
             <Container fluid>
                 <Link to="/admin/manage/products">

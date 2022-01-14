@@ -88,9 +88,9 @@ class TheHeaderDropdownNotif extends Component {
     });
   };
   render() {
-    var { quantityNotifications, nameNotifications } = this.state;
+
     var { header_notifications } = this.props;
-    console.log('Truoc khi parse: ' + header_notifications);
+
 
 
     // Lấy 5 Thông Báo Cuối Mảng

@@ -74,7 +74,7 @@ class ListStaffs extends React.Component {
     //       isLoading: false,
     //     });
     //   })
-    //   .catch((error) => console.log(error));
+    //  
   }
   onDeleteStaff = (item) => {
     if (window.confirm('Bạn có chắc muốn xóa không ?')) {

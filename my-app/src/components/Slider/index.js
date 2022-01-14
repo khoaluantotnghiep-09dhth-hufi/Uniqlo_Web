@@ -8,12 +8,9 @@ class index extends Component {
         this.onShowSlider = this.onShowSlider.bind(this);
     }
     onShowSlider() {
-        console.log(this.props.name + '' + this.props.arrayList.join(' '));
+
     }
-    // onShowSlider = () => {
-    //     // alter(this.props.name +' '+ 'abc');
-    //     console.log(this.props.name + '' + this.props.arrayList.join(' '));
-    // }
+   
     render() {
 
         const ListImages = this.props.arrayList;

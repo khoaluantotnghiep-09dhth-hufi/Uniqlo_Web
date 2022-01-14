@@ -26,12 +26,12 @@ var object_menu= (state = initialState, action) => {
       return [...state];
     //Thêm 
     case types.ADD_OBJECT:
-      console.log(state)
+
       if(state){
         state.push(object_menu);
       }
      else{
-       console.log("State Dang Rong")
+
      }
       return [...state];
     //Cập Nhập 

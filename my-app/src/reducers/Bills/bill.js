@@ -42,7 +42,7 @@ var bill = (state = initialState, action) => {
       return [...state];
     //Thêm Bill
     case types.ADD_BILL:
-      console.log(action.bill);
+
       state.push(action.bill);
 
       return [...state];

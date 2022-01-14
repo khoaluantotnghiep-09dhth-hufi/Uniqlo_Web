@@ -53,7 +53,7 @@ class updateOrder extends React.Component {
           id_customer: data.id_customer,
         });
       })
-      .catch((error) => console.log(error));
+     
 
   }
   componentWillReceiveProps(NextProps) {

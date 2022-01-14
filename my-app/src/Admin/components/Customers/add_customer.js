@@ -155,8 +155,8 @@ class AddCustomer extends React.Component {
     } else {
       this.props.onAddItemCustomer(customer);
 
-    //  console.log(customer);
-    //   CallAPI("customers", "POST", customer)
+
+
        
       history.goBack();
     }

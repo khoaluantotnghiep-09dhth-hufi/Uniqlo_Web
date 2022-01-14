@@ -98,7 +98,7 @@ class index extends Component {
     ) : (
       ""
     );
-    console.log(isCheckLogin);
+
     if (isCheckLogin) {
       return (
         <Redirect

@@ -83,7 +83,7 @@ class addDiscount extends React.Component {
 
     if (file) {
       let base64 = ConvertIMG.getBase64(file);
-      console.log("img", base64)
+
       let objectURL = URL.createObjectURL(file);
       this.setState({
         ImgPrivew: objectURL,

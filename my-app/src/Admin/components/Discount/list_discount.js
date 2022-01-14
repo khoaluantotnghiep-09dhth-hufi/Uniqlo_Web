@@ -63,15 +63,7 @@ class ListDiscount extends React.Component {
   }
   async componentDidMount() {
     this.props.fetchPromotions();
-    // Call_API("promotions", "GET", null)
-    //   .then((response) => {
-       
-    //     this.setState({
-    //       data: response.data,
-    //       isLoading: false,
-    //     });
-    //   })
-    //   .catch((error) => console.log(error));
+    
   }
   onDeletePromotion = (item) => {
     if (window.confirm("Bạn có chắc muốn xóa không ?")) {

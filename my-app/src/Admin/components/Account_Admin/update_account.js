@@ -40,7 +40,7 @@ class updateOrder extends React.Component {
           txtConfirm: data.role,
         });
       })
-      .catch((error) => console.log(error));
+
   }
   // componentWillReceiveProps(NextProps) {
   //   var { match } = this.props;

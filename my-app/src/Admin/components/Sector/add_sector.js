@@ -85,7 +85,7 @@ class AddSector extends React.Component {
         this.setState({
             ...coppyState
         }, () => {
-            console.log("state", this.state)
+           
         })
 
     };
@@ -132,9 +132,9 @@ class AddSector extends React.Component {
         }
     };
     render() {
-        let { object_menu } = this.props;
-        let { txtName, id_object, selectedOption } = this.state;
-        console.log(this.state)
+
+        let { txtName,  selectedOption } = this.state;
+
         return (
             <Container fluid>
                 <Row>

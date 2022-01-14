@@ -20,7 +20,7 @@ class addObject extends React.Component {
     var { object_menu } = this.props;
     if (match.params.id_object_menu) {
       const result = object_menu.find((o) => o.id === match.params.id_object_menu);
-      console.log("resui", result);
+
       this.setState({
         txtName: result.name,
       });

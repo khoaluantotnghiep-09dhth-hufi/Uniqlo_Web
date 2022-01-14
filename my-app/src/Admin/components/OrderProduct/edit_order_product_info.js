@@ -54,7 +54,7 @@ class addProduct extends React.Component {
     }
     componentDidMount() {
         var { match } = this.props;
-        console.log(match.params.id_order_info);
+
         this.props.onEditItemOrderInfo(match.params.id_order_info);
         isLoadingExternally = true;
         this.setState({

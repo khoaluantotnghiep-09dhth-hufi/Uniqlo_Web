@@ -19,7 +19,7 @@ const TheSidebar = () => {
   const dispatch = useDispatch()
   const show = useSelector(state => state.sidebarShow)
   var sessionUser = JSON.parse(sessionStorage.getItem("admin"));
-  console.log('ses test', sessionUser)
+
   return (
     <CSidebar
       show={show}
