@@ -16,10 +16,13 @@ class test extends Component {
       topWomen: [],
       topChild: [],
       topBaby: [],
+      bannerAPI: [],
       isLoadingNam: true,
       isLoadingNu: true,
       isLoadingTreEm: true,
       isLoadingSoSinh: true,
+      isLoadingBanner: true,
+
     };
   }
 
@@ -29,6 +32,12 @@ class test extends Component {
 
     try {
       this.props.fetchBanners();
+      Call_API("banners", "GET", null).then((response) => {
+        this.setState({
+          bannerAPI: response.data,
+          isLoadingBanner: false,
+        });
+      });
       Call_API("products-top4-men", "GET", null).then((response) => {
         this.setState({
           topMen: response.data,
@@ -71,7 +80,22 @@ class test extends Component {
       isLoadingNu,
       isLoadingTreEm,
       isLoadingSoSinh,
+      isLoadingBanner,
+      bannerAPI
     } = this.state;
+
+    var banner =isLoadingNam ? (
+      <div className="adjust_Loading">
+        <button class="btn btn-danger" type="button" disabled>
+          <span
+            class="spinner-grow spinner-grow-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          Loading...
+        </button>
+      </div>
+    ) :( <Banner arrayList={bannerAPI}  className="mb-4"/>);
 
     var nam = isLoadingNam ? (
       <div className="adjust_Loading">
@@ -150,7 +174,7 @@ class test extends Component {
     }
     return (
       <div className="App">
-        <Banner arrayList={banner}  className="mb-4"/>
+       {banner}
         {nam}
         {nu}
         {treem}
