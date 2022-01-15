@@ -201,7 +201,7 @@ class Home extends React.Component {
             <CWidgetDropdown
               color="gradient-warning"
               header={dataBillStatusEqual0}
-              text="Đơn Hàng Chờ Xác Nhận"
+              text="Đơn hàng chờ xác nhận hệ thống"
             >
               <CDropdown>
                 <CDropdownToggle color="transparent">

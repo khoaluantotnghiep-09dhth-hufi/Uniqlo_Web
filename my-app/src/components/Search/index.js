@@ -35,6 +35,30 @@ class index extends Component {
       });
     }
   }
+  
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.match.params.input_Search !== this.props.match.params.input_Search) {
+      const keySearch = nextProps.match.params.input_Search
+      try {
+        CallApi(`web-search/${keySearch}`, "GET", null).then(
+           (response) => {
+   
+             this.setState({
+               productsSearch: response.data,
+               isLoading: true,
+             });
+           }
+         );
+       } catch (error) {
+         this.setState({
+           isLoading: false,
+         });
+       }
+    }
+  }
+
+
 
   showListProduct = (products) => {
     var { onAddToCart } = this.props;

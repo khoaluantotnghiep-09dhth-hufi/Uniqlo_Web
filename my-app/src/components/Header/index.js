@@ -7,7 +7,7 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import Header_Center from "./Header_Center/index";
 
-import { NavLink } from "react-router-dom";
+import { NavLink,Link } from "react-router-dom";
 
 import "./Header.scss";
 class index extends Component {
@@ -19,6 +19,7 @@ class index extends Component {
       txtPhone: "",
       txtPassword: "",
       isCheckLogin: false,
+      input_Search:""
     };
   }
   onClick() {
@@ -63,11 +64,12 @@ class index extends Component {
     // console.log(remove);
     // this.setState({input_Search: remove})
   }
-  handleOnSearch=(event)=>{
+  handleOnSearch=(e)=>{
+    // e.preventDefault();
     // var { input_Search } = this.state;
     // var remove = input_Search?'':'';
     // console.log(remove);
-    // this.setState({input_Search: remove})
+    this.setState({input_Search: ""})
   }
 
 
@@ -79,9 +81,9 @@ class index extends Component {
 
    
     var showLinkSearch = (
-      <NavLink to={`/search/${input_Search}`}>
-        <MDBIcon icon="search" className="sizeIcon" onClick={this.handleOnSearch} />
-      </NavLink>
+      <Link to={`/search/${input_Search}`} onClick={this.handleOnSearch}>
+        <MDBIcon icon="search" className="sizeIcon"  />
+      </Link>
     );
     
     var isCheckAccount =
@@ -121,6 +123,7 @@ class index extends Component {
                 containerClass="mt-0"
                 maxlength="100"
                 name="input_Search"
+                value={input_Search}
                 onChange={this.onHandleChange}
               />
               {showLinkSearch}
