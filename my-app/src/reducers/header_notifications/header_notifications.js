@@ -21,11 +21,13 @@ var header_notifications = (state = initialState, action) => {
   switch (action.type) {
     //Lấy Tất cả Danh Sách Size
     case types.FETCH_NOTIFICATIONS_HEADER:
-      // state = action.nameNotifications;
+      state = action.nameNotifications;
       return [...state];
     //Xóa Size
     case types.DELETE_NOTIFICATIONS_HEADER:
-      index = findIndex(state, action.nameNotifications);
+      console.log(id);
+      console.log(state);
+      index = findIndex(state, id);
 
       if (index !== -1) {
         state.splice(index, 1);
@@ -46,7 +48,7 @@ var header_notifications = (state = initialState, action) => {
       state.push(action.nameNotifications);
    
       // state.push(action.nameNotifications);
-console.log('Added '+state)
+
       return [...state];
     case types.RESET_NOTIFICATIONS_HEADER:
 

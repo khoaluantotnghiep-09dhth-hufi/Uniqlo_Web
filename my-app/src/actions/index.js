@@ -12,7 +12,6 @@ export const fetchNotifications = (nameNotifications) => {
 export const fetchNotificationsResquest = () => {
   return (dispatch) => {
     return callApi("notifications", "GET", null).then((response) => {
-
       dispatch(fetchNotifications(response.data));
     });
   };
@@ -21,21 +20,36 @@ export const fetchNotificationsResquest = () => {
 export const onAddNotificationCancelResquest = (bills) => {
   return (dispatch) => {
     return callApi("notifications", "POST", bills).then((response) => {
-
       // dispatch(fetchAddNotifications(response.data));
+    });
+  };
+};
+export const onDeleteNotificationCancelResquest = (id) => {
+  return (dispatch) => {
+    return callApi(`notifications/${id}`, "delete", null).then((response) => {
+      dispatch(fetchDeleteNotifications(response.data));
+    });
+  };
+};
+
+export const onResetNotificationCancelResquest = (objects) => {
+  return (dispatch) => {
+    return callApi(`reset-notifications`, "get", null).then((response) => {
+      if (response.data === "success") {
+        dispatch(fetchResetNotifications(objects));
+      }
+     
     });
   };
 };
 
 export const fetchAddNotifications = (nameNotifications) => {
-  
   return {
     type: types.ADD_NOTIFICATIONS_HEADER,
     nameNotifications,
   };
 };
 export const fetchDeleteNotifications = (id) => {
-
   return {
     type: types.DELETE_NOTIFICATIONS_HEADER,
     id,
@@ -204,9 +218,11 @@ export const fetchBillsCustomer = (bills_customer) => {
 
 export const fetchBillsCustomerResquest = (id_customer) => {
   return (dispatch) => {
-    return callApi(`bill-customer/${id_customer}`, "GET", null).then((response) => {
-      dispatch(fetchBillsCustomer(response.data));
-    });
+    return callApi(`bill-customer/${id_customer}`, "GET", null).then(
+      (response) => {
+        dispatch(fetchBillsCustomer(response.data));
+      }
+    );
   };
 };
 //Lấy tất cả danh sách Promotion
@@ -753,8 +769,6 @@ export const fetchNews = (news) => {
 
 export const fetchNewsResquest = () => {
   return (dispatch) => {
-
-
     return callApi("news", "GET", null).then((response) => {
       if (response === undefined) {
         toast.error("Vui lòng thử lại !");
@@ -762,7 +776,6 @@ export const fetchNewsResquest = () => {
         dispatch(fetchNews(response.data));
       }
     });
-
   };
 };
 
@@ -773,15 +786,12 @@ export const onAddNews = (news) => {
   };
 };
 export const onAddNewsResquest = (news) => {
-
   return (dispatch) => {
     return callApi("news", "POST", news).then((response) => {
       if (response === undefined) {
         toast.error("Thêm thất bại, vui lòng thử lại !");
       } else {
-
         toast.success("Thêm thành công !");
-
 
         dispatch(onAddNews(response.data));
       }
@@ -796,7 +806,6 @@ export const onUpdateNews = (news) => {
   };
 };
 export const onUpdateNewsResquest = (news) => {
-  
   return (dispatch) => {
     return callApi(`news/${news.id}`, "PUT", news).then((response) => {
       if (response === undefined) {
@@ -976,7 +985,6 @@ export const onAddCustomerClient = (customer) => {
 export const onAddCustomerClientResquest = (customer) => {
   return (dispatch) => {
     return callApi("customers_client", "POST", customer).then((response) => {
-
       if (response === undefined) {
         toast.error("Đăng ký thất bại, vui lòng thử lại !");
       } else {
@@ -984,7 +992,6 @@ export const onAddCustomerClientResquest = (customer) => {
 
         dispatch(onAddCustomerClient(response.data));
       }
-
     });
   };
 };
@@ -1062,7 +1069,7 @@ export const onDeleteCustomer = (id) => {
 
 export const onDeleteCustomerResquest = (id) => {
   return (dispatch) => {
-    var dataObject={id}
+    var dataObject = { id };
     return callApi(`delete-customers`, "post", dataObject).then((response) => {
       toast.success("Xóa thành công !");
       dispatch(onDeleteCustomer(id));
@@ -1455,18 +1462,20 @@ export const onGetAllColorBySizeResquest = (id_product) => {
 export const onAddBillCustomerResquest = (bills_customer) => {
   return (dispatch) => {
     return callApi("bill-customer", "POST", bills_customer).then(
-      (response) => { }
+      (response) => {}
     );
   };
 };
 
 export const onAddBillInfoCustomerResquest = (bills_info_customer) => {
   return (dispatch) => {
-    return callApi("bill-info-customer-mobile", "POST", bills_info_customer).then(
-      (response) => {
-        toast.success("Cảm Ơn Khách Hàng Đã Mua Hàng Của Chúng Tôi !");
-      }
-    );
+    return callApi(
+      "bill-info-customer-mobile",
+      "POST",
+      bills_info_customer
+    ).then((response) => {
+      toast.success("Cảm Ơn Khách Hàng Đã Mua Hàng Của Chúng Tôi !");
+    });
   };
 };
 
@@ -1500,7 +1509,6 @@ export const onAddBanner = (banner) => {
 export const onAddBannerResquest = (banner) => {
   return (dispatch) => {
     return callApi("banners", "POST", banner).then((response) => {
-
       if (response === undefined) {
         toast.error("Thêm thất bại, vui lòng thử lại !");
       } else {
@@ -1520,7 +1528,7 @@ export const onDeleteBanner = (id) => {
 
 export const onDeleteBannerResquest = (id) => {
   return (dispatch) => {
-    var dataObject={id}
+    var dataObject = { id };
     return callApi(`delete-banner`, "post", dataObject).then((response) => {
       if (response === undefined) {
         toast.error("Xóa thất bại, vui lòng thử lại !");
