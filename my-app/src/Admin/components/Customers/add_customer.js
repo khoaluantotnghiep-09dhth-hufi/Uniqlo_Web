@@ -25,9 +25,9 @@ class AddCustomer extends React.Component {
       txtPhone: "",
       txtImage: "",
       txtEmail: "",
-      txtGender: "",
+      txtGender: 0,
       ImgPrivew: "",
-      txtPassword:"",
+      txtPassword: "",
       isOpen: false,
     };
   }
@@ -37,7 +37,7 @@ class AddCustomer extends React.Component {
     this.props.onEditItemCustomer(match.params.id_customer);
     var { customer } = this.props;
     if (match.params.id_customer) {
-  
+
       this.setState({
         txtName: customer.name,
         txtAddress: customer.address,
@@ -45,7 +45,7 @@ class AddCustomer extends React.Component {
         txtImage: customer.image,
         ImgPrivew: customer.image,
         txtEmail: customer.email,
-        txtGender: customer.gender
+        txtGender: customer.gender !== null ? customer.gender : 0
       });
     }
   }
@@ -95,22 +95,23 @@ class AddCustomer extends React.Component {
     })
   }
   checkValidate = () => {
-    let check = ['txtName', 'txtAddress','txtGender'];
+    let check = ['txtName', 'txtAddress', 'txtGender'];
     let isValid = true;
     if (!this.state[check[0]]) {
-        isValid = false;
-        toast.error("Vui lòng nhập tên khách hàng");
+      isValid = false;
+      toast.error("Vui lòng nhập tên khách hàng");
     }
     if (!this.state[check[1]]) {
-        isValid = false;
-        toast.error("Vui lòng nhập địa chỉ");
+      isValid = false;
+      toast.error("Vui lòng nhập địa chỉ");
     }
-    if (!this.state[check[2]]) {
-        isValid = false;
-        toast.error("Vui lòng chọn giới tính");
-    }
+    // if (!this.state[check[2]]) {
+    //   isValid = false;
+    //   toast.error("Vui lòng chọn giới tính");
+      
+    // }
     return isValid;
-}
+  }
   onSubmitForm = (event) => {
     let isValid = this.checkValidate();
     if (isValid === false) return;
@@ -148,16 +149,16 @@ class AddCustomer extends React.Component {
       gender: txtGender,
       password: txtPassword,
     };
-
+    if(txtGender === null) {
+      this.setState({
+        txtGender: 2
+      })
+    }
     if (match.params.id_customer) {
       this.props.onUpdateItemCustomer(customerUpdate);
       history.goBack();
     } else {
       this.props.onAddItemCustomer(customer);
-
-
-
-       
       history.goBack();
     }
   };
@@ -238,9 +239,9 @@ class AddCustomer extends React.Component {
                   onChange={(e) => { this.onChange(e, 'txtGender') }}
                   required
                 >
-                  <option selected value="2">Khác</option>
                   <option value="0">Nam</option>
                   <option value="1">Nữ</option>
+                  <option value="2">Khác</option>
                 </select>
               </Form.Group>
             </Col>
@@ -255,7 +256,7 @@ class AddCustomer extends React.Component {
                   name="txtImage"
                   hidden
                   onChange={(e) => { this.onChangeImage(e) }}
-          
+
                 />
               </Form.Group>
             </Col>
@@ -277,11 +278,11 @@ class AddCustomer extends React.Component {
                   placeholder="Mật khẩu..."
                   name="txtPassword"
                   id="txtPassword"
-               
+
                   onChange={(e) => { this.onChange(e, 'txtPassword') }} />
               </Form.Group>
             </Col>
-            
+
           </Row>
 
           <Row>

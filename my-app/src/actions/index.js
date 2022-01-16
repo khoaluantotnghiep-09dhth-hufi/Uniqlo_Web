@@ -38,7 +38,7 @@ export const onResetNotificationCancelResquest = (objects) => {
       if (response.data === "success") {
         dispatch(fetchResetNotifications(objects));
       }
-     
+
     });
   };
 };
@@ -1069,8 +1069,8 @@ export const onDeleteCustomer = (id) => {
 
 export const onDeleteCustomerResquest = (id) => {
   return (dispatch) => {
-    var dataObject = { id };
-    return callApi(`delete-customers`, "post", dataObject).then((response) => {
+    // var dataObject = { id };
+    return callApi(`delete-customers/${id}`, "DELETE", null).then((response) => {
       toast.success("Xóa thành công !");
       dispatch(onDeleteCustomer(id));
     });
@@ -1462,7 +1462,7 @@ export const onGetAllColorBySizeResquest = (id_product) => {
 export const onAddBillCustomerResquest = (bills_customer) => {
   return (dispatch) => {
     return callApi("bill-customer", "POST", bills_customer).then(
-      (response) => {}
+      (response) => { }
     );
   };
 };

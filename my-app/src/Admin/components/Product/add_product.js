@@ -34,7 +34,7 @@ class addProduct extends React.Component {
       ImgPrivew: "",
       promotionArr: [],
       categoryArr: [],
-      txtStatus: "",
+      txtStatus: 0,
       isOpen: false,
     };
   }
@@ -46,22 +46,24 @@ class addProduct extends React.Component {
       promotionArr: this.props.fetchPromotions(),
       categoryArr: this.props.fetchCategorys(),
     });
+    if (match.params.id_product) {
+      Call_API(`products-admin/${match.params.id_product}`, "GET", null)
+        .then((response) => {
+          var data = response.data[0];
+          this.setState({
+            txtName: data.name,
+            txtPrice: data.price,
+            txtDescription: data.description,
+            txtImage: data.image,
+            id_promotion: data.id_promotion,
+            id_category: data.id_category,
+            ImgPrivew: data.image,
+            txtStatus: data.status,
+          });
+        })
+    }
 
-    Call_API(`products/${match.params.id_product}`, "GET", null)
-      .then((response) => {
-        var data = response.data[0];
-        this.setState({
-          txtName: data.name,
-          txtPrice: data.price,
-          txtDescription: data.description,
-          txtImage: data.image,
-          id_promotion: data.id_promotion,
-          id_category: data.id_category,
-          ImgPrivew: data.image,
-          txtStatus: data.status,
-        });
-      })
-     
+
 
     // if (match.params.id_product) {
     //     const result = products.find(
@@ -129,7 +131,7 @@ class addProduct extends React.Component {
       {
         ...coppyState,
       },
-  
+
     );
   };
   onChangeImage = (e) => {
@@ -314,7 +316,7 @@ class addProduct extends React.Component {
                         category.length > 0 &&
                         category.map((option, index) => (
                           <option value={option.id} key={index}>
-                             Tên: {option.name}
+                            Tên: {option.name}
                           </option>
                         ))}
                     </Form.Select>
@@ -330,7 +332,7 @@ class addProduct extends React.Component {
                         this.onChange(e, "id_promotion");
                       }}
                       labelKey={"Tên"}
-                    //   valueKey={"Mã"}
+                      //   valueKey={"Mã"}
                       isLoading={isLoadingExternally}
                     >
                       {promotion &&
@@ -356,7 +358,6 @@ class addProduct extends React.Component {
                       valueKey={"Mã"}
                       isLoading={isLoadingExternally}
                     >
-                      <option value="2">Chọn</option>
                       <option value="0">Còn Kinh Doanh</option>
                       <option value="1">Ngừng Kinh Doanh</option>
                     </Form.Select>

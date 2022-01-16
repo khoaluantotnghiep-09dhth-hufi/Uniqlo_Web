@@ -64,8 +64,8 @@ class AddNews extends React.Component {
     }
   }
   componentDidMount() {
- 
-    var { match,news } = this.props;
+
+    var { match, news } = this.props;
     this.props.onEditItemNews(match.params.id_news);
     if (match.params.id_news) {
       const result = news.find((o) => o.id === match.params.id_news);
@@ -119,7 +119,7 @@ class AddNews extends React.Component {
   };
   onSubmitForm = (event) => {
     var { match } = this.props;
-   
+
 
     event.preventDefault();
     var { history } = this.props;
@@ -157,7 +157,7 @@ class AddNews extends React.Component {
     }
     else {
       this.props.onAddItemNews(news);
-     
+
       history.goBack();
     }
   };
@@ -189,14 +189,6 @@ class AddNews extends React.Component {
                 </Form.Group>
               </Col>
             </Row>
-            <Form.Group className="mb-3" controlId="formBasicObject">
-              <Form.Label>Nội Dung</Form.Label>
-              <MdEditor 
-              style={{ height: '1000px' }} 
-              renderHTML={text => mdParser.render(text)} 
-              value={this.state.txtDescriptionText}
-              onChange={this.handleEditorChange} />
-            </Form.Group>
             <Row sm="12">
               <Col sm="2" className="d-flex justify-content-center">
                 <Form.Group >
@@ -207,7 +199,7 @@ class AddNews extends React.Component {
                     name="txtImage"
                     hidden
                     onChange={(e) => { this.onChangeImage(e) }}
-                  
+
                   />
                 </Form.Group>
               </Col>
@@ -217,15 +209,26 @@ class AddNews extends React.Component {
                 ></div>
               </Col>
             </Row>
-            <Button type="button"
-              className="btn btn-danger"
-              onClick={this.onSubmitForm}
-            >
-              <FontAwesomeIcon
-                icon={faPlus}
-                className="mr-2"
-                size="lg" />Lưu
-            </Button>
+            <Form.Group className="mb-3" controlId="formBasicObject">
+              <Form.Label>Nội Dung</Form.Label>
+              <MdEditor
+                style={{ height: '1500px' }}
+                renderHTML={text => mdParser.render(text)}
+                value={this.state.txtDescriptionText}
+                onChange={this.handleEditorChange} />
+            </Form.Group>
+            <div className="d-flex justify-content-center">
+              <Button type="button"
+                className="btn btn-danger "
+                onClick={this.onSubmitForm}
+              >
+                <FontAwesomeIcon
+                  icon={faPlus}
+                  className="mr-2"
+                  size="lg" />Lưu
+              </Button>
+            </div>
+
           </Form>
         </Row>
         {
@@ -241,8 +244,8 @@ class AddNews extends React.Component {
 }
 var mapStateToProps = (state) => {
   return {
-        news: state.news,
-    };
+    news: state.news,
+  };
 };
 var mapDispatchToProps = (dispatch, props) => {
   return {
