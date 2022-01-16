@@ -20,7 +20,8 @@ class index extends Component {
     // parseInt(event.target.value).replace(/\D/g, "");
     if(value < 1)
     {
-      toast.error("Số Lượng Phải Lớn hơn 0!", { autoClose: 2500 });
+
+      this.onDelete(product)
     }
     else if (value > quantityAllProduct) {
       toast.error("Không Đủ Số Lượng Để Mua !", { autoClose: 2500 });
@@ -40,6 +41,8 @@ class index extends Component {
 
   onDelete = (product) => {
     var { onDeleteInCart } = this.props;
+    toast.error("Đã xoá sản phẩm khỏi giỏ hàng!", { autoClose: 2500 });
+
     onDeleteInCart(product);
   };
   showTotal = (price, quantity) => {

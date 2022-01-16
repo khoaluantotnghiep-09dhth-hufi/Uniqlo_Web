@@ -61,16 +61,19 @@ class addStaff extends React.Component {
     Call_API(`staffs/${match.params.id_staff}`, "GET", null)
       .then((response) => {
         var data = response.data[0];
-        this.setState({
-          txtNameStaff: data.name,
-          txtEmail: data.email,
-          txtPhone: data.phone,
-          txtAddress: data.address,
-          txtPassword: data.password,
-          txtImage: data.image,
-          ImgPrivew: data.image,
-        });
-      })
+        if(data!==null || data!== undefined ||response.data.length>0) {
+          this.setState({
+            txtNameStaff: data.name,
+            txtEmail: data.email,
+            txtPhone: data.phone,
+            txtAddress: data.address,
+            txtPassword: data.password,
+            txtImage: data.image,
+            ImgPrivew: data.image,
+          });
+        }
+       
+      }).catch(err=>console.log(err))
      
   }
   // componentWillReceiveProps(NextProps) {
@@ -127,7 +130,7 @@ class addStaff extends React.Component {
     return isValid;
   }
   onSubmitForm = (event) => {
- 
+    event.preventDefault();
     let isValid = this.checkValidate();
     if (isValid === false) return;
     var { match } = this.props;
