@@ -112,7 +112,7 @@ class index extends Component {
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     var bills = {
-      id: uniqid("message- "),
+      id: uniqid("message"),
       content: "Có " + "Khách Hàng " + name + " Hủy Đơn " + id_bill + " Lý Do " + reasons + " Nè",
       time: date + ' ' + time,
     };
@@ -149,7 +149,7 @@ class index extends Component {
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     var billReturn = {
-      id: uniqid("message- "),
+      id: uniqid("message"),
       content: "Có " + "Khách Hàng " + name + " Yêu cầu trả hàng " + id_billReturn + " Lý Do " + reasons + " Nè",
       time: date + ' ' + time,
     };
@@ -247,12 +247,12 @@ class index extends Component {
                               className="mr-2"
                               size="sm"
                             />
-                            
-                            {isCheckRequest ? (
+                             <small> Hủy Đơn</small>
+                            {/* {isCheckRequest ? (
                               <small> Chờ Xác Nhận</small>
                             ) : ( 
                             <small> Hủy Đơn</small>
-                            )}
+                            )} */}
                           </Button>
                         ) : (
                           ""
@@ -272,12 +272,13 @@ class index extends Component {
                               className="mr-2"
                               size="sm"
                             />
+                            <small> Yêu cầu trả hàng</small>
                             
-                            {isCheckRequestReturn ? (
+                            {/* {isCheckRequestReturn ? (
                               <small> Chờ Xác Nhận</small>
                             ) : ( 
                             <small> Yêu cầu trả hàng</small>
-                            )}
+                            )} */}
                           </Button>
                         ) : (
                           ""

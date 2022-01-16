@@ -261,7 +261,7 @@ class index extends Component {
       var time =
         today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
       var bills = {
-        id: uniqid("message- "),
+        id: uniqid("message"),
         content: "Có " + "Khách Hàng " + name + " Order Nè",
         time: date + " " + time,
       };

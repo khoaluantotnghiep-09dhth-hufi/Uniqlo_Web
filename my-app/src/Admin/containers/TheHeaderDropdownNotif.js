@@ -26,6 +26,8 @@ class TheHeaderDropdownNotif extends Component {
     };
   }
   componentDidMount() {
+    this.props.fetchNotifications();
+
     var { nameNotifications } = this.state;
 
     var count = 1;
@@ -228,6 +230,10 @@ var mapDispatchToProps = (dispatch, props) => {
     fetchAddNotifications: (nameNotifications) => {
       return dispatch(actions.fetchAddNotifications(nameNotifications));
     },
+    
+    fetchNotifications:()=>{
+      return   dispatch(actions.fetchNotificationsResquest());
+  },
   };
 };
 export default connect(
